@@ -23,7 +23,7 @@
     [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
 
     NSArray *shows = [moc executeFetchRequest:request error:nil];
-	[request release];
+    [request release];
 
     return shows;
 }

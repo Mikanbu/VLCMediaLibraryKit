@@ -30,7 +30,7 @@
     [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
 
     NSArray *episodes = [moc executeFetchRequest:request error:nil];
-	[request release];
+    [request release];
 
     return episodes;
 }

@@ -40,7 +40,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 
     NSError *error;
     NSArray *movies = [moc executeFetchRequest:request error:&error];
-	[request release];
+    [request release];
     if (!movies) {
         NSLog(@"WARNING: %@", error);
     }
