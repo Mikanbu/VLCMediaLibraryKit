@@ -50,6 +50,24 @@
 
     VLCMedia *media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
     VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:media andDelegate:self];
+    /* optimize thumbnails for the device */
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if ([UIScreen mainScreen].scale==2.0) {
+            thumbnailer.thumbnailWidth = 540.;
+            thumbnailer.thumbnailHeight = 405.;
+        } else {
+            thumbnailer.thumbnailWidth = 272.;
+            thumbnailer.thumbnailHeight = 204.;
+        }
+    } else {
+        if ([UIScreen mainScreen].scale==2.0) {
+            thumbnailer.thumbnailWidth = 200.;
+            thumbnailer.thumbnailHeight = 150.;
+        } else {
+            thumbnailer.thumbnailWidth = 100.;
+            thumbnailer.thumbnailHeight = 75.;
+        }
+    }
     [thumbnailer fetchThumbnail];
     [[MLThumbnailerQueue sharedThumbnailerQueue].queue setSuspended:YES]; // Balanced in -mediaThumbnailer:didFinishThumbnail
     [self retain]; // Balanced in -mediaThumbnailer:didFinishThumbnail:
