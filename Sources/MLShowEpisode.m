@@ -31,6 +31,7 @@
 
     NSArray *episodes = [moc executeFetchRequest:request error:nil];
     [request release];
+    [descriptor release];
 
     return episodes;
 }

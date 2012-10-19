@@ -152,6 +152,7 @@ static inline NSString *hashFromFile(MLFile *file)
     ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
+    [op autorelease];
 }
 
 - (void)stop

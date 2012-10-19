@@ -150,6 +150,7 @@ static inline NSString *hashFromFile(MLFile *file)
     MLParsingOperation *op = [[MLParsingOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
+    [op autorelease];
 }
 
 - (void)stop

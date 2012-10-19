@@ -59,6 +59,7 @@ static NSNumber *gServerTime = nil;
             [array addObject:id];
         }
 
+        [xmlDoc release];
         [_delegate tvShowInfoGrabber:self didFetchUpdates:array];
     } else {
         NSAssert([connection.userObject isEqualToString:@"fetchServerTime"], @"Unkown callback emitter");
@@ -74,6 +75,7 @@ static NSNumber *gServerTime = nil;
         gServerTime = [serverTime retain];
         gLastFetch = [[NSDate dateWithTimeIntervalSinceNow:0] retain];
 
+        [xmlDoc release];
         [_delegate tvShowInfoGrabberDidFetchServerTime:self];
     }
 }

@@ -134,11 +134,14 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 #endif
         persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
         if (!persistentStore) {
+            if (coordinator)
+                [coordinator release];
 #if! TARGET_OS_IPHONE
             NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
 #else
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Corrupted Media Library" message:@"There is nothing we can apparently do about it..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            [alert autorelease];
 #endif
             // Probably assert instead.
             return nil;
