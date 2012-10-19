@@ -206,7 +206,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 - (size_t)fileSizeInBytes
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSDictionary *fileAttributes = [manager fileAttributesAtPath:[[NSURL URLWithString:self.url] path] traverseLink:YES];
+    NSDictionary *fileAttributes = [manager attributesOfItemAtPath:[[[NSURL URLWithString:self.url] path] stringByResolvingSymlinksInPath] error:nil];
     NSNumber *fileSize = [fileAttributes objectForKey:NSFileSize];
     return [fileSize unsignedLongLongValue];
 }
