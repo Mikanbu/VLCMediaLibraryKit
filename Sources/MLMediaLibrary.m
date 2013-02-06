@@ -27,6 +27,8 @@
 #import <UIKit/UIKit.h>
 #endif
 
+#define MLLog(...) NSLog(__VA_ARGS__)
+
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
@@ -45,7 +47,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     static id sharedMediaLibrary = nil;
     if (!sharedMediaLibrary) {
         sharedMediaLibrary = [[[self class] alloc] init];
-        MLLog(@"Initializing db in %@", [sharedMediaLibrary databaseFolderPath]);
+        NSLog(@"Initializing db in %@", [sharedMediaLibrary databaseFolderPath]);
 
         // Also force to init the crash preventer
         // Because it will correctly set up the parser and thumbnail queue
@@ -626,7 +628,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         NSURL *fileURL = [NSURL URLWithString:urlString];
         BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
         if (!exists) {
-            MLLog(@"Marking - %@", [fileURL absoluteString]);
+            NSLog(@"Marking - %@", [fileURL absoluteString]);
             file.isSafe = YES; // It doesn't exists, it's safe.
         }
         file.isOnDisk = [NSNumber numberWithBool:exists];

@@ -7,6 +7,7 @@
 #endif
 
 #if TARGET_OS_IPHONE
+// FIXME
 #define HAVE_BLOCK 0
 
 #define NSXMLDocument CXMLDocument
@@ -15,12 +16,6 @@
 #import "TouchXML.h"
 #else
 #define HAVE_BLOCK 1
-#endif
-
-#if 0
-#define MLLog(format, ...) NSLog(format, ## __VA_ARGS__)
-#else
-#define MLLog(format, ...)
 #endif
 
 #import "NSXMLNode_Additions.h"

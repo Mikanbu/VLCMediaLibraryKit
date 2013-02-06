@@ -88,7 +88,7 @@
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
     mediaThumbnailer.delegate = nil;
-    MLLog(@"Finished thumbnail for %@", self.file.title);
+    NSLog(@"Finished thumbnail for %@", self.file.title);
     self.file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
 
     [self endThumbnailing];
