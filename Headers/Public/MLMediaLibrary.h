@@ -18,7 +18,6 @@
 + (id)sharedMediaLibrary;
 
 - (void)addFilePaths:(NSArray *)filepaths;
-- (void)updateDatabase; // Removes missing files
 
 // May be internal
 - (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
