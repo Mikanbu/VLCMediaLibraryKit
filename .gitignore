@@ -1,0 +1,5 @@
+*.mode*
+*.pbxuser
+*.xcworkspace
+xcuserdata
+.DS_Store
