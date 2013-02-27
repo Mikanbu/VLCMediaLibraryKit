@@ -85,7 +85,7 @@
         if (trackInfo)
             [tracksSet addObject:trackInfo];
     }
-    // NSAssert([[self.file tracks] count] == 0, @"Reparsing a file with existing tracks"); // Don't assert here as we may want to re-parse, after all
+
     [self.file setTracks:tracksSet];
     [self.file setDuration:[[_media length] numberValue]];
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
