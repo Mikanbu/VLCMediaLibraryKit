@@ -44,7 +44,7 @@
 
 - (void)fetchThumbnail
 {
-    MLLog(@"Starting THUMB %@", self.file);
+    NSLog(@"Starting THUMB %@", self.file);
 
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
