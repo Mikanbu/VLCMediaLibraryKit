@@ -46,7 +46,7 @@
 
 - (void)cancelAllFileParse
 {
-    NSLog(@"Cancelling file parsing");
+    APLog(@"Cancelling file parsing");
     for (MLFile *file in _parsedFiles)
         file.isBeingParsed = NO;
     [_parsedFiles removeAllObjects];

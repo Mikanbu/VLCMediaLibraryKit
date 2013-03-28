@@ -77,9 +77,9 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Did Fail %@", _delegate);
+    APLog(@"Did Fail %@", _delegate);
     if ([_delegate respondsToSelector:@selector(movieInfoGrabber:didFailWithError:)]) {
-        NSLog(@"Did Fail Calling %@", _delegate);
+        APLog(@"Did Fail Calling %@", _delegate);
 
         [_delegate movieInfoGrabber:self didFailWithError:error];
     }
@@ -130,8 +130,8 @@
             }
 
 
-            //NSLog(@"%@", title);
-            //NSLog(TMDB_QUERY_INFO, TMDB_HOSTNAME, id, TMDB_API_KEY);
+            //APLog(@"%@", title);
+            //APLog(TMDB_QUERY_INFO, TMDB_HOSTNAME, id, TMDB_API_KEY);
             NSString *artworkURL = [node stringValueForXPath:@"./poster[size='cover']"];
             if (!artworkURL)
                 artworkURL = [node stringValueForXPath:@"./poster"];

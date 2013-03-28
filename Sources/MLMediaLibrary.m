@@ -27,8 +27,6 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#define MLLog(...) NSLog(__VA_ARGS__)
-
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
@@ -48,7 +46,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     static id sharedMediaLibrary = nil;
     if (!sharedMediaLibrary) {
         sharedMediaLibrary = [[[self class] alloc] init];
-        NSLog(@"Initializing db in %@", [sharedMediaLibrary databaseFolderPath]);
+        APLog(@"Initializing db in %@", [sharedMediaLibrary databaseFolderPath]);
 
         // Also force to init the crash preventer
         // Because it will correctly set up the parser and thumbnail queue
@@ -196,13 +194,13 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 - (void)computeThumbnailForFile:(MLFile *)file
 {
     if (!file.computedThumbnail) {
-        MLLog(@"Computing thumbnail for %@", file.title);
+        APLog(@"Computing thumbnail for %@", file.title);
         [[MLThumbnailerQueue sharedThumbnailerQueue] addFile:file];
     }
 }
 - (void)errorWhenFetchingMetaDataForFile:(MLFile *)file
 {
-    MLLog(@"Error when fetching for '%@'", file.title);
+    APLog(@"Error when fetching for '%@'", file.title);
 
     [self computeThumbnailForFile:file];
 }
@@ -325,7 +323,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     showInfoGrabber.delegate = self;
     showInfoGrabber.userData = show;
 
-    MLLog(@"Fetching show information on %@", show.name);
+    APLog(@"Fetching show information on %@", show.name);
 
     [showInfoGrabber lookUpForTitle:show.name];
 }
@@ -335,7 +333,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 {
     if (!_allowNetworkAccess)
         return;
-    MLLog(@"Fetching show server time");
+    APLog(@"Fetching show server time");
 
     // First fetch the serverTime, so that we can update each entry.
 #if HAVE_BLOCK
@@ -343,7 +341,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
         [[NSUserDefaults standardUserDefaults] setInteger:[serverDate integerValue] forKey:kLastTVDBUpdateServerTime];
 
-        MLLog(@"Fetching show information on %@", show.name);
+        APLog(@"Fetching show information on %@", show.name);
 
         // First fetch the MLShow ID
         MLTVShowInfoGrabber *grabber = [[[MLTVShowInfoGrabber alloc] init] autorelease];
@@ -358,7 +356,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
                 show.shortSummary = [result objectForKey:@"shortSummary"];
                 show.releaseYear = [result objectForKey:@"releaseYear"];
 
-                MLLog(@"Fetching show episode information on %@", showId);
+                APLog(@"Fetching show episode information on %@", showId);
 
                 // Fetch episode info
                 MLTVShowEpisodesInfoGrabber *grabber = [[[MLTVShowEpisodesInfoGrabber alloc] init] autorelease];
@@ -465,7 +463,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)fetchMetaDataForFile:(MLFile *)file
 {
-    MLLog(@"Fetching meta data for %@", file.title);
+    APLog(@"Fetching meta data for %@", file.title);
 
     [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 
@@ -489,7 +487,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     // because we are a singleton
     MLMovieInfoGrabber *grabber = [[[MLMovieInfoGrabber alloc] init] autorelease];
 
-    MLLog(@"Looking up for Movie '%@'", file.title);
+    APLog(@"Looking up for Movie '%@'", file.title);
 
 #if HAVE_BLOCK
     [grabber lookUpForTitle:file.title andExecuteBlock:^(NSError *err){
@@ -523,7 +521,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)addFilePath:(NSString *)filePath
 {
-    MLLog(@"Adding Path %@", filePath);
+    APLog(@"Adding Path %@", filePath);
 
     NSURL *url = [NSURL fileURLWithPath:filePath];
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
@@ -584,9 +582,9 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
     [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
 
-    MLLog(@"Fetching");
+    APLog(@"Fetching");
     NSArray *dbResults = [[self managedObjectContext] executeFetchRequest:request error:nil];
-    MLLog(@"Done");
+    APLog(@"Done");
 
     NSMutableArray *filePathsToAdd = [NSMutableArray arrayWithArray:filepaths];
 
@@ -634,7 +632,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         NSURL *fileURL = [NSURL URLWithString:urlString];
         BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
         if (!exists) {
-            NSLog(@"Marking - %@", [fileURL absoluteString]);
+            APLog(@"Marking - %@", [fileURL absoluteString]);
             file.isSafe = YES; // It doesn't exists, it's safe.
         }
         file.isOnDisk = [NSNumber numberWithBool:exists];

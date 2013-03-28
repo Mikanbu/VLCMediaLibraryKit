@@ -44,7 +44,7 @@
 
 - (void)fetchThumbnail
 {
-    NSLog(@"Starting THUMB %@", self.file);
+    APLog(@"Starting THUMB %@", self.file);
 
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
@@ -88,7 +88,7 @@
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
     mediaThumbnailer.delegate = nil;
-    NSLog(@"Finished thumbnail for %@", self.file.title);
+    APLog(@"Finished thumbnail for %@", self.file.title);
     self.file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
 
     [self endThumbnailing];
@@ -146,7 +146,7 @@ static inline NSString *hashFromFile(MLFile *file)
     if ([_fileDescriptionToOperation objectForKey:hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {
-        NSLog(@"'%@' is unsafe and will crash, ignoring", file.title);
+        APLog(@"'%@' is unsafe and will crash, ignoring", file.title);
         return;
     }
     ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file];

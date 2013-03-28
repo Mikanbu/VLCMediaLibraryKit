@@ -19,3 +19,9 @@
 #endif
 
 #import "NSXMLNode_Additions.h"
+
+#ifndef NDEBUG
+#define APLog(format, ...) NSLog(format, ## __VA_ARGS__)
+#else
+#define APLog(format, ...)
+#endif

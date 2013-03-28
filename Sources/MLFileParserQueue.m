@@ -44,7 +44,7 @@
 {
     NSAssert(!_media, @"We are already parsing");
 
-    NSLog(@"Starting parsing %@", self.file);
+    APLog(@"Starting parsing %@", self.file);
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
     _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
@@ -62,7 +62,7 @@
 
 - (void)mediaDidFinishParsing:(VLCMedia *)media
 {
-    NSLog(@"Parsed %@ - %d tracks", media, [[_media tracksInformation] count]);
+    APLog(@"Parsed %@ - %d tracks", media, [[_media tracksInformation] count]);
 
     if (_media.delegate != self)
         return;
@@ -144,7 +144,7 @@ static inline NSString *hashFromFile(MLFile *file)
     if ([_fileDescriptionToOperation objectForKey:hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {
-        NSLog(@"%@ is unsafe and will crash, ignoring", file);
+        APLog(@"%@ is unsafe and will crash, ignoring", file);
         return;
     }
     MLParsingOperation *op = [[MLParsingOperation alloc] initWithFile:file];

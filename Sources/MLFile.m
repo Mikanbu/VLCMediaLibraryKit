@@ -43,7 +43,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
     [request release];
     [descriptor release];
     if (!movies) {
-        NSLog(@"WARNING: %@", error);
+        APLog(@"WARNING: %@", error);
     }
 
     return movies;
