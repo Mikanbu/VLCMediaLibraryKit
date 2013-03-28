@@ -617,6 +617,11 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 }
 #endif
 
+- (void)updateMediaDatabase
+{
+    [self startUpdateDB];
+}
+
 - (void)startUpdateDB
 {
     // Remove no more present files

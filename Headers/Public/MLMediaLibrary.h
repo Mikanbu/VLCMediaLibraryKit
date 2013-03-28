@@ -18,6 +18,7 @@
 + (id)sharedMediaLibrary;
 
 - (void)addFilePaths:(NSArray *)filepaths;
+- (void)updateMediaDatabase;
 
 // May be internal
 - (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
