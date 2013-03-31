@@ -14,8 +14,13 @@
 #define NSXMLNode CXMLNode
 
 #import "TouchXML.h"
+
+#import <UIKit/UIKit.h>
+#import <MobileVLCKit/MobileVLCKit.h>
+
 #else
 #define HAVE_BLOCK 1
+#import <VLCKit/VLCKit.h>
 #endif
 
 #import "NSXMLNode_Additions.h"

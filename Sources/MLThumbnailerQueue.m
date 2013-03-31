@@ -6,11 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "MLThumbnailerQueue.h"
-#import "VLCMediaThumbnailer.h"
-#import "VLCMedia.h"
 #import "MLFile.h"
 #import "MLCrashPreventer.h"
 

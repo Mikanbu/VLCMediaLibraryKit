@@ -23,10 +23,6 @@
 // To debug
 #define DELETE_LIBRARY_ON_EACH_LAUNCH 0
 
-#ifdef TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#endif
-
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 

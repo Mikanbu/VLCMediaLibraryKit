@@ -5,7 +5,6 @@
 //  Created by Pierre d'Herbemont on 8/9/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
-#import <MobileVLCKit/MobileVLCKit.h>
 #import "MLFileParserQueue.h"
 #import "MLFile.h"
 #import "MLMediaLibrary.h"

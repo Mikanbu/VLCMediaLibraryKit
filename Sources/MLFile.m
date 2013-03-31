@@ -13,9 +13,6 @@
 #import "MLMediaLibrary.h"
 #import "MLThumbnailerQueue.h"
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
 NSString *kMLFileTypeMovie = @"movie";
 NSString *kMLFileTypeClip = @"clip";
 NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
