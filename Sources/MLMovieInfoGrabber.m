@@ -25,10 +25,6 @@
 
 #import "MLMovieInfoGrabber.h"
 
-#if !TARGET_OS_IPHONE
-#import "NSXMLNode_Additions.h"
-#endif
-
 #define TMDB_HOSTNAME     "api.themoviedb.org"
 
 #define TMDB_API_KEY      "5401cd030990fba60e1c23d2832de62e"

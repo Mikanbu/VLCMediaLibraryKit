@@ -27,7 +27,6 @@
 #import "MLTVShowEpisodesInfoGrabber.h"
 #import "TheTVDBGrabber.h"
 #import "MLURLConnection.h"
-#import "NSXMLNode_Additions.h"
 
 @interface MLTVShowEpisodesInfoGrabber ()
 #if !HAVE_BLOCK
