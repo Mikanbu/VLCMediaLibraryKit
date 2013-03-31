@@ -53,7 +53,7 @@
 /* Begin PBXFileReference section */
 		7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0EF4A1170883940003ED47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7D0EF4DF170883D80003ED47 /* MobileMediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileMediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
+		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
 		7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMovieInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTitleDecrapifier.h; sourceTree = "<group>"; };
 		7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTVShowEpisodesInfoGrabber.h; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */,
-				7D0EF4DF170883D80003ED47 /* MobileMediaLibraryKit_Prefix.pch */,
+				7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */,
 			);
 			name = "Supporting Files";
 			path = MediaLibraryKit;
@@ -424,7 +424,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/MediaLibraryKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MobileMediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/External/MobileVLCKit/include\"",
 					/usr/include/libxml2,
@@ -441,7 +441,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/MediaLibraryKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MobileMediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/External/MobileVLCKit/include\"",
 					/usr/include/libxml2,
