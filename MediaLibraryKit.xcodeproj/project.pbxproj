@@ -34,6 +34,8 @@
 		7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */; };
 		7D0EF55B170885230003ED47 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54F170885230003ED47 /* CTidy.m */; };
 		7D0EF55D170885300003ED47 /* MediaLibrary.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */; };
+		7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
+		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +108,10 @@
 		7D0EF54F170885230003ED47 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
 		7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaLibrary.xcdatamodel; sourceTree = SOURCE_ROOT; };
+		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
+		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
+		7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNamespaceNode.h; sourceTree = "<group>"; };
+		7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNamespaceNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +253,10 @@
 				7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */,
 				7D0EF54B170885230003ED47 /* CXMLNode_XPathExtensions.h */,
 				7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */,
+				7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */,
+				7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */,
+				7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */,
+				7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */,
 				7D0EF54D170885230003ED47 /* Tidy */,
 				7D0EF550170885230003ED47 /* TouchXML.h */,
 			);
@@ -350,6 +360,8 @@
 				7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */,
 				7D0EF55B170885230003ED47 /* CTidy.m in Sources */,
 				7D0EF55D170885300003ED47 /* MediaLibrary.xcdatamodel in Sources */,
+				7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */,
+				7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
