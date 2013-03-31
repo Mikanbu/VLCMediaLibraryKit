@@ -23,8 +23,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
-
 @class MLFile;
 
 @interface MLFileParserQueue : NSObject {

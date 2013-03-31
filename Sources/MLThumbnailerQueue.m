@@ -28,7 +28,6 @@
 #import "MLFile.h"
 #import "MLCrashPreventer.h"
 
-
 @interface ThumbnailOperation : NSOperation <VLCMediaThumbnailerDelegate>
 {
     MLFile *_file;

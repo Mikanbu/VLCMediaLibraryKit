@@ -24,7 +24,6 @@
  *****************************************************************************/
 
 #import "MLLabel.h"
-
 #import "MLFile.h"
 
 @implementation MLLabel
