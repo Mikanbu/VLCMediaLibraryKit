@@ -36,6 +36,13 @@
 		7D0EF55D170885300003ED47 /* MediaLibrary.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */; };
 		7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
 		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
+		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
+		A7924689170F09A30036AAF2 /* MLFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
+		A792468A170F09A30036AAF2 /* MLLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
+		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
+		A792468C170F09A30036AAF2 /* MLShow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
+		A792468D170F09A30036AAF2 /* MLShowEpisode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
+		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +52,13 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in CopyFiles */,
+				A7924689170F09A30036AAF2 /* MLFile.h in CopyFiles */,
+				A792468A170F09A30036AAF2 /* MLLabel.h in CopyFiles */,
+				A792468B170F09A30036AAF2 /* MLMediaLibrary.h in CopyFiles */,
+				A792468C170F09A30036AAF2 /* MLShow.h in CopyFiles */,
+				A792468D170F09A30036AAF2 /* MLShowEpisode.h in CopyFiles */,
+				A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
