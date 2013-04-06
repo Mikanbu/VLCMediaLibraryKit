@@ -1,0 +1,29 @@
+Changes between 2.0.0 and 2.1.0 (Aspen Branch)
+----------------------------------------------
+
+The entire library was cleaned and relicensed to LGPL 2.1 or later.
+
+Features:
+- added automatic support for HiDPI thumbnails depending on the iOS device the
+  client app is executed on
+
+Added APIs:
+- MediaLibraryKit:
+  - added a generic header to include the entire framework's functionality
+    with a single #import
+- MLMediaLibrary:
+  - (void)updateMediaDatabase;
+
+Removed APIs and code:
+- MLMediaLibrary:
+  - (void)updateDatabase;
+- NameCleaner.rb
+
+Modified behavior and misc:
+- use of clang instead of llvm-gcc-4.2
+- updated project file for Xcode 4.3 and later
+- iOS Deployment target was raised to iOS 5.1
+- different logging behavior: to see any debug messages, the framework needs
+  to be compiled in debug mode.
+- fixed a significant number of memory leaks
+- updated TouchXML snapshot to current HEAD
