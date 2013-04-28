@@ -284,13 +284,11 @@ static NSNumber *gServerTime = nil;
 
             NSString *artworkURL = [node stringValueForXPath:@"./banner"];
             NSString *shortSummary = [node stringValueForXPath:@"./Overview"];
-            [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                              title, @"title",
-                              id, @"id",
-                              shortSummary ?: @"", @"shortSummary",
-                              releaseYear ?: @"", @"releaseYear",
-                              [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, artworkURL], @"banner",
-                              nil]];
+            [array addObject:@{@"title": title,
+                              @"id": id,
+                              @"shortSummary": shortSummary ?: @"",
+                              @"releaseYear": releaseYear ?: @"",
+                              @"banner": [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, artworkURL]}];
         }
         self.results = array;
     }

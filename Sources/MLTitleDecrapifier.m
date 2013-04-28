@@ -78,7 +78,7 @@ static inline int intFromChar(char n)
 
 static inline NSNumber *numberFromTwoChars(char high, char low)
 {
-    return [NSNumber numberWithInt:intFromChar(high) * 10 + intFromChar(low)];
+    return @(intFromChar(high) * 10 + intFromChar(low));
 }
 
 + (NSDictionary *)tvShowEpisodeInfoFromString:(NSString *)string
@@ -100,7 +100,7 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             NSNumber *episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
-            return [NSDictionary dictionaryWithObjectsAndKeys:season, @"season", episode, @"episode", tvShowName, @"tvShowName", nil];
+            return @{@"season": season, @"episode": episode, @"tvShowName": tvShowName};
         }
     }
     return nil;

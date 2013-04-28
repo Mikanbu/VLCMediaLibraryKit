@@ -156,7 +156,7 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)addFile:(MLFile *)file
 {
-    if ([_fileDescriptionToOperation objectForKey:hashFromFile(file)])
+    if (_fileDescriptionToOperation[hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {
         APLog(@"'%@' is unsafe and will crash, ignoring", file.title);
@@ -180,13 +180,13 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)setHighPriorityForFile:(MLFile *)file
 {
-    ThumbnailOperation *op = [_fileDescriptionToOperation objectForKey:hashFromFile(file)];
+    ThumbnailOperation *op = _fileDescriptionToOperation[hashFromFile(file)];
     [op setQueuePriority:NSOperationQueuePriorityHigh];
 }
 
 - (void)setDefaultPriorityForFile:(MLFile *)file
 {
-    ThumbnailOperation *op = [_fileDescriptionToOperation objectForKey:hashFromFile(file)];
+    ThumbnailOperation *op = _fileDescriptionToOperation[hashFromFile(file)];
     [op setQueuePriority:NSOperationQueuePriorityNormal];
 }
 @end

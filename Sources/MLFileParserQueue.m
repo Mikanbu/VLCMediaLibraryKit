@@ -89,16 +89,16 @@
     NSArray *tracks = [_media tracksInformation];
     NSMutableSet *tracksSet = [NSMutableSet setWithCapacity:[tracks count]];
     for (NSDictionary *track in tracks) {
-        NSString *type = [track objectForKey:VLCMediaTracksInformationType];
+        NSString *type = track[VLCMediaTracksInformationType];
         NSManagedObject *trackInfo = nil;
         if ([type isEqualToString:VLCMediaTracksInformationTypeVideo]) {
             trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"VideoTrackInformation"];
-            [trackInfo setValue:[track objectForKey:VLCMediaTracksInformationVideoWidth] forKey:@"width"];
-            [trackInfo setValue:[track objectForKey:VLCMediaTracksInformationVideoHeight] forKey:@"height"];
+            [trackInfo setValue:track[VLCMediaTracksInformationVideoWidth] forKey:@"width"];
+            [trackInfo setValue:track[VLCMediaTracksInformationVideoHeight] forKey:@"height"];
         } else if ([type isEqualToString:VLCMediaTracksInformationTypeAudio]) {
             trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AudioTrackInformation"];
-            [trackInfo setValue:[track objectForKey:VLCMediaTracksInformationAudioRate] forKey:@"bitrate"];
-            [trackInfo setValue:[track objectForKey:VLCMediaTracksInformationAudioChannelsNumber] forKey:@"channelsNumber"];
+            [trackInfo setValue:track[VLCMediaTracksInformationAudioRate] forKey:@"bitrate"];
+            [trackInfo setValue:track[VLCMediaTracksInformationAudioChannelsNumber] forKey:@"channelsNumber"];
         }
         if (trackInfo)
             [tracksSet addObject:trackInfo];
@@ -159,7 +159,7 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)addFile:(MLFile *)file
 {
-    if ([_fileDescriptionToOperation objectForKey:hashFromFile(file)])
+    if (_fileDescriptionToOperation[hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {
         APLog(@"%@ is unsafe and will crash, ignoring", file);
@@ -183,13 +183,13 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)setHighPriorityForFile:(MLFile *)file
 {
-    MLParsingOperation *op = [_fileDescriptionToOperation objectForKey:hashFromFile(file)];
+    MLParsingOperation *op = _fileDescriptionToOperation[hashFromFile(file)];
     [op setQueuePriority:NSOperationQueuePriorityHigh];
 }
 
 - (void)setDefaultPriorityForFile:(MLFile *)file
 {
-    MLParsingOperation *op = [_fileDescriptionToOperation objectForKey:hashFromFile(file)];
+    MLParsingOperation *op = _fileDescriptionToOperation[hashFromFile(file)];
     [op setQueuePriority:NSOperationQueuePriorityNormal];
 }
 

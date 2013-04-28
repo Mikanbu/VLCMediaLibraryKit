@@ -43,7 +43,7 @@
     [request setEntity:entity];
 
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
+    [request setSortDescriptors:@[descriptor]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
 
     NSArray *episodes = [moc executeFetchRequest:request error:nil];

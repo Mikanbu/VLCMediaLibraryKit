@@ -37,7 +37,7 @@
     [request setEntity:entity];
 
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
+    [request setSortDescriptors:@[descriptor]];
 
     NSArray *shows = [moc executeFetchRequest:request error:nil];
     [request release];
@@ -57,7 +57,7 @@
     if ([dbResults count] <= 0)
         return nil;
 
-    return [dbResults objectAtIndex:0];
+    return dbResults[0];
 }
 
 

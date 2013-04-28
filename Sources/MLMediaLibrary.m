@@ -99,7 +99,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 {
     int directory = NSLibraryDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    NSString *directoryPath = [paths objectAtIndex:0];
+    NSString *directoryPath = paths[0];
 #if DELETE_LIBRARY_ON_EACH_LAUNCH
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
 #endif
@@ -111,7 +111,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 {
     int directory = NSLibraryDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    NSString *directoryPath = [paths objectAtIndex:0];
+    NSString *directoryPath = paths[0];
 #if DELETE_LIBRARY_ON_EACH_LAUNCH
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
 #endif
@@ -129,10 +129,9 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     NSURL *url = [NSURL fileURLWithPath:path];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
-    NSNumber *yes = [NSNumber numberWithBool:YES];
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             yes, NSMigratePersistentStoresAutomaticallyOption,
-                             yes, NSInferMappingModelAutomaticallyOption, nil];
+    NSNumber *yes = @YES;
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: yes,
+                             NSInferMappingModelAutomaticallyOption: yes};
 
     NSError *error;
     NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
@@ -229,7 +228,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)noMetaDataInRemoteDBForFile:(MLFile *)file
 {
-    file.noOnlineMetaData = [NSNumber numberWithBool:YES];
+    file.noOnlineMetaData = @YES;
     [self computeThumbnailForFile:file];
 }
 
@@ -263,16 +262,16 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     MLShow *show = grabber.userData;
 
     NSArray *results = grabber.episodesResults;
-    [show setValue:[grabber.results objectForKey:@"serieArtworkURL"] forKey:@"artworkURL"];
+    [show setValue:(grabber.results)[@"serieArtworkURL"] forKey:@"artworkURL"];
     for (id result in results) {
-        if ([[result objectForKey:@"serie"] boolValue]) {
+        if ([result[@"serie"] boolValue]) {
             continue;
         }
-        MLShowEpisode *showEpisode = [MLShowEpisode episodeWithShow:show episodeNumber:[result objectForKey:@"episodeNumber"] seasonNumber:[result objectForKey:@"seasonNumber"] createIfNeeded:YES];
-        showEpisode.name = [result objectForKey:@"title"];
-        showEpisode.theTVDBID = [result objectForKey:@"id"];
-        showEpisode.shortSummary = [result objectForKey:@"shortSummary"];
-        showEpisode.artworkURL = [result objectForKey:@"artworkURL"];
+        MLShowEpisode *showEpisode = [MLShowEpisode episodeWithShow:show episodeNumber:result[@"episodeNumber"] seasonNumber:result[@"seasonNumber"] createIfNeeded:YES];
+        showEpisode.name = result[@"title"];
+        showEpisode.theTVDBID = result[@"id"];
+        showEpisode.shortSummary = result[@"shortSummary"];
+        showEpisode.artworkURL = result[@"artworkURL"];
         if (!showEpisode.artworkURL) {
             for (MLFile *file in showEpisode.files)
                 [self computeThumbnailForFile:file];
@@ -299,13 +298,13 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     MLShow *show = grabber.userData;
     NSArray *results = grabber.results;
     if ([results count] > 0) {
-        NSDictionary *result = [results objectAtIndex:0];
-        NSString *showId = [result objectForKey:@"id"];
+        NSDictionary *result = results[0];
+        NSString *showId = result[@"id"];
 
         show.theTVDBID = showId;
-        show.name = [result objectForKey:@"title"];
-        show.shortSummary = [result objectForKey:@"shortSummary"];
-        show.releaseYear = [result objectForKey:@"releaseYear"];
+        show.name = result[@"title"];
+        show.shortSummary = result[@"shortSummary"];
+        show.releaseYear = result[@"releaseYear"];
 
         // Fetch episodes info
         MLTVShowEpisodesInfoGrabber *grabber = [[[MLTVShowEpisodesInfoGrabber alloc] init] autorelease];
@@ -410,9 +409,9 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 {
     file.type = kMLFileTypeTVShowEpisode;
 
-    NSNumber *seasonNumber = [tvShowEpisodeInfo objectForKey:@"season"];
-    NSNumber *episodeNumber = [tvShowEpisodeInfo objectForKey:@"episode"];
-    NSString *tvShowName = [tvShowEpisodeInfo objectForKey:@"tvShowName"];
+    NSNumber *seasonNumber = tvShowEpisodeInfo[@"season"];
+    NSNumber *episodeNumber = tvShowEpisodeInfo[@"episode"];
+    NSString *tvShowName = tvShowEpisodeInfo[@"tvShowName"];
     BOOL hasNoTvShow = NO;
     if (!tvShowName) {
         tvShowName = @"Untitled TV MLShow";
@@ -432,13 +431,13 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         episode.name = file.title;
     file.seasonNumber = seasonNumber;
     file.episodeNumber = episodeNumber;
-    episode.shouldBeDisplayed = [NSNumber numberWithBool:YES];
+    episode.shouldBeDisplayed = @YES;
 
     [episode addFilesObject:file];
     file.showEpisode = episode;
 
     // The rest of the meta data will be fetched using the MLShow
-    file.hasFetchedInfo = [NSNumber numberWithBool:YES];
+    file.hasFetchedInfo = @YES;
 }
 
 
@@ -456,16 +455,16 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)movieInfoGrabberDidFinishGrabbing:(MLMovieInfoGrabber *)grabber
 {
-    NSNumber *yes = [NSNumber numberWithBool:YES];
+    NSNumber *yes = @YES;
 
     NSArray *results = grabber.results;
     MLFile *file = grabber.userData;
     if ([results count] > 0) {
-        NSDictionary *result = [results objectAtIndex:0];
-        file.artworkURL = [result objectForKey:@"artworkURL"];
-        file.title = [result objectForKey:@"title"];
-        file.shortSummary = [result objectForKey:@"shortSummary"];
-        file.releaseYear = [result objectForKey:@"releaseYear"];
+        NSDictionary *result = results[0];
+        file.artworkURL = result[@"artworkURL"];
+        file.title = result[@"title"];
+        file.shortSummary = result[@"shortSummary"];
+        file.releaseYear = result[@"releaseYear"];
     }
     else {
         [self noMetaDataInRemoteDBForFile:file];
@@ -544,7 +543,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     NSDate *openedDate = nil; // FIXME kMDItemLastUsedDate
     NSDate *modifiedDate = nil; // FIXME [result valueForAttribute:@"kMDItemFSContentChangeDate"];
 #endif
-    NSNumber *size = [attributes objectForKey:NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
+    NSNumber *size = attributes[NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
 
     MLFile *file = [self createObjectForEntity:@"File"];
     file.url = [url absoluteString];
@@ -552,12 +551,12 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     // Yes, this is a negative number. VLCTime nicely display negative time
     // with "XX minutes remaining". And we are using this facility.
 
-    NSNumber *no = [NSNumber numberWithBool:NO];
-    NSNumber *yes = [NSNumber numberWithBool:YES];
+    NSNumber *no = @NO;
+    NSNumber *yes = @YES;
 
     file.currentlyWatching = no;
-    file.lastPosition = [NSNumber numberWithDouble:0];
-    file.remainingTime = [NSNumber numberWithDouble:0];
+    file.lastPosition = @0.0;
+    file.remainingTime = @0.0;
     file.unread = yes;
 
 #if !TARGET_OS_IPHONE
@@ -588,7 +587,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         NSURL *url = [NSURL fileURLWithPath:path];
         NSString *urlString = [url absoluteString];
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
-        [urlToObject setObject:path forKey:urlString];
+        urlToObject[urlString] = path;
 
     }
 
@@ -606,7 +605,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     // Remove objects that are already in db.
     for (MLFile *dbResult in dbResults) {
         NSString *urlString = dbResult.url;
-        [filePathsToAdd removeObject:[urlToObject objectForKey:urlString]];
+        [filePathsToAdd removeObject:urlToObject[urlString]];
     }
 
     // Add only the newly added items
@@ -649,7 +648,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
             APLog(@"Marking - %@", [fileURL absoluteString]);
             file.isSafe = YES; // It doesn't exists, it's safe.
         }
-        file.isOnDisk = [NSNumber numberWithBool:exists];
+        file.isOnDisk = @(exists);
     }
 
     // Get the file to parse
@@ -695,7 +694,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         [self fetchMetaDataForShow:show];
 
     // Get updated TV Shows
-    NSNumber *lastServerTime = [NSNumber numberWithInteger:[[NSUserDefaults standardUserDefaults] integerForKey:kLastTVDBUpdateServerTime]];
+    NSNumber *lastServerTime = @([[NSUserDefaults standardUserDefaults] integerForKey:kLastTVDBUpdateServerTime]);
 #if HAVE_BLOCK
     [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
         NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];

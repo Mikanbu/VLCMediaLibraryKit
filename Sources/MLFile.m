@@ -50,7 +50,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
 
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
+    [request setSortDescriptors:@[descriptor]];
 
     NSError *error;
     NSArray *movies = [moc executeFetchRequest:request error:&error];
@@ -160,7 +160,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 - (void)setIsSafe:(BOOL)isSafe
 {
     [self willChangeValueForKey:@"isSafe"];
-    [self setPrimitiveValue:[NSNumber numberWithBool:isSafe] forKey:@"isSafe"];
+    [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
     [self willChangeValueForKey:@"isSafe"];
 }
 
@@ -175,7 +175,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 - (void)setIsBeingParsed:(BOOL)isBeingParsed
 {
     [self willChangeValueForKey:@"isBeingParsed"];
-    [self setPrimitiveValue:[NSNumber numberWithBool:isBeingParsed] forKey:@"isBeingParsed"];
+    [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
     [self willChangeValueForKey:@"isBeingParsed"];
 }
 
@@ -190,7 +190,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 - (void)setThumbnailTimeouted:(BOOL)thumbnailTimeouted
 {
     [self willChangeValueForKey:@"thumbnailTimeouted"];
-    [self setPrimitiveValue:[NSNumber numberWithBool:thumbnailTimeouted] forKey:@"thumbnailTimeouted"];
+    [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
     [self willChangeValueForKey:@"thumbnailTimeouted"];
 }
 
@@ -221,7 +221,7 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 {
     NSFileManager *manager = [NSFileManager defaultManager];
     NSDictionary *fileAttributes = [manager attributesOfItemAtPath:[[[NSURL URLWithString:self.url] path] stringByResolvingSymlinksInPath] error:nil];
-    NSNumber *fileSize = [fileAttributes objectForKey:NSFileSize];
+    NSNumber *fileSize = fileAttributes[NSFileSize];
     return [fileSize unsignedLongLongValue];
 }
 

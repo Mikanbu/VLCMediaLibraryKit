@@ -153,12 +153,10 @@
             if (!artworkURL)
                 artworkURL = [node stringValueForXPath:@"./backdrop"];
             NSString *shortSummary = [node stringValueForXPath:@"./short_overview"];
-            [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                              title, @"title",
-                              shortSummary ?: @"", @"shortSummary",
-                              releaseYear ?: @"", @"releaseYear",
-                              artworkURL, @"artworkURL",
-                              nil]];
+            [array addObject:@{@"title": title,
+                              @"shortSummary": shortSummary ?: @"",
+                              @"releaseYear": releaseYear ?: @"",
+                              @"artworkURL": artworkURL}];
         }
         self.results = array;
     }

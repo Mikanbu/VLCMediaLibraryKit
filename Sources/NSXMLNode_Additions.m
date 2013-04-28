@@ -30,7 +30,7 @@
     NSArray *nodes = [self nodesForXPath:string error:nil];
     if ([nodes count] == 0)
         return nil;
-    return [[nodes objectAtIndex:0] stringValue];
+    return [nodes[0] stringValue];
 }
 
 - (NSNumber *)numberValueForXPath:(NSString *)string
@@ -38,10 +38,10 @@
     NSArray *nodes = [self nodesForXPath:string error:nil];
     if ([nodes count] == 0)
         return nil;
-    NSScanner *scanner = [NSScanner scannerWithString:[[nodes objectAtIndex:0] stringValue]];
+    NSScanner *scanner = [NSScanner scannerWithString:[nodes[0] stringValue]];
     NSInteger i;
     if ([scanner scanInteger:&i])
-        return [NSNumber numberWithInteger:i];
+        return @(i);
     return nil;
 }
 

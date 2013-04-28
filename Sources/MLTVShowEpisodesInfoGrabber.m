@@ -120,7 +120,7 @@
 
     NSString *serieArtworkURL = nil;
     if ([nodesSerie count] == 1) {
-        NSXMLNode *node = [nodesSerie objectAtIndex:0];
+        NSXMLNode *node = nodesSerie[0];
         serieArtworkURL = [node stringValueForXPath:@"./poster"];
     }
 
@@ -136,18 +136,15 @@
             NSNumber *episodeNumber = [node numberValueForXPath:@"./EpisodeNumber"];
             NSString *artworkURL = [node stringValueForXPath:@"./filename"];
             NSString *shortSummary = [node stringValueForXPath:@"./Overview"];
-            [array addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                              episodeId, @"id",
-                              title ?: @"", @"title",
-                              shortSummary ?: @"", @"shortSummary",
-                              episodeNumber, @"episodeNumber",
-                              seasonNumber, @"seasonNumber",
-                              [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, artworkURL], @"artworkURL",
-                              nil]];
+            [array addObject:@{@"id": episodeId,
+                              @"title": title ?: @"",
+                              @"shortSummary": shortSummary ?: @"",
+                              @"episodeNumber": episodeNumber,
+                              @"seasonNumber": seasonNumber,
+                              @"artworkURL": [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, artworkURL]}];
         }
         self.episodesResults = array;
-        self.results = [NSDictionary dictionaryWithObjectsAndKeys:
-                        [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, serieArtworkURL], @"serieArtworkURL", nil];
+        self.results = @{@"serieArtworkURL": [NSString stringWithFormat:TVDB_COVERS_URL, TVDB_IMAGES_HOSTNAME, serieArtworkURL]};
     }
     else {
         self.episodesResults = nil;

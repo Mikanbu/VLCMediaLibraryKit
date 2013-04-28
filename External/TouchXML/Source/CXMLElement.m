@@ -168,8 +168,8 @@
 
 	while (theCurrentNamespace != NULL)
         {
-		NSString *thePrefix = theCurrentNamespace->prefix ? [NSString stringWithUTF8String:(const char *)theCurrentNamespace->prefix] : @"";
-		NSString *theURI = [NSString stringWithUTF8String:(const char *)theCurrentNamespace->href];
+		NSString *thePrefix = theCurrentNamespace->prefix ? @((const char *)theCurrentNamespace->prefix) : @"";
+		NSString *theURI = @((const char *)theCurrentNamespace->href);
 		CXMLNamespaceNode *theNode = [[CXMLNamespaceNode alloc] initWithPrefix:thePrefix URI:theURI parentElement:self];
 		[theNamespaces addObject:theNode];
 		[theNode release];
@@ -189,8 +189,8 @@
         {
 		if (xmlStrcmp(theCurrentNamespace->prefix, thePrefix) == 0)
             {
-			NSString *thePrefixString = theCurrentNamespace->prefix ? [NSString stringWithUTF8String:(const char *)theCurrentNamespace->prefix] : @"";
-			NSString *theURI = [NSString stringWithUTF8String:(const char *)theCurrentNamespace->href];
+			NSString *thePrefixString = theCurrentNamespace->prefix ? @((const char *)theCurrentNamespace->prefix) : @"";
+			NSString *theURI = @((const char *)theCurrentNamespace->href);
 			return [[[CXMLNamespaceNode alloc] initWithPrefix:thePrefixString URI:theURI parentElement:self] autorelease];
             }
 		theCurrentNamespace = theCurrentNamespace->next;
@@ -212,8 +212,8 @@
 		if (theCurrentNamespace->prefix == 0
 			|| (theCurrentNamespace->prefix)[0] == 0)
 		{
-			NSString *thePrefix = theCurrentNamespace->prefix ? [NSString stringWithUTF8String:(const char *)theCurrentNamespace->prefix] : @"";
-			NSString *theURI = [NSString stringWithUTF8String:(const char *)theCurrentNamespace->href];
+			NSString *thePrefix = theCurrentNamespace->prefix ? @((const char *)theCurrentNamespace->prefix) : @"";
+			NSString *theURI = @((const char *)theCurrentNamespace->href);
 			return [[[CXMLNamespaceNode alloc] initWithPrefix:thePrefix URI:theURI parentElement:self] autorelease];
 		}
 		theCurrentNamespace = theCurrentNamespace->next;
@@ -233,7 +233,7 @@
 		if (xmlStrcmp(theCurrentNamespace->href, theXMLURI) == 0)
 		{
 			if(theCurrentNamespace->prefix)
-				return [NSString stringWithUTF8String:(const char *)theCurrentNamespace->prefix];
+				return @((const char *)theCurrentNamespace->prefix);
 
 			return @"";
 		}
