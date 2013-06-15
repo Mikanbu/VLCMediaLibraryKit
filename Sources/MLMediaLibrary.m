@@ -649,6 +649,10 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
             APLog(@"Marking - %@", [fileURL absoluteString]);
             file.isSafe = YES; // It doesn't exists, it's safe.
 #if TARGET_OS_IPHONE
+            NSString *thumbPath = [[[self thumbnailFolderPath] stringByAppendingPathComponent:[[file.objectID URIRepresentation] path]] stringByAppendingString:@".png"];
+            exists = [fileManager fileExistsAtPath:thumbPath];
+            if (exists)
+                [fileManager removeItemAtPath:thumbPath error:nil];
             [[self managedObjectContext] deleteObject:file];
 #endif
         }
