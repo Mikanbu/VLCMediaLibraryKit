@@ -601,7 +601,6 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
     NSMutableArray *filePathsToAdd = [NSMutableArray arrayWithArray:filepaths];
 
-
     // Remove objects that are already in db.
     for (MLFile *dbResult in dbResults) {
         NSString *urlString = dbResult.url;
@@ -640,15 +639,22 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
-    for (MLFile *file in results) {
+    unsigned int count = results.count;
+    for (unsigned int x = 0; x < count; x++) {
+        MLFile *file = results[x];
         NSString *urlString = [file url];
         NSURL *fileURL = [NSURL URLWithString:urlString];
         BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
         if (!exists) {
             APLog(@"Marking - %@", [fileURL absoluteString]);
             file.isSafe = YES; // It doesn't exists, it's safe.
+#if TARGET_OS_IPHONE
+            [[self managedObjectContext] deleteObject:file];
+#endif
         }
-        file.isOnDisk = @(exists);
+#if !TARGET_OS_IPHONE
+    file.isOnDisk = @(exists);
+#endif
     }
 
     // Get the file to parse
@@ -677,7 +683,6 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     for (MLFile *file in results)
         if (!file.computedThumbnail)
             [self computeThumbnailForFile:file];
-
 
     // Get to fetch meta data
     request = [self fetchRequestForEntity:@"File"];
