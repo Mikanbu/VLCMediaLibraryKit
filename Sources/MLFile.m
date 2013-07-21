@@ -107,6 +107,8 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 @dynamic remainingTime;
 @dynamic releaseYear;
 @dynamic lastPosition;
+@dynamic lastSubtitleTrack;
+@dynamic lastAudioTrack;
 @dynamic playCount;
 @dynamic artworkURL;
 @dynamic url;

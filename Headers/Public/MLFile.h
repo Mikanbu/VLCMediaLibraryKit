@@ -7,6 +7,7 @@
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -46,6 +47,8 @@ extern NSString *kMLFileTypeTVShowEpisode;
 @property (nonatomic, retain) NSNumber *remainingTime;
 @property (nonatomic, retain) NSString *releaseYear;
 @property (nonatomic, retain) NSNumber *lastPosition;
+@property (nonatomic, retain) NSNumber *lastSubtitleTrack;
+@property (nonatomic, retain) NSNumber *lastAudioTrack;
 @property (nonatomic, retain) NSNumber *playCount;
 @property (nonatomic, retain) NSString *artworkURL;
 @property (nonatomic, retain) NSString *url;

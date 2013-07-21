@@ -1,6 +1,11 @@
-Changes between 2.0.0 and 2.1.0 (Aspen Branch)
-----------------------------------------------
+2.1.1
+-----
+Added APIs:
+- MLFile:
+  - new properties: lastAudioTrack, lastSubtitleTrack
 
+Changes between 2.0.0 and 2.1.0
+-------------------------------
 The entire library was cleaned and relicensed to LGPL 2.1 or later.
 Please note that the Objective-C syntax was updated, so MediaLibraryKit may no longer compile with outdated versions of Xcode / clang.
 
