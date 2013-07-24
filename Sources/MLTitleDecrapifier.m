@@ -7,6 +7,7 @@
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -100,7 +101,14 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             NSNumber *episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
-            return @{@"season": season, @"episode": episode, @"tvShowName": tvShowName};
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
+            if (season)
+                [dict setObject:season forKey:@"season"];
+            if (episode)
+                [dict setObject:episode forKey:@"episode"];
+            if (tvShowName)
+                [dict setObject:tvShowName forKey:@"tvShowName"];
+            return [NSDictionary dictionaryWithDictionary:dict];
         }
     }
     return nil;
