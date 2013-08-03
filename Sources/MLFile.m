@@ -91,11 +91,25 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 {
     if ([self isShowEpisode]) {
         MLShowEpisode *episode = self.showEpisode;
-        NSString *name = [NSString stringWithFormat:@"%@ - S%02dE%02d",
-                          episode.show.name, [episode.seasonNumber intValue],
-                          [episode.episodeNumber intValue]];
-        return episode.name ? [name stringByAppendingFormat:@" - %@", episode.name]
-                            : name;
+        NSMutableString *name = [[NSMutableString alloc] init];
+        if (episode.show.name && ![episode.show.name isEqualToString:@""])
+            [name appendString:episode.show.name];
+
+        if (![name isEqualToString:@""])
+            [name appendString:@" - "];
+
+        if ([episode.seasonNumber intValue] > 0 && [episode.episodeNumber intValue] > 0)
+            [name appendFormat:@"S%02dE%02d",
+             [episode.seasonNumber intValue],
+             [episode.episodeNumber intValue]];
+
+        if (episode.name && ![episode.name isEqualToString:@""]) {
+            if ([name length] > 0)
+                [name appendString:@" - "];
+            [name appendString:episode.name];
+        }
+
+        return [NSString stringWithString:name];
     }
     [self willAccessValueForKey:@"title"];
     NSString *ret = [self primitiveValueForKey:@"title"];
