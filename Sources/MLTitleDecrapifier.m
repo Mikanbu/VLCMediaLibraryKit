@@ -102,7 +102,6 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             NSNumber *episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
-            NSLog(@"str: %@", str);
             NSString *episodeName = [str substringFromIndex:i+6];
             episodeName = episodeName ? [[MLTitleDecrapifier decrapify:episodeName] capitalizedString] : nil;
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:4];
