@@ -30,14 +30,15 @@
 + (NSString *)decrapify:(NSString *)string
 {
     static NSArray *ignoredWords = nil;
-    if (!ignoredWords) {
+    if (!ignoredWords)
         ignoredWords = [[NSArray alloc] initWithObjects:
                         @"xvid", @"h264", @"dvd", @"rip", @"divx", @"[fr]", nil];
-    }
+
     NSMutableString *mutableString = [NSMutableString stringWithString:string];
     for (NSString *word in ignoredWords)
         [mutableString replaceOccurrencesOfString:word withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"." withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@" - " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     return mutableString;
 }
 
@@ -101,13 +102,18 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             NSNumber *episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
+            NSLog(@"str: %@", str);
+            NSString *episodeName = [str substringFromIndex:i+6];
+            episodeName = episodeName ? [[MLTitleDecrapifier decrapify:episodeName] capitalizedString] : nil;
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:4];
             if (season)
                 [dict setObject:season forKey:@"season"];
             if (episode)
                 [dict setObject:episode forKey:@"episode"];
             if (tvShowName)
                 [dict setObject:tvShowName forKey:@"tvShowName"];
+            if (episodeName)
+                [dict setObject:episodeName forKey:@"tvEpisodeName"];
             return [NSDictionary dictionaryWithDictionary:dict];
         }
     }
