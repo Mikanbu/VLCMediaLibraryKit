@@ -412,9 +412,10 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     NSNumber *seasonNumber = tvShowEpisodeInfo[@"season"];
     NSNumber *episodeNumber = tvShowEpisodeInfo[@"episode"];
     NSString *tvShowName = tvShowEpisodeInfo[@"tvShowName"];
+    NSString *tvEpisodeName = tvShowEpisodeInfo[@"tvEpisodeName"];
     BOOL hasNoTvShow = NO;
     if (!tvShowName) {
-        tvShowName = @"Untitled TV MLShow";
+        tvShowName = @"";
         hasNoTvShow = YES;
     }
     BOOL wasInserted = NO;
@@ -426,8 +427,9 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         show.name = tvShowName;
         [self fetchMetaDataForShow:show];
     }
+    episode.name = tvEpisodeName;
 
-    if (hasNoTvShow)
+    if (!episode.name || [episode.name isEqualToString:@""])
         episode.name = file.title;
     file.seasonNumber = seasonNumber;
     file.episodeNumber = episodeNumber;
