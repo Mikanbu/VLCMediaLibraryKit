@@ -1,5 +1,9 @@
-2.1.1
------
+2.2
+---
+Features:
+- improved episode title decrapification
+- overall stability improvements
+
 Added APIs:
 - MLFile:
   - new properties: lastAudioTrack, lastSubtitleTrack
