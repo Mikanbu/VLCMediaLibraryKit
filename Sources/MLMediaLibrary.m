@@ -284,7 +284,9 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)save
 {
-    [[self managedObjectContext] save:nil];
+    NSError *error = nil;
+    BOOL success = [[self managedObjectContext] save:&error];
+    NSAssert1(success, @"Can't save: %@", error);
 }
 
 - (void)tvShowEpisodesInfoGrabber:(MLTVShowEpisodesInfoGrabber *)grabber didFailWithError:(NSError *)error
