@@ -1,10 +1,15 @@
 2.2
 ---
 Features:
+- added support for audio files and album organization
 - improved episode title decrapification
 - overall stability improvements
 
-Added APIs:
+Added Public APIs:
+- MLAlbum:
+  - New class
+- MLAlbumTrack:
+  - New class
 - MLFile:
   - new properties: lastAudioTrack, lastSubtitleTrack
 

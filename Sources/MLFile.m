@@ -27,12 +27,15 @@
 #import "MLFile.h"
 #import "MLShow.h"
 #import "MLShowEpisode.h"
+#import "MLAlbum.h"
+#import "MLAlbumTrack.h"
 #import "MLMediaLibrary.h"
 #import "MLThumbnailerQueue.h"
 
 NSString *kMLFileTypeMovie = @"movie";
 NSString *kMLFileTypeClip = @"clip";
 NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
+NSString *kMLFileTypeAudio = @"audio";
 
 @implementation MLFile
 
@@ -79,6 +82,16 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 {
     return [self isKindOfType:kMLFileTypeTVShowEpisode];
 }
+- (BOOL)isAlbumTrack
+{
+    return [self isKindOfType:kMLFileTypeAudio];
+}
+- (BOOL)isSupportedAudioFile
+{
+    NSUInteger options = NSRegularExpressionSearch | NSCaseInsensitiveSearch;
+    return ([[self.url lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|flac|it|m2a|m4a|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
+}
+
 - (NSString *)artworkURL
 {
     if ([self isShowEpisode]) {
@@ -110,6 +123,17 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
         }
 
         return [NSString stringWithString:name];
+    } else if ([self isAlbumTrack]) {
+        MLAlbumTrack *track = self.albumTrack;
+        NSMutableString *name = [[NSMutableString alloc] initWithString:track.title];
+
+        if (track.album.name)
+            [name appendFormat:@" - %@", track.album.name];
+
+        if (track.artist)
+            [name appendFormat:@" - %@", track.artist];
+
+        return [NSString stringWithString:name];
     }
     [self willAccessValueForKey:@"title"];
     NSString *ret = [self primitiveValueForKey:@"title"];
@@ -139,6 +163,11 @@ NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 @dynamic tracks;
 @dynamic isOnDisk;
 @dynamic duration;
+@dynamic artist;
+@dynamic album;
+@dynamic albumTrackNumber;
+@dynamic genre;
+@dynamic albumTrack;
 
 - (NSString *)thumbnailPath
 {

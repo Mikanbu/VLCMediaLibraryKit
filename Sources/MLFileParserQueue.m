@@ -106,6 +106,7 @@
 
     [self.file setTracks:tracksSet];
     [self.file setDuration:[[_media length] numberValue]];
+
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
     [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
     [parserQueue.queue setSuspended:NO];

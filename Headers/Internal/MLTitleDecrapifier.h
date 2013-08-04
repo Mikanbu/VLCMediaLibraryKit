@@ -23,12 +23,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "MLFile.h"
 
 @interface MLTitleDecrapifier : NSObject
-{
-}
+
 + (NSString *)decrapify:(NSString *)string;
 + (BOOL)isTVShowEpisodeTitle:(NSString *)string;
 
 + (NSDictionary *)tvShowEpisodeInfoFromString:(NSString *)string;
++ (NSDictionary *)audioContentInfoFromFile:(MLFile *)file;
+
 @end

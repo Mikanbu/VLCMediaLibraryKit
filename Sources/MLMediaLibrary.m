@@ -32,8 +32,10 @@
 #import "MLFile.h"
 #import "MLLabel.h"
 #import "MLShowEpisode.h"
-#import "MLThumbnailerQueue.h"
 #import "MLShow.h"
+#import "MLThumbnailerQueue.h"
+#import "MLAlbumTrack.h"
+#import "MLAlbum.h"
 #import "MLFileParserQueue.h"
 #import "MLCrashPreventer.h"
 
@@ -130,8 +132,8 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
     NSNumber *yes = @YES;
-    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: yes,
-                             NSInferMappingModelAutomaticallyOption: yes};
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : yes,
+                             NSInferMappingModelAutomaticallyOption : yes};
 
     NSError *error;
     NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
@@ -444,6 +446,37 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     file.hasFetchedInfo = @YES;
 }
 
+- (void)addAudioContentWithInfo:(NSDictionary *)audioContentInfo andFile:(MLFile *)file
+{
+    file.type = kMLFileTypeAudio;
+
+    NSString *title = audioContentInfo[VLCMetaInformationTitle];
+    NSString *artist = audioContentInfo[VLCMetaInformationArtist];
+    NSString *albumName = audioContentInfo[VLCMetaInformationAlbum];
+    NSString *releaseYear = audioContentInfo[VLCMetaInformationDate];
+    NSString *genre = audioContentInfo[VLCMetaInformationGenre];
+    NSString *trackNumber = audioContentInfo[VLCMetaInformationTrackNumber];
+
+    MLAlbum *album = nil;
+
+    BOOL wasCreated = NO;
+    MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:[NSNumber numberWithInteger:[trackNumber integerValue]] createIfNeeded:YES wasCreated:&wasCreated];
+    if (track)
+        album = track.album;
+    track.title = title;
+    track.artist = artist;
+    track.genre = genre;
+    album.releaseYear = releaseYear;
+
+    if (!track.title || [track.title isEqualToString:@""])
+        track.title = file.title;
+
+    [track addFilesObject:file];
+    file.albumTrack = track;
+
+    file.hasFetchedInfo = @YES;
+}
+
 
 /**
  * MLFile auto detection
@@ -493,6 +526,14 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     if (tvShowEpisodeInfo) {
         [self addTVShowEpisodeWithInfo:tvShowEpisodeInfo andFile:file];
         return;
+    }
+
+    if ([file isSupportedAudioFile]) {
+        NSDictionary *audioContentInfo = [MLTitleDecrapifier audioContentInfoFromFile:file];
+        if (audioContentInfo && ![file videoTrack]) {
+            [self addAudioContentWithInfo:audioContentInfo andFile:file];
+            return;
+        }
     }
 
     if (!_allowNetworkAccess)
@@ -654,8 +695,8 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
             file.isSafe = YES; // It doesn't exists, it's safe.
 #if TARGET_OS_IPHONE
             NSString *thumbPath = [[[self thumbnailFolderPath] stringByAppendingPathComponent:[[file.objectID URIRepresentation] path]] stringByAppendingString:@".png"];
-            exists = [fileManager fileExistsAtPath:thumbPath];
-            if (exists)
+            bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
+            if (thumbExists)
                 [fileManager removeItemAtPath:thumbPath error:nil];
             [[self managedObjectContext] deleteObject:file];
 #endif

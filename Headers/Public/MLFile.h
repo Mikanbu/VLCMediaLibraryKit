@@ -27,14 +27,14 @@
 #import <CoreData/CoreData.h>
 
 @class MLShowEpisode;
+@class MLAlbumTrack;
 
 extern NSString *kMLFileTypeMovie;
 extern NSString *kMLFileTypeClip;
 extern NSString *kMLFileTypeTVShowEpisode;
+extern NSString *kMLFileTypeAudio;
 
 @interface MLFile :  NSManagedObject
-{
-}
 
 + (NSArray *)allFiles;
 
@@ -42,6 +42,8 @@ extern NSString *kMLFileTypeTVShowEpisode;
 - (BOOL)isMovie;
 - (BOOL)isClip;
 - (BOOL)isShowEpisode;
+- (BOOL)isAlbumTrack;
+- (BOOL)isSupportedAudioFile;
 
 @property (nonatomic, retain) NSNumber *seasonNumber;
 @property (nonatomic, retain) NSNumber *remainingTime;
@@ -65,6 +67,11 @@ extern NSString *kMLFileTypeTVShowEpisode;
 @property (nonatomic, retain) NSSet *tracks;
 @property (nonatomic, retain) NSNumber *isOnDisk;
 @property (nonatomic, retain) NSNumber *duration;
+@property (nonatomic, retain) NSString *artist;
+@property (nonatomic, retain) NSString *album;
+@property (nonatomic, retain) NSNumber *albumTrackNumber;
+@property (nonatomic, retain) NSString *genre;
+@property (nonatomic, retain) MLAlbumTrack *albumTrack;
 
 @property (nonatomic, retain) UIImage *computedThumbnail;
 @property (nonatomic, assign) BOOL isSafe;

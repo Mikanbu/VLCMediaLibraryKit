@@ -1,9 +1,12 @@
 /*****************************************************************************
- * MediaLibraryKit
+ * MLAlbum.h
  *****************************************************************************
+ * Copyright (C) 2010 Pierre d'Herbemont
  * Copyright (C) 2013 Felix Paul Kühne
+ * $Id$
  *
- * Authors: Felix Paul Kühne <fkuehne # videolan.org>
+ * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -20,18 +23,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <MediaLibraryKit/MLFile.h>
-#import <MediaLibraryKit/MLLabel.h>
-#import <MediaLibraryKit/MLMediaLibrary.h>
-#import <MediaLibraryKit/MLShow.h>
-#import <MediaLibraryKit/MLShowEpisode.h>
-#import <MediaLibraryKit/MLAlbum.h>
-#import <MediaLibraryKit/MLAlbumTrack.h>
+@interface MLAlbum : NSManagedObject
 
-@class MLFile;
-@class MLLabel;
-@class MLMediaLibrary;
-@class MLShow;
-@class MLShowEpisode;
-@class MLAlbum;
-@class MLAlbumTrack;
++ (NSArray *)allAlbums;
++ (MLAlbum *)albumWithName:(NSString *)name;
+
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *releaseYear;
+@property (nonatomic, retain) NSSet *tracks;
+@property (nonatomic, retain, readonly) NSSet *unreadTracks;
+
+@end
+
+
+@interface MLAlbum (CoreDataGeneratedAccessors)
+- (void)addTracksObject:(NSManagedObject *)value;
+- (void)removeTracksObject:(NSManagedObject *)value;
+- (void)addTracks:(NSSet *)value;
+- (void)removeTracks:(NSSet *)value;
+@end

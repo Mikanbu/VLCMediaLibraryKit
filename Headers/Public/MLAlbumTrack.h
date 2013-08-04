@@ -1,12 +1,12 @@
 /*****************************************************************************
- * MLShowEpisode.h
- * Lunettes
+ * MLAlbumTrack.h
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2013 Felix Paul Kühne
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -23,39 +23,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <CoreData/CoreData.h>
+#import "MLAlbum.h"
 
-@class MLShow;
+@interface MLAlbumTrack : NSManagedObject
 
-@interface MLShowEpisode :  NSManagedObject
++ (NSArray *)allTracks;
 
-+ (NSArray *)allEpisodes;
-
-// This will eventually create the show
-+ (MLShowEpisode *)episodeWithShow:(id)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded;
-+ (MLShowEpisode *)episodeWithShowName:(NSString *)showName episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber
-                        createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
++ (MLAlbumTrack *)trackWithAlbum:(id)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded;
++ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
 
 @property (nonatomic, retain) NSNumber *unread;
-@property (nonatomic, retain) NSString *theTVDBID;
-@property (nonatomic, retain) NSString *shortSummary;
-@property (nonatomic, retain) NSNumber *shouldBeDisplayed;
-@property (nonatomic, retain) NSNumber *episodeNumber;
-@property (nonatomic, retain) NSNumber *seasonNumber;
-@property (nonatomic, retain) NSNumber *lastSyncDate;
-@property (nonatomic, retain) NSString *artworkURL;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) MLShow *show;
+@property (nonatomic, retain) NSString *artist;
+@property (nonatomic, retain) NSString *genre;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSNumber *trackNumber;
+
+@property (nonatomic, retain) MLAlbum *album;
 @property (nonatomic, retain) NSSet *files;
 
 @end
 
-
-@interface MLShowEpisode (CoreDataGeneratedAccessors)
+@interface MLAlbumTrack (CoreDataGeneratedAccessors)
 - (void)addFilesObject:(NSManagedObject *)value;
 - (void)removeFilesObject:(NSManagedObject *)value;
 - (void)addFiles:(NSSet *)value;
 - (void)removeFiles:(NSSet *)value;
-
 @end
-

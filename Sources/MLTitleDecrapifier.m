@@ -120,4 +120,34 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
     return nil;
 
 }
+
++ (NSDictionary *)audioContentInfoFromFile:(MLFile *)file
+{
+    if (!file)
+        return nil;
+
+    VLCMedia *media = [VLCMedia mediaWithURL:[NSURL URLWithString:file.url]];
+    if (![media isParsed])
+        [media synchronousParse];
+
+    NSDictionary *rawMetaDict = [media metaDictionary];
+    if (!rawMetaDict)
+        return nil;
+
+    NSMutableDictionary *metaDictionary = [NSMutableDictionary dictionaryWithDictionary:rawMetaDict];
+
+    if ([metaDictionary objectForKey:VLCMetaInformationTitle] == nil) {
+        NSString *title = file.title;
+        NSArray *components = [title componentsSeparatedByString:@" "];
+        if (components.count > 0) {
+            if ([components[0] intValue] > 0)
+                title = [self decrapify:[title stringByReplacingOccurrencesOfString:components[0] withString:@""]];
+        } else
+            title = [self decrapify:title];
+        [metaDictionary setObject:title forKey:VLCMetaInformationTitle];
+    }
+
+    return metaDictionary;
+}
+
 @end

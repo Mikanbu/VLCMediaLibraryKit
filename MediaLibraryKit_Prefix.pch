@@ -27,6 +27,8 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#import <CoreData/CoreData.h>
+
 #if TARGET_OS_IPHONE
 // FIXME
 #define HAVE_BLOCK 0
