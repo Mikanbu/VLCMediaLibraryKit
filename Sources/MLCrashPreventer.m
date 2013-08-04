@@ -30,7 +30,6 @@
 #import "MLFile.h"
 #import "MLMediaLibrary.h"
 
-
 @implementation MLCrashPreventer
 + (id)sharedPreventer
 {
@@ -48,9 +47,9 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
         _parsedFiles = [[NSMutableArray alloc] init];
-    }
+
     return self;
 }
 
@@ -78,6 +77,7 @@
             file.isBeingParsed = NO;
         }
     }
+    [[MLMediaLibrary sharedMediaLibrary] save];
 }
 
 - (BOOL)isFileSafe:(MLFile *)file
@@ -89,7 +89,7 @@
 {
     NSAssert([MLThumbnailerQueue sharedThumbnailerQueue].queue == [MLFileParserQueue sharedFileParserQueue].queue, @"");
 
-    NSAssert([_parsedFiles count] < 1, @"Parsing multiple files at the same time. Crash preventer can't work accuratly.");
+    NSAssert([_parsedFiles count] < 1, @"Parsing multiple files at the same time. Crash preventer can't work accurately.");
     file.isBeingParsed = YES;
 
     // Force to save the media library in case of crash.
