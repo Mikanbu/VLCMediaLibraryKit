@@ -28,6 +28,9 @@
 #import "MLFile.h"
 #import "MLMediaLibrary.h"
 #import "MLCrashPreventer.h"
+#import "MLAlbumTrack.h"
+#import "MLAlbum.h"
+#import "MLTitleDecrapifier.h"
 
 @interface MLParsingOperation : NSOperation
 {
@@ -64,6 +67,8 @@
 
     APLog(@"Starting parsing %@", self.file);
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
+
+    NSLog(@"Parsing %@ of type %@", self.file, self.file.type);
 
     _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
     _media.delegate = self;
@@ -106,6 +111,39 @@
 
     [self.file setTracks:tracksSet];
     [self.file setDuration:[[_media length] numberValue]];
+
+    if ([self.file isAlbumTrack]) {
+        NSLog(@"'%@' is an audio file, adding specific meta data", self.file.title);
+
+        NSDictionary *audioContentInfo = [_media metaDictionary];
+
+        if (audioContentInfo && audioContentInfo.count > 0) {
+            NSString *title = audioContentInfo[VLCMetaInformationTitle];
+            NSString *artist = audioContentInfo[VLCMetaInformationArtist];
+            NSString *albumName = audioContentInfo[VLCMetaInformationAlbum];
+            NSString *releaseYear = audioContentInfo[VLCMetaInformationDate];
+            NSString *genre = audioContentInfo[VLCMetaInformationGenre];
+            NSString *trackNumber = audioContentInfo[VLCMetaInformationTrackNumber];
+
+            MLAlbum *album = nil;
+
+            BOOL wasCreated = NO;
+            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:[NSNumber numberWithInteger:[trackNumber integerValue]] createIfNeeded:YES wasCreated:&wasCreated];
+            if (track) {
+                album = track.album;
+                track.title = title ? title : @"";
+                track.artist = artist ? artist : @"";
+                track.genre = genre ? genre : @"";
+                album.releaseYear = releaseYear ? releaseYear : @"";
+
+                if (!track.title || [track.title isEqualToString:@""])
+                    track.title = [MLTitleDecrapifier decrapify:self.file.title];
+
+                [track addFilesObject:self.file];
+                self.file.albumTrack = track;
+            }
+        }
+    }
 
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
     [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
@@ -160,6 +198,7 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)addFile:(MLFile *)file
 {
+    NSLog(@"addFile:%@", file.title);
     if (_fileDescriptionToOperation[hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {

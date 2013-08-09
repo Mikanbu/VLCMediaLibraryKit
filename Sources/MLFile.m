@@ -102,6 +102,7 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (NSString *)title
 {
+    NSString *ret = @"";
     if ([self isShowEpisode]) {
         MLShowEpisode *episode = self.showEpisode;
         NSMutableString *name = [[NSMutableString alloc] init];
@@ -122,22 +123,26 @@ NSString *kMLFileTypeAudio = @"audio";
             [name appendString:episode.name];
         }
 
-        return [NSString stringWithString:name];
+        ret = [NSString stringWithString:name];
     } else if ([self isAlbumTrack]) {
         MLAlbumTrack *track = self.albumTrack;
-        NSMutableString *name = [[NSMutableString alloc] initWithString:track.title];
+        if (track && track.title.length > 0) {
+            NSMutableString *name = [[NSMutableString alloc] initWithString:track.title];
 
-        if (track.album.name)
-            [name appendFormat:@" - %@", track.album.name];
+            if (track.album.name.length > 0)
+                [name appendFormat:@" - %@", track.album.name];
 
-        if (track.artist)
-            [name appendFormat:@" - %@", track.artist];
+            if (track.artist.length > 0)
+                [name appendFormat:@" - %@", track.artist];
 
-        return [NSString stringWithString:name];
+            ret = [NSString stringWithString:name];
+        }
     }
-    [self willAccessValueForKey:@"title"];
-    NSString *ret = [self primitiveValueForKey:@"title"];
-    [self didAccessValueForKey:@"title"];
+    if (ret.length < 1) {
+        [self willAccessValueForKey:@"title"];
+        ret = [self primitiveValueForKey:@"title"];
+        [self didAccessValueForKey:@"title"];
+    }
     return ret;
 }
 

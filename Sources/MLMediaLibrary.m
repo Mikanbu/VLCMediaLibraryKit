@@ -450,38 +450,16 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 {
     file.type = kMLFileTypeAudio;
 
-    NSString *title = audioContentInfo[VLCMetaInformationTitle];
-    NSString *artist = audioContentInfo[VLCMetaInformationArtist];
-    NSString *albumName = audioContentInfo[VLCMetaInformationAlbum];
-    NSString *releaseYear = audioContentInfo[VLCMetaInformationDate];
-    NSString *genre = audioContentInfo[VLCMetaInformationGenre];
-    NSString *trackNumber = audioContentInfo[VLCMetaInformationTrackNumber];
+    file.title = audioContentInfo[VLCMetaInformationTitle];
 
-    MLAlbum *album = nil;
-
-    BOOL wasCreated = NO;
-    MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:[NSNumber numberWithInteger:[trackNumber integerValue]] createIfNeeded:YES wasCreated:&wasCreated];
-    if (track)
-        album = track.album;
-    track.title = title;
-    track.artist = artist;
-    track.genre = genre;
-    album.releaseYear = releaseYear;
-
-    if (!track.title || [track.title isEqualToString:@""])
-        track.title = file.title;
-
-    [track addFilesObject:file];
-    file.albumTrack = track;
+    /* all further meta data is set by the FileParserQueue */
 
     file.hasFetchedInfo = @YES;
 }
 
-
 /**
  * MLFile auto detection
  */
-
 
 #if !HAVE_BLOCK
 - (void)movieInfoGrabber:(MLMovieInfoGrabber *)grabber didFailWithError:(NSError *)error
@@ -730,7 +708,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
     results = [[self managedObjectContext] executeFetchRequest:request error:nil];
     for (MLFile *file in results)
-        if (!file.computedThumbnail)
+        if (!file.computedThumbnail && ![file isAlbumTrack])
             [self computeThumbnailForFile:file];
 
     // Get to fetch meta data

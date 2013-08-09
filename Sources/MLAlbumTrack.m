@@ -78,7 +78,7 @@
     if (!album && createIfNeeded) {
         *wasCreated = YES;
         album = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Album"];
-        album.name = albumName;
+        album.name = albumName ? albumName : @"";
     } else if (!album && !createIfNeeded)
         return nil;
 

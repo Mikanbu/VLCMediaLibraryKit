@@ -162,6 +162,10 @@ static inline NSString *hashFromFile(MLFile *file)
         APLog(@"'%@' is unsafe and will crash, ignoring", file.title);
         return;
     }
+    if ([file isAlbumTrack]) {
+        APLog(@"'%@' is an audio file, ignoring", file.title);
+        return;
+    }
     ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
