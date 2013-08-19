@@ -1,8 +1,8 @@
-2.2
----
+Changes between 2.1.0 and 2.2.0
+-------------------------------
 Features:
-- added support for audio files and album organization
-- improved episode title decrapification
+- added support for audio file detection and album organization
+- improved title decrapification
 - overall stability improvements
 
 Added Public APIs:
