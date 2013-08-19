@@ -32,7 +32,7 @@
     static NSArray *ignoredWords = nil;
     if (!ignoredWords)
         ignoredWords = [[NSArray alloc] initWithObjects:
-                        @"xvid", @"h264", @"dvd", @"rip", @"divx", @"[fr]", nil];
+                        @"xvid", @"h264", @"dvd", @"rip", @"divx", @"[fr]", @"720p", @"1080i", @"1080p", @"x264", @"hdtv", @"aac", nil];
 
     NSMutableString *mutableString = [NSMutableString stringWithString:string];
     for (NSString *word in ignoredWords)
