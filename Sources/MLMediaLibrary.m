@@ -52,7 +52,6 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 @interface MLMediaLibrary () <MLMovieInfoGrabberDelegate, MLTVShowEpisodesInfoGrabberDelegate, MLTVShowInfoGrabberDelegate>
 #endif
 - (NSManagedObjectContext *)managedObjectContext;
-- (void)startUpdateDB;
 - (NSString *)databaseFolderPath;
 @end
 
@@ -652,11 +651,6 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 
 - (void)updateMediaDatabase
 {
-    [self startUpdateDB];
-}
-
-- (void)startUpdateDB
-{
     // Remove no more present files
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
@@ -741,7 +735,7 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
     [grabber fetchUpdatesSinceServerTime:lastServerTime];
 #endif
     /* Update every hour - FIXME: Preferences key */
-    [self performSelector:@selector(startUpdateDB) withObject:nil afterDelay:60 * 60];
+    [self performSelector:@selector(updateMediaDatabase) withObject:nil afterDelay:60 * 60];
 }
 
 - (void)applicationWillExit
