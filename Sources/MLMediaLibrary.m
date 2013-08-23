@@ -45,6 +45,7 @@
 
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
+static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseFormat 2.2";
 
 #if HAVE_BLOCK
 @interface MLMediaLibrary ()
@@ -56,6 +57,11 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 @end
 
 @implementation MLMediaLibrary
++ (void)initialize
+{
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kUpdatedToTheMojoWireDatabaseFormat : [NSNumber numberWithBool:NO]}];
+}
+
 + (id)sharedMediaLibrary
 {
     static id sharedMediaLibrary = nil;
@@ -648,6 +654,87 @@ static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
         [self fetchMetaDataForShow:show];
 }
 #endif
+
+- (BOOL)libraryNeedsUpgrade
+{
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheMojoWireDatabaseFormat] boolValue])
+        return YES;
+    return NO;
+}
+
+- (void)upgradeLibrary
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    // remove remnants if needed
+    NSArray *collection = [MLAlbum allAlbums];
+    NSUInteger count = collection.count;
+    MLAlbum *album;
+    MLAlbumTrack *track;
+    NSArray *secondaryCollection;
+    NSURL *fileURL;
+    NSUInteger secondaryCount = 0;
+    NSArray *tertiaryCollection;
+    NSUInteger tertiaryCount = 0;
+    NSUInteger emptyAlbumCounter = 0;
+    for (NSUInteger x = 0; x < count; x++) {
+        album = collection[x];
+        if (album.tracks.count < 1)
+            [[self managedObjectContext] deleteObject:album];
+        else {
+            secondaryCollection = album.tracks.allObjects;
+            secondaryCount = secondaryCollection.count;
+            emptyAlbumCounter = 0;
+            for (NSUInteger y = 0; y < secondaryCount; y++) {
+                track = secondaryCollection[y];
+                tertiaryCollection = track.files.allObjects;
+                tertiaryCount = tertiaryCollection.count;
+                for (NSUInteger z = 0; z < tertiaryCount; z++) {
+                    fileURL = [NSURL URLWithString:[(MLFile *)tertiaryCollection[z] url]];
+                    BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
+                    if (exists)
+                        emptyAlbumCounter++;
+                }
+            }
+            if (emptyAlbumCounter == 0)
+                [[self managedObjectContext] deleteObject:album];
+        }
+    }
+    album = nil;
+    collection = [MLShow allShows];
+    MLShow *show;
+    MLShowEpisode *showEpisode;
+    count = collection.count;
+    for (NSUInteger x = 0; x < count; x++) {
+        show = collection[x];
+        if (show.episodes.count < 1)
+            [[self managedObjectContext] deleteObject:show];
+        else {
+            secondaryCollection = show.episodes.allObjects;
+            secondaryCount = secondaryCollection.count;
+            emptyAlbumCounter = 0;
+            for (NSUInteger y = 0; y < secondaryCount; y++) {
+                showEpisode = secondaryCollection[y];
+                tertiaryCollection = showEpisode.files.allObjects;
+                tertiaryCount = tertiaryCollection.count;
+                for (NSUInteger z = 0; z < tertiaryCount; z++) {
+                    fileURL = [NSURL URLWithString:[(MLFile *)tertiaryCollection[z] url]];
+                    BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
+                    if (exists)
+                        emptyAlbumCounter++;
+                }
+            }
+            if (emptyAlbumCounter == 0)
+                [[self managedObjectContext] deleteObject:show];
+        }
+    }
+    [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
+    [defaults synchronize];
+
+    if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
+        [self.delegate libraryUpgradeComplete];
+}
 
 - (void)updateMediaDatabase
 {

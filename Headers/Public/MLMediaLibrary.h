@@ -32,9 +32,13 @@
     BOOL _allowNetworkAccess;
 }
 
+@property (readonly) BOOL libraryNeedsUpgrade;
+@property (nonatomic, retain) id delegate;
+
 + (id)sharedMediaLibrary;
 
 - (void)addFilePaths:(NSArray *)filepaths;
+- (void)upgradeLibrary;
 - (void)updateMediaDatabase;
 
 // May be internal
@@ -48,4 +52,11 @@
 - (void)save;
 - (void)libraryDidDisappear;
 - (void)libraryDidAppear;
+@end
+
+@protocol MLMediaLibrary <NSObject>
+
+@optional
+- (void)libraryUpgradeComplete;
+
 @end
