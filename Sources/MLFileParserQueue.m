@@ -68,8 +68,6 @@
     APLog(@"Starting parsing %@", self.file);
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
-    NSLog(@"Parsing %@ of type %@", self.file, self.file.type);
-
     _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
     _media.delegate = self;
     [_media parse];
@@ -113,8 +111,6 @@
     [self.file setDuration:[[_media length] numberValue]];
 
     if ([self.file isAlbumTrack]) {
-        NSLog(@"'%@' is an audio file, adding specific meta data", self.file.title);
-
         NSDictionary *audioContentInfo = [_media metaDictionary];
 
         if (audioContentInfo && audioContentInfo.count > 0) {
@@ -198,7 +194,6 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)addFile:(MLFile *)file
 {
-    NSLog(@"addFile:%@", file.title);
     if (_fileDescriptionToOperation[hashFromFile(file)])
         return;
     if (![[MLCrashPreventer sharedPreventer] isFileSafe:file]) {
