@@ -40,7 +40,6 @@
     [mutableString replaceOccurrencesOfString:@"." withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"_" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"+" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
-    [mutableString replaceOccurrencesOfString:@" - " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     return mutableString;
 }
 
