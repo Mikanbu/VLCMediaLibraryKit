@@ -190,6 +190,13 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
 #endif
 }
 
+- (void)save
+{
+    NSError *error = nil;
+    BOOL success = [[self managedObjectContext] save:&error];
+    NSAssert1(success, @"Can't save: %@", error);
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"hasChanges"] && object == _managedObjectContext) {
@@ -289,13 +296,6 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     show.lastSyncDate = [MLTVShowInfoGrabber serverTime];
 }
 
-- (void)save
-{
-    NSError *error = nil;
-    BOOL success = [[self managedObjectContext] save:&error];
-    NSAssert1(success, @"Can't save: %@", error);
-}
-
 - (void)tvShowEpisodesInfoGrabber:(MLTVShowEpisodesInfoGrabber *)grabber didFailWithError:(NSError *)error
 {
     MLShow *show = grabber.userData;
@@ -389,7 +389,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                         if ([[result objectForKey:@"serie"] boolValue]) {
                             continue;
                         }
-                        MLShowEpisode *showEpisode = [self showEpisodeWithShow:show episodeNumber:[result objectForKey:@"episodeNumber"] seasonNumber:[result objectForKey:@"seasonNumber"]];
+                        MLShowEpisode *showEpisode = [MLShowEpisode episodeWithShow:show episodeNumber:[result objectForKey:@"episodeNumber"] seasonNumber:[result objectForKey:@"seasonNumber"] createIfNeeded:YES];
                         showEpisode.name = [result objectForKey:@"title"];
                         showEpisode.theTVDBID = [result objectForKey:@"id"];
                         showEpisode.shortSummary = [result objectForKey:@"shortSummary"];
