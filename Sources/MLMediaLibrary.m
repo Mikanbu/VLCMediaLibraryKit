@@ -616,7 +616,6 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
         NSString *urlString = [url absoluteString];
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
         urlToObject[urlString] = path;
-
     }
 
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
@@ -667,7 +666,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
-    // remove remnants if needed
+    /* remove potential empty albums left over by previous releases */
     NSArray *collection = [MLAlbum allAlbums];
     NSUInteger count = collection.count;
     MLAlbum *album;
@@ -702,6 +701,8 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
         }
     }
     album = nil;
+
+    /* remove potential empty shows left over by previous releases */
     collection = [MLShow allShows];
     MLShow *show;
     MLShowEpisode *showEpisode;
@@ -731,6 +732,19 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     }
     [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
     [defaults synchronize];
+
+    /* remove duplicates */
+    NSArray *allFiles = [MLFile allFiles];
+    NSUInteger allFilesCount = allFiles.count;
+    NSMutableArray *seenFiles = [[NSMutableArray alloc] initWithCapacity:allFilesCount];
+    MLFile *currentFile;
+    for (NSUInteger x = 0; x < count; x++) {
+        currentFile = allFiles[x];
+        if ([seenFiles containsObject:currentFile.url])
+            [[self managedObjectContext] deleteObject:currentFile];
+        else
+            [seenFiles addObject:currentFile.url];
+    }
 
     if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
         [self.delegate libraryUpgradeComplete];
