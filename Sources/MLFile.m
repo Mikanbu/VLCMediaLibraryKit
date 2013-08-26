@@ -59,9 +59,8 @@ NSString *kMLFileTypeAudio = @"audio";
     NSArray *movies = [moc executeFetchRequest:request error:&error];
     [request release];
     [descriptor release];
-    if (!movies) {
+    if (!movies || error.code != 0)
         APLog(@"WARNING: %@", error);
-    }
 
     return movies;
 }
@@ -94,9 +93,9 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (NSString *)artworkURL
 {
-    if ([self isShowEpisode]) {
+    if ([self isShowEpisode])
         return self.showEpisode.artworkURL;
-    }
+
     return [self primitiveValueForKey:@"artworkURL"];
 }
 
