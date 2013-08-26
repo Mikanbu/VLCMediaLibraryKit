@@ -613,7 +613,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     // Prepare a fetch request for all items
     for (NSString *path in filepaths) {
         NSURL *url = [NSURL fileURLWithPath:path];
-        NSString *urlString = [url absoluteString];
+        NSString *urlString = [[url absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"file://localhost/"];
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
         urlToObject[urlString] = path;
     }
@@ -663,6 +663,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
 
 - (void)upgradeLibrary
 {
+    [self libraryDidDisappear];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
@@ -730,28 +731,33 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                 [[self managedObjectContext] deleteObject:show];
         }
     }
-    [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
-    [defaults synchronize];
 
     /* remove duplicates */
     NSArray *allFiles = [MLFile allFiles];
     NSUInteger allFilesCount = allFiles.count;
     NSMutableArray *seenFiles = [[NSMutableArray alloc] initWithCapacity:allFilesCount];
     MLFile *currentFile;
-    for (NSUInteger x = 0; x < count; x++) {
+    NSString *currentFilePath;
+    for (NSUInteger x = 0; x < allFilesCount; x++) {
         currentFile = allFiles[x];
-        if ([seenFiles containsObject:currentFile.url])
+        currentFilePath = [currentFile.url stringByReplacingOccurrencesOfString:@"/localhost/" withString:@"//"];
+        if ([seenFiles containsObject:currentFilePath])
             [[self managedObjectContext] deleteObject:currentFile];
         else
-            [seenFiles addObject:currentFile.url];
+            [seenFiles addObject:currentFilePath];
     }
 
+    [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
+    [defaults synchronize];
+
+    [self libraryDidAppear];
     if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
         [self.delegate libraryUpgradeComplete];
 }
 
 - (void)updateMediaDatabase
 {
+    [self libraryDidDisappear];
     // Remove no more present files
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
@@ -788,6 +794,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     file.isOnDisk = @(exists);
 #endif
     }
+    [self libraryDidAppear];
 
     // Get the file to parse
     request = [self fetchRequestForEntity:@"File"];
