@@ -102,28 +102,25 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (NSString *)title
 {
-    NSString *ret = @"";
     if ([self isShowEpisode]) {
         MLShowEpisode *episode = self.showEpisode;
         NSMutableString *name = [[NSMutableString alloc] init];
-        if (episode.show.name && ![episode.show.name isEqualToString:@""])
+        if (episode.show.name.length > 0)
             [name appendString:episode.show.name];
 
-        if (![name isEqualToString:@""])
-            [name appendString:@" - "];
+        if ([episode.seasonNumber intValue] > 0) {
+            if (![name isEqualToString:@""])
+                [name appendString:@" - "];
+            [name appendFormat:@"S%02dE%02d", [episode.seasonNumber intValue], [episode.episodeNumber intValue]];
+        }
 
-        if ([episode.seasonNumber intValue] > 0 && [episode.episodeNumber intValue] > 0)
-            [name appendFormat:@"S%02dE%02d",
-             [episode.seasonNumber intValue],
-             [episode.episodeNumber intValue]];
-
-        if (episode.name && ![episode.name isEqualToString:@""]) {
+        if (episode.name.length > 0) {
             if ([name length] > 0)
                 [name appendString:@" - "];
             [name appendString:episode.name];
         }
 
-        ret = [NSString stringWithString:name];
+        return [NSString stringWithString:name];
     } else if ([self isAlbumTrack]) {
         MLAlbumTrack *track = self.albumTrack;
         if (track && track.title.length > 0) {
@@ -135,14 +132,14 @@ NSString *kMLFileTypeAudio = @"audio";
             if (track.artist.length > 0)
                 [name appendFormat:@" - %@", track.artist];
 
-            ret = [NSString stringWithString:name];
+            return [NSString stringWithString:name];
         }
     }
-    if (ret.length < 1) {
-        [self willAccessValueForKey:@"title"];
-        ret = [self primitiveValueForKey:@"title"];
-        [self didAccessValueForKey:@"title"];
-    }
+
+    [self willAccessValueForKey:@"title"];
+    NSString *ret = [self primitiveValueForKey:@"title"];
+    [self didAccessValueForKey:@"title"];
+
     return ret;
 }
 
