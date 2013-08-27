@@ -32,7 +32,7 @@
     static NSArray *ignoredWords = nil;
     if (!ignoredWords)
         ignoredWords = [[NSArray alloc] initWithObjects:
-                        @"xvid", @"h264", @"dvd", @"rip", @"divx", @"[fr]", @"720p", @"1080i", @"1080p", @"x264", @"hdtv", @"aac", nil];
+                        @"xvid", @"h264", @"dvd", @"rip", @"divx", @"[fr]", @"720p", @"1080i", @"1080p", @"x264", @"hdtv", @"aac", @"bluray", nil];
 
     NSMutableString *mutableString = [NSMutableString stringWithString:string];
     for (NSString *word in ignoredWords)
@@ -40,7 +40,20 @@
     [mutableString replaceOccurrencesOfString:@"." withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"_" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"+" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
-    return mutableString;
+    [mutableString replaceOccurrencesOfString:@"-" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+
+    NSString *staticString = [NSString stringWithString:mutableString];
+    mutableString = nil;
+
+    while ([staticString rangeOfString:@"  "].location != NSNotFound)
+        staticString = [staticString stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+
+    if (staticString.length > 2) {
+        if ([staticString characterAtIndex:0] == 0x20)
+            staticString = [staticString substringFromIndex:1];
+    }
+
+    return staticString;
 }
 
 static inline BOOL isDigit(char c)
@@ -104,16 +117,27 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
             NSString *episodeName = [str substringFromIndex:i+6];
-            episodeName = episodeName ? [[MLTitleDecrapifier decrapify:episodeName] capitalizedString] : nil;
+
+            NSArray *components = [episodeName componentsSeparatedByString:@" "];
+            NSUInteger componentsCount = components.count;
+
+            episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
+
+            /* episode name is optional */
+            if ([episodeName isEqualToString:components[componentsCount - 1]])
+                episodeName = nil;
+            if (components.count > 1)
+                episodeName = [episodeName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", components[componentsCount - 1]] withString:@""];
+
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:4];
             if (season)
                 [dict setObject:season forKey:@"season"];
             if (episode)
                 [dict setObject:episode forKey:@"episode"];
-            if (tvShowName)
+            if (tvShowName && ![tvShowName isEqualToString:@" "])
                 [dict setObject:tvShowName forKey:@"tvShowName"];
-            if (episodeName)
-                [dict setObject:episodeName forKey:@"tvEpisodeName"];
+            if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
+                [dict setObject:[episodeName capitalizedString] forKey:@"tvEpisodeName"];
             return [NSDictionary dictionaryWithDictionary:dict];
         }
     }
