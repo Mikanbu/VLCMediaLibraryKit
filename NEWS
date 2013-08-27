@@ -1,9 +1,10 @@
-Changes between 2.1.0 and 2.2.0
--------------------------------
+Version 2.1
+-----------
 Features:
 - added support for audio file detection and album organization
-- improved title decrapification
+- improved title decrapification including advanced TV Show support
 - overall stability improvements
+- updated database format including a future-proof upgrade API
 
 Added Public APIs:
 - MLAlbum:
@@ -12,9 +13,13 @@ Added Public APIs:
   - New class
 - MLFile:
   - new properties: lastAudioTrack, lastSubtitleTrack
+- MLMediaLibrary:
+  - new proporties: delegate, libraryNeedsUpgrade
+  - new selector: upgradeLibrary
+  - new delegate protocol: libraryUpgradeComplete
 
-Changes between 2.0.0 and 2.1.0
--------------------------------
+Version 2.0
+-----------
 The entire library was cleaned and relicensed to LGPL 2.1 or later.
 Please note that the Objective-C syntax was updated, so MediaLibraryKit may no longer compile with outdated versions of Xcode / clang.
 
