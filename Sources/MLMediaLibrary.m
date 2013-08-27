@@ -438,7 +438,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     }
     episode.name = tvEpisodeName;
 
-    if (!episode.name || [episode.name isEqualToString:@""])
+    if (episode.name.length < 1)
         episode.name = file.title;
     file.seasonNumber = seasonNumber;
     file.episodeNumber = episodeNumber;
@@ -613,7 +613,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     // Prepare a fetch request for all items
     for (NSString *path in filepaths) {
         NSURL *url = [NSURL fileURLWithPath:path];
-        NSString *urlString = [[url absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"file://localhost/"];
+        NSString *urlString = [url absoluteString];
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
         urlToObject[urlString] = path;
     }
