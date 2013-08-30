@@ -102,9 +102,12 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
     if (!string)
         return nil;
     NSString *str = [string lowercaseString];
+    BOOL successfulSearch = NO;
+    NSMutableDictionary *mutableDict;
+    NSUInteger stringLength = [str length];
 
     // Search for s01e10.
-    for (int i = 0; i < (int)[str length] - 5; i++) {
+    for (NSUInteger i = 0; i < stringLength - 5; i++) {
         if (c(str, i) == 's' &&
             isDigit(c(str, i+1)) &&
             isDigit(c(str, i+2)) &&
@@ -129,20 +132,48 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             if (components.count > 1)
                 episodeName = [episodeName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", components[componentsCount - 1]] withString:@""];
 
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:4];
+            mutableDict = [[NSMutableDictionary alloc] initWithCapacity:4];
             if (season)
-                [dict setObject:season forKey:@"season"];
+                [mutableDict setObject:season forKey:@"season"];
             if (episode)
-                [dict setObject:episode forKey:@"episode"];
+                [mutableDict setObject:episode forKey:@"episode"];
             if (tvShowName && ![tvShowName isEqualToString:@" "])
-                [dict setObject:tvShowName forKey:@"tvShowName"];
+                [mutableDict setObject:tvShowName forKey:@"tvShowName"];
             if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
-                [dict setObject:[episodeName capitalizedString] forKey:@"tvEpisodeName"];
-            return [NSDictionary dictionaryWithDictionary:dict];
+                [mutableDict setObject:[episodeName capitalizedString] forKey:@"tvEpisodeName"];
+            successfulSearch = YES;
         }
     }
-    return nil;
 
+    // search for 0x00
+    if (!successfulSearch) {
+        for (NSUInteger i = 0; i < stringLength - 4; i++) {
+            if (isDigit(c(str, i)) &&
+                c(str, i+1) == 'x' &&
+                isDigit(c(str, i+2)) &&
+                isDigit(c(str, i+3)))
+            {
+                NSNumber *season = [NSNumber numberWithInt:intFromChar(c(str,i))];
+                NSNumber *episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
+                NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
+                tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
+
+                mutableDict = [[NSMutableDictionary alloc] initWithCapacity:3];
+                if (season)
+                    [mutableDict setObject:season forKey:@"season"];
+                if (episode)
+                    [mutableDict setObject:episode forKey:@"episode"];
+                if (tvShowName && ![tvShowName isEqualToString:@" "])
+                    [mutableDict setObject:tvShowName forKey:@"tvShowName"];
+                successfulSearch = YES;
+            }
+        }
+    }
+
+    if (successfulSearch)
+        return [NSDictionary dictionaryWithDictionary:mutableDict];
+
+    return nil;
 }
 
 + (NSDictionary *)audioContentInfoFromFile:(MLFile *)file
