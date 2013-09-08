@@ -208,7 +208,7 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     [self willChangeValueForKey:@"isSafe"];
     [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
-    [self willChangeValueForKey:@"isSafe"];
+    [self didChangeValueForKey:@"isSafe"];
 }
 
 - (BOOL)isBeingParsed
@@ -223,7 +223,7 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     [self willChangeValueForKey:@"isBeingParsed"];
     [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
-    [self willChangeValueForKey:@"isBeingParsed"];
+    [self didChangeValueForKey:@"isBeingParsed"];
 }
 
 - (BOOL)thumbnailTimeouted
@@ -238,9 +238,8 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     [self willChangeValueForKey:@"thumbnailTimeouted"];
     [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
-    [self willChangeValueForKey:@"thumbnailTimeouted"];
+    [self didChangeValueForKey:@"thumbnailTimeouted"];
 }
-
 
 - (void)willDisplay
 {
