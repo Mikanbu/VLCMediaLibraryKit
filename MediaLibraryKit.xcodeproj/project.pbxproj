@@ -38,34 +38,35 @@
 		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 		7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
-		7D9E238917AF0711008485E5 /* MLAlbum.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
-		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
-		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
-		A7924689170F09A30036AAF2 /* MLFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
-		A792468A170F09A30036AAF2 /* MLLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
-		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
-		A792468C170F09A30036AAF2 /* MLShow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
-		A792468D170F09A30036AAF2 /* MLShowEpisode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
-		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
+		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
+		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
+		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
+		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
+		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
+		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
+		A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
+		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
+		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7D0EF49C170883940003ED47 /* CopyFiles */ = {
+		7D0EF49C170883940003ED47 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				7D9E238917AF0711008485E5 /* MLAlbum.h in CopyFiles */,
-				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in CopyFiles */,
-				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in CopyFiles */,
-				A7924689170F09A30036AAF2 /* MLFile.h in CopyFiles */,
-				A792468A170F09A30036AAF2 /* MLLabel.h in CopyFiles */,
-				A792468B170F09A30036AAF2 /* MLMediaLibrary.h in CopyFiles */,
-				A792468C170F09A30036AAF2 /* MLShow.h in CopyFiles */,
-				A792468D170F09A30036AAF2 /* MLShowEpisode.h in CopyFiles */,
-				A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in CopyFiles */,
+				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */,
+				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */,
+				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */,
+				A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */,
+				A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */,
+				A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files */,
+				A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */,
+				A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */,
+				A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -320,7 +321,7 @@
 			buildPhases = (
 				7D0EF49A170883940003ED47 /* Sources */,
 				7D0EF49B170883940003ED47 /* Frameworks */,
-				7D0EF49C170883940003ED47 /* CopyFiles */,
+				7D0EF49C170883940003ED47 /* Copy Files */,
 			);
 			buildRules = (
 			);
