@@ -206,9 +206,14 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (void)setIsSafe:(BOOL)isSafe
 {
-    [self willChangeValueForKey:@"isSafe"];
-    [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
-    [self didChangeValueForKey:@"isSafe"];
+    @try {
+        [self willChangeValueForKey:@"isSafe"];
+        [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
+        [self didChangeValueForKey:@"isSafe"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"setIsSafe raised exception");
+    }
 }
 
 - (BOOL)isBeingParsed
@@ -221,9 +226,14 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (void)setIsBeingParsed:(BOOL)isBeingParsed
 {
-    [self willChangeValueForKey:@"isBeingParsed"];
-    [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
-    [self didChangeValueForKey:@"isBeingParsed"];
+    @try {
+        [self willChangeValueForKey:@"isBeingParsed"];
+        [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
+        [self didChangeValueForKey:@"isBeingParsed"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"setIsBeingParsed raised exception");
+    }
 }
 
 - (BOOL)thumbnailTimeouted
@@ -236,9 +246,14 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (void)setThumbnailTimeouted:(BOOL)thumbnailTimeouted
 {
-    [self willChangeValueForKey:@"thumbnailTimeouted"];
-    [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
-    [self didChangeValueForKey:@"thumbnailTimeouted"];
+    @try {
+        [self willChangeValueForKey:@"thumbnailTimeouted"];
+        [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
+        [self didChangeValueForKey:@"thumbnailTimeouted"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"setThumbnailTimeouted raised exception");
+    }
 }
 
 - (void)willDisplay
