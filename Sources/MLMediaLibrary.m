@@ -774,13 +774,25 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
             file.isSafe = YES; // It doesn't exists, it's safe.
             if (file.isAlbumTrack) {
                 MLAlbum *album = file.albumTrack.album;
-                if (album.tracks.count <= 1)
-                    [[self managedObjectContext] deleteObject:album];
+                if (album.tracks.count <= 1) {
+                    @try {
+                        [[self managedObjectContext] deleteObject:album];
+                    }
+                    @catch (NSException *exception) {
+                        APLog(@"failed to nuke object because it disappeared in front of us");
+                    }
+                }
             }
             if (file.isShowEpisode) {
                 MLShow *show = file.showEpisode.show;
-                if (show.episodes.count <= 1)
-                    [[self managedObjectContext] deleteObject:show];
+                if (show.episodes.count <= 1) {
+                    @try {
+                        [[self managedObjectContext] deleteObject:show];
+                    }
+                    @catch (NSException *exception) {
+                        APLog(@"failed to nuke object because it disappeared in front of us");
+                    }
+                }
             }
 #if TARGET_OS_IPHONE
             NSString *thumbPath = [[[self thumbnailFolderPath] stringByAppendingPathComponent:[[file.objectID URIRepresentation] path]] stringByAppendingString:@".png"];
