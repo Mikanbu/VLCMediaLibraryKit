@@ -49,8 +49,12 @@
         staticString = [staticString stringByReplacingOccurrencesOfString:@"  " withString:@" "];
 
     if (staticString.length > 2) {
-        if ([staticString characterAtIndex:0] == 0x20)
-            staticString = [staticString substringFromIndex:1];
+        @try {
+            if ([staticString characterAtIndex:0] == 0x20)
+                staticString = [staticString substringFromIndex:1];
+        }
+        @catch (NSException *exception) {
+        }
     }
 
     return staticString;
@@ -64,7 +68,12 @@ static inline BOOL isDigit(char c)
 // Shortcut to ease reading
 static inline unichar c(NSString *string, unsigned index)
 {
-    return [string characterAtIndex:index];
+    @try {
+        return [string characterAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        return 0x00;
+    }
 }
 
 
