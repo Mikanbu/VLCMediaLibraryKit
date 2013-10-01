@@ -76,6 +76,14 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     return sharedMediaLibrary;
 }
 
+- (void)dealloc
+{
+    if (_managedObjectContext)
+        [_managedObjectContext removeObserver:self forKeyPath:@"hasChanges"];
+    [_managedObjectContext release];
+    [super dealloc];
+}
+
 - (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
