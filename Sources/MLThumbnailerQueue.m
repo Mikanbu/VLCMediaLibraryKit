@@ -31,6 +31,7 @@
 @interface ThumbnailOperation : NSOperation <VLCMediaThumbnailerDelegate>
 {
     MLFile *_file;
+    VLCMedia *_media;
 }
 @property (retain,readwrite) MLFile *file;
 @end
@@ -51,6 +52,7 @@
 
 - (void)dealloc
 {
+    [_media release];
     [_file release];
     [super dealloc];
 }
@@ -61,8 +63,8 @@
 
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
-    VLCMedia *media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
-    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:media andDelegate:self];
+    _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
+    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media andDelegate:self];
     /* optimize thumbnails for the device */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         if ([UIScreen mainScreen].scale==2.0) {
