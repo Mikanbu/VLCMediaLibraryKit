@@ -754,6 +754,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
         else
             [seenFiles addObject:currentFilePath];
     }
+    [seenFiles release];
 
     [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
     [defaults synchronize];
