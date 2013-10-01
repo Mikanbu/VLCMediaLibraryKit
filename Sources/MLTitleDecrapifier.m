@@ -179,8 +179,11 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
         }
     }
 
-    if (successfulSearch)
-        return [NSDictionary dictionaryWithDictionary:mutableDict];
+    if (successfulSearch) {
+        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:mutableDict];
+        [mutableDict release];
+        return dict;
+    }
 
     return nil;
 }
