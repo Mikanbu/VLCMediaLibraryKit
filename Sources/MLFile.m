@@ -120,7 +120,9 @@ NSString *kMLFileTypeAudio = @"audio";
             [name appendString:episode.name];
         }
 
-        return [NSString stringWithString:name];
+        NSString *returnValue = [NSString stringWithString:name];
+        [name release];
+        return returnValue;
     } else if ([self isAlbumTrack]) {
         MLAlbumTrack *track = self.albumTrack;
         if (track && track.title.length > 0) {
@@ -132,7 +134,9 @@ NSString *kMLFileTypeAudio = @"audio";
             if (track.artist.length > 0)
                 [name appendFormat:@" - %@", track.artist];
 
-            return [NSString stringWithString:name];
+            NSString *returnValue = [NSString stringWithString:name];
+            [name release];
+            return returnValue;
         }
     }
 
