@@ -1,3 +1,9 @@
+Version 2.1.2
+-------------
+- fix crashes and missing exception handlings
+- fix memory leaks in MLFile, library and title sanitizer
+- prevent zombie creation and VLCMedia corruptions
+
 Version 2.1.1
 -------------
 - improved title decrapification with faster processing and support for older
