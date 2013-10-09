@@ -115,6 +115,9 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
     NSMutableDictionary *mutableDict;
     NSUInteger stringLength = [str length];
 
+    if (stringLength < 6)
+        return nil;
+
     // Search for s01e10.
     for (NSUInteger i = 0; i < stringLength - 5; i++) {
         if (c(str, i) == 's' &&
