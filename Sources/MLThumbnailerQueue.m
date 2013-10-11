@@ -75,12 +75,17 @@
             thumbnailer.thumbnailHeight = 204.;
         }
     } else {
-        if ([UIScreen mainScreen].scale==2.0) {
-            thumbnailer.thumbnailWidth = 200.;
-            thumbnailer.thumbnailHeight = 150.;
+        if (SYSTEM_RUNS_IOS7) {
+            thumbnailer.thumbnailWidth = 480.;
+            thumbnailer.thumbnailHeight = 270.;
         } else {
-            thumbnailer.thumbnailWidth = 100.;
-            thumbnailer.thumbnailHeight = 75.;
+            if ([UIScreen mainScreen].scale==2.0) {
+                thumbnailer.thumbnailWidth = 480.;
+                thumbnailer.thumbnailHeight = 270.;
+            } else {
+                thumbnailer.thumbnailWidth = 240.;
+                thumbnailer.thumbnailHeight = 135.;
+            }
         }
     }
     [thumbnailer fetchThumbnail];
