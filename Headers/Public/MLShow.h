@@ -25,6 +25,7 @@
 
 #import <CoreData/CoreData.h>
 
+@class MLShowEpisode;
 
 @interface MLShow :  NSManagedObject
 {
@@ -41,6 +42,9 @@
 @property (nonatomic, retain) NSNumber *lastSyncDate;
 @property (nonatomic, retain) NSSet *episodes;
 @property (nonatomic, retain, readonly) NSSet *unreadEpisodes;
+
+- (void)removeEpisode:(MLShowEpisode*)episode;
+- (void)removeEpisodeWithSeasonNumber:(NSNumber *)seasonNumber andEpisodeNumber:(NSNumber *)episodeNumber;
 
 @end
 

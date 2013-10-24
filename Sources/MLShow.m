@@ -25,6 +25,7 @@
  *****************************************************************************/
 
 #import "MLShow.h"
+#import "MLShowEpisode.h"
 #import "MLMediaLibrary.h"
 
 @implementation MLShow
@@ -85,4 +86,42 @@
 //    }
 //    return set;
 //}
+
+- (void)removeEpisode:(MLShowEpisode*)episode
+{
+    if (!episode)
+        return;
+
+    NSMutableSet *episodes = [self mutableSetValueForKey:@"episodes"];
+
+    [episodes removeObject:episode];
+
+    [self willChangeValueForKey:@"episodes"];
+    [self setValue:episodes forKey:@"episodes"];
+    [self didChangeValueForKey:@"episodes"];
+}
+
+- (void)removeEpisodeWithSeasonNumber:(NSNumber *)seasonNumber andEpisodeNumber:(NSNumber *)episodeNumber
+{
+    NSMutableSet *episodes = [self mutableSetValueForKey:@"episodes"];
+    MLShowEpisode *episode = nil;
+    if (seasonNumber && episodeNumber) {
+        for (MLShowEpisode *episodeIter in episodes) {
+            if ([episodeIter.seasonNumber intValue] == [seasonNumber intValue] &&
+                [episodeIter.episodeNumber intValue] == [episodeNumber intValue]) {
+                episode = episodeIter;
+                break;
+            }
+        }
+    }
+    if (!episode)
+        return;
+
+    [episodes removeObject:episode];
+
+    [self willChangeValueForKey:@"episodes"];
+    [self setValue:episodes forKey:@"episodes"];
+    [self didChangeValueForKey:@"episodes"];
+}
+
 @end

@@ -1,3 +1,11 @@
+Next Version
+------------
+- fixed subitem behavior of MLShow and MLAlbum on removal
+
+Added Public APIs:
+- MLShow:
+  - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber
+
 Version 2.1.2
 -------------
 - fix crashes and missing exception handlings
@@ -26,7 +34,7 @@ Added Public APIs:
 - MLFile:
   - new properties: lastAudioTrack, lastSubtitleTrack
 - MLMediaLibrary:
-  - new proporties: delegate, libraryNeedsUpgrade
+  - new properties: delegate, libraryNeedsUpgrade
   - new selector: upgradeLibrary
   - new delegate protocol: libraryUpgradeComplete
 
