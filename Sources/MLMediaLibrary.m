@@ -791,6 +791,8 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                         APLog(@"failed to nuke object because it disappeared in front of us");
                     }
                 }
+                else
+                    [album removeTrack:file.albumTrack];
             }
             if (file.isShowEpisode) {
                 MLShow *show = file.showEpisode.show;
