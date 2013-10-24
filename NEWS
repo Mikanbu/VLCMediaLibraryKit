@@ -5,6 +5,8 @@ Next Version
 Added Public APIs:
 - MLShow:
   - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber
+- MLAlbum:
+  - new selectors: removeTrack, removeTrackWithTrackNumber
 
 Version 2.1.2
 -------------

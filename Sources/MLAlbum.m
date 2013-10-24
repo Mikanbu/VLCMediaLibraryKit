@@ -24,6 +24,7 @@
  *****************************************************************************/
 
 #import "MLAlbum.h"
+#import "MLAlbumTrack.h"
 #import "MLMediaLibrary.h"
 
 @implementation MLAlbum
@@ -63,5 +64,41 @@
 @dynamic releaseYear;
 @dynamic tracks;
 @dynamic unreadTracks;
+
+- (void)removeTrack:(MLAlbumTrack *)track
+{
+    if (!track)
+        return;
+
+    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
+
+    [tracks removeObject:track];
+
+    [self willChangeValueForKey:@"tracks"];
+    [self setValue:tracks forKey:@"tracks"];
+    [self didChangeValueForKey:@"tracks"];
+}
+
+- (void)removeTrackWithNumber:(NSNumber *)trackNumber
+{
+    NSMutableSet *tracks = [self mutableSetValueForKey:@"episodes"];
+    MLAlbumTrack *track = nil;
+    if (trackNumber) {
+        for (MLAlbumTrack *trackIter in tracks) {
+            if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
+                track = trackIter;
+                break;
+            }
+        }
+    }
+    if (!track)
+        return;
+
+    [tracks removeObject:track];
+
+    [self willChangeValueForKey:@"tracks"];
+    [self setValue:tracks forKey:@"tracks"];
+    [self didChangeValueForKey:@"tracks"];
+}
 
 @end

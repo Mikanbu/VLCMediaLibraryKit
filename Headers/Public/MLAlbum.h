@@ -23,6 +23,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+@class MLAlbumTrack;
+
 @interface MLAlbum : NSManagedObject
 
 + (NSArray *)allAlbums;
@@ -32,6 +34,9 @@
 @property (nonatomic, retain) NSString *releaseYear;
 @property (nonatomic, retain) NSSet *tracks;
 @property (nonatomic, retain, readonly) NSSet *unreadTracks;
+
+- (void)removeTrack:(MLAlbumTrack *)track;
+- (void)removeTrackWithNumber:(NSNumber *)trackNumber;
 
 @end
 
