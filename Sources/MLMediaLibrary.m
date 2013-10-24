@@ -801,7 +801,8 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                     @catch (NSException *exception) {
                         APLog(@"failed to nuke object because it disappeared in front of us");
                     }
-                }
+                } else
+                    [show removeEpisode:file.showEpisode];
             }
 #if TARGET_OS_IPHONE
             NSString *thumbPath = [[[self thumbnailFolderPath] stringByAppendingPathComponent:[[file.objectID URIRepresentation] path]] stringByAppendingString:@".png"];
