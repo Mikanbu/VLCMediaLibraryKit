@@ -45,7 +45,7 @@
 
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
-static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseFormat 2.2";
+static NSString *kUpdatedToTheGreatSharkHuntDatabaseFormat = @"upgradedToDatabaseFormat 2.3";
 
 #if HAVE_BLOCK
 @interface MLMediaLibrary ()
@@ -59,7 +59,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
 @implementation MLMediaLibrary
 + (void)initialize
 {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kUpdatedToTheMojoWireDatabaseFormat : [NSNumber numberWithBool:NO]}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : [NSNumber numberWithBool:NO]}];
 }
 
 + (id)sharedMediaLibrary
@@ -664,7 +664,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
 
 - (BOOL)libraryNeedsUpgrade
 {
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheMojoWireDatabaseFormat] boolValue])
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheGreatSharkHuntDatabaseFormat] boolValue])
         return YES;
     return NO;
 }
@@ -703,6 +703,8 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                     BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
                     if (exists)
                         emptyAlbumCounter++;
+                    else
+                        [album removeTrack:track];
                 }
             }
             if (emptyAlbumCounter == 0)
@@ -733,6 +735,8 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                     BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
                     if (exists)
                         emptyAlbumCounter++;
+                    else
+                        [show removeEpisode:showEpisode];
                 }
             }
             if (emptyAlbumCounter == 0)
@@ -756,7 +760,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
     }
     [seenFiles release];
 
-    [defaults setBool:YES forKey:kUpdatedToTheMojoWireDatabaseFormat];
+    [defaults setBool:YES forKey:kUpdatedToTheGreatSharkHuntDatabaseFormat];
     [defaults synchronize];
 
     [self libraryDidAppear];
@@ -790,8 +794,7 @@ static NSString *kUpdatedToTheMojoWireDatabaseFormat = @"upgradedToDatabaseForma
                     @catch (NSException *exception) {
                         APLog(@"failed to nuke object because it disappeared in front of us");
                     }
-                }
-                else
+                } else
                     [album removeTrack:file.albumTrack];
             }
             if (file.isShowEpisode) {
