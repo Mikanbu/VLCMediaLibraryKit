@@ -8,6 +8,11 @@ Added Public APIs:
 - MLAlbum:
   - new selectors: removeTrack, removeTrackWithTrackNumber
 
+Version 2.1.3
+-------------
+- fix crash when processing files whose names are less than 6 characters long
+  (after removing the file extension)
+
 Version 2.1.2
 -------------
 - fix crashes and missing exception handlings
