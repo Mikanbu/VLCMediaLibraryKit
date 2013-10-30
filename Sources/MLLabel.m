@@ -7,6 +7,7 @@
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -24,9 +25,27 @@
  *****************************************************************************/
 
 #import "MLLabel.h"
+#import "MLMediaLibrary.h"
 #import "MLFile.h"
 
 @implementation MLLabel
+
++ (NSArray *)allLabels
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Label" inManagedObjectContext:moc];
+    [request setEntity:entity];
+
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    [request setSortDescriptors:@[descriptor]];
+
+    NSArray *labels = [moc executeFetchRequest:request error:nil];
+    [request release];
+    [descriptor release];
+
+    return labels;
+}
 
 @dynamic name;
 @dynamic files;

@@ -7,6 +7,8 @@ Added Public APIs:
   - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber
 - MLAlbum:
   - new selectors: removeTrack, removeTrackWithTrackNumber
+- MLLabel
+  - new selector: allLabels
 
 Version 2.1.3
 -------------
