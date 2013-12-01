@@ -81,7 +81,7 @@
 
 - (void)removeTrackWithNumber:(NSNumber *)trackNumber
 {
-    NSMutableSet *tracks = [self mutableSetValueForKey:@"episodes"];
+    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
     MLAlbumTrack *track = nil;
     if (trackNumber) {
         for (MLAlbumTrack *trackIter in tracks) {
