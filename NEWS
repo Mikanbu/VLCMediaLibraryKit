@@ -1,6 +1,8 @@
 Next Version
 ------------
 - fixed subitem behavior of MLShow and MLAlbum on removal
+- MLTitleDecrapifier handles shows with more than 99 and less than 1000
+  episodes correctly now
 
 Added Public APIs:
 - MLShow:

@@ -106,6 +106,11 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
     return @(intFromChar(high) * 10 + intFromChar(low));
 }
 
+static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
+{
+    return @(intFromChar(high) * 100 + intFromChar(mid) * 10 + intFromChar(low));
+}
+
 + (NSDictionary *)tvShowEpisodeInfoFromString:(NSString *)string
 {
     if (!string)
@@ -128,7 +133,11 @@ static inline NSNumber *numberFromTwoChars(char high, char low)
             isDigit(c(str, i+5)))
         {
             NSNumber *season = numberFromTwoChars(c(str,i+1), c(str,i+2));
-            NSNumber *episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
+            NSNumber *episode;
+            if (isDigit(c(str, i+6)))
+                episode = numberFromThreeChars(c(str,i+4), c(str,i+5), c(str,i+6));
+            else
+                episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
             NSString *episodeName = [str substringFromIndex:i+6];
