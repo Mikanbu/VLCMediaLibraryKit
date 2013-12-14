@@ -138,7 +138,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
                 episode = numberFromThreeChars(c(str,i+4), c(str,i+5), c(str,i+6));
             else
                 episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
-            NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
+            NSString *tvShowName = i > 0 ? [str substringToIndex:i] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
             NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+6] : nil;
 
@@ -174,7 +174,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
             {
                 NSNumber *season = [NSNumber numberWithInt:intFromChar(c(str,i))];
                 NSNumber *episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
-                NSString *tvShowName = i > 0 ? [str substringToIndex:i-1] : nil;
+                NSString *tvShowName = i > 0 ? [str substringToIndex:i] : nil;
                 tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
 
                 NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+4] : nil;
