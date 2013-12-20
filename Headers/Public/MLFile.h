@@ -96,6 +96,10 @@ extern NSString *kMLFileTypeAudio;
 - (void)didHide;
 
 /**
+ * do not rely on this path unless you are a MLKit object */
+- (NSString *)thumbnailPath;
+
+/**
  * Shortcuts to the videoTracks.
  */
 - (NSManagedObject *)videoTrack;

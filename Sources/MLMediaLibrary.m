@@ -815,7 +815,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                     [show removeEpisode:file.showEpisode];
             }
 #if TARGET_OS_IPHONE
-            NSString *thumbPath = [[[self thumbnailFolderPath] stringByAppendingPathComponent:[[file.objectID URIRepresentation] path]] stringByAppendingString:@".png"];
+            NSString *thumbPath = [file thumbnailPath];
             bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
             if (thumbExists)
                 [fileManager removeItemAtPath:thumbPath error:nil];
