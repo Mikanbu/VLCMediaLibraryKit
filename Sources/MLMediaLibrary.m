@@ -46,6 +46,7 @@
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 static NSString *kUpdatedToTheGreatSharkHuntDatabaseFormat = @"upgradedToDatabaseFormat 2.3";
+static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 #if HAVE_BLOCK
 @interface MLMediaLibrary ()
@@ -59,7 +60,8 @@ static NSString *kUpdatedToTheGreatSharkHuntDatabaseFormat = @"upgradedToDatabas
 @implementation MLMediaLibrary
 + (void)initialize
 {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : [NSNumber numberWithBool:NO]}];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : [NSNumber numberWithBool:NO], kDecrapifyTitles : [NSNumber numberWithBool:YES]}];
 }
 
 + (id)sharedMediaLibrary
@@ -602,7 +604,10 @@ static NSString *kUpdatedToTheGreatSharkHuntDatabaseFormat = @"upgradedToDatabas
     }
 #endif
 
-    file.title = [MLTitleDecrapifier decrapify:[title stringByDeletingPathExtension]];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kDecrapifyTitles] boolValue] == YES)
+        file.title = [MLTitleDecrapifier decrapify:[title stringByDeletingPathExtension]];
+    else
+        file.title = [title stringByDeletingPathExtension];
 
     if ([size longLongValue] < 150000000) /* 150 MB */
         file.type = kMLFileTypeClip;
