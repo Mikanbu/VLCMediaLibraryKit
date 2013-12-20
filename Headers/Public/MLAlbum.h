@@ -34,6 +34,7 @@
 @property (nonatomic, retain) NSString *releaseYear;
 @property (nonatomic, retain) NSSet *tracks;
 @property (nonatomic, retain, readonly) NSSet *unreadTracks;
+@property (nonatomic, readonly) NSArray *sortedTracks;
 
 - (void)removeTrack:(MLAlbumTrack *)track;
 - (void)removeTrackWithNumber:(NSNumber *)trackNumber;

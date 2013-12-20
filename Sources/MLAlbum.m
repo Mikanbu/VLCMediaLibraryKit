@@ -65,6 +65,17 @@
 @dynamic tracks;
 @dynamic unreadTracks;
 
+- (NSArray *)sortedTracks
+{
+    NSArray *tracks = [[self valueForKey:@"tracks"] allObjects];
+
+    NSSortDescriptor *trackNumberDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"trackNumber"
+                                ascending:YES
+                                 selector:@selector(compare:)];
+    return [[tracks sortedArrayUsingDescriptors:@[trackNumberDescriptor]] retain];
+}
+
 - (void)removeTrack:(MLAlbumTrack *)track
 {
     if (!track)
