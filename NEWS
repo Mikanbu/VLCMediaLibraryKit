@@ -8,9 +8,10 @@ Next Version
 
 Added Public APIs:
 - MLShow:
-  - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber
+  - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber,
+                   sortedEpisodes
 - MLAlbum:
-  - new selectors: removeTrack, removeTrackWithTrackNumber
+  - new selectors: removeTrack, removeTrackWithTrackNumber, sortedTracks
 - MLLabel
   - new selector: allLabels
 

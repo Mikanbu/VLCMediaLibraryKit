@@ -41,6 +41,7 @@
 @property (nonatomic, retain) NSString *releaseYear;
 @property (nonatomic, retain) NSNumber *lastSyncDate;
 @property (nonatomic, retain) NSSet *episodes;
+@property (nonatomic, readonly) NSArray *sortedEpisodes;
 @property (nonatomic, retain, readonly) NSSet *unreadEpisodes;
 
 - (void)removeEpisode:(MLShowEpisode*)episode;

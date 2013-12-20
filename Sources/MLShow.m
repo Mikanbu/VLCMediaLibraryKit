@@ -87,6 +87,22 @@
 //    return set;
 //}
 
+- (NSArray *)sortedEpisodes
+{
+    NSArray *episodes = [[self valueForKey:@"episodes"] allObjects];
+
+    NSSortDescriptor *seasonDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"seasonNumber"
+                                ascending:YES
+                                 selector:@selector(compare:)];
+    NSSortDescriptor *episodesDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"episodeNumber"
+                                ascending:YES
+                                 selector:@selector(compare:)];
+    NSArray *descriptors = [NSArray arrayWithObjects:seasonDescriptor, episodesDescriptor, nil];
+    return [[episodes sortedArrayUsingDescriptors:descriptors] retain];
+}
+
 - (void)removeEpisode:(MLShowEpisode*)episode
 {
     if (!episode)
