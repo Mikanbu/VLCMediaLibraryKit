@@ -1,10 +1,11 @@
 Next Version
 ------------
-- fixed subitem behavior of MLShow and MLAlbum on removal
-- MLTitleDecrapifier handles shows with more than 99 and less than 1000
+- FIX: correct subitem behavior of MLShow and MLAlbum on removal
+- FIX: MLTitleDecrapifier handles shows with more than 99 and less than 1000
   episodes correctly now
-- added user defaults option to disable file name display optimizations
+- NEW: added user defaults option to disable file name display optimizations
   when media is newly added to the library
+- FIX: thumbnails are correctly purged if a media item is removed
 
 Added Public APIs:
 - MLShow:
