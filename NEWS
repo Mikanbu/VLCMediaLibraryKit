@@ -1,5 +1,5 @@
-Next Version
-------------
+Version 2.2
+-----------
 - FIX: correct subitem behavior of MLShow and MLAlbum on removal
 - FIX: MLTitleDecrapifier handles shows with more than 99 and less than 1000
   episodes correctly now
@@ -9,11 +9,14 @@ Next Version
 
 Added Public APIs:
 - MLShow:
-  - new selectors: removeEpisode, removeEpisodeWithSeasonNumberandEpisodeNumber,
+  - new selectors: removeEpisode:
+                   removeEpisodeWithSeasonNumber:andEpisodeNumber:
                    sortedEpisodes
 - MLAlbum:
-  - new selectors: removeTrack, removeTrackWithTrackNumber, sortedTracks
-- MLLabel
+  - new selectors: removeTrack:
+                   removeTrackWithTrackNumber:
+                   sortedTracks
+- MLLabel:
   - new selector: allLabels
 
 Version 2.1.3
