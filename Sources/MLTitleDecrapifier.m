@@ -140,16 +140,9 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
                 episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
             NSString *tvShowName = i > 0 ? [str substringToIndex:i] : nil;
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
+
             NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+6] : nil;
-
-            NSArray *components = [episodeName componentsSeparatedByString:@" "];
-            NSUInteger componentsCount = components.count;
-
             episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
-
-            /* episode name is optional */
-            if ([episodeName isEqualToString:components[componentsCount - 1]])
-                episodeName = nil;
 
             mutableDict = [[NSMutableDictionary alloc] initWithCapacity:4];
             if (season)
@@ -178,15 +171,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
                 tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
 
                 NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+4] : nil;
-
-                NSArray *components = [episodeName componentsSeparatedByString:@" "];
-                NSUInteger componentsCount = components.count;
-
                 episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
-
-                /* episode name is optional */
-                if ([episodeName isEqualToString:components[componentsCount - 1]])
-                    episodeName = nil;
 
                 mutableDict = [[NSMutableDictionary alloc] initWithCapacity:3];
                 if (season)
