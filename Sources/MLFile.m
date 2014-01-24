@@ -160,7 +160,6 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic shortSummary;
 @dynamic currentlyWatching;
 @dynamic episodeNumber;
-@dynamic unread;
 @dynamic hasFetchedInfo;
 @dynamic noOnlineMetaData;
 @dynamic showEpisode;
@@ -173,6 +172,26 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic albumTrackNumber;
 @dynamic genre;
 @dynamic albumTrack;
+
+- (NSNumber *)unread
+{
+    [self willAccessValueForKey:@"unread"];
+    NSNumber *ret = [self primitiveValueForKey:@"unread"];
+    [self didAccessValueForKey:@"unread"];
+    return ret;
+}
+
+- (void)setUnread:(NSNumber *)unread
+{
+    @try {
+        [self willChangeValueForKey:@"unread"];
+        [self setPrimitiveValue:@(isSafe) forKey:@"unread"];
+        [self didChangeValueForKey:@"unread"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"setUnread raised exception");
+    }
+}
 
 - (NSNumber *)lastPosition
 {
