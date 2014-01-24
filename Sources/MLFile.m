@@ -150,7 +150,6 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic seasonNumber;
 @dynamic remainingTime;
 @dynamic releaseYear;
-@dynamic lastPosition;
 @dynamic lastSubtitleTrack;
 @dynamic lastAudioTrack;
 @dynamic playCount;
@@ -174,6 +173,26 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic albumTrackNumber;
 @dynamic genre;
 @dynamic albumTrack;
+
+- (NSNumber *)lastPosition
+{
+    [self willAccessValueForKey:@"lastPosition"];
+    NSNumber *ret = [self primitiveValueForKey:@"lastPosition"];
+    [self didAccessValueForKey:@"lastPosition"];
+    return ret;
+}
+
+- (void)setLastPosition:(NSNumber *)lastPosition
+{
+    @try {
+        [self willChangeValueForKey:@"lastPosition"];
+        [self setPrimitiveValue:lastPosition forKey:@"lastPosition"];
+        [self didChangeValueForKey:@"lastPosition"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"lastPosition raised exception");
+    }
+}
 
 - (NSString *)thumbnailPath
 {
