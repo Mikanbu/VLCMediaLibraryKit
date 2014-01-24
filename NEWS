@@ -1,3 +1,7 @@
+Version 2.2.1
+-------------
+- FIX: incorrect return value for untitled TV shows
+
 Version 2.2
 -----------
 - FIX: correct subitem behavior of MLShow and MLAlbum on removal
