@@ -32,21 +32,26 @@
 {
     MLFile *_file;
     VLCMedia *_media;
+    VLCLibrary *_internalLibrary;
 }
 @property (retain,readwrite) MLFile *file;
 @end
 
 @interface MLThumbnailerQueue ()
+{
+    VLCLibrary *_internalLibrary;
+}
 - (void)didFinishOperation:(ThumbnailOperation *)op;
 @end
 
 @implementation ThumbnailOperation
 @synthesize file=_file;
-- (id)initWithFile:(MLFile *)file;
+- (id)initWithFile:(MLFile *)file andVLCLibrary:(VLCLibrary *)library;
 {
     if (!(self = [super init]))
         return nil;
     self.file = file;
+    _internalLibrary = library;
     return self;
 }
 
@@ -64,7 +69,7 @@
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
     _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
-    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media andDelegate:self];
+    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:_internalLibrary];
     /* optimize thumbnails for the device */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         if ([UIScreen mainScreen].scale==2.0) {
@@ -136,6 +141,7 @@
 {
     self = [super init];
     if (self != nil) {
+        _internalLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--avcodec-threads=1", @"--avcodec-skip-frame=4", @"--avcodec-skip-idct=4", @"--deinterlace=-1", @"--avcodec-skiploopfilter=3"]];
         _fileDescriptionToOperation = [[NSMutableDictionary alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         [_queue setMaxConcurrentOperationCount:1];
@@ -145,6 +151,7 @@
 
 - (void)dealloc
 {
+    [_internalLibrary release];
     [_queue release];
     [_fileDescriptionToOperation release];
     [super dealloc];
@@ -173,7 +180,7 @@ static inline NSString *hashFromFile(MLFile *file)
         APLog(@"'%@' is an audio file, ignoring", file.title);
         return;
     }
-    ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file];
+    ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file andVLCLibrary:_internalLibrary];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
     [op autorelease];
