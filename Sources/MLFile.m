@@ -185,7 +185,7 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     @try {
         [self willChangeValueForKey:@"unread"];
-        [self setPrimitiveValue:@(isSafe) forKey:@"unread"];
+        [self setPrimitiveValue:unread forKey:@"unread"];
         [self didChangeValueForKey:@"unread"];
     }
     @catch (NSException *exception) {
