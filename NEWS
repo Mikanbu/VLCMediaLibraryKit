@@ -1,6 +1,8 @@
 Version 2.2.1
 -------------
 - FIX: incorrect return value for untitled TV shows
+- FIX: crash in setter/getter for lastPosition and unread in MLFile
+- Thumbnailer: use a special libVLC instance for thumbnails
 
 Version 2.2
 -----------
