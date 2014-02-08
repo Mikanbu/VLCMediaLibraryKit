@@ -44,6 +44,7 @@
 // May be internal
 - (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
 - (id)createObjectForEntity:(NSString *)entity;
+- (void)removeObject:(NSManagedObject *)object;
 - (NSString *)thumbnailFolderPath;
 
 - (void)applicationWillStart;

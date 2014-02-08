@@ -102,6 +102,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:moc];
 }
 
+- (void)removeObject:(NSManagedObject *)object
+{
+    [[self managedObjectContext] deleteObject:object];
+}
+
 #pragma mark -
 #pragma mark Media Library
 - (NSManagedObjectModel *)managedObjectModel
