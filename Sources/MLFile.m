@@ -86,6 +86,7 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     return [self isKindOfType:kMLFileTypeAudio];
 }
+
 - (BOOL)isSupportedAudioFile
 {
     NSUInteger options = NSRegularExpressionSearch | NSCaseInsensitiveSearch;
@@ -170,6 +171,7 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic artist;
 @dynamic album;
 @dynamic albumTrackNumber;
+@dynamic folderTrackNumber;
 @dynamic genre;
 @dynamic albumTrack;
 

@@ -70,6 +70,7 @@ extern NSString *kMLFileTypeAudio;
 @property (nonatomic, retain) NSString *artist;
 @property (nonatomic, retain) NSString *album;
 @property (nonatomic, retain) NSNumber *albumTrackNumber;
+@property (nonatomic, retain) NSNumber *folderTrackNumber;
 @property (nonatomic, retain) NSString *genre;
 @property (nonatomic, retain) MLAlbumTrack *albumTrack;
 

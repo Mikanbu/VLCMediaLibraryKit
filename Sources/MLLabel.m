@@ -50,4 +50,15 @@
 @dynamic name;
 @dynamic files;
 
+- (NSArray *)sortedFolderItems
+{
+    NSArray *folderItems = [[self valueForKey:@"files"] allObjects];
+
+    NSSortDescriptor *folderItemDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"folderTrackNumber"
+                                ascending:YES
+                                 selector:@selector(compare:)];
+    return [[folderItems sortedArrayUsingDescriptors:@[folderItemDescriptor]] retain];
+}
+
 @end

@@ -32,6 +32,7 @@
 {
 }
 + (NSArray *)allLabels;
+- (NSArray *)sortedFolderItems;
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet* files;
@@ -44,6 +45,7 @@
 - (void)removeFilesObject:(MLFile *)value;
 - (void)addFiles:(NSSet *)value;
 - (void)removeFiles:(NSSet *)value;
+
 
 @end
 
