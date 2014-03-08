@@ -147,7 +147,7 @@
         if (speedCategory < 2)
             _internalLibrary = [VLCLibrary sharedLibrary];
         else
-            _internalLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--avcodec-threads=1", @"--avcodec-skip-frame=4", @"--avcodec-skip-idct=4", @"--deinterlace=-1", @"--avcodec-skiploopfilter=3"]];
+            _internalLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--avcodec-threads=1", @"--avcodec-skip-idct=4", @"--deinterlace=-1", @"--avcodec-skiploopfilter=3"]];
         _fileDescriptionToOperation = [[NSMutableDictionary alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         [_queue setMaxConcurrentOperationCount:1];
