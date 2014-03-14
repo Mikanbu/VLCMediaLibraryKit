@@ -174,26 +174,7 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic folderTrackNumber;
 @dynamic genre;
 @dynamic albumTrack;
-
-- (NSNumber *)unread
-{
-    [self willAccessValueForKey:@"unread"];
-    NSNumber *ret = [self primitiveValueForKey:@"unread"];
-    [self didAccessValueForKey:@"unread"];
-    return ret;
-}
-
-- (void)setUnread:(NSNumber *)unread
-{
-    @try {
-        [self willChangeValueForKey:@"unread"];
-        [self setPrimitiveValue:unread forKey:@"unread"];
-        [self didChangeValueForKey:@"unread"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setUnread raised exception");
-    }
-}
+@dynamic unread;
 
 - (NSNumber *)lastPosition
 {

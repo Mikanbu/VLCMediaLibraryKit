@@ -69,23 +69,23 @@
 @dynamic lastSyncDate;
 @dynamic releaseYear;
 @dynamic episodes;
-@dynamic unreadEpisodes;
 
-//- (NSSet *)unreadEpisodes
-//{
-//    NSSet *episodes = [self episodes];
-//    NSMutableSet *set = [NSMutableSet set];
-//    for(id episode in set) {
-//        NSSet *files = [episode valueForKey:@"files"];
-//        for(id file in files) {
-//            if ([[file valueForKey:@"unread"] boolValue]) {
-//                [set addObject:episode];
-//                break;
-//            }
-//        }
-//    }
-//    return set;
-//}
+- (NSSet *)unreadEpisodes
+{
+    NSArray *episodes = [[self valueForKey:@"episodes"] allObjects];
+    NSMutableSet *set = [NSMutableSet set];
+    NSUInteger count = episodes.count;
+    for (NSUInteger x = 0; x < count; x++) {
+        NSSet *files = [episodes[x] valueForKey:@"files"];
+        for (id file in files) {
+            if ([[file valueForKey:@"unread"] boolValue]) {
+                [set addObject:episodes[x]];
+                break;
+            }
+        }
+    }
+    return set;
+}
 
 - (NSArray *)sortedEpisodes
 {
