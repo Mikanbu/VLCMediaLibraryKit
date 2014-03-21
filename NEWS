@@ -1,8 +1,15 @@
 Version 2.3
 -----------
+- FIX: crash when deploying MLFile's unread property
+
 Added Public APIs:
 - MLFile:
-  - new selector: fileForURL
+  - new selectors: fileForURL
+                   folderTrackNumber
+- MLLabel:
+  - new selector: sortedFolderItems
+- MLMediaLibrary:
+  - new selector: removeObject
 
 Version 2.2.1
 -------------
