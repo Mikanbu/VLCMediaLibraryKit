@@ -1,3 +1,9 @@
+Version 2.3
+-----------
+Added Public APIs:
+- MLFile:
+  - new selector: fileForURL
+
 Version 2.2.1
 -------------
 - FIX: incorrect return value for untitled TV shows

@@ -37,6 +37,7 @@ extern NSString *kMLFileTypeAudio;
 @interface MLFile :  NSManagedObject
 
 + (NSArray *)allFiles;
++ (NSArray *)fileForURL:(NSString *)url;
 
 - (BOOL)isKindOfType:(NSString *)type;
 - (BOOL)isMovie;

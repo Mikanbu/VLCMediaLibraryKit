@@ -66,6 +66,27 @@ NSString *kMLFileTypeAudio = @"audio";
     return movies;
 }
 
++ (NSArray *)fileForURL:(NSString *)url;
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"url == %@", url]];
+
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+    [request setSortDescriptors:@[descriptor]];
+
+    NSError *error;
+    NSArray *files = [moc executeFetchRequest:request error:&error];
+    [request release];
+    [descriptor release];
+    if (!files)
+        APLog(@"WARNING: %@", error);
+
+    return files;
+}
+
 - (BOOL)isKindOfType:(NSString *)type
 {
     return [self.type isEqualToString:type];
