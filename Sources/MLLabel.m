@@ -58,7 +58,9 @@
     [[NSSortDescriptor alloc] initWithKey:@"folderTrackNumber"
                                 ascending:YES
                                  selector:@selector(compare:)];
-    return [[folderItems sortedArrayUsingDescriptors:@[folderItemDescriptor]] retain];
+    NSArray *items = [folderItems sortedArrayUsingDescriptors:@[folderItemDescriptor]];
+    [folderItemDescriptor release];
+    return items;
 }
 
 @end
