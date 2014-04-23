@@ -111,7 +111,7 @@ NSString *kMLFileTypeAudio = @"audio";
 - (BOOL)isSupportedAudioFile
 {
     NSUInteger options = NSRegularExpressionSearch | NSCaseInsensitiveSearch;
-    return ([[self.url lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|flac|it|m2a|m4a|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
+    return ([[self.url lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|caf|flac|it|m2a|m4a|m4b|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|w64|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
 }
 
 - (NSString *)artworkURL
