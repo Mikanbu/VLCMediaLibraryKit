@@ -146,13 +146,13 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
 
             mutableDict = [[NSMutableDictionary alloc] initWithCapacity:4];
             if (season)
-                [mutableDict setObject:season forKey:@"season"];
+                mutableDict[@"season"] = season;
             if (episode)
-                [mutableDict setObject:episode forKey:@"episode"];
+                mutableDict[@"episode"] = episode;
             if (tvShowName && ![tvShowName isEqualToString:@" "])
-                [mutableDict setObject:tvShowName forKey:@"tvShowName"];
+                mutableDict[@"tvShowName"] = tvShowName;
             if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
-                [mutableDict setObject:[episodeName capitalizedString] forKey:@"tvEpisodeName"];
+                mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
             successfulSearch = YES;
         }
     }
@@ -165,7 +165,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
                 isDigit(c(str, i+2)) &&
                 isDigit(c(str, i+3)))
             {
-                NSNumber *season = [NSNumber numberWithInt:intFromChar(c(str,i))];
+                NSNumber *season = @(intFromChar(c(str,i)));
                 NSNumber *episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
                 NSString *tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
                 tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
@@ -175,13 +175,13 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
 
                 mutableDict = [[NSMutableDictionary alloc] initWithCapacity:3];
                 if (season)
-                    [mutableDict setObject:season forKey:@"season"];
+                    mutableDict[@"season"] = season;
                 if (episode)
-                    [mutableDict setObject:episode forKey:@"episode"];
+                    mutableDict[@"episode"] = episode;
                 if (tvShowName && ![tvShowName isEqualToString:@" "])
-                    [mutableDict setObject:tvShowName forKey:@"tvShowName"];
+                    mutableDict[@"tvShowName"] = tvShowName;
                 if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
-                    [mutableDict setObject:[episodeName capitalizedString] forKey:@"tvEpisodeName"];
+                    mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
                 successfulSearch = YES;
             }
         }
@@ -209,7 +209,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
     } else
         title = [self decrapify:title];
 
-    return [NSDictionary dictionaryWithObject:title forKey:VLCMetaInformationTitle];
+    return @{VLCMetaInformationTitle: title};
 }
 
 @end

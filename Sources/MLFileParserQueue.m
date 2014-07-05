@@ -124,7 +124,7 @@
             MLAlbum *album = nil;
 
             BOOL wasCreated = NO;
-            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:[NSNumber numberWithInteger:[trackNumber integerValue]] createIfNeeded:YES wasCreated:&wasCreated];
+            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:@([trackNumber integerValue]) createIfNeeded:YES wasCreated:&wasCreated];
             if (track) {
                 album = track.album;
                 track.title = title ? title : @"";

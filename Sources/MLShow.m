@@ -99,7 +99,7 @@
     [[NSSortDescriptor alloc] initWithKey:@"episodeNumber"
                                 ascending:YES
                                  selector:@selector(compare:)];
-    NSArray *descriptors = [NSArray arrayWithObjects:seasonDescriptor, episodesDescriptor, nil];
+    NSArray *descriptors = @[seasonDescriptor, episodesDescriptor];
     return [[episodes sortedArrayUsingDescriptors:descriptors] retain];
 }
 

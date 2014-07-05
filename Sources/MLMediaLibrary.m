@@ -61,7 +61,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 + (void)initialize
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : [NSNumber numberWithBool:NO], kDecrapifyTitles : [NSNumber numberWithBool:YES]}];
+    [defaults registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : @NO, kDecrapifyTitles : @YES}];
 }
 
 + (id)sharedMediaLibrary
