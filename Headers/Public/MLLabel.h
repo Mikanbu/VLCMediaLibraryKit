@@ -34,8 +34,8 @@
 + (NSArray *)allLabels;
 - (NSArray *)sortedFolderItems;
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet* files;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSSet* files;
 
 @end
 

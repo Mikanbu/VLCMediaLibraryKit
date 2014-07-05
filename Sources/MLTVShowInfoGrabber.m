@@ -31,7 +31,7 @@
 #if !HAVE_BLOCK
     <MLURLConnectionDelegate>
 #endif
-@property (readwrite, retain) NSArray *results;
+@property (readwrite, strong) NSArray *results;
 @end
 
 @implementation MLTVShowInfoGrabber
@@ -44,13 +44,6 @@
 static NSDate *gLastFetch = nil;
 static NSNumber *gServerTime = nil;
 
-- (void)dealloc
-{
-    [_data release];
-    [_connection release];
-    [_results release];
-    [super dealloc];
-}
 
 #if !HAVE_BLOCK
 - (void)urlConnection:(MLURLConnection *)connection didFinishWithError:(NSError *)error
@@ -63,10 +56,8 @@ static NSNumber *gServerTime = nil;
         NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithData:connection.data options:0 error:nil];
         NSNumber *serverTime = [[xmlDoc rootElement] numberValueForXPath:@"./Time"];
 
-        [gServerTime release];
-        [gLastFetch release];
-        gServerTime = [serverTime retain];
-        gLastFetch = [[NSDate dateWithTimeIntervalSinceNow:0] retain];
+        gServerTime = serverTime;
+        gLastFetch = [NSDate dateWithTimeIntervalSinceNow:0];
 
         NSArray *nodes = [xmlDoc nodesForXPath:@"./Items/Series" error:&error];
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[nodes count]];
@@ -75,7 +66,6 @@ static NSNumber *gServerTime = nil;
             [array addObject:id];
         }
 
-        [xmlDoc release];
         [_delegate tvShowInfoGrabber:self didFetchUpdates:array];
     } else {
         NSAssert([connection.userObject isEqualToString:@"fetchServerTime"], @"Unkown callback emitter");
@@ -83,15 +73,12 @@ static NSNumber *gServerTime = nil;
             [_delegate tvShowInfoGrabberDidFetchServerTime:self];
             return;
         }
-        [gServerTime release];
-        [gLastFetch release];
         NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithData:connection.data options:0 error:nil];
         NSNumber *serverTime = [[xmlDoc rootElement] numberValueForXPath:@"./Time"];
 
-        gServerTime = [serverTime retain];
-        gLastFetch = [[NSDate dateWithTimeIntervalSinceNow:0] retain];
+        gServerTime = serverTime;
+        gLastFetch = [NSDate dateWithTimeIntervalSinceNow:0];
 
-        [xmlDoc release];
         [_delegate tvShowInfoGrabberDidFetchServerTime:self];
     }
 }
@@ -194,16 +181,12 @@ static NSNumber *gServerTime = nil;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TVDB_QUERY_SEARCH, TVDB_HOSTNAME, escapedString]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
     [_connection cancel];
-    [_connection release];
 
-    [_data release];
     _data = [[NSMutableData alloc] init];
 
     // Keep a reference to ourself while we are alive.
-    [self retain];
 
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    [request release];
 }
 
 - (void)lookUpForShowID:(NSString *)showId
@@ -211,16 +194,12 @@ static NSNumber *gServerTime = nil;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TVDB_QUERY_EPISODE_INFO, TVDB_HOSTNAME, TVDB_API_KEY, showId, TVDB_DEFAULT_LANGUAGE]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
     [_connection cancel];
-    [_connection release];
 
-    [_data release];
     _data = [[NSMutableData alloc] init];
 
     // Keep a reference to ourself while we are alive.
-    [self retain];
 
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    [request release];
 }
 
 #if HAVE_BLOCK
@@ -244,9 +223,6 @@ static NSNumber *gServerTime = nil;
         _block = NULL;
     }
 #endif
-
-    // This balances the -retain in -lookupForTitle
-    [self autorelease];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -258,7 +234,6 @@ static NSNumber *gServerTime = nil;
 {
     NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithData:_data options:0 error:nil];
 
-    [_data release];
     _data = nil;
 
     NSError *error = nil;
@@ -274,9 +249,9 @@ static NSNumber *gServerTime = nil;
             NSString *release = [node stringValueForXPath:@"./FirstAired"];
             NSString *releaseYear = nil;
             if (release) {
-                NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
                 [inputFormatter setDateFormat:@"yyyy-MM-dd"];
-                NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
                 [outputFormatter setDateFormat:@"yyyy"];
                 NSDate *releaseDate = [inputFormatter dateFromString:release];
                 releaseYear = releaseDate ? [outputFormatter stringFromDate:releaseDate] : nil;
@@ -295,7 +270,6 @@ static NSNumber *gServerTime = nil;
     else
         self.results = nil;
 
-    [xmlDoc release];
 
 #if HAVE_BLOCK
     if (_block) {
@@ -307,9 +281,6 @@ static NSNumber *gServerTime = nil;
 
     if ([_delegate respondsToSelector:@selector(movieInfoGrabberDidFinishGrabbing:)])
         [_delegate tvShowInfoGrabberDidFinishGrabbing:self];
-
-    // This balances the -retain in -lookupForTitle
-    [self autorelease];
 }
 
 @end

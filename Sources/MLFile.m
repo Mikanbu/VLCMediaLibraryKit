@@ -57,8 +57,6 @@ NSString *kMLFileTypeAudio = @"audio";
 
     NSError *error;
     NSArray *movies = [moc executeFetchRequest:request error:&error];
-    [request release];
-    [descriptor release];
     if (!movies) {
         APLog(@"WARNING: %@", error);
     }
@@ -79,8 +77,6 @@ NSString *kMLFileTypeAudio = @"audio";
 
     NSError *error;
     NSArray *files = [moc executeFetchRequest:request error:&error];
-    [request release];
-    [descriptor release];
     if (!files)
         APLog(@"WARNING: %@", error);
 
@@ -143,7 +139,6 @@ NSString *kMLFileTypeAudio = @"audio";
         }
 
         NSString *returnValue = [NSString stringWithString:name];
-        [name release];
         return returnValue;
     } else if ([self isAlbumTrack]) {
         MLAlbumTrack *track = self.albumTrack;
@@ -157,7 +152,6 @@ NSString *kMLFileTypeAudio = @"audio";
                 [name appendFormat:@" - %@", track.artist];
 
             NSString *returnValue = [NSString stringWithString:name];
-            [name release];
             return returnValue;
         }
     }

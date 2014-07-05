@@ -33,8 +33,8 @@
     <MLURLConnectionDelegate>
 #endif
 
-@property (readwrite, retain) NSDictionary *results;
-@property (readwrite, retain) NSArray *episodesResults;
+@property (readwrite, strong) NSDictionary *results;
+@property (readwrite, strong) NSArray *episodesResults;
 
 - (void)didReceiveData:(NSData *)data;
 @end
@@ -46,43 +46,25 @@
 #if !HAVE_BLOCK
 @synthesize userData=_userData;
 #endif
-- (void)dealloc
-{
-    [_connection release];
-    [_results release];
-    [_episodesResults release];
-#if HAVE_BLOCK
-    if (_block)
-        Block_release(_block);
-#else
-    [_userData release];
-#endif
-    [super dealloc];
-}
 
 #if !HAVE_BLOCK
 - (void)urlConnection:(MLURLConnection *)connection didFinishWithError:(NSError *)error
 {
     if (error) {
-        [_connection release];
         _connection = nil;
-        [self autorelease];
         return;
     }
     [self didReceiveData:connection.data];
-    [self autorelease];
 }
 #endif
 
 - (void)lookUpForShowID:(NSString *)showId
 {
     [_connection cancel];
-    [_connection release];
 
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TVDB_QUERY_EPISODE_INFO, TVDB_HOSTNAME, TVDB_API_KEY, showId, TVDB_DEFAULT_LANGUAGE]];
 
     // Balanced below
-    [self retain];
 
 #if HAVE_BLOCK
     _connection = [[MLURLConnection runConnectionWithURL:url andBlock:^(MLURLConnection *connection, NSError * error) {
@@ -96,7 +78,7 @@
         [self autorelease];
     }] retain];
 #else
-    _connection = [[MLURLConnection runConnectionWithURL:url delegate:self userObject:nil] retain];
+    _connection = [MLURLConnection runConnectionWithURL:url delegate:self userObject:nil];
 #endif
 }
 
@@ -152,7 +134,6 @@
 
     }
 
-    [xmlDoc release];
 
 #if HAVE_BLOCK
     if (_block) {

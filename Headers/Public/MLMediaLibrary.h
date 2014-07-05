@@ -33,7 +33,7 @@
 }
 
 @property (readonly) BOOL libraryNeedsUpgrade;
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, strong) id delegate;
 
 + (id)sharedMediaLibrary;
 

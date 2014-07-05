@@ -30,16 +30,16 @@
     NSMutableData *_data;
     NSArray *_results;
     void (^_block)();
-    id<MLTVShowInfoGrabberDelegate> _delegate;
+    id<MLTVShowInfoGrabberDelegate> __weak _delegate;
 #if !HAVE_BLOCK
     id _userData;
 #endif
 }
 
-@property (readwrite, assign) id<MLTVShowInfoGrabberDelegate> delegate;
-@property (readonly, retain) NSArray *results;
+@property (readwrite, weak) id<MLTVShowInfoGrabberDelegate> delegate;
+@property (readonly, strong) NSArray *results;
 #if !HAVE_BLOCK
-@property (readwrite, retain) id userData;
+@property (readwrite, strong) id userData;
 #endif
 
 - (void)lookUpForTitle:(NSString *)title;

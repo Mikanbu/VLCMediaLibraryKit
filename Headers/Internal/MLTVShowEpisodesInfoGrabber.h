@@ -31,18 +31,18 @@
     MLURLConnection *_connection;
     NSDictionary *_results;
     NSArray *_episodesResults;
-    id<MLTVShowEpisodesInfoGrabberDelegate> _delegate;
+    id<MLTVShowEpisodesInfoGrabberDelegate> __weak _delegate;
     void (^_block)();
 #if !HAVE_BLOCK
     id _userData;
 #endif
 }
 
-@property (readwrite, assign) id<MLTVShowEpisodesInfoGrabberDelegate> delegate;
-@property (readonly, retain) NSArray *episodesResults;
-@property (readonly, retain) NSDictionary *results;
+@property (readwrite, weak) id<MLTVShowEpisodesInfoGrabberDelegate> delegate;
+@property (readonly, strong) NSArray *episodesResults;
+@property (readonly, strong) NSDictionary *results;
 #if !HAVE_BLOCK
-@property (readwrite, retain) id userData;
+@property (readwrite, strong) id userData;
 #endif
 
 - (void)lookUpForShowID:(NSString *)id;

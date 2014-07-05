@@ -56,8 +56,6 @@
 - (void)dealloc
 {
     NSAssert([_parsedFiles count] == 0, @"You should call -cancelAllFileParse before releasing");
-    [_parsedFiles release];
-    [super dealloc];
 }
 
 - (void)cancelAllFileParse

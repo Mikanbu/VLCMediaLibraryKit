@@ -30,11 +30,11 @@
 + (NSArray *)allAlbums;
 + (MLAlbum *)albumWithName:(NSString *)name;
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *releaseYear;
-@property (nonatomic, retain) NSSet *tracks;
-@property (nonatomic, retain, readonly) NSSet *unreadTracks;
-@property (nonatomic, readonly) NSArray *sortedTracks;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *releaseYear;
+@property (nonatomic, strong) NSSet *tracks;
+@property (nonatomic, strong, readonly) NSSet *unreadTracks;
+@property (weak, nonatomic, readonly) NSArray *sortedTracks;
 
 - (void)removeTrack:(MLAlbumTrack *)track;
 - (void)removeTrackWithNumber:(NSNumber *)trackNumber;

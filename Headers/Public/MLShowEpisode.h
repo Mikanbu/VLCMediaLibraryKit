@@ -36,17 +36,17 @@
 + (MLShowEpisode *)episodeWithShowName:(NSString *)showName episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber
                         createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
 
-@property (nonatomic, retain) NSNumber *unread;
-@property (nonatomic, retain) NSString *theTVDBID;
-@property (nonatomic, retain) NSString *shortSummary;
-@property (nonatomic, retain) NSNumber *shouldBeDisplayed;
-@property (nonatomic, retain) NSNumber *episodeNumber;
-@property (nonatomic, retain) NSNumber *seasonNumber;
-@property (nonatomic, retain) NSNumber *lastSyncDate;
-@property (nonatomic, retain) NSString *artworkURL;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) MLShow *show;
-@property (nonatomic, retain) NSSet *files;
+@property (nonatomic, strong) NSNumber *unread;
+@property (nonatomic, strong) NSString *theTVDBID;
+@property (nonatomic, strong) NSString *shortSummary;
+@property (nonatomic, strong) NSNumber *shouldBeDisplayed;
+@property (nonatomic, strong) NSNumber *episodeNumber;
+@property (nonatomic, strong) NSNumber *seasonNumber;
+@property (nonatomic, strong) NSNumber *lastSyncDate;
+@property (nonatomic, strong) NSString *artworkURL;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) MLShow *show;
+@property (nonatomic, strong) NSSet *files;
 
 @end
 

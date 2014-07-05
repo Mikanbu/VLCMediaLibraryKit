@@ -28,7 +28,7 @@
 #import "MLAlbum.h"
 
 @interface MLAlbumTrack ()
-@property (nonatomic, retain) NSNumber *primitiveUnread;
+@property (nonatomic, strong) NSNumber *primitiveUnread;
 @end
 
 @implementation MLAlbumTrack
@@ -45,8 +45,6 @@
     [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
 
     NSArray *tracks = [moc executeFetchRequest:request error:nil];
-    [request release];
-    [descriptor release];
 
     return tracks;
 }

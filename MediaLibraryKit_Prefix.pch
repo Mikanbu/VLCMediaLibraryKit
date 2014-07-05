@@ -39,7 +39,7 @@
 #import "TouchXML.h"
 
 #import <UIKit/UIKit.h>
-#import <MobileVLCKit/MobileVLCKit.h>
+#import "/Users/fkuehne/Desktop/videolan/gits/ios3/ImportedSources/VLCKit/build/Release-iphonesimulator/include/MobileVLCKit/MobileVLCKit.h"
 
 #else
 #define HAVE_BLOCK 1

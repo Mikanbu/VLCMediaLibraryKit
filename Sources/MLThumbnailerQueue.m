@@ -35,7 +35,7 @@
     VLCMedia *_media;
     VLCLibrary *_internalLibrary;
 }
-@property (retain,readwrite) MLFile *file;
+@property (strong,readwrite) MLFile *file;
 @end
 
 @interface MLThumbnailerQueue ()
@@ -56,12 +56,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_media release];
-    [_file release];
-    [super dealloc];
-}
 
 - (void)fetchThumbnail
 {
@@ -69,7 +63,7 @@
 
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
-    _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
+    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
     VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:_internalLibrary];
     /* optimize thumbnails for the device */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -96,7 +90,7 @@
     }
     [thumbnailer fetchThumbnail];
     [[MLThumbnailerQueue sharedThumbnailerQueue].queue setSuspended:YES]; // Balanced in -mediaThumbnailer:didFinishThumbnail
-    [self retain]; // Balanced in -mediaThumbnailer:didFinishThumbnail:
+     // Balanced in -mediaThumbnailer:didFinishThumbnail:
 }
 - (void)main
 {
@@ -109,7 +103,6 @@
     MLThumbnailerQueue *thumbnailer = [MLThumbnailerQueue sharedThumbnailerQueue];
     [thumbnailer.queue setSuspended:NO];
     [thumbnailer didFinishOperation:self];
-    [self release];
 }
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
@@ -155,13 +148,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_internalLibrary release];
-    [_queue release];
-    [_fileDescriptionToOperation release];
-    [super dealloc];
-}
 
 
 static inline NSString *hashFromFile(MLFile *file)
@@ -189,7 +175,6 @@ static inline NSString *hashFromFile(MLFile *file)
     ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file andVLCLibrary:_internalLibrary];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
-    [op autorelease];
 }
 
 - (void)stop

@@ -66,7 +66,7 @@
             {
             _node = (xmlNodePtr)theDoc;
             NSAssert(_node->_private == NULL, @"TODO");
-            _node->_private = self; // Note. NOT retained (TODO think more about _private usage)
+            _node->_private = (__bridge void *)(self); // Note. NOT retained (TODO think more about _private usage)
             }
         else
             {
@@ -85,7 +85,6 @@
 
         if (theError != NULL)
             {
-            [self release];
             self = NULL;
             }
         }
@@ -129,7 +128,7 @@
             if (theDoc != NULL && xmlDocGetRootElement(theDoc) != NULL)
                 {
                 _node = (xmlNodePtr)theDoc;
-                _node->_private = self; // Note. NOT retained (TODO think more about _private usage)
+                _node->_private = (__bridge void *)(self); // Note. NOT retained (TODO think more about _private usage)
                 }
             else
                 {
@@ -147,7 +146,6 @@
 
         if (theError != NULL)
             {
-            [self release];
             self = NULL;
             }
         }
@@ -181,22 +179,20 @@
     {
     // Fix for #35 http://code.google.com/p/touchcode/issues/detail?id=35 -- clear up the node objects first (inside a pool so I _know_ they're cleared) and then freeing the document
 
-    NSAutoreleasePool *thePool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 
     for (CXMLNode *theNode in nodePool)
         {
         [theNode invalidate];
         }
 
-    [nodePool release];
     nodePool = NULL;
 
-    [thePool release];
+    }
     //
     xmlUnlinkNode(_node);
     xmlFreeDoc((xmlDocPtr)_node);
     _node = NULL;
-    [super dealloc];
 }
 
 //- (NSString *)characterEncoding;
@@ -251,7 +247,7 @@
     int buffersize;
 
     xmlDocDumpFormatMemory((xmlDocPtr)(self->_node), &xmlbuff, &buffersize, 1);
-    NSString *dump = [[[NSString alloc] initWithBytes:xmlbuff length:buffersize encoding:NSUTF8StringEncoding] autorelease];
+    NSString *dump = [[NSString alloc] initWithBytes:xmlbuff length:buffersize encoding:NSUTF8StringEncoding];
     xmlFree(xmlbuff);
 
     [result appendString:dump];

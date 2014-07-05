@@ -82,8 +82,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     if (_managedObjectContext)
         [_managedObjectContext removeObserver:self forKeyPath:@"hasChanges"];
-    [_managedObjectContext release];
-    [super dealloc];
 }
 
 - (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity
@@ -93,7 +91,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
     NSAssert(entityDescription, @"No entity");
     [request setEntity:entityDescription];
-    return [request autorelease];
+    return request;
 }
 
 - (id)createObjectForEntity:(NSString *)entity
@@ -113,7 +111,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     if (_managedObjectModel)
         return _managedObjectModel;
-    _managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     return _managedObjectModel;
 }
 
@@ -170,14 +168,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #endif
         persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
         if (!persistentStore) {
-            if (coordinator)
-                [coordinator release];
 #if! TARGET_OS_IPHONE
             NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
 #else
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Corrupted Media Library" message:@"There is nothing we can apparently do about it..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert autorelease];
 #endif
             // Probably assert instead.
             return nil;
@@ -186,7 +181,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    [coordinator release];
     [_managedObjectContext setUndoManager:nil];
     [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
     return _managedObjectContext;
@@ -331,7 +325,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         show.releaseYear = result[@"releaseYear"];
 
         // Fetch episodes info
-        MLTVShowEpisodesInfoGrabber *grabber = [[[MLTVShowEpisodesInfoGrabber alloc] init] autorelease];
+        MLTVShowEpisodesInfoGrabber *grabber = [[MLTVShowEpisodesInfoGrabber alloc] init];
         grabber.delegate = self;
         grabber.userData = show;
         [grabber lookUpForShowID:showId];
@@ -356,7 +350,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [[NSUserDefaults standardUserDefaults] setInteger:[[MLTVShowInfoGrabber serverTime] integerValue] forKey:kLastTVDBUpdateServerTime];
 
     // First fetch the MLShow ID
-    MLTVShowInfoGrabber *showInfoGrabber = [[[MLTVShowInfoGrabber alloc] init] autorelease];
+    MLTVShowInfoGrabber *showInfoGrabber = [[MLTVShowInfoGrabber alloc] init];
     showInfoGrabber.delegate = self;
     showInfoGrabber.userData = show;
 
@@ -422,7 +416,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         }];
     }];
 #else
-    MLTVShowInfoGrabber *grabber = [[[MLTVShowInfoGrabber alloc] init] autorelease];
+    MLTVShowInfoGrabber *grabber = [[MLTVShowInfoGrabber alloc] init];
     grabber.delegate = self;
     grabber.userData = show;
     [grabber fetchServerTime];
@@ -541,7 +535,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // We don't care about keeping a reference to track the item during its life span
     // because we are a singleton
-    MLMovieInfoGrabber *grabber = [[[MLMovieInfoGrabber alloc] init] autorelease];
+    MLMovieInfoGrabber *grabber = [[MLMovieInfoGrabber alloc] init];
 
     APLog(@"Looking up for Movie '%@'", file.title);
 
@@ -768,7 +762,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         else
             [seenFiles addObject:currentFilePath];
     }
-    [seenFiles release];
 
     [defaults setBool:YES forKey:kUpdatedToTheGreatSharkHuntDatabaseFormat];
     [defaults synchronize];
@@ -885,7 +878,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             [self fetchMetaDataForShow:show];
     }];
 #else
-    MLTVShowInfoGrabber *grabber = [[[MLTVShowInfoGrabber alloc] init] autorelease];
+    MLTVShowInfoGrabber *grabber = [[MLTVShowInfoGrabber alloc] init];
     grabber.delegate = self;
     [grabber fetchUpdatesSinceServerTime:lastServerTime];
 #endif

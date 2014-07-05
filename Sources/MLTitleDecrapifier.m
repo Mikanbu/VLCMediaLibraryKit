@@ -189,7 +189,6 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
 
     if (successfulSearch) {
         NSDictionary *dict = [NSDictionary dictionaryWithDictionary:mutableDict];
-        [mutableDict release];
         return dict;
     }
 

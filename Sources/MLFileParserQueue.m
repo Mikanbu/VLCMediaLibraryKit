@@ -37,7 +37,7 @@
     MLFile *_file;
     VLCMedia *_media;
 }
-@property (retain,readwrite) MLFile *file;
+@property (strong,readwrite) MLFile *file;
 @end
 
 @interface MLFileParserQueue ()
@@ -54,12 +54,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_media release];
-    [_file release];
-    [super dealloc];
-}
 
 - (void)parse
 {
@@ -68,12 +62,12 @@
     APLog(@"Starting parsing %@", self.file);
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
-    _media = [[VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]] retain];
+    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
     _media.delegate = self;
     [_media parse];
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
     [parserQueue.queue setSuspended:YES]; // Balanced in -mediaDidFinishParsing
-    [self retain]; // Balanced in -mediaDidFinishParsing:
+     // Balanced in -mediaDidFinishParsing:
 }
 
 - (void)main
@@ -145,10 +139,8 @@
     [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
     [parserQueue.queue setSuspended:NO];
     [parserQueue didFinishOperation:self];
-    [_media autorelease];
     _media = nil;
 
-    [self release];
 }
 @end
 
@@ -174,12 +166,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_queue release];
-    [_fileDescriptionToOperation release];
-    [super dealloc];
-}
 
 
 static inline NSString *hashFromFile(MLFile *file)
@@ -203,7 +189,6 @@ static inline NSString *hashFromFile(MLFile *file)
     MLParsingOperation *op = [[MLParsingOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
-    [op autorelease];
 }
 
 - (void)stop

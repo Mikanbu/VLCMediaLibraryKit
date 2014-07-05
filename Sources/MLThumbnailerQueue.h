@@ -40,5 +40,5 @@
 - (void)stop;
 - (void)resume;
 
-@property (nonatomic, retain) NSOperationQueue *queue;
+@property (nonatomic, strong) NSOperationQueue *queue;
 @end

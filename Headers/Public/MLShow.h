@@ -34,15 +34,15 @@
 + (NSArray *)allShows;
 + (MLShow *)showWithName:(NSString *)name;
 
-@property (nonatomic, retain) NSString *theTVDBID;
-@property (nonatomic, retain) NSString *shortSummary;
-@property (nonatomic, retain) NSString *artworkURL;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *releaseYear;
-@property (nonatomic, retain) NSNumber *lastSyncDate;
-@property (nonatomic, retain) NSSet *episodes;
-@property (nonatomic, readonly) NSArray *sortedEpisodes;
-@property (nonatomic, retain, readonly) NSSet *unreadEpisodes;
+@property (nonatomic, strong) NSString *theTVDBID;
+@property (nonatomic, strong) NSString *shortSummary;
+@property (nonatomic, strong) NSString *artworkURL;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *releaseYear;
+@property (nonatomic, strong) NSNumber *lastSyncDate;
+@property (nonatomic, strong) NSSet *episodes;
+@property (weak, nonatomic, readonly) NSArray *sortedEpisodes;
+@property (nonatomic, strong, readonly) NSSet *unreadEpisodes;
 
 - (void)removeEpisode:(MLShowEpisode*)episode;
 - (void)removeEpisodeWithSeasonNumber:(NSNumber *)seasonNumber andEpisodeNumber:(NSNumber *)episodeNumber;

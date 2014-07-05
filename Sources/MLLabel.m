@@ -41,8 +41,6 @@
     [request setSortDescriptors:@[descriptor]];
 
     NSArray *labels = [moc executeFetchRequest:request error:nil];
-    [request release];
-    [descriptor release];
 
     return labels;
 }
@@ -59,7 +57,6 @@
                                 ascending:YES
                                  selector:@selector(compare:)];
     NSArray *items = [folderItems sortedArrayUsingDescriptors:@[folderItemDescriptor]];
-    [folderItemDescriptor release];
     return items;
 }
 

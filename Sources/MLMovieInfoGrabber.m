@@ -35,7 +35,7 @@
 
 
 @interface MLMovieInfoGrabber ()
-@property (readwrite, retain) NSArray *results;
+@property (readwrite, strong) NSArray *results;
 @end
 
 @implementation MLMovieInfoGrabber
@@ -44,20 +44,6 @@
 #if !HAVE_BLOCK
 @synthesize userData=_userData;
 #endif
-- (void)dealloc
-{
-#if !HAVE_BLOCK
-    [_userData release];
-#endif
-    [_data release];
-    [_connection release];
-    [_results release];
-#if HAVE_BLOCK
-    if (_block)
-        Block_release(_block);
-#endif
-    [super dealloc];
-}
 
 - (void)lookUpForTitle:(NSString *)title
 {
@@ -65,17 +51,13 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TMDB_QUERY_SEARCH, TMDB_HOSTNAME, escapedString, TMDB_API_KEY]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:4];
     [_connection cancel];
-    [_connection release];
 
-    [_data release];
     _data = [[NSMutableData alloc] init];
 
     // Keep a reference to ourself while we are alive.
-    [self retain];
 
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     NSAssert(_connection, @"Can't create connection");
-    [request release];
 
 }
 
@@ -106,8 +88,6 @@
         _block = NULL;
     }
 #endif
-    // This balances the -retain in -lookupForTitle
-    [self autorelease];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -119,7 +99,6 @@
 {
     NSXMLDocument *xmlDoc = [[NSXMLDocument alloc] initWithData:_data options:0 error:nil];
 
-    [_data release];
     _data = nil;
 
     NSError *error = nil;
@@ -134,9 +113,9 @@
             NSString *release = [node stringValueForXPath:@"./release"];
             NSString *releaseYear = nil;
             if (release) {
-                NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
                 [inputFormatter setDateFormat:@"yyyy-MM-dd"];
-                NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
                 [outputFormatter setDateFormat:@"yyyy"];
                 NSDate *releaseDate = [inputFormatter dateFromString:release];
                 releaseYear = releaseDate ? [outputFormatter stringFromDate:releaseDate] : nil;
@@ -163,7 +142,6 @@
     else {
           self.results = nil;
     }
-    [xmlDoc release];
 
 #if HAVE_BLOCK
     if (_block) {
@@ -175,9 +153,6 @@
 
     if ([_delegate respondsToSelector:@selector(movieInfoGrabberDidFinishGrabbing:)])
         [_delegate movieInfoGrabberDidFinishGrabbing:self];
-
-    // This balances the -retain in -lookupForTitle
-    [self autorelease];
 }
 
 @end

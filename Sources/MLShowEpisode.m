@@ -29,8 +29,8 @@
 #import "MLShow.h"
 
 @interface MLShowEpisode ()
-@property (nonatomic, retain) NSNumber *primitiveUnread;
-@property (nonatomic, retain) NSString *primitiveArtworkURL;
+@property (nonatomic, strong) NSNumber *primitiveUnread;
+@property (nonatomic, strong) NSString *primitiveArtworkURL;
 @end
 
 @implementation MLShowEpisode
@@ -47,8 +47,6 @@
     [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
 
     NSArray *episodes = [moc executeFetchRequest:request error:nil];
-    [request release];
-    [descriptor release];
 
     return episodes;
 }

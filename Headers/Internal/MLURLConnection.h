@@ -35,9 +35,9 @@
 #endif
 }
 
-@property (readonly, retain) NSData *data;
-@property (readwrite, retain) id userObject;
-@property (readwrite, retain) id<MLURLConnectionDelegate> delegate;
+@property (readonly, strong) NSData *data;
+@property (readwrite, strong) id userObject;
+@property (readwrite, strong) id<MLURLConnectionDelegate> delegate;
 
 #if HAVE_BLOCK
 + (id)runConnectionWithURL:(NSURL *)url andBlock:(void (^)(MLURLConnection *connection, NSError *error))block;

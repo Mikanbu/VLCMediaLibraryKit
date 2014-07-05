@@ -40,8 +40,6 @@
     [request setSortDescriptors:@[descriptor]];
 
     NSArray *albums = [moc executeFetchRequest:request error:nil];
-    [request release];
-    [descriptor release];
 
     return albums;
 }
@@ -73,7 +71,7 @@
     [[NSSortDescriptor alloc] initWithKey:@"trackNumber"
                                 ascending:YES
                                  selector:@selector(compare:)];
-    return [[tracks sortedArrayUsingDescriptors:@[trackNumberDescriptor]] retain];
+    return [tracks sortedArrayUsingDescriptors:@[trackNumberDescriptor]];
 }
 
 - (void)removeTrack:(MLAlbumTrack *)track

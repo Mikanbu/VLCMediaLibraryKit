@@ -30,7 +30,7 @@
     NSURLConnection *_connection;
     NSMutableData *_data;
     NSArray *_results;
-    id<MLMovieInfoGrabberDelegate> _delegate;
+    id<MLMovieInfoGrabberDelegate> __weak _delegate;
 #if HAVE_BLOCK
     void (^_block)(NSError *);
 #else
@@ -38,11 +38,11 @@
 #endif
 }
 
-@property (readwrite, assign) id<MLMovieInfoGrabberDelegate> delegate;
+@property (readwrite, weak) id<MLMovieInfoGrabberDelegate> delegate;
 #if !HAVE_BLOCK
-@property (readwrite, retain) id userData;
+@property (readwrite, strong) id userData;
 #endif
-@property (readonly, retain) NSArray *results;
+@property (readonly, strong) NSArray *results;
 
 - (void)lookUpForTitle:(NSString *)title;
 #if HAVE_BLOCK

@@ -41,8 +41,6 @@
     [request setSortDescriptors:@[descriptor]];
 
     NSArray *shows = [moc executeFetchRequest:request error:nil];
-    [request release];
-    [descriptor release];
 
     return shows;
 }
@@ -100,7 +98,7 @@
                                 ascending:YES
                                  selector:@selector(compare:)];
     NSArray *descriptors = @[seasonDescriptor, episodesDescriptor];
-    return [[episodes sortedArrayUsingDescriptors:descriptors] retain];
+    return [episodes sortedArrayUsingDescriptors:descriptors];
 }
 
 - (void)removeEpisode:(MLShowEpisode*)episode

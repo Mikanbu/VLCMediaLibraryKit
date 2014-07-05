@@ -32,14 +32,14 @@
 + (MLAlbumTrack *)trackWithAlbum:(id)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded;
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
 
-@property (nonatomic, retain) NSNumber *unread;
-@property (nonatomic, retain) NSString *artist;
-@property (nonatomic, retain) NSString *genre;
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSNumber *trackNumber;
+@property (nonatomic, strong) NSNumber *unread;
+@property (nonatomic, strong) NSString *artist;
+@property (nonatomic, strong) NSString *genre;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSNumber *trackNumber;
 
-@property (nonatomic, retain) MLAlbum *album;
-@property (nonatomic, retain) NSSet *files;
+@property (nonatomic, strong) MLAlbum *album;
+@property (nonatomic, strong) NSSet *files;
 
 @end
 

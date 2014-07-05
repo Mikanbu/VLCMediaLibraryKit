@@ -48,37 +48,23 @@
 #else
 + (id)runConnectionWithURL:(NSURL *)url delegate:(id<MLURLConnectionDelegate>)delegate userObject:(id)userObject
 {
-    MLURLConnection *obj = [[[[self class] alloc] init] autorelease];
+    MLURLConnection *obj = [[[self class] alloc] init];
     obj.delegate = delegate;
     obj.userObject = userObject;
     [obj loadURL:url];
     return obj;
 }
 #endif
-- (void)dealloc
-{
-#if HAVE_BLOCK
-    if (_block)
-        Block_release(_block);
-#endif
-    [_userObject release];
-    [_connection release];
-    [_data release];
-    [super dealloc];
-}
 
 - (void)loadURL:(NSURL *)url
 {
-    [_data release];
     _data = [[NSMutableData alloc] init];
 
-    NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15] autorelease];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
     [_connection cancel];
-    [_connection release];
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
     // Make sure we are around during the request
-    [self retain];
 }
 
 #if HAVE_BLOCK
@@ -96,7 +82,6 @@
 - (void)cancel
 {
     [_connection cancel];
-    [_connection release];
     _connection = nil;
 }
 
@@ -113,9 +98,6 @@
     }
 #endif
     [_delegate urlConnection:self didFinishWithError:error];
-
-    // This balances the -retain in -load
-    [self autorelease];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -137,9 +119,6 @@
 #endif
 
     [_delegate urlConnection:self didFinishWithError:nil];
-
-    // This balances the -retain in -load
-    [self autorelease];
 }
 
 @end
