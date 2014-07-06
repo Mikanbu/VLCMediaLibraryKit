@@ -170,7 +170,6 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic lastAudioTrack;
 @dynamic playCount;
 @dynamic artworkURL;
-@dynamic url;
 @dynamic type;
 @dynamic title;
 @dynamic shortSummary;
@@ -207,7 +206,36 @@ NSString *kMLFileTypeAudio = @"audio";
         [self didChangeValueForKey:@"lastPosition"];
     }
     @catch (NSException *exception) {
-        APLog(@"lastPosition raised exception");
+        APLog(@"setLastPosition raised exception");
+    }
+}
+
+- (NSString *)url
+{
+    [self willAccessValueForKey:@"url"];
+    NSString *ret = [self primitiveValueForKey:@"url"];
+    [self didAccessValueForKey:@"url"];
+
+    /* we need to make sure that current app path is still part of the file
+     * URL since app upgrades via iTunes or the App Store will change the
+     * absolute URL of our files (trac #11330) */
+    if ([ret rangeOfString:[[MLMediaLibrary sharedMediaLibrary] documentFolderPath]].location != NSNotFound)
+        return ret;
+
+    ret = [[[MLMediaLibrary sharedMediaLibrary] documentFolderPath] stringByAppendingPathComponent:[ret lastPathComponent]];
+    APLog(@"returning modified URL! will return %@", ret);
+    return ret;
+}
+
+- (void)setUrl:(NSString *)url
+{
+    @try {
+        [self willChangeValueForKey:@"url"];
+        [self setPrimitiveValue:url forKey:@"url"];
+        [self didChangeValueForKey:@"url"];
+    }
+    @catch (NSException *exception) {
+        APLog(@"setUrl raised exception");
     }
 }
 

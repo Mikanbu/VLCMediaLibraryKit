@@ -662,7 +662,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     for (NSString *path in filepaths) {
         NSURL *url = [NSURL fileURLWithPath:path];
         NSString *urlString = [url absoluteString];
+#if TARGET_OS_IPHONE
+        /* check for the end of a path only, since parts of the path components may change
+         * while it is still the same file
+         * of course, this is only true for the flat file structure we use on iOS */
+        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url ENDSWITH %@", [urlString lastPathComponent]]];
+#else
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
+#endif
         urlToObject[urlString] = path;
     }
 
@@ -829,7 +836,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
         if (!exists) {
             APLog(@"Marking - %@", [fileURL absoluteString]);
-            file.isSafe = YES; // It doesn't exists, it's safe.
+            file.isSafe = YES; // It doesn't exist, it's safe.
             if (file.isAlbumTrack) {
                 MLAlbum *album = file.albumTrack.album;
                 if (album.tracks.count <= 1) {
