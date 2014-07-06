@@ -28,8 +28,6 @@
 @class MLShowEpisode;
 
 @interface MLShow :  NSManagedObject
-{
-}
 
 + (NSArray *)allShows;
 + (MLShow *)showWithName:(NSString *)name;

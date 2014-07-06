@@ -32,6 +32,13 @@
 #import "MLAlbum.h"
 #import "MLTitleDecrapifier.h"
 
+@interface MLFileParserQueue ()
+{
+    NSDictionary *_fileDescriptionToOperation;
+    NSOperationQueue *_queue;
+}
+@end
+
 @interface MLParsingOperation : NSOperation
 {
     MLFile *_file;

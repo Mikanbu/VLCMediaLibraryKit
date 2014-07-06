@@ -25,10 +25,8 @@
 
 @class MLFile;
 
-@interface MLFileParserQueue : NSObject {
-    NSDictionary *_fileDescriptionToOperation;
-    NSOperationQueue *_queue;
-}
+@interface MLFileParserQueue : NSObject
+
 + (MLFileParserQueue *)sharedFileParserQueue;
 - (void)addFile:(MLFile *)file;
 - (void)setHighPriorityForFile:(MLFile *)file;

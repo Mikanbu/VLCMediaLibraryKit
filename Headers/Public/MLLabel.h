@@ -29,8 +29,7 @@
 @class MLFile;
 
 @interface MLLabel :  NSManagedObject
-{
-}
+
 + (NSArray *)allLabels;
 - (NSArray *)sortedFolderItems;
 

@@ -25,9 +25,7 @@
 
 @class MLFile;
 
-@interface MLCrashPreventer : NSObject {
-    NSMutableArray *_parsedFiles;
-}
+@interface MLCrashPreventer : NSObject
 
 + (id)sharedPreventer;
 

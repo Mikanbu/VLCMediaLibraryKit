@@ -30,6 +30,12 @@
 #import "MLFile.h"
 #import "MLMediaLibrary.h"
 
+@interface MLCrashPreventer ()
+{
+    NSMutableArray *_parsedFiles;
+}
+@end
+
 @implementation MLCrashPreventer
 + (id)sharedPreventer
 {

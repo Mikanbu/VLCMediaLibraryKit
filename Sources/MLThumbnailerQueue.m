@@ -41,6 +41,8 @@
 @interface MLThumbnailerQueue ()
 {
     VLCLibrary *_internalLibrary;
+    NSDictionary *_fileDescriptionToOperation;
+    NSOperationQueue *_queue;
 }
 - (void)didFinishOperation:(ThumbnailOperation *)op;
 @end

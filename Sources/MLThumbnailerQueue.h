@@ -27,10 +27,8 @@
 
 @class MLFile;
 
-@interface MLThumbnailerQueue : NSObject {
-    NSDictionary *_fileDescriptionToOperation;
-    NSOperationQueue *_queue;
-}
+@interface MLThumbnailerQueue : NSObject
+
 + (MLThumbnailerQueue *)sharedThumbnailerQueue;
 
 - (void)addFile:(MLFile *)file;
