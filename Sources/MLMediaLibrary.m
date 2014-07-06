@@ -711,6 +711,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (void)upgradeLibrary
 {
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheGreatSharkHuntDatabaseFormat] boolValue])
+        [self _upgradeLibraryToGreatSharkHuntDatabaseFormat];
+}
+
+- (void)_upgradeLibraryToGreatSharkHuntDatabaseFormat
+{
     [self libraryDidDisappear];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSFileManager *fileManager = [NSFileManager defaultManager];
