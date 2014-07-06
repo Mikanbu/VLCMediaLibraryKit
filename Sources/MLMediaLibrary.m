@@ -39,6 +39,13 @@
 #import "MLFileParserQueue.h"
 #import "MLCrashPreventer.h"
 
+@interface MLMediaLibrary ()
+{
+    NSString *_thumbnailFolderPath;
+    NSString *_databaseFolderPath;
+}
+@end
+
 #define DEBUG 1
 // To debug
 #define DELETE_LIBRARY_ON_EACH_LAUNCH 0
@@ -117,25 +124,34 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (NSString *)databaseFolderPath
 {
+    if (_databaseFolderPath) {
+        if (_databaseFolderPath.length > 0)
+            return _databaseFolderPath;
+    }
     int directory = NSLibraryDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
     NSString *directoryPath = paths[0];
 #if DELETE_LIBRARY_ON_EACH_LAUNCH
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
 #endif
-    return directoryPath;
+    _databaseFolderPath = directoryPath;
+    return _databaseFolderPath;
 }
-
 
 - (NSString *)thumbnailFolderPath
 {
+    if (_thumbnailFolderPath) {
+        if (_thumbnailFolderPath.length > 0)
+            return _thumbnailFolderPath;
+    }
     int directory = NSLibraryDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
     NSString *directoryPath = paths[0];
 #if DELETE_LIBRARY_ON_EACH_LAUNCH
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
 #endif
-    return [directoryPath stringByAppendingPathComponent:@"Thumbnails"];
+    _thumbnailFolderPath = [directoryPath stringByAppendingPathComponent:@"Thumbnails"];
+    return _thumbnailFolderPath;
 }
 
 - (NSManagedObjectContext *)managedObjectContext
