@@ -3,7 +3,7 @@
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2014 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -41,8 +41,14 @@
 
 @interface MLMediaLibrary ()
 {
+    NSManagedObjectContext *_managedObjectContext;
+    NSManagedObjectModel   *_managedObjectModel;
+
+    BOOL _allowNetworkAccess;
+
     NSString *_thumbnailFolderPath;
     NSString *_databaseFolderPath;
+    NSString *_documentFolderPath;
 }
 @end
 
@@ -152,6 +158,20 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #endif
     _thumbnailFolderPath = [directoryPath stringByAppendingPathComponent:@"Thumbnails"];
     return _thumbnailFolderPath;
+}
+
+- (NSString *)documentFolderPath
+{
+    if (_documentFolderPath) {
+        if (_documentFolderPath.length > 0)
+            return _documentFolderPath;
+    }
+    int directory = NSDocumentDirectory;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
+
+    NSURL *url = [NSURL fileURLWithPath:paths[0]];
+    _documentFolderPath = [url absoluteString];
+    return _documentFolderPath;
 }
 
 - (NSManagedObjectContext *)managedObjectContext

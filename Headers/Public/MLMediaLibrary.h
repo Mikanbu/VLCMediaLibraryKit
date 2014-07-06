@@ -3,7 +3,7 @@
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2014 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -25,12 +25,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MLMediaLibrary : NSObject {
-    NSManagedObjectContext *_managedObjectContext;
-    NSManagedObjectModel   *_managedObjectModel;
-
-    BOOL _allowNetworkAccess;
-}
+@interface MLMediaLibrary : NSObject
 
 @property (readonly) BOOL libraryNeedsUpgrade;
 @property (nonatomic, strong) id delegate;
@@ -46,6 +41,7 @@
 - (id)createObjectForEntity:(NSString *)entity;
 - (void)removeObject:(NSManagedObject *)object;
 - (NSString *)thumbnailFolderPath;
+- (NSString *)documentFolderPath;
 
 - (void)applicationWillStart;
 - (void)applicationWillExit;
