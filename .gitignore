@@ -3,3 +3,5 @@
 *.xcworkspace
 xcuserdata
 .DS_Store
+build
+External/MobileVLCKit
