@@ -425,7 +425,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/fkuehne/Desktop/videolan/gits/ios3/ImportedSources/VLCKit/build/Release-iphonesimulator/include/MobileVLCKit/**",
+					"$(SRCROOT)/External/MobileVLCKit/include/MobileVLCKit/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
@@ -452,7 +452,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/fkuehne/Desktop/videolan/gits/ios3/ImportedSources/VLCKit/build/Release-iphonesimulator/include/MobileVLCKit/**",
+					"$(SRCROOT)/External/MobileVLCKit/include/MobileVLCKit/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
