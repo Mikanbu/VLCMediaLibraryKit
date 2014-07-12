@@ -1,3 +1,13 @@
+Version 2.4
+-----------
+- NEW: code was upgraded to ARC
+- FIX: library is no longer reset when upgrading iOS app through the store
+- FIX: [] pattern is correctly removed from file titles
+
+Added Public APIs:
+- MLMediaLibrary
+  - new selector: documentFolderPath
+
 Version 2.3
 -----------
 - FIX: crash when deploying MLFile's unread property
