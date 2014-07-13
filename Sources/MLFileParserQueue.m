@@ -39,7 +39,7 @@
 }
 @end
 
-@interface MLParsingOperation : NSOperation
+@interface MLParsingOperation : NSOperation <VLCMediaDelegate>
 {
     MLFile *_file;
     VLCMedia *_media;
