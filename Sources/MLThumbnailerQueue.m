@@ -3,7 +3,7 @@
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2014 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -78,8 +78,13 @@
         }
     } else {
         if (SYSTEM_RUNS_IOS7) {
-            thumbnailer.thumbnailWidth = 480.;
-            thumbnailer.thumbnailHeight = 270.;
+            if ([UIScreen mainScreen].scale==2.0) {
+                thumbnailer.thumbnailWidth = 480.;
+                thumbnailer.thumbnailHeight = 270.;
+            } else {
+                thumbnailer.thumbnailWidth = 720.;
+                thumbnailer.thumbnailHeight = 405.;
+            }
         } else {
             if ([UIScreen mainScreen].scale==2.0) {
                 thumbnailer.thumbnailWidth = 480.;
