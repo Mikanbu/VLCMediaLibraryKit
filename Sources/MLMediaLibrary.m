@@ -169,8 +169,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     int directory = NSDocumentDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
 
-    NSURL *url = [NSURL fileURLWithPath:paths[0]];
-    _documentFolderPath = [url absoluteString];
+    _documentFolderPath = [NSString stringWithFormat:@"file://%@", paths[0]];
     return _documentFolderPath;
 }
 

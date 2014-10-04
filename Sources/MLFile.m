@@ -219,10 +219,12 @@ NSString *kMLFileTypeAudio = @"audio";
     /* we need to make sure that current app path is still part of the file
      * URL since app upgrades via iTunes or the App Store will change the
      * absolute URL of our files (trac #11330) */
-    if ([ret rangeOfString:[[MLMediaLibrary sharedMediaLibrary] documentFolderPath]].location != NSNotFound)
+    NSString *documentFolderPath = [[MLMediaLibrary sharedMediaLibrary] documentFolderPath];
+    if ([ret rangeOfString:documentFolderPath].location != NSNotFound)
         return ret;
 
-    ret = [[[MLMediaLibrary sharedMediaLibrary] documentFolderPath] stringByAppendingPathComponent:[ret lastPathComponent]];
+    ret = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [ret lastPathComponent]];
+
     APLog(@"returning modified URL! will return %@", ret);
     return ret;
 }
