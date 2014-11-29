@@ -827,7 +827,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
-    unsigned int count = results.count;
+    unsigned int count = (unsigned int)results.count;
     for (unsigned int x = 0; x < count; x++) {
         MLFile *file = results[x];
         NSString *urlString = [file url];

@@ -124,7 +124,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
         return nil;
 
     // Search for s01e10.
-    for (NSUInteger i = 0; i < stringLength - 5; i++) {
+    for (unsigned int i = 0; i < stringLength - 5; i++) {
         if (c(str, i) == 's' &&
             isDigit(c(str, i+1)) &&
             isDigit(c(str, i+2)) &&
@@ -159,7 +159,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
 
     // search for 0x00
     if (!successfulSearch) {
-        for (NSUInteger i = 0; i < stringLength - 4; i++) {
+        for (unsigned int i = 0; i < stringLength - 4; i++) {
             if (isDigit(c(str, i)) &&
                 c(str, i+1) == 'x' &&
                 isDigit(c(str, i+2)) &&
