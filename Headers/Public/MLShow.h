@@ -42,6 +42,7 @@
 @property (weak, nonatomic, readonly) NSArray *sortedEpisodes;
 @property (nonatomic, strong, readonly) NSSet *unreadEpisodes;
 
+- (void)addEpisode:(MLShowEpisode*)episode;
 - (void)removeEpisode:(MLShowEpisode*)episode;
 - (void)removeEpisodeWithSeasonNumber:(NSNumber *)seasonNumber andEpisodeNumber:(NSNumber *)episodeNumber;
 

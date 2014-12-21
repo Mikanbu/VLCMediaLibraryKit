@@ -101,6 +101,19 @@
     return [episodes sortedArrayUsingDescriptors:descriptors];
 }
 
+- (void)addEpisode:(MLShowEpisode*)episode
+{
+    if (!episode)
+        return;
+
+    NSMutableSet *episodes = [self mutableSetValueForKey:@"episodes"];
+    [episodes addObject:episode];
+
+    [self willChangeValueForKey:@"episodes"];
+    [self setValue:episodes forKey:@"episodes"];
+    [self didChangeValueForKey:@"episodes"];
+}
+
 - (void)removeEpisode:(MLShowEpisode*)episode
 {
     if (!episode)

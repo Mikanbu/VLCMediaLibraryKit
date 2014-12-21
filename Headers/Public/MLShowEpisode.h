@@ -32,7 +32,7 @@
 + (NSArray *)allEpisodes;
 
 // This will eventually create the show
-+ (MLShowEpisode *)episodeWithShow:(id)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded;
++ (MLShowEpisode *)episodeWithShow:(MLShow *)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded;
 + (MLShowEpisode *)episodeWithShowName:(NSString *)showName episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber
                         createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
 

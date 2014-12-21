@@ -474,8 +474,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     BOOL wasInserted = NO;
     MLShow *show = nil;
     MLShowEpisode *episode = [MLShowEpisode episodeWithShowName:tvShowName episodeNumber:episodeNumber seasonNumber:seasonNumber createIfNeeded:YES wasCreated:&wasInserted];
-    if (episode)
+
+    if (episode) {
         show = episode.show;
+        [show addEpisode:episode];
+    }
     if (wasInserted && !hasNoTvShow) {
         show.name = tvShowName;
         [self fetchMetaDataForShow:show];

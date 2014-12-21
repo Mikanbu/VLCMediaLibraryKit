@@ -51,9 +51,13 @@
     return episodes;
 }
 
-+ (MLShowEpisode *)episodeWithShow:(id)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded
++ (MLShowEpisode *)episodeWithShow:(MLShow *)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded
 {
-    NSMutableSet *episodes = [show mutableSetValueForKey:@"episodes"];
+    if (!show)
+        return NULL;
+
+    NSSet *episodes = [show valueForKey:@"episodes"];
+
     MLShowEpisode *episode = nil;
     if (seasonNumber && episodeNumber) {
         for (MLShowEpisode *episodeIter in episodes) {
@@ -64,17 +68,21 @@
             }
         }
     }
+
     if (!episode && createIfNeeded) {
         episode = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"ShowEpisode"];
         episode.episodeNumber = episodeNumber;
         episode.seasonNumber = seasonNumber;
-        [episodes addObject:episode];
+        episode.show = show;
     }
     return episode;
 }
 
-+ (MLShowEpisode *)episodeWithShowName:(NSString *)showName episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber
-                        createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
++ (MLShowEpisode *)episodeWithShowName:(NSString *)showName
+                         episodeNumber:(NSNumber *)episodeNumber
+                          seasonNumber:(NSNumber *)seasonNumber
+                        createIfNeeded:(BOOL)createIfNeeded
+                            wasCreated:(BOOL *)wasCreated
 {
     MLShow *show = [MLShow showWithName:showName];
     *wasCreated = NO;
