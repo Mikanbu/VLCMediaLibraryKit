@@ -33,7 +33,7 @@
 		7D0EF559170885230003ED47 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */; };
 		7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */; };
 		7D0EF55B170885230003ED47 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54F170885230003ED47 /* CTidy.m */; };
-		7D0EF55D170885300003ED47 /* MediaLibrary.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */; };
+		7D4625851A560729001A80B4 /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */; };
 		7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
 		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 		7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
@@ -128,7 +128,8 @@
 		7D0EF54E170885230003ED47 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
 		7D0EF54F170885230003ED47 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
-		7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaLibrary.xcdatamodel; sourceTree = SOURCE_ROOT; };
+		7D4625831A560729001A80B4 /* MediaLibrary-2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.1.xcdatamodel"; sourceTree = "<group>"; };
+		7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.xcdatamodel"; sourceTree = "<group>"; };
 		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
 		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
 		7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNamespaceNode.h; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 		7D0EF495170883940003ED47 = {
 			isa = PBXGroup;
 			children = (
+				7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */,
 				7D0EF536170885230003ED47 /* TouchXML */,
 				7D0EF506170885130003ED47 /* Headers */,
 				7D0EF516170885130003ED47 /* Sources */,
@@ -182,7 +184,6 @@
 		7D0EF4A4170883940003ED47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7D0EF55C170885300003ED47 /* MediaLibrary.xcdatamodel */,
 				7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -385,6 +386,7 @@
 				7D0EF554170885230003ED47 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				7D0EF555170885230003ED47 /* CXMLElement.m in Sources */,
 				7D0EF556170885230003ED47 /* CXMLElement_CreationExtensions.m in Sources */,
+				7D4625851A560729001A80B4 /* MediaLibrary.xcdatamodeld in Sources */,
 				7D0EF557170885230003ED47 /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				7D0EF558170885230003ED47 /* CXMLNode.m in Sources */,
 				7D0EF559170885230003ED47 /* CXMLNode_PrivateExtensions.m in Sources */,
@@ -392,7 +394,6 @@
 				7D0EF55B170885230003ED47 /* CTidy.m in Sources */,
 				7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */,
 				7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */,
-				7D0EF55D170885300003ED47 /* MediaLibrary.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +530,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D4625831A560729001A80B4 /* MediaLibrary-2.1.xcdatamodel */,
+				7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */,
+			);
+			currentVersion = 7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */;
+			path = MediaLibrary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7D0EF496170883940003ED47 /* Project object */;
 }

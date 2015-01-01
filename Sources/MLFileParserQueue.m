@@ -101,11 +101,21 @@
             [trackInfo setValue:track[VLCMediaTracksInformationVideoHeight] forKey:@"height"];
         } else if ([type isEqualToString:VLCMediaTracksInformationTypeAudio]) {
             trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AudioTrackInformation"];
-            [trackInfo setValue:track[VLCMediaTracksInformationAudioRate] forKey:@"bitrate"];
+            [trackInfo setValue:track[VLCMediaTracksInformationAudioRate] forKey:@"sampleRate"];
             [trackInfo setValue:track[VLCMediaTracksInformationAudioChannelsNumber] forKey:@"channelsNumber"];
+        } else if ([type isEqualToString:VLCMediaTracksInformationTypeText]) {
+            trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"SubtitlesTrackInformation"];
+            [trackInfo setValue:track[VLCMediaTracksInformationTextEncoding] forKey:@"textEncoding"];
         }
-        if (trackInfo)
+
+        if (trackInfo) {
+            [trackInfo setValue:track[VLCMediaTracksInformationBitrate] forKey:@"bitrate"];
+            [trackInfo setValue:track[VLCMediaTracksInformationCodec] forKey:@"codec"];
+            [trackInfo setValue:track[VLCMediaTracksInformationCodecLevel] forKey:@"codecLevel"];
+            [trackInfo setValue:track[VLCMediaTracksInformationCodecProfile] forKey:@"codecProfile"];
+            [trackInfo setValue:track[VLCMediaTracksInformationLanguage] forKey:@"language"];
             [tracksSet addObject:trackInfo];
+        }
     }
 
     [self.file setTracks:tracksSet];
