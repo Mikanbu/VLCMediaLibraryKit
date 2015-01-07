@@ -659,11 +659,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSUInteger count = [filepaths count];
     NSMutableArray *fetchPredicates = [NSMutableArray arrayWithCapacity:count];
     NSMutableDictionary *urlToObject = [NSMutableDictionary dictionaryWithCapacity:count];
+    NSString *documentFolderPath = [[MLMediaLibrary sharedMediaLibrary] documentFolderPath];
 
     // Prepare a fetch request for all items
     for (NSString *path in filepaths) {
-        NSURL *url = [NSURL fileURLWithPath:path];
-        NSString *urlString = [url absoluteString];
+        NSString *urlString;
+        urlString = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [path lastPathComponent]];
+
 #if TARGET_OS_IPHONE
         /* check for the end of a path only, since parts of the path components may change
          * while it is still the same file
@@ -672,9 +674,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #else
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
 #endif
-        urlToObject[urlString] = path;
+        [urlToObject setObject:path forKey:urlString];
     }
-
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
 
     [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
@@ -688,7 +689,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     // Remove objects that are already in db.
     for (MLFile *dbResult in dbResults) {
         NSString *urlString = dbResult.url;
-        [filePathsToAdd removeObject:urlToObject[urlString]];
+        [filePathsToAdd removeObject:[urlToObject objectForKey:urlString]];
     }
 
     // Add only the newly added items
