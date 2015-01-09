@@ -223,7 +223,16 @@ NSString *kMLFileTypeAudio = @"audio";
     if ([ret rangeOfString:documentFolderPath].location != NSNotFound)
         return ret;
 
-    ret = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [ret lastPathComponent]];
+    NSArray *pathComponents = [ret componentsSeparatedByString:@"/"];
+    NSUInteger componentCount = pathComponents.count;
+    if ([pathComponents[componentCount - 2] isEqualToString:@"Documents"])
+        ret = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [ret lastPathComponent]];
+    else {
+        NSUInteger firstElement = [pathComponents indexOfObject:@"Documents"] + 1;
+        ret = documentFolderPath;
+        for (NSUInteger x = 0; x < componentCount - firstElement; x++)
+            ret = [ret stringByAppendingFormat:@"/%@", pathComponents[firstElement + x]];
+    }
 
     APLog(@"returning modified URL! will return %@", ret);
     return ret;

@@ -662,19 +662,37 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSString *documentFolderPath = [[MLMediaLibrary sharedMediaLibrary] documentFolderPath];
 
     // Prepare a fetch request for all items
-    for (NSString *path in filepaths) {
-        NSString *urlString;
-        urlString = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [path lastPathComponent]];
+    NSArray *pathComponents;
+    NSUInteger componentCount;
 
+    for (NSString *path in filepaths) {
 #if TARGET_OS_IPHONE
-        /* check for the end of a path only, since parts of the path components may change
-         * while it is still the same file
-         * of course, this is only true for the flat file structure we use on iOS */
-        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url ENDSWITH %@", [urlString lastPathComponent]]];
-#else
-        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", urlString]];
-#endif
+        NSString *urlString;
+        NSString *componentString = @"";
+
+        pathComponents = [path componentsSeparatedByString:@"/"];
+        componentCount = pathComponents.count;
+        if ([pathComponents[componentCount - 2] isEqualToString:@"Documents"])
+            componentString = [path lastPathComponent];
+        else {
+            NSUInteger firstElement = [pathComponents indexOfObject:@"Documents"] + 1;
+            for (NSUInteger x = 0; x < componentCount - firstElement; x++) {
+                if (x == 0)
+                    componentString = [componentString stringByAppendingFormat:@"%@", pathComponents[firstElement + x]];
+                else
+                    componentString = [componentString stringByAppendingFormat:@"/%@", pathComponents[firstElement + x]];
+            }
+        }
+
+        /* compose and escape string */
+        urlString = [[NSString stringWithFormat:@"%@/%@", documentFolderPath, componentString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+        /* check for the end of the paths */
+        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url CONTAINS %@", [urlString lastPathComponent]]];
         [urlToObject setObject:path forKey:urlString];
+#else
+        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", path]];
+#endif
     }
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
 
