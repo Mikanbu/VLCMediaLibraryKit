@@ -110,7 +110,8 @@
 
         if (trackInfo) {
             [trackInfo setValue:track[VLCMediaTracksInformationBitrate] forKey:@"bitrate"];
-            [trackInfo setValue:track[VLCMediaTracksInformationCodec] forKey:@"codec"];
+            [trackInfo setValue:[track[VLCMediaTracksInformationCodec] stringValue] forKey:@"codec"];
+            [trackInfo setValue:track[VLCMediaTracksInformationCodec] forKey:@"codecFourCC"];
             [trackInfo setValue:track[VLCMediaTracksInformationCodecLevel] forKey:@"codecLevel"];
             [trackInfo setValue:track[VLCMediaTracksInformationCodecProfile] forKey:@"codecProfile"];
             [trackInfo setValue:track[VLCMediaTracksInformationLanguage] forKey:@"language"];
