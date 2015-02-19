@@ -177,23 +177,22 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return _documentFolderPath;
 }
 
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext)
-        return _managedObjectContext;
-
+- (NSURL *)persistentStoreURL {
     NSString *databaseFolderPath = [self databaseFolderPath];
-
     NSString *path = [databaseFolderPath stringByAppendingPathComponent: @"MediaLibrary.sqlite"];
-    NSURL *url = [NSURL fileURLWithPath:path];
+    return [NSURL fileURLWithPath:path];
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
     NSNumber *yes = @YES;
     NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : yes,
-                             NSInferMappingModelAutomaticallyOption : yes};
+                              NSInferMappingModelAutomaticallyOption : yes};
 
     NSError *error;
-    NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
+    NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
 
     if (!persistentStore) {
 #if! TARGET_OS_IPHONE
@@ -201,11 +200,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         NSInteger ret = NSRunAlertPanel(@"Error", @"The Media Library you have on your disk is not compatible with the one Lunettes can read. Do you want to create a new one?", @"No", @"Yes", nil);
         if (ret == NSOKButton)
             [NSApp terminate:nil];
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
 #else
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
 #endif
-        persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
+        persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
         if (!persistentStore) {
 #if! TARGET_OS_IPHONE
             NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
@@ -217,9 +216,16 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             return nil;
         }
     }
+    return coordinator;
+}
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext)
+        return _managedObjectContext;
 
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     [_managedObjectContext setUndoManager:nil];
     [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
     return _managedObjectContext;

@@ -29,6 +29,8 @@
 
 @property (readonly) BOOL libraryNeedsUpgrade;
 @property (nonatomic, strong) id delegate;
+@property (nonatomic, strong) NSURL *persistentStoreURL;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (id)sharedMediaLibrary;
 
