@@ -125,7 +125,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (_managedObjectModel)
         return _managedObjectModel;
 
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"MediaLibrary-2.5" ofType:@"mom"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"MediaLibrary" ofType:@"momd"];
     NSURL *momURL = [NSURL fileURLWithPath:path];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
 
