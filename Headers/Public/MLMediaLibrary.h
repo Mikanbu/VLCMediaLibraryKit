@@ -29,6 +29,8 @@
 
 @property (readonly) BOOL libraryNeedsUpgrade;
 @property (nonatomic, strong) id delegate;
+// base path for the database and thumbnails
+@property (nonatomic, copy) NSString *libraryBasePath;
 @property (nonatomic, strong) NSURL *persistentStoreURL;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
@@ -51,6 +53,8 @@
 - (void)save;
 - (void)libraryDidDisappear;
 - (void)libraryDidAppear;
+
+- (BOOL)migrateLibraryToBasePath:(NSString *)basePath error:(NSError **)migrationError;
 @end
 
 @protocol MLMediaLibrary <NSObject>

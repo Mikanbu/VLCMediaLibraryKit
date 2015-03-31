@@ -132,35 +132,33 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return _managedObjectModel;
 }
 
+- (NSString *)libraryBasePath
+{
+    if (_libraryBasePath.length == 0) {
+        int directory = NSLibraryDirectory;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
+        NSString *directoryPath = paths.firstObject;
+#if DELETE_LIBRARY_ON_EACH_LAUNCH
+        [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
+#endif
+        _libraryBasePath = directoryPath;
+    }
+    return _libraryBasePath;
+}
+
 - (NSString *)databaseFolderPath
 {
-    if (_databaseFolderPath) {
-        if (_databaseFolderPath.length > 0)
-            return _databaseFolderPath;
+    if (_databaseFolderPath.length == 0) {
+        _databaseFolderPath = self.libraryBasePath;
     }
-    int directory = NSLibraryDirectory;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    NSString *directoryPath = paths[0];
-#if DELETE_LIBRARY_ON_EACH_LAUNCH
-    [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-#endif
-    _databaseFolderPath = directoryPath;
     return _databaseFolderPath;
 }
 
 - (NSString *)thumbnailFolderPath
 {
-    if (_thumbnailFolderPath) {
-        if (_thumbnailFolderPath.length > 0)
-            return _thumbnailFolderPath;
+    if (_thumbnailFolderPath.length == 0) {
+        _thumbnailFolderPath = [self.libraryBasePath stringByAppendingPathComponent:@"Thumbnails"];
     }
-    int directory = NSLibraryDirectory;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    NSString *directoryPath = paths[0];
-#if DELETE_LIBRARY_ON_EACH_LAUNCH
-    [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-#endif
-    _thumbnailFolderPath = [directoryPath stringByAppendingPathComponent:@"Thumbnails"];
     return _thumbnailFolderPath;
 }
 
@@ -172,18 +170,22 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
     int directory = NSDocumentDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-
     _documentFolderPath = [NSString stringWithFormat:@"file://%@", paths[0]];
     return _documentFolderPath;
 }
 
-- (NSURL *)persistentStoreURL {
-    NSString *databaseFolderPath = [self databaseFolderPath];
-    NSString *path = [databaseFolderPath stringByAppendingPathComponent: @"MediaLibrary.sqlite"];
-    return [NSURL fileURLWithPath:path];
+- (NSURL *)persistentStoreURL
+{
+    if (_persistentStoreURL == nil) {
+        NSString *databaseFolderPath = [self databaseFolderPath];
+        NSString *path = [databaseFolderPath stringByAppendingPathComponent: @"MediaLibrary.sqlite"];
+        _persistentStoreURL = [NSURL fileURLWithPath:path];
+    }
+    return _persistentStoreURL;
 }
 
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
 
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
@@ -987,4 +989,48 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     // Resume our work
     [[MLThumbnailerQueue sharedThumbnailerQueue] resume];
 }
+
+#pragma mark - path migrations
+- (BOOL)migrateLibraryToBasePath:(NSString *)basePath error:(NSError *__autoreleasing *)migrationError
+{
+    BOOL success = YES;
+    NSPersistentStoreCoordinator *coordinater = [self persistentStoreCoordinator];
+    NSURL *oldStoreURL = self.persistentStoreURL;
+    NSPersistentStore *oldStore = [coordinater persistentStoreForURL:oldStoreURL];
+    NSString *oldThumbnailPath = self.thumbnailFolderPath;
+
+    self.libraryBasePath = basePath;
+    _databaseFolderPath = nil;
+    _thumbnailFolderPath = nil;
+    self.persistentStoreURL = nil;
+
+    NSURL *newURL = self.persistentStoreURL;
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:[[newURL URLByDeletingLastPathComponent] path] withIntermediateDirectories:YES attributes:nil error:nil];
+    NSPersistentStore *newStore = [coordinater migratePersistentStore:oldStore
+                                                                toURL:newURL
+                                                              options:oldStore.options
+                                                             withType:oldStore.type
+                                                                error:&error];
+    if (!newStore) {
+        success = NO;
+        APLog(@"Failed to migrate library to new path with error: %@",error);
+    } else {
+        if (![[NSFileManager defaultManager] removeItemAtURL:oldStoreURL error:&error]) {
+            APLog(@"Failed to remove old library with error: %@",error);
+        }
+    }
+
+    NSString *newThumbnailPath = self.thumbnailFolderPath;
+    if (![[NSFileManager defaultManager] moveItemAtPath:oldThumbnailPath toPath:newThumbnailPath error:&error]) {
+        success = NO;
+        APLog(@"Failed to move thumbnails to new path with error: %@",error);
+    }
+
+    if (migrationError != nil && error) {
+        *migrationError = error;
+    }
+    return success;
+}
+
 @end
