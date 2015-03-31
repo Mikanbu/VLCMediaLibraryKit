@@ -49,6 +49,7 @@
     NSString *_thumbnailFolderPath;
     NSString *_databaseFolderPath;
     NSString *_documentFolderPath;
+    NSString *_libraryBasePath;
 }
 @end
 
@@ -144,6 +145,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         _libraryBasePath = directoryPath;
     }
     return _libraryBasePath;
+}
+
+- (void)setLibraryBasePath:(NSString *)libraryBasePath
+{
+    _libraryBasePath = [libraryBasePath copy];
+    _databaseFolderPath = nil;
+    _thumbnailFolderPath = nil;
+    _persistentStoreURL = nil;
 }
 
 - (NSString *)databaseFolderPath
