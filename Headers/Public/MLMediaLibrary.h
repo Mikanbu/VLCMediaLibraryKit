@@ -33,6 +33,7 @@
 @property (nonatomic, copy) NSString *libraryBasePath;
 @property (nonatomic, strong) NSURL *persistentStoreURL;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, copy) NSDictionary *additionalPersitentStoreOptions;
 
 + (id)sharedMediaLibrary;
 

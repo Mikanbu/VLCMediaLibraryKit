@@ -201,6 +201,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSNumber *yes = @YES;
     NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : yes,
                               NSInferMappingModelAutomaticallyOption : yes};
+    if (self.additionalPersitentStoreOptions.count > 0) {
+        NSMutableDictionary *mutableOptions = options.mutableCopy;
+        [mutableOptions addEntriesFromDictionary:self.additionalPersitentStoreOptions];
+        options = mutableOptions;
+    }
 
     NSError *error;
     NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
