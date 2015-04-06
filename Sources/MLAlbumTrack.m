@@ -2,7 +2,7 @@
  * MLAlbumTrack.m
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2013 Felix Paul Kühne
+ * Copyright (C) 2013-2015 Felix Paul Kühne
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -37,6 +37,9 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (moc  || moc.persistentStoreCoordinator == nil)
+        return [NSArray array];
+
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AlbumTrack" inManagedObjectContext:moc];
     [request setEntity:entity];
 
@@ -90,8 +93,11 @@
     [self willChangeValueForKey:@"unread"];
     [self setPrimitiveUnread:unread];
     [self didChangeValueForKey:@"unread"];
-    [[[MLMediaLibrary sharedMediaLibrary] managedObjectContext] refreshObject:[self album] mergeChanges:YES];
-    [[[MLMediaLibrary sharedMediaLibrary] managedObjectContext] refreshObject:self mergeChanges:YES];
+    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (moc) {
+        [moc refreshObject:[self album] mergeChanges:YES];
+        [moc refreshObject:self mergeChanges:YES];
+    }
 }
 
 @dynamic artist;

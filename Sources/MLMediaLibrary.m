@@ -3,7 +3,7 @@
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2014 VLC authors and VideoLAN
+ * Copyright (C) 2010-2015 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -102,6 +102,9 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc || moc.persistentStoreCoordinator == nil)
+        return nil;
+
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
     NSAssert(entityDescription, @"No entity");
     [request setEntity:entityDescription];
@@ -111,12 +114,18 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 - (id)createObjectForEntity:(NSString *)entity
 {
     NSManagedObjectContext *moc = [self managedObjectContext];
+    if (moc || moc.persistentStoreCoordinator == nil)
+        return nil;
+
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:moc];
 }
 
 - (void)removeObject:(NSManagedObject *)object
 {
-    [[self managedObjectContext] deleteObject:object];
+    NSManagedObjectContext *moc = [self managedObjectContext];
+
+    if (moc)
+        [[self managedObjectContext] deleteObject:object];
 }
 
 #pragma mark -
@@ -207,6 +216,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         options = mutableOptions;
     }
 
+    if ([[self.additionalPersitentStoreOptions objectForKey:NSReadOnlyPersistentStoreOption] boolValue] == YES) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:self.persistentStoreURL.path]) {
+            APLog(@"no library was found in read-only mode, hence no functionality will be available in this session");
+            return nil;
+        }
+    }
+
     NSError *error;
     NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
 
@@ -242,6 +258,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    if (_managedObjectContext.persistentStoreCoordinator == nil)
+        return nil;
     [_managedObjectContext setUndoManager:nil];
     [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
     return _managedObjectContext;
@@ -251,6 +269,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(savePendingChanges) object:nil];
     NSError *error = nil;
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc)
+        return;
+
     BOOL success = [[self managedObjectContext] save:&error];
     NSAssert1(success, @"Can't save: %@", error);
 #if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
@@ -263,7 +285,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 - (void)save
 {
     NSError *error = nil;
-    BOOL success = [[self managedObjectContext] save:&error];
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc)
+        return;
+
+    BOOL success = [moc save:&error];
     NSAssert1(success, @"Can't save: %@", error);
 }
 
@@ -725,7 +751,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
 
     APLog(@"Fetching");
-    NSArray *dbResults = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc)
+        return;
+    NSArray *dbResults = [moc executeFetchRequest:request error:nil];
     APLog(@"Done");
 
     NSMutableArray *filePathsToAdd = [NSMutableArray arrayWithArray:filepaths];
@@ -786,10 +815,17 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSArray *tertiaryCollection;
     NSUInteger tertiaryCount = 0;
     NSUInteger emptyAlbumCounter = 0;
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc) {
+        [self libraryDidAppear];
+        if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
+            [self.delegate libraryUpgradeComplete];
+        return;
+    }
     for (NSUInteger x = 0; x < count; x++) {
         album = collection[x];
         if (album.tracks.count < 1)
-            [[self managedObjectContext] deleteObject:album];
+            [moc deleteObject:album];
         else {
             secondaryCollection = album.tracks.allObjects;
             secondaryCount = secondaryCollection.count;
@@ -808,7 +844,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                 }
             }
             if (emptyAlbumCounter == 0)
-                [[self managedObjectContext] deleteObject:album];
+                [moc deleteObject:album];
         }
     }
     album = nil;
@@ -821,7 +857,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     for (NSUInteger x = 0; x < count; x++) {
         show = collection[x];
         if (show.episodes.count < 1)
-            [[self managedObjectContext] deleteObject:show];
+            [moc deleteObject:show];
         else {
             secondaryCollection = show.episodes.allObjects;
             secondaryCount = secondaryCollection.count;
@@ -840,7 +876,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                 }
             }
             if (emptyAlbumCounter == 0)
-                [[self managedObjectContext] deleteObject:show];
+                [moc deleteObject:show];
         }
     }
 
@@ -854,7 +890,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         currentFile = allFiles[x];
         currentFilePath = [currentFile.url stringByReplacingOccurrencesOfString:@"/localhost/" withString:@"//"];
         if ([seenFiles containsObject:currentFilePath])
-            [[self managedObjectContext] deleteObject:currentFile];
+            [moc deleteObject:currentFile];
         else
             [seenFiles addObject:currentFilePath];
     }
@@ -872,7 +908,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [self libraryDidDisappear];
     // Remove no more present files
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
-    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if (!moc)
+        return;
+    NSArray *results = [moc executeFetchRequest:request error:nil];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     unsigned int count = (unsigned int)results.count;
@@ -888,7 +927,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                 MLAlbum *album = file.albumTrack.album;
                 if (album.tracks.count <= 1) {
                     @try {
-                        [[self managedObjectContext] deleteObject:album];
+                        [moc deleteObject:album];
                     }
                     @catch (NSException *exception) {
                         APLog(@"failed to nuke object because it disappeared in front of us");
@@ -900,7 +939,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                 MLShow *show = file.showEpisode.show;
                 if (show.episodes.count <= 1) {
                     @try {
-                        [[self managedObjectContext] deleteObject:show];
+                        [moc deleteObject:show];
                     }
                     @catch (NSException *exception) {
                         APLog(@"failed to nuke object because it disappeared in front of us");
@@ -913,7 +952,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
             if (thumbExists)
                 [fileManager removeItemAtPath:thumbPath error:nil];
-            [[self managedObjectContext] deleteObject:file];
+            [moc deleteObject:file];
 #endif
         }
 #if !TARGET_OS_IPHONE
@@ -925,7 +964,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     // Get the file to parse
     request = [self fetchRequestForEntity:@"File"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && tracks.@count == 0"]];
-    results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
         [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 
@@ -933,7 +972,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         // Always attempt to fetch
         request = [self fetchRequestForEntity:@"File"];
         [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
-        results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+        results = [moc executeFetchRequest:request error:nil];
         for (MLFile *file in results) {
             if (!file.computedThumbnail)
                 [self computeThumbnailForFile:file];
@@ -944,7 +983,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     // Get the thumbnails to compute
     request = [self fetchRequestForEntity:@"File"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
-    results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
         if (!file.computedThumbnail && ![file isAlbumTrack])
             [self computeThumbnailForFile:file];
@@ -952,14 +991,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     // Get to fetch meta data
     request = [self fetchRequestForEntity:@"File"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
-    results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
         [self fetchMetaDataForFile:file];
 
     // Get to fetch show info
     request = [self fetchRequestForEntity:@"Show"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"lastSyncDate == 0"]];
-    results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+    results = [moc executeFetchRequest:request error:nil];
     for (MLShow *show in results)
         [self fetchMetaDataForShow:show];
 
@@ -969,7 +1008,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
         NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
         [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
-        NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
+        NSArray *results = [moc executeFetchRequest:request error:nil];
         for (MLShow *show in results)
             [self fetchMetaDataForShow:show];
     }];
@@ -1009,6 +1048,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     BOOL success = YES;
     NSPersistentStoreCoordinator *coordinater = [self persistentStoreCoordinator];
+    if (!coordinater) {
+        APLog(@"no persistenz store coordinator found, migration will fail");
+        return NO;
+    }
     NSURL *oldStoreURL = self.persistentStoreURL;
     NSPersistentStore *oldStore = [coordinater persistentStoreForURL:oldStoreURL];
     NSString *oldThumbnailPath = self.thumbnailFolderPath;

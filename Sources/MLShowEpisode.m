@@ -3,7 +3,7 @@
  * Lunettes
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2015 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -39,6 +39,8 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (!moc || moc.persistentStoreCoordinator == nil)
+        return [NSArray array];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShowEpisode" inManagedObjectContext:moc];
     [request setEntity:entity];
 
@@ -106,8 +108,11 @@
     [self willChangeValueForKey:@"unread"];
     [self setPrimitiveUnread:unread];
     [self didChangeValueForKey:@"unread"];
-    [[[MLMediaLibrary sharedMediaLibrary] managedObjectContext] refreshObject:[self show] mergeChanges:YES];
-    [[[MLMediaLibrary sharedMediaLibrary] managedObjectContext] refreshObject:self mergeChanges:YES];
+    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (!moc)
+        return;
+    [moc refreshObject:[self show] mergeChanges:YES];
+    [moc refreshObject:self mergeChanges:YES];
 }
 
 @dynamic theTVDBID;

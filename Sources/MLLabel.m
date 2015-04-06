@@ -3,7 +3,7 @@
  * Lunettes
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2015 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -34,6 +34,9 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (!moc || moc.persistentStoreCoordinator == nil)
+        return [NSArray array];
+
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Label" inManagedObjectContext:moc];
     [request setEntity:entity];
 

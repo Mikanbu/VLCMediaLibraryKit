@@ -2,7 +2,7 @@
  * MLAlbum.m
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2013 Felix Paul Kühne
+ * Copyright (C) 2013-2015 Felix Paul Kühne
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -33,6 +33,8 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    if (!moc || moc.persistentStoreCoordinator == nil)
+        return nil;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Album" inManagedObjectContext:moc];
     [request setEntity:entity];
 
@@ -49,8 +51,12 @@
     NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Album"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
 
-    NSArray *dbResults = [[[MLMediaLibrary sharedMediaLibrary] managedObjectContext] executeFetchRequest:request error:nil];
-    NSAssert(dbResults, @"Can't execute fetch request");
+    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+    NSArray *dbResults;
+    if (moc) {
+        dbResults = [moc executeFetchRequest:request error:nil];
+        NSAssert(dbResults, @"Can't execute fetch request");
+    }
 
     if ([dbResults count] <= 0)
         return nil;
