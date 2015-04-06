@@ -114,7 +114,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 - (id)createObjectForEntity:(NSString *)entity
 {
     NSManagedObjectContext *moc = [self managedObjectContext];
-    if (moc || moc.persistentStoreCoordinator == nil)
+    if (!moc || moc.persistentStoreCoordinator == nil)
         return nil;
 
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:moc];

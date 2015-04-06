@@ -37,7 +37,7 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (moc  || moc.persistentStoreCoordinator == nil)
+    if (!moc || moc.persistentStoreCoordinator == nil)
         return [NSArray array];
 
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AlbumTrack" inManagedObjectContext:moc];
