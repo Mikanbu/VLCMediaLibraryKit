@@ -48,6 +48,8 @@
 - (NSString *)thumbnailFolderPath;
 - (NSString *)documentFolderPath;
 
+- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
+
 - (void)applicationWillStart;
 - (void)applicationWillExit;
 

@@ -311,6 +311,15 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation {
+    if (uriRepresenation == nil) {
+        return nil;
+    }
+    NSManagedObjectID *objectID = [self.persistentStoreCoordinator managedObjectIDForURIRepresentation:uriRepresenation];
+    NSManagedObject *managedObject = [self.managedObjectContext objectWithID:objectID];
+    return managedObject;
+}
+
 #pragma mark -
 #pragma mark No meta data fallbacks
 

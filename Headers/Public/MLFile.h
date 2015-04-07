@@ -39,6 +39,8 @@ extern NSString *kMLFileTypeAudio;
 + (NSArray *)allFiles;
 + (NSArray *)fileForURL:(NSString *)url;
 
++ (instancetype)fileForURIRepresentation:(NSURL *)uriRepresentation;
+
 - (BOOL)isKindOfType:(NSString *)type;
 - (BOOL)isMovie;
 - (BOOL)isClip;

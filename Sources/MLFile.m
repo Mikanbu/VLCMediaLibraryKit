@@ -89,6 +89,15 @@ NSString *kMLFileTypeAudio = @"audio";
     return files;
 }
 
++ (instancetype)fileForURIRepresentation:(NSURL *)uriRepresentation {
+    NSManagedObject *object = [[MLMediaLibrary sharedMediaLibrary] objectForURIRepresentation:uriRepresentation];
+    if ([object isKindOfClass:[MLFile class]]) {
+        return (MLFile *)object;
+    } else {
+        return nil;
+    }
+}
+
 - (BOOL)isKindOfType:(NSString *)type
 {
     return [self.type isEqualToString:type];
