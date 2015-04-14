@@ -34,6 +34,7 @@
 @property (nonatomic, strong) NSURL *persistentStoreURL;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, copy) NSDictionary *additionalPersitentStoreOptions;
+@property (nonatomic, readonly) int deviceSpeedCategory;
 
 + (id)sharedMediaLibrary;
 
