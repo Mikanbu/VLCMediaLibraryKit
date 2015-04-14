@@ -1,3 +1,13 @@
+Version 2.5.1
+-------------
+Added Public APIs:
+- MLMediaLibrary:
+  - new selectors: libraryBasePath
+                   additionalPersitentStoreOptions
+                   objectForURIRepresentation:
+                   migrateLibraryToBasePath
+                   deviceSpeedCategory
+
 Version 2.5
 -----------
 - Updated database format allowing more meta data
