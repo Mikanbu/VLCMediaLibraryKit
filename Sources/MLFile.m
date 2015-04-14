@@ -267,7 +267,8 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (NSString *)thumbnailPath
 {
-    NSString *folder = [[MLMediaLibrary sharedMediaLibrary] thumbnailFolderPath];
+    MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
+    NSString *folder = [sharedLibrary thumbnailFolderPath];
     NSURL *url = [[self objectID] URIRepresentation];
     return [[folder stringByAppendingPathComponent:[url path]] stringByAppendingString:@".png"];
 }
@@ -287,7 +288,14 @@ NSString *kMLFileTypeAudio = @"audio";
         [manager removeItemAtURL:url error:nil];
         return;
     }
-    [UIImagePNGRepresentation(image) writeToURL:url atomically:YES];
+
+    /* device category 3 or later include hardware accelerated JPEG support so we should prefer
+     * the now faster and smaller format.
+     * For compatiblity reasons, we also call those JPEG files *.png */
+    if ([[MLMediaLibrary sharedMediaLibrary] deviceSpeedCategory] >= 3)
+        [UIImageJPEGRepresentation(image, .9) writeToURL:url atomically:YES];
+    else
+        [UIImagePNGRepresentation(image) writeToURL:url atomically:YES];
 }
 
 - (BOOL)isSafe
