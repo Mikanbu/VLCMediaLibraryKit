@@ -58,7 +58,6 @@
     return self;
 }
 
-
 - (void)fetchThumbnail
 {
     APLog(@"Starting THUMB %@", self.file);
@@ -67,36 +66,13 @@
 
     _media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
     VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:_internalLibrary];
-    /* optimize thumbnails for the device */
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        if ([UIScreen mainScreen].scale==2.0) {
-            thumbnailer.thumbnailWidth = 540.;
-            thumbnailer.thumbnailHeight = 405.;
-        } else {
-            thumbnailer.thumbnailWidth = 272.;
-            thumbnailer.thumbnailHeight = 204.;
-        }
-    } else {
-        if (SYSTEM_RUNS_IOS7) {
-            if ([UIScreen mainScreen].scale==2.0) {
-                thumbnailer.thumbnailWidth = 480.;
-                thumbnailer.thumbnailHeight = 270.;
-            } else {
-                thumbnailer.thumbnailWidth = 720.;
-                thumbnailer.thumbnailHeight = 405.;
-            }
-        } else {
-            if ([UIScreen mainScreen].scale==2.0) {
-                thumbnailer.thumbnailWidth = 480.;
-                thumbnailer.thumbnailHeight = 270.;
-            } else {
-                thumbnailer.thumbnailWidth = 240.;
-                thumbnailer.thumbnailHeight = 135.;
-            }
-        }
-    }
+    MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
+
+    CGSize thumbSize = [thumbnailerQueue preferredThumbnailSizeForDevice];
+    thumbnailer.thumbnailWidth = thumbSize.width;
+    thumbnailer.thumbnailHeight = thumbSize.height;
     [thumbnailer fetchThumbnail];
-    [[MLThumbnailerQueue sharedThumbnailerQueue].queue setSuspended:YES]; // Balanced in -mediaThumbnailer:didFinishThumbnail
+    [thumbnailerQueue.queue setSuspended:YES]; // Balanced in -mediaThumbnailer:didFinishThumbnail
      // Balanced in -mediaThumbnailer:didFinishThumbnail:
 }
 - (void)main
@@ -107,9 +83,9 @@
 - (void)endThumbnailing
 {
     [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
-    MLThumbnailerQueue *thumbnailer = [MLThumbnailerQueue sharedThumbnailerQueue];
-    [thumbnailer.queue setSuspended:NO];
-    [thumbnailer didFinishOperation:self];
+    MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
+    [thumbnailerQueue.queue setSuspended:NO];
+    [thumbnailerQueue didFinishOperation:self];
 }
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
@@ -155,11 +131,43 @@
     return self;
 }
 
-
-
 static inline NSString *hashFromFile(MLFile *file)
 {
     return [NSString stringWithFormat:@"%p", [[file objectID] URIRepresentation]];
+}
+
+- (CGSize)preferredThumbnailSizeForDevice
+{
+    CGFloat thumbnailWidth, thumbnailHeight;
+    /* optimize thumbnails for the device */
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if ([UIScreen mainScreen].scale==2.0) {
+            thumbnailWidth = 540.;
+            thumbnailHeight = 405.;
+        } else {
+            thumbnailWidth = 272.;
+            thumbnailHeight = 204.;
+        }
+    } else {
+        if (SYSTEM_RUNS_IOS7) {
+            if ([UIScreen mainScreen].scale==2.0) {
+                thumbnailWidth = 480.;
+                thumbnailHeight = 270.;
+            } else {
+                thumbnailWidth = 720.;
+                thumbnailHeight = 405.;
+            }
+        } else {
+            if ([UIScreen mainScreen].scale==2.0) {
+                thumbnailWidth = 480.;
+                thumbnailHeight = 270.;
+            } else {
+                thumbnailWidth = 240.;
+                thumbnailHeight = 135.;
+            }
+        }
+    }
+    return CGSizeMake(thumbnailWidth, thumbnailHeight);
 }
 
 - (void)didFinishOperation:(ThumbnailOperation *)op

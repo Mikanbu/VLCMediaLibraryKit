@@ -32,6 +32,8 @@
 #import "MLAlbum.h"
 #import "MLTitleDecrapifier.h"
 #import <CommonCrypto/CommonDigest.h> // for MD5
+#import <AVFoundation/AVFoundation.h>
+#import "MLThumbnailerQueue.h"
 
 @interface MLFileParserQueue ()
 {
@@ -167,7 +169,8 @@
             albumName = file.albumTrack.album.name;
         }
         title = file.title;
-        file.computedThumbnail = [UIImage imageWithContentsOfFile:[self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName]];
+        file.computedThumbnail = [self scaleImage:[UIImage imageWithContentsOfFile:[self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName]]
+                                        toFitRect:(CGRect){CGPointZero, [[MLThumbnailerQueue sharedThumbnailerQueue] preferredThumbnailSizeForDevice]}];
     }
 
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
@@ -179,6 +182,31 @@
 }
 
 #pragma mark - audio file specific code
+
+- (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect
+{
+    CGRect destinationRect = AVMakeRectWithAspectRatioInsideRect(image.size, rect);
+
+    CGImageRef cgImage = image.CGImage;
+    size_t bitsPerComponent = CGImageGetBitsPerComponent(cgImage);
+    size_t bytesPerRow = CGImageGetBytesPerRow(cgImage);
+    CGColorSpaceRef colorSpaceRef = CGImageGetColorSpace(cgImage);
+    CGBitmapInfo bitmapInfoRef = CGImageGetBitmapInfo(cgImage);
+
+    CGContextRef contextRef = CGBitmapContextCreate(NULL,
+                                                    destinationRect.size.width,
+                                                    destinationRect.size.height,
+                                                    bitsPerComponent,
+                                                    bytesPerRow,
+                                                    colorSpaceRef,
+                                                    bitmapInfoRef);
+
+    CGContextSetInterpolationQuality(contextRef, kCGInterpolationLow);
+
+    CGContextDrawImage(contextRef, (CGRect){CGPointZero, destinationRect.size}, cgImage);
+
+    return [UIImage imageWithCGImage:CGBitmapContextCreateImage(contextRef)];
+}
 
 - (NSString *)artworkPathForMediaItemWithTitle:(NSString *)title Artist:(NSString*)artist andAlbumName:(NSString*)albumname
 {
