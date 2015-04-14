@@ -934,27 +934,31 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             file.isSafe = YES; // It doesn't exist, it's safe.
             if (file.isAlbumTrack) {
                 MLAlbum *album = file.albumTrack.album;
-                if (album.tracks.count <= 1) {
-                    @try {
-                        [moc deleteObject:album];
-                    }
-                    @catch (NSException *exception) {
-                        APLog(@"failed to nuke object because it disappeared in front of us");
-                    }
-                } else
-                    [album removeTrack:file.albumTrack];
+                if (album != nil) {
+                    if (album.tracks.count <= 1) {
+                        @try {
+                            [moc deleteObject:album];
+                        }
+                        @catch (NSException *exception) {
+                            APLog(@"failed to nuke object because it disappeared in front of us");
+                        }
+                    } else
+                        [album removeTrack:file.albumTrack];
+                }
             }
             if (file.isShowEpisode) {
                 MLShow *show = file.showEpisode.show;
-                if (show.episodes.count <= 1) {
-                    @try {
-                        [moc deleteObject:show];
-                    }
-                    @catch (NSException *exception) {
-                        APLog(@"failed to nuke object because it disappeared in front of us");
-                    }
-                } else
-                    [show removeEpisode:file.showEpisode];
+                if (show != nil) {
+                    if (show.episodes.count <= 1) {
+                        @try {
+                            [moc deleteObject:show];
+                        }
+                        @catch (NSException *exception) {
+                            APLog(@"failed to nuke object because it disappeared in front of us");
+                        }
+                    } else
+                        [show removeEpisode:file.showEpisode];
+                }
             }
 #if TARGET_OS_IPHONE
             NSString *thumbPath = [file thumbnailPath];
