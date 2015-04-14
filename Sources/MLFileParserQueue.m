@@ -31,6 +31,7 @@
 #import "MLAlbumTrack.h"
 #import "MLAlbum.h"
 #import "MLTitleDecrapifier.h"
+#import <CommonCrypto/CommonDigest.h> // for MD5
 
 @interface MLFileParserQueue ()
 {
@@ -61,15 +62,15 @@
     return self;
 }
 
-
 - (void)parse
 {
     NSAssert(!_media, @"We are already parsing");
 
-    APLog(@"Starting parsing %@", self.file);
-    [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
+    MLFile *file = self.file;
+    APLog(@"Starting parsing %@", file);
+    [[MLCrashPreventer sharedPreventer] willParseFile:file];
 
-    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
+    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:file.url]];
     _media.delegate = self;
     [_media parse];
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
@@ -89,9 +90,12 @@
     if (_media.delegate != self)
         return;
 
+    MLFile *file = self.file;
+
     _media.delegate = nil;
     NSArray *tracks = [_media tracksInformation];
     NSMutableSet *tracksSet = [NSMutableSet setWithCapacity:[tracks count]];
+    BOOL mediaHasVideo = NO;
     for (NSDictionary *track in tracks) {
         NSString *type = track[VLCMediaTracksInformationType];
         NSManagedObject *trackInfo = nil;
@@ -99,6 +103,7 @@
             trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"VideoTrackInformation"];
             [trackInfo setValue:track[VLCMediaTracksInformationVideoWidth] forKey:@"width"];
             [trackInfo setValue:track[VLCMediaTracksInformationVideoHeight] forKey:@"height"];
+            mediaHasVideo = YES;
         } else if ([type isEqualToString:VLCMediaTracksInformationTypeAudio]) {
             trackInfo = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AudioTrackInformation"];
             [trackInfo setValue:track[VLCMediaTracksInformationAudioRate] forKey:@"sampleRate"];
@@ -119,10 +124,10 @@
         }
     }
 
-    [self.file setTracks:tracksSet];
-    [self.file setDuration:[[_media length] numberValue]];
+    [file setTracks:tracksSet];
+    [file setDuration:[[_media length] numberValue]];
 
-    if ([self.file isAlbumTrack]) {
+    if ([file isAlbumTrack]) {
         NSDictionary *audioContentInfo = [_media metaDictionary];
 
         if (audioContentInfo && audioContentInfo.count > 0) {
@@ -145,21 +150,66 @@
                 album.releaseYear = releaseYear ? releaseYear : @"";
 
                 if (!track.title || [track.title isEqualToString:@""])
-                    track.title = [MLTitleDecrapifier decrapify:self.file.title];
+                    track.title = [MLTitleDecrapifier decrapify:file.title];
 
-                [track addFilesObject:self.file];
-                self.file.albumTrack = track;
+                [track addFilesObject:file];
+                file.albumTrack = track;
             }
         }
     }
 
+    if (!mediaHasVideo) {
+        APLog(@"'%@' is an audio file, fetching artwork", file.title);
+        NSString *artist, *albumName, *title;
+
+        if (file.isAlbumTrack) {
+            artist = file.albumTrack.artist;
+            albumName = file.albumTrack.album.name;
+        }
+        title = file.title;
+        file.computedThumbnail = [UIImage imageWithContentsOfFile:[self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName]];
+    }
+
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
-    [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
+    [[MLCrashPreventer sharedPreventer] didParseFile:file];
     [parserQueue.queue setSuspended:NO];
     [parserQueue didFinishOperation:self];
     _media = nil;
 
 }
+
+#pragma mark - audio file specific code
+
+- (NSString *)artworkPathForMediaItemWithTitle:(NSString *)title Artist:(NSString*)artist andAlbumName:(NSString*)albumname
+{
+    NSString *artworkURL;
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cacheDir = searchPaths[0];
+    cacheDir = [cacheDir stringByAppendingFormat:@"/%@", [[NSBundle mainBundle] bundleIdentifier]];
+
+    if (artist.length == 0 || albumname.length == 0) {
+        /* Use generated hash to find art */
+        artworkURL = [cacheDir stringByAppendingFormat:@"/art/arturl/%@/art.jpg", [self _md5FromString:title]];
+    } else {
+        /* Otherwise, it was cached by artist and album */
+        artworkURL = [cacheDir stringByAppendingFormat:@"/art/artistalbum/%@/%@/art.jpg", artist, albumname];
+    }
+
+    return artworkURL;
+}
+
+- (NSString *)_md5FromString:(NSString *)string
+{
+    const char *ptr = [string UTF8String];
+    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(ptr, (unsigned int)strlen(ptr), md5Buffer);
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x",md5Buffer[i]];
+
+    return [NSString stringWithString:output];
+}
+
 @end
 
 @implementation MLFileParserQueue
