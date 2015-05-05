@@ -27,19 +27,23 @@
 
 @interface MLMediaLibrary : NSObject
 
-@property (readonly) BOOL libraryNeedsUpgrade;
 @property (nonatomic, strong) id delegate;
 // base path for the database and thumbnails
+// setting the library base path resets the path derived from it
 @property (nonatomic, copy) NSString *libraryBasePath;
 @property (nonatomic, strong) NSURL *persistentStoreURL;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, copy) NSDictionary *additionalPersitentStoreOptions;
 @property (nonatomic, readonly) int deviceSpeedCategory;
+// default is group.org.videolan.vlc-ios
+@property (nonatomic, copy) NSString *applicationGroupIdentifier;
 
 + (id)sharedMediaLibrary;
 
+- (BOOL)libraryMigrationNeeded;
+- (void)migrateLibrary;
+
 - (void)addFilePaths:(NSArray *)filepaths;
-- (void)upgradeLibrary;
 - (void)updateMediaDatabase;
 
 // May be internal
@@ -57,8 +61,6 @@
 - (void)save;
 - (void)libraryDidDisappear;
 - (void)libraryDidAppear;
-
-- (BOOL)migrateLibraryToBasePath:(NSString *)basePath error:(NSError **)migrationError;
 @end
 
 @protocol MLMediaLibrary <NSObject>

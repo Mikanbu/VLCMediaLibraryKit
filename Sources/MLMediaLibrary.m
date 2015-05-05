@@ -38,6 +38,7 @@
 #import "MLAlbum.h"
 #import "MLFileParserQueue.h"
 #import "MLCrashPreventer.h"
+#import "MLMediaLibrary+Migration.h"
 #import <sys/sysctl.h> // for sysctlbyname
 
 @interface MLMediaLibrary ()
@@ -56,12 +57,9 @@
 @end
 
 #define DEBUG 1
-// To debug
-#define DELETE_LIBRARY_ON_EACH_LAUNCH 0
 
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
-static NSString *kUpdatedToTheGreatSharkHuntDatabaseFormat = @"upgradedToDatabaseFormat 2.3";
 static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 #if HAVE_BLOCK
@@ -77,7 +75,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 + (void)initialize
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults registerDefaults:@{kUpdatedToTheGreatSharkHuntDatabaseFormat : @NO, kDecrapifyTitles : @YES}];
+    [defaults registerDefaults:@{kDecrapifyTitles : @YES}];
 }
 
 + (id)sharedMediaLibrary
@@ -85,13 +83,23 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     static id sharedMediaLibrary = nil;
     if (!sharedMediaLibrary) {
         sharedMediaLibrary = [[[self class] alloc] init];
-        APLog(@"Initializing db in %@", [sharedMediaLibrary databaseFolderPath]);
 
         // Also force to init the crash preventer
         // Because it will correctly set up the parser and thumbnail queue
         [MLCrashPreventer sharedPreventer];
     }
     return sharedMediaLibrary;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _applicationGroupIdentifier = @"group.org.videolan.vlc-ios";
+        [self _setupLibraryPathPriorToMigration];
+        APLog(@"Initializing db in %@", [self databaseFolderPath]);
+    }
+    return self;
 }
 
 - (void)dealloc
@@ -173,20 +181,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
 
     return _managedObjectModel;
-}
-
-- (NSString *)libraryBasePath
-{
-    if (_libraryBasePath.length == 0) {
-        int directory = NSLibraryDirectory;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-        NSString *directoryPath = paths.firstObject;
-#if DELETE_LIBRARY_ON_EACH_LAUNCH
-        [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-#endif
-        _libraryBasePath = directoryPath;
-    }
-    return _libraryBasePath;
 }
 
 - (void)setLibraryBasePath:(NSString *)libraryBasePath
@@ -827,123 +821,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 }
 #endif
 
-- (BOOL)libraryNeedsUpgrade
-{
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheGreatSharkHuntDatabaseFormat] boolValue])
-        return YES;
-    return NO;
-}
 
-- (void)upgradeLibrary
-{
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kUpdatedToTheGreatSharkHuntDatabaseFormat] boolValue])
-        [self _upgradeLibraryToGreatSharkHuntDatabaseFormat];
-}
-
-- (void)_upgradeLibraryToGreatSharkHuntDatabaseFormat
-{
-    [self libraryDidDisappear];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    /* remove potential empty albums left over by previous releases */
-    NSArray *collection = [MLAlbum allAlbums];
-    NSUInteger count = collection.count;
-    MLAlbum *album;
-    MLAlbumTrack *track;
-    NSArray *secondaryCollection;
-    NSURL *fileURL;
-    NSUInteger secondaryCount = 0;
-    NSArray *tertiaryCollection;
-    NSUInteger tertiaryCount = 0;
-    NSUInteger emptyAlbumCounter = 0;
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc) {
-        [self libraryDidAppear];
-        if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
-            [self.delegate libraryUpgradeComplete];
-        return;
-    }
-    for (NSUInteger x = 0; x < count; x++) {
-        album = collection[x];
-        if (album.tracks.count < 1)
-            [moc deleteObject:album];
-        else {
-            secondaryCollection = album.tracks.allObjects;
-            secondaryCount = secondaryCollection.count;
-            emptyAlbumCounter = 0;
-            for (NSUInteger y = 0; y < secondaryCount; y++) {
-                track = secondaryCollection[y];
-                tertiaryCollection = track.files.allObjects;
-                tertiaryCount = tertiaryCollection.count;
-                for (NSUInteger z = 0; z < tertiaryCount; z++) {
-                    fileURL = [NSURL URLWithString:[(MLFile *)tertiaryCollection[z] url]];
-                    BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
-                    if (exists)
-                        emptyAlbumCounter++;
-                    else
-                        [album removeTrack:track];
-                }
-            }
-            if (emptyAlbumCounter == 0)
-                [moc deleteObject:album];
-        }
-    }
-    album = nil;
-
-    /* remove potential empty shows left over by previous releases */
-    collection = [MLShow allShows];
-    MLShow *show;
-    MLShowEpisode *showEpisode;
-    count = collection.count;
-    for (NSUInteger x = 0; x < count; x++) {
-        show = collection[x];
-        if (show.episodes.count < 1)
-            [moc deleteObject:show];
-        else {
-            secondaryCollection = show.episodes.allObjects;
-            secondaryCount = secondaryCollection.count;
-            emptyAlbumCounter = 0;
-            for (NSUInteger y = 0; y < secondaryCount; y++) {
-                showEpisode = secondaryCollection[y];
-                tertiaryCollection = showEpisode.files.allObjects;
-                tertiaryCount = tertiaryCollection.count;
-                for (NSUInteger z = 0; z < tertiaryCount; z++) {
-                    fileURL = [NSURL URLWithString:[(MLFile *)tertiaryCollection[z] url]];
-                    BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
-                    if (exists)
-                        emptyAlbumCounter++;
-                    else
-                        [show removeEpisode:showEpisode];
-                }
-            }
-            if (emptyAlbumCounter == 0)
-                [moc deleteObject:show];
-        }
-    }
-
-    /* remove duplicates */
-    NSArray *allFiles = [MLFile allFiles];
-    NSUInteger allFilesCount = allFiles.count;
-    NSMutableArray *seenFiles = [[NSMutableArray alloc] initWithCapacity:allFilesCount];
-    MLFile *currentFile;
-    NSString *currentFilePath;
-    for (NSUInteger x = 0; x < allFilesCount; x++) {
-        currentFile = allFiles[x];
-        currentFilePath = [currentFile.url stringByReplacingOccurrencesOfString:@"/localhost/" withString:@"//"];
-        if ([seenFiles containsObject:currentFilePath])
-            [moc deleteObject:currentFile];
-        else
-            [seenFiles addObject:currentFilePath];
-    }
-
-    [defaults setBool:YES forKey:kUpdatedToTheGreatSharkHuntDatabaseFormat];
-    [defaults synchronize];
-
-    [self libraryDidAppear];
-    if ([self.delegate respondsToSelector:@selector(libraryUpgradeComplete)])
-        [self.delegate libraryUpgradeComplete];
-}
 
 - (void)updateMediaDatabase
 {
@@ -1089,51 +967,15 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [[MLThumbnailerQueue sharedThumbnailerQueue] resume];
 }
 
-#pragma mark - path migrations
-- (BOOL)migrateLibraryToBasePath:(NSString *)basePath error:(NSError *__autoreleasing *)migrationError
+#pragma mark - migrations
+
+- (BOOL)libraryMigrationNeeded
 {
-    BOOL success = YES;
-    NSPersistentStoreCoordinator *coordinater = [self persistentStoreCoordinator];
-    if (!coordinater) {
-        APLog(@"no persistenz store coordinator found, migration will fail");
-        return NO;
-    }
-    NSURL *oldStoreURL = self.persistentStoreURL;
-    NSPersistentStore *oldStore = [coordinater persistentStoreForURL:oldStoreURL];
-    NSString *oldThumbnailPath = self.thumbnailFolderPath;
-
-    self.libraryBasePath = basePath;
-    _databaseFolderPath = nil;
-    _thumbnailFolderPath = nil;
-    self.persistentStoreURL = nil;
-
-    NSURL *newURL = self.persistentStoreURL;
-    NSError *error = nil;
-    [[NSFileManager defaultManager] createDirectoryAtPath:[[newURL URLByDeletingLastPathComponent] path] withIntermediateDirectories:YES attributes:nil error:nil];
-    NSPersistentStore *newStore = [coordinater migratePersistentStore:oldStore
-                                                                toURL:newURL
-                                                              options:oldStore.options
-                                                             withType:oldStore.type
-                                                                error:&error];
-    if (!newStore) {
-        success = NO;
-        APLog(@"Failed to migrate library to new path with error: %@",error);
-    } else {
-        if (![[NSFileManager defaultManager] removeItemAtURL:oldStoreURL error:&error]) {
-            APLog(@"Failed to remove old library with error: %@",error);
-        }
-    }
-
-    NSString *newThumbnailPath = self.thumbnailFolderPath;
-    if (![[NSFileManager defaultManager] moveItemAtPath:oldThumbnailPath toPath:newThumbnailPath error:&error]) {
-        success = NO;
-        APLog(@"Failed to move thumbnails to new path with error: %@",error);
-    }
-
-    if (migrationError != nil && error) {
-        *migrationError = error;
-    }
-    return success;
+    return [self _libraryMigrationNeeded];
+}
+- (void)migrateLibrary
+{
+    [self _migrateLibrary];
 }
 
 @end
