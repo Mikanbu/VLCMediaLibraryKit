@@ -171,6 +171,7 @@
 				7D0EF49F170883940003ED47 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		7D0EF49F170883940003ED47 /* Products */ = {
 			isa = PBXGroup;
