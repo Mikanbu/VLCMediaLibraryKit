@@ -48,6 +48,7 @@
 		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
+		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -139,8 +140,10 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
+		DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.2.xcdatamodel"; sourceTree = "<group>"; };
 		DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLMediaLibrary+Migration.h"; sourceTree = "<group>"; };
 		DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLMediaLibrary+Migration.m"; sourceTree = "<group>"; };
+		DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_2_5_to_2_5_2.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,7 @@
 		7D0EF495170883940003ED47 = {
 			isa = PBXGroup;
 			children = (
+				DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */,
 				7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */,
 				7D0EF536170885230003ED47 /* TouchXML */,
 				7D0EF506170885130003ED47 /* Headers */,
@@ -377,6 +381,7 @@
 				7D0EF52D170885130003ED47 /* MLMovieInfoGrabber.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
+				DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel in Sources */,
 				7D0EF530170885130003ED47 /* MLThumbnailerQueue.m in Sources */,
 				7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */,
 				7D0EF532170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m in Sources */,
@@ -541,10 +546,11 @@
 		7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */,
 				7D4625831A560729001A80B4 /* MediaLibrary-2.1.xcdatamodel */,
 				7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */,
 			);
-			currentVersion = 7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */;
+			currentVersion = DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */;
 			path = MediaLibrary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

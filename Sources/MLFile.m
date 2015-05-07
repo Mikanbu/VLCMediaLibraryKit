@@ -44,6 +44,12 @@ NSString *kMLFileTypeAudio = @"audio";
     return [NSString stringWithFormat:@"<MLFile title='%@'>", [self title]];
 }
 
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+    self.thumbnailName = [NSUUID UUID].UUIDString;
+}
+
 + (NSArray *)allFiles
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -204,6 +210,7 @@ NSString *kMLFileTypeAudio = @"audio";
 @dynamic genre;
 @dynamic albumTrack;
 @dynamic unread;
+@dynamic thumbnailName;
 
 - (NSNumber *)lastPosition
 {
@@ -269,8 +276,8 @@ NSString *kMLFileTypeAudio = @"audio";
 {
     MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
     NSString *folder = [sharedLibrary thumbnailFolderPath];
-    NSURL *url = [[self objectID] URIRepresentation];
-    return [[folder stringByAppendingPathComponent:[url path]] stringByAppendingString:@".png"];
+    NSString *thumbnailFullName = [[self thumbnailName] stringByAppendingPathExtension:@"png"];
+    return [folder stringByAppendingPathComponent:thumbnailFullName];
 }
 
 - (UIImage *)computedThumbnail

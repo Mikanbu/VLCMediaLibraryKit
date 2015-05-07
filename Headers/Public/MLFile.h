@@ -76,6 +76,7 @@ extern NSString *kMLFileTypeAudio;
 @property (nonatomic, strong) NSNumber *folderTrackNumber;
 @property (nonatomic, strong) NSString *genre;
 @property (nonatomic, strong) MLAlbumTrack *albumTrack;
+@property (nonatomic, strong) NSString *thumbnailName;
 
 @property (nonatomic, strong) UIImage *computedThumbnail;
 @property (nonatomic, assign) BOOL isSafe;

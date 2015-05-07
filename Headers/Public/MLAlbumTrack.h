@@ -40,6 +40,7 @@
 
 @property (nonatomic, strong) MLAlbum *album;
 @property (nonatomic, strong) NSSet *files;
+@property (nonatomic) BOOL containsArtwork;
 
 @end
 

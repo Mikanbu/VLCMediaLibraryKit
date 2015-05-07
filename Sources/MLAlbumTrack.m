@@ -106,4 +106,5 @@
 @dynamic trackNumber;
 @dynamic album;
 @dynamic files;
+@dynamic containsArtwork;
 @end
