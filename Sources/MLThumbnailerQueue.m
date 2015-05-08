@@ -64,7 +64,7 @@
 
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
-    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:self.file.url]];
+    _media = [VLCMedia mediaWithURL:self.file.url];
     VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:_internalLibrary];
     MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
 

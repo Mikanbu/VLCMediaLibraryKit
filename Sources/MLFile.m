@@ -8,6 +8,7 @@
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
  *          Felix Paul Kühne <fkuehne # videolan.org>
+ *          Tobias Conradi <videolan # tobias-conradi.de
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -73,16 +74,20 @@ NSString *kMLFileTypeAudio = @"audio";
     return movies;
 }
 
-+ (NSArray *)fileForURL:(NSString *)url;
++ (NSArray *)fileForURL:(NSURL *)url;
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
     if (!moc || moc.persistentStoreCoordinator == nil)
         return [NSArray array];
 
+    NSString *path = url.path;
+#if TARGET_OS_IPHONE
+    path = [[MLMediaLibrary sharedMediaLibrary] pathRelativeToDocumentsFolderFromAbsolutPath:path];
+#endif
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"url == %@", url]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"path == %@", path]];
 
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     [request setSortDescriptors:@[descriptor]];
@@ -128,7 +133,7 @@ NSString *kMLFileTypeAudio = @"audio";
 - (BOOL)isSupportedAudioFile
 {
     NSUInteger options = NSRegularExpressionSearch | NSCaseInsensitiveSearch;
-    return ([[self.url lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|caf|flac|it|m2a|m4a|m4b|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|w64|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
+    return ([[self.path lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|caf|flac|it|m2a|m4a|m4b|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|w64|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
 }
 
 - (NSString *)artworkURL
@@ -232,44 +237,39 @@ NSString *kMLFileTypeAudio = @"audio";
     }
 }
 
-- (NSString *)url
+- (NSString *)path
 {
-    [self willAccessValueForKey:@"url"];
-    NSString *ret = [self primitiveValueForKey:@"url"];
-    [self didAccessValueForKey:@"url"];
-
-    /* we need to make sure that current app path is still part of the file
-     * URL since app upgrades via iTunes or the App Store will change the
-     * absolute URL of our files (trac #11330) */
-    NSString *documentFolderPath = [[MLMediaLibrary sharedMediaLibrary] documentFolderPath];
-    if ([ret rangeOfString:documentFolderPath].location != NSNotFound)
-        return ret;
-
-    NSArray *pathComponents = [ret componentsSeparatedByString:@"/"];
-    NSUInteger componentCount = pathComponents.count;
-    if ([pathComponents[componentCount - 2] isEqualToString:@"Documents"])
-        ret = [NSString stringWithFormat:@"%@/%@", documentFolderPath, [ret lastPathComponent]];
-    else {
-        NSUInteger firstElement = [pathComponents indexOfObject:@"Documents"] + 1;
-        ret = documentFolderPath;
-        for (NSUInteger x = 0; x < componentCount - firstElement; x++)
-            ret = [ret stringByAppendingFormat:@"/%@", pathComponents[firstElement + x]];
-    }
-
-    APLog(@"returning modified URL! will return %@", ret);
+    [self willAccessValueForKey:@"path"];
+    NSString *ret = [self primitiveValueForKey:@"path"];
+    [self didAccessValueForKey:@"path"];
     return ret;
 }
 
-- (void)setUrl:(NSString *)url
+- (void)setPath:(NSString *)path
 {
     @try {
-        [self willChangeValueForKey:@"url"];
-        [self setPrimitiveValue:url forKey:@"url"];
-        [self didChangeValueForKey:@"url"];
+        [self willChangeValueForKey:@"path"];
+        [self setPrimitiveValue:path forKey:@"path"];
+        [self didChangeValueForKey:@"path"];
     }
     @catch (NSException *exception) {
         APLog(@"setUrl raised exception");
     }
+}
+- (void)setUrl:(NSURL *)url {
+    NSString *path = url.path;
+#if TARGET_OS_IPHONE
+    path = [[MLMediaLibrary sharedMediaLibrary] pathRelativeToDocumentsFolderFromAbsolutPath:path];
+#endif
+    self.path = path;
+}
+
+- (NSURL *)url {
+    NSString *path = self.path;
+#if TARGET_OS_IPHONE
+    path = [[MLMediaLibrary sharedMediaLibrary] absolutPathFromPathRelativeToDocumentsFolder:path];
+#endif
+    return [NSURL fileURLWithPath:path];
 }
 
 - (NSString *)thumbnailPath
@@ -390,7 +390,7 @@ NSString *kMLFileTypeAudio = @"audio";
 - (size_t)fileSizeInBytes
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSDictionary *fileAttributes = [manager attributesOfItemAtPath:[[[NSURL URLWithString:self.url] path] stringByResolvingSymlinksInPath] error:nil];
+    NSDictionary *fileAttributes = [manager attributesOfItemAtPath:[self.url path] error:nil];
     NSNumber *fileSize = fileAttributes[NSFileSize];
     return [fileSize unsignedLongLongValue];
 }

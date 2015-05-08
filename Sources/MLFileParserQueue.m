@@ -72,7 +72,7 @@
     APLog(@"Starting parsing %@", file);
     [[MLCrashPreventer sharedPreventer] willParseFile:file];
 
-    _media = [VLCMedia mediaWithURL:[NSURL URLWithString:file.url]];
+    _media = [VLCMedia mediaWithURL:file.url];
     _media.delegate = self;
     [_media parse];
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];

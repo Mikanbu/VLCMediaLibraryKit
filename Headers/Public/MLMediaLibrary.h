@@ -7,6 +7,8 @@
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
+ *          Tobias Conradi <videolan # tobias-conradi.de>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -52,6 +54,9 @@
 - (void)removeObject:(NSManagedObject *)object;
 - (NSString *)thumbnailFolderPath;
 - (NSString *)documentFolderPath;
+
+- (NSString *)pathRelativeToDocumentsFolderFromAbsolutPath:(NSString *)absolutPath;
+- (NSString *)absolutPathFromPathRelativeToDocumentsFolder:(NSString *)relativePath;
 
 - (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
 

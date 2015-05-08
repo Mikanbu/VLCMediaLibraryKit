@@ -8,6 +8,7 @@
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
  *          Felix Paul Kühne <fkuehne # videolan.org>
+ *          Tobias Conradi <videolan # tobias-conradi.de>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -183,6 +184,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return _managedObjectModel;
 }
 
+#pragma mark - Path handling
 - (void)setLibraryBasePath:(NSString *)libraryBasePath
 {
     _libraryBasePath = [libraryBasePath copy];
@@ -215,7 +217,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
     int directory = NSDocumentDirectory;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    _documentFolderPath = [NSString stringWithFormat:@"file://%@", paths[0]];
+    _documentFolderPath = paths.firstObject;
     return _documentFolderPath;
 }
 
@@ -229,6 +231,16 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return _persistentStoreURL;
 }
 
+- (NSString *)pathRelativeToDocumentsFolderFromAbsolutPath:(NSString *)absolutPath
+{
+    return [absolutPath stringByReplacingOccurrencesOfString:self.documentFolderPath withString:@""];
+}
+- (NSString *)absolutPathFromPathRelativeToDocumentsFolder:(NSString *)relativePath
+{
+    return [self.documentFolderPath stringByAppendingPathComponent:relativePath];
+}
+
+#pragma mark -
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
 
@@ -709,7 +721,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSNumber *size = attributes[NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
 
     MLFile *file = [self createObjectForEntity:@"File"];
-    file.url = [url absoluteString];
+    file.url = url;
 
     // Yes, this is a negative number. VLCTime nicely display negative time
     // with "XX minutes remaining". And we are using this facility.
@@ -747,40 +759,16 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSUInteger count = [filepaths count];
     NSMutableArray *fetchPredicates = [NSMutableArray arrayWithCapacity:count];
     NSMutableDictionary *urlToObject = [NSMutableDictionary dictionaryWithCapacity:count];
-    NSString *documentFolderPath = [[MLMediaLibrary sharedMediaLibrary] documentFolderPath];
 
     // Prepare a fetch request for all items
-    NSArray *pathComponents;
-    NSUInteger componentCount;
-
     for (NSString *path in filepaths) {
+        NSString *relativePath = path;
 #if TARGET_OS_IPHONE
-        NSString *urlString;
-        NSString *componentString = @"";
-
-        pathComponents = [path componentsSeparatedByString:@"/"];
-        componentCount = pathComponents.count;
-        if ([pathComponents[componentCount - 2] isEqualToString:@"Documents"])
-            componentString = [path lastPathComponent];
-        else {
-            NSUInteger firstElement = [pathComponents indexOfObject:@"Documents"] + 1;
-            for (NSUInteger x = 0; x < componentCount - firstElement; x++) {
-                if (x == 0)
-                    componentString = [componentString stringByAppendingFormat:@"%@", pathComponents[firstElement + x]];
-                else
-                    componentString = [componentString stringByAppendingFormat:@"/%@", pathComponents[firstElement + x]];
-            }
-        }
-
-        /* compose and escape string */
-        urlString = [[NSString stringWithFormat:@"%@/%@", documentFolderPath, componentString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-        /* check for the end of the paths */
-        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url CONTAINS %@", [urlString lastPathComponent]]];
-        [urlToObject setObject:path forKey:urlString];
-#else
-        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"url == %@", path]];
+        // on iPhone we only save relative paths ins the DB
+        relativePath = [self pathRelativeToDocumentsFolderFromAbsolutPath:path];
 #endif
+        [urlToObject setObject:path forKey:relativePath];
+        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"path == %@", relativePath]];
     }
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
 
@@ -797,8 +785,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // Remove objects that are already in db.
     for (MLFile *dbResult in dbResults) {
-        NSString *urlString = dbResult.url;
-        [filePathsToAdd removeObject:[urlToObject objectForKey:urlString]];
+        NSString *path = dbResult.path;
+        [filePathsToAdd removeObject:[urlToObject objectForKey:path]];
     }
 
     // Add only the newly added items
@@ -837,8 +825,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     unsigned int count = (unsigned int)results.count;
     for (unsigned int x = 0; x < count; x++) {
         MLFile *file = results[x];
-        NSString *urlString = [file url];
-        NSURL *fileURL = [NSURL URLWithString:urlString];
+       NSURL *fileURL = file.url;
         BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
         if (!exists) {
             APLog(@"Marking - %@", [fileURL absoluteString]);

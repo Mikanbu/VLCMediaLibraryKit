@@ -8,6 +8,7 @@
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
  *          Felix Paul Kühne <fkuehne # videolan.org>
+ *          Tobias Conradi <videolan # tobias-conradi.de>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -37,7 +38,7 @@ extern NSString *kMLFileTypeAudio;
 @interface MLFile :  NSManagedObject
 
 + (NSArray *)allFiles;
-+ (NSArray *)fileForURL:(NSString *)url;
++ (NSArray *)fileForURL:(NSURL *)url;
 
 + (instancetype)fileForURIRepresentation:(NSURL *)uriRepresentation;
 
@@ -56,7 +57,9 @@ extern NSString *kMLFileTypeAudio;
 @property (nonatomic, strong) NSNumber *lastAudioTrack;
 @property (nonatomic, strong) NSNumber *playCount;
 @property (nonatomic, strong) NSString *artworkURL;
-@property (nonatomic, strong) NSString *url;
+// on iOS the path relative to documents folder on OS X full path
+// if you want to set path maybe set url instead which does the right thing depending on the OS
+@property (nonatomic, strong) NSString *path;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *shortSummary;
@@ -82,6 +85,11 @@ extern NSString *kMLFileTypeAudio;
 @property (nonatomic, assign) BOOL isSafe;
 @property (nonatomic, assign) BOOL isBeingParsed;
 @property (nonatomic, assign) BOOL thumbnailTimeouted;
+
+// always full URL, derived from path
+// on Mac directly path as URL
+// on iOS combined path appended MLMediaLibrary documentsFolder
+@property (nonatomic, strong) NSURL *url;
 
 /**
  * the data in this object are about to be put on screen

@@ -49,6 +49,7 @@
 		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
 		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */; };
+		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -144,6 +145,8 @@
 		DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLMediaLibrary+Migration.h"; sourceTree = "<group>"; };
 		DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLMediaLibrary+Migration.m"; sourceTree = "<group>"; };
 		DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_2_5_to_2_5_2.xcmappingmodel; sourceTree = "<group>"; };
+		DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileEntityMappingPolicy_2_5_to_2_5_2.h; sourceTree = "<group>"; };
+		DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileEntityMappingPolicy_2_5_to_2_5_2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +213,7 @@
 		7D0EF507170885130003ED47 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.h */,
 				7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */,
 				7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */,
 				7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */,
@@ -254,6 +258,7 @@
 				7D0EF520170885130003ED47 /* MLShowEpisode.m */,
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
+				DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */,
 				7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */,
 				7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */,
 				7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */,
@@ -374,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m in Sources */,
 				7D0EF528170885130003ED47 /* MLCrashPreventer.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */,
