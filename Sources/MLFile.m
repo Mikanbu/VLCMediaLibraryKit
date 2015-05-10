@@ -115,11 +115,11 @@ NSString *kMLFileTypeAudio = @"audio";
 }
 - (BOOL)isMovie
 {
-    return [self isKindOfType:kMLFileTypeTVShowEpisode];
+    return [self isKindOfType:kMLFileTypeMovie];
 }
 - (BOOL)isClip
 {
-    return [self isKindOfType:kMLFileTypeTVShowEpisode];
+    return [self isKindOfType:kMLFileTypeClip];
 }
 - (BOOL)isShowEpisode
 {
