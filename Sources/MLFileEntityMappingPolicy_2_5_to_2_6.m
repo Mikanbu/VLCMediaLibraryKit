@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLFileEntityMappingPolicy_2_5_to_2_5_2.m
+ * MLFileEntityMappingPolicy_2_5_to_2_6.m
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (c) 2015 VideoLAN. All rights reserved.
@@ -10,9 +10,9 @@
  * Refer to the COPYING file of the official project for license.
  *****************************************************************************/
 
-#import "MLFileEntityMappingPolicy_2_5_to_2_5_2.h"
+#import "MLFileEntityMappingPolicy_2_5_to_2_6.h"
 
-@implementation MLFileEntityMappingPolicy_2_5_to_2_5_2
+@implementation MLFileEntityMappingPolicy_2_5_to_2_6
 - (BOOL)createDestinationInstancesForSourceInstance:(NSManagedObject *)sInstance entityMapping:(NSEntityMapping *)mapping manager:(NSMigrationManager *)manager error:(NSError **)error
 {
     NSString *fullPath = [sInstance primitiveValueForKey:@"url"];

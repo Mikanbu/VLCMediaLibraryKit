@@ -33,7 +33,6 @@
 		7D0EF559170885230003ED47 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */; };
 		7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */; };
 		7D0EF55B170885230003ED47 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54F170885230003ED47 /* CTidy.m */; };
-		7D4625851A560729001A80B4 /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */; };
 		7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
 		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 		7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
@@ -48,8 +47,9 @@
 		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
-		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */; };
-		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */; };
+		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
+		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
+		DDC7BFAE1B03825F00160878 /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,8 +131,6 @@
 		7D0EF54E170885230003ED47 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
 		7D0EF54F170885230003ED47 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
-		7D4625831A560729001A80B4 /* MediaLibrary-2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.1.xcdatamodel"; sourceTree = "<group>"; };
-		7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.xcdatamodel"; sourceTree = "<group>"; };
 		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
 		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
 		7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNamespaceNode.h; sourceTree = "<group>"; };
@@ -141,12 +139,14 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
-		DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.2.xcdatamodel"; sourceTree = "<group>"; };
 		DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLMediaLibrary+Migration.h"; sourceTree = "<group>"; };
 		DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLMediaLibrary+Migration.m"; sourceTree = "<group>"; };
-		DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_2_5_to_2_5_2.xcmappingmodel; sourceTree = "<group>"; };
-		DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileEntityMappingPolicy_2_5_to_2_5_2.h; sourceTree = "<group>"; };
-		DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileEntityMappingPolicy_2_5_to_2_5_2.m; sourceTree = "<group>"; };
+		DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_2_5_to_2_6.xcmappingmodel; sourceTree = "<group>"; };
+		DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileEntityMappingPolicy_2_5_to_2_6.h; sourceTree = "<group>"; };
+		DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileEntityMappingPolicy_2_5_to_2_6.m; sourceTree = "<group>"; };
+		DDC7BFAB1B03825F00160878 /* MediaLibrary-2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.1.xcdatamodel"; sourceTree = "<group>"; };
+		DDC7BFAC1B03825F00160878 /* MediaLibrary-2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.xcdatamodel"; sourceTree = "<group>"; };
+		DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.6.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,8 @@
 		7D0EF495170883940003ED47 = {
 			isa = PBXGroup;
 			children = (
-				DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel */,
-				7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */,
+				DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */,
+				DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */,
 				7D0EF536170885230003ED47 /* TouchXML */,
 				7D0EF506170885130003ED47 /* Headers */,
 				7D0EF516170885130003ED47 /* Sources */,
@@ -214,7 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				7D0EF517170885130003ED47 /* MLCrashPreventer.h */,
-				DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.h */,
+				DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.h */,
 				7D0EF51A170885130003ED47 /* MLFileParserQueue.h */,
 				DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */,
 				7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */,
@@ -258,7 +258,7 @@
 				7D0EF520170885130003ED47 /* MLShowEpisode.m */,
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
-				DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m */,
+				DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */,
 				7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */,
 				7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */,
 				7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */,
@@ -379,16 +379,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_5_2.m in Sources */,
+				DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */,
 				7D0EF528170885130003ED47 /* MLCrashPreventer.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */,
+				DDC7BFAE1B03825F00160878 /* MediaLibrary.xcdatamodeld in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52D170885130003ED47 /* MLMovieInfoGrabber.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
-				DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_5_2.xcmappingmodel in Sources */,
+				DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */,
 				7D0EF530170885130003ED47 /* MLThumbnailerQueue.m in Sources */,
 				7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */,
 				7D0EF532170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m in Sources */,
@@ -403,7 +404,6 @@
 				7D0EF554170885230003ED47 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				7D0EF555170885230003ED47 /* CXMLElement.m in Sources */,
 				7D0EF556170885230003ED47 /* CXMLElement_CreationExtensions.m in Sources */,
-				7D4625851A560729001A80B4 /* MediaLibrary.xcdatamodeld in Sources */,
 				7D0EF557170885230003ED47 /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */,
 				7D0EF558170885230003ED47 /* CXMLNode.m in Sources */,
@@ -550,14 +550,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7D4625821A560729001A80B4 /* MediaLibrary.xcdatamodeld */ = {
+		DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */,
-				7D4625831A560729001A80B4 /* MediaLibrary-2.1.xcdatamodel */,
-				7D4625841A560729001A80B4 /* MediaLibrary-2.5.xcdatamodel */,
+				DDC7BFAB1B03825F00160878 /* MediaLibrary-2.1.xcdatamodel */,
+				DDC7BFAC1B03825F00160878 /* MediaLibrary-2.5.xcdatamodel */,
+				DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */,
 			);
-			currentVersion = DD8EE4891AF908820067954E /* MediaLibrary-2.5.2.xcdatamodel */;
+			currentVersion = DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */;
 			path = MediaLibrary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

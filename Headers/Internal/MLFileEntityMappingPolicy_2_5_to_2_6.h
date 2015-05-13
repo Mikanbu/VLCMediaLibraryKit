@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLFileEntityMappingPolicy_2_5_to_2_5_2.h
+ * MLFileEntityMappingPolicy_2_5_to_2_6.h
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (c) 2015 VideoLAN. All rights reserved.
@@ -11,6 +11,6 @@
  *****************************************************************************/
 #import <CoreData/CoreData.h>
 
-@interface MLFileEntityMappingPolicy_2_5_to_2_5_2 : NSEntityMigrationPolicy
+@interface MLFileEntityMappingPolicy_2_5_to_2_6 : NSEntityMigrationPolicy
 
 @end

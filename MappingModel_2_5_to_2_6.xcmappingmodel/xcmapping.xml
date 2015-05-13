@@ -350,15 +350,15 @@ cBIAAYagrxEIhQAHAAgAFwAYADQANQA2AFAAUQBSAFMAVABVAFYAVwBYAFkAWgB1AHYAdwB9AH4AigCe
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z164"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z164">
-        <attribute name="migrationpolicyclassname" type="string">MLFileEntityMappingPolicy_2_5_to_2_5_2</attribute>
+        <attribute name="migrationpolicyclassname" type="string">MLFileEntityMappingPolicy_2_5_to_2_6</attribute>
         <attribute name="sourcename" type="string">File</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">2</attribute>
         <attribute name="destinationname" type="string">File</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z118"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z108 z156 z208 z181 z168 z161 z160 z109 z198 z179 z171 z149 z197 z206 z178 z124 z163 z121 z167 z165 z137 z170 z146 z215 z211 z173 z107 z204 z175"></relationship>
-        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z177 z104 z140 z114"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z215 z121 z173 z107 z171 z156 z181 z161 z178 z160 z124 z208 z211 z204 z163 z175 z108 z149 z146 z165 z179 z170 z206 z197 z167 z137 z109 z198 z168"></relationship>
+        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z114 z140 z177 z104"></relationship>
     </object>
     <object type="XDDEVATTRIBUTEMAPPING" id="z165">
         <attribute name="name" type="string">lastPosition</attribute>
