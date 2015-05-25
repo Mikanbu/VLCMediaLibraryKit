@@ -126,6 +126,7 @@
         NSString *groupComponent = [@"Shared/AppGroup/fake-" stringByAppendingString:self.applicationGroupIdentifier];
         NSString *groupPath = [[NSString pathWithComponents:pathComponents] stringByAppendingPathComponent:groupComponent];
         groupURL = [NSURL fileURLWithPath:groupPath];
+        [[NSFileManager defaultManager] createDirectoryAtURL:groupURL withIntermediateDirectories:YES attributes:nil error:nil];
     }
 #endif
     return groupURL;
