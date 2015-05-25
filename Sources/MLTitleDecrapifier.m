@@ -41,6 +41,8 @@
     [mutableString replaceOccurrencesOfString:@"_" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"+" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"-" withString:@" " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"[]" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"()" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
 
     NSString *staticString = [NSString stringWithString:mutableString];
     mutableString = nil;
@@ -116,14 +118,19 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
     if (!string)
         return nil;
     NSString *str = [string lowercaseString];
-    BOOL successfulSearch = NO;
-    NSMutableDictionary *mutableDict;
     NSUInteger stringLength = [str length];
 
     if (stringLength < 6)
         return nil;
 
-    // Search for s01e10.
+    BOOL successfulSearch = NO;
+    NSMutableDictionary *mutableDict;
+    NSNumber *season;
+    NSNumber *episode;
+    NSString *tvShowName;
+    NSString *episodeName;
+
+    // Search for S00E00*
     for (unsigned int i = 0; i < stringLength - 5; i++) {
         if (c(str, i) == 's' &&
             isDigit(c(str, i+1)) &&
@@ -132,28 +139,20 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
             isDigit(c(str, i+4)) &&
             isDigit(c(str, i+5)))
         {
-            NSNumber *season = numberFromTwoChars(c(str,i+1), c(str,i+2));
-            NSNumber *episode;
+            season = numberFromTwoChars(c(str,i+1), c(str,i+2));
+
             if (isDigit(c(str, i+6)))
                 episode = numberFromThreeChars(c(str,i+4), c(str,i+5), c(str,i+6));
             else
                 episode = numberFromTwoChars(c(str,i+4), c(str,i+5));
-            NSString *tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
+            tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
             tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
 
-            NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+6] : nil;
+            episodeName = stringLength > i + 4 ? [str substringFromIndex:i+6] : nil;
             episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
 
-            mutableDict = [[NSMutableDictionary alloc] initWithCapacity:4];
-            if (season)
-                mutableDict[@"season"] = season;
-            if (episode)
-                mutableDict[@"episode"] = episode;
-            if (tvShowName && ![tvShowName isEqualToString:@" "])
-                mutableDict[@"tvShowName"] = tvShowName;
-            if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
-                mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
             successfulSearch = YES;
+            goto returnThings;
         }
     }
 
@@ -165,29 +164,59 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
                 isDigit(c(str, i+2)) &&
                 isDigit(c(str, i+3)))
             {
-                NSNumber *season = @(intFromChar(c(str,i)));
-                NSNumber *episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
-                NSString *tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
+                season = @(intFromChar(c(str,i)));
+                episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
+                tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
                 tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
 
-                NSString *episodeName = stringLength > i + 4 ? [str substringFromIndex:i+4] : nil;
+                episodeName = stringLength > i + 4 ? [str substringFromIndex:i+4] : nil;
                 episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
 
-                mutableDict = [[NSMutableDictionary alloc] initWithCapacity:3];
-                if (season)
-                    mutableDict[@"season"] = season;
-                if (episode)
-                    mutableDict[@"episode"] = episode;
-                if (tvShowName && ![tvShowName isEqualToString:@" "])
-                    mutableDict[@"tvShowName"] = tvShowName;
-                if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
-                    mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
                 successfulSearch = YES;
+                goto returnThings;
             }
         }
     }
 
+    // search for S0E00*
+    if (!successfulSearch) {
+        for (unsigned int i = 0; i < stringLength - 4; i++) {
+            if (c(str, i) == 's' &&
+                isDigit(c(str, i+1)) &&
+                c(str, i+2) == 'e' &&
+                isDigit(c(str, i+3)) &&
+                isDigit(c(str, i+4)))
+            {
+                season = [NSNumber numberWithInt:intFromChar(c(str,i+1))];
+
+                if (isDigit(c(str, i+5)))
+                    episode = numberFromThreeChars(c(str,i+3), c(str,i+4), c(str,i+5));
+                else
+                    episode = numberFromTwoChars(c(str,i+3), c(str,i+4));
+                tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
+                tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
+
+                episodeName = stringLength > i + 4 ? [str substringFromIndex:i+5] : nil;
+                episodeName = episodeName ? [MLTitleDecrapifier decrapify:episodeName] : nil;
+
+                successfulSearch = YES;
+                goto returnThings;
+            }
+        }
+    }
+
+returnThings:
     if (successfulSearch) {
+        mutableDict = [[NSMutableDictionary alloc] initWithCapacity:4];
+        if (season)
+            mutableDict[@"season"] = season;
+        if (episode)
+            mutableDict[@"episode"] = episode;
+        if (tvShowName && ![tvShowName isEqualToString:@" "])
+            mutableDict[@"tvShowName"] = tvShowName;
+        if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
+            mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
+
         NSDictionary *dict = [NSDictionary dictionaryWithDictionary:mutableDict];
         return dict;
     }
