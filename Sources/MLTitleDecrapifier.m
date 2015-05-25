@@ -158,7 +158,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
 
     // search for 0x00
     if (!successfulSearch) {
-        for (unsigned int i = 0; i < stringLength - 4; i++) {
+        for (unsigned int i = 0; i < stringLength - 3; i++) {
             if (isDigit(c(str, i)) &&
                 c(str, i+1) == 'x' &&
                 isDigit(c(str, i+2)) &&
@@ -166,6 +166,7 @@ static inline NSNumber *numberFromThreeChars(char high, char mid, char low)
             {
                 season = @(intFromChar(c(str,i)));
                 episode = numberFromTwoChars(c(str,i+2), c(str,i+3));
+
                 tvShowName = i > 0 ? [str substringToIndex:i] : NSLocalizedString(@"UNTITLED_SHOW", @"");
                 tvShowName = tvShowName ? [[MLTitleDecrapifier decrapify:tvShowName] capitalizedString] : nil;
 
@@ -217,8 +218,7 @@ returnThings:
         if (episodeName.length > 0 && ![episodeName isEqualToString:@" "])
             mutableDict[@"tvEpisodeName"] = [episodeName capitalizedString];
 
-        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:mutableDict];
-        return dict;
+        return [NSDictionary dictionaryWithDictionary:mutableDict];
     }
 
     return nil;
