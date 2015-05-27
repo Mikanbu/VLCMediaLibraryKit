@@ -127,6 +127,12 @@
     }
 
     [file setTracks:tracksSet];
+    if (mediaHasVideo) {
+        if ([[_media length] intValue] > 600000) // 10min
+            file.type = kMLFileTypeMovie;
+        else
+            file.type = kMLFileTypeClip;
+    }
     [file setDuration:[[_media length] numberValue]];
 
     if ([file isAlbumTrack]) {
@@ -161,19 +167,30 @@
     }
 
     if (!mediaHasVideo) {
+        file.type = kMLFileTypeAudio;
         APLog(@"'%@' is an audio file, fetching artwork", file.title);
         NSString *artist, *albumName, *title;
+        BOOL skipOperation = NO;
 
         if (file.isAlbumTrack) {
             artist = file.albumTrack.artist;
             albumName = file.albumTrack.album.name;
-        }
-        title = file.title;
 
-        file.computedThumbnail = [self scaleImage:[UIImage imageWithContentsOfFile:[self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName]]
-                                        toFitRect:(CGRect){CGPointZero, [[MLThumbnailerQueue sharedThumbnailerQueue] preferredThumbnailSizeForDevice]}];
-        if (file.computedThumbnail == nil)
-            file.albumTrack.containsArtwork = NO;
+            if (!file.albumTrack.containsArtwork)
+                skipOperation = YES;
+        }
+
+        if (!skipOperation) {
+            title = file.title;
+
+            NSString *artworkPath = [self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:artworkPath]) {
+                file.computedThumbnail = [self scaleImage:[UIImage imageWithContentsOfFile:artworkPath]
+                                                toFitRect:(CGRect){CGPointZero, [[MLThumbnailerQueue sharedThumbnailerQueue] preferredThumbnailSizeForDevice]}];
+            }
+            if (file.computedThumbnail == nil)
+                file.albumTrack.containsArtwork = NO;
+        }
     }
 
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];

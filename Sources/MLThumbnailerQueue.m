@@ -183,7 +183,9 @@ static inline NSString *hashFromFile(MLFile *file)
         APLog(@"'%@' is unsafe and will crash, ignoring", file.title);
         return;
     }
+
     if ([file isAlbumTrack]) {
+        file.type = kMLFileTypeAudio;
         APLog(@"'%@' is an audio file, ignoring", file.title);
         return;
     }

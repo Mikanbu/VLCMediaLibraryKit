@@ -364,11 +364,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (void)computeThumbnailForFile:(MLFile *)file
 {
-    if (!file.computedThumbnail) {
+    if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio]) {
         APLog(@"Computing thumbnail for %@", file.title);
         [[MLThumbnailerQueue sharedThumbnailerQueue] addFile:file];
     }
 }
+
 - (void)errorWhenFetchingMetaDataForFile:(MLFile *)file
 {
     APLog(@"Error when fetching for '%@'", file.title);
@@ -654,11 +655,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     NSDictionary *tvShowEpisodeInfo = [MLTitleDecrapifier tvShowEpisodeInfoFromString:file.title];
     if (tvShowEpisodeInfo) {
+        file.type = kMLFileTypeTVShowEpisode;
         [self addTVShowEpisodeWithInfo:tvShowEpisodeInfo andFile:file];
         return;
     }
 
-    if ([file isSupportedAudioFile]) {
+    if ([file isKindOfType:kMLFileTypeAudio]) {
         NSDictionary *audioContentInfo = [MLTitleDecrapifier audioContentInfoFromFile:file];
         if (audioContentInfo && ![file videoTrack]) {
             [self addAudioContentWithInfo:audioContentInfo andFile:file];
@@ -896,7 +898,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
-        if (!file.computedThumbnail && ![file isAlbumTrack])
+        if (!file.computedThumbnail)
             [self computeThumbnailForFile:file];
 
     // Get to fetch meta data
