@@ -32,6 +32,7 @@
 #import "MLAlbumTrack.h"
 #import "MLMediaLibrary.h"
 #import "MLThumbnailerQueue.h"
+#import "MLFileParserQueue.h"
 
 NSString *kMLFileTypeMovie = @"movie";
 NSString *kMLFileTypeClip = @"clip";
@@ -282,7 +283,16 @@ NSString *kMLFileTypeAudio = @"audio";
 
 - (UIImage *)computedThumbnail
 {
-    return [UIImage imageWithContentsOfFile:[self thumbnailPath]];
+    NSString *thumbnailPath = [self thumbnailPath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath])
+        return [UIImage imageWithContentsOfFile:[self thumbnailPath]];
+    else {
+        if (self.isAlbumTrack) {
+            if (self.albumTrack.containsArtwork)
+                [[MLFileParserQueue sharedFileParserQueue] addFile:self];
+        }
+    }
+    return nil;
 }
 
 - (void)setComputedThumbnail:(UIImage *)image

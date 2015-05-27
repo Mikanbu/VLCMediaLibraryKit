@@ -169,8 +169,11 @@
             albumName = file.albumTrack.album.name;
         }
         title = file.title;
+
         file.computedThumbnail = [self scaleImage:[UIImage imageWithContentsOfFile:[self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName]]
                                         toFitRect:(CGRect){CGPointZero, [[MLThumbnailerQueue sharedThumbnailerQueue] preferredThumbnailSizeForDevice]}];
+        if (file.computedThumbnail == nil)
+            file.albumTrack.containsArtwork = NO;
     }
 
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
@@ -178,7 +181,6 @@
     [parserQueue.queue setSuspended:NO];
     [parserQueue didFinishOperation:self];
     _media = nil;
-
 }
 
 #pragma mark - audio file specific code
