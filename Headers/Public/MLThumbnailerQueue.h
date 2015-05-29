@@ -38,7 +38,5 @@
 - (void)stop;
 - (void)resume;
 
-- (CGSize)preferredThumbnailSizeForDevice;
-
 @property (nonatomic, strong) NSOperationQueue *queue;
 @end

@@ -47,6 +47,7 @@
 #endif
 
 #import "NSXMLNode_Additions.h"
+#import "UIImage+MLKit.h"
 
 #ifndef NDEBUG
 #define APLog(format, ...) NSLog(format, ## __VA_ARGS__)
