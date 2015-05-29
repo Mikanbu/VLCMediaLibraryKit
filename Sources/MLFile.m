@@ -38,6 +38,7 @@ NSString *kMLFileTypeMovie = @"movie";
 NSString *kMLFileTypeClip = @"clip";
 NSString *kMLFileTypeTVShowEpisode = @"tvShowEpisode";
 NSString *kMLFileTypeAudio = @"audio";
+NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 
 @implementation MLFile
 
@@ -319,6 +320,9 @@ NSString *kMLFileTypeAudio = @"audio";
         [UIImageJPEGRepresentation(image, .9) writeToURL:url atomically:YES];
     else
         [UIImagePNGRepresentation(image) writeToURL:url atomically:YES];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MLFileThumbnailWasUpdated
+                                                        object:self];
 }
 
 - (BOOL)isSafe

@@ -35,6 +35,8 @@ extern NSString *kMLFileTypeClip;
 extern NSString *kMLFileTypeTVShowEpisode;
 extern NSString *kMLFileTypeAudio;
 
+extern NSString *const MLFileThumbnailWasUpdated;
+
 @interface MLFile :  NSManagedObject
 
 + (NSArray *)allFiles;
