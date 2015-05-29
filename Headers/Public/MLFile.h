@@ -81,6 +81,7 @@ extern NSString *kMLFileTypeAudio;
 @property (nonatomic, strong) MLAlbumTrack *albumTrack;
 @property (nonatomic, strong) NSString *thumbnailName;
 
+- (void)setComputedThumbnailScaledForDevice:(UIImage *)thumbnail;
 @property (nonatomic, strong) UIImage *computedThumbnail;
 @property (nonatomic, assign) BOOL isSafe;
 @property (nonatomic, assign) BOOL isBeingParsed;

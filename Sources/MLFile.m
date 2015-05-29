@@ -295,6 +295,12 @@ NSString *kMLFileTypeAudio = @"audio";
     return nil;
 }
 
+- (void)setComputedThumbnailScaledForDevice:(UIImage *)thumbnail
+{
+    [self setComputedThumbnail:[UIImage scaleImage:thumbnail
+                                         toFitRect:(CGRect){CGPointZero, [UIImage preferredThumbnailSizeForDevice]}]];
+}
+
 - (void)setComputedThumbnail:(UIImage *)image
 {
     NSURL *url = [NSURL fileURLWithPath:[self thumbnailPath]];
