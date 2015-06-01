@@ -126,10 +126,8 @@
     }
 
     [file setTracks:tracksSet];
-    if (mediaHasVideo) {
-        if ([[_media length] intValue] > 600000) // 10min
-            file.type = kMLFileTypeMovie;
-        else
+    if (mediaHasVideo && file.isMovie) {
+        if ([[_media length] intValue] < 600000) // 10min
             file.type = kMLFileTypeClip;
     }
     [file setDuration:[[_media length] numberValue]];
