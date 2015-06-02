@@ -52,13 +52,27 @@
     return tracks;
 }
 
-+ (MLAlbumTrack *)trackWithAlbum:(id)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded
 {
-    NSMutableSet *tracks = [album mutableSetValueForKey:@"tracks"];
+    return [MLAlbumTrack trackWithAlbum:album
+                            trackNumber:trackNumber
+                              trackName:@""
+                         createIfNeeded:createIfNeeded];
+}
+
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album trackNumber:(NSNumber *)trackNumber trackName:(NSString *)trackName createIfNeeded:(BOOL)createIfNeeded
+{
+    if (!album)
+        return nil;
+
+    NSSet *tracks = [album tracks];
     MLAlbumTrack *track = nil;
     if (trackNumber) {
         for (MLAlbumTrack *trackIter in tracks) {
             if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
+                track = trackIter;
+                break;
+            } else if ([trackIter.title isEqualToString:trackName]) {
                 track = trackIter;
                 break;
             }
@@ -66,13 +80,24 @@
     }
     if (!track && createIfNeeded) {
         track = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AlbumTrack"];
+        if (trackNumber.integerValue == 0)
+            trackNumber = @(tracks.count + 1);
         track.trackNumber = trackNumber;
-        [tracks addObject:track];
+        [album addTrack:track];
     }
     return track;
 }
 
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
+{
+    return [MLAlbumTrack trackWithAlbumName:albumName
+                                trackNumber:trackNumber
+                                  trackName:@""
+                             createIfNeeded:createIfNeeded
+                                 wasCreated:wasCreated];
+}
+
++ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber trackName:(NSString *)trackName createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
 {
     MLAlbum *album = [MLAlbum albumWithName:albumName];
     *wasCreated = NO;
@@ -83,7 +108,7 @@
     } else if (!album && !createIfNeeded)
         return nil;
 
-    return [MLAlbumTrack trackWithAlbum:album trackNumber:trackNumber createIfNeeded:createIfNeeded];
+    return [MLAlbumTrack trackWithAlbum:album trackNumber:trackNumber trackName:trackName createIfNeeded:createIfNeeded];
 }
 
 @dynamic primitiveUnread;

@@ -29,8 +29,22 @@
 
 + (NSArray *)allTracks;
 
-+ (MLAlbumTrack *)trackWithAlbum:(id)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded;
-+ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
+                     trackNumber:(NSNumber *)trackNumber
+                  createIfNeeded:(BOOL)createIfNeeded;
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
+                     trackNumber:(NSNumber *)trackNumber
+                       trackName:(NSString *)trackName
+                  createIfNeeded:(BOOL)createIfNeeded;
++ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
+                         trackNumber:(NSNumber *)trackNumber
+                      createIfNeeded:(BOOL)createIfNeeded
+                          wasCreated:(BOOL *)wasCreated;
++ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
+                         trackNumber:(NSNumber *)trackNumber
+                           trackName:(NSString *)trackName
+                      createIfNeeded:(BOOL)createIfNeeded
+                          wasCreated:(BOOL *)wasCreated;
 
 @property (nonatomic, strong) NSNumber *unread;
 @property (nonatomic, strong) NSString *artist;

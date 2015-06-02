@@ -11,6 +11,9 @@ Added Public APIs:
   - new selector: setComputedThumbnailScaledForDevice
 - MLAlbum:
   - new selector: addAlbumTrack
+- MLAlbumTrack:
+  - new selectors: trackWithAlbum:trackNumber:trackName:createIfNeeded:
+                   trackWithAlbumName:trackNumber:trackName:createIfNeeded:wasCreated:
 
 Version 2.5
 -----------
