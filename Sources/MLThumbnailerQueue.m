@@ -28,6 +28,7 @@
 #import "MLFile.h"
 #import "MLCrashPreventer.h"
 #import "MLMediaLibrary.h"
+#import "MLFileParserQueue.h"
 
 @interface ThumbnailOperation : NSOperation <VLCMediaThumbnailerDelegate>
 {
@@ -90,8 +91,13 @@
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
     mediaThumbnailer.delegate = nil;
-    APLog(@"Finished thumbnail for %@", self.file.title);
-    self.file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
+    MLFile *file = self.file;
+    APLog(@"Finished thumbnail for %@", file.title);
+    if (thumbnail) {
+        UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnail];
+        if (thumbnailImage)
+            file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
+    }
 
     [self endThumbnailing];
 }
@@ -150,11 +156,22 @@ static inline NSString *hashFromFile(MLFile *file)
         return;
     }
 
-    if ([file isAlbumTrack]) {
-        file.type = kMLFileTypeAudio;
+    if (file.albumTrack) {
+        APLog(@"'%@' is part of a music album, ignoring", file.title);
+        return;
+    }
+
+    if ([file isKindOfType:kMLFileTypeAudio]) {
         APLog(@"'%@' is an audio file, ignoring", file.title);
         return;
     }
+
+    if (file.hasFetchedInfo.boolValue != YES) {
+        APLog(@"'%@' still awaits parsing, ignoring", file.title);
+        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
+        return;
+    }
+
     ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file andVLCLibrary:_internalLibrary];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
