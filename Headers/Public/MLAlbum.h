@@ -36,6 +36,7 @@
 @property (nonatomic, strong, readonly) NSSet *unreadTracks;
 @property (weak, nonatomic, readonly) NSArray *sortedTracks;
 
+- (void)addTrack:(MLAlbumTrack *)track;
 - (void)removeTrack:(MLAlbumTrack *)track;
 - (void)removeTrackWithNumber:(NSNumber *)trackNumber;
 

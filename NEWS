@@ -8,7 +8,9 @@ Added Public APIs:
                    migrateLibraryToBasePath
                    deviceSpeedCategory
 - MLFile:
-  - new selectors: setComputedThumbnailScaledForDevice
+  - new selector: setComputedThumbnailScaledForDevice
+- MLAlbum:
+  - new selector: addAlbumTrack
 
 Version 2.5
 -----------

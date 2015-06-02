@@ -65,8 +65,8 @@
 }
 
 @dynamic name;
-@dynamic releaseYear;
 @dynamic tracks;
+@dynamic releaseYear;
 @dynamic unreadTracks;
 
 - (NSArray *)sortedTracks
@@ -78,6 +78,19 @@
                                 ascending:YES
                                  selector:@selector(compare:)];
     return [tracks sortedArrayUsingDescriptors:@[trackNumberDescriptor]];
+}
+
+- (void)addTrack:(MLAlbumTrack *)track
+{
+    if (!track)
+        return;
+
+    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
+    [tracks addObject:track];
+
+    [self willChangeValueForKey:@"tracks"];
+    [self setValue:tracks forKey:@"tracks"];
+    [self didChangeValueForKey:@"tracks"];
 }
 
 - (void)removeTrack:(MLAlbumTrack *)track
