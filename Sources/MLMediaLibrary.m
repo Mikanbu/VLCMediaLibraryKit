@@ -599,17 +599,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     file.hasFetchedInfo = @YES;
 }
 
-- (void)addAudioContentWithInfo:(NSDictionary *)audioContentInfo andFile:(MLFile *)file
-{
-    file.type = kMLFileTypeAudio;
-
-    file.title = audioContentInfo[VLCMetaInformationTitle];
-
-    /* all further meta data is set by the FileParserQueue */
-
-    file.hasFetchedInfo = @YES;
-}
-
 /**
  * MLFile auto detection
  */
@@ -646,26 +635,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     APLog(@"Fetching meta data for %@", file.title);
 
-    [[MLFileParserQueue sharedFileParserQueue] addFile:file];
-
-    if (!_allowNetworkAccess) {
-        // Automatically compute the thumbnail
-        [self computeThumbnailForFile:file];
-    }
-
     NSDictionary *tvShowEpisodeInfo = [MLTitleDecrapifier tvShowEpisodeInfoFromString:file.title];
     if (tvShowEpisodeInfo) {
         file.type = kMLFileTypeTVShowEpisode;
         [self addTVShowEpisodeWithInfo:tvShowEpisodeInfo andFile:file];
         return;
-    }
-
-    if ([file isKindOfType:kMLFileTypeAudio]) {
-        NSDictionary *audioContentInfo = [MLTitleDecrapifier audioContentInfoFromFile:file];
-        if (audioContentInfo && ![file videoTrack]) {
-            [self addAudioContentWithInfo:audioContentInfo andFile:file];
-            return;
-        }
     }
 
     if (!_allowNetworkAccess)
@@ -714,13 +688,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     APLog(@"Adding Path %@", filePath);
 
     NSURL *url = [NSURL fileURLWithPath:filePath];
-    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
     NSString *title = [filePath lastPathComponent];
 #if !TARGET_OS_IPHONE
     NSDate *openedDate = nil; // FIXME kMDItemLastUsedDate
     NSDate *modifiedDate = nil; // FIXME [result valueForAttribute:@"kMDItemFSContentChangeDate"];
 #endif
-    NSNumber *size = attributes[NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
 
     MLFile *file = [self createObjectForEntity:@"File"];
     file.url = url;
@@ -748,12 +720,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     else
         file.title = [title stringByDeletingPathExtension];
 
-    if ([size longLongValue] < 150000000) /* 150 MB */
-        file.type = kMLFileTypeClip;
-    else
-        file.type = kMLFileTypeMovie;
-
-    [self fetchMetaDataForFile:file];
+    [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 }
 
 - (void)addFilePaths:(NSArray *)filepaths
@@ -810,8 +777,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         [self fetchMetaDataForShow:show];
 }
 #endif
-
-
 
 - (void)updateMediaDatabase
 {
@@ -887,7 +852,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
         results = [moc executeFetchRequest:request error:nil];
         for (MLFile *file in results) {
-            if (!file.computedThumbnail)
+            if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio])
                 [self computeThumbnailForFile:file];
         }
         return;
@@ -897,16 +862,19 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     request = [self fetchRequestForEntity:@"File"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
     results = [moc executeFetchRequest:request error:nil];
-    for (MLFile *file in results)
-        if (!file.computedThumbnail)
-            [self computeThumbnailForFile:file];
+    for (MLFile *file in results) {
+        if (!file.computedThumbnail) {
+            if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio])
+                [self computeThumbnailForFile:file];
+        }
+    }
 
     // Get to fetch meta data
     request = [self fetchRequestForEntity:@"File"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
-        [self fetchMetaDataForFile:file];
+        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 
     // Get to fetch show info
     request = [self fetchRequestForEntity:@"Show"];
@@ -936,24 +904,28 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (void)applicationWillExit
 {
+    [[MLFileParserQueue sharedFileParserQueue] stop];
     [[MLCrashPreventer sharedPreventer] cancelAllFileParse];
 }
 
 - (void)applicationWillStart
 {
     [[MLCrashPreventer sharedPreventer] markCrasherFiles];
+    [[MLFileParserQueue sharedFileParserQueue] resume];
 }
 
 - (void)libraryDidDisappear
 {
     // Stop expansive work
     [[MLThumbnailerQueue sharedThumbnailerQueue] stop];
+    [[MLFileParserQueue sharedFileParserQueue] stop];
 }
 
 - (void)libraryDidAppear
 {
     // Resume our work
     [[MLThumbnailerQueue sharedThumbnailerQueue] resume];
+    [[MLFileParserQueue sharedFileParserQueue] resume];
 }
 
 #pragma mark - migrations
