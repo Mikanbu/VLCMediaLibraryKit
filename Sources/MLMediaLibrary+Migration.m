@@ -46,7 +46,7 @@
         NSError *error;
         migrationNeeded = [self _migrationNeeded:&error];
         if (error!=nil) {
-            NSLog(@"Failed to check if model migration is needed %@", error);
+            APLog(@"Failed to check if model migration is needed %@", error);
         }
     }
     return migrationNeeded;
@@ -64,7 +64,7 @@
     NSError *error;
     NSString *groupPath = [self _groupURL].path;
     if ([self _migrateLibraryToBasePath:groupPath error:&error]) {
-        NSLog(@"Failed to migrate to group path with error: %@",error);
+        APLog(@"Failed to migrate to group path with error: %@",error);
     }
 }
 
@@ -155,14 +155,14 @@
     NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:[NSURL fileURLWithPath:basePath] includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsSubdirectoryDescendants | NSDirectoryEnumerationSkipsHiddenFiles errorHandler:nil];
     for (NSString *pathToDelete in enumerator) {
         if (![[NSFileManager defaultManager] removeItemAtPath:pathToDelete error:&deleteError]) {
-            NSLog(@"Failed to clear object from new base path for migration debugging: %@",deleteError);
+            APLog(@"Failed to clear object from new base path for migration debugging: %@",deleteError);
         }
     }
 #endif
 
     NSURL *directoryURL = [newURL URLByDeletingLastPathComponent];
     if (![[NSFileManager defaultManager] createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&error]) {
-        NSLog(@"Failed to created new directories for url: %@",directoryURL);
+        APLog(@"Failed to created new directories for url: %@",directoryURL);
     }
     NSPersistentStore *newStore = [coordinater migratePersistentStore:oldStore
                                                                 toURL:newURL
@@ -178,7 +178,7 @@
         for (NSString *extension in @[@"",@"-wal",@"-shm"]) {
             NSString *path = [oldStorePath stringByAppendingString:extension];
             if ([[NSFileManager defaultManager] fileExistsAtPath:path] && ![[NSFileManager defaultManager] removeItemAtPath:path error:&error]) {
-                NSLog(@"Failed to remove old library with error: %@",error);
+                APLog(@"Failed to remove old library with error: %@",error);
             }
         }
     }
