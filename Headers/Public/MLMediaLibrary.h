@@ -27,6 +27,8 @@
 
 #import <CoreData/CoreData.h>
 
+@class MLFile;
+
 @interface MLMediaLibrary : NSObject
 
 @property (nonatomic, strong) id delegate;
@@ -59,6 +61,8 @@
 - (NSString *)absolutPathFromPathRelativeToDocumentsFolder:(NSString *)relativePath;
 
 - (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
+- (void)computeThumbnailForFile:(MLFile *)file;
+- (void)fetchMetaDataForFile:(MLFile *)file;
 
 - (void)applicationWillStart;
 - (void)applicationWillExit;
