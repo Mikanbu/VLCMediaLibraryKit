@@ -45,6 +45,8 @@
 {
     MLFile *_file;
     VLCMedia *_media;
+    BOOL _parsing;
+    NSTimer *_timeOutTimer;
 }
 @property (strong,readwrite) MLFile *file;
 @end
@@ -68,8 +70,11 @@
     NSAssert(!_media, @"We are already parsing");
 
     MLFile *file = self.file;
-    APLog(@"Starting parsing %@", file);
+    APLog(@"Starting PARSE %@", file);
     [[MLCrashPreventer sharedPreventer] willParseFile:file];
+
+    _parsing = YES;
+    _timeOutTimer = [NSTimer scheduledTimerWithTimeInterval:3. target:self selector:@selector(cancelParsing:) userInfo:nil repeats:NO];
 
     _media = [VLCMedia mediaWithURL:file.url];
     _media.delegate = self;
@@ -79,6 +84,17 @@
      // Balanced in -mediaDidFinishParsing:
 }
 
+- (void)cancelParsing:(NSTimer *)timer
+{
+    if (_parsing && _media) {
+        [self mediaDidFinishParsing:_media];
+        return;
+    }
+
+    _parsing = NO;
+    [self endParsing];
+}
+
 - (void)main
 {
     [self performSelectorOnMainThread:@selector(parse) withObject:nil waitUntilDone:YES];
@@ -86,6 +102,9 @@
 
 - (void)mediaDidFinishParsing:(VLCMedia *)media
 {
+    _parsing = NO;
+    [_timeOutTimer invalidate];
+
     APLog(@"Parsed %@ - %lu tracks", media, [[_media tracksInformation] count]);
 
     if (_media.delegate != self)
@@ -125,16 +144,16 @@
         }
     }
 
-    [file setTracks:tracksSet];
-    if (mediaHasVideo && file.isMovie) {
-        if ([[_media length] intValue] < 600000) // 10min
-            file.type = kMLFileTypeClip;
+    @try {
+        [file setTracks:tracksSet];
+        [file setDuration:[[_media length] numberValue]];
     }
-    [file setDuration:[[_media length] numberValue]];
+    @catch (NSException *exception) {
+        APLog(@"we failed to write some metadata because the file disappeared in front of us");
+    }
 
-    if ([file isAlbumTrack]) {
+    if (!mediaHasVideo) {
         NSDictionary *audioContentInfo = [_media metaDictionary];
-
         if (audioContentInfo && audioContentInfo.count > 0) {
             NSString *title = audioContentInfo[VLCMetaInformationTitle];
             NSString *artist = audioContentInfo[VLCMetaInformationArtist];
@@ -146,7 +165,11 @@
             MLAlbum *album = nil;
 
             BOOL wasCreated = NO;
-            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName trackNumber:@([trackNumber integerValue]) createIfNeeded:YES wasCreated:&wasCreated];
+            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName
+                                                       trackNumber:@([trackNumber integerValue])
+                                                         trackName:title
+                                                    createIfNeeded:YES
+                                                        wasCreated:&wasCreated];
             if (track) {
                 album = track.album;
                 track.title = title ? title : @"";
@@ -161,9 +184,7 @@
                 file.albumTrack = track;
             }
         }
-    }
 
-    if (!mediaHasVideo) {
         file.type = kMLFileTypeAudio;
         APLog(@"'%@' is an audio file, fetching artwork", file.title);
         NSString *artist, *albumName, *title;
@@ -177,9 +198,16 @@
                 skipOperation = YES;
         }
 
-        if (!skipOperation) {
-            title = file.title;
+        title = file.title;
 
+        if (!title) {
+            NSDictionary *poorMansContentInfo = [MLTitleDecrapifier audioContentInfoFromFile:file];
+            if (poorMansContentInfo)
+                title = poorMansContentInfo[VLCMetaInformationTitle];
+            file.title = title;
+        }
+
+        if (!skipOperation) {
             NSString *artworkPath = [self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName];
             if ([[NSFileManager defaultManager] fileExistsAtPath:artworkPath]) {
                 file.computedThumbnail = [UIImage scaleImage:[UIImage imageWithContentsOfFile:artworkPath]
@@ -188,10 +216,26 @@
             if (file.computedThumbnail == nil)
                 file.albumTrack.containsArtwork = NO;
         }
-    }
+    } else {
+        MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
+        [sharedLibrary computeThumbnailForFile:file];
+        [sharedLibrary fetchMetaDataForFile:file];
 
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file.url.absoluteString error:nil];
+        NSNumber *size = attributes[NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
+        if ([size longLongValue] < 150000000) /* 150 MB */
+            file.type = kMLFileTypeClip;
+        else
+            file.type = kMLFileTypeMovie;
+    }
+    file.hasFetchedInfo = @(YES);
+    [self endParsing];
+}
+
+- (void)endParsing
+{
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
-    [[MLCrashPreventer sharedPreventer] didParseFile:file];
+    [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
     [parserQueue.queue setSuspended:NO];
     [parserQueue didFinishOperation:self];
     _media = nil;
@@ -253,8 +297,6 @@
     return self;
 }
 
-
-
 static inline NSString *hashFromFile(MLFile *file)
 {
     return [NSString stringWithFormat:@"%p", [[file objectID] URIRepresentation]];
@@ -273,6 +315,10 @@ static inline NSString *hashFromFile(MLFile *file)
         APLog(@"%@ is unsafe and will crash, ignoring", file);
         return;
     }
+    if (file.isBeingParsed) {
+        APLog(@"%@ is already being parsed, ignoring", file);
+        return;
+    }
     MLParsingOperation *op = [[MLParsingOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
@@ -280,11 +326,15 @@ static inline NSString *hashFromFile(MLFile *file)
 
 - (void)stop
 {
+    if (![[MLCrashPreventer sharedPreventer] fileParsingInProgress])
+        [_queue setSuspended:YES];
     [_queue setMaxConcurrentOperationCount:0];
 }
 
 - (void)resume
 {
+    if (![[MLCrashPreventer sharedPreventer] fileParsingInProgress])
+        [_queue setSuspended:NO];
     [_queue setMaxConcurrentOperationCount:1];
 }
 
