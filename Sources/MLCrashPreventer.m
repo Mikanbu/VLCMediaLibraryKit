@@ -64,6 +64,11 @@
     NSAssert([_parsedFiles count] == 0, @"You should call -cancelAllFileParse before releasing");
 }
 
+- (BOOL)fileParsingInProgress
+{
+    return _parsedFiles.count > 0;
+}
+
 - (void)cancelAllFileParse
 {
     APLog(@"Cancelling file parsing");

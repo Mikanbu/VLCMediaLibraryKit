@@ -37,4 +37,6 @@
 
 - (void)willParseFile:(MLFile *)file;
 - (void)didParseFile:(MLFile *)file;
+- (BOOL)fileParsingInProgress;
+
 @end
