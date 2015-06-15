@@ -76,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.7.xcdatamodel"; sourceTree = "<group>"; };
 		7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0EF4A1170883940003ED47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
@@ -559,11 +560,12 @@
 		DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */,
 				DDC7BFAB1B03825F00160878 /* MediaLibrary-2.1.xcdatamodel */,
 				DDC7BFAC1B03825F00160878 /* MediaLibrary-2.5.xcdatamodel */,
 				DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */,
 			);
-			currentVersion = DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */;
+			currentVersion = 7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */;
 			path = MediaLibrary.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

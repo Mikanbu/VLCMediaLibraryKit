@@ -77,7 +77,13 @@
     [[NSSortDescriptor alloc] initWithKey:@"trackNumber"
                                 ascending:YES
                                  selector:@selector(compare:)];
-    return [tracks sortedArrayUsingDescriptors:@[trackNumberDescriptor]];
+
+    NSSortDescriptor *discNumberDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"discNumber"
+                                ascending:YES
+                                 selector:@selector(compare:)];
+
+    return [tracks sortedArrayUsingDescriptors:@[discNumberDescriptor, trackNumberDescriptor]];
 }
 
 - (void)addTrack:(MLAlbumTrack *)track

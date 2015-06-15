@@ -161,15 +161,25 @@
             NSString *releaseYear = audioContentInfo[VLCMetaInformationDate];
             NSString *genre = audioContentInfo[VLCMetaInformationGenre];
             NSString *trackNumber = audioContentInfo[VLCMetaInformationTrackNumber];
+            NSString *discNumber = audioContentInfo[VLCMetaInformationDiscNumber];
 
             MLAlbum *album = nil;
 
             BOOL wasCreated = NO;
-            MLAlbumTrack *track = [MLAlbumTrack trackWithAlbumName:albumName
-                                                       trackNumber:@([trackNumber integerValue])
-                                                         trackName:title
-                                                    createIfNeeded:YES
-                                                        wasCreated:&wasCreated];
+
+            NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+            if (albumName)
+                [mutDict setObject:albumName forKey:MLAlbumTrackAlbumName];
+            if (title)
+                [mutDict setObject:title forKey:MLAlbumTrackTrackName];
+            if (trackNumber)
+                [mutDict setObject:@([trackNumber integerValue]) forKey:MLAlbumTrackNumber];
+            if (discNumber)
+                [mutDict setObject:@([discNumber integerValue]) forKey:MLAlbumTrackDiscNumber];
+
+            MLAlbumTrack *track = [MLAlbumTrack trackWithMetadata:[NSDictionary dictionaryWithDictionary:mutDict]
+                                                   createIfNeeded:YES
+                                                       wasCreated:&wasCreated];
             if (track) {
                 album = track.album;
                 track.title = title ? title : @"";

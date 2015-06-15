@@ -25,32 +25,48 @@
 
 #import "MLAlbum.h"
 
+extern NSString *const MLAlbumTrackAlbumName;
+extern NSString *const MLAlbumTrackNumber;
+extern NSString *const MLAlbumTrackTrackName;
+extern NSString *const MLAlbumTrackDiscNumber;
+
 @interface MLAlbumTrack : NSManagedObject
 
 + (NSArray *)allTracks;
 
 + (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
                      trackNumber:(NSNumber *)trackNumber
-                  createIfNeeded:(BOOL)createIfNeeded;
+                  createIfNeeded:(BOOL)createIfNeeded __attribute__((deprecated));
 + (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
                      trackNumber:(NSNumber *)trackNumber
                        trackName:(NSString *)trackName
-                  createIfNeeded:(BOOL)createIfNeeded;
+                  createIfNeeded:(BOOL)createIfNeeded __attribute__((deprecated));
+
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
                          trackNumber:(NSNumber *)trackNumber
                       createIfNeeded:(BOOL)createIfNeeded
-                          wasCreated:(BOOL *)wasCreated;
+                          wasCreated:(BOOL *)wasCreated __attribute__((deprecated));
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
                          trackNumber:(NSNumber *)trackNumber
                            trackName:(NSString *)trackName
                       createIfNeeded:(BOOL)createIfNeeded
-                          wasCreated:(BOOL *)wasCreated;
+                          wasCreated:(BOOL *)wasCreated __attribute__((deprecated));
+
+/* for available keys, see above */
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
+                        metadata:(NSDictionary *)metadata
+                  createIfNeeded:(BOOL)createIfNeeded
+                      wasCreated:(BOOL *)wasCreated;
++ (MLAlbumTrack *)trackWithMetadata:(NSDictionary *)metadata
+                     createIfNeeded:(BOOL)createIfNeeded
+                         wasCreated:(BOOL *)wasCreated;
 
 @property (nonatomic, strong) NSNumber *unread;
 @property (nonatomic, strong) NSString *artist;
 @property (nonatomic, strong) NSString *genre;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSNumber *trackNumber;
+@property (nonatomic, strong) NSNumber *discNumber;
 
 @property (nonatomic, strong) MLAlbum *album;
 @property (nonatomic, strong) NSSet *files;

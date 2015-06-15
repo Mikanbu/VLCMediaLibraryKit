@@ -27,6 +27,12 @@
 #import "MLAlbumTrack.h"
 #import "MLAlbum.h"
 
+NSString *const MLAlbumTrackAlbum       = @"MLAlbumTrackAlbum";
+NSString *const MLAlbumTrackAlbumName   = @"MLAlbumTrackAlbumName";
+NSString *const MLAlbumTrackNumber      = @"MLAlbumTrackNumber";
+NSString *const MLAlbumTrackTrackName   = @"MLAlbumTrackTrackName";
+NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
+
 @interface MLAlbumTrack ()
 @property (nonatomic, strong) NSNumber *primitiveUnread;
 @end
@@ -54,23 +60,44 @@
 
 + (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded
 {
-    return [MLAlbumTrack trackWithAlbum:album
-                            trackNumber:trackNumber
-                              trackName:@""
-                         createIfNeeded:createIfNeeded];
+    NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+
+    if (trackNumber)
+        [mutDict setObject:trackNumber forKey:MLAlbumTrackNumber];
+    BOOL wasCreated = NO;
+
+    return [MLAlbumTrack trackWithAlbum:album metadata:[NSDictionary dictionaryWithDictionary:mutDict] createIfNeeded:createIfNeeded wasCreated:&wasCreated];
 }
 
 + (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album trackNumber:(NSNumber *)trackNumber trackName:(NSString *)trackName createIfNeeded:(BOOL)createIfNeeded
 {
+    NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+
+    if (trackName)
+        [mutDict setObject:trackName forKey:MLAlbumTrackTrackName];
+    if (trackNumber)
+        [mutDict setObject:trackNumber forKey:MLAlbumTrackNumber];
+    BOOL wasCreated = NO;
+
+    return [MLAlbumTrack trackWithAlbum:album metadata:[NSDictionary dictionaryWithDictionary:mutDict] createIfNeeded:createIfNeeded wasCreated:&wasCreated];
+}
+
++ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album metadata:(NSDictionary *)metadata createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
+{
     if (!album)
         return nil;
+
+    NSNumber *trackNumber = metadata[MLAlbumTrackNumber];
+    NSString *trackName = metadata[MLAlbumTrackTrackName];
+    NSNumber *discNumber = metadata[MLAlbumTrackDiscNumber];
 
     NSSet *tracks = [album tracks];
     MLAlbumTrack *track = nil;
     if (trackNumber) {
         for (MLAlbumTrack *trackIter in tracks) {
             if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
-                track = trackIter;
+                if (trackIter.discNumber == discNumber)
+                        track = trackIter;
                 break;
             } else if ([trackIter.title isEqualToString:trackName]) {
                 track = trackIter;
@@ -83,6 +110,9 @@
         if (trackNumber.integerValue == 0)
             trackNumber = @(tracks.count + 1);
         track.trackNumber = trackNumber;
+        track.title = trackName;
+        if (discNumber)
+            track.discNumber = discNumber;
         [album addTrack:track];
     }
     return track;
@@ -90,25 +120,45 @@
 
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
 {
-    return [MLAlbumTrack trackWithAlbumName:albumName
-                                trackNumber:trackNumber
-                                  trackName:@""
-                             createIfNeeded:createIfNeeded
-                                 wasCreated:wasCreated];
+    NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+
+    if (albumName)
+        [mutDict setObject:albumName forKey:MLAlbumTrackAlbumName];
+    if (trackNumber)
+        [mutDict setObject:trackNumber forKey:MLAlbumTrackNumber];
+
+    return [MLAlbumTrack trackWithMetadata:[NSDictionary dictionaryWithDictionary:mutDict] createIfNeeded:createIfNeeded wasCreated:wasCreated];
 }
 
 + (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName trackNumber:(NSNumber *)trackNumber trackName:(NSString *)trackName createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
 {
+    NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+
+    if (albumName)
+        [mutDict setObject:albumName forKey:MLAlbumTrackAlbumName];
+    if (trackNumber)
+        [mutDict setObject:trackNumber forKey:MLAlbumTrackNumber];
+    if (trackName)
+        [mutDict setObject:trackName forKey:MLAlbumTrackTrackName];
+
+    return [MLAlbumTrack trackWithMetadata:[NSDictionary dictionaryWithDictionary:mutDict] createIfNeeded:createIfNeeded wasCreated:wasCreated];
+}
+
++ (MLAlbumTrack *)trackWithMetadata:(NSDictionary *)metadata createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated
+{
+    NSString *albumName = metadata[MLAlbumTrackAlbumName];
     MLAlbum *album = [MLAlbum albumWithName:albumName];
     *wasCreated = NO;
+
     if (!album && createIfNeeded) {
         *wasCreated = YES;
         album = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Album"];
         album.name = albumName ? albumName : @"";
-    } else if (!album && !createIfNeeded)
+    }
+    if (!album && !createIfNeeded)
         return nil;
 
-    return [MLAlbumTrack trackWithAlbum:album trackNumber:trackNumber trackName:trackName createIfNeeded:createIfNeeded];
+    return [MLAlbumTrack trackWithAlbum:album metadata:metadata createIfNeeded:createIfNeeded wasCreated:wasCreated];
 }
 
 @dynamic primitiveUnread;
@@ -129,6 +179,7 @@
 @dynamic genre;
 @dynamic title;
 @dynamic trackNumber;
+@dynamic discNumber;
 @dynamic album;
 @dynamic files;
 @dynamic containsArtwork;
