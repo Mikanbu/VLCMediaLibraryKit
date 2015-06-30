@@ -36,8 +36,6 @@
 
 #ifdef MLKIT_READONLY_TARGET
 
-#warning MLKIT_READONLY_TARGET
-
 @implementation MLFileParserQueue
 
 + (MLFileParserQueue *)sharedFileParserQueue

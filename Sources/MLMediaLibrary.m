@@ -27,9 +27,6 @@
 
 #import "MLMediaLibrary.h"
 #import "MLTitleDecrapifier.h"
-#import "MLMovieInfoGrabber.h"
-#import "MLTVShowInfoGrabber.h"
-#import "MLTVShowEpisodesInfoGrabber.h"
 #import "MLFile.h"
 #import "MLLabel.h"
 #import "MLShowEpisode.h"
@@ -41,6 +38,12 @@
 #import "MLCrashPreventer.h"
 #import "MLMediaLibrary+Migration.h"
 #import <sys/sysctl.h> // for sysctlbyname
+
+#if HAVE_BLOCK
+#import "MLMovieInfoGrabber.h"
+#import "MLTVShowInfoGrabber.h"
+#import "MLTVShowEpisodesInfoGrabber.h"
+#endif
 
 @interface MLMediaLibrary ()
 {
@@ -57,16 +60,15 @@
 }
 @end
 
-#define DEBUG 1
 
 // Pref key
 static NSString *kLastTVDBUpdateServerTime = @"MLLastTVDBUpdateServerTime";
 static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 #if HAVE_BLOCK
-@interface MLMediaLibrary ()
-#else
 @interface MLMediaLibrary () <MLMovieInfoGrabberDelegate, MLTVShowEpisodesInfoGrabberDelegate, MLTVShowInfoGrabberDelegate>
+#else
+@interface MLMediaLibrary ()
 #endif
 - (NSManagedObjectContext *)managedObjectContext;
 - (NSString *)databaseFolderPath;
@@ -415,7 +417,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #pragma mark -
 #pragma mark Online meta data grabbing
 
-#if !HAVE_BLOCK
+#if HAVE_BLOCK
 - (void)tvShowEpisodesInfoGrabberDidFinishGrabbing:(MLTVShowEpisodesInfoGrabber *)grabber
 {
     MLShow *show = grabber.userData;
@@ -551,11 +553,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
         }];
     }];
-#else
-    MLTVShowInfoGrabber *grabber = [[MLTVShowInfoGrabber alloc] init];
-    grabber.delegate = self;
-    grabber.userData = show;
-    [grabber fetchServerTime];
 #endif
 }
 
@@ -603,7 +600,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
  * MLFile auto detection
  */
 
-#if !HAVE_BLOCK
+#if HAVE_BLOCK
 - (void)movieInfoGrabber:(MLMovieInfoGrabber *)grabber didFailWithError:(NSError *)error
 {
     MLFile *file = grabber.userData;
@@ -644,7 +641,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     if (!_allowNetworkAccess)
         return;
-
+#if HAVE_BLOCK
     // Go online and fetch info.
 
     // We don't care about keeping a reference to track the item during its life span
@@ -653,7 +650,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     APLog(@"Looking up for Movie '%@'", file.title);
 
-#if HAVE_BLOCK
+
     [grabber lookUpForTitle:file.title andExecuteBlock:^(NSError *err){
         if (err) {
             [self errorWhenFetchingMetaDataForFile:file];
@@ -673,10 +670,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             [self noMetaDataInRemoteDBForFile:file];
         file.hasFetchedInfo = [NSNumber numberWithBool:YES];
     }];
-#else
-    grabber.userData = file;
-    grabber.delegate = self;
-    [grabber lookUpForTitle:file.title];
 #endif
 }
 
@@ -767,7 +760,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #pragma mark -
 #pragma mark DB Updates
 
-#if !HAVE_BLOCK
+#if HAVE_BLOCK
 - (void)tvShowInfoGrabber:(MLTVShowInfoGrabber *)grabber didFetchUpdates:(NSArray *)updates
 {
     NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
@@ -883,9 +876,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     for (MLShow *show in results)
         [self fetchMetaDataForShow:show];
 
+#if HAVE_BLOCK
     // Get updated TV Shows
     NSNumber *lastServerTime = @([[NSUserDefaults standardUserDefaults] integerForKey:kLastTVDBUpdateServerTime]);
-#if HAVE_BLOCK
+
     [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
         NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
         [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
@@ -893,10 +887,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         for (MLShow *show in results)
             [self fetchMetaDataForShow:show];
     }];
-#else
-    MLTVShowInfoGrabber *grabber = [[MLTVShowInfoGrabber alloc] init];
-    grabber.delegate = self;
-    [grabber fetchUpdatesSinceServerTime:lastServerTime];
 #endif
     /* Update every hour - FIXME: Preferences key */
     [self performSelector:@selector(updateMediaDatabase) withObject:nil afterDelay:60 * 60];
