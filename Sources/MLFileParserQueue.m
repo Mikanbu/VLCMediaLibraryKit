@@ -267,13 +267,6 @@
         MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
         [sharedLibrary computeThumbnailForFile:file];
         [sharedLibrary fetchMetaDataForFile:file];
-
-        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file.url.absoluteString error:nil];
-        NSNumber *size = attributes[NSFileSize]; // FIXME [result valueForAttribute:@"kMDItemFSSize"];
-        if ([size longLongValue] < 150000000) /* 150 MB */
-            file.type = kMLFileTypeClip;
-        else
-            file.type = kMLFileTypeMovie;
     }
     file.hasFetchedInfo = @(YES);
     [self endParsing];
