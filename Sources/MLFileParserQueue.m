@@ -144,7 +144,7 @@
     _parsing = NO;
     [_timeOutTimer invalidate];
 
-    APLog(@"Parsed %@ - %lu tracks", media, [[_media tracksInformation] count]);
+    APLog(@"Parsed %@ - %lu tracks", media, (unsigned long)[[_media tracksInformation] count]);
 
     if (_media.delegate != self)
         return;

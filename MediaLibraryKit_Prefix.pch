@@ -33,20 +33,16 @@
 // FIXME
 #define HAVE_BLOCK 0
 
-#define NSXMLDocument CXMLDocument
-#define NSXMLNode CXMLNode
-
-#import "TouchXML.h"
-
 #import <UIKit/UIKit.h>
 #import <MobileVLCKit/MobileVLCKit.h>
 
 #else
 #define HAVE_BLOCK 1
 #import <VLCKit/VLCKit.h>
+#import "NSXMLNode_Additions.h"
+
 #endif
 
-#import "NSXMLNode_Additions.h"
 #import "UIImage+MLKit.h"
 
 #ifndef NDEBUG

@@ -13,26 +13,11 @@
 		7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
 		7D0EF52B170885130003ED47 /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
-		7D0EF52D170885130003ED47 /* MLMovieInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51E170885130003ED47 /* MLMovieInfoGrabber.m */; };
 		7D0EF52E170885130003ED47 /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
 		7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
 		7D0EF530170885130003ED47 /* MLThumbnailerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */; };
 		7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
-		7D0EF532170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */; };
-		7D0EF533170885130003ED47 /* MLTVShowInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */; };
 		7D0EF534170885130003ED47 /* MLURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF526170885130003ED47 /* MLURLConnection.m */; };
-		7D0EF535170885130003ED47 /* NSXMLNode_Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF527170885130003ED47 /* NSXMLNode_Additions.m */; };
-		7D0EF551170885230003ED47 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53A170885230003ED47 /* CXMLDocument_CreationExtensions.m */; };
-		7D0EF552170885230003ED47 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53C170885230003ED47 /* CXMLNode_CreationExtensions.m */; };
-		7D0EF553170885230003ED47 /* CXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53E170885230003ED47 /* CXMLDocument.m */; };
-		7D0EF554170885230003ED47 /* CXMLDocument_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF540170885230003ED47 /* CXMLDocument_PrivateExtensions.m */; };
-		7D0EF555170885230003ED47 /* CXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF542170885230003ED47 /* CXMLElement.m */; };
-		7D0EF556170885230003ED47 /* CXMLElement_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF544170885230003ED47 /* CXMLElement_CreationExtensions.m */; };
-		7D0EF557170885230003ED47 /* CXMLElement_ElementTreeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF546170885230003ED47 /* CXMLElement_ElementTreeExtensions.m */; };
-		7D0EF558170885230003ED47 /* CXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF548170885230003ED47 /* CXMLNode.m */; };
-		7D0EF559170885230003ED47 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */; };
-		7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */; };
-		7D0EF55B170885230003ED47 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54F170885230003ED47 /* CTidy.m */; };
 		7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
 		7D84E4E71B42BA9900EA7D1F /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
 		7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
@@ -41,33 +26,16 @@
 		7D84E4EB1B42BA9900EA7D1F /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
 		7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
-		7D84E4EE1B42BA9900EA7D1F /* MLMovieInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51E170885130003ED47 /* MLMovieInfoGrabber.m */; };
 		7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
 		7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
 		7D84E4F11B42BA9900EA7D1F /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		7D84E4F21B42BA9900EA7D1F /* MLThumbnailerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */; };
 		7D84E4F31B42BA9900EA7D1F /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
-		7D84E4F41B42BA9900EA7D1F /* MLTVShowEpisodesInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */; };
-		7D84E4F51B42BA9900EA7D1F /* MLTVShowInfoGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */; };
 		7D84E4F61B42BA9900EA7D1F /* MLURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF526170885130003ED47 /* MLURLConnection.m */; };
 		7D84E4F71B42BA9900EA7D1F /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
 		7D84E4F81B42BA9900EA7D1F /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
-		7D84E4F91B42BA9900EA7D1F /* NSXMLNode_Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF527170885130003ED47 /* NSXMLNode_Additions.m */; };
-		7D84E4FA1B42BA9900EA7D1F /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53A170885230003ED47 /* CXMLDocument_CreationExtensions.m */; };
-		7D84E4FB1B42BA9900EA7D1F /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53C170885230003ED47 /* CXMLNode_CreationExtensions.m */; };
-		7D84E4FC1B42BA9900EA7D1F /* CXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF53E170885230003ED47 /* CXMLDocument.m */; };
-		7D84E4FD1B42BA9900EA7D1F /* CXMLDocument_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF540170885230003ED47 /* CXMLDocument_PrivateExtensions.m */; };
 		7D84E4FE1B42BA9900EA7D1F /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
-		7D84E4FF1B42BA9900EA7D1F /* CXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF542170885230003ED47 /* CXMLElement.m */; };
-		7D84E5001B42BA9900EA7D1F /* CXMLElement_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF544170885230003ED47 /* CXMLElement_CreationExtensions.m */; };
-		7D84E5011B42BA9900EA7D1F /* CXMLElement_ElementTreeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF546170885230003ED47 /* CXMLElement_ElementTreeExtensions.m */; };
 		7D84E5021B42BA9900EA7D1F /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
-		7D84E5031B42BA9900EA7D1F /* CXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF548170885230003ED47 /* CXMLNode.m */; };
-		7D84E5041B42BA9900EA7D1F /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */; };
-		7D84E5051B42BA9900EA7D1F /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */; };
-		7D84E5061B42BA9900EA7D1F /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF54F170885230003ED47 /* CTidy.m */; };
-		7D84E5071B42BA9900EA7D1F /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
-		7D84E5081B42BA9900EA7D1F /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 		7D84E50A1B42BA9900EA7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
 		7D84E50C1B42BA9900EA7D1F /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D84E50D1B42BA9900EA7D1F /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
@@ -78,8 +46,6 @@
 		7D84E5121B42BA9900EA7D1F /* MLShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
 		7D84E5131B42BA9900EA7D1F /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 		7D84E5141B42BA9900EA7D1F /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
-		7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */; };
-		7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */; };
 		7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
 		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
@@ -483,33 +449,16 @@
 				DDC7BFAE1B03825F00160878 /* MediaLibrary.xcdatamodeld in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
-				7D0EF52D170885130003ED47 /* MLMovieInfoGrabber.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
 				DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */,
 				7D0EF530170885130003ED47 /* MLThumbnailerQueue.m in Sources */,
 				7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */,
-				7D0EF532170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m in Sources */,
-				7D0EF533170885130003ED47 /* MLTVShowInfoGrabber.m in Sources */,
 				7D0EF534170885130003ED47 /* MLURLConnection.m in Sources */,
 				7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */,
 				7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */,
-				7D0EF535170885130003ED47 /* NSXMLNode_Additions.m in Sources */,
-				7D0EF551170885230003ED47 /* CXMLDocument_CreationExtensions.m in Sources */,
-				7D0EF552170885230003ED47 /* CXMLNode_CreationExtensions.m in Sources */,
-				7D0EF553170885230003ED47 /* CXMLDocument.m in Sources */,
-				7D0EF554170885230003ED47 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */,
-				7D0EF555170885230003ED47 /* CXMLElement.m in Sources */,
-				7D0EF556170885230003ED47 /* CXMLElement_CreationExtensions.m in Sources */,
-				7D0EF557170885230003ED47 /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */,
-				7D0EF558170885230003ED47 /* CXMLNode.m in Sources */,
-				7D0EF559170885230003ED47 /* CXMLNode_PrivateExtensions.m in Sources */,
-				7D0EF55A170885230003ED47 /* CXMLNode_XPathExtensions.m in Sources */,
-				7D0EF55B170885230003ED47 /* CTidy.m in Sources */,
-				7D8ECFE21708FEAE00A989E9 /* CXHTMLDocument.m in Sources */,
-				7D8ECFE51708FEC000A989E9 /* CXMLNamespaceNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,33 +473,16 @@
 				7D84E4EB1B42BA9900EA7D1F /* MediaLibrary.xcdatamodeld in Sources */,
 				7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */,
 				7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */,
-				7D84E4EE1B42BA9900EA7D1F /* MLMovieInfoGrabber.m in Sources */,
 				7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */,
 				7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */,
 				7D84E4F11B42BA9900EA7D1F /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */,
 				7D84E4F21B42BA9900EA7D1F /* MLThumbnailerQueue.m in Sources */,
 				7D84E4F31B42BA9900EA7D1F /* MLTitleDecrapifier.m in Sources */,
-				7D84E4F41B42BA9900EA7D1F /* MLTVShowEpisodesInfoGrabber.m in Sources */,
-				7D84E4F51B42BA9900EA7D1F /* MLTVShowInfoGrabber.m in Sources */,
 				7D84E4F61B42BA9900EA7D1F /* MLURLConnection.m in Sources */,
 				7D84E4F71B42BA9900EA7D1F /* MLAlbumTrack.m in Sources */,
 				7D84E4F81B42BA9900EA7D1F /* MLAlbum.m in Sources */,
-				7D84E4F91B42BA9900EA7D1F /* NSXMLNode_Additions.m in Sources */,
-				7D84E4FA1B42BA9900EA7D1F /* CXMLDocument_CreationExtensions.m in Sources */,
-				7D84E4FB1B42BA9900EA7D1F /* CXMLNode_CreationExtensions.m in Sources */,
-				7D84E4FC1B42BA9900EA7D1F /* CXMLDocument.m in Sources */,
-				7D84E4FD1B42BA9900EA7D1F /* CXMLDocument_PrivateExtensions.m in Sources */,
 				7D84E4FE1B42BA9900EA7D1F /* UIImage+MLKit.m in Sources */,
-				7D84E4FF1B42BA9900EA7D1F /* CXMLElement.m in Sources */,
-				7D84E5001B42BA9900EA7D1F /* CXMLElement_CreationExtensions.m in Sources */,
-				7D84E5011B42BA9900EA7D1F /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				7D84E5021B42BA9900EA7D1F /* MLMediaLibrary+Migration.m in Sources */,
-				7D84E5031B42BA9900EA7D1F /* CXMLNode.m in Sources */,
-				7D84E5041B42BA9900EA7D1F /* CXMLNode_PrivateExtensions.m in Sources */,
-				7D84E5051B42BA9900EA7D1F /* CXMLNode_XPathExtensions.m in Sources */,
-				7D84E5061B42BA9900EA7D1F /* CTidy.m in Sources */,
-				7D84E5071B42BA9900EA7D1F /* CXHTMLDocument.m in Sources */,
-				7D84E5081B42BA9900EA7D1F /* CXMLNamespaceNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
