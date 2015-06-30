@@ -12,6 +12,12 @@ Deprecated Public APIs:
   trackWithAlbumName:trackNumber:createIfNeeded:wasCreated:
   trackWithAlbumName:trackNumber:trackName:createIfNeeded:wasCreated:
 
+Version 2.5.2
+-------------
+* Smaller library size by increased dead code stripping
+* Added new target to create a read-only variant which
+  does not depend on VLCKit
+
 Version 2.5.1
 -------------
 Added Public APIs:
