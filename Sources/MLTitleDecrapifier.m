@@ -26,6 +26,34 @@
 
 #import "MLTitleDecrapifier.h"
 
+#ifdef MLKIT_READONLY_TARGET
+
+@implementation MLTitleDecrapifier
+
++ (NSString *)decrapify:(NSString *)string;
+{
+    return @"";
+}
+
++ (BOOL)isTVShowEpisodeTitle:(NSString *)string
+{
+    return NO;
+}
+
++ (NSDictionary *)tvShowEpisodeInfoFromString:(NSString *)string
+{
+    return @{};
+}
+
++ (NSDictionary *)audioContentInfoFromFile:(MLFile *)file
+{
+    return @{};
+}
+
+@end
+
+#else
+
 @implementation MLTitleDecrapifier
 + (NSString *)decrapify:(NSString *)string
 {
@@ -241,3 +269,5 @@ returnThings:
 }
 
 @end
+
+#endif

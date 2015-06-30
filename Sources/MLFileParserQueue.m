@@ -34,6 +34,45 @@
 #import <CommonCrypto/CommonDigest.h> // for MD5
 #import "MLThumbnailerQueue.h"
 
+#ifdef MLKIT_READONLY_TARGET
+
+#warning MLKIT_READONLY_TARGET
+
+@implementation MLFileParserQueue
+
++ (MLFileParserQueue *)sharedFileParserQueue
+{
+    static MLFileParserQueue *shared = nil;
+    if (!shared) {
+        shared = [[MLFileParserQueue alloc] init];
+    }
+    return shared;
+}
+
+- (void)addFile:(MLFile *)file
+{
+}
+
+- (void)setHighPriorityForFile:(MLFile *)file
+{
+}
+
+- (void)setDefaultPriorityForFile:(MLFile *)file
+{
+}
+
+- (void)stop
+{
+}
+
+- (void)resume
+{
+}
+
+@end
+
+#else
+
 @interface MLFileParserQueue ()
 {
     NSDictionary *_fileDescriptionToOperation;
@@ -361,3 +400,5 @@ static inline NSString *hashFromFile(MLFile *file)
 }
 
 @end
+
+#endif

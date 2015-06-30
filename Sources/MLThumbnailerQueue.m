@@ -30,6 +30,43 @@
 #import "MLMediaLibrary.h"
 #import "MLFileParserQueue.h"
 
+#ifdef MLKIT_READONLY_TARGET
+
+@implementation MLThumbnailerQueue
+
++ (MLThumbnailerQueue *)sharedThumbnailerQueue
+{
+    static MLThumbnailerQueue *shared = nil;
+    if (!shared) {
+        shared = [[MLThumbnailerQueue alloc] init];
+    }
+    return shared;
+}
+
+- (void)addFile:(MLFile *)file
+{
+}
+
+- (void)setHighPriorityForFile:(MLFile *)file
+{
+}
+
+- (void)setDefaultPriorityForFile:(MLFile *)file
+{
+}
+
+- (void)stop
+{
+}
+
+- (void)resume
+{
+}
+
+@end
+
+#else
+
 @interface ThumbnailOperation : NSOperation <VLCMediaThumbnailerDelegate>
 {
     MLFile *_file;
@@ -200,3 +237,5 @@ static inline NSString *hashFromFile(MLFile *file)
 }
 
 @end
+
+#endif
