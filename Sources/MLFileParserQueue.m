@@ -204,35 +204,46 @@
 
             BOOL wasCreated = NO;
 
-            NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
-            if (albumName)
-                [mutDict setObject:albumName forKey:MLAlbumTrackAlbumName];
-            if (title)
-                [mutDict setObject:title forKey:MLAlbumTrackTrackName];
-            if (trackNumber)
-                [mutDict setObject:@([trackNumber integerValue]) forKey:MLAlbumTrackNumber];
-            if (discNumber)
-                [mutDict setObject:@([discNumber integerValue]) forKey:MLAlbumTrackDiscNumber];
+            @try {
+                NSMutableDictionary *mutDict = [NSMutableDictionary dictionary];
+                if (albumName)
+                    [mutDict setObject:albumName forKey:MLAlbumTrackAlbumName];
+                if (title)
+                    [mutDict setObject:title forKey:MLAlbumTrackTrackName];
+                if (trackNumber)
+                    [mutDict setObject:@([trackNumber integerValue]) forKey:MLAlbumTrackNumber];
+                if (discNumber)
+                    [mutDict setObject:@([discNumber integerValue]) forKey:MLAlbumTrackDiscNumber];
 
-            MLAlbumTrack *track = [MLAlbumTrack trackWithMetadata:[NSDictionary dictionaryWithDictionary:mutDict]
-                                                   createIfNeeded:YES
-                                                       wasCreated:&wasCreated];
-            if (track) {
-                album = track.album;
-                track.title = title ? title : @"";
-                track.artist = artist ? artist : @"";
-                track.genre = genre ? genre : @"";
-                album.releaseYear = releaseYear ? releaseYear : @"";
+                MLAlbumTrack *track = [MLAlbumTrack trackWithMetadata:[NSDictionary dictionaryWithDictionary:mutDict]
+                                                       createIfNeeded:YES
+                                                           wasCreated:&wasCreated];
+                if (track) {
+                    album = track.album;
+                    track.title = title ? title : @"";
+                    track.artist = artist ? artist : @"";
+                    track.genre = genre ? genre : @"";
+                    album.releaseYear = releaseYear ? releaseYear : @"";
 
-                if (!track.title || [track.title isEqualToString:@""])
-                    track.title = [MLTitleDecrapifier decrapify:file.title];
+                    if (!track.title || [track.title isEqualToString:@""])
+                        track.title = [MLTitleDecrapifier decrapify:file.title];
 
-                [track addFilesObject:file];
-                file.albumTrack = track;
+                    [track addFilesObject:file];
+                    file.albumTrack = track;
+                }
+            }
+            @catch (NSException *exception) {
+                APLog(@"album track creation failed");
             }
         }
 
-        file.type = kMLFileTypeAudio;
+        @try {
+            file.type = kMLFileTypeAudio;
+        }
+        @catch (NSException *exception) {
+            APLog(@"file type setting failed");
+        }
+
         APLog(@"'%@' is an audio file, fetching artwork", file.title);
         NSString *artist, *albumName, *title;
         BOOL skipOperation = NO;
@@ -251,24 +262,40 @@
             NSDictionary *poorMansContentInfo = [MLTitleDecrapifier audioContentInfoFromFile:file];
             if (poorMansContentInfo)
                 title = poorMansContentInfo[VLCMetaInformationTitle];
-            file.title = title;
+            @try {
+                file.title = title;
+            }
+            @catch (NSException *exception) {
+                APLog(@"file title setting failed");
+            }
         }
 
         if (!skipOperation) {
-            NSString *artworkPath = [self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:artworkPath]) {
-                file.computedThumbnail = [UIImage scaleImage:[UIImage imageWithContentsOfFile:artworkPath]
-                                                   toFitRect:(CGRect){CGPointZero, [UIImage preferredThumbnailSizeForDevice]}];
+            @try {
+                NSString *artworkPath = [self artworkPathForMediaItemWithTitle:title Artist:artist andAlbumName:albumName];
+                if ([[NSFileManager defaultManager] fileExistsAtPath:artworkPath]) {
+                    file.computedThumbnail = [UIImage scaleImage:[UIImage imageWithContentsOfFile:artworkPath]
+                                                       toFitRect:(CGRect){CGPointZero, [UIImage preferredThumbnailSizeForDevice]}];
+                }
+                if (file.computedThumbnail == nil)
+                    file.albumTrack.containsArtwork = NO;
             }
-            if (file.computedThumbnail == nil)
-                file.albumTrack.containsArtwork = NO;
+            @catch (NSException *exception) {
+                APLog(@"file thumbnail setting failed");
+            }
         }
     } else {
         MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
         [sharedLibrary computeThumbnailForFile:file];
         [sharedLibrary fetchMetaDataForFile:file];
     }
-    file.hasFetchedInfo = @(YES);
+    @try {
+        file.hasFetchedInfo = @(YES);
+    }
+    @catch (NSException *exception) {
+        APLog(@"failed to set that we fetch info for the file");
+    }
+
     [self endParsing];
 }
 
