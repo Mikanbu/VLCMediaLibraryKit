@@ -50,6 +50,8 @@
 + (MLShow *)showWithName:(NSString *)name
 {
     NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Show"];
+    if (!request)
+        return nil;
     [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
 
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];

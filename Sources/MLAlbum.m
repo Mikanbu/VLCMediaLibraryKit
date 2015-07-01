@@ -49,6 +49,8 @@
 + (MLAlbum *)albumWithName:(NSString *)name
 {
     NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Album"];
+    if (!request)
+        return nil;
     [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
 
     NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];

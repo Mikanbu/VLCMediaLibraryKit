@@ -733,7 +733,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"path == %@", relativePath]];
     }
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
-
+    if (!request)
+        return;
     [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
 
     APLog(@"Fetching");
@@ -764,6 +765,9 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 - (void)tvShowInfoGrabber:(MLTVShowInfoGrabber *)grabber didFetchUpdates:(NSArray *)updates
 {
     NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
+    if (!request)
+        return;
+
     [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:nil];
     for (MLShow *show in results)
@@ -776,6 +780,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     [self libraryDidDisappear];
     // Remove no more present files
     NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
+    if (!request)
+        return;
     NSManagedObjectContext *moc = [self managedObjectContext];
     if (!moc)
         return;
@@ -834,6 +840,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // Get the file to parse
     request = [self fetchRequestForEntity:@"File"];
+    if (!request)
+        return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && tracks.@count == 0"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
@@ -842,6 +850,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!_allowNetworkAccess) {
         // Always attempt to fetch
         request = [self fetchRequestForEntity:@"File"];
+        if (!request)
+            return;
         [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
         results = [moc executeFetchRequest:request error:nil];
         for (MLFile *file in results) {
@@ -853,6 +863,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // Get the thumbnails to compute
     request = [self fetchRequestForEntity:@"File"];
+    if (!request)
+        return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results) {
@@ -864,6 +876,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // Get to fetch meta data
     request = [self fetchRequestForEntity:@"File"];
+    if (!request)
+        return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLFile *file in results)
@@ -871,6 +885,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     // Get to fetch show info
     request = [self fetchRequestForEntity:@"Show"];
+    if (!request)
+        return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"lastSyncDate == 0"]];
     results = [moc executeFetchRequest:request error:nil];
     for (MLShow *show in results)
@@ -882,6 +898,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
         NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
+        if (!request)
+            return;
         [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
         NSArray *results = [moc executeFetchRequest:request error:nil];
         for (MLShow *show in results)
