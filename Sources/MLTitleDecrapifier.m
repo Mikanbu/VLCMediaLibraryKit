@@ -57,6 +57,9 @@
 @implementation MLTitleDecrapifier
 + (NSString *)decrapify:(NSString *)string
 {
+    if (string == nil)
+        return nil;
+
     static NSArray *ignoredWords = nil;
     if (!ignoredWords)
         ignoredWords = [[NSArray alloc] initWithObjects:
