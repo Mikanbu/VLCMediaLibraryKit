@@ -268,7 +268,10 @@ returnThings:
     } else
         title = [self decrapify:title];
 
-    return @{VLCMetaInformationTitle: title};
+    if (title != nil)
+        return @{VLCMetaInformationTitle: title};
+
+    return @{};
 }
 
 @end
