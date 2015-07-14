@@ -30,6 +30,11 @@
 #import <CoreData/CoreData.h>
 
 #if TARGET_OS_IPHONE
+
+#ifndef __IPHONE_9_0
+#error "This project uses features only available in iOS SDK 9.0 and later."
+#endif
+
 // FIXME
 #define HAVE_BLOCK 0
 
@@ -52,6 +57,8 @@
 #endif
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define SYSTEM_RUNS_IOS9 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")
 
 #ifdef __IPHONE_7_0
 #define SYSTEM_RUNS_IOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")

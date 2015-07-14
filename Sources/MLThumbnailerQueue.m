@@ -132,8 +132,10 @@
     APLog(@"Finished thumbnail for %@", file.title);
     if (thumbnail) {
         UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnail];
-        if (thumbnailImage)
+        if (thumbnailImage) {
             file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
+            [file updateCoreSpotlightEntry];
+        }
     }
 
     [self endThumbnailing];

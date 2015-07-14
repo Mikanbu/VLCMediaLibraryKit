@@ -24,6 +24,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import <CommonCrypto/CommonDigest.h> // for MD5
+
 #import "MLFileParserQueue.h"
 #import "MLFile.h"
 #import "MLMediaLibrary.h"
@@ -31,7 +33,6 @@
 #import "MLAlbumTrack.h"
 #import "MLAlbum.h"
 #import "MLTitleDecrapifier.h"
-#import <CommonCrypto/CommonDigest.h> // for MD5
 #import "MLThumbnailerQueue.h"
 
 #ifdef MLKIT_READONLY_TARGET
@@ -295,6 +296,7 @@
     @catch (NSException *exception) {
         APLog(@"failed to set that we fetch info for the file");
     }
+    [file updateCoreSpotlightEntry];
 
     [self endParsing];
 }

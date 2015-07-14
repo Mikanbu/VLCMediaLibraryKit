@@ -415,4 +415,90 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     return [fileSize unsignedLongLongValue];
 }
 
+- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
+{
+#if TARGET_OS_IPHONE
+    if (!SYSTEM_RUNS_IOS9)
+        return nil;
+
+    NSString *workString;
+
+    CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"public.audiovisual-content"];
+    attributeSet.title = self.title;
+    attributeSet.metadataModificationDate = [NSDate date];
+    attributeSet.addedDate = [NSDate date];
+    attributeSet.duration = @(self.duration.intValue / 1000);
+    attributeSet.streamable = @(0);
+    attributeSet.deliveryType = @(0);
+    attributeSet.local = @(1);
+    attributeSet.playCount = @(0);
+
+    UIImage *computedThumb = self.computedThumbnail;
+    if (computedThumb) {
+        attributeSet.thumbnailData = UIImageJPEGRepresentation(computedThumb, .9);
+        computedThumb = nil;
+    }
+
+    NSArray *tracks = [[self tracks] allObjects];
+    NSUInteger trackCount = tracks.count;
+    NSMutableArray *codecs = [NSMutableArray new];
+    NSMutableArray *languages = [NSMutableArray new];
+    for (NSUInteger x = 0; x < trackCount; x++) {
+        NSManagedObject *track = tracks[x];
+        [codecs addObject:[track valueForKey:@"codec"]];
+        NSString *language = [track valueForKey:@"language"];
+        if (language != nil)
+            [languages addObject:language];
+
+        NSString *trackEntityName = [[track entity] name];
+        if ([trackEntityName isEqualToString:@"VideoTrackInformation"]) {
+            attributeSet.videoBitRate = [track valueForKey:@"bitrate"];
+        } else if ([trackEntityName isEqualToString:@"AudioTrackInformation"]) {
+            attributeSet.audioSampleRate = [track valueForKey:@"sampleRate"];
+            attributeSet.audioChannelCount = [track valueForKey:@"channelsNumber"];
+            attributeSet.audioBitRate = [track valueForKey:@"bitrate"];
+        }
+    }
+    attributeSet.codecs = [NSArray arrayWithArray:codecs];
+    attributeSet.languages = [NSArray arrayWithArray:languages];
+
+    workString = self.genre;
+    if (workString)
+        attributeSet.genre = workString;
+
+    MLAlbumTrack *albumTrack = self.albumTrack;
+    if (albumTrack) {
+        attributeSet.artist = albumTrack.artist;
+        attributeSet.title = albumTrack.title;
+        attributeSet.audioTrackNumber = albumTrack.trackNumber;
+        MLAlbum *album = albumTrack.album;
+        if (album) {
+            attributeSet.album = album.name;
+        }
+        if (attributeSet.genre == nil)
+            attributeSet.genre = albumTrack.genre;
+    }
+
+    return attributeSet;
+#else
+    return nil;
+#endif
+}
+
+- (void)updateCoreSpotlightEntry
+{
+#if TARGET_OS_IPHONE
+    if (SYSTEM_RUNS_IOS9) {
+        /* create final CS item, which will replace the earlier entity */
+        CSSearchableItemAttributeSet *attributeSet = [self coreSpotlightAttributeSet];
+
+        CSSearchableItem *item;
+        item = [[CSSearchableItem alloc] initWithUniqueIdentifier:self.objectID.URIRepresentation.absoluteString
+                                                 domainIdentifier:[[MLMediaLibrary sharedMediaLibrary] applicationGroupIdentifier]
+                                                     attributeSet:attributeSet];
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:nil];
+    }
+#endif
+}
+
 @end

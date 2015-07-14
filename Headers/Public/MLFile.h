@@ -26,6 +26,7 @@
  *****************************************************************************/
 
 #import <CoreData/CoreData.h>
+#import <CoreSpotlight/CoreSpotlight.h>
 
 @class MLShowEpisode;
 @class MLAlbumTrack;
@@ -121,6 +122,9 @@ extern NSString *const MLFileThumbnailWasUpdated;
 - (NSManagedObject *)videoTrack;
 
 - (size_t)fileSizeInBytes;
+
+- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
+- (void)updateCoreSpotlightEntry;
 
 @end
 

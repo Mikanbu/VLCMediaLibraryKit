@@ -39,6 +39,10 @@
 #import "MLMediaLibrary+Migration.h"
 #import <sys/sysctl.h> // for sysctlbyname
 
+#if TARGET_OS_IPHONE
+#import <CoreSpotlight/CoreSpotlight.h>
+#endif
+
 #if HAVE_BLOCK
 #import "MLMovieInfoGrabber.h"
 #import "MLTVShowInfoGrabber.h"
@@ -676,6 +680,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #pragma mark -
 #pragma mark Adding file to the DB
 
+#ifdef MLKIT_READONLY_TARGET
+
+- (void)addFilePaths:(NSArray *)filepaths
+{
+}
+
+#else
+
 - (void)addFilePath:(NSString *)filePath
 {
     APLog(@"Adding Path %@", filePath);
@@ -712,6 +724,25 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         file.title = [MLTitleDecrapifier decrapify:[title stringByDeletingPathExtension]];
     else
         file.title = [title stringByDeletingPathExtension];
+
+#if TARGET_OS_IPHONE
+    if (SYSTEM_RUNS_IOS9) {
+        /* add a preliminary CS item, which will be replaced once we have more information */
+        CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"public.audiovisual-content"];
+        attributeSet.title = file.title;
+        attributeSet.displayName = file.title;
+        attributeSet.metadataModificationDate = [NSDate date];
+
+        CSSearchableItem *item;
+        item = [[CSSearchableItem alloc] initWithUniqueIdentifier:file.objectID.URIRepresentation.absoluteString
+                                                 domainIdentifier:_applicationGroupIdentifier
+                                                     attributeSet:attributeSet];
+        // Index the item.
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:^(NSError * __nullable error) {
+            NSLog(@"Search item indexed");
+        }];
+    }
+#endif
 
     [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 }
@@ -756,7 +787,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     for (NSString* path in filePathsToAdd)
         [self addFilePath:path];
 }
-
+#endif
 
 #pragma mark -
 #pragma mark DB Updates
@@ -774,6 +805,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         [self fetchMetaDataForShow:show];
 }
 #endif
+
+#ifdef MLKIT_READONLY_TARGET
+
+- (void)updateMediaDatabase
+{
+}
+
+#else
 
 - (void)updateMediaDatabase
 {
@@ -829,6 +868,15 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
             if (thumbExists)
                 [fileManager removeItemAtPath:thumbPath error:nil];
+
+            if (SYSTEM_RUNS_IOS9) {
+            /* remove file from CoreSpotlight */
+                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[file.objectID.URIRepresentation.absoluteString]
+                                                                               completionHandler:^(NSError * __nullable error) {
+                                                                                   NSLog(@"Removed %@ from index", file.objectID.URIRepresentation);
+                                                                               }];
+            }
+
             [moc deleteObject:file];
 #endif
         }
@@ -909,6 +957,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     /* Update every hour - FIXME: Preferences key */
     [self performSelector:@selector(updateMediaDatabase) withObject:nil afterDelay:60 * 60];
 }
+#endif
 
 - (void)applicationWillExit
 {
