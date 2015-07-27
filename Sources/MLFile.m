@@ -415,9 +415,9 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     return [fileSize unsignedLongLongValue];
 }
 
+#if TARGET_OS_IPHONE
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
 {
-#if TARGET_OS_IPHONE
     if (!SYSTEM_RUNS_IOS9)
         return nil;
 
@@ -480,14 +480,10 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     }
 
     return attributeSet;
-#else
-    return nil;
-#endif
 }
 
 - (void)updateCoreSpotlightEntry
 {
-#if TARGET_OS_IPHONE
     if (SYSTEM_RUNS_IOS9) {
         /* create final CS item, which will replace the earlier entity */
         CSSearchableItemAttributeSet *attributeSet = [self coreSpotlightAttributeSet];
@@ -498,7 +494,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
                                                      attributeSet:attributeSet];
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:nil];
     }
-#endif
 }
+#endif
 
 @end

@@ -26,7 +26,9 @@
  *****************************************************************************/
 
 #import <CoreData/CoreData.h>
+#if TARGET_OS_IPHONE
 #import <CoreSpotlight/CoreSpotlight.h>
+#endif
 
 @class MLShowEpisode;
 @class MLAlbumTrack;
@@ -123,8 +125,10 @@ extern NSString *const MLFileThumbnailWasUpdated;
 
 - (size_t)fileSizeInBytes;
 
+#if TARGET_OS_IPHONE
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
 - (void)updateCoreSpotlightEntry;
+#endif
 
 @end
 

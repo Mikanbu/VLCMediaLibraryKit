@@ -725,25 +725,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     else
         file.title = [title stringByDeletingPathExtension];
 
-#if TARGET_OS_IPHONE
-    if (SYSTEM_RUNS_IOS9) {
-        /* add a preliminary CS item, which will be replaced once we have more information */
-        CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"public.audiovisual-content"];
-        attributeSet.title = file.title;
-        attributeSet.displayName = file.title;
-        attributeSet.metadataModificationDate = [NSDate date];
-
-        CSSearchableItem *item;
-        item = [[CSSearchableItem alloc] initWithUniqueIdentifier:file.objectID.URIRepresentation.absoluteString
-                                                 domainIdentifier:_applicationGroupIdentifier
-                                                     attributeSet:attributeSet];
-        // Index the item.
-        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:^(NSError * __nullable error) {
-            NSLog(@"Search item indexed");
-        }];
-    }
-#endif
-
     [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 }
 
