@@ -26,6 +26,7 @@
 #import <CoreData/CoreData.h>
 
 @class MLShow;
+@class MLFile;
 
 @interface MLShowEpisode :  NSManagedObject
 
@@ -56,6 +57,6 @@
 - (void)removeFilesObject:(NSManagedObject *)value;
 - (void)addFiles:(NSSet *)value;
 - (void)removeFiles:(NSSet *)value;
-
+- (MLFile *)anyFileFromEpisode;
 @end
 

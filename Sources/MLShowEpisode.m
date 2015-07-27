@@ -27,6 +27,7 @@
 #import "MLMediaLibrary.h"
 #import "MLShowEpisode.h"
 #import "MLShow.h"
+#import "MLFile.h"
 
 @interface MLShowEpisode ()
 @property (nonatomic, strong) NSNumber *primitiveUnread;
@@ -139,4 +140,10 @@
 @dynamic name;
 @dynamic show;
 @dynamic files;
+
+- (MLFile *)anyFileFromTrack
+{
+    return (MLFile *)self.files.anyObject;
+}
+
 @end

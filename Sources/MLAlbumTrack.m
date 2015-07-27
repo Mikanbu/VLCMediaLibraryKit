@@ -26,6 +26,7 @@
 #import "MLMediaLibrary.h"
 #import "MLAlbumTrack.h"
 #import "MLAlbum.h"
+#import "MLFile.h"
 
 NSString *const MLAlbumTrackAlbum       = @"MLAlbumTrackAlbum";
 NSString *const MLAlbumTrackAlbumName   = @"MLAlbumTrackAlbumName";
@@ -183,4 +184,10 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
 @dynamic album;
 @dynamic files;
 @dynamic containsArtwork;
+
+- (MLFile *)anyFileFromTrack
+{
+    return (MLFile *)self.files.anyObject;
+}
+
 @end

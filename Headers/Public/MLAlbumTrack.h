@@ -30,6 +30,8 @@ extern NSString *const MLAlbumTrackNumber;
 extern NSString *const MLAlbumTrackTrackName;
 extern NSString *const MLAlbumTrackDiscNumber;
 
+@class MLFile;
+
 @interface MLAlbumTrack : NSManagedObject
 
 + (NSArray *)allTracks;
@@ -79,4 +81,5 @@ extern NSString *const MLAlbumTrackDiscNumber;
 - (void)removeFilesObject:(NSManagedObject *)value;
 - (void)addFiles:(NSSet *)value;
 - (void)removeFiles:(NSSet *)value;
+- (MLFile *)anyFileFromTrack;
 @end
