@@ -39,7 +39,9 @@
 #define HAVE_BLOCK 0
 
 #import <UIKit/UIKit.h>
+#ifndef MLKIT_READONLY_TARGET
 #import <MobileVLCKit/MobileVLCKit.h>
+#endif
 
 #else
 #define HAVE_BLOCK 1
