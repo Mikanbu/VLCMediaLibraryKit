@@ -55,6 +55,7 @@
 		7D2DF7FB1B677F8200FB78AB /* MappingModel_2_5_to_2_6.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		7D2DF7FC1B677F8200FB78AB /* MediaLibrary.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
 		7D2DF7FE1B67808D00FB78AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2DF7FD1B67808D00FB78AB /* UIKit.framework */; };
+		7D62B5AB1B67D1460098D4BB /* libMobileVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D62B5AA1B67D1460098D4BB /* libMobileVLCKit.a */; };
 		7D84E4E71B42BA9900EA7D1F /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
 		7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
@@ -203,6 +204,7 @@
 		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D2DF7FD1B67808D00FB78AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		7D62B5AA1B67D1460098D4BB /* libMobileVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobileVLCKit.a; path = "../VLCKit/build/Debug-iphoneos/libMobileVLCKit.a"; sourceTree = "<group>"; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
 		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D62B5AB1B67D1460098D4BB /* libMobileVLCKit.a in Frameworks */,
 				7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +282,7 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D62B5AA1B67D1460098D4BB /* libMobileVLCKit.a */,
 				7D2DF7FD1B67808D00FB78AB /* UIKit.framework */,
 				7DF09E7B1B6763DF001075FD /* libMobileVLCKit.a */,
 				7D0EF4A1170883940003ED47 /* Foundation.framework */,
