@@ -40,7 +40,9 @@
 #import <sys/sysctl.h> // for sysctlbyname
 
 #if TARGET_OS_IPHONE
+#ifndef MLKIT_READONLY_TARGET
 #import <CoreSpotlight/CoreSpotlight.h>
+#endif
 #endif
 
 #if HAVE_BLOCK
@@ -286,8 +288,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #if! TARGET_OS_IPHONE
             NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
 #else
+#ifndef TARGET_OS_WATCH
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Corrupted Media Library" message:@"There is nothing we can apparently do about it..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+#endif
 #endif
             // Probably assert instead.
             return nil;

@@ -19,6 +19,42 @@
 		7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
 		7D0EF534170885130003ED47 /* MLURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF526170885130003ED47 /* MLURLConnection.m */; };
 		7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
+		7D2DF7D31B677F1700FB78AB /* MediaLibraryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D41B677F1700FB78AB /* MLAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D51B677F1700FB78AB /* MLAlbumTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D61B677F1700FB78AB /* MLFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D71B677F1700FB78AB /* MLLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D81B677F1700FB78AB /* MLMediaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7D91B677F1700FB78AB /* MLShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7DB1B677F1700FB78AB /* MLThumbnailerQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF517170885130003ED47 /* MLCrashPreventer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7DD1B677F2300FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.h in Headers */ = {isa = PBXBuildFile; fileRef = DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7DE1B677F2300FB78AB /* MLFileParserQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF51A170885130003ED47 /* MLFileParserQueue.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7DF1B677F2300FB78AB /* MLMediaLibrary+Migration.h in Headers */ = {isa = PBXBuildFile; fileRef = DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50C170885130003ED47 /* MLURLConnection.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E51B677F2300FB78AB /* NSXMLNode_Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50D170885130003ED47 /* NSXMLNode_Additions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7D2DF7E71B677F3100FB78AB /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
+		7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
+		7D2DF7E91B677F3100FB78AB /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
+		7D2DF7EA1B677F3100FB78AB /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
+		7D2DF7EB1B677F3100FB78AB /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
+		7D2DF7EC1B677F3100FB78AB /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
+		7D2DF7EE1B677F3100FB78AB /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
+		7D2DF7EF1B677F3100FB78AB /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
+		7D2DF7F01B677F3100FB78AB /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
+		7D2DF7F11B677F3100FB78AB /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
+		7D2DF7F21B677F3100FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
+		7D2DF7F31B677F3100FB78AB /* MLThumbnailerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */; };
+		7D2DF7F41B677F3100FB78AB /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
+		7D2DF7FB1B677F8200FB78AB /* MappingModel_2_5_to_2_6.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
+		7D2DF7FC1B677F8200FB78AB /* MediaLibrary.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
+		7D2DF7FE1B67808D00FB78AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2DF7FD1B67808D00FB78AB /* UIKit.framework */; };
 		7D84E4E71B42BA9900EA7D1F /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
 		7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
@@ -50,7 +86,6 @@
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
 		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
-		7DF09E7C1B6763DF001075FD /* libMobileVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF09E7B1B6763DF001075FD /* libMobileVLCKit.a */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
 		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
 		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
@@ -165,6 +200,9 @@
 		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
 		7D201AC61B186724009AC64E /* UIImage+MLKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLKit.h"; sourceTree = "<group>"; };
 		7D201AC71B186724009AC64E /* UIImage+MLKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLKit.m"; sourceTree = "<group>"; };
+		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKitwatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
+		7D2DF7FD1B67808D00FB78AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
 		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
@@ -190,8 +228,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DF09E7C1B6763DF001075FD /* libMobileVLCKit.a in Frameworks */,
 				7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D2DF7C71B677EE600FB78AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2DF7FE1B67808D00FB78AB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +271,7 @@
 			children = (
 				7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */,
 				7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */,
+				7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,6 +279,7 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D2DF7FD1B67808D00FB78AB /* UIKit.framework */,
 				7DF09E7B1B6763DF001075FD /* libMobileVLCKit.a */,
 				7D0EF4A1170883940003ED47 /* Foundation.framework */,
 			);
@@ -242,6 +289,7 @@
 		7D0EF4A4170883940003ED47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7D2DF7CF1B677EE600FB78AB /* Info.plist */,
 				7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -379,6 +427,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		7D2DF7C81B677EE600FB78AB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2DF7D31B677F1700FB78AB /* MediaLibraryKit.h in Headers */,
+				7D2DF7D41B677F1700FB78AB /* MLAlbum.h in Headers */,
+				7D2DF7D51B677F1700FB78AB /* MLAlbumTrack.h in Headers */,
+				7D2DF7D61B677F1700FB78AB /* MLFile.h in Headers */,
+				7D2DF7D71B677F1700FB78AB /* MLLabel.h in Headers */,
+				7D2DF7D81B677F1700FB78AB /* MLMediaLibrary.h in Headers */,
+				7D2DF7D91B677F1700FB78AB /* MLShow.h in Headers */,
+				7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */,
+				7D2DF7DB1B677F1700FB78AB /* MLThumbnailerQueue.h in Headers */,
+				7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */,
+				7D2DF7DD1B677F2300FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.h in Headers */,
+				7D2DF7DE1B677F2300FB78AB /* MLFileParserQueue.h in Headers */,
+				7D2DF7DF1B677F2300FB78AB /* MLMediaLibrary+Migration.h in Headers */,
+				7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */,
+				7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */,
+				7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */,
+				7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */,
+				7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */,
+				7D2DF7E51B677F2300FB78AB /* NSXMLNode_Additions.h in Headers */,
+				7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		7D0EF49D170883940003ED47 /* MediaLibraryKit */ = {
 			isa = PBXNativeTarget;
@@ -396,6 +474,24 @@
 			productName = MediaLibraryKit;
 			productReference = 7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		7D2DF7CA1B677EE600FB78AB /* MediaLibraryKitwatchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKitwatchOS" */;
+			buildPhases = (
+				7D2DF7C61B677EE600FB78AB /* Sources */,
+				7D2DF7C71B677EE600FB78AB /* Frameworks */,
+				7D2DF7C81B677EE600FB78AB /* Headers */,
+				7D2DF7C91B677EE600FB78AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MediaLibraryKitwatchOS;
+			productName = "MediaLibraryKit-watchOS";
+			productReference = 7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */ = {
 			isa = PBXNativeTarget;
@@ -422,6 +518,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = VideoLAN;
+				TargetAttributes = {
+					7D2DF7CA1B677EE600FB78AB = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
 			};
 			buildConfigurationList = 7D0EF499170883940003ED47 /* Build configuration list for PBXProject "MediaLibraryKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -437,9 +538,22 @@
 			targets = (
 				7D0EF49D170883940003ED47 /* MediaLibraryKit */,
 				7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */,
+				7D2DF7CA1B677EE600FB78AB /* MediaLibraryKitwatchOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D2DF7C91B677EE600FB78AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2DF7FB1B677F8200FB78AB /* MappingModel_2_5_to_2_6.xcmappingmodel in Resources */,
+				7D2DF7FC1B677F8200FB78AB /* MediaLibrary.xcdatamodeld in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7D0EF49A170883940003ED47 /* Sources */ = {
@@ -463,6 +577,26 @@
 				7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */,
 				7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */,
 				DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D2DF7C61B677EE600FB78AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2DF7E71B677F3100FB78AB /* MLCrashPreventer.m in Sources */,
+				7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */,
+				7D2DF7E91B677F3100FB78AB /* MLFileParserQueue.m in Sources */,
+				7D2DF7EA1B677F3100FB78AB /* MLLabel.m in Sources */,
+				7D2DF7EB1B677F3100FB78AB /* MLMediaLibrary.m in Sources */,
+				7D2DF7EC1B677F3100FB78AB /* MLMediaLibrary+Migration.m in Sources */,
+				7D2DF7EE1B677F3100FB78AB /* MLShow.m in Sources */,
+				7D2DF7EF1B677F3100FB78AB /* MLShowEpisode.m in Sources */,
+				7D2DF7F01B677F3100FB78AB /* MLAlbum.m in Sources */,
+				7D2DF7F11B677F3100FB78AB /* MLAlbumTrack.m in Sources */,
+				7D2DF7F21B677F3100FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */,
+				7D2DF7F31B677F3100FB78AB /* MLThumbnailerQueue.m in Sources */,
+				7D2DF7F41B677F3100FB78AB /* MLTitleDecrapifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +737,95 @@
 			};
 			name = Release;
 		};
+		7D2DF7D11B677EE600FB78AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					MLKIT_READONLY_TARGET,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "MediaLibraryKit-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		7D2DF7D21B677EE600FB78AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = MLKIT_READONLY_TARGET;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "MediaLibraryKit-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		7D84E5161B42BA9900EA7D1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -668,6 +891,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKitwatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D2DF7D11B677EE600FB78AB /* Debug */,
+				7D2DF7D21B677EE600FB78AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		7D84E5151B42BA9900EA7D1F /* Build configuration list for PBXNativeTarget "MediaLibraryKit-readonly" */ = {
 			isa = XCConfigurationList;

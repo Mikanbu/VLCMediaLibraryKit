@@ -416,6 +416,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 }
 
 #if TARGET_OS_IPHONE
+#ifndef MLKIT_READONLY_TARGET
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
 {
     if (!SYSTEM_RUNS_IOS9)
@@ -495,6 +496,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:nil];
     }
 }
+#endif
 #endif
 
 @end
