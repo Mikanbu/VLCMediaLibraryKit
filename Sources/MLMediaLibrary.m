@@ -39,7 +39,7 @@
 #import "MLMediaLibrary+Migration.h"
 #import <sys/sysctl.h> // for sysctlbyname
 
-#if CS_ENABLED
+#if TARGET_OS_IOS
 #import <CoreSpotlight/CoreSpotlight.h>
 #endif
 
@@ -303,7 +303,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (_managedObjectContext)
         return _managedObjectContext;
 
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     if (_managedObjectContext.persistentStoreCoordinator == nil)
         return nil;
@@ -846,7 +846,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                         [show removeEpisode:file.showEpisode];
                 }
             }
-#if CS_ENABLED
+#if TARGET_OS_IOS
             NSString *thumbPath = [file thumbnailPath];
             bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
             if (thumbExists)

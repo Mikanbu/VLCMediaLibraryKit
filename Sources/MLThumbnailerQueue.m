@@ -134,7 +134,7 @@
         UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnail];
         if (thumbnailImage) {
             file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
-#if CS_ENABLED
+#if TARGET_OS_IOS
             [file updateCoreSpotlightEntry];
 #endif
         }

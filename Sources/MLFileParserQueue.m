@@ -296,7 +296,7 @@
     @catch (NSException *exception) {
         APLog(@"failed to set that we fetch info for the file");
     }
-#if CS_ENABLED
+#if TARGET_OS_IOS
     [file updateCoreSpotlightEntry];
 #endif
 

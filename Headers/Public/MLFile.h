@@ -26,7 +26,7 @@
  *****************************************************************************/
 
 #import <CoreData/CoreData.h>
-#if CS_ENABLED
+#if TARGET_OS_IOS
 #import <CoreSpotlight/CoreSpotlight.h>
 #endif
 #if TARGET_OS_IPHONE
@@ -129,7 +129,7 @@ extern NSString *const MLFileThumbnailWasUpdated;
 
 - (size_t)fileSizeInBytes;
 
-#if CS_ENABLED
+#if TARGET_OS_IOS
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
 - (void)updateCoreSpotlightEntry;
 #endif

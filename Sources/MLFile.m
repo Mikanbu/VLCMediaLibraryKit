@@ -412,10 +412,10 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     NSFileManager *manager = [NSFileManager defaultManager];
     NSDictionary *fileAttributes = [manager attributesOfItemAtPath:[self.url path] error:nil];
     NSNumber *fileSize = fileAttributes[NSFileSize];
-    return [fileSize unsignedLongLongValue];
+    return [fileSize unsignedLongValue];
 }
 
-#if CS_ENABLED
+#if TARGET_OS_IOS
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
 {
     if (!SYSTEM_RUNS_IOS9)
