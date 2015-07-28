@@ -39,10 +39,8 @@
 #import "MLMediaLibrary+Migration.h"
 #import <sys/sysctl.h> // for sysctlbyname
 
-#if TARGET_OS_IPHONE
-#ifndef MLKIT_READONLY_TARGET
+#if CS_ENABLED
 #import <CoreSpotlight/CoreSpotlight.h>
-#endif
 #endif
 
 #if HAVE_BLOCK
@@ -185,7 +183,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (_managedObjectModel)
         return _managedObjectModel;
 
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"MediaLibrary" ofType:@"momd"];
+    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"MediaLibrary" ofType:@"momd"];
     NSURL *momURL = [NSURL fileURLWithPath:path];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
 
@@ -848,7 +846,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                         [show removeEpisode:file.showEpisode];
                 }
             }
-#if TARGET_OS_IPHONE
+#if CS_ENABLED
             NSString *thumbPath = [file thumbnailPath];
             bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
             if (thumbExists)

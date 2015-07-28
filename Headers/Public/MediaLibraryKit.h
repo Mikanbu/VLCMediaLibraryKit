@@ -20,6 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#define CS_ENABLED TARGET_OS_IPHONE && !TARGET_OS_WATCH && !MLKIT_READONLY_TARGET
+
+
 #import <MediaLibraryKit/MLFile.h>
 #import <MediaLibraryKit/MLLabel.h>
 #import <MediaLibraryKit/MLMediaLibrary.h>

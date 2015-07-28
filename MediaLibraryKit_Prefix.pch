@@ -40,7 +40,9 @@
 
 #import <UIKit/UIKit.h>
 #ifndef MLKIT_READONLY_TARGET
+#if !TARGET_OS_WATCH
 #import <MobileVLCKit/MobileVLCKit.h>
+#endif
 #endif
 
 #else

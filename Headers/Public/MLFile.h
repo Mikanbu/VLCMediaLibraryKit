@@ -26,10 +26,11 @@
  *****************************************************************************/
 
 #import <CoreData/CoreData.h>
-#if TARGET_OS_IPHONE
-#ifndef MLKIT_READONLY_TARGET
+#if CS_ENABLED
 #import <CoreSpotlight/CoreSpotlight.h>
 #endif
+#if TARGET_OS_IPHONE
+@class UIImage;
 #endif
 
 @class MLShowEpisode;
@@ -87,9 +88,10 @@ extern NSString *const MLFileThumbnailWasUpdated;
 @property (nonatomic, strong) NSString *genre;
 @property (nonatomic, strong) MLAlbumTrack *albumTrack;
 @property (nonatomic, strong) NSString *thumbnailName;
-
+#if TARGET_OS_IPHONE
 - (void)setComputedThumbnailScaledForDevice:(UIImage *)thumbnail;
 @property (nonatomic, strong) UIImage *computedThumbnail;
+#endif
 @property (nonatomic, assign) BOOL isSafe;
 @property (nonatomic, assign) BOOL isBeingParsed;
 @property (nonatomic, assign) BOOL thumbnailTimeouted;
@@ -127,11 +129,9 @@ extern NSString *const MLFileThumbnailWasUpdated;
 
 - (size_t)fileSizeInBytes;
 
-#if TARGET_OS_IPHONE
-#ifndef MLKIT_READONLY_TARGET
+#if CS_ENABLED
 - (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
 - (void)updateCoreSpotlightEntry;
-#endif
 #endif
 
 @end
