@@ -200,7 +200,7 @@
 		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
 		7D201AC61B186724009AC64E /* UIImage+MLKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLKit.h"; sourceTree = "<group>"; };
 		7D201AC71B186724009AC64E /* UIImage+MLKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLKit.m"; sourceTree = "<group>"; };
-		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKitwatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D2DF7FD1B67808D00FB78AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,7 +271,7 @@
 			children = (
 				7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */,
 				7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */,
-				7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */,
+				7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,9 +475,9 @@
 			productReference = 7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7D2DF7CA1B677EE600FB78AB /* MediaLibraryKitwatchOS */ = {
+		7D2DF7CA1B677EE600FB78AB /* MediaLibraryKit-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKitwatchOS" */;
+			buildConfigurationList = 7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKit-watchOS" */;
 			buildPhases = (
 				7D2DF7C61B677EE600FB78AB /* Sources */,
 				7D2DF7C71B677EE600FB78AB /* Frameworks */,
@@ -488,9 +488,9 @@
 			);
 			dependencies = (
 			);
-			name = MediaLibraryKitwatchOS;
+			name = "MediaLibraryKit-watchOS";
 			productName = "MediaLibraryKit-watchOS";
-			productReference = 7D2DF7CB1B677EE600FB78AB /* MediaLibraryKitwatchOS.framework */;
+			productReference = 7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */ = {
@@ -538,7 +538,7 @@
 			targets = (
 				7D0EF49D170883940003ED47 /* MediaLibraryKit */,
 				7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */,
-				7D2DF7CA1B677EE600FB78AB /* MediaLibraryKitwatchOS */,
+				7D2DF7CA1B677EE600FB78AB /* MediaLibraryKit-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -759,7 +759,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
 					MLKIT_READONLY_TARGET,
 				);
@@ -773,7 +772,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MediaLibraryKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -816,7 +815,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MediaLibraryKit;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -892,13 +891,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKitwatchOS" */ = {
+		7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKit-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D2DF7D11B677EE600FB78AB /* Debug */,
 				7D2DF7D21B677EE600FB78AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D84E5151B42BA9900EA7D1F /* Build configuration list for PBXNativeTarget "MediaLibraryKit-readonly" */ = {
 			isa = XCConfigurationList;
