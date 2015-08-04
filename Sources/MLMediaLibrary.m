@@ -249,6 +249,9 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #pragma mark -
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
 
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
@@ -295,6 +298,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             return nil;
         }
     }
+
+    _persistentStoreCoordinator = coordinator;
     return coordinator;
 }
 
@@ -305,8 +310,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
-    if (_managedObjectContext.persistentStoreCoordinator == nil)
+    if (_managedObjectContext.persistentStoreCoordinator == nil) {
+        _managedObjectContext = nil;
         return nil;
+    }
     [_managedObjectContext setUndoManager:nil];
     [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
     return _managedObjectContext;
@@ -363,8 +370,10 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         return nil;
     }
     NSManagedObjectID *objectID = [self.persistentStoreCoordinator managedObjectIDForURIRepresentation:uriRepresenation];
-    NSManagedObject *managedObject = [self.managedObjectContext objectWithID:objectID];
-    return managedObject;
+    if (objectID) {
+        return [self.managedObjectContext objectWithID:objectID];
+    }
+    return nil;
 }
 
 #pragma mark -
