@@ -247,6 +247,21 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 }
 
 #pragma mark -
+
+- (NSPersistentStore *)addDefaultLibraryStoreToCoordinator:(NSPersistentStoreCoordinator *)coordinator withError:(NSError **)error {
+
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : @YES,
+                              NSInferMappingModelAutomaticallyOption : @YES,
+                              NSSQLitePragmasOption : @{@"journal_mode": @"DELETE"}};
+
+    if (self.additionalPersitentStoreOptions.count > 0) {
+        NSMutableDictionary *mutableOptions = options.mutableCopy;
+        [mutableOptions addEntriesFromDictionary:self.additionalPersitentStoreOptions];
+        options = mutableOptions;
+    }
+    return [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:error];
+}
+
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (_persistentStoreCoordinator) {
@@ -254,15 +269,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
 
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-
-    NSNumber *yes = @YES;
-    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : yes,
-                              NSInferMappingModelAutomaticallyOption : yes};
-    if (self.additionalPersitentStoreOptions.count > 0) {
-        NSMutableDictionary *mutableOptions = options.mutableCopy;
-        [mutableOptions addEntriesFromDictionary:self.additionalPersitentStoreOptions];
-        options = mutableOptions;
-    }
 
     if ([[self.additionalPersitentStoreOptions objectForKey:NSReadOnlyPersistentStoreOption] boolValue] == YES) {
         if (![[NSFileManager defaultManager] fileExistsAtPath:self.persistentStoreURL.path]) {
@@ -272,7 +278,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
 
     NSError *error;
-    NSPersistentStore *persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
+    NSPersistentStore *persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
 
     if (!persistentStore) {
 #if! TARGET_OS_IPHONE
@@ -284,7 +290,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #else
         [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
 #endif
-        persistentStore = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:&error];
+        persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
         if (!persistentStore) {
 #if! TARGET_OS_IPHONE
             NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
@@ -303,13 +309,48 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     return coordinator;
 }
 
+
+- (void)overrideLibraryWithLibraryFromURL:(NSURL *)replacementURL {
+
+    NSError *error;
+
+    NSPersistentStoreCoordinator *psc = self.persistentStoreCoordinator;
+    NSPersistentStore *store = [psc persistentStoreForURL:self.persistentStoreURL];
+    if (store) {
+        if(![psc removePersistentStore:store error:&error]) {
+            NSLog(@"%s failed to remove persistent store with error %@",__PRETTY_FUNCTION__,error);
+            error = nil;
+        }
+    }
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager replaceItemAtURL:self.persistentStoreURL
+                                   withItemAtURL:replacementURL
+                                  backupItemName:nil
+                                         options:0
+                                resultingItemURL:nil
+                                           error:&error];
+    if (!success) {
+        NSLog(@"%s failed to replace store with error %@",__PRETTY_FUNCTION__,error);
+        error = nil;
+    }
+
+    if(![self addDefaultLibraryStoreToCoordinator:psc withError:&error]) {
+        NSLog(@"%s failed to add store with error %@",__PRETTY_FUNCTION__,error);
+    }
+}
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext)
         return _managedObjectContext;
 
+    NSPersistentStoreCoordinator *coodinator = self.persistentStoreCoordinator;
+    if (!coodinator) {
+        return nil;
+    }
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    [_managedObjectContext setPersistentStoreCoordinator:coodinator];
     if (_managedObjectContext.persistentStoreCoordinator == nil) {
         _managedObjectContext = nil;
         return nil;

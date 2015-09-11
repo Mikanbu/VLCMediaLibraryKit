@@ -46,6 +46,8 @@
 
 - (BOOL)libraryMigrationNeeded;
 - (void)migrateLibrary;
+- (void)overrideLibraryWithLibraryFromURL:(NSURL *)replacementURL;
+
 
 - (void)addFilePaths:(NSArray *)filepaths;
 - (void)updateMediaDatabase;
@@ -70,6 +72,8 @@
 - (void)save;
 - (void)libraryDidDisappear;
 - (void)libraryDidAppear;
+
+
 @end
 
 @protocol MLMediaLibrary <NSObject>
