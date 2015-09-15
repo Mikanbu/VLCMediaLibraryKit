@@ -16,36 +16,20 @@
     CGFloat thumbnailWidth, thumbnailHeight;
     /* optimize thumbnails for the device */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        if ([UIScreen mainScreen].scale==2.0) {
-            thumbnailWidth = 540.;
-            thumbnailHeight = 405.;
-        } else {
-            thumbnailWidth = 272.;
-            thumbnailHeight = 204.;
-        }
+        thumbnailWidth = 272.;
+        thumbnailHeight = 204.;
     } else {
-        if (SYSTEM_RUNS_IOS7) {
-            if ([UIScreen mainScreen].scale==2.0) {
-                thumbnailWidth = 480.;
-                thumbnailHeight = 270.;
-            } else {
-                thumbnailWidth = 720.;
-                thumbnailHeight = 405.;
-            }
-        } else {
-            if ([UIScreen mainScreen].scale==2.0) {
-                thumbnailWidth = 480.;
-                thumbnailHeight = 270.;
-            } else {
-                thumbnailWidth = 240.;
-                thumbnailHeight = 135.;
-            }
-        }
+        thumbnailWidth = 240.;
+        thumbnailHeight = 135.;
     }
     return CGSizeMake(thumbnailWidth, thumbnailHeight);
 }
 
-+ (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect
++ (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect {
+    return [self scaleImage:image toFitRect:rect scale:[UIScreen mainScreen].scale];
+}
+
++ (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect scale:(CGFloat)scale
 {
     CGRect destinationRect = AVMakeRectWithAspectRatioInsideRect(image.size, rect);
 
@@ -56,8 +40,8 @@
     CGBitmapInfo bitmapInfoRef = CGImageGetBitmapInfo(cgImage);
 
     CGContextRef contextRef = CGBitmapContextCreate(NULL,
-                                                    destinationRect.size.width,
-                                                    destinationRect.size.height,
+                                                    destinationRect.size.width*scale,
+                                                    destinationRect.size.height*scale,
                                                     bitsPerComponent,
                                                     bytesPerRow,
                                                     colorSpaceRef,
@@ -67,7 +51,7 @@
 
     CGContextDrawImage(contextRef, (CGRect){CGPointZero, destinationRect.size}, cgImage);
     CGImageRef imageRef = CGBitmapContextCreateImage(contextRef);
-    UIImage *scaledImage = [UIImage imageWithCGImage:imageRef];
+    UIImage *scaledImage = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
     CGImageRelease(imageRef);
     CGContextRelease(contextRef);
     return scaledImage;

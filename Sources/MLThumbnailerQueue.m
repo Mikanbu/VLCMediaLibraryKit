@@ -107,8 +107,9 @@
     MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
 
     CGSize thumbSize = [UIImage preferredThumbnailSizeForDevice];
-    thumbnailer.thumbnailWidth = thumbSize.width;
-    thumbnailer.thumbnailHeight = thumbSize.height;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    thumbnailer.thumbnailWidth = thumbSize.width*scale;
+    thumbnailer.thumbnailHeight = thumbSize.height*scale;
     [thumbnailer fetchThumbnail];
     [thumbnailerQueue.queue setSuspended:YES]; // Balanced in -mediaThumbnailer:didFinishThumbnail
      // Balanced in -mediaThumbnailer:didFinishThumbnail:
@@ -131,7 +132,7 @@
     MLFile *file = self.file;
     APLog(@"Finished thumbnail for %@", file.title);
     if (thumbnail) {
-        UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnail];
+        UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnail scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
         if (thumbnailImage) {
             file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
 #if TARGET_OS_IOS

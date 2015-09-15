@@ -11,6 +11,9 @@
 @interface UIImage (MLKit)
 
 + (CGSize)preferredThumbnailSizeForDevice;
+
+// uses current screen scale as scale
 + (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect;
++ (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect scale:(CGFloat) scale;
 
 @end
