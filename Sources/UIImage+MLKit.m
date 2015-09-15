@@ -66,8 +66,11 @@
     CGContextSetInterpolationQuality(contextRef, kCGInterpolationLow);
 
     CGContextDrawImage(contextRef, (CGRect){CGPointZero, destinationRect.size}, cgImage);
-
-    return [UIImage imageWithCGImage:CGBitmapContextCreateImage(contextRef)];
+    CGImageRef imageRef = CGBitmapContextCreateImage(contextRef);
+    UIImage *scaledImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGContextRelease(contextRef);
+    return scaledImage;
 }
 
 @end
