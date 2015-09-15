@@ -32,6 +32,7 @@
 + (UIImage *)scaleImage:(UIImage *)image toFitRect:(CGRect)rect scale:(CGFloat)scale
 {
     CGRect destinationRect = AVMakeRectWithAspectRatioInsideRect(image.size, rect);
+    destinationRect = CGRectMake(destinationRect.origin.x, destinationRect.origin.y, destinationRect.size.width*scale, destinationRect.size.height*scale);
 
     CGImageRef cgImage = image.CGImage;
     size_t bitsPerComponent = CGImageGetBitsPerComponent(cgImage);
@@ -40,8 +41,8 @@
     CGBitmapInfo bitmapInfoRef = CGImageGetBitmapInfo(cgImage);
 
     CGContextRef contextRef = CGBitmapContextCreate(NULL,
-                                                    destinationRect.size.width*scale,
-                                                    destinationRect.size.height*scale,
+                                                    destinationRect.size.width,
+                                                    destinationRect.size.height,
                                                     bitsPerComponent,
                                                     bytesPerRow,
                                                     colorSpaceRef,
