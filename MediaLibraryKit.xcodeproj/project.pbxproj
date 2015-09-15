@@ -94,6 +94,8 @@
 		A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
 		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
+		DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
 		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
@@ -107,6 +109,7 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */,
 				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */,
 				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */,
 				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */,
@@ -339,6 +342,7 @@
 				7D0EF514170885130003ED47 /* MLShow.h */,
 				7D0EF515170885130003ED47 /* MLShowEpisode.h */,
 				7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */,
+				7D201AC61B186724009AC64E /* UIImage+MLKit.h */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -364,7 +368,6 @@
 				7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */,
 				7D0EF526170885130003ED47 /* MLURLConnection.m */,
 				7D0EF527170885130003ED47 /* NSXMLNode_Additions.m */,
-				7D201AC61B186724009AC64E /* UIImage+MLKit.h */,
 				7D201AC71B186724009AC64E /* UIImage+MLKit.m */,
 			);
 			path = Sources;
@@ -446,6 +449,7 @@
 				7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */,
 				7D2DF7DB1B677F1700FB78AB /* MLThumbnailerQueue.h in Headers */,
 				7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */,
+				DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */,
 				7D2DF7DD1B677F2300FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.h in Headers */,
 				7D2DF7DE1B677F2300FB78AB /* MLFileParserQueue.h in Headers */,
 				7D2DF7DF1B677F2300FB78AB /* MLMediaLibrary+Migration.h in Headers */,
