@@ -29,6 +29,7 @@
 #import "MLCrashPreventer.h"
 #import "MLMediaLibrary.h"
 #import "MLFileParserQueue.h"
+#import "UIImage+MLKit.h"
 
 #ifdef MLKIT_READONLY_TARGET
 

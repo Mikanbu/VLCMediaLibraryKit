@@ -299,7 +299,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 - (void)setComputedThumbnailScaledForDevice:(UIImage *)thumbnail
 {
     [self setComputedThumbnail:[UIImage scaleImage:thumbnail
-                                         toFitRect:(CGRect){CGPointZero, [UIImage preferredThumbnailSizeForDevice]}]];
+                                         toFitRect:(CGRect){CGPointZero, (CGSize)[UIImage preferredThumbnailSizeForDevice]}]];
 }
 
 - (void)setComputedThumbnail:(UIImage *)image

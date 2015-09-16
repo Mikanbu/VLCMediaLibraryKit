@@ -28,6 +28,7 @@
 #import <MediaLibraryKit/MLAlbum.h>
 #import <MediaLibraryKit/MLAlbumTrack.h>
 #import <MediaLibraryKit/MLThumbnailerQueue.h>
+#import <MediaLibraryKit/UIImage+MLKit.h>
 
 @class MLFile;
 @class MLLabel;

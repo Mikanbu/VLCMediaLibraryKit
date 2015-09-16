@@ -96,6 +96,7 @@
 		A792468E170F09A30036AAF2 /* MLThumbnailerQueue.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; };
 		DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; };
+		DD9FBE731BA985C600FFE77A /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; settings = {ASSET_TAGS = (); }; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
 		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
@@ -605,6 +606,7 @@
 				7D2DF7F21B677F3100FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */,
 				7D2DF7F31B677F3100FB78AB /* MLThumbnailerQueue.m in Sources */,
 				7D2DF7F41B677F3100FB78AB /* MLTitleDecrapifier.m in Sources */,
+				DD9FBE731BA985C600FFE77A /* UIImage+MLKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
