@@ -324,12 +324,23 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager replaceItemAtURL:self.persistentStoreURL
-                                   withItemAtURL:replacementURL
-                                  backupItemName:nil
-                                         options:0
-                                resultingItemURL:nil
-                                           error:&error];
+
+    NSURL *finalTargetURL = self.persistentStoreURL;
+    NSString *tmpName = [[NSUUID UUID] UUIDString];
+    NSURL *tmpTargetURL = [[finalTargetURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:tmpName];
+
+    BOOL success = [fileManager copyItemAtURL:replacementURL toURL:tmpTargetURL error:&error];
+    if (!success) {
+        NSLog(@"%s failed to copy store to tmp url with with error %@",__PRETTY_FUNCTION__,error);
+        error = nil;
+    }
+
+    success = [fileManager replaceItemAtURL:self.persistentStoreURL
+                              withItemAtURL:tmpTargetURL
+                             backupItemName:nil
+                                    options:0
+                           resultingItemURL:nil
+                                      error:&error];
     if (!success) {
         NSLog(@"%s failed to replace store with error %@",__PRETTY_FUNCTION__,error);
         error = nil;
