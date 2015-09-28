@@ -484,7 +484,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 
 - (void)updateCoreSpotlightEntry
 {
-    if (SYSTEM_RUNS_IOS9) {
+    if ([CSSearchableIndex class] && [CSSearchableIndex isIndexingAvailable]) {
         /* create final CS item, which will replace the earlier entity */
         CSSearchableItemAttributeSet *attributeSet = [self coreSpotlightAttributeSet];
 

@@ -297,7 +297,9 @@
         APLog(@"failed to set that we fetch info for the file");
     }
 #if TARGET_OS_IOS
-    [file updateCoreSpotlightEntry];
+    if ([[MLMediaLibrary sharedMediaLibrary] isSpotlightIndexingEnabled]) {
+        [file updateCoreSpotlightEntry];
+    }
 #endif
 
     [self endParsing];

@@ -42,6 +42,9 @@
 // default is group.org.videolan.vlc-ios
 @property (nonatomic, copy) NSString *applicationGroupIdentifier;
 
+#if TARGET_OS_IOS
+@property (nonatomic, getter = isSpotlightIndexingEnabled) BOOL spotlightIndexingEnabled;
+#endif
 + (id)sharedMediaLibrary;
 
 - (BOOL)libraryMigrationNeeded;

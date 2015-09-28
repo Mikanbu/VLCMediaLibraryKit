@@ -137,7 +137,9 @@
         if (thumbnailImage) {
             file.computedThumbnail = [UIImage imageWithCGImage:thumbnail];
 #if TARGET_OS_IOS
-            [file updateCoreSpotlightEntry];
+            if ([[MLMediaLibrary sharedMediaLibrary] isSpotlightIndexingEnabled]) {
+                [file updateCoreSpotlightEntry];
+            }
 #endif
         }
     }

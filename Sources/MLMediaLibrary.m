@@ -913,7 +913,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             if (thumbExists)
                 [fileManager removeItemAtPath:thumbPath error:nil];
 
-            if (SYSTEM_RUNS_IOS9) {
+            if ([CSSearchableIndex class]) {
             /* remove file from CoreSpotlight */
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[file.objectID.URIRepresentation.absoluteString]
                                                                                completionHandler:^(NSError * __nullable error) {
