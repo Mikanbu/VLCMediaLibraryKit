@@ -141,7 +141,7 @@
 @dynamic show;
 @dynamic files;
 
-- (MLFile *)anyFileFromTrack
+- (MLFile *)anyFileFromEpisode
 {
     return (MLFile *)self.files.anyObject;
 }
