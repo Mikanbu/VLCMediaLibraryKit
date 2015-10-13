@@ -874,7 +874,15 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSManagedObjectContext *moc = [self managedObjectContext];
     if (!moc)
         return;
-    NSArray *results = [moc executeFetchRequest:request error:nil];
+    NSArray *results;
+    @try {
+        results = [moc executeFetchRequest:request error:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"media database update failed");
+        return;
+    }
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     unsigned int count = (unsigned int)results.count;
