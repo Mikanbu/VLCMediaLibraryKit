@@ -108,11 +108,16 @@
 
     NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
 
-    [tracks removeObject:track];
+    @try {
+        [tracks removeObject:track];
 
-    [self willChangeValueForKey:@"tracks"];
-    [self setValue:tracks forKey:@"tracks"];
-    [self didChangeValueForKey:@"tracks"];
+        [self willChangeValueForKey:@"tracks"];
+        [self setValue:tracks forKey:@"tracks"];
+        [self didChangeValueForKey:@"tracks"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"removing track failed");
+    }
 }
 
 - (void)removeTrackWithNumber:(NSNumber *)trackNumber
