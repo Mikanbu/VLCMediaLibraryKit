@@ -379,7 +379,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!moc)
         return;
 
-    BOOL success = [[self managedObjectContext] save:&error];
+    BOOL success = NO;
+    @try {
+        success = [[self managedObjectContext] save:&error];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Saving pending changes failed");
+    }
     NSAssert1(success, @"Can't save: %@", error);
 #if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
     NSProcessInfo *process = [NSProcessInfo processInfo];
