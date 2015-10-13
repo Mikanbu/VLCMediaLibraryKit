@@ -401,7 +401,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!moc)
         return;
 
-    BOOL success = [moc save:&error];
+    BOOL success = NO;
+    @try {
+        success = [moc save:&error];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Saving changes failed");
+    }
     NSAssert1(success, @"Can't save: %@", error);
 }
 
