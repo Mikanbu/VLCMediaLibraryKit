@@ -955,7 +955,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!request)
         return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && tracks.@count == 0"]];
-    results = [moc executeFetchRequest:request error:nil];
+    @try {
+        results = [moc executeFetchRequest:request error:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"media database update failed");
+        return;
+    }
     for (MLFile *file in results)
         [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 
@@ -965,7 +971,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         if (!request)
             return;
         [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
-        results = [moc executeFetchRequest:request error:nil];
+        @try {
+            results = [moc executeFetchRequest:request error:nil];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"media database update failed");
+            return;
+        }
         for (MLFile *file in results) {
             if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio])
                 [self computeThumbnailForFile:file];
@@ -978,7 +990,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!request)
         return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
-    results = [moc executeFetchRequest:request error:nil];
+    @try {
+        results = [moc executeFetchRequest:request error:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"media database update failed");
+        return;
+    }
     for (MLFile *file in results) {
         if (!file.computedThumbnail) {
             if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio])
@@ -991,7 +1009,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!request)
         return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
-    results = [moc executeFetchRequest:request error:nil];
+    @try {
+        results = [moc executeFetchRequest:request error:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"media database update failed");
+        return;
+    }
     for (MLFile *file in results)
         [[MLFileParserQueue sharedFileParserQueue] addFile:file];
 
@@ -1000,7 +1024,13 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     if (!request)
         return;
     [request setPredicate:[NSPredicate predicateWithFormat:@"lastSyncDate == 0"]];
-    results = [moc executeFetchRequest:request error:nil];
+    @try {
+        results = [moc executeFetchRequest:request error:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"media database update failed");
+        return;
+    }
     for (MLShow *show in results)
         [self fetchMetaDataForShow:show];
 
