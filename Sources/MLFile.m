@@ -445,7 +445,9 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     NSMutableArray *languages = [NSMutableArray new];
     for (NSUInteger x = 0; x < trackCount; x++) {
         NSManagedObject *track = tracks[x];
-        [codecs addObject:[track valueForKey:@"codec"]];
+        NSString *codec = [track valueForKey:@"codec"];
+        if (codec)
+            [codecs addObject:codec];
         NSString *language = [track valueForKey:@"language"];
         if (language != nil)
             [languages addObject:language];
