@@ -102,7 +102,16 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     self = [super init];
     if (self) {
-        _applicationGroupIdentifier = @"group.org.videolan.vlc-ios";
+
+        NSString *key = @"MLKitGroupIdentifier";
+        _applicationGroupIdentifier = [[[NSBundle bundleForClass:self.class] infoDictionary] valueForKey:key];
+        if (!_applicationGroupIdentifier) {
+            _applicationGroupIdentifier = [[[NSBundle mainBundle] infoDictionary] valueForKey:key];
+        }
+        if (!_applicationGroupIdentifier) {
+            _applicationGroupIdentifier = @"group.org.videolan.vlc-ios";
+        }
+
         [self _setupLibraryPathPriorToMigration];
         APLog(@"Initializing db in %@", [self databaseFolderPath]);
     }

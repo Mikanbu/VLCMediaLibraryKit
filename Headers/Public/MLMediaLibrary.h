@@ -39,7 +39,9 @@
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, copy) NSDictionary *additionalPersitentStoreOptions;
 @property (nonatomic, readonly) int deviceSpeedCategory;
-// default is group.org.videolan.vlc-ios
+// uses identifier from Info.plist in framework bundle or main bundle with key
+// MLKitGroupIdentifier by default
+// if key in Info.plist wasn't set it further defaults to group.org.videolan.vlc-ios
 @property (nonatomic, copy) NSString *applicationGroupIdentifier;
 
 #if TARGET_OS_IOS
