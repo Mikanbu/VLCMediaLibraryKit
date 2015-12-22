@@ -1,6 +1,15 @@
 Version 2.6.0
 -------------
+* Added native support for watchOS 2
+* Added improve data model
+* Added support for CoreSpotlight
+* Improved thumbnailing
+* Improved support for group identifiers
+* Stability improvements
+
 Added Public APIs:
+- MLMediaLibrary:
+  - new property: spotlightIndexingEnabled
 - MLAlbumTrack:
   - new selectors: trackWithAlbum:metadata:createIfNeeded:wasCreated:
                    trackWithMetadata:createIfNeeded:wasCreated:
@@ -11,6 +20,18 @@ Deprecated Public APIs:
   trackWithAlbum:trackNumber:trackName:createIfNeeded:
   trackWithAlbumName:trackNumber:createIfNeeded:wasCreated:
   trackWithAlbumName:trackNumber:trackName:createIfNeeded:wasCreated:
+
+Version 2.5.5
+-------------
+* Stability improvements
+
+Version 2.5.4
+-------------
+* Stability improvements
+
+Version 2.5.3
+-------------
+* Stability improvements
 
 Version 2.5.2
 -------------
