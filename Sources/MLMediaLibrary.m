@@ -132,7 +132,8 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         return nil;
 
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
-    NSAssert(entityDescription, @"No entity");
+    if (!entityDescription)
+        return nil;
     [request setEntity:entityDescription];
     return request;
 }
@@ -395,7 +396,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     @catch (NSException *exception) {
         NSLog(@"Saving pending changes failed");
     }
-    NSAssert1(success, @"Can't save: %@", error);
 #if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
     NSProcessInfo *process = [NSProcessInfo processInfo];
     if ([process respondsToSelector:@selector(enableSuddenTermination)])
@@ -417,7 +417,6 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     @catch (NSException *exception) {
         NSLog(@"Saving changes failed");
     }
-    NSAssert1(success, @"Can't save: %@", error);
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
