@@ -94,18 +94,20 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
 
     NSSet *tracks = [album tracks];
     MLAlbumTrack *track = nil;
-    if (trackNumber) {
-        for (MLAlbumTrack *trackIter in tracks) {
-            if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
-                if (trackIter.discNumber == discNumber)
-                        track = trackIter;
+    for (MLAlbumTrack *trackIter in tracks) {
+        if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
+            if (trackIter.discNumber.intValue == discNumber.intValue) {
+                track = trackIter;
                 break;
-            } else if ([trackIter.title isEqualToString:trackName]) {
+            }
+        } else if ([trackIter.title isEqualToString:trackName]) {
+            if (trackIter.discNumber.intValue == discNumber.intValue) {
                 track = trackIter;
                 break;
             }
         }
     }
+
     if (!track && createIfNeeded) {
         track = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AlbumTrack"];
         if (trackNumber.integerValue == 0)
