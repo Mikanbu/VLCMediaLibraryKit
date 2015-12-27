@@ -83,7 +83,7 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     if (!moc || moc.persistentStoreCoordinator == nil)
         return [NSArray array];
 
-    NSString *path = url.path;
+    NSString *path = url.path.stringByRemovingPercentEncoding;
 #if TARGET_OS_IPHONE
     path = [[MLMediaLibrary sharedMediaLibrary] pathRelativeToDocumentsFolderFromAbsolutPath:path];
 #endif
