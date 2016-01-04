@@ -323,7 +323,7 @@
     NSString *cacheDir = searchPaths[0];
     cacheDir = [cacheDir stringByAppendingFormat:@"/%@", [[NSBundle mainBundle] bundleIdentifier]];
 
-    if (artist.length == 0 || albumname.length == 0) {
+    if ((artist.length == 0 || albumname.length == 0) && title != nil && title.length > 0) {
         /* Use generated hash to find art */
         artworkURL = [cacheDir stringByAppendingFormat:@"/art/arturl/%@/art.jpg", [self _md5FromString:title]];
     } else {
