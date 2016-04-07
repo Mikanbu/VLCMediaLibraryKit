@@ -1,3 +1,7 @@
+Version 2.6.2
+-------------
+* Optimized thumbnailing and parsing
+
 Version 2.6.1
 -------------
 * Fixed file lookup for paths containing spaces or umlauts
