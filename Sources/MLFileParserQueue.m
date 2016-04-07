@@ -85,6 +85,7 @@
     VLCMedia *_media;
     BOOL _parsing;
     NSTimer *_timeOutTimer;
+    dispatch_semaphore_t _parsingSema;
 }
 @property (strong,readwrite) MLFile *file;
 @end
@@ -105,6 +106,9 @@
 
 - (void)parse
 {
+    MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
+    [parserQueue.queue setSuspended:YES]; // Balanced in -mediaDidFinishParsing
+
     NSAssert(!_media, @"We are already parsing");
 
     MLFile *file = self.file;
@@ -116,9 +120,7 @@
 
     _media = [VLCMedia mediaWithURL:file.url];
     _media.delegate = self;
-    [_media parse];
-    MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
-    [parserQueue.queue setSuspended:YES]; // Balanced in -mediaDidFinishParsing
+    [_media parseWithOptions:VLCMediaParseLocal|VLCMediaFetchLocal];
      // Balanced in -mediaDidFinishParsing:
 }
 
@@ -135,7 +137,13 @@
 
 - (void)main
 {
-    [self performSelectorOnMainThread:@selector(parse) withObject:nil waitUntilDone:YES];
+    _parsingSema = dispatch_semaphore_create(0);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self parse];
+    });
+
+    dispatch_semaphore_wait(_parsingSema, DISPATCH_TIME_FOREVER);
 }
 
 - (void)mediaDidFinishParsing:(VLCMedia *)media
@@ -145,8 +153,10 @@
 
     APLog(@"Parsed %@ - %lu tracks", media, (unsigned long)[[_media tracksInformation] count]);
 
-    if (_media.delegate != self)
+    if (_media.delegate != self) {
+        [self endParsing];
         return;
+    }
 
     MLFile *file = self.file;
 
@@ -180,6 +190,10 @@
             [trackInfo setValue:track[VLCMediaTracksInformationLanguage] forKey:@"language"];
             [tracksSet addObject:trackInfo];
         }
+    }
+    /* assume the best if we fail to parse the video */
+    if (tracks.count == 0) {
+        mediaHasVideo = YES;
     }
 
     @try {
@@ -285,10 +299,6 @@
                 APLog(@"file thumbnail setting failed");
             }
         }
-    } else {
-        MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
-        [sharedLibrary computeThumbnailForFile:file];
-        [sharedLibrary fetchMetaDataForFile:file];
     }
     @try {
         file.hasFetchedInfo = @(YES);
@@ -296,6 +306,13 @@
     @catch (NSException *exception) {
         APLog(@"failed to set that we fetch info for the file");
     }
+
+    if (mediaHasVideo) {
+        MLMediaLibrary *sharedLibrary = [MLMediaLibrary sharedMediaLibrary];
+        [sharedLibrary computeThumbnailForFile:file];
+        [sharedLibrary fetchMetaDataForFile:file];
+    }
+
 #if TARGET_OS_IOS
     if ([[MLMediaLibrary sharedMediaLibrary] isSpotlightIndexingEnabled]) {
         [file updateCoreSpotlightEntry];
@@ -309,9 +326,10 @@
 {
     MLFileParserQueue *parserQueue = [MLFileParserQueue sharedFileParserQueue];
     [[MLCrashPreventer sharedPreventer] didParseFile:self.file];
+    _media = nil;
     [parserQueue.queue setSuspended:NO];
     [parserQueue didFinishOperation:self];
-    _media = nil;
+    dispatch_semaphore_signal(_parsingSema);
 }
 
 #pragma mark - audio file specific code
@@ -372,7 +390,18 @@
 
 static inline NSString *hashFromFile(MLFile *file)
 {
-    return [NSString stringWithFormat:@"%p", [[file objectID] URIRepresentation]];
+    NSString *path = [[[file objectID] URIRepresentation] absoluteString];
+    const char *cstr = [path cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:path.length];
+
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(data.bytes, data.length, digest);
+
+    NSMutableString *sha1Hash = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        [sha1Hash appendFormat:@"%02x", digest[i]];
+
+    return sha1Hash;
 }
 
 - (void)didFinishOperation:(MLParsingOperation *)op
