@@ -328,7 +328,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     NSPersistentStore *store = [psc persistentStoreForURL:self.persistentStoreURL];
     if (store) {
         if(![psc removePersistentStore:store error:&error]) {
-            NSLog(@"%s failed to remove persistent store with error %@",__PRETTY_FUNCTION__,error);
+            APLog(@"%s failed to remove persistent store with error %@",__PRETTY_FUNCTION__,error);
             error = nil;
         }
     }
@@ -341,7 +341,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
     BOOL success = [fileManager copyItemAtURL:replacementURL toURL:tmpTargetURL error:&error];
     if (!success) {
-        NSLog(@"%s failed to copy store to tmp url with with error %@",__PRETTY_FUNCTION__,error);
+        APLog(@"%s failed to copy store to tmp url with with error %@",__PRETTY_FUNCTION__,error);
         error = nil;
     }
 
@@ -352,12 +352,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
                            resultingItemURL:nil
                                       error:&error];
     if (!success) {
-        NSLog(@"%s failed to replace store with error %@",__PRETTY_FUNCTION__,error);
+        APLog(@"%s failed to replace store with error %@",__PRETTY_FUNCTION__,error);
         error = nil;
     }
 
     if(![self addDefaultLibraryStoreToCoordinator:psc withError:&error]) {
-        NSLog(@"%s failed to add store with error %@",__PRETTY_FUNCTION__,error);
+        APLog(@"%s failed to add store with error %@",__PRETTY_FUNCTION__,error);
     }
 }
 
@@ -394,7 +394,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         success = [[self managedObjectContext] save:&error];
     }
     @catch (NSException *exception) {
-        NSLog(@"Saving pending changes failed");
+        APLog(@"Saving pending changes failed");
     }
 #if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
     NSProcessInfo *process = [NSProcessInfo processInfo];
@@ -415,7 +415,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         success = [moc save:&error];
     }
     @catch (NSException *exception) {
-        NSLog(@"Saving changes failed");
+        APLog(@"Saving changes failed");
     }
 }
 
@@ -453,7 +453,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (void)computeThumbnailForFile:(MLFile *)file
 {
-    if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio]) {
+    if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue]) {
         APLog(@"Computing thumbnail for %@", file.title);
         [[MLThumbnailerQueue sharedThumbnailerQueue] addFile:file];
     }
@@ -893,7 +893,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         results = [moc executeFetchRequest:request error:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"media database update failed");
+        APLog(@"media database update failed");
         return;
     }
 
@@ -945,7 +945,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             /* remove file from CoreSpotlight */
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[file.objectID.URIRepresentation.absoluteString]
                                                                                completionHandler:^(NSError * __nullable error) {
-                                                                                   NSLog(@"Removed %@ from index", file.objectID.URIRepresentation);
+                                                                                   APLog(@"Removed %@ from index", file.objectID.URIRepresentation);
                                                                                }];
             }
 
@@ -967,7 +967,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         results = [moc executeFetchRequest:request error:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"media database update failed");
+        APLog(@"media database update failed");
         return;
     }
     for (MLFile *file in results)
@@ -983,11 +983,11 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
             results = [moc executeFetchRequest:request error:nil];
         }
         @catch (NSException *exception) {
-            NSLog(@"media database update failed");
+            APLog(@"media database update failed");
             return;
         }
         for (MLFile *file in results) {
-            if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio])
+            if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
                 [self computeThumbnailForFile:file];
         }
         return;
@@ -1002,12 +1002,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         results = [moc executeFetchRequest:request error:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"media database update failed");
+        APLog(@"media database update failed");
         return;
     }
     for (MLFile *file in results) {
         if (!file.computedThumbnail) {
-            if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio])
+            if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
                 [self computeThumbnailForFile:file];
         }
     }
@@ -1021,7 +1021,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         results = [moc executeFetchRequest:request error:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"media database update failed");
+        APLog(@"media database update failed");
         return;
     }
     for (MLFile *file in results)
@@ -1036,7 +1036,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         results = [moc executeFetchRequest:request error:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"media database update failed");
+        APLog(@"media database update failed");
         return;
     }
     for (MLShow *show in results)
