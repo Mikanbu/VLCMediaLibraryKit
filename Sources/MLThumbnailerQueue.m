@@ -30,6 +30,7 @@
 #import "MLMediaLibrary.h"
 #import "MLFileParserQueue.h"
 #import "UIImage+MLKit.h"
+#import <CommonCrypto/CommonDigest.h>
 
 #ifdef MLKIT_READONLY_TARGET
 
@@ -71,15 +72,14 @@
 @interface ThumbnailOperation : NSOperation <VLCMediaThumbnailerDelegate>
 {
     MLFile *_file;
-    VLCMedia *_media;
-    VLCLibrary *_internalLibrary;
+    VLCMedia *_media;;
+    dispatch_semaphore_t _thumbnailingSema;
 }
 @property (strong,readwrite) MLFile *file;
 @end
 
 @interface MLThumbnailerQueue ()
 {
-    VLCLibrary *_internalLibrary;
     NSDictionary *_fileDescriptionToOperation;
     NSOperationQueue *_queue;
 }
@@ -88,12 +88,11 @@
 
 @implementation ThumbnailOperation
 @synthesize file=_file;
-- (id)initWithFile:(MLFile *)file andVLCLibrary:(VLCLibrary *)library;
+- (id)initWithFile:(MLFile *)file
 {
     if (!(self = [super init]))
         return nil;
     self.file = file;
-    _internalLibrary = library;
     return self;
 }
 
@@ -104,7 +103,7 @@
     [[MLCrashPreventer sharedPreventer] willParseFile:self.file];
 
     _media = [VLCMedia mediaWithURL:self.file.url];
-    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:_internalLibrary];
+    VLCMediaThumbnailer *thumbnailer = [VLCMediaThumbnailer thumbnailerWithMedia:_media delegate:self andVLCLibrary:[VLCLibrary sharedLibrary]];
     MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
 
     CGSize thumbSize = [UIImage preferredThumbnailSizeForDevice];
@@ -117,7 +116,13 @@
 }
 - (void)main
 {
-    [self performSelectorOnMainThread:@selector(fetchThumbnail) withObject:nil waitUntilDone:YES];
+    _thumbnailingSema = dispatch_semaphore_create(0);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self fetchThumbnail];
+    });
+
+    dispatch_semaphore_wait(_thumbnailingSema, DISPATCH_TIME_FOREVER);
 }
 
 - (void)endThumbnailing
@@ -126,7 +131,9 @@
     MLThumbnailerQueue *thumbnailerQueue = [MLThumbnailerQueue sharedThumbnailerQueue];
     [thumbnailerQueue.queue setSuspended:NO];
     [thumbnailerQueue didFinishOperation:self];
+    dispatch_semaphore_signal(_thumbnailingSema);
 }
+
 - (void)mediaThumbnailer:(VLCMediaThumbnailer *)mediaThumbnailer didFinishThumbnail:(CGImageRef)thumbnail
 {
     mediaThumbnailer.delegate = nil;
@@ -169,12 +176,6 @@
 {
     self = [super init];
     if (self != nil) {
-        int speedCategory = [[MLMediaLibrary sharedMediaLibrary] deviceSpeedCategory];
-        APLog(@"running on a category %i device", speedCategory);
-        if (speedCategory < 2)
-            _internalLibrary = [VLCLibrary sharedLibrary];
-        else
-            _internalLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--avcodec-threads=1", @"--avcodec-skip-idct=4", @"--deinterlace=-1", @"--avcodec-skiploopfilter=3", @"--no-interact", @"--avi-index=3"]];
         _fileDescriptionToOperation = [[NSMutableDictionary alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         [_queue setMaxConcurrentOperationCount:1];
@@ -184,7 +185,18 @@
 
 static inline NSString *hashFromFile(MLFile *file)
 {
-    return [NSString stringWithFormat:@"%p", [[file objectID] URIRepresentation]];
+    NSString *path = [[[file objectID] URIRepresentation] absoluteString];
+    const char *cstr = [path cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:path.length];
+
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(data.bytes, data.length, digest);
+
+    NSMutableString *sha1Hash = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        [sha1Hash appendFormat:@"%02x", digest[i]];
+
+    return sha1Hash;
 }
 
 - (void)didFinishOperation:(ThumbnailOperation *)op
@@ -217,7 +229,7 @@ static inline NSString *hashFromFile(MLFile *file)
         return;
     }
 
-    ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file andVLCLibrary:_internalLibrary];
+    ThumbnailOperation *op = [[ThumbnailOperation alloc] initWithFile:file];
     [_fileDescriptionToOperation setValue:op forKey:hashFromFile(file)];
     [self.queue addOperation:op];
 }
