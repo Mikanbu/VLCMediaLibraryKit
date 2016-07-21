@@ -31,6 +31,8 @@ Pod::Spec.new do |s|
       "Headers/Internal/MLMovieInfoGrabber.h", "Headers/Internal/MLTVShowEpisodesInfoGrabber.h", "Headers/Internal/MLTVShowInfoGrabber.h", \
       "Headers/Internal/MLURLConnection.h", "Headers/Internal/NSXMLNode_Additions.h", "Headers/Internal/TheTVDBGrabber.h"
 
+  s.header_dir = "MediaLibraryKit"
+
   s.resources = "MappingModel_2_5_to_2_6.xcmappingmodel", "MediaLibrary.xcdatamodeld"
 
   s.frameworks = "Foundation", "CoreData"
