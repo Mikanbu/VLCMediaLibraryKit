@@ -13,9 +13,6 @@
 
 #import "MLMediaLibrary+Migration.h"
 #import "MLTitleDecrapifier.h"
-#import "MLMovieInfoGrabber.h"
-#import "MLTVShowInfoGrabber.h"
-#import "MLTVShowEpisodesInfoGrabber.h"
 #import "MLFile.h"
 #import "MLLabel.h"
 #import "MLShowEpisode.h"
@@ -23,7 +20,11 @@
 #import "MLThumbnailerQueue.h"
 #import "MLAlbumTrack.h"
 #import "MLAlbum.h"
-
+#if HAVE_BLOCK
+#import "MLMovieInfoGrabber.h"
+#import "MLTVShowInfoGrabber.h"
+#import "MLTVShowEpisodesInfoGrabber.h"
+#endif
 
 @implementation MLMediaLibrary (Migration)
 
