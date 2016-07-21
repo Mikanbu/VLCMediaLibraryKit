@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MediaLibraryKit-prod"
-  s.version      = "2.6.2"
+  s.version      = "2.6.3"
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://code.videolan.org/videolan/MediaLibraryKit.git", :tag => "#{s.version}" }
 
   s.prefix_header_file = "MediaLibraryKit_Prefix.pch"
-  s.source_files  = "Headers/Internal/*.h", "Sources/*.m", 
+  s.source_files  = "Headers/Internal/*.h", "Sources/*.m",
   s.public_header_files = "Headers/Public/*.h"
   s.exclude_files = \
       "Sources/MLMovieInfoGrabber.m", "Sources/MLTVShowEpisodesInfoGrabber.m", "Sources/MLTVShowInfoGrabber.m", \
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.watchos.xcconfig = { "MTL_ENABLE_DEBUG_INFO" => "NO", "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) MLKIT_READONLY_TARGET" }
+  s.watchos.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) MLKIT_READONLY_TARGET" }
   s.ios.dependency "MobileVLCKit-prod"
 
 end
