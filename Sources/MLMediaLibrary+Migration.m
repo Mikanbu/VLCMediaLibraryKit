@@ -101,6 +101,10 @@
         return NO;
     }
 
+    if ([self _groupURL] == nil) {
+        return NO;
+    }
+
     NSString *oldPersistentStorePath = [[self _oldBasePath] stringByAppendingPathComponent: @"MediaLibrary.sqlite"];
     return [[NSFileManager defaultManager] fileExistsAtPath:oldPersistentStorePath];
 }
@@ -113,7 +117,6 @@
 }
 
 - (NSURL *)_groupURL {
-
     if (![[NSFileManager defaultManager] respondsToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)]) {
         return nil;
     }
