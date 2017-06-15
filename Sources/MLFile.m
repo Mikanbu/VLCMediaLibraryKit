@@ -387,12 +387,12 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 
 - (void)willDisplay
 {
-    [[MLThumbnailerQueue sharedThumbnailerQueue] setHighPriorityForFile:self];
+//    [[MLThumbnailerQueue sharedThumbnailerQueue] setHighPriorityForFile:self];
 }
 
 - (void)didHide
 {
-    [[MLThumbnailerQueue sharedThumbnailerQueue] setDefaultPriorityForFile:self];
+//    [[MLThumbnailerQueue sharedThumbnailerQueue] setDefaultPriorityForFile:self];
 }
 
 - (NSManagedObject *)videoTrack

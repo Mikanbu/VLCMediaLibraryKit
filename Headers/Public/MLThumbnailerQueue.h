@@ -22,21 +22,21 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-
-#import <Foundation/Foundation.h>
-
-@class MLFile;
-
-@interface MLThumbnailerQueue : NSObject
-
-+ (MLThumbnailerQueue *)sharedThumbnailerQueue;
-
-- (void)addFile:(MLFile *)file;
-- (void)setHighPriorityForFile:(MLFile *)file;
-- (void)setDefaultPriorityForFile:(MLFile *)file;
-
-- (void)stop;
-- (void)resume;
-
-@property (nonatomic, strong) NSOperationQueue *queue;
-@end
+//
+//#import <Foundation/Foundation.h>
+//
+//@class MLFile;
+//
+//@interface MLThumbnailerQueue : NSObject
+//
+//+ (MLThumbnailerQueue *)sharedThumbnailerQueue;
+//
+//- (void)addFile:(MLFile *)file;
+//- (void)setHighPriorityForFile:(MLFile *)file;
+//- (void)setDefaultPriorityForFile:(MLFile *)file;
+//
+//- (void)stop;
+//- (void)resume;
+//
+//@property (nonatomic, strong) NSOperationQueue *queue;
+//@end

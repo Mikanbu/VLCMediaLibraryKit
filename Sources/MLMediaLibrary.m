@@ -455,7 +455,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 {
     if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue]) {
         APLog(@"Computing thumbnail for %@", file.title);
-        [[MLThumbnailerQueue sharedThumbnailerQueue] addFile:file];
+//        [[MLThumbnailerQueue sharedThumbnailerQueue] addFile:file];
     }
 }
 
@@ -1076,14 +1076,14 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 - (void)libraryDidDisappear
 {
     // Stop expansive work
-    [[MLThumbnailerQueue sharedThumbnailerQueue] stop];
+//    [[MLThumbnailerQueue sharedThumbnailerQueue] stop];
     [[MLFileParserQueue sharedFileParserQueue] stop];
 }
 
 - (void)libraryDidAppear
 {
     // Resume our work
-    [[MLThumbnailerQueue sharedThumbnailerQueue] resume];
+//    [[MLThumbnailerQueue sharedThumbnailerQueue] resume];
     [[MLFileParserQueue sharedFileParserQueue] resume];
 }
 

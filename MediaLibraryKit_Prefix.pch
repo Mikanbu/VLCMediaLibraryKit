@@ -41,13 +41,13 @@
 #import <UIKit/UIKit.h>
 #ifndef MLKIT_READONLY_TARGET
 #if !TARGET_OS_WATCH
-#import <MobileVLCKit/MobileVLCKit.h>
+//#import <MobileVLCKit/MobileVLCKit.h>
 #endif
 #endif
 
 #else
 #define HAVE_BLOCK 1
-#import <VLCKit/VLCKit.h>
+//#import <VLCKit/VLCKit.h>
 #import "NSXMLNode_Additions.h"
 
 #endif

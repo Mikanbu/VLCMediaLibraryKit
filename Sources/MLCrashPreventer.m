@@ -45,7 +45,7 @@
 
     // Use the same queue for the two objects, because we wan't to track accurately
     // which operation causes a crash.
-    [MLThumbnailerQueue sharedThumbnailerQueue].queue = [MLFileParserQueue sharedFileParserQueue].queue;
+//    [MLThumbnailerQueue sharedThumbnailerQueue].queue = [MLFileParserQueue sharedFileParserQueue].queue;
 
     return crashPreventer;
 }
@@ -96,7 +96,7 @@
 
 - (void)willParseFile:(MLFile *)file
 {
-    NSAssert([MLThumbnailerQueue sharedThumbnailerQueue].queue == [MLFileParserQueue sharedFileParserQueue].queue, @"");
+//    NSAssert([MLThumbnailerQueue sharedThumbnailerQueue].queue == [MLFileParserQueue sharedFileParserQueue].queue, @"");
 
     NSAssert([_parsedFiles count] < 1, @"Parsing multiple files at the same time. Crash preventer can't work accurately.");
     file.isBeingParsed = YES;
