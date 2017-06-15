@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "2.0"
   # s.osx.deployment_target = "10.7"
   # s.tvos.deployment_target = "9.0"
-
-  s.source       = { :git => "https://code.videolan.org/videolan/MediaLibraryKit.git", :tag => "#{s.version}" }
+  
+  s.source       = { :git => "https://github.com/TheHungryBu/MediaLibraryKit.git", :tag => "#{s.version}" }
 
   s.prefix_header_file = "MediaLibraryKit_Prefix.pch"
   s.source_files  = "Headers/Internal/*.h", "Sources/*.m",
