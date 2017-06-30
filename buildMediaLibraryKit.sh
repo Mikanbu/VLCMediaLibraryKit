@@ -42,6 +42,7 @@ do
             ;;
     esac
 done
+shift "$((OPTIND-1))"
 
 ROOT_DIR=`pwd`
 
@@ -60,33 +61,38 @@ buildMedialibrary()
 {
     mkdir -p medialibrary
     pushd medialibrary
-        #FIXME: do a smarter usage of git.
-        git clone git@code.videolan.org:videolan/medialibrary.git
-        pushd medialibrary
-            git submodule update --init
-            mkdir build
-            pushd build
-                ../bootstrap
-                local makeOptions=""
-                local configureOptions="--disable-shared"
-                if [ "$TESTS" = "yes" ]; then
-                    configureOptions="${configureOptions} --enable-tests"
-                fi
-                ../configure $configureOptions CXX=$CXX_COMPILATOR OBJCXX=$OBJCXX_COMPILATOR
-
-                if [ "$VERBOSE" = "yes" ]; then
-                    makeOptions="V=1"
-                fi
-                make $makeOptions
-
-                if [ $? -ne 0 ]; then
-                    info "welp it failed but info it still happy"
-                fi
-
-                info "`pwd`/.libs/"
-                #library are in .libs
+        if [ -d medialibrary ]; then
+            pushd medialibrary
+                git pull --rebase
             popd
-        popd
+        else
+            git clone git@code.videolan.org:videolan/medialibrary.git
+            pushd medialibrary
+                git submodule update --init
+                mkdir build
+                pushd build
+                    ../bootstrap
+                    local makeOptions=""
+                    local configureOptions="--disable-shared"
+                    if [ "$TESTS" = "yes" ]; then
+                        configureOptions="${configureOptions} --enable-tests"
+                    fi
+                    ../configure $configureOptions CXX=$CXX_COMPILATOR OBJCXX=$OBJCXX_COMPILATOR
+
+                    if [ "$VERBOSE" = "yes" ]; then
+                        makeOptions="V=1"
+                    fi
+                    make $makeOptions
+
+                    if [ $? -ne 0 ]; then
+                        info "welp it failed but info it still happy"
+                    fi
+
+                    info "`pwd`/.libs/"
+                    #library are in .libs
+                popd
+            popd
+         fi
     popd
 }
 
@@ -134,19 +140,17 @@ if [ "$VERBOSE" = "yes" ]; then
     out="/dev/stdout"
 fi
 
-#if [ "x$1" != "x" ]; then
-#    usage
-#    exit 1
-#fi
-
+if [ "x$1" != "x" ]; then
+    usage
+    exit 1
+fi
 
 if [ "$SKIPMEDIALIBRARY" != "yes" ]; then
     info "Starting Medialibrary build..."
     buildMedialibrary
-    #info "Medialibrary build completed."
+else
+    info "Build of Medialibrary skipped..."
 fi
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
-
-#add into export
 
