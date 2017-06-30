@@ -36,7 +36,6 @@
 		7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50C170885130003ED47 /* MLURLConnection.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7D2DF7E51B677F2300FB78AB /* NSXMLNode_Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50D170885130003ED47 /* NSXMLNode_Additions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E71B677F3100FB78AB /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
@@ -144,7 +143,6 @@
 		7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTVShowEpisodesInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTVShowInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF50C170885130003ED47 /* MLURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLURLConnection.h; sourceTree = "<group>"; };
-		7D0EF50D170885130003ED47 /* NSXMLNode_Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLNode_Additions.h; sourceTree = "<group>"; };
 		7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTVDBGrabber.h; sourceTree = "<group>"; };
 		7D0EF510170885130003ED47 /* MediaLibraryKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit.h; sourceTree = "<group>"; };
 		7D0EF511170885130003ED47 /* MLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFile.h; sourceTree = "<group>"; };
@@ -168,39 +166,11 @@
 		7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTVShowEpisodesInfoGrabber.m; sourceTree = "<group>"; };
 		7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTVShowInfoGrabber.m; sourceTree = "<group>"; };
 		7D0EF526170885130003ED47 /* MLURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLURLConnection.m; sourceTree = "<group>"; };
-		7D0EF527170885130003ED47 /* NSXMLNode_Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSXMLNode_Additions.m; sourceTree = "<group>"; };
-		7D0EF539170885230003ED47 /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
-		7D0EF53A170885230003ED47 /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
-		7D0EF53B170885230003ED47 /* CXMLNode_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_CreationExtensions.h; sourceTree = "<group>"; };
-		7D0EF53C170885230003ED47 /* CXMLNode_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_CreationExtensions.m; sourceTree = "<group>"; };
-		7D0EF53D170885230003ED47 /* CXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument.h; sourceTree = "<group>"; };
-		7D0EF53E170885230003ED47 /* CXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument.m; sourceTree = "<group>"; };
-		7D0EF53F170885230003ED47 /* CXMLDocument_PrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_PrivateExtensions.h; sourceTree = "<group>"; };
-		7D0EF540170885230003ED47 /* CXMLDocument_PrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_PrivateExtensions.m; sourceTree = "<group>"; };
-		7D0EF541170885230003ED47 /* CXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLElement.h; sourceTree = "<group>"; };
-		7D0EF542170885230003ED47 /* CXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLElement.m; sourceTree = "<group>"; };
-		7D0EF543170885230003ED47 /* CXMLElement_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLElement_CreationExtensions.h; sourceTree = "<group>"; };
-		7D0EF544170885230003ED47 /* CXMLElement_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLElement_CreationExtensions.m; sourceTree = "<group>"; };
-		7D0EF545170885230003ED47 /* CXMLElement_ElementTreeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLElement_ElementTreeExtensions.h; sourceTree = "<group>"; };
-		7D0EF546170885230003ED47 /* CXMLElement_ElementTreeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLElement_ElementTreeExtensions.m; sourceTree = "<group>"; };
-		7D0EF547170885230003ED47 /* CXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode.h; sourceTree = "<group>"; };
-		7D0EF548170885230003ED47 /* CXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode.m; sourceTree = "<group>"; };
-		7D0EF549170885230003ED47 /* CXMLNode_PrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_PrivateExtensions.h; sourceTree = "<group>"; };
-		7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_PrivateExtensions.m; sourceTree = "<group>"; };
-		7D0EF54B170885230003ED47 /* CXMLNode_XPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_XPathExtensions.h; sourceTree = "<group>"; };
-		7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_XPathExtensions.m; sourceTree = "<group>"; };
-		7D0EF54E170885230003ED47 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
-		7D0EF54F170885230003ED47 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
-		7D0EF550170885230003ED47 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
 		7D201AC61B186724009AC64E /* UIImage+MLKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLKit.h"; sourceTree = "<group>"; };
 		7D201AC71B186724009AC64E /* UIImage+MLKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLKit.m"; sourceTree = "<group>"; };
 		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
-		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
-		7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNamespaceNode.h; sourceTree = "<group>"; };
-		7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNamespaceNode.m; sourceTree = "<group>"; };
 		7D9E238117AEE9F2008485E5 /* MLAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbum.h; sourceTree = "<group>"; };
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
@@ -243,7 +213,6 @@
 		7D0EF495170883940003ED47 = {
 			isa = PBXGroup;
 			children = (
-				7D0EF536170885230003ED47 /* TouchXML */,
 				7D0EF506170885130003ED47 /* Headers */,
 				7D0EF516170885130003ED47 /* Sources */,
 				7D0EF4A4170883940003ED47 /* Supporting Files */,
@@ -303,7 +272,6 @@
 				7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */,
 				7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */,
 				7D0EF50C170885130003ED47 /* MLURLConnection.h */,
-				7D0EF50D170885130003ED47 /* NSXMLNode_Additions.h */,
 				7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */,
 			);
 			path = Internal;
@@ -345,69 +313,9 @@
 				7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */,
 				7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */,
 				7D0EF526170885130003ED47 /* MLURLConnection.m */,
-				7D0EF527170885130003ED47 /* NSXMLNode_Additions.m */,
 				7D201AC71B186724009AC64E /* UIImage+MLKit.m */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		7D0EF536170885230003ED47 /* TouchXML */ = {
-			isa = PBXGroup;
-			children = (
-				7D0EF537170885230003ED47 /* Source */,
-			);
-			name = TouchXML;
-			path = External/TouchXML;
-			sourceTree = "<group>";
-		};
-		7D0EF537170885230003ED47 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				7D0EF538170885230003ED47 /* Creation */,
-				7D0EF53D170885230003ED47 /* CXMLDocument.h */,
-				7D0EF53E170885230003ED47 /* CXMLDocument.m */,
-				7D0EF53F170885230003ED47 /* CXMLDocument_PrivateExtensions.h */,
-				7D0EF540170885230003ED47 /* CXMLDocument_PrivateExtensions.m */,
-				7D0EF541170885230003ED47 /* CXMLElement.h */,
-				7D0EF542170885230003ED47 /* CXMLElement.m */,
-				7D0EF543170885230003ED47 /* CXMLElement_CreationExtensions.h */,
-				7D0EF544170885230003ED47 /* CXMLElement_CreationExtensions.m */,
-				7D0EF545170885230003ED47 /* CXMLElement_ElementTreeExtensions.h */,
-				7D0EF546170885230003ED47 /* CXMLElement_ElementTreeExtensions.m */,
-				7D0EF547170885230003ED47 /* CXMLNode.h */,
-				7D0EF548170885230003ED47 /* CXMLNode.m */,
-				7D0EF549170885230003ED47 /* CXMLNode_PrivateExtensions.h */,
-				7D0EF54A170885230003ED47 /* CXMLNode_PrivateExtensions.m */,
-				7D0EF54B170885230003ED47 /* CXMLNode_XPathExtensions.h */,
-				7D0EF54C170885230003ED47 /* CXMLNode_XPathExtensions.m */,
-				7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */,
-				7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */,
-				7D8ECFE31708FEC000A989E9 /* CXMLNamespaceNode.h */,
-				7D8ECFE41708FEC000A989E9 /* CXMLNamespaceNode.m */,
-				7D0EF54D170885230003ED47 /* Tidy */,
-				7D0EF550170885230003ED47 /* TouchXML.h */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		7D0EF538170885230003ED47 /* Creation */ = {
-			isa = PBXGroup;
-			children = (
-				7D0EF539170885230003ED47 /* CXMLDocument_CreationExtensions.h */,
-				7D0EF53A170885230003ED47 /* CXMLDocument_CreationExtensions.m */,
-				7D0EF53B170885230003ED47 /* CXMLNode_CreationExtensions.h */,
-				7D0EF53C170885230003ED47 /* CXMLNode_CreationExtensions.m */,
-			);
-			path = Creation;
-			sourceTree = "<group>";
-		};
-		7D0EF54D170885230003ED47 /* Tidy */ = {
-			isa = PBXGroup;
-			children = (
-				7D0EF54E170885230003ED47 /* CTidy.h */,
-				7D0EF54F170885230003ED47 /* CTidy.m */,
-			);
-			path = Tidy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,7 +343,6 @@
 				7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */,
 				7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */,
 				7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */,
-				7D2DF7E51B677F2300FB78AB /* NSXMLNode_Additions.h in Headers */,
 				7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
