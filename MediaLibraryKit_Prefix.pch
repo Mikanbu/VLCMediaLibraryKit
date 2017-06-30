@@ -35,7 +35,6 @@
 #error "This project uses features only available in iOS SDK 9.0 and later."
 #endif
 
-// FIXME
 #define HAVE_BLOCK 0
 
 #import <UIKit/UIKit.h>
