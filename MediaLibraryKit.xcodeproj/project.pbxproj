@@ -52,19 +52,14 @@
 		7D2DF7F21B677F3100FB78AB /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
 		7D2DF7F31B677F3100FB78AB /* MLThumbnailerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */; };
 		7D2DF7F41B677F3100FB78AB /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
-		7D2DF7FB1B677F8200FB78AB /* MappingModel_2_5_to_2_6.xcmappingmodel in Resources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
-		7D2DF7FC1B677F8200FB78AB /* MediaLibrary.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
-		7D2DF7FE1B67808D00FB78AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2DF7FD1B67808D00FB78AB /* UIKit.framework */; };
 		7D84E4E71B42BA9900EA7D1F /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
 		7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
 		7D84E4EA1B42BA9900EA7D1F /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
-		7D84E4EB1B42BA9900EA7D1F /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
 		7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
 		7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
 		7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
-		7D84E4F11B42BA9900EA7D1F /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		7D84E4F21B42BA9900EA7D1F /* MLThumbnailerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF522170885130003ED47 /* MLThumbnailerQueue.m */; };
 		7D84E4F31B42BA9900EA7D1F /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
 		7D84E4F61B42BA9900EA7D1F /* MLURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF526170885130003ED47 /* MLURLConnection.m */; };
@@ -97,9 +92,7 @@
 		DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; };
 		DD9FBE731BA985C600FFE77A /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
 		DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
-		DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */; };
 		DDC57DFB1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */; };
-		DDC7BFAE1B03825F00160878 /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -145,7 +138,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.7.xcdatamodel"; sourceTree = "<group>"; };
 		7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0EF4A1170883940003ED47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
@@ -206,8 +198,6 @@
 		7D201AC71B186724009AC64E /* UIImage+MLKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLKit.m"; sourceTree = "<group>"; };
 		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
-		7D2DF7FD1B67808D00FB78AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7D62B5AA1B67D1460098D4BB /* libMobileVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobileVLCKit.a; path = "../VLCKit/build/Debug-iphoneos/libMobileVLCKit.a"; sourceTree = "<group>"; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8ECFE01708FEAE00A989E9 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHTMLDocument.h; sourceTree = "<group>"; };
 		7D8ECFE11708FEAE00A989E9 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHTMLDocument.m; sourceTree = "<group>"; };
@@ -217,15 +207,10 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
-		7DF09E7B1B6763DF001075FD /* libMobileVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobileVLCKit.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/VLC_for_iOS-aihbdkeagpzjqsczvuoyenddvmqy/Build/Products/Debug-iphoneos/libMobileVLCKit.a"; sourceTree = "<group>"; };
 		DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLMediaLibrary+Migration.h"; sourceTree = "<group>"; };
 		DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLMediaLibrary+Migration.m"; sourceTree = "<group>"; };
-		DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModel_2_5_to_2_6.xcmappingmodel; sourceTree = "<group>"; };
 		DDC57DF91AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileEntityMappingPolicy_2_5_to_2_6.h; sourceTree = "<group>"; };
 		DDC57DFA1AFD0B5000DBAEF7 /* MLFileEntityMappingPolicy_2_5_to_2_6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileEntityMappingPolicy_2_5_to_2_6.m; sourceTree = "<group>"; };
-		DDC7BFAB1B03825F00160878 /* MediaLibrary-2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.1.xcdatamodel"; sourceTree = "<group>"; };
-		DDC7BFAC1B03825F00160878 /* MediaLibrary-2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.5.xcdatamodel"; sourceTree = "<group>"; };
-		DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MediaLibrary-2.6.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2DF7FE1B67808D00FB78AB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +243,6 @@
 		7D0EF495170883940003ED47 = {
 			isa = PBXGroup;
 			children = (
-				DDB959381AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel */,
-				DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */,
 				7D0EF536170885230003ED47 /* TouchXML */,
 				7D0EF506170885130003ED47 /* Headers */,
 				7D0EF516170885130003ED47 /* Sources */,
@@ -284,9 +266,6 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7D62B5AA1B67D1460098D4BB /* libMobileVLCKit.a */,
-				7D2DF7FD1B67808D00FB78AB /* UIKit.framework */,
-				7DF09E7B1B6763DF001075FD /* libMobileVLCKit.a */,
 				7D0EF4A1170883940003ED47 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -555,8 +534,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2DF7FB1B677F8200FB78AB /* MappingModel_2_5_to_2_6.xcmappingmodel in Resources */,
-				7D2DF7FC1B677F8200FB78AB /* MediaLibrary.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,12 +548,10 @@
 				7D0EF528170885130003ED47 /* MLCrashPreventer.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */,
-				DDC7BFAE1B03825F00160878 /* MediaLibrary.xcdatamodeld in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
-				DDB959391AFBAD8700BB8CFF /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */,
 				7D0EF530170885130003ED47 /* MLThumbnailerQueue.m in Sources */,
 				7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */,
 				7D0EF534170885130003ED47 /* MLURLConnection.m in Sources */,
@@ -616,12 +591,10 @@
 				7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */,
 				7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */,
 				7D84E4EA1B42BA9900EA7D1F /* MLFileParserQueue.m in Sources */,
-				7D84E4EB1B42BA9900EA7D1F /* MediaLibrary.xcdatamodeld in Sources */,
 				7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */,
 				7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */,
 				7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */,
 				7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */,
-				7D84E4F11B42BA9900EA7D1F /* MappingModel_2_5_to_2_6.xcmappingmodel in Sources */,
 				7D84E4F21B42BA9900EA7D1F /* MLThumbnailerQueue.m in Sources */,
 				7D84E4F31B42BA9900EA7D1F /* MLTitleDecrapifier.m in Sources */,
 				7D84E4F61B42BA9900EA7D1F /* MLURLConnection.m in Sources */,
@@ -918,22 +891,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		DDC7BFAA1B03825F00160878 /* MediaLibrary.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */,
-				DDC7BFAB1B03825F00160878 /* MediaLibrary-2.1.xcdatamodel */,
-				DDC7BFAC1B03825F00160878 /* MediaLibrary-2.5.xcdatamodel */,
-				DDC7BFAD1B03825F00160878 /* MediaLibrary-2.6.xcdatamodel */,
-			);
-			currentVersion = 7D0363A61B2F317500CC0343 /* MediaLibrary-2.7.xcdatamodel */;
-			path = MediaLibrary.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7D0EF496170883940003ED47 /* Project object */;
 }
