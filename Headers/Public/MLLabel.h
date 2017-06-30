@@ -24,11 +24,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <CoreData/CoreData.h>
-
 @class MLFile;
 
-@interface MLLabel :  NSManagedObject
+@interface MLLabel : NSObject
 
 + (NSArray *)allLabels;
 - (NSArray *)sortedFolderItems;
@@ -39,12 +37,10 @@
 @end
 
 
-@interface MLLabel (CoreDataGeneratedAccessors)
-- (void)addFilesObject:(MLFile *)value;
-- (void)removeFilesObject:(MLFile *)value;
-- (void)addFiles:(NSSet *)value;
-- (void)removeFiles:(NSSet *)value;
-
-
-@end
+//@interface MLLabel (CoreDataGeneratedAccessors)
+//- (void)addFilesObject:(MLFile *)value;
+//- (void)removeFilesObject:(MLFile *)value;
+//- (void)addFiles:(NSSet *)value;
+//- (void)removeFiles:(NSSet *)value;
+//@end
 

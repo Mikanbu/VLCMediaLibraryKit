@@ -23,12 +23,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <CoreData/CoreData.h>
-
 @class MLShow;
 @class MLFile;
 
-@interface MLShowEpisode :  NSManagedObject
+@interface MLShowEpisode : NSObject
 
 + (NSArray *)allEpisodes;
 
@@ -51,12 +49,12 @@
 
 @end
 
-
-@interface MLShowEpisode (CoreDataGeneratedAccessors)
-- (void)addFilesObject:(NSManagedObject *)value;
-- (void)removeFilesObject:(NSManagedObject *)value;
-- (void)addFiles:(NSSet *)value;
-- (void)removeFiles:(NSSet *)value;
-- (MLFile *)anyFileFromEpisode;
-@end
+//
+//@interface MLShowEpisode (CoreDataGeneratedAccessors)
+//- (void)addFilesObject:(NSManagedObject *)value;
+//- (void)removeFilesObject:(NSManagedObject *)value;
+//- (void)addFiles:(NSSet *)value;
+//- (void)removeFiles:(NSSet *)value;
+//- (MLFile *)anyFileFromEpisode;
+//@end
 

@@ -25,13 +25,17 @@
 
 @class MLAlbumTrack;
 
-@interface MLAlbum : NSManagedObject
+@interface MLAlbum : NSObject
 
 + (NSArray *)allAlbums;
 + (MLAlbum *)albumWithName:(NSString *)name;
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *releaseYear;
+@property (nonatomic, strong) NSString *name;//title
+@property (nonatomic) NSInteger albumId;
+@property (nonatomic) NSInteger artistId;
+@property (nonatomic, strong) NSString *shortSummary;
+@property (nonatomic, strong) NSString *releaseYear;//int in c++
+@property (nonatomic) NSInteger duration;
 @property (nonatomic, strong) NSSet *tracks;
 @property (nonatomic, strong, readonly) NSSet *unreadTracks;
 @property (weak, nonatomic, readonly) NSArray *sortedTracks;
@@ -43,9 +47,9 @@
 @end
 
 
-@interface MLAlbum (CoreDataGeneratedAccessors)
-- (void)addTracksObject:(NSManagedObject *)value;
-- (void)removeTracksObject:(NSManagedObject *)value;
-- (void)addTracks:(NSSet *)value;
-- (void)removeTracks:(NSSet *)value;
-@end
+//@interface MLAlbum ()
+//- (void)addTracksObject:(NSManagedObject *)value;
+//- (void)removeTracksObject:(NSManagedObject *)value;
+//- (void)addTracks:(NSSet *)value;
+//- (void)removeTracks:(NSSet *)value;
+//@end

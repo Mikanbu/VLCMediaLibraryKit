@@ -73,7 +73,7 @@
     }
 
     if (!episode && createIfNeeded) {
-        episode = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"ShowEpisode"];
+  //      episode = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"ShowEpisode"];
         episode.episodeNumber = episodeNumber;
         episode.seasonNumber = seasonNumber;
         episode.show = show;
@@ -91,7 +91,7 @@
     *wasCreated = NO;
     if (!show && createIfNeeded) {
         *wasCreated = YES;
-        show = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Show"];
+//        show = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Show"];
         show.name = showName;
     } else if (!show && !createIfNeeded)
         return nil;

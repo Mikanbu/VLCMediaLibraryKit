@@ -40,7 +40,7 @@
 #import <sys/sysctl.h> // for sysctlbyname
 
 #if TARGET_OS_IOS
-#import <CoreSpotlight/CoreSpotlight.h>
+//#import <CoreSpotlight/CoreSpotlight.h>
 #endif
 
 #if HAVE_BLOCK
@@ -51,8 +51,8 @@
 
 @interface MLMediaLibrary ()
 {
-    NSManagedObjectContext *_managedObjectContext;
-    NSManagedObjectModel   *_managedObjectModel;
+//    NSManagedObjectContext *_managedObjectContext;
+//    NSManagedObjectModel   *_managedObjectModel;
 
     BOOL _allowNetworkAccess;
     int _deviceSpeedCategory;
@@ -74,7 +74,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 #else
 @interface MLMediaLibrary ()
 #endif
-- (NSManagedObjectContext *)managedObjectContext;
+//- (NSManagedObjectContext *)managedObjectContext;
 - (NSString *)databaseFolderPath;
 @end
 
@@ -120,40 +120,40 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 - (void)dealloc
 {
-    if (_managedObjectContext)
-        [_managedObjectContext removeObserver:self forKeyPath:@"hasChanges"];
+//    if (_managedObjectContext)
+//        [_managedObjectContext removeObserver:self forKeyPath:@"hasChanges"];
 }
-
-- (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc || moc.persistentStoreCoordinator == nil)
-        return nil;
-
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
-    if (!entityDescription)
-        return nil;
-    [request setEntity:entityDescription];
-    return request;
-}
-
-- (id)createObjectForEntity:(NSString *)entity
-{
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc || moc.persistentStoreCoordinator == nil)
-        return nil;
-
-    return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:moc];
-}
-
-- (void)removeObject:(NSManagedObject *)object
-{
-    NSManagedObjectContext *moc = [self managedObjectContext];
-
-    if (moc)
-        [[self managedObjectContext] deleteObject:object];
-}
+//
+//- (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity
+//{
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc || moc.persistentStoreCoordinator == nil)
+//        return nil;
+//
+//    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
+//    if (!entityDescription)
+//        return nil;
+//    [request setEntity:entityDescription];
+//    return request;
+//}
+//
+//- (id)createObjectForEntity:(NSString *)entity
+//{
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc || moc.persistentStoreCoordinator == nil)
+//        return nil;
+//
+//    return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:moc];
+//}
+//
+//- (void)removeObject:(NSManagedObject *)object
+//{
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//
+//    if (moc)
+//        [[self managedObjectContext] deleteObject:object];
+//}
 
 #pragma mark - helper
 - (int)deviceSpeedCategory
@@ -188,17 +188,17 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 #pragma mark -
 #pragma mark Media Library
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel)
-        return _managedObjectModel;
-
-    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"MediaLibrary" ofType:@"momd"];
-    NSURL *momURL = [NSURL fileURLWithPath:path];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
-
-    return _managedObjectModel;
-}
+//- (NSManagedObjectModel *)managedObjectModel
+//{
+//    if (_managedObjectModel)
+//        return _managedObjectModel;
+//
+//    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"MediaLibrary" ofType:@"momd"];
+//    NSURL *momURL = [NSURL fileURLWithPath:path];
+//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+//
+//    return _managedObjectModel;
+//}
 
 #pragma mark - Path handling
 - (void)setLibraryBasePath:(NSString *)libraryBasePath
@@ -271,53 +271,53 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }
     return [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreURL options:options error:error];
 }
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator) {
-        return _persistentStoreCoordinator;
-    }
-
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-
-    if ([[self.additionalPersitentStoreOptions objectForKey:NSReadOnlyPersistentStoreOption] boolValue] == YES) {
-        if (![[NSFileManager defaultManager] fileExistsAtPath:self.persistentStoreURL.path]) {
-            APLog(@"no library was found in read-only mode, hence no functionality will be available in this session");
-            return nil;
-        }
-    }
-
-    NSError *error;
-    NSPersistentStore *persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
-
-    if (!persistentStore) {
-#if! TARGET_OS_IPHONE
-        // FIXME: Deal with versioning
-        NSInteger ret = NSRunAlertPanel(@"Error", @"The Media Library you have on your disk is not compatible with the one Lunettes can read. Do you want to create a new one?", @"No", @"Yes", nil);
-        if (ret == NSOKButton)
-            [NSApp terminate:nil];
-        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
-#else
-        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
-#endif
-        persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
-        if (!persistentStore) {
-#if! TARGET_OS_IPHONE
-            NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
-#else
-#ifndef TARGET_OS_WATCH
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Corrupted Media Library" message:@"There is nothing we can apparently do about it..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-#endif
-#endif
-            // Probably assert instead.
-            return nil;
-        }
-    }
-
-    _persistentStoreCoordinator = coordinator;
-    return coordinator;
-}
+//
+//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+//{
+//    if (_persistentStoreCoordinator) {
+//        return _persistentStoreCoordinator;
+//    }
+//
+//    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+//
+//    if ([[self.additionalPersitentStoreOptions objectForKey:NSReadOnlyPersistentStoreOption] boolValue] == YES) {
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:self.persistentStoreURL.path]) {
+//            APLog(@"no library was found in read-only mode, hence no functionality will be available in this session");
+//            return nil;
+//        }
+//    }
+//
+//    NSError *error;
+//    NSPersistentStore *persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
+//
+//    if (!persistentStore) {
+//#if! TARGET_OS_IPHONE
+//        // FIXME: Deal with versioning
+//        NSInteger ret = NSRunAlertPanel(@"Error", @"The Media Library you have on your disk is not compatible with the one Lunettes can read. Do you want to create a new one?", @"No", @"Yes", nil);
+//        if (ret == NSOKButton)
+//            [NSApp terminate:nil];
+//        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
+//#else
+//        [[NSFileManager defaultManager] removeItemAtPath:self.persistentStoreURL.path error:nil];
+//#endif
+//        persistentStore = [self addDefaultLibraryStoreToCoordinator:coordinator withError:&error];
+//        if (!persistentStore) {
+//#if! TARGET_OS_IPHONE
+//            NSRunInformationalAlertPanel(@"Corrupted Media Library", @"There is nothing we can apparently do about it...", @"OK", nil, nil);
+//#else
+//#ifndef TARGET_OS_WATCH
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Corrupted Media Library" message:@"There is nothing we can apparently do about it..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [alert show];
+//#endif
+//#endif
+//            // Probably assert instead.
+//            return nil;
+//        }
+//    }
+//
+//    _persistentStoreCoordinator = coordinator;
+//    return coordinator;
+//}
 
 
 - (void)overrideLibraryWithLibraryFromURL:(NSURL *)replacementURL {
@@ -360,93 +360,93 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         APLog(@"%s failed to add store with error %@",__PRETTY_FUNCTION__,error);
     }
 }
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext)
-        return _managedObjectContext;
-
-    NSPersistentStoreCoordinator *coodinator = self.persistentStoreCoordinator;
-    if (!coodinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coodinator];
-    if (_managedObjectContext.persistentStoreCoordinator == nil) {
-        _managedObjectContext = nil;
-        return nil;
-    }
-    [_managedObjectContext setUndoManager:nil];
-    [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
-    return _managedObjectContext;
-}
-
-- (void)savePendingChanges
-{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(savePendingChanges) object:nil];
-    NSError *error = nil;
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc)
-        return;
-
-    BOOL success = NO;
-    @try {
-        success = [[self managedObjectContext] save:&error];
-    }
-    @catch (NSException *exception) {
-        APLog(@"Saving pending changes failed");
-    }
-#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
-    NSProcessInfo *process = [NSProcessInfo processInfo];
-    if ([process respondsToSelector:@selector(enableSuddenTermination)])
-        [process enableSuddenTermination];
-#endif
-}
-
-- (void)save
-{
-    NSError *error = nil;
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc)
-        return;
-
-    BOOL success = NO;
-    @try {
-        success = [moc save:&error];
-    }
-    @catch (NSException *exception) {
-        APLog(@"Saving changes failed");
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"hasChanges"] && object == _managedObjectContext) {
-#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
-        NSProcessInfo *process = [NSProcessInfo processInfo];
-        if ([process respondsToSelector:@selector(disableSuddenTermination)])
-            [process disableSuddenTermination];
-#endif
-
-        if ([[self managedObjectContext] hasChanges]) {
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(savePendingChanges) object:nil];
-            [self performSelector:@selector(savePendingChanges) withObject:nil afterDelay:1.];
-        }
-        return;
-    }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
-- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation {
-    if (uriRepresenation == nil) {
-        return nil;
-    }
-    NSManagedObjectID *objectID = [self.persistentStoreCoordinator managedObjectIDForURIRepresentation:uriRepresenation];
-    if (objectID) {
-        return [self.managedObjectContext objectWithID:objectID];
-    }
-    return nil;
-}
+//
+//- (NSManagedObjectContext *)managedObjectContext
+//{
+//    if (_managedObjectContext)
+//        return _managedObjectContext;
+//
+//    NSPersistentStoreCoordinator *coodinator = self.persistentStoreCoordinator;
+//    if (!coodinator) {
+//        return nil;
+//    }
+//    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//    [_managedObjectContext setPersistentStoreCoordinator:coodinator];
+//    if (_managedObjectContext.persistentStoreCoordinator == nil) {
+//        _managedObjectContext = nil;
+//        return nil;
+//    }
+//    [_managedObjectContext setUndoManager:nil];
+//    [_managedObjectContext addObserver:self forKeyPath:@"hasChanges" options:NSKeyValueObservingOptionInitial context:nil];
+//    return _managedObjectContext;
+//}
+//
+//- (void)savePendingChanges
+//{
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(savePendingChanges) object:nil];
+//    NSError *error = nil;
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc)
+//        return;
+//
+//    BOOL success = NO;
+//    @try {
+//        success = [[self managedObjectContext] save:&error];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"Saving pending changes failed");
+//    }
+//#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+//    NSProcessInfo *process = [NSProcessInfo processInfo];
+//    if ([process respondsToSelector:@selector(enableSuddenTermination)])
+//        [process enableSuddenTermination];
+//#endif
+//}
+//
+//- (void)save
+//{
+//    NSError *error = nil;
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc)
+//        return;
+//
+//    BOOL success = NO;
+//    @try {
+//        success = [moc save:&error];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"Saving changes failed");
+//    }
+//}
+//
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"hasChanges"] && object == _managedObjectContext) {
+//#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5
+//        NSProcessInfo *process = [NSProcessInfo processInfo];
+//        if ([process respondsToSelector:@selector(disableSuddenTermination)])
+//            [process disableSuddenTermination];
+//#endif
+//
+//        if ([[self managedObjectContext] hasChanges]) {
+//            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(savePendingChanges) object:nil];
+//            [self performSelector:@selector(savePendingChanges) withObject:nil afterDelay:1.];
+//        }
+//        return;
+//    }
+//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//}
+//
+//- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation {
+//    if (uriRepresenation == nil) {
+//        return nil;
+//    }
+//    NSManagedObjectID *objectID = [self.persistentStoreCoordinator managedObjectIDForURIRepresentation:uriRepresenation];
+//    if (objectID) {
+//        return [self.managedObjectContext objectWithID:objectID];
+//    }
+//    return nil;
+//}
 
 #pragma mark -
 #pragma mark No meta data fallbacks
@@ -490,12 +490,12 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
 
 #pragma mark -
 #pragma mark Getter
-
-- (void)addNewLabelWithName:(NSString *)name
-{
-    MLLabel *label = [self createObjectForEntity:@"Label"];
-    label.name = name;
-}
+//
+//- (void)addNewLabelWithName:(NSString *)name
+//{
+//    MLLabel *label = [self createObjectForEntity:@"Label"];
+//    label.name = name;
+//}
 
 /**
  * TV MLShow Episodes
@@ -676,7 +676,7 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     file.episodeNumber = episodeNumber;
     episode.shouldBeDisplayed = @YES;
 
-    [episode addFilesObject:file];
+//    [episode addFilesObject:file];
     file.showEpisode = episode;
 
     // The rest of the meta data will be fetched using the MLShow
@@ -759,99 +759,99 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
     }];
 #endif
 }
-
-#pragma mark -
-#pragma mark Adding file to the DB
-
-#ifdef MLKIT_READONLY_TARGET
-
-- (void)addFilePaths:(NSArray *)filepaths
-{
-}
-
-#else
-
-- (void)addFilePath:(NSString *)filePath
-{
-    APLog(@"Adding Path %@", filePath);
-
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    NSString *title = [filePath lastPathComponent];
-#if !TARGET_OS_IPHONE
-    NSDate *openedDate = nil; // FIXME kMDItemLastUsedDate
-    NSDate *modifiedDate = nil; // FIXME [result valueForAttribute:@"kMDItemFSContentChangeDate"];
-#endif
-
-    MLFile *file = [self createObjectForEntity:@"File"];
-    file.url = url;
-
-    // Yes, this is a negative number. VLCTime nicely display negative time
-    // with "XX minutes remaining". And we are using this facility.
-
-    NSNumber *no = @NO;
-    NSNumber *yes = @YES;
-
-    file.currentlyWatching = no;
-    file.lastPosition = @0.0;
-    file.remainingTime = @0.0;
-    file.unread = yes;
-
-#if !TARGET_OS_IPHONE
-    if ([openedDate isGreaterThan:modifiedDate]) {
-        file.playCount = [NSNumber numberWithDouble:1];
-        file.unread = no;
-    }
-#endif
-
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kDecrapifyTitles] boolValue] == YES)
-        file.title = [MLTitleDecrapifier decrapify:[title stringByDeletingPathExtension]];
-    else
-        file.title = [title stringByDeletingPathExtension];
-
-    [[MLFileParserQueue sharedFileParserQueue] addFile:file];
-}
-
-- (void)addFilePaths:(NSArray *)filepaths
-{
-    NSUInteger count = [filepaths count];
-    NSMutableArray *fetchPredicates = [NSMutableArray arrayWithCapacity:count];
-    NSMutableDictionary *urlToObject = [NSMutableDictionary dictionaryWithCapacity:count];
-
-    // Prepare a fetch request for all items
-    for (NSString *path in filepaths) {
-        NSString *relativePath = path;
-#if TARGET_OS_IPHONE
-        // on iPhone we only save relative paths ins the DB
-        relativePath = [self pathRelativeToDocumentsFolderFromAbsolutPath:path];
-#endif
-        [urlToObject setObject:path forKey:relativePath];
-        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"path == %@", relativePath]];
-    }
-    NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
-    if (!request)
-        return;
-    [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
-
-    APLog(@"Fetching");
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc)
-        return;
-    NSArray *dbResults = [moc executeFetchRequest:request error:nil];
-    APLog(@"Done");
-
-    NSMutableArray *filePathsToAdd = [NSMutableArray arrayWithArray:filepaths];
-
-    // Remove objects that are already in db.
-    for (MLFile *dbResult in dbResults) {
-        NSString *path = dbResult.path;
-        [filePathsToAdd removeObject:[urlToObject objectForKey:path]];
-    }
-
-    // Add only the newly added items
-    for (NSString* path in filePathsToAdd)
-        [self addFilePath:path];
-}
-#endif
+//
+//#pragma mark -
+//#pragma mark Adding file to the DB
+//
+////#ifdef MLKIT_READONLY_TARGET
+//
+//- (void)addFilePaths:(NSArray *)filepaths
+//{
+//}
+//
+//#else
+//
+//- (void)addFilePath:(NSString *)filePath
+//{
+//    APLog(@"Adding Path %@", filePath);
+//
+//    NSURL *url = [NSURL fileURLWithPath:filePath];
+//    NSString *title = [filePath lastPathComponent];
+//#if !TARGET_OS_IPHONE
+//    NSDate *openedDate = nil; // FIXME kMDItemLastUsedDate
+//    NSDate *modifiedDate = nil; // FIXME [result valueForAttribute:@"kMDItemFSContentChangeDate"];
+//#endif
+//
+//    MLFile *file = [self createObjectForEntity:@"File"];
+//    file.url = url;
+//
+//    // Yes, this is a negative number. VLCTime nicely display negative time
+//    // with "XX minutes remaining". And we are using this facility.
+//
+//    NSNumber *no = @NO;
+//    NSNumber *yes = @YES;
+//
+//    file.currentlyWatching = no;
+//    file.lastPosition = @0.0;
+//    file.remainingTime = @0.0;
+//    file.unread = yes;
+//
+//#if !TARGET_OS_IPHONE
+//    if ([openedDate isGreaterThan:modifiedDate]) {
+//        file.playCount = [NSNumber numberWithDouble:1];
+//        file.unread = no;
+//    }
+//#endif
+//
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kDecrapifyTitles] boolValue] == YES)
+//        file.title = [MLTitleDecrapifier decrapify:[title stringByDeletingPathExtension]];
+//    else
+//        file.title = [title stringByDeletingPathExtension];
+//
+//    [[MLFileParserQueue sharedFileParserQueue] addFile:file];
+//}
+//
+//- (void)addFilePaths:(NSArray *)filepaths
+//{
+//    NSUInteger count = [filepaths count];
+//    NSMutableArray *fetchPredicates = [NSMutableArray arrayWithCapacity:count];
+//    NSMutableDictionary *urlToObject = [NSMutableDictionary dictionaryWithCapacity:count];
+//
+//    // Prepare a fetch request for all items
+//    for (NSString *path in filepaths) {
+//        NSString *relativePath = path;
+//#if TARGET_OS_IPHONE
+//        // on iPhone we only save relative paths ins the DB
+//        relativePath = [self pathRelativeToDocumentsFolderFromAbsolutPath:path];
+//#endif
+//        [urlToObject setObject:path forKey:relativePath];
+//        [fetchPredicates addObject:[NSPredicate predicateWithFormat:@"path == %@", relativePath]];
+//    }
+//    NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
+//    if (!request)
+//        return;
+//    [request setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:fetchPredicates]];
+//
+//    APLog(@"Fetching");
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc)
+//        return;
+//    NSArray *dbResults = [moc executeFetchRequest:request error:nil];
+//    APLog(@"Done");
+//
+//    NSMutableArray *filePathsToAdd = [NSMutableArray arrayWithArray:filepaths];
+//
+//    // Remove objects that are already in db.
+//    for (MLFile *dbResult in dbResults) {
+//        NSString *path = dbResult.path;
+//        [filePathsToAdd removeObject:[urlToObject objectForKey:path]];
+//    }
+//
+//    // Add only the newly added items
+//    for (NSString* path in filePathsToAdd)
+//        [self addFilePath:path];
+//}
+//#endif
 
 #pragma mark -
 #pragma mark DB Updates
@@ -869,197 +869,197 @@ static NSString *kDecrapifyTitles = @"MLDecrapifyTitles";
         [self fetchMetaDataForShow:show];
 }
 #endif
-
-#ifdef MLKIT_READONLY_TARGET
-
-- (void)updateMediaDatabase
-{
-}
-
-#else
-
-- (void)updateMediaDatabase
-{
-    [self libraryDidDisappear];
-    // Remove no more present files
-    NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
-    if (!request)
-        return;
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    if (!moc)
-        return;
-    NSArray *results;
-    @try {
-        results = [moc executeFetchRequest:request error:nil];
-    }
-    @catch (NSException *exception) {
-        APLog(@"media database update failed");
-        return;
-    }
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    unsigned int count = (unsigned int)results.count;
-    for (unsigned int x = 0; x < count; x++) {
-        MLFile *file = results[x];
-       NSURL *fileURL = file.url;
-        BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
-        if (!exists) {
-            APLog(@"Marking - %@", [fileURL absoluteString]);
-            file.isSafe = YES; // It doesn't exist, it's safe.
-            if (file.isAlbumTrack) {
-                MLAlbum *album = file.albumTrack.album;
-                if (album != nil) {
-                    if (album.tracks.count <= 1) {
-                        @try {
-                            [moc deleteObject:album];
-                        }
-                        @catch (NSException *exception) {
-                            APLog(@"failed to nuke object because it disappeared in front of us");
-                        }
-                    } else
-                        [album removeTrack:file.albumTrack];
-                }
-            }
-            if (file.isShowEpisode) {
-                MLShow *show = file.showEpisode.show;
-                if (show != nil) {
-                    if (show.episodes.count <= 1) {
-                        @try {
-                            [moc deleteObject:show];
-                        }
-                        @catch (NSException *exception) {
-                            APLog(@"failed to nuke object because it disappeared in front of us");
-                        }
-                    } else
-                        [show removeEpisode:file.showEpisode];
-                }
-            }
-#if TARGET_OS_IOS
-            NSString *thumbPath = [file thumbnailPath];
-            bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
-            if (thumbExists)
-                [fileManager removeItemAtPath:thumbPath error:nil];
-
-            if ([CSSearchableIndex class]) {
-            /* remove file from CoreSpotlight */
-                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[file.objectID.URIRepresentation.absoluteString]
-                                                                               completionHandler:^(NSError * __nullable error) {
-                                                                                   APLog(@"Removed %@ from index", file.objectID.URIRepresentation);
-                                                                               }];
-            }
-
-            [moc deleteObject:file];
-#endif
-        }
-#if !TARGET_OS_IPHONE
-    file.isOnDisk = @(exists);
-#endif
-    }
-    [self libraryDidAppear];
-
-    // Get the file to parse
-    request = [self fetchRequestForEntity:@"File"];
-    if (!request)
-        return;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && tracks.@count == 0"]];
-    @try {
-        results = [moc executeFetchRequest:request error:nil];
-    }
-    @catch (NSException *exception) {
-        APLog(@"media database update failed");
-        return;
-    }
-    for (MLFile *file in results)
-        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
-
-    if (!_allowNetworkAccess) {
-        // Always attempt to fetch
-        request = [self fetchRequestForEntity:@"File"];
-        if (!request)
-            return;
-        [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
-        @try {
-            results = [moc executeFetchRequest:request error:nil];
-        }
-        @catch (NSException *exception) {
-            APLog(@"media database update failed");
-            return;
-        }
-        for (MLFile *file in results) {
-            if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
-                [self computeThumbnailForFile:file];
-        }
-        return;
-    }
-
-    // Get the thumbnails to compute
-    request = [self fetchRequestForEntity:@"File"];
-    if (!request)
-        return;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
-    @try {
-        results = [moc executeFetchRequest:request error:nil];
-    }
-    @catch (NSException *exception) {
-        APLog(@"media database update failed");
-        return;
-    }
-    for (MLFile *file in results) {
-        if (!file.computedThumbnail) {
-            if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
-                [self computeThumbnailForFile:file];
-        }
-    }
-
-    // Get to fetch meta data
-    request = [self fetchRequestForEntity:@"File"];
-    if (!request)
-        return;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
-    @try {
-        results = [moc executeFetchRequest:request error:nil];
-    }
-    @catch (NSException *exception) {
-        APLog(@"media database update failed");
-        return;
-    }
-    for (MLFile *file in results)
-        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
-
-    // Get to fetch show info
-    request = [self fetchRequestForEntity:@"Show"];
-    if (!request)
-        return;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"lastSyncDate == 0"]];
-    @try {
-        results = [moc executeFetchRequest:request error:nil];
-    }
-    @catch (NSException *exception) {
-        APLog(@"media database update failed");
-        return;
-    }
-    for (MLShow *show in results)
-        [self fetchMetaDataForShow:show];
-
-#if HAVE_BLOCK
-    // Get updated TV Shows
-    NSNumber *lastServerTime = @([[NSUserDefaults standardUserDefaults] integerForKey:kLastTVDBUpdateServerTime]);
-
-    [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
-        NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
-        if (!request)
-            return;
-        [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
-        NSArray *results = [moc executeFetchRequest:request error:nil];
-        for (MLShow *show in results)
-            [self fetchMetaDataForShow:show];
-    }];
-#endif
-    /* Update every hour - FIXME: Preferences key */
-    [self performSelector:@selector(updateMediaDatabase) withObject:nil afterDelay:60 * 60];
-}
-#endif
+//
+//#ifdef MLKIT_READONLY_TARGET
+//
+//- (void)updateMediaDatabase
+//{
+//}
+//
+//#else
+//
+//- (void)updateMediaDatabase
+//{
+//    [self libraryDidDisappear];
+//    // Remove no more present files
+//    NSFetchRequest *request = [self fetchRequestForEntity:@"File"];
+//    if (!request)
+//        return;
+//    NSManagedObjectContext *moc = [self managedObjectContext];
+//    if (!moc)
+//        return;
+//    NSArray *results;
+//    @try {
+//        results = [moc executeFetchRequest:request error:nil];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"media database update failed");
+//        return;
+//    }
+//
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//
+//    unsigned int count = (unsigned int)results.count;
+//    for (unsigned int x = 0; x < count; x++) {
+//        MLFile *file = results[x];
+//       NSURL *fileURL = file.url;
+//        BOOL exists = [fileManager fileExistsAtPath:[fileURL path]];
+//        if (!exists) {
+//            APLog(@"Marking - %@", [fileURL absoluteString]);
+//            file.isSafe = YES; // It doesn't exist, it's safe.
+//            if (file.isAlbumTrack) {
+//                MLAlbum *album = file.albumTrack.album;
+//                if (album != nil) {
+//                    if (album.tracks.count <= 1) {
+//                        @try {
+//                            [moc deleteObject:album];
+//                        }
+//                        @catch (NSException *exception) {
+//                            APLog(@"failed to nuke object because it disappeared in front of us");
+//                        }
+//                    } else
+//                        [album removeTrack:file.albumTrack];
+//                }
+//            }
+//            if (file.isShowEpisode) {
+//                MLShow *show = file.showEpisode.show;
+//                if (show != nil) {
+//                    if (show.episodes.count <= 1) {
+//                        @try {
+//                            [moc deleteObject:show];
+//                        }
+//                        @catch (NSException *exception) {
+//                            APLog(@"failed to nuke object because it disappeared in front of us");
+//                        }
+//                    } else
+//                        [show removeEpisode:file.showEpisode];
+//                }
+//            }
+//#if TARGET_OS_IOS
+//            NSString *thumbPath = [file thumbnailPath];
+//            bool thumbExists = [fileManager fileExistsAtPath:thumbPath];
+//            if (thumbExists)
+//                [fileManager removeItemAtPath:thumbPath error:nil];
+//
+//            if ([CSSearchableIndex class]) {
+//            /* remove file from CoreSpotlight */
+//                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[file.objectID.URIRepresentation.absoluteString]
+//                                                                               completionHandler:^(NSError * __nullable error) {
+//                                                                                   APLog(@"Removed %@ from index", file.objectID.URIRepresentation);
+//                                                                               }];
+//            }
+//
+//            [moc deleteObject:file];
+//#endif
+//        }
+//#if !TARGET_OS_IPHONE
+//    file.isOnDisk = @(exists);
+//#endif
+//    }
+//    [self libraryDidAppear];
+//
+//    // Get the file to parse
+//    request = [self fetchRequestForEntity:@"File"];
+//    if (!request)
+//        return;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && tracks.@count == 0"]];
+//    @try {
+//        results = [moc executeFetchRequest:request error:nil];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"media database update failed");
+//        return;
+//    }
+//    for (MLFile *file in results)
+//        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
+//
+//    if (!_allowNetworkAccess) {
+//        // Always attempt to fetch
+//        request = [self fetchRequestForEntity:@"File"];
+//        if (!request)
+//            return;
+//        [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES"]];
+//        @try {
+//            results = [moc executeFetchRequest:request error:nil];
+//        }
+//        @catch (NSException *exception) {
+//            APLog(@"media database update failed");
+//            return;
+//        }
+//        for (MLFile *file in results) {
+//            if (!file.computedThumbnail && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
+//                [self computeThumbnailForFile:file];
+//        }
+//        return;
+//    }
+//
+//    // Get the thumbnails to compute
+//    request = [self fetchRequestForEntity:@"File"];
+//    if (!request)
+//        return;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 1 && artworkURL == nil"]];
+//    @try {
+//        results = [moc executeFetchRequest:request error:nil];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"media database update failed");
+//        return;
+//    }
+//    for (MLFile *file in results) {
+//        if (!file.computedThumbnail) {
+//            if (!file.albumTrack && ![file isKindOfType:kMLFileTypeAudio] && [file.hasFetchedInfo boolValue])
+//                [self computeThumbnailForFile:file];
+//        }
+//    }
+//
+//    // Get to fetch meta data
+//    request = [self fetchRequestForEntity:@"File"];
+//    if (!request)
+//        return;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"isOnDisk == YES && hasFetchedInfo == 0"]];
+//    @try {
+//        results = [moc executeFetchRequest:request error:nil];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"media database update failed");
+//        return;
+//    }
+//    for (MLFile *file in results)
+//        [[MLFileParserQueue sharedFileParserQueue] addFile:file];
+//
+//    // Get to fetch show info
+//    request = [self fetchRequestForEntity:@"Show"];
+//    if (!request)
+//        return;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"lastSyncDate == 0"]];
+//    @try {
+//        results = [moc executeFetchRequest:request error:nil];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"media database update failed");
+//        return;
+//    }
+//    for (MLShow *show in results)
+//        [self fetchMetaDataForShow:show];
+//
+//#if HAVE_BLOCK
+//    // Get updated TV Shows
+//    NSNumber *lastServerTime = @([[NSUserDefaults standardUserDefaults] integerForKey:kLastTVDBUpdateServerTime]);
+//
+//    [MLTVShowInfoGrabber fetchUpdatesSinceServerTime:lastServerTime andExecuteBlock:^(NSArray *updates){
+//        NSFetchRequest *request = [self fetchRequestForEntity:@"Show"];
+//        if (!request)
+//            return;
+//        [request setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"theTVDBID"] rightExpression:[NSExpression expressionForConstantValue:updates] modifier:NSDirectPredicateModifier type:NSInPredicateOperatorType options:0]];
+//        NSArray *results = [moc executeFetchRequest:request error:nil];
+//        for (MLShow *show in results)
+//            [self fetchMetaDataForShow:show];
+//    }];
+//#endif
+//    /* Update every hour - FIXME: Preferences key */
+//    [self performSelector:@selector(updateMediaDatabase) withObject:nil afterDelay:60 * 60];
+//}
+//#endif
 
 - (void)applicationWillExit
 {

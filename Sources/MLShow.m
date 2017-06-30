@@ -47,25 +47,26 @@
     return shows;
 }
 
-+ (MLShow *)showWithName:(NSString *)name
-{
-    NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Show"];
-    if (!request)
-        return nil;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
-
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (!moc)
-        return nil;
-
-    NSArray *dbResults = [moc executeFetchRequest:request error:nil];
-    NSAssert(dbResults, @"Can't execute fetch request");
-
-    if ([dbResults count] <= 0)
-        return nil;
-
-    return dbResults[0];
-}
+//
+//+ (MLShow *)showWithName:(NSString *)name
+//{
+////    NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Show"];
+//    if (!request)
+//        return nil;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
+//
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    if (!moc)
+//        return nil;
+//
+//    NSArray *dbResults = [moc executeFetchRequest:request error:nil];
+//    NSAssert(dbResults, @"Can't execute fetch request");
+//
+//    if ([dbResults count] <= 0)
+//        return nil;
+//
+//    return dbResults[0];
+//}
 
 
 @dynamic theTVDBID;

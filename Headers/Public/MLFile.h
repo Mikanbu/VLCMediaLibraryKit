@@ -25,9 +25,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <CoreData/CoreData.h>
+//#import <CoreData/CoreData.h>
 #if TARGET_OS_IOS
-#import <CoreSpotlight/CoreSpotlight.h>
+//#import <CoreSpotlight/CoreSpotlight.h>
 #endif
 #if TARGET_OS_IPHONE
 @class UIImage;
@@ -43,7 +43,7 @@ extern NSString *kMLFileTypeAudio;
 
 extern NSString *const MLFileThumbnailWasUpdated;
 
-@interface MLFile :  NSManagedObject
+@interface MLFile : NSObject
 
 + (NSArray *)allFiles;
 + (NSArray *)fileForURL:(NSURL *)url;
@@ -125,27 +125,27 @@ extern NSString *const MLFileThumbnailWasUpdated;
 /**
  * Shortcuts to the videoTracks.
  */
-- (NSManagedObject *)videoTrack;
+//- (NSManagedObject *)videoTrack;
 
 - (size_t)fileSizeInBytes;
 
 #if TARGET_OS_IOS
-- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
-- (void)updateCoreSpotlightEntry;
+//- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet;
+//- (void)updateCoreSpotlightEntry;
 #endif
 
 @end
 
 
-@interface MLFile (CoreDataGeneratedAccessors)
-- (void)addLabelsObject:(NSManagedObject *)value;
-- (void)removeLabelsObject:(NSManagedObject *)value;
-- (void)addLabels:(NSSet *)value;
-- (void)removeLabels:(NSSet *)value;
-
-- (void)addTracksObject:(NSManagedObject *)value;
-- (void)removeTracksObject:(NSManagedObject *)value;
-- (void)addTracks:(NSSet *)value;
-- (void)removeTracks:(NSSet *)value;
-@end
+//@interface MLFile ()
+//- (void)addLabelsObject:(NSManagedObject *)value;
+//- (void)removeLabelsObject:(NSManagedObject *)value;
+//- (void)addLabels:(NSSet *)value;
+//- (void)removeLabels:(NSSet *)value;
+//
+//- (void)addTracksObject:(NSManagedObject *)value;
+//- (void)removeTracksObject:(NSManagedObject *)value;
+//- (void)addTracks:(NSSet *)value;
+//- (void)removeTracks:(NSSet *)value;
+//@end
 

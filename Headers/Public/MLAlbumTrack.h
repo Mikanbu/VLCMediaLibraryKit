@@ -32,7 +32,7 @@ extern NSString *const MLAlbumTrackDiscNumber;
 
 @class MLFile;
 
-@interface MLAlbumTrack : NSManagedObject
+@interface MLAlbumTrack : NSObject
 
 + (NSArray *)allTracks;
 
@@ -63,23 +63,36 @@ extern NSString *const MLAlbumTrackDiscNumber;
                      createIfNeeded:(BOOL)createIfNeeded
                          wasCreated:(BOOL *)wasCreated;
 
+//
 @property (nonatomic, strong) NSNumber *unread;
 @property (nonatomic, strong) NSString *artist;
 @property (nonatomic, strong) NSString *genre;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSNumber *trackNumber;
 @property (nonatomic, strong) NSNumber *discNumber;
+//
 
 @property (nonatomic, strong) MLAlbum *album;
 @property (nonatomic, strong) NSSet *files;
 @property (nonatomic) BOOL containsArtwork;
 
+///
+
+@property (nonatomic) NSInteger trackId;
+@property (nonatomic) NSInteger artistId;
+@property (nonatomic) NSInteger genreId;
+//@property (nonatomic) NSInteger trackNumber;
+@property (nonatomic) NSInteger albumId;
+//@property (nonatomic) NSInteger discNumber;
+
+///
+
 @end
 
-@interface MLAlbumTrack (CoreDataGeneratedAccessors)
-- (void)addFilesObject:(NSManagedObject *)value;
-- (void)removeFilesObject:(NSManagedObject *)value;
-- (void)addFiles:(NSSet *)value;
-- (void)removeFiles:(NSSet *)value;
-- (MLFile *)anyFileFromTrack;
+@interface MLAlbumTrack ()
+//- (void)addFilesObject:(NSManagedObject *)value;
+//- (void)removeFilesObject:(NSManagedObject *)value;
+//- (void)addFiles:(NSSet *)value;
+//- (void)removeFiles:(NSSet *)value;
+//- (MLFile *)anyFileFromTrack;
 @end

@@ -46,12 +46,12 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 {
     return [NSString stringWithFormat:@"<MLFile title='%@'>", [self title]];
 }
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    self.thumbnailName = [NSUUID UUID].UUIDString;
-}
+//
+//- (void)awakeFromInsert
+//{
+//    [super awakeFromInsert];
+//    self.thumbnailName = [NSUUID UUID].UUIDString;
+//}
 
 + (NSArray *)allFiles
 {
@@ -102,14 +102,14 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     return files;
 }
 
-+ (instancetype)fileForURIRepresentation:(NSURL *)uriRepresentation {
-    NSManagedObject *object = [[MLMediaLibrary sharedMediaLibrary] objectForURIRepresentation:uriRepresentation];
-    if ([object isKindOfClass:[MLFile class]]) {
-        return (MLFile *)object;
-    } else {
-        return nil;
-    }
-}
+//+ (instancetype)fileForURIRepresentation:(NSURL *)uriRepresentation {
+//    NSManagedObject *object = [[MLMediaLibrary sharedMediaLibrary] objectForURIRepresentation:uriRepresentation];
+//    if ([object isKindOfClass:[MLFile class]]) {
+//        return (MLFile *)object;
+//    } else {
+//        return nil;
+//    }
+//}
 
 - (BOOL)isKindOfType:(NSString *)type
 {
@@ -137,15 +137,15 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     NSUInteger options = NSRegularExpressionSearch | NSCaseInsensitiveSearch;
     return ([[self.path lastPathComponent] rangeOfString:@"\\.(aac|aiff|aif|amr|aob|ape|axa|caf|flac|it|m2a|m4a|m4b|mka|mlp|mod|mp1|mp2|mp3|mpa|mpc|oga|oma|opus|rmi|s3m|spx|tta|voc|vqf|w64|wav|wma|wv|xa|xm)$" options:options].location != NSNotFound);
 }
-
-- (NSString *)artworkURL
-{
-    if ([self isShowEpisode]) {
-        return self.showEpisode.artworkURL;
-    }
-    return [self primitiveValueForKey:@"artworkURL"];
-}
-
+//
+//- (NSString *)artworkURL
+//{
+//    if ([self isShowEpisode]) {
+//        return self.showEpisode.artworkURL;
+//    }
+//    return [self primitiveValueForKey:@"artworkURL"];
+//}
+//
 - (NSString *)title
 {
     if ([self isShowEpisode]) {
@@ -184,11 +184,12 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
         }
     }
 
-    [self willAccessValueForKey:@"title"];
-    NSString *ret = [self primitiveValueForKey:@"title"];
-    [self didAccessValueForKey:@"title"];
-
-    return ret;
+//    [self willAccessValueForKey:@"title"];
+//    NSString *ret = [self primitiveValueForKey:@"title"];
+//    [self didAccessValueForKey:@"title"];
+//
+//    return ret;
+    return nil;
 }
 
 @dynamic seasonNumber;
@@ -218,46 +219,46 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 @dynamic albumTrack;
 @dynamic unread;
 @dynamic thumbnailName;
-
-- (NSNumber *)lastPosition
-{
-    [self willAccessValueForKey:@"lastPosition"];
-    NSNumber *ret = [self primitiveValueForKey:@"lastPosition"];
-    [self didAccessValueForKey:@"lastPosition"];
-    return ret;
-}
-
-- (void)setLastPosition:(NSNumber *)lastPosition
-{
-    @try {
-        [self willChangeValueForKey:@"lastPosition"];
-        [self setPrimitiveValue:lastPosition forKey:@"lastPosition"];
-        [self didChangeValueForKey:@"lastPosition"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setLastPosition raised exception");
-    }
-}
-
-- (NSString *)path
-{
-    [self willAccessValueForKey:@"path"];
-    NSString *ret = [self primitiveValueForKey:@"path"];
-    [self didAccessValueForKey:@"path"];
-    return ret;
-}
-
-- (void)setPath:(NSString *)path
-{
-    @try {
-        [self willChangeValueForKey:@"path"];
-        [self setPrimitiveValue:path forKey:@"path"];
-        [self didChangeValueForKey:@"path"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setUrl raised exception");
-    }
-}
+//
+//- (NSNumber *)lastPosition
+//{
+//    [self willAccessValueForKey:@"lastPosition"];
+//    NSNumber *ret = [self primitiveValueForKey:@"lastPosition"];
+//    [self didAccessValueForKey:@"lastPosition"];
+//    return ret;
+//}
+//
+//- (void)setLastPosition:(NSNumber *)lastPosition
+//{
+//    @try {
+//        [self willChangeValueForKey:@"lastPosition"];
+//        [self setPrimitiveValue:lastPosition forKey:@"lastPosition"];
+//        [self didChangeValueForKey:@"lastPosition"];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"setLastPosition raised exception");
+//    }
+//}
+//
+//- (NSString *)path
+//{
+//    [self willAccessValueForKey:@"path"];
+//    NSString *ret = [self primitiveValueForKey:@"path"];
+//    [self didAccessValueForKey:@"path"];
+//    return ret;
+//}
+//
+//- (void)setPath:(NSString *)path
+//{
+//    @try {
+//        [self willChangeValueForKey:@"path"];
+//        [self setPrimitiveValue:path forKey:@"path"];
+//        [self didChangeValueForKey:@"path"];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"setUrl raised exception");
+//    }
+//}
 - (void)setUrl:(NSURL *)url {
     NSString *path = url.path;
 #if TARGET_OS_IPHONE
@@ -324,66 +325,66 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
     [[NSNotificationCenter defaultCenter] postNotificationName:MLFileThumbnailWasUpdated
                                                         object:self];
 }
-
-- (BOOL)isSafe
-{
-    [self willAccessValueForKey:@"isSafe"];
-    NSNumber *ret = [self primitiveValueForKey:@"isSafe"];
-    [self didAccessValueForKey:@"isSafe"];
-    return [ret boolValue];
-}
-
-- (void)setIsSafe:(BOOL)isSafe
-{
-    @try {
-        [self willChangeValueForKey:@"isSafe"];
-        [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
-        [self didChangeValueForKey:@"isSafe"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setIsSafe raised exception");
-    }
-}
-
-- (BOOL)isBeingParsed
-{
-    [self willAccessValueForKey:@"isBeingParsed"];
-    NSNumber *ret = [self primitiveValueForKey:@"isBeingParsed"];
-    [self didAccessValueForKey:@"isBeingParsed"];
-    return [ret boolValue];
-}
-
-- (void)setIsBeingParsed:(BOOL)isBeingParsed
-{
-    @try {
-        [self willChangeValueForKey:@"isBeingParsed"];
-        [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
-        [self didChangeValueForKey:@"isBeingParsed"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setIsBeingParsed raised exception");
-    }
-}
-
-- (BOOL)thumbnailTimeouted
-{
-    [self willAccessValueForKey:@"thumbnailTimeouted"];
-    NSNumber *ret = [self primitiveValueForKey:@"thumbnailTimeouted"];
-    [self didAccessValueForKey:@"thumbnailTimeouted"];
-    return [ret boolValue];
-}
-
-- (void)setThumbnailTimeouted:(BOOL)thumbnailTimeouted
-{
-    @try {
-        [self willChangeValueForKey:@"thumbnailTimeouted"];
-        [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
-        [self didChangeValueForKey:@"thumbnailTimeouted"];
-    }
-    @catch (NSException *exception) {
-        APLog(@"setThumbnailTimeouted raised exception");
-    }
-}
+//
+//- (BOOL)isSafe
+//{
+//    [self willAccessValueForKey:@"isSafe"];
+//    NSNumber *ret = [self primitiveValueForKey:@"isSafe"];
+//    [self didAccessValueForKey:@"isSafe"];
+//    return [ret boolValue];
+//}
+//
+//- (void)setIsSafe:(BOOL)isSafe
+//{
+//    @try {
+//        [self willChangeValueForKey:@"isSafe"];
+//        [self setPrimitiveValue:@(isSafe) forKey:@"isSafe"];
+//        [self didChangeValueForKey:@"isSafe"];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"setIsSafe raised exception");
+//    }
+//}
+//
+//- (BOOL)isBeingParsed
+//{
+//    [self willAccessValueForKey:@"isBeingParsed"];
+//    NSNumber *ret = [self primitiveValueForKey:@"isBeingParsed"];
+//    [self didAccessValueForKey:@"isBeingParsed"];
+//    return [ret boolValue];
+//}
+//
+//- (void)setIsBeingParsed:(BOOL)isBeingParsed
+//{
+//    @try {
+//        [self willChangeValueForKey:@"isBeingParsed"];
+//        [self setPrimitiveValue:@(isBeingParsed) forKey:@"isBeingParsed"];
+//        [self didChangeValueForKey:@"isBeingParsed"];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"setIsBeingParsed raised exception");
+//    }
+//}
+//
+//- (BOOL)thumbnailTimeouted
+//{
+//    [self willAccessValueForKey:@"thumbnailTimeouted"];
+//    NSNumber *ret = [self primitiveValueForKey:@"thumbnailTimeouted"];
+//    [self didAccessValueForKey:@"thumbnailTimeouted"];
+//    return [ret boolValue];
+//}
+//
+//- (void)setThumbnailTimeouted:(BOOL)thumbnailTimeouted
+//{
+//    @try {
+//        [self willChangeValueForKey:@"thumbnailTimeouted"];
+//        [self setPrimitiveValue:@(thumbnailTimeouted) forKey:@"thumbnailTimeouted"];
+//        [self didChangeValueForKey:@"thumbnailTimeouted"];
+//    }
+//    @catch (NSException *exception) {
+//        APLog(@"setThumbnailTimeouted raised exception");
+//    }
+//}
 
 - (void)willDisplay
 {
@@ -416,87 +417,87 @@ NSString *const MLFileThumbnailWasUpdated = @"MLFileThumbnailWasUpdated";
 }
 
 #if TARGET_OS_IOS
-- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
-{
-    if (!SYSTEM_RUNS_IOS9)
-        return nil;
+//- (CSSearchableItemAttributeSet *)coreSpotlightAttributeSet
+//{
+//    if (!SYSTEM_RUNS_IOS9)
+//        return nil;
+//
+//    NSString *workString;
+//
+//    CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"public.audiovisual-content"];
+//    attributeSet.title = self.title;
+//    attributeSet.metadataModificationDate = [NSDate date];
+//    attributeSet.addedDate = [NSDate date];
+//    attributeSet.duration = @(self.duration.intValue / 1000);
+//    attributeSet.streamable = @(0);
+//    attributeSet.deliveryType = @(0);
+//    attributeSet.local = @(1);
+//    attributeSet.playCount = @(0);
+//
+//    UIImage *computedThumb = self.computedThumbnail;
+//    if (computedThumb) {
+//        attributeSet.thumbnailData = UIImageJPEGRepresentation(computedThumb, .9);
+//        computedThumb = nil;
+//    }
+//
+//    NSArray *tracks = [[self tracks] allObjects];
+//    NSUInteger trackCount = tracks.count;
+//    NSMutableArray *codecs = [NSMutableArray new];
+//    NSMutableArray *languages = [NSMutableArray new];
+//    for (NSUInteger x = 0; x < trackCount; x++) {
+//        NSManagedObject *track = tracks[x];
+//        NSString *codec = [track valueForKey:@"codec"];
+//        if (codec)
+//            [codecs addObject:codec];
+//        NSString *language = [track valueForKey:@"language"];
+//        if (language != nil)
+//            [languages addObject:language];
+//
+//        NSString *trackEntityName = [[track entity] name];
+//        if ([trackEntityName isEqualToString:@"VideoTrackInformation"]) {
+//            attributeSet.videoBitRate = [track valueForKey:@"bitrate"];
+//        } else if ([trackEntityName isEqualToString:@"AudioTrackInformation"]) {
+//            attributeSet.audioSampleRate = [track valueForKey:@"sampleRate"];
+//            attributeSet.audioChannelCount = [track valueForKey:@"channelsNumber"];
+//            attributeSet.audioBitRate = [track valueForKey:@"bitrate"];
+//        }
+//    }
+//    attributeSet.codecs = [NSArray arrayWithArray:codecs];
+//    attributeSet.languages = [NSArray arrayWithArray:languages];
+//
+//    workString = self.genre;
+//    if (workString)
+//        attributeSet.genre = workString;
+//
+//    MLAlbumTrack *albumTrack = self.albumTrack;
+//    if (albumTrack) {
+//        attributeSet.artist = albumTrack.artist;
+//        attributeSet.title = albumTrack.title;
+//        attributeSet.audioTrackNumber = albumTrack.trackNumber;
+//        MLAlbum *album = albumTrack.album;
+//        if (album) {
+//            attributeSet.album = album.name;
+//        }
+//        if (attributeSet.genre == nil)
+//            attributeSet.genre = albumTrack.genre;
+//    }
+//
+//    return attributeSet;
+//}
 
-    NSString *workString;
-
-    CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"public.audiovisual-content"];
-    attributeSet.title = self.title;
-    attributeSet.metadataModificationDate = [NSDate date];
-    attributeSet.addedDate = [NSDate date];
-    attributeSet.duration = @(self.duration.intValue / 1000);
-    attributeSet.streamable = @(0);
-    attributeSet.deliveryType = @(0);
-    attributeSet.local = @(1);
-    attributeSet.playCount = @(0);
-
-    UIImage *computedThumb = self.computedThumbnail;
-    if (computedThumb) {
-        attributeSet.thumbnailData = UIImageJPEGRepresentation(computedThumb, .9);
-        computedThumb = nil;
-    }
-
-    NSArray *tracks = [[self tracks] allObjects];
-    NSUInteger trackCount = tracks.count;
-    NSMutableArray *codecs = [NSMutableArray new];
-    NSMutableArray *languages = [NSMutableArray new];
-    for (NSUInteger x = 0; x < trackCount; x++) {
-        NSManagedObject *track = tracks[x];
-        NSString *codec = [track valueForKey:@"codec"];
-        if (codec)
-            [codecs addObject:codec];
-        NSString *language = [track valueForKey:@"language"];
-        if (language != nil)
-            [languages addObject:language];
-
-        NSString *trackEntityName = [[track entity] name];
-        if ([trackEntityName isEqualToString:@"VideoTrackInformation"]) {
-            attributeSet.videoBitRate = [track valueForKey:@"bitrate"];
-        } else if ([trackEntityName isEqualToString:@"AudioTrackInformation"]) {
-            attributeSet.audioSampleRate = [track valueForKey:@"sampleRate"];
-            attributeSet.audioChannelCount = [track valueForKey:@"channelsNumber"];
-            attributeSet.audioBitRate = [track valueForKey:@"bitrate"];
-        }
-    }
-    attributeSet.codecs = [NSArray arrayWithArray:codecs];
-    attributeSet.languages = [NSArray arrayWithArray:languages];
-
-    workString = self.genre;
-    if (workString)
-        attributeSet.genre = workString;
-
-    MLAlbumTrack *albumTrack = self.albumTrack;
-    if (albumTrack) {
-        attributeSet.artist = albumTrack.artist;
-        attributeSet.title = albumTrack.title;
-        attributeSet.audioTrackNumber = albumTrack.trackNumber;
-        MLAlbum *album = albumTrack.album;
-        if (album) {
-            attributeSet.album = album.name;
-        }
-        if (attributeSet.genre == nil)
-            attributeSet.genre = albumTrack.genre;
-    }
-
-    return attributeSet;
-}
-
-- (void)updateCoreSpotlightEntry
-{
-    if ([CSSearchableIndex class] && [CSSearchableIndex isIndexingAvailable]) {
-        /* create final CS item, which will replace the earlier entity */
-        CSSearchableItemAttributeSet *attributeSet = [self coreSpotlightAttributeSet];
-
-        CSSearchableItem *item;
-        item = [[CSSearchableItem alloc] initWithUniqueIdentifier:self.objectID.URIRepresentation.absoluteString
-                                                 domainIdentifier:[[MLMediaLibrary sharedMediaLibrary] applicationGroupIdentifier]
-                                                     attributeSet:attributeSet];
-        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:nil];
-    }
-}
+//- (void)updateCoreSpotlightEntry
+//{
+//    if ([CSSearchableIndex class] && [CSSearchableIndex isIndexingAvailable]) {
+//        /* create final CS item, which will replace the earlier entity */
+//        CSSearchableItemAttributeSet *attributeSet = [self coreSpotlightAttributeSet];
+//
+//        CSSearchableItem *item;
+//        item = [[CSSearchableItem alloc] initWithUniqueIdentifier:self.objectID.URIRepresentation.absoluteString
+//                                                 domainIdentifier:[[MLMediaLibrary sharedMediaLibrary] applicationGroupIdentifier]
+//                                                     attributeSet:attributeSet];
+//        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[item] completionHandler:nil];
+//    }
+//}
 #endif
 
 @end

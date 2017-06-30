@@ -40,24 +40,24 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
 
 @implementation MLAlbumTrack
 
-+ (NSArray *)allTracks
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (!moc || moc.persistentStoreCoordinator == nil)
-        return [NSArray array];
-
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AlbumTrack" inManagedObjectContext:moc];
-    [request setEntity:entity];
-
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:NO];
-    [request setSortDescriptors:@[descriptor]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
-
-    NSArray *tracks = [moc executeFetchRequest:request error:nil];
-
-    return tracks;
-}
+//+ (NSArray *)allTracks
+//{
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    if (!moc || moc.persistentStoreCoordinator == nil)
+//        return [NSArray array];
+//
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AlbumTrack" inManagedObjectContext:moc];
+//    [request setEntity:entity];
+//
+//    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:NO];
+//    [request setSortDescriptors:@[descriptor]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"files.@count > 0"]];
+//
+//    NSArray *tracks = [moc executeFetchRequest:request error:nil];
+//
+//    return tracks;
+//}
 
 + (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album trackNumber:(NSNumber *)trackNumber createIfNeeded:(BOOL)createIfNeeded
 {
@@ -109,7 +109,7 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
     }
 
     if (!track && createIfNeeded) {
-        track = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AlbumTrack"];
+//        track = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"AlbumTrack"];
         if (trackNumber.integerValue == 0)
             trackNumber = @(tracks.count + 1);
         track.trackNumber = trackNumber;
@@ -155,7 +155,7 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
 
     if (!album && createIfNeeded) {
         *wasCreated = YES;
-        album = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Album"];
+//        album = [[MLMediaLibrary sharedMediaLibrary] createObjectForEntity:@"Album"];
         album.name = albumName ? albumName : @"";
     }
     if (!album && !createIfNeeded)
@@ -166,17 +166,17 @@ NSString *const MLAlbumTrackDiscNumber  = @"MLAlbumTrackDiscNumber";
 
 @dynamic primitiveUnread;
 @dynamic unread;
-- (void)setUnread:(NSNumber *)unread
-{
-    [self willChangeValueForKey:@"unread"];
-    [self setPrimitiveUnread:unread];
-    [self didChangeValueForKey:@"unread"];
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (moc) {
-        [moc refreshObject:[self album] mergeChanges:YES];
-        [moc refreshObject:self mergeChanges:YES];
-    }
-}
+//- (void)setUnread:(NSNumber *)unread
+//{
+//    [self willChangeValueForKey:@"unread"];
+//    [self setPrimitiveUnread:unread];
+//    [self didChangeValueForKey:@"unread"];
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    if (moc) {
+//        [moc refreshObject:[self album] mergeChanges:YES];
+//        [moc refreshObject:self mergeChanges:YES];
+//    }
+//}
 
 @dynamic artist;
 @dynamic genre;

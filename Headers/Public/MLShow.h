@@ -27,7 +27,7 @@
 
 @class MLShowEpisode;
 
-@interface MLShow :  NSManagedObject
+@interface MLShow : NSObject
 
 + (NSArray *)allShows;
 + (MLShow *)showWithName:(NSString *)name;
@@ -48,12 +48,11 @@
 
 @end
 
-
-@interface MLShow   (CoreDataGeneratedAccessors)
-- (void)addEpisodesObject:(NSManagedObject *)value;
-- (void)removeEpisodesObject:(NSManagedObject *)value;
-- (void)addEpisodes:(NSSet *)value;
-- (void)removeEpisodes:(NSSet *)value;
-
-@end
+//
+//@interface MLShow   (CoreDataGeneratedAccessors)
+//- (void)addEpisodesObject:(NSManagedObject *)value;
+//- (void)removeEpisodesObject:(NSManagedObject *)value;
+//- (void)addEpisodes:(NSSet *)value;
+//- (void)removeEpisodes:(NSSet *)value;
+//@end
 

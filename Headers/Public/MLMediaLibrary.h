@@ -25,8 +25,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <CoreData/CoreData.h>
-
 @class MLFile;
 
 @interface MLMediaLibrary : NSObject
@@ -58,16 +56,16 @@
 - (void)updateMediaDatabase;
 
 // May be internal
-- (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
-- (id)createObjectForEntity:(NSString *)entity;
-- (void)removeObject:(NSManagedObject *)object;
+//- (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
+//- (id)createObjectForEntity:(NSString *)entity;
+//- (void)removeObject:(NSManagedObject *)object;
 - (NSString *)thumbnailFolderPath;
 - (NSString *)documentFolderPath;
 
 - (NSString *)pathRelativeToDocumentsFolderFromAbsolutPath:(NSString *)absolutPath;
 - (NSString *)absolutPathFromPathRelativeToDocumentsFolder:(NSString *)relativePath;
 
-- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
+//- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
 - (void)computeThumbnailForFile:(MLFile *)file;
 - (void)fetchMetaDataForFile:(MLFile *)file;
 

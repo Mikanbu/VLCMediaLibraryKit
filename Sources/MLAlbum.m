@@ -28,118 +28,118 @@
 #import "MLMediaLibrary.h"
 
 @implementation MLAlbum
-
-+ (NSArray *)allAlbums
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (!moc || moc.persistentStoreCoordinator == nil)
-        return nil;
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Album" inManagedObjectContext:moc];
-    [request setEntity:entity];
-
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    [request setSortDescriptors:@[descriptor]];
-
-    NSArray *albums = [moc executeFetchRequest:request error:nil];
-
-    return albums;
-}
-
-+ (MLAlbum *)albumWithName:(NSString *)name
-{
-    NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Album"];
-    if (!request)
-        return nil;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
-
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    NSArray *dbResults;
-    if (moc) {
-        dbResults = [moc executeFetchRequest:request error:nil];
-        NSAssert(dbResults, @"Can't execute fetch request");
-    }
-
-    if ([dbResults count] <= 0)
-        return nil;
-
-    return dbResults[0];
-}
+//
+//+ (NSArray *)allAlbums
+//{
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    if (!moc || moc.persistentStoreCoordinator == nil)
+//        return nil;
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Album" inManagedObjectContext:moc];
+//    [request setEntity:entity];
+//
+//    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+//    [request setSortDescriptors:@[descriptor]];
+//
+//    NSArray *albums = [moc executeFetchRequest:request error:nil];
+//
+//    return albums;
+//}
+//
+//+ (MLAlbum *)albumWithName:(NSString *)name
+//{
+//    NSFetchRequest *request = [[MLMediaLibrary sharedMediaLibrary] fetchRequestForEntity:@"Album"];
+//    if (!request)
+//        return nil;
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
+//
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    NSArray *dbResults;
+//    if (moc) {
+//        dbResults = [moc executeFetchRequest:request error:nil];
+//        NSAssert(dbResults, @"Can't execute fetch request");
+//    }
+//
+//    if ([dbResults count] <= 0)
+//        return nil;
+//
+//    return dbResults[0];
+//}
 
 @dynamic name;
 @dynamic tracks;
 @dynamic releaseYear;
 @dynamic unreadTracks;
-
-- (NSArray *)sortedTracks
-{
-    NSArray *tracks = [[self valueForKey:@"tracks"] allObjects];
-
-    NSSortDescriptor *trackNumberDescriptor =
-    [[NSSortDescriptor alloc] initWithKey:@"trackNumber"
-                                ascending:YES
-                                 selector:@selector(compare:)];
-
-    NSSortDescriptor *discNumberDescriptor =
-    [[NSSortDescriptor alloc] initWithKey:@"discNumber"
-                                ascending:YES
-                                 selector:@selector(compare:)];
-
-    return [tracks sortedArrayUsingDescriptors:@[discNumberDescriptor, trackNumberDescriptor]];
-}
-
-- (void)addTrack:(MLAlbumTrack *)track
-{
-    if (!track)
-        return;
-
-    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
-    [tracks addObject:track];
-
-    [self willChangeValueForKey:@"tracks"];
-    [self setValue:tracks forKey:@"tracks"];
-    [self didChangeValueForKey:@"tracks"];
-}
-
-- (void)removeTrack:(MLAlbumTrack *)track
-{
-    if (!track)
-        return;
-
-    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
-
-    @try {
-        [tracks removeObject:track];
-
-        [self willChangeValueForKey:@"tracks"];
-        [self setValue:tracks forKey:@"tracks"];
-        [self didChangeValueForKey:@"tracks"];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"removing track failed");
-    }
-}
-
-- (void)removeTrackWithNumber:(NSNumber *)trackNumber
-{
-    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
-    MLAlbumTrack *track = nil;
-    if (trackNumber) {
-        for (MLAlbumTrack *trackIter in tracks) {
-            if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
-                track = trackIter;
-                break;
-            }
-        }
-    }
-    if (!track)
-        return;
-
-    [tracks removeObject:track];
-
-    [self willChangeValueForKey:@"tracks"];
-    [self setValue:tracks forKey:@"tracks"];
-    [self didChangeValueForKey:@"tracks"];
-}
-
+//
+//- (NSArray *)sortedTracks
+//{
+//    NSArray *tracks = [[self valueForKey:@"tracks"] allObjects];
+//
+//    NSSortDescriptor *trackNumberDescriptor =
+//    [[NSSortDescriptor alloc] initWithKey:@"trackNumber"
+//                                ascending:YES
+//                                 selector:@selector(compare:)];
+//
+//    NSSortDescriptor *discNumberDescriptor =
+//    [[NSSortDescriptor alloc] initWithKey:@"discNumber"
+//                                ascending:YES
+//                                 selector:@selector(compare:)];
+//
+//    return [tracks sortedArrayUsingDescriptors:@[discNumberDescriptor, trackNumberDescriptor]];
+//}
+//
+//- (void)addTrack:(MLAlbumTrack *)track
+//{
+//    if (!track)
+//        return;
+//
+//    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
+//    [tracks addObject:track];
+//
+//    [self willChangeValueForKey:@"tracks"];
+//    [self setValue:tracks forKey:@"tracks"];
+//    [self didChangeValueForKey:@"tracks"];
+//}
+//
+//- (void)removeTrack:(MLAlbumTrack *)track
+//{
+//    if (!track)
+//        return;
+//
+//    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
+//
+//    @try {
+//        [tracks removeObject:track];
+//
+//        [self willChangeValueForKey:@"tracks"];
+//        [self setValue:tracks forKey:@"tracks"];
+//        [self didChangeValueForKey:@"tracks"];
+//    }
+//    @catch (NSException *exception) {
+//        NSLog(@"removing track failed");
+//    }
+//}
+//
+//- (void)removeTrackWithNumber:(NSNumber *)trackNumber
+//{
+//    NSMutableSet *tracks = [self mutableSetValueForKey:@"tracks"];
+//    MLAlbumTrack *track = nil;
+//    if (trackNumber) {
+//        for (MLAlbumTrack *trackIter in tracks) {
+//            if ([trackIter.trackNumber intValue] == [trackNumber intValue]) {
+//                track = trackIter;
+//                break;
+//            }
+//        }
+//    }
+//    if (!track)
+//        return;
+//
+//    [tracks removeObject:track];
+//
+//    [self willChangeValueForKey:@"tracks"];
+//    [self setValue:tracks forKey:@"tracks"];
+//    [self didChangeValueForKey:@"tracks"];
+//}
+//
 @end

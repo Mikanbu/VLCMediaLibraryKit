@@ -30,23 +30,23 @@
 
 @implementation MLLabel
 
-+ (NSArray *)allLabels
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
-    if (!moc || moc.persistentStoreCoordinator == nil)
-        return [NSArray array];
-
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Label" inManagedObjectContext:moc];
-    [request setEntity:entity];
-
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    [request setSortDescriptors:@[descriptor]];
-
-    NSArray *labels = [moc executeFetchRequest:request error:nil];
-
-    return labels;
-}
+//+ (NSArray *)allLabels
+//{
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSManagedObjectContext *moc = [[MLMediaLibrary sharedMediaLibrary] managedObjectContext];
+//    if (!moc || moc.persistentStoreCoordinator == nil)
+//        return [NSArray array];
+//
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Label" inManagedObjectContext:moc];
+//    [request setEntity:entity];
+//
+//    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+//    [request setSortDescriptors:@[descriptor]];
+//
+//    NSArray *labels = [moc executeFetchRequest:request error:nil];
+//
+//    return labels;
+//}
 
 @dynamic name;
 @dynamic files;
