@@ -583,6 +583,7 @@
 				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MediaLibraryKit.dst;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -611,6 +612,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MediaLibraryKit.dst;
 				ENABLE_NS_ASSERTIONS = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
