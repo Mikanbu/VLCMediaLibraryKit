@@ -142,6 +142,30 @@ buildXcodeproj()
                > ${out}
 }
 
+createFramework() {
+
+    local target="$1"
+    local platform="$2"
+    local framework="${target}.framework"
+
+    info "Starting the creation of $framework ($target, $platform)..."
+
+    if [ ! -d build ]; then
+        mkdir build
+    fi
+    pushd build
+        rm -rf $framework && \
+        mkdir $framework && \
+        lipo -create $BUILD_TYPE-$platform/libMediaLibraryKit.a \
+                     $MEDIALIBRARY_DIR/libmedialibrary.a        \
+            -o $framework/$target && \
+        chmod a+x $framework/$target && \
+        cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
+    popd
+
+    info "$framework armed and ready to use!"
+}
+
 ###
 
 out="/dev/null"
@@ -161,9 +185,11 @@ else
     info "Build of Medialibrary skipped..."
 fi
 
-buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
+MEDIALIBRARY_DIR="${ROOT_DIR}/medialibrary/medialibrary/build/.libs"
 
 if [ "$CLEAN" = "yes" ]; then
     xcodebuild clean
 fi
 
+buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
+createFramework "MedialibraryKit" iphoneos
