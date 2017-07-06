@@ -60,6 +60,15 @@ MEDIALIBRARY_DIR=""
 
 # Helpers
 
+spushd()
+{
+    pushd "$1" 2>&1> /dev/null
+}
+
+spopd()
+{
+    popd 2>&1> /dev/null
+}
 
 
 log()
@@ -85,37 +94,38 @@ log()
 buildMedialibrary()
 {
     mkdir -p medialibrary
-    pushd medialibrary
+    spushd medialibrary
         if [ -d medialibrary ]; then
-            pushd medialibrary
+            spushd medialibrary
                 git pull --rebase
-            popd
+            spopd
         else
             git clone git@code.videolan.org:videolan/medialibrary.git
-            pushd medialibrary
+            spushd medialibrary
                 git submodule update --init
                 mkdir build
-                pushd build
-                    ../bootstrap
+                spushd build
                     local makeOptions=""
                     local configureOptions="--disable-shared"
+
                     if [ "$TESTS" = "yes" ]; then
                         configureOptions="${configureOptions} --enable-tests"
                     fi
-                    ../configure $configureOptions CXX=$CXX_COMPILATOR OBJCXX=$OBJCXX_COMPILATOR
-
                     if [ "$VERBOSE" = "yes" ]; then
                         makeOptions="V=1"
                     fi
+
+                    ../bootstrap && \
+                    ../configure $configureOptions CXX=$CXX_COMPILATOR OBJCXX=$OBJCXX_COMPILATOR && \
                     make $makeOptions
 
                     if [ $? -ne 0 ]; then
                         log "error" "medialibrary build failed!"
                     fi
-                popd
-            popd
+                spopd
+            spopd
          fi
-    popd
+    spopd
 }
 
 # from buildMobileVLCKit.sh
@@ -155,8 +165,8 @@ buildXcodeproj()
                > ${out}
 }
 
-createFramework() {
-
+createFramework()
+{
     local target="$1"
     local platform="$2"
     local framework="${target}.framework"
@@ -166,7 +176,7 @@ createFramework() {
     if [ ! -d build ]; then
         mkdir build
     fi
-    pushd build
+    spushd build
         rm -rf $framework && \
         mkdir $framework && \
         lipo -create $BUILD_TYPE-$platform/libMediaLibraryKit.a \
@@ -174,7 +184,7 @@ createFramework() {
             -o $framework/$target && \
         chmod a+x $framework/$target && \
         cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
-    popd
+    spopd
 
     log "info" "$framework armed and ready to use!"
 }
