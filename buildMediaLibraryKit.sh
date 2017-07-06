@@ -18,12 +18,14 @@ usage()
 
    OPTIONS
     -v      Be more verbose
+    -d      Enable debug mode
     -t      Enable tests
     -m      Skip medialibrary compilation
+    -c      Clean build
 EOF
 }
 
-while getopts "hvtm" OPTION
+while getopts "hvdtmc" OPTION
 do
     case $OPTION in
         h)
@@ -33,11 +35,17 @@ do
         v)
             VERBOSE=yes
             ;;
+        d)
+            BUILD_TYPE="Debug"
+            ;;
         t)
             TESTS=yes
             ;;
         m)
             SKIPMEDIALIBRARY=yes
+            ;;
+        c)
+            CLEAN=yes
             ;;
         ?)
             usage
@@ -154,4 +162,8 @@ else
 fi
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
+
+if [ "$CLEAN" = "yes" ]; then
+    xcodebuild clean
+fi
 
