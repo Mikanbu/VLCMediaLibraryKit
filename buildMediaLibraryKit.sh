@@ -60,12 +60,25 @@ MEDIALIBRARY_DIR=""
 
 # Helpers
 
-# info/warning/error colors and parameters;
-info()
+
+
+log()
 {
     local green="\033[1;32m"
+    local orange="\033[1;91m"
+    local red="\033[1;31m"
     local normal="\033[0m"
-    echo "[${green}info${normal}] $1"
+    local color=$green
+    local msgType=$1
+
+    if [ "$1" = "warning" ]; then
+        color=$orange
+        msgType="warning"
+    elif [ "$1" = "error" ]; then
+        color=$red
+        msgType="error"
+    fi
+    echo "[${color}${msgType}${normal}] $2"
 }
 
 # Retrieve medialibrary
@@ -97,7 +110,7 @@ buildMedialibrary()
                     make $makeOptions
 
                     if [ $? -ne 0 ]; then
-                        info "welp it failed but info it still happy"
+                        log "error" "medialibrary build failed!"
                     fi
                 popd
             popd
@@ -111,7 +124,7 @@ buildXcodeproj()
     local target="$2"
     local platform="$3"
 
-    info "Starting build $1 ($target, ${BUILD_TYPE}, $platform)..."
+    log "info" "Starting build $1 ($target, ${BUILD_TYPE}, $platform)..."
 
     local architectures=""
     if [ "$TVOS" != "yes" ]; then
@@ -148,7 +161,7 @@ createFramework() {
     local platform="$2"
     local framework="${target}.framework"
 
-    info "Starting the creation of $framework ($target, $platform)..."
+    log "info" "Starting the creation of $framework ($target, $platform)..."
 
     if [ ! -d build ]; then
         mkdir build
@@ -163,7 +176,7 @@ createFramework() {
         cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
     popd
 
-    info "$framework armed and ready to use!"
+    log "info" "$framework armed and ready to use!"
 }
 
 ###
@@ -179,16 +192,17 @@ if [ "x$1" != "x" ]; then
 fi
 
 if [ "$SKIPMEDIALIBRARY" != "yes" ]; then
-    info "Starting Medialibrary build..."
+    log "info" "Starting Medialibrary build..."
     buildMedialibrary
 else
-    info "Build of Medialibrary skipped..."
+    log "warning" "Build of Medialibrary skipped..."
 fi
 
 MEDIALIBRARY_DIR="${ROOT_DIR}/medialibrary/medialibrary/build/.libs"
 
 if [ "$CLEAN" = "yes" ]; then
     xcodebuild clean
+    log "info" "Xcode build cleaned!"
 fi
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
