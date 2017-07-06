@@ -1,12 +1,15 @@
 #!/bin/sh
 
-VERBOSE=no
+CLEAN=no
 TESTS=no
-SKIPMEDIALIBRARY=no
+VERBOSE=no
 ROOT_DIR=default
-BUILD_TYPE=release
+BUILD_TYPE="Release"
 CXX_COMPILATOR=clang++
+SKIPMEDIALIBRARY=no
 OBJCXX_COMPILATOR=clang++
+
+set -e
 
 usage()
 {
@@ -44,7 +47,8 @@ do
 done
 shift "$((OPTIND-1))"
 
-ROOT_DIR=`pwd`
+ROOT_DIR="$(pwd)"
+MEDIALIBRARY_DIR=""
 
 # Helpers
 
@@ -87,9 +91,6 @@ buildMedialibrary()
                     if [ $? -ne 0 ]; then
                         info "welp it failed but info it still happy"
                     fi
-
-                    info "`pwd`/.libs/"
-                    #library are in .libs
                 popd
             popd
          fi
@@ -100,19 +101,19 @@ buildMedialibrary()
 buildXcodeproj()
 {
     local target="$2"
-    local PLATFORM="$3"
+    local platform="$3"
 
-    info "Starting build $1 ($target, ${BUILD_TYPE}, $PLATFORM)..."
+    info "Starting build $1 ($target, ${BUILD_TYPE}, $platform)..."
 
     local architectures=""
     if [ "$TVOS" != "yes" ]; then
-    if [ "$PLATFORM" = "iphonesimulator" ]; then
+    if [ "$platform" = "iphonesimulator" ]; then
             architectures="i386 x86_64"
         else
             architectures="armv7 armv7s arm64"
         fi
     else
-        if [ "$PLATFORM" = "appletvsimulator" ]; then
+        if [ "$platform" = "appletvsimulator" ]; then
             architectures="x86_64"
         else
             architectures="arm64"
@@ -125,7 +126,7 @@ buildXcodeproj()
     fi
     xcodebuild -project "$1.xcodeproj" \
                -target "$target" \
-               -sdk $PLATFORM$SDK \
+               -sdk $platform$SDK \
                -configuration ${BUILD_TYPE} \
                ARCHS="${architectures}" \
                IPHONEOS_DEPLOYMENT_TARGET=${SDK_MIN} \
