@@ -579,10 +579,7 @@
 		7D0EF4AD170883940003ED47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MediaLibraryKit.dst;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
@@ -606,10 +603,7 @@
 		7D0EF4AE170883940003ED47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MediaLibraryKit.dst;
 				ENABLE_NS_ASSERTIONS = NO;
