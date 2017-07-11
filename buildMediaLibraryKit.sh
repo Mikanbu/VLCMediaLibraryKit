@@ -22,7 +22,7 @@ usage()
     -d      Enable debug mode
     -t      Enable tests
     -m      Skip medialibrary compilation
-    -c      Clean build
+    -c      Clean all target build
     -s      Enable medialibrary build for simulators
 EOF
 }
@@ -216,7 +216,7 @@ fi
 MEDIALIBRARY_DIR="${ROOT_DIR}/medialibrary/medialibrary/build/.libs"
 
 if [ "$CLEAN" = "yes" ]; then
-    xcodebuild clean
+    xcodebuild -alltargets clean
     log "info" "Xcode build cleaned!"
 fi
 
