@@ -4,6 +4,7 @@ CLEAN=no
 TESTS=no
 VERBOSE=no
 ROOT_DIR=default
+SIMULATOR=no
 BUILD_TYPE="Release"
 CXX_COMPILATOR=clang++
 SKIPMEDIALIBRARY=no
@@ -22,10 +23,11 @@ usage()
     -t      Enable tests
     -m      Skip medialibrary compilation
     -c      Clean build
+    -s      Enable medialibrary build for simulators
 EOF
 }
 
-while getopts "hvdtmc" OPTION
+while getopts "hvdtmcs" OPTION
 do
     case $OPTION in
         h)
@@ -46,6 +48,9 @@ do
             ;;
         c)
             CLEAN=yes
+            ;;
+        s)
+            SIMULATOR=yes
             ;;
         ?)
             usage
@@ -138,7 +143,7 @@ buildXcodeproj()
 
     local architectures=""
     if [ "$TVOS" != "yes" ]; then
-    if [ "$platform" = "iphonesimulator" ]; then
+        if [ "$platform" = "iphonesimulator" ]; then
             architectures="i386 x86_64"
         else
             architectures="armv7 armv7s arm64"
