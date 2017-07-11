@@ -215,6 +215,24 @@ buildXcodeproj()
                > ${out}
 }
 
+lipoMedialibrary()
+{
+    local medialibraryInstallDir="${MEDIALIBRARY_DIR}/build/${1}-install"
+    local files=""
+    local architectures="`ls ${medialibraryInstallDir}`"
+
+    log "info" "Starting the creation of a libmedialibrary.a bundle..."
+
+    for i in ${architectures}
+    do
+        files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
+    done
+
+    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
+
+    log "info" "libmedialibrary.a bundle armed and ready to use!"
+}
+
 createFramework()
 {
     local target="$1"
@@ -270,6 +288,12 @@ if [ "$CLEAN" = "yes" ]; then
     xcodebuild -alltargets clean
     log "info" "Xcode build cleaned!"
 fi
+
+if [ "$SIMULATOR" = "yes" ]; then
+    lipoMedialibrary iPhoneSimulator
+fi
+
+lipoMedialibrary iPhoneOS
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
 createFramework "MedialibraryKit" iphoneos
