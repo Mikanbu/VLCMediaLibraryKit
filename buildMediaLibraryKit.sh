@@ -204,12 +204,7 @@ buildXcodeproj()
             architectures="x86_64"
         else
             architectures="arm64"
-    fi
-    fi
-
-    local defs="$GCC_PREPROCESSOR_DEFINITIONS"
-    if [ "$SCARY" = "no" ]; then
-        defs="$defs NOSCARYCODECS"
+        fi
     fi
     xcodebuild -project "$1.xcodeproj" \
                -target "$target" \
@@ -217,7 +212,6 @@ buildXcodeproj()
                -configuration ${BUILD_TYPE} \
                ARCHS="${architectures}" \
                IPHONEOS_DEPLOYMENT_TARGET=${SDK_MIN} \
-               GCC_PREPROCESSOR_DEFINITIONS="$defs" \
                > ${out}
 }
 
@@ -237,7 +231,6 @@ createFramework()
         rm -rf $framework && \
         mkdir $framework && \
         lipo -create $BUILD_TYPE-$platform/libMediaLibraryKit.a \
-                     $medialibraryLibDir/libmedialibrary.a      \
             -o $framework/$target && \
         chmod a+x $framework/$target && \
         cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
