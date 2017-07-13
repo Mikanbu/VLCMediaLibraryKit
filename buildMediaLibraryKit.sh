@@ -1,7 +1,6 @@
 #!/bin/sh
 
 CLEAN=no
-TESTS=no
 SDK_MIN=9.0
 VERBOSE=no
 ROOT_DIR=default
@@ -22,14 +21,13 @@ usage()
    OPTIONS
     -v      Be more verbose
     -d      Enable debug mode
-    -t      Enable tests
     -m      Skip medialibrary compilation
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
 EOF
 }
 
-while getopts "hvdtmcs" OPTION
+while getopts "hvdmcs" OPTION
 do
     case $OPTION in
         h)
@@ -41,9 +39,6 @@ do
             ;;
         d)
             BUILD_TYPE="Debug"
-            ;;
-        t)
-            TESTS=yes
             ;;
         m)
             SKIPMEDIALIBRARY=yes
@@ -159,9 +154,6 @@ buildMedialibrary()
 
                 configureOptions="${configureOptions} --prefix=${prefix} --host=${target}"
 
-                if [ "$TESTS" = "yes" ]; then
-                    configureOptions="${configureOptions} --enable-tests"
-                fi
                 if [ "$VERBOSE" = "yes" ]; then
                     makeOptions="${makeOptions} V=1"
                 fi
