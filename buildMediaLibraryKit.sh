@@ -59,6 +59,11 @@ shift "$((OPTIND-1))"
 
 ROOT_DIR="$(pwd)"
 MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
+DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
+SQLITE_BUILD_DIR=""
+SQLITE_INCLUDE_DIR=""
+LIBJPEG_BUILD_DIR=""
+LIBJPEG_INCLUDE_DIR=""
 
 # Helpers
 
@@ -111,6 +116,113 @@ fetchMedialibrary()
     spopd #libmedialibrary
 }
 
+buildLibJpeg()
+{
+    local arch=$1
+    local target=$2
+    local libjpegRelease="1.5.2"
+    local libjpegDir="${DEPENDENCIES_DIR}/libjpeg-turbo"
+    local prefix="${libjpegDir}/install/${arch}"
+
+    if [ ! -d "${libjpegDir}" ]; then
+        log "warning" "libjpeg source not found! Starting download..."
+        git clone git@github.com:libjpeg-turbo/libjpeg-turbo.git
+        spushd libjpeg-turbo
+            git checkout tags/${libjpegRelease}
+        spopd
+    fi
+    log "info" "Starting libjpeg configuration..."
+    spushd libjpeg-turbo
+        if [ ! -d "configure" ]; then
+            autoreconf --install
+        fi
+        if [ ! -d "build" ]; then
+            mkdir build
+        fi
+        spushd build
+            if [ ! -d "$arch" ]; then
+                mkdir $arch
+            fi
+            spushd $arch
+                ${libjpegDir}/configure \
+                               --host=$target \
+                               --prefix=$prefix \
+                               --disable-shared
+                log "info" "Starting libjpeg make..."
+                make
+                if [ ! -d "${prefix}" ]; then
+                    mkdir -p $prefix
+                fi
+                make install
+                LIBJPEG_BUILD_DIR="`pwd`"
+                LIBJPEG_INCLUDE_DIR="${prefix}/include/"
+                log "info" "libjpeg armed and ready for ${arch}!"
+            spopd
+        spopd
+    spopd
+}
+
+buildSqlite()
+{
+    local arch=$1
+    local target=$2
+    local sqliteRelease="sqlite-autoconf-3180000"
+    local sqliteSHA1="74559194e1dd9b9d577cac001c0e9d370856671b"
+    local sqliteDir="${DEPENDENCIES_DIR}/${sqliteRelease}"
+    local prefix="${sqliteDir}/installation/${arch}"
+
+    if [ ! -d "${sqliteDir}" ]; then
+        log "warning" "sqlite source not found! Starting download..."
+        wget https://download.videolan.org/pub/contrib/sqlite/${sqliteRelease}.tar.gz
+        if [ ! "`sha1sum ${sqliteRelease}.tar.gz`" = "${sqliteSHA1}  ${sqliteRelease}.tar.gz" ]; then
+            log "error" "Wrong sha1 for ${sqliteRelease}.tar.gz"
+            exit 1
+        fi
+        tar -xzf ${sqliteRelease}.tar.gz
+        rm -f ${sqliteRelease}.tar.gz
+    fi
+    spushd $sqliteDir
+        log "info" "Starting SQLite configuration..."
+        if [ ! -d "build" ]; then
+            mkdir build
+        fi
+        spushd build
+            if [ ! -d "$arch" ]; then
+                mkdir $arch
+            fi
+            spushd $arch
+                log "error" $prefix
+                ${sqliteDir}/configure \
+                    --host=$target \
+                    --prefix=$prefix \
+                    --disable-shared
+                log "info" "Starting SQLite make..."
+                make
+                if [ ! -d "${prefix}" ]; then
+                    mkdir -p $prefix
+                fi
+                make install
+                SQLITE_BUILD_DIR="`pwd`"
+                SQLITE_INCLUDE_DIR="${prefix}/include/"
+                log "info" "SQLite armed and ready for ${arch}!"
+            spopd
+        spopd
+    spopd
+}
+
+
+buildDependencies()
+{
+    log "info" "Starting build for medialibrary dependencies..."
+    if [ ! -d "${DEPENDENCIES_DIR}" ]; then
+        mkdir -p $DEPENDENCIES_DIR
+    fi
+    spushd $DEPENDENCIES_DIR
+        buildSqlite $1 $2
+        buildLibJpeg $1 $2
+    spopd
+}
+
 buildMedialibrary()
 {
     log "info" "Starting Medialibrary build..."
@@ -119,7 +231,6 @@ buildMedialibrary()
     local arch=$2
     local platform=$3
     local makeOptions=""
-    local configureOptions="--disable-shared"
 
     spushd libmedialibrary
         spushd medialibrary
@@ -128,8 +239,8 @@ buildMedialibrary()
             fi
             spushd build
                 local actualArch=$arch
-
                 if [ "${arch}" = "aarch64" ]; then
+                    #for the target triplet
                     actualArch="arm64"
                 fi
 
@@ -138,7 +249,6 @@ buildMedialibrary()
                 local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
                 local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
 
-                log "warning" "build Directory: $buildDir with prefix: $prefix"
                 log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
 
                 SDKROOT=`xcode-select -print-path`/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}${SDK_VERSION}.sdk
@@ -152,7 +262,7 @@ buildMedialibrary()
                 export CXXFLAGS="${CFLAGS}"
                 export CPPFLAGS="${CFLAGS}"
 
-                configureOptions="${configureOptions} --prefix=${prefix} --host=${target}"
+                buildDependencies $actualArch $target
 
                 if [ "$VERBOSE" = "yes" ]; then
                     makeOptions="${makeOptions} V=1"
@@ -161,10 +271,20 @@ buildMedialibrary()
                 mkdir -p $buildDir && spushd $buildDir
 
                     $MEDIALIBRARY_DIR/bootstrap && \
-                        $MEDIALIBRARY_DIR/configure $configureOptions CXX=$CXX_COMPILATOR OBJCXX=$OBJCXX_COMPILATOR
-                    log "info" "Staring make in ${buildDir}..."
+                    $MEDIALIBRARY_DIR/configure \
+                                       --disable-shared \
+                                       --prefix=$prefix \
+                                       --host=$target \
+                                       CXX=$CXX_COMPILATOR \
+                                       OBJCXX=$OBJCXX_COMPILATOR \
+                                       LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
+                                       LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}"
+                                       SQLITE_LIBS="-L${SQLITE_BUILD_DIR} -lsqlite3" \
+                                       SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
+
+                    log "info" "Starting make in ${buildDir}..."
                     make -C $buildDir $makeOptions > ${out}
-                    make -C ${buildDir} install > ${out}
+                    make -C $buildDir install > ${out}
 
                 spopd
 
