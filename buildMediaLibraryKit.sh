@@ -60,8 +60,10 @@ shift "$((OPTIND-1))"
 ROOT_DIR="$(pwd)"
 MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
 DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
+SQLITE_DIR="${DEPENDENCIES_DIR}/sqlite-autoconf-3180000"
 SQLITE_BUILD_DIR=""
 SQLITE_INCLUDE_DIR=""
+LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
 
@@ -121,10 +123,10 @@ buildLibJpeg()
     local arch=$1
     local target=$2
     local libjpegRelease="1.5.2"
-    local libjpegDir="${DEPENDENCIES_DIR}/libjpeg-turbo"
-    local prefix="${libjpegDir}/install/${arch}"
+    LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
+    local prefix="${LIBJPEG_DIR}/install/${arch}"
 
-    if [ ! -d "${libjpegDir}" ]; then
+    if [ ! -d "${LIBJPEG_DIR}" ]; then
         log "warning" "libjpeg source not found! Starting download..."
         git clone git@github.com:libjpeg-turbo/libjpeg-turbo.git
         spushd libjpeg-turbo
@@ -144,7 +146,7 @@ buildLibJpeg()
                 mkdir $arch
             fi
             spushd $arch
-                ${libjpegDir}/configure \
+                ${LIBJPEG_DIR}/configure \
                                --host=$target \
                                --prefix=$prefix \
                                --disable-shared
@@ -168,10 +170,10 @@ buildSqlite()
     local target=$2
     local sqliteRelease="sqlite-autoconf-3180000"
     local sqliteSHA1="74559194e1dd9b9d577cac001c0e9d370856671b"
-    local sqliteDir="${DEPENDENCIES_DIR}/${sqliteRelease}"
-    local prefix="${sqliteDir}/installation/${arch}"
+    SQLITE_DIR="${DEPENDENCIES_DIR}/${sqliteRelease}"
+    local prefix="${SQLITE_DIR}/installation/${arch}"
 
-    if [ ! -d "${sqliteDir}" ]; then
+    if [ ! -d "${SQLITE_DIR}" ]; then
         log "warning" "sqlite source not found! Starting download..."
         wget https://download.videolan.org/pub/contrib/sqlite/${sqliteRelease}.tar.gz
         if [ ! "`sha1sum ${sqliteRelease}.tar.gz`" = "${sqliteSHA1}  ${sqliteRelease}.tar.gz" ]; then
@@ -181,7 +183,7 @@ buildSqlite()
         tar -xzf ${sqliteRelease}.tar.gz
         rm -f ${sqliteRelease}.tar.gz
     fi
-    spushd $sqliteDir
+    spushd $SQLITE_DIR
         log "info" "Starting SQLite configuration..."
         if [ ! -d "build" ]; then
             mkdir build
@@ -192,7 +194,7 @@ buildSqlite()
             fi
             spushd $arch
                 log "error" $prefix
-                ${sqliteDir}/configure \
+                ${SQLITE_DIR}/configure \
                     --host=$target \
                     --prefix=$prefix \
                     --disable-shared
