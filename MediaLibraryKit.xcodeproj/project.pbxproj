@@ -77,6 +77,8 @@
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
 		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
+		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
+		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
 		8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
 		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
@@ -174,6 +176,8 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
+		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
+		8D3D64DB1F1D671F008E178E /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
 		8D44EC641F03C084007F2C54 /* libmedialibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary.a; path = ../medialibrary/build/.libs/libmedialibrary.a; sourceTree = "<group>"; };
 		DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLMediaLibrary+Migration.h"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */,
+				8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */,
+				8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */,
 				8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +239,8 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D3D64DA1F1D671F008E178E /* libjpeg.a */,
+				8D3D64DB1F1D671F008E178E /* libsqlite3.a */,
 				8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */,
 				8D44EC641F03C084007F2C54 /* libmedialibrary.a */,
 				7D0EF4A1170883940003ED47 /* Foundation.framework */,
