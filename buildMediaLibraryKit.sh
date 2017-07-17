@@ -332,19 +332,50 @@ buildXcodeproj()
 lipoMedialibrary()
 {
     local medialibraryInstallDir="${MEDIALIBRARY_DIR}/build/${1}-install"
+    local medialibraryArch="`ls ${medialibraryInstallDir}`"
     local files=""
-    local architectures="`ls ${medialibraryInstallDir}`"
 
     log "info" "Starting the creation of a libmedialibrary.a bundle..."
-
-    for i in ${architectures}
+    for i in ${medialibraryArch}
     do
         files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
     done
 
     lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
-
     log "info" "libmedialibrary.a bundle armed and ready to use!"
+}
+
+lipoSqlite()
+{
+    local sqliteInstallDir="${SQLITE_DIR}/installation"
+    local sqliteArch="`ls ${sqliteInstallDir}`"
+    local files=""
+
+    log "info" "Starting the creation of a libsqlite3.a bundle..."
+    for i in ${sqliteArch}
+    do
+        files="${sqliteInstallDir}/${i}/lib/libsqlite3.a ${files}"
+    done
+
+    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"
+    log "info" "libsqlite3.a bundle armed and ready to use!"
+}
+
+lipoJpeg()
+{
+    local libjpegInstallDir="${LIBJPEG_DIR}/install"
+    local libjpegArch="`ls ${libjpegInstallDir}`"
+    local files=""
+
+    log "info" "Starting the creation of a libjpeg.a bundle..."
+
+    for i in ${libjpegArch}
+    do
+        files="${libjpegInstallDir}/${i}/lib/libjpeg.a ${files}"
+    done
+
+    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libjpeg.a"
+    log "info" "libjpeg.a bundle armed and ready to use!"
 }
 
 createFramework()
@@ -408,6 +439,8 @@ if [ "$SIMULATOR" = "yes" ]; then
 fi
 
 lipoMedialibrary iPhoneOS
+lipoSqlite
+lipoJpeg
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
 createFramework "MedialibraryKit" iphoneos
