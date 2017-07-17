@@ -402,12 +402,14 @@ createFramework()
     log "info" "$framework armed and ready to use!"
 }
 
-###
-
 out="/dev/null"
 if [ "$VERBOSE" = "yes" ]; then
     out="/dev/stdout"
 fi
+
+##################
+# Command Center #
+##################
 
 if [ "x$1" != "x" ]; then
     usage
