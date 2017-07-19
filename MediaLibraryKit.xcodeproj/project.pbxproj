@@ -185,6 +185,7 @@
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
 		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
 		8D31CE3F1F0A6873005A2895 /* MLArtist.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MLArtist.mm; sourceTree = "<group>"; };
+		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
 		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
 		8D3D64DB1F1D671F008E178E /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -293,6 +294,7 @@
 				7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */,
 				7D0EF50C170885130003ED47 /* MLURLConnection.h */,
 				7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */,
+				8D31CE481F0B9917005A2895 /* Medialibrary.h */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
