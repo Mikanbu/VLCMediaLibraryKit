@@ -77,9 +77,11 @@
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
 		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
+		8D31CE401F0A6873005A2895 /* MLArtist.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* MLArtist.mm */; };
 		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
 		8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
+		8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D31CE3E1F0A6873005A2895 /* MLArtist.h */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
 		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
 		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
@@ -100,6 +102,7 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */,
 				DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */,
 				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */,
 				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */,
@@ -176,6 +179,8 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
+		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
+		8D31CE3F1F0A6873005A2895 /* MLArtist.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MLArtist.mm; sourceTree = "<group>"; };
 		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
 		8D3D64DB1F1D671F008E178E /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -289,6 +294,7 @@
 				7D0EF510170885130003ED47 /* MediaLibraryKit.h */,
 				7D9E238117AEE9F2008485E5 /* MLAlbum.h */,
 				7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */,
+				8D31CE3E1F0A6873005A2895 /* MLArtist.h */,
 				7D0EF511170885130003ED47 /* MLFile.h */,
 				7D0EF512170885130003ED47 /* MLLabel.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
@@ -303,6 +309,7 @@
 		7D0EF516170885130003ED47 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8D31CE3F1F0A6873005A2895 /* MLArtist.mm */,
 				7D0EF518170885130003ED47 /* MLCrashPreventer.m */,
 				7D0EF519170885130003ED47 /* MLFile.m */,
 				7D0EF51B170885130003ED47 /* MLFileParserQueue.m */,
@@ -467,6 +474,7 @@
 				7D0EF531170885130003ED47 /* MLTitleDecrapifier.m in Sources */,
 				7D0EF534170885130003ED47 /* MLURLConnection.m in Sources */,
 				7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */,
+				8D31CE401F0A6873005A2895 /* MLArtist.mm in Sources */,
 				7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */,
 				7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */,
 				DDB959371AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m in Sources */,
