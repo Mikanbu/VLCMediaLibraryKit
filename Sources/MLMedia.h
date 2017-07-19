@@ -1,9 +1,9 @@
 /*****************************************************************************
+ * MLMedia.h
  * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2013 Felix Paul Kühne
- *
- * Authors: Felix Paul Kühne <fkuehne # videolan.org>
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
+ * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -20,24 +20,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <MediaLibraryKit/MLFile.h>
-#import <MediaLibraryKit/MLLabel.h>
-#import <MediaLibraryKit/MLMediaLibrary.h>
-#import <MediaLibraryKit/MLShow.h>
-#import <MediaLibraryKit/MLShowEpisode.h>
-#import <MediaLibraryKit/MLAlbum.h>
-#import <MediaLibraryKit/MLAlbumTrack.h>
-#import <MediaLibraryKit/MLThumbnailerQueue.h>
-#import <MediaLibraryKit/UIImage+MLKit.h>
-#import <MediaLibraryKit/MLArtist.h>
-#import <MediaLibraryKit/MLMedia.h>
+@interface MLMedia : NSObject
 
-@class MLFile;
-@class MLLabel;
-@class MLMediaLibrary;
-@class MLShow;
-@class MLShowEpisode;
-@class MLAlbum;
-@class MLAlbumTrack;
-@class MLArtist;
-@class MLMedia;
+@property (nonatomic, readonly, strong) NSURL *mrl;
+@property (nonatomic, strong) NSString *title;
+
+- (instancetype)initWithMrl:(NSURL *)mrl;
+- (instancetype)initWithMrl:(NSURL *)mrl forTitle:(NSString *)title;
+
+- (BOOL)isFavorite;
+
+- (BOOL)updateTitle:(NSString *)title;
+
+@end
