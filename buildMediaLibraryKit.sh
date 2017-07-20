@@ -9,6 +9,7 @@ BUILD_TYPE="Release"
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
 SKIPMEDIALIBRARY=no
+SKIP_DEPENDENCIES=no
 OBJCXX_COMPILATOR=clang++
 
 set -e
@@ -24,10 +25,11 @@ usage()
     -m      Skip medialibrary compilation
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
+    -x      Skip medialibrary dependencies build
 EOF
 }
 
-while getopts "hvdmcs" OPTION
+while getopts "hvdmcsx" OPTION
 do
     case $OPTION in
         h)
@@ -48,6 +50,9 @@ do
             ;;
         s)
             SIMULATOR=yes
+            ;;
+        x)
+            SKIP_DEPENDENCIES=yes
             ;;
         ?)
             usage
@@ -264,7 +269,15 @@ buildMedialibrary()
                 export CXXFLAGS="${CFLAGS}"
                 export CPPFLAGS="${CFLAGS}"
 
-                buildDependencies $actualArch $target
+                if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
+                    buildDependencies $actualArch $target
+                else
+                    log "warning" "Build of medialibrary dependencies skipped..."
+                    LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}"
+                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}/include/"
+                    SQLITE_BUILD_DIR="${SQLITE_DIR}/build/${arch}"
+                    SQLITE_INCLUDE_DIR="${SQLITE_DIR}/installation/${arch}/include/"
+                fi
 
                 if [ "$VERBOSE" = "yes" ]; then
                     makeOptions="${makeOptions} V=1"
