@@ -347,15 +347,19 @@ lipoMedialibrary()
     local medialibraryInstallDir="${MEDIALIBRARY_DIR}/build/${1}-install"
     local medialibraryArch="`ls ${medialibraryInstallDir}`"
     local files=""
+    local darwinFiles=""
 
     log "info" "Starting the creation of a libmedialibrary.a bundle..."
     for i in ${medialibraryArch}
     do
         files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
+        darwinFiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary_macos.a ${darwinFiles}"
     done
 
     lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
+    lipo ${darwinFiles} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary_macos.a"
     log "info" "libmedialibrary.a bundle armed and ready to use!"
+    log "info" "libmedialibrary_macos.a bundle armed and ready to use!"
 }
 
 lipoSqlite()
