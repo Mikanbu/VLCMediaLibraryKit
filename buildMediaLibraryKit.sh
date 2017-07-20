@@ -8,7 +8,7 @@ SIMULATOR=no
 BUILD_TYPE="Release"
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
-SKIPMEDIALIBRARY=no
+SKIP_MEDIALIBRARY=no
 SKIP_DEPENDENCIES=no
 OBJCXX_COMPILATOR=clang++
 
@@ -43,7 +43,7 @@ do
             BUILD_TYPE="Debug"
             ;;
         m)
-            SKIPMEDIALIBRARY=yes
+            SKIP_MEDIALIBRARY=yes
             ;;
         c)
             CLEAN=yes
@@ -429,7 +429,7 @@ if [ "x$1" != "x" ]; then
     exit 1
 fi
 
-if [ "$SKIPMEDIALIBRARY" != "yes" ]; then
+if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     fetchMedialibrary
 
     #Mobile first!
