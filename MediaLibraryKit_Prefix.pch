@@ -24,45 +24,47 @@
  *****************************************************************************/
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
+# import <Foundation/Foundation.h>
 #endif
+
+#include "Medialibrary.h"
+
 
 #if TARGET_OS_IPHONE
 
-#ifndef __IPHONE_9_0
-#error "This project uses features only available in iOS SDK 9.0 and later."
-#endif
+# ifndef __IPHONE_9_0
+#  error "This project uses features only available in iOS SDK 9.0 and later."
+# endif
 
-#define HAVE_BLOCK 0
+# define HAVE_BLOCK 0
+# import <UIKit/UIKit.h>
 
-#import <UIKit/UIKit.h>
-#ifndef MLKIT_READONLY_TARGET
-#if !TARGET_OS_WATCH
+# ifndef MLKIT_READONLY_TARGET
+#  if !TARGET_OS_WATCH
 //#import <MobileVLCKit/MobileVLCKit.h>
-#endif
-#endif
+#  endif
+# endif
 
 #else
-#define HAVE_BLOCK 1
+
+# define HAVE_BLOCK 1
 //#import <VLCKit/VLCKit.h>
-#import "NSXMLNode_Additions.h"
+#  import "NSXMLNode_Additions.h"
 
 #endif
 
 #import "UIImage+MLKit.h"
 
 #ifndef NDEBUG
-#define APLog(format, ...) NSLog(format, ## __VA_ARGS__)
+# define APLog(format, ...) NSLog(format, ## __VA_ARGS__)
 #else
-#define APLog(format, ...)
+# define APLog(format, ...)
 #endif
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-//#define SYSTEM_RUNS_IOS9 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")
-
 #ifdef __IPHONE_9_0
-#define SYSTEM_RUNS_IOS9 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")
+# define SYSTEM_RUNS_IOS9 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")
 #else
-#define SYSTEM_RUNS_IOS9 NO
+# define SYSTEM_RUNS_IOS9 NO
 #endif
