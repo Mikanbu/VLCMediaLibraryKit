@@ -10,7 +10,6 @@
 		7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
 		7D0EF528170885130003ED47 /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D0EF529170885130003ED47 /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
-		7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
 		7D0EF52B170885130003ED47 /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
 		7D0EF52E170885130003ED47 /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
@@ -29,7 +28,6 @@
 		7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7DB1B677F1700FB78AB /* MLThumbnailerQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF521170885130003ED47 /* MLThumbnailerQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF517170885130003ED47 /* MLCrashPreventer.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7D2DF7DE1B677F2300FB78AB /* MLFileParserQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF51A170885130003ED47 /* MLFileParserQueue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7DF1B677F2300FB78AB /* MLMediaLibrary+Migration.h in Headers */ = {isa = PBXBuildFile; fileRef = DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -39,7 +37,6 @@
 		7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E71B677F3100FB78AB /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
-		7D2DF7E91B677F3100FB78AB /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
 		7D2DF7EA1B677F3100FB78AB /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D2DF7EB1B677F3100FB78AB /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
 		7D2DF7EC1B677F3100FB78AB /* MLMediaLibrary+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */; };
@@ -51,7 +48,6 @@
 		7D2DF7F41B677F3100FB78AB /* MLTitleDecrapifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */; };
 		7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF518170885130003ED47 /* MLCrashPreventer.m */; };
 		7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
-		7D84E4EA1B42BA9900EA7D1F /* MLFileParserQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51B170885130003ED47 /* MLFileParserQueue.m */; };
 		7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
 		7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
@@ -161,8 +157,6 @@
 		7D0EF517170885130003ED47 /* MLCrashPreventer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLCrashPreventer.h; sourceTree = "<group>"; };
 		7D0EF518170885130003ED47 /* MLCrashPreventer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLCrashPreventer.m; sourceTree = "<group>"; };
 		7D0EF519170885130003ED47 /* MLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFile.m; sourceTree = "<group>"; };
-		7D0EF51A170885130003ED47 /* MLFileParserQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFileParserQueue.h; sourceTree = "<group>"; };
-		7D0EF51B170885130003ED47 /* MLFileParserQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLFileParserQueue.m; sourceTree = "<group>"; };
 		7D0EF51C170885130003ED47 /* MLLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLLabel.m; sourceTree = "<group>"; };
 		7D0EF51D170885130003ED47 /* MLMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMediaLibrary.m; sourceTree = "<group>"; };
 		7D0EF51E170885130003ED47 /* MLMovieInfoGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMovieInfoGrabber.m; sourceTree = "<group>"; };
@@ -286,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				7D0EF517170885130003ED47 /* MLCrashPreventer.h */,
-				7D0EF51A170885130003ED47 /* MLFileParserQueue.h */,
 				DDB959351AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.h */,
 				7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */,
 				7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */,
@@ -325,7 +318,6 @@
 				7D0EF518170885130003ED47 /* MLCrashPreventer.m */,
 				8DC6C4071F1E769B00FB8D07 /* MLMedia.m */,
 				7D0EF519170885130003ED47 /* MLFile.m */,
-				7D0EF51B170885130003ED47 /* MLFileParserQueue.m */,
 				7D0EF51C170885130003ED47 /* MLLabel.m */,
 				7D0EF51D170885130003ED47 /* MLMediaLibrary.m */,
 				DDB959361AFB9B2B00BB8CFF /* MLMediaLibrary+Migration.m */,
@@ -362,7 +354,6 @@
 				7D2DF7DB1B677F1700FB78AB /* MLThumbnailerQueue.h in Headers */,
 				7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */,
 				DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */,
-				7D2DF7DE1B677F2300FB78AB /* MLFileParserQueue.h in Headers */,
 				7D2DF7DF1B677F2300FB78AB /* MLMediaLibrary+Migration.h in Headers */,
 				7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */,
 				7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */,
@@ -478,7 +469,6 @@
 			files = (
 				7D0EF528170885130003ED47 /* MLCrashPreventer.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
-				7D0EF52A170885130003ED47 /* MLFileParserQueue.m in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
@@ -501,7 +491,6 @@
 			files = (
 				7D2DF7E71B677F3100FB78AB /* MLCrashPreventer.m in Sources */,
 				7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */,
-				7D2DF7E91B677F3100FB78AB /* MLFileParserQueue.m in Sources */,
 				7D2DF7EA1B677F3100FB78AB /* MLLabel.m in Sources */,
 				7D2DF7EB1B677F3100FB78AB /* MLMediaLibrary.m in Sources */,
 				7D2DF7EC1B677F3100FB78AB /* MLMediaLibrary+Migration.m in Sources */,
@@ -521,7 +510,6 @@
 			files = (
 				7D84E4E81B42BA9900EA7D1F /* MLCrashPreventer.m in Sources */,
 				7D84E4E91B42BA9900EA7D1F /* MLFile.m in Sources */,
-				7D84E4EA1B42BA9900EA7D1F /* MLFileParserQueue.m in Sources */,
 				7D84E4EC1B42BA9900EA7D1F /* MLLabel.m in Sources */,
 				7D84E4ED1B42BA9900EA7D1F /* MLMediaLibrary.m in Sources */,
 				7D84E4EF1B42BA9900EA7D1F /* MLShow.m in Sources */,
