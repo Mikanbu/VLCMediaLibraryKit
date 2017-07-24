@@ -28,7 +28,6 @@
 		7D2DF7DC1B677F2300FB78AB /* MLCrashPreventer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF517170885130003ED47 /* MLCrashPreventer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50C170885130003ED47 /* MLURLConnection.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -132,7 +131,6 @@
 		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
 		7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMovieInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTitleDecrapifier.h; sourceTree = "<group>"; };
-		7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTVShowEpisodesInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTVShowInfoGrabber.h; sourceTree = "<group>"; };
 		7D0EF50C170885130003ED47 /* MLURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLURLConnection.h; sourceTree = "<group>"; };
 		7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTVDBGrabber.h; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 		7D0EF51F170885130003ED47 /* MLShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLShow.m; sourceTree = "<group>"; };
 		7D0EF520170885130003ED47 /* MLShowEpisode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLShowEpisode.m; sourceTree = "<group>"; };
 		7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTitleDecrapifier.m; sourceTree = "<group>"; };
-		7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTVShowEpisodesInfoGrabber.m; sourceTree = "<group>"; };
 		7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTVShowInfoGrabber.m; sourceTree = "<group>"; };
 		7D0EF526170885130003ED47 /* MLURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLURLConnection.m; sourceTree = "<group>"; };
 		7D201AC61B186724009AC64E /* UIImage+MLKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLKit.h"; sourceTree = "<group>"; };
@@ -266,7 +263,6 @@
 				7D0EF517170885130003ED47 /* MLCrashPreventer.h */,
 				7D0EF508170885130003ED47 /* MLMovieInfoGrabber.h */,
 				7D0EF509170885130003ED47 /* MLTitleDecrapifier.h */,
-				7D0EF50A170885130003ED47 /* MLTVShowEpisodesInfoGrabber.h */,
 				7D0EF50B170885130003ED47 /* MLTVShowInfoGrabber.h */,
 				7D0EF50C170885130003ED47 /* MLURLConnection.h */,
 				7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */,
@@ -308,7 +304,6 @@
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
 				7D0EF523170885130003ED47 /* MLTitleDecrapifier.m */,
-				7D0EF524170885130003ED47 /* MLTVShowEpisodesInfoGrabber.m */,
 				7D0EF525170885130003ED47 /* MLTVShowInfoGrabber.m */,
 				7D0EF526170885130003ED47 /* MLURLConnection.m */,
 				7D201AC71B186724009AC64E /* UIImage+MLKit.m */,
@@ -335,7 +330,6 @@
 				DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */,
 				7D2DF7E01B677F2300FB78AB /* MLMovieInfoGrabber.h in Headers */,
 				7D2DF7E11B677F2300FB78AB /* MLTitleDecrapifier.h in Headers */,
-				7D2DF7E21B677F2300FB78AB /* MLTVShowEpisodesInfoGrabber.h in Headers */,
 				7D2DF7E31B677F2300FB78AB /* MLTVShowInfoGrabber.h in Headers */,
 				7D2DF7E41B677F2300FB78AB /* MLURLConnection.h in Headers */,
 				7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */,
