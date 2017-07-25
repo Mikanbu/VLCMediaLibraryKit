@@ -22,7 +22,6 @@
 		7D2DF7D81B677F1700FB78AB /* MLMediaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7D91B677F1700FB78AB /* MLShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7D2DF7E81B677F3100FB78AB /* MLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* MLFile.m */; };
 		7D2DF7EA1B677F3100FB78AB /* MLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* MLLabel.m */; };
 		7D2DF7EB1B677F3100FB78AB /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
@@ -116,7 +115,6 @@
 		7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0EF4A1170883940003ED47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
-		7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTVDBGrabber.h; sourceTree = "<group>"; };
 		7D0EF510170885130003ED47 /* MediaLibraryKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit.h; sourceTree = "<group>"; };
 		7D0EF511170885130003ED47 /* MLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLFile.h; sourceTree = "<group>"; };
 		7D0EF512170885130003ED47 /* MLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLLabel.h; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 		7D0EF507170885130003ED47 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				7D0EF50E170885130003ED47 /* TheTVDBGrabber.h */,
 				8D31CE481F0B9917005A2895 /* Medialibrary.h */,
 			);
 			path = Internal;
@@ -295,7 +292,6 @@
 				7D2DF7D91B677F1700FB78AB /* MLShow.h in Headers */,
 				7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */,
 				DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */,
-				7D2DF7E61B677F2300FB78AB /* TheTVDBGrabber.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
