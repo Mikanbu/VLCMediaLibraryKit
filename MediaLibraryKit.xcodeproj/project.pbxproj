@@ -13,7 +13,6 @@
 		7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* MLMediaLibrary.m */; };
 		7D0EF52E170885130003ED47 /* MLShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* MLShow.m */; };
 		7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
-		7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
 		7D2DF7D31B677F1700FB78AB /* MediaLibraryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7D41B677F1700FB78AB /* MLAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D2DF7D51B677F1700FB78AB /* MLAlbumTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +35,6 @@
 		7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* MLShowEpisode.m */; };
 		7D84E4F71B42BA9900EA7D1F /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
 		7D84E4F81B42BA9900EA7D1F /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
-		7D84E4FE1B42BA9900EA7D1F /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
 		7D84E50A1B42BA9900EA7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
 		7D84E50C1B42BA9900EA7D1F /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D84E50D1B42BA9900EA7D1F /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
@@ -64,9 +62,6 @@
 		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
 		A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
 		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
-		DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D201AC61B186724009AC64E /* UIImage+MLKit.h */; };
-		DD9FBE731BA985C600FFE77A /* UIImage+MLKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D201AC71B186724009AC64E /* UIImage+MLKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,7 +73,6 @@
 			files = (
 				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */,
 				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */,
-				DD9FBE721BA8891500FFE77A /* UIImage+MLKit.h in Copy Files */,
 				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */,
 				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */,
 				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */,
@@ -126,8 +120,6 @@
 		7D0EF51D170885130003ED47 /* MLMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMediaLibrary.m; sourceTree = "<group>"; };
 		7D0EF51F170885130003ED47 /* MLShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLShow.m; sourceTree = "<group>"; };
 		7D0EF520170885130003ED47 /* MLShowEpisode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLShowEpisode.m; sourceTree = "<group>"; };
-		7D201AC61B186724009AC64E /* UIImage+MLKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MLKit.h"; sourceTree = "<group>"; };
-		7D201AC71B186724009AC64E /* UIImage+MLKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MLKit.m"; sourceTree = "<group>"; };
 		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,7 +246,6 @@
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
 				7D0EF515170885130003ED47 /* MLShowEpisode.h */,
-				7D201AC61B186724009AC64E /* UIImage+MLKit.h */,
 				8DC6C4061F1E769B00FB8D07 /* MLMedia.h */,
 			);
 			path = Public;
@@ -273,7 +264,6 @@
 				7D0EF520170885130003ED47 /* MLShowEpisode.m */,
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
-				7D201AC71B186724009AC64E /* UIImage+MLKit.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -293,7 +283,6 @@
 				7D2DF7D81B677F1700FB78AB /* MLMediaLibrary.h in Headers */,
 				7D2DF7D91B677F1700FB78AB /* MLShow.h in Headers */,
 				7D2DF7DA1B677F1700FB78AB /* MLShowEpisode.h in Headers */,
-				DD9FBE711BA8883B00FFE77A /* UIImage+MLKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +401,6 @@
 				7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */,
 				8D31CE401F0A6873005A2895 /* MLArtist.m in Sources */,
 				7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */,
-				7D201AC81B186724009AC64E /* UIImage+MLKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +415,6 @@
 				7D2DF7EF1B677F3100FB78AB /* MLShowEpisode.m in Sources */,
 				7D2DF7F01B677F3100FB78AB /* MLAlbum.m in Sources */,
 				7D2DF7F11B677F3100FB78AB /* MLAlbumTrack.m in Sources */,
-				DD9FBE731BA985C600FFE77A /* UIImage+MLKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +429,6 @@
 				7D84E4F01B42BA9900EA7D1F /* MLShowEpisode.m in Sources */,
 				7D84E4F71B42BA9900EA7D1F /* MLAlbumTrack.m in Sources */,
 				7D84E4F81B42BA9900EA7D1F /* MLAlbum.m in Sources */,
-				7D84E4FE1B42BA9900EA7D1F /* UIImage+MLKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
