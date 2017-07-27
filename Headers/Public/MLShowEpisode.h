@@ -1,12 +1,9 @@
 /*****************************************************************************
  * MLShowEpisode.h
- * Lunettes
+ * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
- *
- * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -23,38 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLShow;
-@class MLFile;
-
 @interface MLShowEpisode : NSObject
 
-+ (NSArray *)allEpisodes;
-
-// This will eventually create the show
-+ (MLShowEpisode *)episodeWithShow:(MLShow *)show episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber createIfNeeded:(BOOL)createIfNeeded;
-+ (MLShowEpisode *)episodeWithShowName:(NSString *)showName episodeNumber:(NSNumber *)episodeNumber seasonNumber:(NSNumber *)seasonNumber
-                        createIfNeeded:(BOOL)createIfNeeded wasCreated:(BOOL *)wasCreated;
-
-@property (nonatomic, strong) NSNumber *unread;
-@property (nonatomic, strong) NSString *theTVDBID;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSNumber *shouldBeDisplayed;
-@property (nonatomic, strong) NSNumber *episodeNumber;
-@property (nonatomic, strong) NSNumber *seasonNumber;
-@property (nonatomic, strong) NSNumber *lastSyncDate;
-@property (nonatomic, strong) NSString *artworkURL;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) MLShow *show;
-@property (nonatomic, strong) NSSet *files;
-
 @end
-
-//
-//@interface MLShowEpisode (CoreDataGeneratedAccessors)
-//- (void)addFilesObject:(NSManagedObject *)value;
-//- (void)removeFilesObject:(NSManagedObject *)value;
-//- (void)addFiles:(NSSet *)value;
-//- (void)removeFiles:(NSSet *)value;
-//- (MLFile *)anyFileFromEpisode;
-//@end
 
