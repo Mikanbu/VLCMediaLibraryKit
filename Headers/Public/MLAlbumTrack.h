@@ -1,12 +1,9 @@
 /*****************************************************************************
  * MLAlbumTrack.h
+ * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2013 Felix Paul Kühne
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
- *
- * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
- *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -23,76 +20,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLAlbum.h"
-
-extern NSString *const MLAlbumTrackAlbumName;
-extern NSString *const MLAlbumTrackNumber;
-extern NSString *const MLAlbumTrackTrackName;
-extern NSString *const MLAlbumTrackDiscNumber;
-
-@class MLFile;
-
 @interface MLAlbumTrack : NSObject
 
-+ (NSArray *)allTracks;
-
-+ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
-                     trackNumber:(NSNumber *)trackNumber
-                  createIfNeeded:(BOOL)createIfNeeded __attribute__((deprecated));
-+ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
-                     trackNumber:(NSNumber *)trackNumber
-                       trackName:(NSString *)trackName
-                  createIfNeeded:(BOOL)createIfNeeded __attribute__((deprecated));
-
-+ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
-                         trackNumber:(NSNumber *)trackNumber
-                      createIfNeeded:(BOOL)createIfNeeded
-                          wasCreated:(BOOL *)wasCreated __attribute__((deprecated));
-+ (MLAlbumTrack *)trackWithAlbumName:(NSString *)albumName
-                         trackNumber:(NSNumber *)trackNumber
-                           trackName:(NSString *)trackName
-                      createIfNeeded:(BOOL)createIfNeeded
-                          wasCreated:(BOOL *)wasCreated __attribute__((deprecated));
-
-/* for available keys, see above */
-+ (MLAlbumTrack *)trackWithAlbum:(MLAlbum *)album
-                        metadata:(NSDictionary *)metadata
-                  createIfNeeded:(BOOL)createIfNeeded
-                      wasCreated:(BOOL *)wasCreated;
-+ (MLAlbumTrack *)trackWithMetadata:(NSDictionary *)metadata
-                     createIfNeeded:(BOOL)createIfNeeded
-                         wasCreated:(BOOL *)wasCreated;
-
-//
-@property (nonatomic, strong) NSNumber *unread;
-@property (nonatomic, strong) NSString *artist;
-@property (nonatomic, strong) NSString *genre;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSNumber *trackNumber;
-@property (nonatomic, strong) NSNumber *discNumber;
-//
-
-@property (nonatomic, strong) MLAlbum *album;
-@property (nonatomic, strong) NSSet *files;
-@property (nonatomic) BOOL containsArtwork;
-
-///
-
-@property (nonatomic) NSInteger trackId;
-@property (nonatomic) NSInteger artistId;
-@property (nonatomic) NSInteger genreId;
-//@property (nonatomic) NSInteger trackNumber;
-@property (nonatomic) NSInteger albumId;
-//@property (nonatomic) NSInteger discNumber;
-
-///
-
-@end
-
-@interface MLAlbumTrack ()
-//- (void)addFilesObject:(NSManagedObject *)value;
-//- (void)removeFilesObject:(NSManagedObject *)value;
-//- (void)addFiles:(NSSet *)value;
-//- (void)removeFiles:(NSSet *)value;
-//- (MLFile *)anyFileFromTrack;
 @end
