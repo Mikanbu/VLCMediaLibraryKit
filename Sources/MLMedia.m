@@ -22,6 +22,7 @@
 
 #import "MLMediaLibrary.h"
 #import "MLMedia.h"
+#import "MLMedia+Init.h"
 
 @interface MLMedia ()
 {
@@ -68,6 +69,17 @@
         _title = title;
     }
     return success;
+}
+
+@implementation MLMedia (Internal)
+
+- (instancetype)initWithMediaPtr:(struct mediaImpl *)impl
+{
+    self = [super init];
+    _media = impl->implMedia;
+    [self cacheFromCurrentMediaPtr];
+
+    return self;
 }
 
 @end
