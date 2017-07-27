@@ -48,8 +48,6 @@
 #else
 
 # define HAVE_BLOCK 1
-//#import <VLCKit/VLCKit.h>
-#  import "NSXMLNode_Additions.h"
 
 #endif
 
