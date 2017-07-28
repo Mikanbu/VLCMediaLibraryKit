@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #import "MLAlbum.h"
+#import "MLAlbum+Init.h"
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
 #import "MLArtist.h"
@@ -94,6 +95,20 @@
 - (void)tracks
 {
     auto tracks = _album->tracks();
+}
+
+@end
+
+@implementation MLAlbum (Internal)
+
+- (instancetype)initWithAlbumPtr:(struct albumImpl *)impl
+{
+    self = [super init];
+    if (self) {
+        _album = impl->albumPtr;
+        [self _cacheValuesOfAlbumPtr];
+    }
+    return self;
 }
 
 @end
