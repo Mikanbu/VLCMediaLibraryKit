@@ -1,5 +1,5 @@
 /*****************************************************************************
- * PimplHelper.h
+ * MLPlaylist+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,20 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
+#import "MLPlaylist.h"
 
-struct mediaImpl {
-    medialibrary::MediaPtr mediaPtr;
-};
+@interface MLPlaylist (Internal)
 
-struct artistImpl {
-    medialibrary::ArtistPtr artistPtr;
-};
+- (instancetype)initWithPlaylistPtr:(struct playlistImpl *)impl;
 
-struct albumImpl {
-    medialibrary::AlbumPtr albumPtr;
-};
+@end
 
-struct playlistImpl {
-    medialibrary::PlaylistPtr playlistPtr;
-};

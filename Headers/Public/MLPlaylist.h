@@ -1,5 +1,5 @@
 /*****************************************************************************
- * PimplHelper.h
+ * MLPlayst.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,20 +20,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
+@interface MLPlaylist : NSObject
 
-struct mediaImpl {
-    medialibrary::MediaPtr mediaPtr;
-};
+@property(nonatomic, readonly, strong) NSString *name;
 
-struct artistImpl {
-    medialibrary::ArtistPtr artistPtr;
-};
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithIdentifier:(int64_t)identifier;
 
-struct albumImpl {
-    medialibrary::AlbumPtr albumPtr;
-};
+- (int64_t)identifier;
+- (BOOL)updateNameTo:(NSString *)name;
+- (uint)creationDate;
+- (NSArray *)media;
 
-struct playlistImpl {
-    medialibrary::PlaylistPtr playlistPtr;
-};
+- (BOOL)appendMediaWithIdentifier:(int64_t)identifier;
+- (BOOL)addMediaWithIdentifier:(int64_t)identifier at:(uint)position;
+- (BOOL)moveMediaWithIdentifier:(int64_t)identifier at:(uint)position;
+- (BOOL)removeMediaWithIdentifier:(int64_t)identifier;
+
+@end
