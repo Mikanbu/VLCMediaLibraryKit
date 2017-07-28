@@ -20,9 +20,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
+#import "MLArtist.h"
+#import "PimplHelper.h"
+#import "MLMediaLibrary.h"
+#import "MLMediaMetadata.h"
 
 @interface MLMedia ()
 {
@@ -33,27 +36,69 @@
 
 @implementation MLMedia
 
-- (instancetype)init
+#pragma mark - Private Helpers
+
+- (void)_cacheFromCurrentMediaPtr
+{
+    if (_media) {
+        _title = [[NSString alloc] initWithUTF8String:_media->title().c_str()];
+        _thumbnail = [[NSString alloc] initWithUTF8String:_media->thumbnail().c_str()];
+    }
+}
+
+#pragma mark - Initialization
+
+- (instancetype)initWithIdentifier:(int64_t)identifier
 {
     self = [super init];
     if (self) {
         _ml = (medialibrary::IMediaLibrary *)[MLMediaLibrary sharedInstance];
-        if (_mrl)
-            _media = _ml->addMedia([[_mrl absoluteString] UTF8String]);
+        if ((_media = _ml->media(identifier))) {
+            [self _cacheFromCurrentMediaPtr];
+        }
     }
     return self;
 }
 
-- (instancetype)initWithMrl:(NSURL *)mrl
+#pragma mark - Getters/Setters
+
+- (int64_t)identifier
 {
-    _mrl = mrl;
-    return [self init];
+    return _media->id();
 }
 
-- (instancetype)initWithMrl:(NSURL *)mrl forTitle:(NSString *)title
+- (MLMediaType)type
 {
+    return (MLMediaType)_media->type();
+}
+
+- (MLMediaSubType)subType
+{
+    return (MLMediaSubType)_media->subType();
+}
+
+- (BOOL)updateTitle:(NSString *)title
+{
+    BOOL success = _media->setTitle([title UTF8String]);
+
+    NSAssert(success, @"Failed to update title.");
     _title = title;
-    return [self initWithMrl:mrl];
+    return success;
+}
+
+- (int64_t)duration
+{
+    return _media->duration();
+}
+
+- (int)playCount
+{
+    return _media->playCount();
+}
+
+- (BOOL)increasePlayCount
+{
+    return _media->increasePlayCount();
 }
 
 - (BOOL)isFavorite
@@ -61,24 +106,38 @@
     return _media->isFavorite();
 }
 
-- (BOOL)updateTitle:(NSString *)title
+- (BOOL)setFavorite:(BOOL)favorite
 {
-    BOOL success = _media->setTitle([title UTF8String]);
-
-    if (success) {
-        _title = title;
-    }
-    return success;
+    return _media->setFavorite(favorite);
 }
+
+- (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
+{
+//    _media->metadata((medialibrary::IMedia::MetadataType)type);
+//
+//    MLMediaMetadata *md = [[MLMediaMetadata alloc] initWith:nil];
+    return nil;
+}
+
+- (uint)insertionDate
+{
+    return _media->insertionDate();
+}
+
+- (uint)releaseDate
+{
+    return _media->releaseDate();
+}
+
+@end
 
 @implementation MLMedia (Internal)
 
 - (instancetype)initWithMediaPtr:(struct mediaImpl *)impl
 {
     self = [super init];
-    _media = impl->implMedia;
-    [self cacheFromCurrentMediaPtr];
-
+    _media = impl->mediaPtr;
+    [self _cacheFromCurrentMediaPtr];
     return self;
 }
 
