@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #import "MLArtist.h"
+#import "MLArtist+Init.h"
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
 #import "MLAlbum.h"
@@ -99,6 +100,20 @@
         [result addObject:mlMedia];
     }
     return result;
+}
+
+@end
+
+@implementation MLArtist (Internal)
+
+- (instancetype)initWithArtistPtr:(struct artistImpl *)impl
+{
+    self = [super init];
+    if (self) {
+        _artist = impl->artistPtr;
+        [self _cacheValuesOfArtistPtr];
+    }
+    return self;
 }
 
 @end
