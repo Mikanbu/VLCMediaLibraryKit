@@ -1,12 +1,9 @@
 /*****************************************************************************
  * MLAlbum.h
+ * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2013 Felix Paul Kühne
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
- *
- * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
- *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -23,33 +20,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLAlbumTrack;
+@class MLArtist;
+
+struct albumImpl;
 
 @interface MLAlbum : NSObject
 
-+ (NSArray *)allAlbums;
-+ (MLAlbum *)albumWithName:(NSString *)name;
+//@property (nonatomic, readonly) NSString *title; conflict with foundation title variables.
+@property (nonatomic, readonly) NSString *name;//is not title because fondation does not like title.
+@property (nonatomic, readonly) NSString *shortsummary;
+@property (nonatomic, readonly) NSString *artworkMRL;
 
-@property (nonatomic, strong) NSString *name;//title
-@property (nonatomic) NSInteger albumId;
-@property (nonatomic) NSInteger artistId;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSString *releaseYear;//int in c++
+@property (nonatomic) NSInteger releaseYear;
+@property (nonatomic) NSString *albumArtist;
+@property (nonatomic) long albumArtistId;
+@property (nonatomic) NSInteger nbTracks;
 @property (nonatomic) NSInteger duration;
-@property (nonatomic, strong) NSSet *tracks;
-@property (nonatomic, strong, readonly) NSSet *unreadTracks;
-@property (weak, nonatomic, readonly) NSArray *sortedTracks;
 
-- (void)addTrack:(MLAlbumTrack *)track;
-- (void)removeTrack:(MLAlbumTrack *)track;
-- (void)removeTrackWithNumber:(NSNumber *)trackNumber;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithIdentifier:(int64_t)identifier;
+
+- (int64_t)identifier;
+
+/**
+ * Returns an array of MLArtist object.
+ */
+- (NSArray *)artists;
+
 
 @end
-
-
-//@interface MLAlbum ()
-//- (void)addTracksObject:(NSManagedObject *)value;
-//- (void)removeTracksObject:(NSManagedObject *)value;
-//- (void)addTracks:(NSSet *)value;
-//- (void)removeTracks:(NSSet *)value;
-//@end
