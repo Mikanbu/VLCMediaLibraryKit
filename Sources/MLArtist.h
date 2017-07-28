@@ -20,27 +20,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLAlbum;
+typedef NS_ENUM(NSUInteger, MLSortingCriteria);
+
+@class MLAlbum, MLMedia;
 
 @interface MLArtist : NSObject
 
-@property (nonatomic) long artistId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *shortBio;
-@property (nonatomic) NSString *artworkMRL;
-@property (nonatomic) NSString *musicBrainzId;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *shortBio;
+@property (nonatomic, strong, readonly) NSString *artworkMRL;
+@property (nonatomic, strong, readonly) NSString *musicBrainzId;
 
-- (instancetype)initWithId:(long)artistId
-            name:(NSString *)name
-        shortBio:(NSString *)shortBio
-      artworkMRL:(NSString *)artworkMRL
-   musicBrainzId:(NSString *)musicBrainzId;
 
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithIdentifier:(int64_t)identifier;
+
+-(int64_t)identifier;
 
 /**
  * Return all albums from the current artist.
  * \return a NSArray of MLAlbum object.
  */
-- (NSArray *)albums;
+- (NSArray *)albums:(MLSortingCriteria)sortingCriteria;
+
+/**
+ * Return all medias from the current artist.
+ * \return a NSArray of MLMedia object.
+ */
+- (NSArray *)media:(MLSortingCriteria)sortingCriteria;
 
 @end

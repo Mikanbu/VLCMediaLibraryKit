@@ -20,12 +20,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-
 #import "MLArtist.h"
+#import "MLMedia.h"
+#import "MLMedia+Init.h"
+#import "MLAlbum.h"
+#import "MLAlbum+Init.h"
+#import "PimplHelper.h"
 #import "MLMediaLibrary.h"
 
-@interface MLArtist()
+@interface MLArtist ()
 {
+    struct mediaImpl *mImpl;
+
     medialibrary::ArtistPtr _artist;
     medialibrary::IMediaLibrary *_ml;
 }
@@ -33,48 +39,66 @@
 
 @implementation MLArtist
 
-//- (instancetype)initWithId:(long)artistId name:(NSString *)name shortBio:(NSString *)shortBio artworkMRL:(NSString *)artworkMRL musicBrainzId:(NSString *)musicBrainzId
-//{
-//    self.artistId = artistId;
-//    self.name = name;
-//    self.shortBio = shortBio;
-//    self.artworkMRL = artworkMRL;
-//    self.musicBrainzId = musicBrainzId;
-//
-//    _ml = (medialibrary::IMediaLibrary *)[MLMediaLibrary sharedInstance];
-//    return self;
-//}
-
-- (instancetype)initWithId:(int64_t)identifier
+- (instancetype)initWithIdentifier:(int64_t)identifier
 {
     self = [super init];
     if (self) {
         _ml = (medialibrary::IMediaLibrary *)[MLMediaLibrary sharedInstance];
 
-        if ((_artist = _ml->artist(identifier))) {
-            _identifier = _artist->id();
-            _name = [NSString stringWithUTF8String:_artist->name().c_str()];
-            _shortBio = [NSString stringWithUTF8String:_artist->shortBio().c_str()];
-            _artworkMRL = [NSString stringWithUTF8String:_artist->artworkMrl().c_str()];
-            _musicBrainzId = [NSString stringWithUTF8String:_artist->musicBrainzId().c_str()];
-        }
+        if ((_artist = _ml->artist(identifier)))
+            [self _cacheValuesOfArtistPtr];
         NSAssert(_artist, @"Failed to init Artist with identifier: %lld", identifier);
     }
     return self;
 }
 
-#pragma mark - Getters/Setters
+#pragma mark - Helpers
 
-- (NSArray *)albums
+- (void)_cacheValuesOfArtistPtr
 {
-    //need mlalbum object
-    return NULL;
+    if (_artist) {
+        _name = [NSString stringWithUTF8String:_artist->name().c_str()];
+        _shortBio = [NSString stringWithUTF8String:_artist->shortBio().c_str()];
+        _artworkMRL = [NSString stringWithUTF8String:_artist->artworkMrl().c_str()];
+        _musicBrainzId = [NSString stringWithUTF8String:_artist->musicBrainzId().c_str()];
+    }
 }
 
-- (NSArray *)media
+#pragma mark - Getters/Setters
+
+- (int64_t)identifier
 {
-    auto media = _artist->media();
-    return nil;
+    return _artist->id();
+}
+
+- (NSArray *)albums:(MLSortingCriteria)sortingCriteria
+{
+    NSMutableArray *result = [NSMutableArray array];
+    auto albumVector = _artist->albums((medialibrary::SortingCriteria)sortingCriteria);
+
+    for (auto album : albumVector) {
+        struct albumImpl tmp;
+        tmp.albumPtr = album;
+        // let's believe that this initialization is magically done.
+        MLAlbum *mlAlbum = [[MLAlbum alloc] initWithAlbumPtr:&tmp];
+        [result addObject:mlAlbum];
+    }
+    return result;
+}
+
+- (NSArray *)media:(MLSortingCriteria)sortingCriteria
+{
+    NSMutableArray *result = [NSMutableArray array];
+    auto mediaVector = _artist->media((medialibrary::SortingCriteria)sortingCriteria);
+
+    for (auto media : mediaVector) {
+        struct mediaImpl tmp;
+        tmp.mediaPtr = media;
+        // let's believe that this initialization is magically done.
+        MLMedia *mlMedia = [[MLMedia alloc] initWithMediaPtr:&tmp];
+        [result addObject:mlMedia];
+    }
+    return result;
 }
 
 @end
