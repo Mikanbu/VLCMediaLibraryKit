@@ -26,13 +26,10 @@
 #import "MLMedia+Init.h"
 #import "MLAlbum.h"
 #import "MLAlbum+Init.h"
-#import "PimplHelper.h"
 #import "MLMediaLibrary.h"
 
 @interface MLArtist ()
 {
-    struct mediaImpl *mImpl;
-
     medialibrary::ArtistPtr _artist;
     medialibrary::IMediaLibrary *_ml;
 }
@@ -77,11 +74,8 @@
     NSMutableArray *result = [NSMutableArray array];
     auto albumVector = _artist->albums((medialibrary::SortingCriteria)sortingCriteria);
 
-    for (auto album : albumVector) {
-        struct albumImpl tmp;
-        tmp.albumPtr = album;
-        // let's believe that this initialization is magically done.
-        MLAlbum *mlAlbum = [[MLAlbum alloc] initWithAlbumPtr:&tmp];
+    for (const auto &album : albumVector) {
+        MLAlbum *mlAlbum = [[MLAlbum alloc] initWithAlbumPtr:album];
         [result addObject:mlAlbum];
     }
     return result;
@@ -92,11 +86,8 @@
     NSMutableArray *result = [NSMutableArray array];
     auto mediaVector = _artist->media((medialibrary::SortingCriteria)sortingCriteria);
 
-    for (auto media : mediaVector) {
-        struct mediaImpl tmp;
-        tmp.mediaPtr = media;
-        // let's believe that this initialization is magically done.
-        MLMedia *mlMedia = [[MLMedia alloc] initWithMediaPtr:&tmp];
+    for (const auto &media : mediaVector) {
+        MLMedia *mlMedia = [[MLMedia alloc] initWithMediaPtr:media];
         [result addObject:mlMedia];
     }
     return result;
@@ -106,11 +97,11 @@
 
 @implementation MLArtist (Internal)
 
-- (instancetype)initWithArtistPtr:(struct artistImpl *)impl
+- (instancetype)initWithArtistPtr:(medialibrary::ArtistPtr)artistPtr
 {
     self = [super init];
     if (self) {
-        _artist = impl->artistPtr;
+        _artist = artistPtr;
         [self _cacheValuesOfArtistPtr];
     }
     return self;

@@ -25,7 +25,6 @@
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
 #import "MLArtist.h"
-#import "PimplHelper.h"
 #import "MLMediaLibrary.h"
 
 @interface MLAlbum ()
@@ -101,11 +100,11 @@
 
 @implementation MLAlbum (Internal)
 
-- (instancetype)initWithAlbumPtr:(struct albumImpl *)impl
+- (instancetype)initWithAlbumPtr:(medialibrary::AlbumPtr)albumPtr
 {
     self = [super init];
     if (self) {
-        _album = impl->albumPtr;
+        _album = albumPtr;
         [self _cacheValuesOfAlbumPtr];
     }
     return self;

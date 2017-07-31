@@ -24,6 +24,6 @@
 
 @interface MLArtist (Internal)
 
-- (instancetype)initWithArtistPtr:(struct artistImpl *)impl;
+- (instancetype)initWithArtistPtr:(medialibrary::ArtistPtr)artistPtr;
 
 @end

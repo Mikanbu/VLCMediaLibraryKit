@@ -23,7 +23,6 @@
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
 #import "MLArtist.h"
-#import "PimplHelper.h"
 #import "MLMediaLibrary.h"
 #import "MLMediaMetadata.h"
 
@@ -133,10 +132,10 @@
 
 @implementation MLMedia (Internal)
 
-- (instancetype)initWithMediaPtr:(struct mediaImpl *)impl
+- (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr
 {
     self = [super init];
-    _media = impl->mediaPtr;
+    _media = mediaPtr;
     [self _cacheFromCurrentMediaPtr];
     return self;
 }

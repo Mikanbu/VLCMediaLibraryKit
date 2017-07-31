@@ -22,10 +22,8 @@
 
 #import "MLMedia.h"
 
-//This interface serve as hidder for the initialization method using MediaPtr.
-
 @interface MLMedia (Internal)
 
-- (instancetype)initWithMediaPtr:(struct mediaImpl *)impl;
+- (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr;
 
 @end

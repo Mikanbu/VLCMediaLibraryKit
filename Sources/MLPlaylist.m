@@ -21,7 +21,6 @@
  *****************************************************************************/
 
 #import "MLPlaylist.h"
-#import "PimplHelper.h"
 #import "MLMediaLibrary.h"
 
 @interface MLPlaylist ()
@@ -91,11 +90,11 @@
 
 @implementation MLPlaylist (Internal)
 
-- (instancetype)initWithPlaylistPtr:(struct playlistImpl *)impl
+- (instancetype)initWithPlaylistPtr:(medialibrary::PlaylistPtr)playlistPtr
 {
     self = [super init];
     if (self) {
-        _playlist = impl->playlistPtr;
+        _playlist = playlistPtr;
         _name = [[NSString alloc] initWithUTF8String:_playlist->name().c_str()];
     }
     return self;

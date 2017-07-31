@@ -24,6 +24,6 @@
 
 @interface MLAlbum (Internal)
 
-- (instancetype)initWithAlbumPtr:(struct albumImpl *)impl;
+- (instancetype)initWithAlbumPtr:(medialibrary::AlbumPtr)albumPtr;
 
 @end

@@ -24,7 +24,7 @@
 
 @interface MLPlaylist (Internal)
 
-- (instancetype)initWithPlaylistPtr:(struct playlistImpl *)impl;
+- (instancetype)initWithPlaylistPtr:(medialibrary::PlaylistPtr)playlistPtr;
 
 @end
 

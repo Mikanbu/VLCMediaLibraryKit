@@ -40,7 +40,6 @@
 #import "MLAlbum+Init.h"
 #import "MLArtist+Init.h"
 #import "MLPlaylist+Init.h"
-#import "PimplHelper.h"
 
 @interface MLMediaLibrary ()
 {
@@ -108,39 +107,6 @@
     _ml->setVerbosity((medialibrary::LogLevel)level);
 }
 
-#pragma mark - MLMediaLibrary helpers
-
-- (MLMedia *)_createMediaWith:(medialibrary::MediaPtr)mediaPtr
-{
-    struct mediaImpl impl;
-    impl.mediaPtr = mediaPtr;
-    return [[MLMedia alloc] initWithMediaPtr:&impl];
-}
-
-- (MLAlbum *)_createAlbumWith:(medialibrary::AlbumPtr)albumPtr
-{
-    struct albumImpl impl;
-
-    impl.albumPtr = albumPtr;
-    return [[MLAlbum alloc] initWithAlbumPtr:&impl];
-}
-
-- (MLArtist *)_createArtistWith:(medialibrary::ArtistPtr)artistPtr
-{
-    struct artistImpl impl;
-
-    impl.artistPtr = artistPtr;
-    return [[MLArtist alloc] initWithArtistPtr:&impl];
-}
-
-- (MLPlaylist *)_createPlaylistWith:(medialibrary::PlaylistPtr)playlistPtr
-{
-    struct playlistImpl impl;
-
-    impl.playlistPtr = playlistPtr;
-    return [[MLPlaylist alloc] initWithPlaylistPtr:&impl];
-}
-
 #pragma mark -
 #pragma mark Medialibrary main methods
 
@@ -153,17 +119,17 @@
 
 - (MLMedia *)mediaWithIdentifier:(int64_t)identifier
 {
-    return [self _createMediaWith:_ml->media(identifier)];
+    return [[MLMedia alloc] initWithMediaPtr:_ml->media(identifier)];
 }
 
 - (MLMedia *)mediaWithMrl:(NSString *)mrl
 {
-    return [self _createMediaWith:_ml->media([mrl UTF8String])];
+    return [[MLMedia alloc] initWithMediaPtr:_ml->media([mrl UTF8String])];
 }
 
 - (MLMedia *)addMediaWithMrl:(NSString *)mrl
 {
-    return [self _createMediaWith:_ml->addMedia([mrl UTF8String])];
+    return [[MLMedia alloc] initWithMediaPtr:_ml->addMedia([mrl UTF8String])];
 }
 
 //NSArray of MLMedia
@@ -173,7 +139,7 @@
     auto audioFiles = _ml->audioFiles((medialibrary::SortingCriteria)sort, desc);
 
     for (auto audioFile : audioFiles) {
-        [result addObject: [self _createMediaWith:audioFile]];
+        [result addObject:[[MLMedia alloc] initWithMediaPtr:audioFile]];
     }
     return result;
 }
@@ -184,7 +150,7 @@
     auto videoFiles = _ml->videoFiles((medialibrary::SortingCriteria)sort, desc);
 
     for (auto videoFile : videoFiles) {
-        [result addObject: [self _createMediaWith:videoFile]];
+        [result addObject:[[MLMedia alloc] initWithMediaPtr:videoFile]];
     }
     return result;
 }
@@ -193,15 +159,15 @@
 
 - (MLAlbum *)albumWithIdentifier:(int64_t)identifier
 {
-    return [self _createAlbumWith:_ml->album(identifier)];
+    return [[MLAlbum alloc] initWithAlbumPtr:_ml->album(identifier)];
 }
 
 - (NSArray *)albumsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc
 {
     NSMutableArray *result = [NSMutableArray array];
     auto albums = _ml->albums((medialibrary::SortingCriteria)sort, desc);
-    for (auto album : albums) {
-        [result addObject: [self _createAlbumWith:album]];
+    for (const auto &album : albums) {
+        [result addObject:[[MLAlbum alloc] initWithAlbumPtr:album]];
     }
     return result;
 }
@@ -210,7 +176,7 @@
 
 - (MLArtist *)artistWithIdentifier:(int64_t)identifier
 {
-    return [self _createArtistWith:_ml->artist(identifier)];
+    return [[MLArtist alloc] initWithArtistPtr:_ml->artist(identifier)];
 }
 
 - (NSArray *)artistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc
@@ -218,7 +184,7 @@
     NSMutableArray *result = [NSMutableArray array];
     auto artists = _ml->artists((medialibrary::SortingCriteria)sort, desc);
     for (auto artist : artists) {
-        [result addObject: [self _createArtistWith:artist]];
+        [result addObject:[[MLArtist alloc] initWithArtistPtr:artist]];
     }
     return result;
 }
@@ -229,7 +195,7 @@
 
 - (MLPlaylist *)createPlaylistWithName:(NSString *)name
 {
-    return [self _createPlaylistWith:_ml->createPlaylist([name UTF8String])];
+    return [[MLPlaylist alloc] initWithPlaylistPtr:_ml->createPlaylist([name UTF8String])];
 }
 
 - (NSArray *)playlistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc
@@ -237,14 +203,14 @@
     NSMutableArray *result = [NSMutableArray array];
     auto playlists = _ml->playlists((medialibrary::SortingCriteria)sort, desc);
     for (auto playlist : playlists) {
-        [result addObject: [self _createPlaylistWith:playlist]];
+        [result addObject:[[MLPlaylist alloc] initWithPlaylistPtr:playlist]];
     }
     return result;
 }
 
 - (MLPlaylist *)playlistWithIdentifier:(int64_t)identifier
 {
-    return [self _createPlaylistWith:_ml->playlist(identifier)];
+    return [[MLPlaylist alloc] initWithPlaylistPtr:_ml->playlist(identifier)];
 }
 
 - (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier
@@ -277,7 +243,7 @@
     NSMutableArray *result = [NSMutableArray array];
 
     for (auto media : mediaList) {
-        [result addObject:[self _createMediaWith:media]];
+        [result addObject:[[MLMedia alloc] initWithMediaPtr:media]];
     }
     return result;
 }
