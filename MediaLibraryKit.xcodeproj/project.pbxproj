@@ -48,6 +48,7 @@
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
 		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
 		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
+		8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* MLGenre.h */; };
 		8D31CE401F0A6873005A2895 /* MLArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* MLArtist.m */; };
 		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
@@ -56,6 +57,7 @@
 		8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC6C4061F1E769B00FB8D07 /* MLMedia.h */; };
 		8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */; };
 		8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */; };
+		8DBE03E61F2F6A290061C878 /* MLGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE03E51F2F6A290061C878 /* MLGenre.m */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
@@ -73,6 +75,7 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */,
 				8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */,
 				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */,
 				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */,
@@ -133,6 +136,7 @@
 		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
 		8D31CE3F1F0A6873005A2895 /* MLArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLArtist.m; sourceTree = "<group>"; };
 		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
+		8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MLGenre+Init.h"; path = "Headers/Internal/MLGenre+Init.h"; sourceTree = SOURCE_ROOT; };
 		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
 		8D3D64DB1F1D671F008E178E /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPlaylist.h; sourceTree = "<group>"; };
 		8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPlaylist.m; sourceTree = "<group>"; };
 		8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLPlaylist+Init.h"; sourceTree = "<group>"; };
+		8DBE03E41F2F6A290061C878 /* MLGenre.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGenre.h; sourceTree = "<group>"; };
+		8DBE03E51F2F6A290061C878 /* MLGenre.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGenre.m; sourceTree = "<group>"; };
 		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
 		8DC6C4071F1E769B00FB8D07 /* MLMedia.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLMedia.m; path = Sources/MLMedia.m; sourceTree = SOURCE_ROOT; };
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -242,6 +248,7 @@
 				8D90D0DD1F2A41DB00DBB850 /* MLMedia+Init.h */,
 				8D90D0E11F2A543D00DBB850 /* MLAlbum+Init.h */,
 				8D90D0E41F2B558000DBB850 /* MLArtist+Init.h */,
+				8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
 			);
 			path = Internal;
@@ -255,6 +262,7 @@
 				7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */,
 				8D31CE3E1F0A6873005A2895 /* MLArtist.h */,
 				7D0EF511170885130003ED47 /* MLFile.h */,
+				8DBE03E41F2F6A290061C878 /* MLGenre.h */,
 				7D0EF512170885130003ED47 /* MLLabel.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
@@ -274,6 +282,7 @@
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
 				8DC6C4071F1E769B00FB8D07 /* MLMedia.m */,
 				7D0EF519170885130003ED47 /* MLFile.m */,
+				8DBE03E51F2F6A290061C878 /* MLGenre.m */,
 				7D0EF51C170885130003ED47 /* MLLabel.m */,
 				7D0EF51D170885130003ED47 /* MLMediaLibrary.m */,
 				7D0EF51F170885130003ED47 /* MLShow.m */,
@@ -404,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBE03E61F2F6A290061C878 /* MLGenre.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */,
