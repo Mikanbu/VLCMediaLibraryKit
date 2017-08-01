@@ -21,9 +21,84 @@
  *****************************************************************************/
 
 #import "MLShow.h"
-#import "MLShowEpisode.h"
-#import "MLMediaLibrary.h"
+#import "MLShowEpisode+Init.h"
+
+@interface MLShow ()
+{
+    medialibrary::ShowPtr _show;
+}
+@end
 
 @implementation MLShow
+
+- (int64_t)identifier
+{
+    return _show->id();
+}
+
+- (NSString *)name
+{
+    if (!_name)
+        _name = [[NSString alloc] initWithUTF8String:_show->name().c_str()];
+    return _name;
+}
+
+- (NSDate *)releaseDate
+{
+    return [NSDate dateWithTimeIntervalSinceReferenceDate:_show->releaseDate()];
+}
+
+- (NSString *)shortSummary
+{
+    if (!_shortSummary)
+        _shortSummary = [[NSString alloc] initWithUTF8String:_show->shortSummary().c_str()];
+    return _shortSummary;
+}
+
+- (NSString *)artworkMrl
+{
+    if (!_artworkMrl)
+        _artworkMrl = [[NSString alloc] initWithUTF8String:_show->artworkMrl().c_str()];
+    return _artworkMrl;
+}
+
+- (NSString *)tvdbId
+{
+    if (!_tvdbId)
+        _tvdbId = [[NSString alloc] initWithUTF8String:_show->tvdbId().c_str()];
+    return _tvdbId;
+}
+
+- (NSArray<MLShowEpisode *> *)episodes
+{
+    if (!_episodes) {
+        auto episodes = _show->episodes();
+        NSMutableArray *result = [NSMutableArray array];
+
+        for (const auto &episode : episodes) {
+            [result addObject:[[MLShowEpisode alloc] initWithShowEpisodePtr:episode]];
+        }
+        _episodes = result;
+    }
+    return _episodes;
+}
+
+@end
+
+@implementation MLShow (Internal)
+
+- (instancetype)initWithShowPtr:(medialibrary::ShowPtr)showPtr
+{
+    self = [super init];
+    if (self) {
+        _show = showPtr;
+    }
+    return self;
+}
+
+- (medialibrary::ShowPtr)showPtr
+{
+    return _show;
+}
 
 @end

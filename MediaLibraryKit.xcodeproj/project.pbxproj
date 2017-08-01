@@ -149,6 +149,7 @@
 		8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLPlaylist+Init.h"; sourceTree = "<group>"; };
 		8DBE03E41F2F6A290061C878 /* MLGenre.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGenre.h; sourceTree = "<group>"; };
 		8DBE03E51F2F6A290061C878 /* MLGenre.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGenre.m; sourceTree = "<group>"; };
+		8DC50D831F30C1E500D6CCED /* MLShow+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLShow+Init.h"; sourceTree = "<group>"; };
 		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
 		8DC6C4071F1E769B00FB8D07 /* MLMedia.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLMedia.m; path = Sources/MLMedia.m; sourceTree = SOURCE_ROOT; };
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -248,6 +249,7 @@
 				8D90D0E41F2B558000DBB850 /* MLArtist+Init.h */,
 				8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
+				8DC50D831F30C1E500D6CCED /* MLShow+Init.h */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
