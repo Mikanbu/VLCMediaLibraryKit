@@ -27,13 +27,17 @@
 // medialibrary
 # include <medialibrary/IAlbum.h>
 # include <medialibrary/IArtist.h>
-# include <medialibrary/IGenre.h>
-# include <medialibrary/IPlaylist.h>
-# include <medialibrary/IFolder.h>
-# include <medialibrary/Types.h>
 # include <medialibrary/IDeviceLister.h>
+# include <medialibrary/IFolder.h>
+# include <medialibrary/IGenre.h>
+# include <medialibrary/IHistoryEntry.h>
+# include <medialibrary/ILabel.h>
 # include <medialibrary/IMedia.h>
 # include <medialibrary/IMediaLibrary.h>
+# include <medialibrary/IPlaylist.h>
+# include <medialibrary/IShow.h>
+# include <medialibrary/IShowEpisode.h>
+# include <medialibrary/IMovie.h>
 
 // devicelister
 # include <medialibrary/IDeviceLister.h>
