@@ -20,24 +20,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <MediaLibraryKit/MLFile.h>
-#import <MediaLibraryKit/MLLabel.h>
-#import <MediaLibraryKit/MLMediaLibrary.h>
-#import <MediaLibraryKit/MLShow.h>
-#import <MediaLibraryKit/MLShowEpisode.h>
 #import <MediaLibraryKit/MLAlbum.h>
 #import <MediaLibraryKit/MLAlbumTrack.h>
-#import <MediaLibraryKit/MLThumbnailerQueue.h>
-#import <MediaLibraryKit/UIImage+MLKit.h>
 #import <MediaLibraryKit/MLArtist.h>
+#import <MediaLibraryKit/MLFile.h>
+#import <MediaLibraryKit/MLFolder.h>
+#import <MediaLibraryKit/MLGenre.h>
+#import <MediaLibraryKit/MLHistoryEntry.h>
+#import <MediaLibraryKit/MLLabel.h>
 #import <MediaLibraryKit/MLMedia.h>
+#import <MediaLibraryKit/MLMediaLibrary.h>
+#import <MediaLibraryKit/MLPlaylist.h>
 
-@class MLFile;
-@class MLLabel;
-@class MLMediaLibrary;
-@class MLShow;
-@class MLShowEpisode;
+#import <MediaLibraryKit/MLShow.h>
+#import <MediaLibraryKit/MLShowEpisode.h>
+
+
 @class MLAlbum;
 @class MLAlbumTrack;
 @class MLArtist;
+@class MLFile;
+@class MLFolder;
+@class MLGenre;
+@class MLHistoryEntry;
+@class MLLabel;
 @class MLMedia;
+@class MLMediaLibrary;
+@class MLPlaylist;
+
+@class MLShow;
+@class MLShowEpisode;
