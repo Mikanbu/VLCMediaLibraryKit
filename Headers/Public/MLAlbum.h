@@ -20,32 +20,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLArtist;
+@class MLArtist, MLMedia, MLGenre;
 
-struct albumImpl;
+typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 
 @interface MLAlbum : NSObject
 
-//@property (nonatomic, readonly) NSString *title; conflict with foundation title variables.
-@property (nonatomic, readonly) NSString *name;//is not title because fondation does not like title.
-@property (nonatomic, readonly) NSString *shortsummary;
-@property (nonatomic, readonly) NSString *artworkMRL;
-
-@property (nonatomic) NSInteger releaseYear;
-@property (nonatomic) NSString *albumArtist;
-@property (nonatomic) long albumArtistId;
-@property (nonatomic) NSInteger nbTracks;
-@property (nonatomic) NSInteger duration;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *shortSummary;
+@property (nonatomic, strong) NSString *artworkMrl;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithIdentifier:(int64_t)identifier;
 
 - (int64_t)identifier;
+- (NSString *)title;
+- (uint)releaseYear;
+- (NSString *)shortSummary;
+- (NSString *)artworkMrl;
+
+- (MLArtist *)albumMainArtist;
+
+- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLMedia *> *)tracksByGenre:(MLGenre *)genre sortingCriteria:(MLSortingCriteria)criteria;
 
 /**
  * Returns an array of MLArtist object.
  */
-- (NSArray *)artists;
+- (NSArray<MLArtist *> *)artistsOrderedBy:(BOOL)desc;
 
+- (uint32_t)numberOfTracks;
+- (uint)duration;
 
 @end

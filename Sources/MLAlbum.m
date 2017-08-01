@@ -22,43 +22,17 @@
 
 #import "MLAlbum.h"
 #import "MLAlbum+Init.h"
-#import "MLMedia.h"
 #import "MLMedia+Init.h"
-#import "MLArtist.h"
-#import "MLMediaLibrary.h"
+#import "MLArtist+Init.h"
+#import "MLGenre+Init.h"
 
 @interface MLAlbum ()
 {
     medialibrary::AlbumPtr _album;
-    medialibrary::IMediaLibrary *_ml;
 }
 @end
 
 @implementation MLAlbum
-
-#pragma mark - Initilization
-
-- (void)_cacheValuesOfAlbumPtr
-{
-    if (_album) {
-        _name = [[NSString alloc] initWithUTF8String:_album->title().c_str()];
-        _shortsummary = [[NSString alloc] initWithUTF8String:_album->shortSummary().c_str()];
-        _artworkMRL = [[NSString alloc] initWithUTF8String:_album->artworkMrl().c_str()];
-    }
-}
-
-- (instancetype)initWithIdentifier:(int64_t)identifier
-{
-    self = [super init];
-    if (self) {
-        _ml = (medialibrary::IMediaLibrary *)[[MLMediaLibrary alloc] instance];
-        NSAssert(_ml, @"Failed to retrieve medialibrary instance!");
-        _album = _ml->album(identifier);
-        NSAssert(_album, @"Failed to retrieve an album with the identifier: %lld!", identifier);
-        [self _cacheValuesOfAlbumPtr];
-    }
-    return self;
-}
 
 #pragma mark - Getters/Setters
 
@@ -67,33 +41,78 @@
     return _album->id();
 }
 
+- (NSString *)title
+{
+    if (!_title)
+        _title = [[NSString alloc] initWithUTF8String:_album->title().c_str()];
+    return _title;
+}
+
+- (uint)releaseYear
+{
+    return _album->releaseYear();
+}
+
+- (NSString *)shortSummary
+{
+    if (!_shortSummary)
+        _shortSummary = [[NSString alloc] initWithUTF8String:_album->shortSummary().c_str()];
+    return _shortSummary;
+}
+
+- (NSString *)artworkMrl
+{
+    if (!_artworkMrl)
+        _artworkMrl = [[NSString alloc] initWithUTF8String:_album->artworkMrl().c_str()];
+    return _artworkMrl;
+}
+
 - (MLArtist *)albumMainArtist
 {
-    return [[MLArtist alloc] initWithIdentifier:_album->albumArtist()->id()];
+    return [[MLArtist alloc] initWithArtistPtr:_album->albumArtist()];
 }
 
-- (NSArray *)artists
-{
-    return nil;
-}
-
-- (NSArray *)tracks:(MLSortingCriteria)sortingCriteria desc:(BOOL)desc
+- (NSArray *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
     NSMutableArray *result = [NSMutableArray array];
-    auto tracks = _album->tracks((medialibrary::SortingCriteria)sortingCriteria, desc);
+    auto tracks = _album->tracks((medialibrary::SortingCriteria)criteria, desc);
 
-    for (auto media : tracks) {
-        struct mediaImpl tmp;
-        tmp.mediaPtr = media;
-        MLMedia *tmpMedia = [[MLMedia alloc] initWithMediaPtr:&tmp];
-        [result addObject:tmpMedia];
+    for (const auto &media : tracks) {
+        [result addObject:[[MLMedia alloc] initWithMediaPtr:media]];
     }
     return result;
 }
 
-- (void)tracks
+- (NSArray<MLMedia *> *)tracksByGenre:(MLGenre *)genre sortingCriteria:(MLSortingCriteria)criteria;
 {
-    auto tracks = _album->tracks();
+    auto tracks = _album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria);
+    NSMutableArray *result = [NSMutableArray array];
+
+    for (const auto &track : tracks) {
+        [result addObject:[[MLMedia alloc] initWithMediaPtr:track]];
+    }
+    return result;
+}
+
+- (NSArray<MLArtist *> *)artistsOrderedBy:(BOOL)desc
+{
+    auto artists = _album->artists(desc);
+    NSMutableArray *result = [NSMutableArray array];
+
+    for (const auto &artist : artists) {
+        [result addObject:[[MLArtist alloc] initWithArtistPtr:artist]];
+    }
+    return result;
+}
+
+- (uint32_t)numberOfTracks
+{
+    return _album->nbTracks();
+}
+
+- (uint)duration
+{
+    return _album->duration();
 }
 
 @end
@@ -105,7 +124,6 @@
     self = [super init];
     if (self) {
         _album = albumPtr;
-        [self _cacheValuesOfAlbumPtr];
     }
     return self;
 }
