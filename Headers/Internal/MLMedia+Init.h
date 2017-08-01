@@ -25,5 +25,6 @@
 @interface MLMedia (Internal)
 
 - (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr;
+- (medialibrary::MediaPtr)mediaPtr;
 
 @end

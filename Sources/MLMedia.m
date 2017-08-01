@@ -140,4 +140,9 @@
     return self;
 }
 
+- (medialibrary::MediaPtr)mediaPtr
+{
+    return _media;
+}
+
 @end
