@@ -20,17 +20,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+@class MLMedia;
+
 @interface MLPlaylist : NSObject
 
-@property(nonatomic, readonly, strong) NSString *name;
+@property(nonatomic, strong) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithIdentifier:(int64_t)identifier;
 
 - (int64_t)identifier;
-- (BOOL)updateNameTo:(NSString *)name;
+- (NSString *)name;
+- (BOOL)updateName:(NSString *)name;
 - (uint)creationDate;
-- (NSArray *)media;
+- (NSArray<MLMedia *> *)media;
 
 - (BOOL)appendMediaWithIdentifier:(int64_t)identifier;
 - (BOOL)addMediaWithIdentifier:(int64_t)identifier at:(uint)position;

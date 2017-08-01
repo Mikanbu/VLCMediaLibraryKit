@@ -21,29 +21,14 @@
  *****************************************************************************/
 
 #import "MLPlaylist.h"
-#import "MLMediaLibrary.h"
 
 @interface MLPlaylist ()
 {
     medialibrary::PlaylistPtr _playlist;
-    medialibrary::IMediaLibrary *_ml;
 }
 @end
 
 @implementation MLPlaylist
-
-#pragma mark - Initializer
-
-- (instancetype)initWithIdentifier:(int64_t)identifier
-{
-    self = [super init];
-    if (self) {
-        _ml = (medialibrary::IMediaLibrary *)[MLMediaLibrary sharedInstance];
-        _playlist = _ml->playlist(identifier);
-        _name = [[NSString alloc] initWithUTF8String:_playlist->name().c_str()];
-    }
-    return self;
-}
 
 #pragma mark - Getters/Setters
 - (int64_t)identifier
@@ -51,7 +36,14 @@
     return _playlist->id();
 }
 
-- (BOOL)updateNameTo:(NSString *)name
+- (NSString *)name
+{
+    if (!_name)
+        _name = [[NSString alloc] initWithUTF8String:_playlist->name().c_str()];
+    return _name;
+}
+
+- (BOOL)updateName:(NSString *)name
 {
     return _playlist->setName([name UTF8String]);
 }
@@ -61,7 +53,7 @@
     return _playlist->creationDate();
 }
 
-- (NSArray *)media
+- (NSArray<MLMedia *> *)media
 {
     return nil;
 }
@@ -95,7 +87,6 @@
     self = [super init];
     if (self) {
         _playlist = playlistPtr;
-        _name = [[NSString alloc] initWithUTF8String:_playlist->name().c_str()];
     }
     return self;
 }
