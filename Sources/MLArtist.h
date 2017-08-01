@@ -26,16 +26,20 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 
 @interface MLArtist : NSObject
 
-@property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSString *shortBio;
-@property (nonatomic, strong, readonly) NSString *artworkMRL;
-@property (nonatomic, strong, readonly) NSString *musicBrainzId;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *shortBio;
+@property (nonatomic, strong) NSString *artworkMrl;
+@property (nonatomic, strong) NSString *musicBrainzId;
 
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithIdentifier:(int64_t)identifier;
 
--(int64_t)identifier;
+- (int64_t)identifier;
+
+- (NSString *)name;
+- (NSString *)shortBio;
+- (NSString *)artworkMrl;
+- (NSString *)musicBrainzId;
 
 /**
  * Return all albums from the current artist.
