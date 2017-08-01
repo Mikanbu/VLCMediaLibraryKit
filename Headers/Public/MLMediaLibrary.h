@@ -1,14 +1,9 @@
 /*****************************************************************************
  * MLMediaLibrary.h
- * MobileMediaLibraryKit
+ * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010 Pierre d'Herbemont
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
- *
- * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
- *          Felix Paul Kühne <fkuehne # videolan.org>
- *          Tobias Conradi <videolan # tobias-conradi.de>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -25,7 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLFile, MLLabel, MLMedia, MLAlbum, MLArtist, MLPlaylist, MLHistoryEntry;
+@class MLFile, MLLabel, MLMedia, MLAlbum, MLArtist, MLPlaylist, MLHistoryEntry, MLGenre, MLFolder, MLShow, MLMovie;
+
+struct MLMediaSearchAggregate;
 
 typedef NS_ENUM (NSUInteger, MLSortingCriteria) {
     /*
@@ -75,7 +72,7 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 + (void *)sharedInstance;
 
 - (BOOL)startMedialibrary;
-- (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath forThumbnailPath:(NSString *)thumbnailPath;
+- (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
 
 #pragma mark -
 
@@ -83,27 +80,93 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 #pragma mark -
 
+#pragma mark - Label
+
 - (MLLabel *)createLabelWithName:(NSString *)name;
+- (BOOL)deleteLabel:(MLLabel *)label;
+
+#pragma mark - Media
+
 - (MLMedia *)mediaWithIdentifier:(int64_t)identifier;
 - (MLMedia *)mediaWithMrl:(NSString *)mrl;
 - (MLMedia *)addMediaWithMrl:(NSString *)mrl;
-- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
-- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+
+#pragma mark - Album
+
 - (MLAlbum *)albumWithIdentifier:(int64_t)identifier;
-- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+
+#pragma mark - Show
+
+- (MLShow *)showWithName:(NSString *)name;
+
+#pragma mark - Movie
+
+- (MLMovie *)movieWithName:(NSString *)name;
+
+#pragma mark - Artist
 
 - (MLArtist *)artistWithIdentifier:(int64_t)identifier;
-- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+
+#pragma mark - Genre
+
+- (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (MLGenre *)genreWithIdentifier:(int64_t)identifier;
+
+#pragma mark - Playlist
 
 - (MLPlaylist *)createPlaylistWithName:(NSString *)name;
-- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
 - (MLPlaylist *)playlistWithIdentifier:(int64_t)identifier;
 - (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier;
+
+#pragma mark - History
 
 - (BOOL)addMediaToStreamHistory:(MLMedia *)media;
 - (NSArray<MLHistoryEntry *> *)lastStreamsPlayed;
 - (NSArray<MLMedia *> *)lastMediaPlayed;
 - (BOOL)clearHistory;
 
-@end
+#pragma mark - Search
 
+- (NSArray<MLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
+- (NSArray<MLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
+- (NSArray<MLGenre *> *)searchGenreByName:(NSString *)name;
+- (NSArray<MLArtist *> *)searchArtistsByName:(NSString *)name;
+
+#pragma mark - Discover
+
+- (void)discoverOnEntryPoint:(NSString *)path;
+- (void)enableDiscoverNetwork:(BOOL)enable;
+- (NSArray<MLFolder *> *)entryPoints;
+- (void)removeEntryPointWithPath:(NSString *)path;
+
+#pragma mark - Folder
+
+- (void)banFolderWithPath:(NSString *)path;
+- (void)unbanFolderWithEntryPoint:(NSString *)entryPoint;
+
+#pragma mark - Thumbnail
+
+- (NSString *)thumbnailPath;
+
+#pragma mark - Logger
+
+#pragma mark - Background Operation
+
+- (void)pauseBackgroundOperations;
+- (void)resumeBackgroundOperations;
+
+#pragma mark - Reload
+
+- (void)reload;
+- (void)reloadEntryPoint:(NSString *)entryPoint;
+
+#pragma mark - Parser
+
+- (void)forceParserRetry;
+
+@end
