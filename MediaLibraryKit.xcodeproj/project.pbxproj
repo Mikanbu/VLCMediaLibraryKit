@@ -57,9 +57,11 @@
 		8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D31CE3E1F0A6873005A2895 /* MLArtist.h */; };
 		8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC6C4061F1E769B00FB8D07 /* MLMedia.h */; };
 		8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */; };
+		8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0EB1F2B9DDC00DBB850 /* MLHistoryEntry.m */; };
 		8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */; };
 		8DBE03E61F2F6A290061C878 /* MLGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE03E51F2F6A290061C878 /* MLGenre.m */; };
 		8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D05F9DA1F309AF9003000B6 /* MLFolder.h */; };
+		8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
@@ -78,6 +80,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files */,
+				8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */,
 				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */,
 				8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */,
 				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */,
@@ -139,6 +142,7 @@
 		8D05F9D81F2F97D2003000B6 /* MLLabel+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLLabel+Init.h"; sourceTree = "<group>"; };
 		8D05F9DA1F309AF9003000B6 /* MLFolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLFolder.h; path = Headers/Public/MLFolder.h; sourceTree = SOURCE_ROOT; };
 		8D05F9DB1F309AF9003000B6 /* MLFolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLFolder.m; path = Sources/MLFolder.m; sourceTree = SOURCE_ROOT; };
+		8D05F9DD1F309C13003000B6 /* MLHistoryEntry+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLHistoryEntry+Init.h"; sourceTree = "<group>"; };
 		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
 		8D31CE3F1F0A6873005A2895 /* MLArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLArtist.m; sourceTree = "<group>"; };
 		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPlaylist.h; sourceTree = "<group>"; };
 		8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPlaylist.m; sourceTree = "<group>"; };
 		8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLPlaylist+Init.h"; sourceTree = "<group>"; };
+		8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLHistoryEntry.h; sourceTree = "<group>"; };
+		8D90D0EB1F2B9DDC00DBB850 /* MLHistoryEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLHistoryEntry.m; sourceTree = "<group>"; };
 		8DBE03E41F2F6A290061C878 /* MLGenre.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGenre.h; sourceTree = "<group>"; };
 		8DBE03E51F2F6A290061C878 /* MLGenre.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGenre.m; sourceTree = "<group>"; };
 		8DC50D7C1F309CF100D6CCED /* MLFolder+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLFolder+Init.h"; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 				8D90D0E41F2B558000DBB850 /* MLArtist+Init.h */,
 				8DC50D7C1F309CF100D6CCED /* MLFolder+Init.h */,
 				8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */,
+				8D05F9DD1F309C13003000B6 /* MLHistoryEntry+Init.h */,
 				8D05F9D81F2F97D2003000B6 /* MLLabel+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
 				8DC50D831F30C1E500D6CCED /* MLShow+Init.h */,
@@ -273,6 +280,7 @@
 				7D0EF511170885130003ED47 /* MLFile.h */,
 				8D05F9DA1F309AF9003000B6 /* MLFolder.h */,
 				8DBE03E41F2F6A290061C878 /* MLGenre.h */,
+				8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */,
 				7D0EF512170885130003ED47 /* MLLabel.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
@@ -293,6 +301,7 @@
 				7D0EF519170885130003ED47 /* MLFile.m */,
 				8D05F9DB1F309AF9003000B6 /* MLFolder.m */,
 				8DBE03E51F2F6A290061C878 /* MLGenre.m */,
+				8D90D0EB1F2B9DDC00DBB850 /* MLHistoryEntry.m */,
 				7D0EF51C170885130003ED47 /* MLLabel.m */,
 				7D0EF51D170885130003ED47 /* MLMediaLibrary.m */,
 				7D0EF51F170885130003ED47 /* MLShow.m */,
@@ -427,6 +436,7 @@
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */,
+				8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
