@@ -22,42 +22,18 @@
 
 #import "MLMedia.h"
 #import "MLMedia+Init.h"
-#import "MLArtist.h"
-#import "MLMediaLibrary.h"
+#import "MLLabel+Init.h"
+#import "MLMovie+Init.h"
+#import "MLShowEpisode+Init.h"
 #import "MLMediaMetadata.h"
 
 @interface MLMedia ()
 {
     medialibrary::MediaPtr _media;
-    medialibrary::IMediaLibrary *_ml;
 }
 @end
 
 @implementation MLMedia
-
-#pragma mark - Private Helpers
-
-- (void)_cacheFromCurrentMediaPtr
-{
-    if (_media) {
-        _title = [[NSString alloc] initWithUTF8String:_media->title().c_str()];
-        _thumbnail = [[NSString alloc] initWithUTF8String:_media->thumbnail().c_str()];
-    }
-}
-
-#pragma mark - Initialization
-
-- (instancetype)initWithIdentifier:(int64_t)identifier
-{
-    self = [super init];
-    if (self) {
-        _ml = (medialibrary::IMediaLibrary *)[MLMediaLibrary sharedInstance];
-        if ((_media = _ml->media(identifier))) {
-            [self _cacheFromCurrentMediaPtr];
-        }
-    }
-    return self;
-}
 
 #pragma mark - Getters/Setters
 
@@ -74,6 +50,13 @@
 - (MLMediaSubType)subType
 {
     return (MLMediaSubType)_media->subType();
+}
+
+- (NSString *)title
+{
+    if (!_title)
+        _title = [[NSString alloc] initWithUTF8String:_media->title().c_str()];
+    return _title;
 }
 
 - (BOOL)updateTitle:(NSString *)title
@@ -100,6 +83,14 @@
     return _media->increasePlayCount();
 }
 
+- (MLShowEpisode *)showEpisode
+{
+    if (!_showEpisode) {
+        _showEpisode = [[MLShowEpisode alloc] initWithShowEpisodePtr:_media->showEpisode()];
+    }
+    return _showEpisode;
+}
+
 - (BOOL)isFavorite
 {
     return _media->isFavorite();
@@ -110,12 +101,49 @@
     return _media->setFavorite(favorite);
 }
 
+- (BOOL)addLabel:(MLLabel *)label
+{
+    return _media->addLabel([label labelPtr]);
+}
+
+- (BOOL)removeLabel:(MLLabel *)label
+{
+    return _media->removeLabel([label labelPtr]);
+}
+
+- (MLMovie *)movie
+{
+    if (!_movie)
+        _movie = [[MLMovie alloc] initWithMoviePtr:_media->movie()];
+    return _movie;
+}
+
+- (NSArray<MLLabel *> *)labels
+{
+    if (!_labels) {
+        auto labels = _media->labels();
+        NSMutableArray *result = [NSMutableArray array];
+
+        for (const auto &label : labels) {
+            [result addObject:[[MLLabel alloc] initWithLabelPtr:label]];
+        }
+    }
+    return _labels;
+}
+
 - (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
 {
 //    _media->metadata((medialibrary::IMedia::MetadataType)type);
 //
 //    MLMediaMetadata *md = [[MLMediaMetadata alloc] initWith:nil];
     return nil;
+}
+
+- (NSString *)thumbnail
+{
+    if (!_thumbnail)
+        _thumbnail = [[NSString alloc] initWithUTF8String:_media->thumbnail().c_str()];
+    return _thumbnail;
 }
 
 - (uint)insertionDate
@@ -135,8 +163,9 @@
 - (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr
 {
     self = [super init];
-    _media = mediaPtr;
-    [self _cacheFromCurrentMediaPtr];
+    if (self) {
+        _media = mediaPtr;
+    }
     return self;
 }
 

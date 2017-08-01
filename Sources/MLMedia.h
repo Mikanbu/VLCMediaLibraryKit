@@ -20,7 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLAlbum, MLAlbumTrack, MLShowEpisode, MLMediaMetadata;
+@class MLAlbum, MLAlbumTrack, MLShowEpisode, MLMediaMetadata, MLLabel, MLShowEpisode, MLMovie;
 
 typedef NS_ENUM(uint8_t, MLMediaType) {
     MLMediaTypeUnknown,
@@ -67,15 +67,15 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
     MLMetadataTypeApplicationSpecific = 250,
 };
 
-struct mediaImpl;
-
 @interface MLMedia : NSObject
 
-@property (nonatomic, readonly, strong) NSString *title;
-@property (nonatomic, readonly, strong) NSString *thumbnail;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, strong) MLShowEpisode *showEpisode;
+@property (nonatomic, strong) MLMovie *movie;
+@property (nonatomic, strong) NSArray<MLLabel *> *labels;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithIdentifier:(int64_t)identifier;
 
 #pragma mark - Getters/Setters
 
@@ -84,14 +84,21 @@ struct mediaImpl;
 - (MLMediaType)type;
 - (MLMediaSubType)subType;
 
+- (NSString *)title;
 - (BOOL)updateTitle:(NSString *)title;
 - (int64_t)duration;
 - (int)playCount;
 - (BOOL)increasePlayCount;
-
+- (MLShowEpisode *)showEpisode;
 - (BOOL)isFavorite;
 - (BOOL)setFavorite:(BOOL)favorite;
 
+- (BOOL)addLabel:(MLLabel *)label;
+- (BOOL)removeLabel:(MLLabel *)label;
+- (MLMovie *)movie;
+- (NSArray<MLLabel *> *)labels;
+
+- (NSString *)thumbnail;
 - (uint)insertionDate;
 - (uint)releaseDate;
 
