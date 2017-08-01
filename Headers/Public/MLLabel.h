@@ -1,13 +1,9 @@
 /*****************************************************************************
  * MLLabel.h
- * Lunettes
+ * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2013 VLC authors and VideoLAN
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
- *
- * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
- *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -24,23 +20,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLFile;
+@class MLMedia;
 
 @interface MLLabel : NSObject
 
-+ (NSArray *)allLabels;
-- (NSArray *)sortedFolderItems;
+@property(nonatomic, strong) NSString *name;
 
-@property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSSet* files;
+- (int64_t)identifier;
+- (NSString *)name;
+- (NSArray<MLMedia *> *)files;
 
 @end
-
-
-//@interface MLLabel (CoreDataGeneratedAccessors)
-//- (void)addFilesObject:(MLFile *)value;
-//- (void)removeFilesObject:(MLFile *)value;
-//- (void)addFiles:(NSSet *)value;
-//- (void)removeFiles:(NSSet *)value;
-//@end
 

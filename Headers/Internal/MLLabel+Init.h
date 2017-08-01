@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLLabel.m
+ * MLLabel+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -21,55 +21,10 @@
  *****************************************************************************/
 
 #import "MLLabel.h"
-#import "MLMedia+Init.h"
 
-@interface MLLabel ()
-{
-    medialibrary::LabelPtr _label;
-}
-@end
+@interface MLLabel (Internal)
 
-@implementation MLLabel
-
-- (int64_t)identifier
-{
-    return _label->id();
-}
-
-- (NSString *)name
-{
-    if (!_name)
-        _name = [[NSString alloc] initWithUTF8String:_label->name().c_str()];
-    return _name;
-}
-
-- (NSArray<MLMedia *> *)files
-{
-    auto files = _label->files();
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &file : files) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr: file]];
-    }
-    return result;
-}
-
-@end
-
-@implementation MLLabel (Internal)
-
-- (instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr
-{
-    self = [super init];
-    if (self) {
-        _label = labelPtr;
-    }
-    return self;
-}
-
-- (medialibrary::LabelPtr)labelPtr
-{
-    return _label;
-}
+- (instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr;
+- (medialibrary::LabelPtr)labelPtr;
 
 @end

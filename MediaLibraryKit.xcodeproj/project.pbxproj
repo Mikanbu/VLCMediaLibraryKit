@@ -136,6 +136,7 @@
 		7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* MLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAlbum.m; sourceTree = "<group>"; };
+		8D05F9D81F2F97D2003000B6 /* MLLabel+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLLabel+Init.h"; sourceTree = "<group>"; };
 		8D05F9DA1F309AF9003000B6 /* MLFolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLFolder.h; path = Headers/Public/MLFolder.h; sourceTree = SOURCE_ROOT; };
 		8D05F9DB1F309AF9003000B6 /* MLFolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLFolder.m; path = Sources/MLFolder.m; sourceTree = SOURCE_ROOT; };
 		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 				8D90D0E41F2B558000DBB850 /* MLArtist+Init.h */,
 				8DC50D7C1F309CF100D6CCED /* MLFolder+Init.h */,
 				8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */,
+				8D05F9D81F2F97D2003000B6 /* MLLabel+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
 				8DC50D831F30C1E500D6CCED /* MLShow+Init.h */,
 			);
