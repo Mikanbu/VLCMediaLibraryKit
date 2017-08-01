@@ -164,6 +164,7 @@
 		8DBE03E51F2F6A290061C878 /* MLGenre.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGenre.m; sourceTree = "<group>"; };
 		8DC50D7C1F309CF100D6CCED /* MLFolder+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLFolder+Init.h"; sourceTree = "<group>"; };
 		8DC50D831F30C1E500D6CCED /* MLShow+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLShow+Init.h"; sourceTree = "<group>"; };
+		8DC50D841F30C30200D6CCED /* MLShowEpisode+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLShowEpisode+Init.h"; sourceTree = "<group>"; };
 		8DC50D851F30CBD700D6CCED /* MLMovie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMovie.h; sourceTree = "<group>"; };
 		8DC50D861F30CBD700D6CCED /* MLMovie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMovie.m; sourceTree = "<group>"; };
 		8DC50D881F30CD5400D6CCED /* MLMovie+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLMovie+Init.h"; sourceTree = "<group>"; };
@@ -271,6 +272,7 @@
 				8DC50D881F30CD5400D6CCED /* MLMovie+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
 				8DC50D831F30C1E500D6CCED /* MLShow+Init.h */,
+				8DC50D841F30C30200D6CCED /* MLShowEpisode+Init.h */,
 			);
 			path = Internal;
 			sourceTree = "<group>";

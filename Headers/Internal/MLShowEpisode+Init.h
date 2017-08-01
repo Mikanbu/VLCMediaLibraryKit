@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLShowEpisode.h
+ * MLShowEpisode+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,28 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLShow, MLMedia;
+#import "MLShowEpisode.h"
 
-@interface MLShowEpisode : NSObject
+@interface MLShowEpisode (Internal)
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSString *artworkMrl;
-@property (nonatomic, strong) NSString *tvdbId;
-@property (nonatomic, strong) MLShow *show;
-@property (nonatomic, strong) NSArray<MLMedia *> *files;
-
-- (instancetype)init NS_UNAVAILABLE;
-
-- (int64_t)identifier;
-- (NSString *)artworkMrl;
-- (uint)episodeNumber;
-- (NSString *)name;
-- (uint)seasonNumber;
-- (NSString *)shortSummary;
-- (NSString *)tvdbId;
-- (MLShow *)show;
-- (NSArray<MLMedia *> *)files;
+- (instancetype)initWithShowEpisodePtr:(medialibrary::ShowEpisodePtr)showEpisodePtr;
 
 @end
 
