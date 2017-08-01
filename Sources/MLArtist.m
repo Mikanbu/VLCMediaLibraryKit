@@ -107,4 +107,9 @@
     return self;
 }
 
+- (medialibrary::ArtistPtr)artistPtr
+{
+    return _artist;
+}
+
 @end
