@@ -26,6 +26,7 @@
 
 // medialibrary
 # include <medialibrary/IAlbum.h>
+# include <medialibrary/IAlbumTrack.h>
 # include <medialibrary/IArtist.h>
 # include <medialibrary/IDeviceLister.h>
 # include <medialibrary/IFolder.h>

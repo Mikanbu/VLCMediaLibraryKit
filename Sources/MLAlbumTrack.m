@@ -20,9 +20,79 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
 #import "MLAlbumTrack.h"
+#import "MLAlbumTrack+Init.h"
+#import "MLArtist+Init.h"
+#import "MLGenre+Init.h"
+#import "MLAlbum+Init.h"
+#import "MLMedia+Init.h"
+
+@interface MLAlbumTrack ()
+{
+    medialibrary::AlbumTrackPtr _albumTrackPtr;
+}
+@end
 
 @implementation MLAlbumTrack
+
+- (int64_t)identifier
+{
+    return _albumTrackPtr->id();
+}
+
+- (MLArtist *)artist
+{
+    if (!_artist) {
+        _artist = [[MLArtist alloc] initWithArtistPtr:_albumTrackPtr->artist()];
+    }
+    return _artist;
+}
+
+- (MLGenre *)genre
+{
+    if (!_genre) {
+        _genre = [[MLGenre alloc] initWithGenrePtr:_albumTrackPtr->genre()];
+    }
+    return _genre;
+}
+
+- (uint)trackNumber
+{
+    return _albumTrackPtr->trackNumber();
+}
+
+- (MLAlbum *)album
+{
+    if (!_album) {
+        _album = [[MLAlbum alloc] initWithAlbumPtr:_albumTrackPtr->album()];
+    }
+    return _album;
+}
+
+- (MLMedia *)media
+{
+    if (!_media) {
+        _media = [[MLMedia alloc] initWithMediaPtr:_albumTrackPtr->media()];
+    }
+    return _media;
+}
+
+- (uint)discNumber
+{
+    return _albumTrackPtr->discNumber();
+}
+
+@end
+
+@implementation MLAlbumTrack (Internal)
+
+- (instancetype)initWithAlbumTrackPtr:(medialibrary::AlbumTrackPtr)albumTrackPtr
+{
+    self = [super init];
+    if (self) {
+        _albumTrackPtr = albumTrackPtr;
+    }
+    return self;
+}
 
 @end

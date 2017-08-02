@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLAlbumTrack.h
+ * MLAlbumTrack+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,35 +20,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLArtist, MLGenre, MLAlbum, MLMedia;
+#import "MLAlbumTrack.h"
 
-@interface MLAlbumTrack : NSObject
+@interface MLAlbumTrack (Internal)
 
-@property (nonatomic, strong) MLArtist *artist;
-@property (nonatomic, strong) MLGenre *genre;
-@property (nonatomic, strong) MLAlbum *album;
-@property (nonatomic, strong) MLMedia *media;
-
-- (instancetype)init NS_UNAVAILABLE;
-
-- (int64_t)identifier;
-/**
- * @brief Returns the artist, as tagged in the media.
- * This can be different from the associated media's artist.
- * For instance, in case of a featuring, Media::artist() might return
- * "Artist 1", while IAlbumTrack::artist() might return something like
- * "Artist 1 featuring Artist 2 and also artist 3 and a whole bunch of people"
- * @return
- */
-- (MLArtist *)artist;
-- (MLGenre *)genre;
-- (uint)trackNumber;
-- (MLAlbum *)album;
-- (MLMedia *)media;
-
-/**
- * @return Which disc this tracks appears on (or 0 if unspecified)
- */
-- (uint)discNumber;
+- (instancetype)initWithAlbumTrackPtr:(medialibrary::AlbumTrackPtr)albumTrackPtr;
 
 @end
