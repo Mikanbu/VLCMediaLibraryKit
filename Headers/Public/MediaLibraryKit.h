@@ -23,6 +23,7 @@
 #import <MediaLibraryKit/MLAlbum.h>
 #import <MediaLibraryKit/MLAlbumTrack.h>
 #import <MediaLibraryKit/MLArtist.h>
+#import <MediaLibraryKit/MLAudioTrack.h>
 #import <MediaLibraryKit/MLFile.h>
 #import <MediaLibraryKit/MLFolder.h>
 #import <MediaLibraryKit/MLGenre.h>
@@ -39,6 +40,7 @@
 @class MLAlbum;
 @class MLAlbumTrack;
 @class MLArtist;
+@class MLAudioTrack;
 @class MLFile;
 @class MLFolder;
 @class MLGenre;

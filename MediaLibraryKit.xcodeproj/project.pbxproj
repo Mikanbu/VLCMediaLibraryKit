@@ -64,6 +64,7 @@
 		8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */; };
 		8DC50D871F30CBD700D6CCED /* MLMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* MLMovie.m */; };
 		8DC50D8E1F321E2300D6CCED /* MLVideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D8D1F321E2300D6CCED /* MLVideoTrack.m */; };
+		8DC50D921F32226C00D6CCED /* MLAudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D911F32226C00D6CCED /* MLAudioTrack.m */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */; };
@@ -176,6 +177,9 @@
 		8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLVideoTrack.h; sourceTree = "<group>"; };
 		8DC50D8D1F321E2300D6CCED /* MLVideoTrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLVideoTrack.m; sourceTree = "<group>"; };
 		8DC50D8F1F32209200D6CCED /* MLVideoTrack+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLVideoTrack+Init.h"; sourceTree = "<group>"; };
+		8DC50D901F32226C00D6CCED /* MLAudioTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLAudioTrack.h; sourceTree = "<group>"; };
+		8DC50D911F32226C00D6CCED /* MLAudioTrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLAudioTrack.m; sourceTree = "<group>"; };
+		8DC50D931F32235F00D6CCED /* MLAudioTrack+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLAudioTrack+Init.h"; sourceTree = "<group>"; };
 		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
 		8DC6C4071F1E769B00FB8D07 /* MLMedia.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLMedia.m; path = Sources/MLMedia.m; sourceTree = SOURCE_ROOT; };
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				8D90D0E11F2A543D00DBB850 /* MLAlbum+Init.h */,
 				8DC50D8A1F320AF800D6CCED /* MLAlbumTrack+Init.h */,
 				8D90D0E41F2B558000DBB850 /* MLArtist+Init.h */,
+				8DC50D931F32235F00D6CCED /* MLAudioTrack+Init.h */,
 				8DC50D8B1F320EC900D6CCED /* MLFile+Init.h */,
 				8DC50D7C1F309CF100D6CCED /* MLFolder+Init.h */,
 				8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */,
@@ -298,6 +303,7 @@
 				7D9E238117AEE9F2008485E5 /* MLAlbum.h */,
 				7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */,
 				8D31CE3E1F0A6873005A2895 /* MLArtist.h */,
+				8DC50D901F32226C00D6CCED /* MLAudioTrack.h */,
 				7D0EF511170885130003ED47 /* MLFile.h */,
 				8D05F9DA1F309AF9003000B6 /* MLFolder.h */,
 				8DBE03E41F2F6A290061C878 /* MLGenre.h */,
@@ -322,6 +328,7 @@
 				8D31CE3F1F0A6873005A2895 /* MLArtist.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
 				8DC6C4071F1E769B00FB8D07 /* MLMedia.m */,
+				8DC50D911F32226C00D6CCED /* MLAudioTrack.m */,
 				7D0EF519170885130003ED47 /* MLFile.m */,
 				8D05F9DB1F309AF9003000B6 /* MLFolder.m */,
 				8DBE03E51F2F6A290061C878 /* MLGenre.m */,
@@ -472,6 +479,7 @@
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
 				8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */,
 				8D05F9DC1F309AF9003000B6 /* MLFolder.m in Sources */,
+				8DC50D921F32226C00D6CCED /* MLAudioTrack.m in Sources */,
 				7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */,
 				8DC50D871F30CBD700D6CCED /* MLMovie.m in Sources */,
 				8D31CE401F0A6873005A2895 /* MLArtist.m in Sources */,
