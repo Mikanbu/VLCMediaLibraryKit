@@ -65,6 +65,7 @@
 		8DC50D871F30CBD700D6CCED /* MLMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* MLMovie.m */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
+		8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
 		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
 		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
@@ -168,9 +169,12 @@
 		8DC50D851F30CBD700D6CCED /* MLMovie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMovie.h; sourceTree = "<group>"; };
 		8DC50D861F30CBD700D6CCED /* MLMovie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMovie.m; sourceTree = "<group>"; };
 		8DC50D881F30CD5400D6CCED /* MLMovie+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLMovie+Init.h"; sourceTree = "<group>"; };
+		8DC50D891F31FFCD00D6CCED /* MLMediaMetadata+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLMediaMetadata+Init.h"; sourceTree = "<group>"; };
 		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
 		8DC6C4071F1E769B00FB8D07 /* MLMedia.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLMedia.m; path = Sources/MLMedia.m; sourceTree = SOURCE_ROOT; };
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
+		8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMediaMetadata.h; sourceTree = "<group>"; };
+		8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMediaMetadata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +273,7 @@
 				8D05F9DD1F309C13003000B6 /* MLHistoryEntry+Init.h */,
 				8D05F9D81F2F97D2003000B6 /* MLLabel+Init.h */,
 				8D90D0DD1F2A41DB00DBB850 /* MLMedia+Init.h */,
+				8DC50D891F31FFCD00D6CCED /* MLMediaMetadata+Init.h */,
 				8DC50D881F30CD5400D6CCED /* MLMovie+Init.h */,
 				8D90D0E91F2B8E1200DBB850 /* MLPlaylist+Init.h */,
 				8DC50D831F30C1E500D6CCED /* MLShow+Init.h */,
@@ -291,6 +296,7 @@
 				7D0EF512170885130003ED47 /* MLLabel.h */,
 				8DC6C4061F1E769B00FB8D07 /* MLMedia.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
+				8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */,
 				8DC50D851F30CBD700D6CCED /* MLMovie.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
 				7D0EF515170885130003ED47 /* MLShowEpisode.h */,
@@ -317,6 +323,7 @@
 				7D0EF51F170885130003ED47 /* MLShow.m */,
 				7D0EF520170885130003ED47 /* MLShowEpisode.m */,
 				8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */,
+				8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -447,6 +454,7 @@
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */,
 				8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */,
+				8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
