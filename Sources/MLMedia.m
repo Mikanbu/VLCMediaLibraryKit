@@ -24,6 +24,7 @@
 #import "MLMedia+Init.h"
 #import "MLLabel+Init.h"
 #import "MLMovie+Init.h"
+#import "MLAlbumTrack+Init.h"
 #import "MLShowEpisode+Init.h"
 #import "MLMediaMetadata+Init.h"
 
@@ -68,6 +69,14 @@
     NSAssert(success, @"Failed to update title.");
     _title = title;
     return success;
+}
+
+- (MLAlbumTrack *)albumTrack
+{
+    if (!_albumTrack) {
+        _albumTrack = [[MLAlbumTrack alloc] initWithAlbumTrackPtr:_media->albumTrack()];
+    }
+    return _albumTrack;
 }
 
 - (int64_t)duration

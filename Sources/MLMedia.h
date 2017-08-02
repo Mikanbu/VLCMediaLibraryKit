@@ -71,6 +71,7 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, strong) MLAlbumTrack *albumTrack;
 @property (nonatomic, strong) MLShowEpisode *showEpisode;
 @property (nonatomic, strong) MLMovie *movie;
 @property (nonatomic, strong) NSArray<MLLabel *> *labels;
@@ -86,6 +87,7 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
 
 - (NSString *)title;
 - (BOOL)updateTitle:(NSString *)title;
+- (MLAlbumTrack *)albumTrack;
 - (int64_t)duration;
 - (int)playCount;
 - (BOOL)increasePlayCount;
