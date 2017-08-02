@@ -38,8 +38,9 @@
 
 - (NSString *)name
 {
-    if (!_name)
+    if (!_name) {
         _name = [[NSString alloc] initWithUTF8String:_show->name().c_str()];
+    }
     return _name;
 }
 
@@ -50,22 +51,25 @@
 
 - (NSString *)shortSummary
 {
-    if (!_shortSummary)
+    if (!_shortSummary) {
         _shortSummary = [[NSString alloc] initWithUTF8String:_show->shortSummary().c_str()];
+    }
     return _shortSummary;
 }
 
 - (NSString *)artworkMrl
 {
-    if (!_artworkMrl)
+    if (!_artworkMrl) {
         _artworkMrl = [[NSString alloc] initWithUTF8String:_show->artworkMrl().c_str()];
+    }
     return _artworkMrl;
 }
 
 - (NSString *)tvdbId
 {
-    if (!_tvdbId)
+    if (!_tvdbId) {
         _tvdbId = [[NSString alloc] initWithUTF8String:_show->tvdbId().c_str()];
+    }
     return _tvdbId;
 }
 

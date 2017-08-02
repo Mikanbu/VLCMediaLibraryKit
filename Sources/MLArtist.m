@@ -42,29 +42,33 @@
 
 - (NSString *)name
 {
-    if (!_name)
+    if (!_name) {
         _name = [NSString stringWithUTF8String:_artist->name().c_str()];
+    }
     return _name;
 }
 
 - (NSString *)shortBio
 {
-    if (!_shortBio)
+    if (!_shortBio) {
         _shortBio = [NSString stringWithUTF8String:_artist->shortBio().c_str()];
+    }
     return _shortBio;
 }
 
 - (NSString *)artworkMrl
 {
-    if (!_artworkMrl)
+    if (!_artworkMrl) {
         _artworkMrl = [NSString stringWithUTF8String:_artist->artworkMrl().c_str()];
+    }
     return _artworkMrl;
 }
 
 - (NSString *)musicBrainzId
 {
-    if (!_musicBrainzId)
+    if (!_musicBrainzId) {
         _musicBrainzId = [NSString stringWithUTF8String:_artist->musicBrainzId().c_str()];
+    }
     return _musicBrainzId;
 }
 

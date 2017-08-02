@@ -54,8 +54,9 @@
 
 - (NSString *)title
 {
-    if (!_title)
+    if (!_title) {
         _title = [[NSString alloc] initWithUTF8String:_media->title().c_str()];
+    }
     return _title;
 }
 
@@ -113,8 +114,9 @@
 
 - (MLMovie *)movie
 {
-    if (!_movie)
+    if (!_movie) {
         _movie = [[MLMovie alloc] initWithMoviePtr:_media->movie()];
+    }
     return _movie;
 }
 
@@ -141,8 +143,9 @@
 
 - (NSString *)thumbnail
 {
-    if (!_thumbnail)
+    if (!_thumbnail) {
         _thumbnail = [[NSString alloc] initWithUTF8String:_media->thumbnail().c_str()];
+    }
     return _thumbnail;
 }
 

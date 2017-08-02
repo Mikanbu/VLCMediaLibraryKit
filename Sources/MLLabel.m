@@ -38,8 +38,9 @@
 
 - (NSString *)name
 {
-    if (!_name)
+    if (!_name) {
         _name = [[NSString alloc] initWithUTF8String:_label->name().c_str()];
+    }
     return _name;
 }
 

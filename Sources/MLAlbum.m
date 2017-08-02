@@ -43,8 +43,9 @@
 
 - (NSString *)title
 {
-    if (!_title)
+    if (!_title) {
         _title = [[NSString alloc] initWithUTF8String:_album->title().c_str()];
+    }
     return _title;
 }
 
@@ -55,15 +56,17 @@
 
 - (NSString *)shortSummary
 {
-    if (!_shortSummary)
+    if (!_shortSummary) {
         _shortSummary = [[NSString alloc] initWithUTF8String:_album->shortSummary().c_str()];
+    }
     return _shortSummary;
 }
 
 - (NSString *)artworkMrl
 {
-    if (!_artworkMrl)
+    if (!_artworkMrl) {
         _artworkMrl = [[NSString alloc] initWithUTF8String:_album->artworkMrl().c_str()];
+    }
     return _artworkMrl;
 }
 

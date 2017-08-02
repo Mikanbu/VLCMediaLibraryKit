@@ -38,8 +38,9 @@
 
 - (NSString *)mrl
 {
-    if (!_mrl)
+    if (!_mrl) {
         _mrl = [[NSString alloc] initWithUTF8String:_folder->mrl().c_str()];
+    }
     return _mrl;
 }
 

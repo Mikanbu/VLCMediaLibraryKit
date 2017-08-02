@@ -39,29 +39,33 @@
 
 - (NSString *)title
 {
-    if (!_title)
+    if (!_title) {
         _title = [[NSString alloc] initWithUTF8String:_movie->title().c_str()];
+    }
     return _title;
 }
 
 - (NSString *)shortSummary
 {
-    if (!_shortSummary)
+    if (!_shortSummary) {
         _shortSummary = [[NSString alloc] initWithUTF8String:_movie->shortSummary().c_str()];
+    }
     return _shortSummary;
 }
 
 - (NSString *)artworkMrl
 {
-    if (!_artworkMrl)
+    if (!_artworkMrl) {
         _artworkMrl = [[NSString alloc] initWithUTF8String:_movie->artworkMrl().c_str()];
+    }
     return _artworkMrl;
 }
 
 - (NSString *)imdbId
 {
-    if (!_imdbId)
+    if (!_imdbId) {
         _imdbId = [[NSString alloc] initWithUTF8String:_movie->imdbId().c_str()];
+    }
     return _imdbId;
 }
 
