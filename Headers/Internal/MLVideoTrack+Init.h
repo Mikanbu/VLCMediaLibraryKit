@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Medialibrary.h
+ * MLVideoTrack+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,31 +20,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "MLVideoTrack.h"
 
-#ifndef Medialibrary_h
-# define Medialibrary_h
+@interface MLVideoTrack (Internal)
 
-// medialibrary
-# include <medialibrary/IAlbum.h>
-# include <medialibrary/IAlbumTrack.h>
-# include <medialibrary/IArtist.h>
-# include <medialibrary/IDeviceLister.h>
-# include <medialibrary/IFolder.h>
-# include <medialibrary/IGenre.h>
-# include <medialibrary/IHistoryEntry.h>
-# include <medialibrary/ILabel.h>
-# include <medialibrary/IMedia.h>
-# include <medialibrary/IMediaLibrary.h>
-# include <medialibrary/IPlaylist.h>
-# include <medialibrary/IShow.h>
-# include <medialibrary/IShowEpisode.h>
-# include <medialibrary/IMovie.h>
-# include <medialibrary/IVideoTrack.h>
+- (instancetype)initWithVideoTrackPtr:(medialibrary::VideoTrackPtr)videoTrackPtr;
 
-// devicelister
-# include <medialibrary/IDeviceLister.h>
-
-// utils
-# include <medialibrary/Types.h>
-
-#endif /* Medialibrary_h */
+@end
