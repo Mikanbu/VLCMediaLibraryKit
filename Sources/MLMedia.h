@@ -20,7 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLAlbum, MLAlbumTrack, MLShowEpisode, MLMediaMetadata, MLLabel, MLShowEpisode, MLMovie;
+@class MLAlbum, MLAlbumTrack, MLShowEpisode, MLMediaMetadata, MLLabel, MLShowEpisode, MLMovie, MLFile;
+
+typedef NS_ENUM(NSInteger, MLFileType);
 
 typedef NS_ENUM(uint8_t, MLMediaType) {
     MLMediaTypeUnknown,
@@ -92,6 +94,10 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
 - (int)playCount;
 - (BOOL)increasePlayCount;
 - (MLShowEpisode *)showEpisode;
+
+- (NSArray<MLFile *> *)files;
+- (MLFile *)addExternalMrl:(NSString *)mrl fileType:(MLFileType)type;
+
 - (BOOL)isFavorite;
 - (BOOL)setFavorite:(BOOL)favorite;
 

@@ -24,6 +24,7 @@
 #import "MLMedia+Init.h"
 #import "MLLabel+Init.h"
 #import "MLMovie+Init.h"
+#import "MLFile+Init.h"
 #import "MLAlbumTrack+Init.h"
 #import "MLShowEpisode+Init.h"
 #import "MLMediaMetadata+Init.h"
@@ -100,6 +101,22 @@
         _showEpisode = [[MLShowEpisode alloc] initWithShowEpisodePtr:_media->showEpisode()];
     }
     return _showEpisode;
+}
+
+- (NSArray<MLFile *> *)files
+{
+    auto files = _media->files();
+    NSMutableArray *result = [NSMutableArray array];
+
+    for (const auto &file : files) {
+        [result addObject:[[MLFile alloc] initWithFilePtr:file]];
+    }
+    return result;
+}
+
+- (MLFile *)addExternalMrl:(NSString *)mrl fileType:(MLFileType)type
+{
+    return [[MLFile alloc] initWithFilePtr:_media->addExternalMrl([mrl UTF8String], (medialibrary::IFile::Type)type)];
 }
 
 - (BOOL)isFavorite
