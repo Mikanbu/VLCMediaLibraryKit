@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLFile.m
+ * MLFile+Init.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -21,60 +21,9 @@
  *****************************************************************************/
 
 #import "MLFile.h"
-#import "MLFile+Init.h"
 
-@interface MLFile ()
-{
-    medialibrary::FilePtr _file;
-}
-@end
+@interface MLFile (Internal)
 
-@implementation MLFile
-
-- (int64_t)identifier
-{
-    return _file->id();
-}
-
-- (NSString *)mrl
-{
-    if (!_mrl) {
-        _mrl = [[NSString alloc] initWithUTF8String:_file->mrl().c_str()];
-    }
-    return _mrl;
-}
-
-- (MLFileType)type
-{
-    return (MLFileType)_file->type();
-}
-
-- (uint)lastModificationDate
-{
-    return _file->lastModificationDate();
-}
-
-- (uint)size
-{
-    return _file->size();
-}
-
-- (BOOL)isExternal
-{
-    return _file->isExternal();
-}
-
-@end
-
-@implementation MLFile (Internal)
-
-- (instancetype)initWithFilePtr:(medialibrary::FilePtr)filePtr
-{
-    self = [super init];
-    if (self) {
-        _file = filePtr;
-    }
-    return self;
-}
+- (instancetype)initWithFilePtr:(medialibrary::FilePtr)filePtr;
 
 @end
