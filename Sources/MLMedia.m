@@ -25,7 +25,8 @@
 #import "MLLabel+Init.h"
 #import "MLMovie+Init.h"
 #import "MLShowEpisode+Init.h"
-#import "MLMediaMetadata.h"
+#import "MLMediaMetadata+Init.h"
+
 
 @interface MLMedia ()
 {
@@ -135,10 +136,8 @@
 
 - (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
 {
-//    _media->metadata((medialibrary::IMedia::MetadataType)type);
-//
-//    MLMediaMetadata *md = [[MLMediaMetadata alloc] initWith:nil];
-    return nil;
+
+    return [[MLMediaMetadata alloc] initWithMediaMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
 }
 
 - (NSString *)thumbnail
