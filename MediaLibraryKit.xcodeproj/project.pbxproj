@@ -65,6 +65,10 @@
 		8DC50D871F30CBD700D6CCED /* MLMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* MLMovie.m */; };
 		8DC50D8E1F321E2300D6CCED /* MLVideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D8D1F321E2300D6CCED /* MLVideoTrack.m */; };
 		8DC50D921F32226C00D6CCED /* MLAudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D911F32226C00D6CCED /* MLAudioTrack.m */; };
+		8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D901F32226C00D6CCED /* MLAudioTrack.h */; };
+		8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */; };
+		8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* MLMovie.h */; };
+		8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */; };
@@ -83,6 +87,10 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files */,
+				8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files */,
+				8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files */,
+				8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files */,
 				8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files */,
 				8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */,
 				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */,

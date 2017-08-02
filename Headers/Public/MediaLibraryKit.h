@@ -31,10 +31,12 @@
 #import <MediaLibraryKit/MLLabel.h>
 #import <MediaLibraryKit/MLMedia.h>
 #import <MediaLibraryKit/MLMediaLibrary.h>
+#import <MediaLibraryKit/MLMediaMetadata.h>
+#import <MediaLibraryKit/MLMovie.h>
 #import <MediaLibraryKit/MLPlaylist.h>
-
 #import <MediaLibraryKit/MLShow.h>
 #import <MediaLibraryKit/MLShowEpisode.h>
+#import <MediaLibraryKit/MLVideoTrack.h>
 
 
 @class MLAlbum;
@@ -48,7 +50,9 @@
 @class MLLabel;
 @class MLMedia;
 @class MLMediaLibrary;
+@class MLMediaMetadata;
+@class MLMovie;
 @class MLPlaylist;
-
 @class MLShow;
 @class MLShowEpisode;
+@class MLVideoTrack;
