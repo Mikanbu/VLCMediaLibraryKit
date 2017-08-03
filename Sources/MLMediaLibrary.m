@@ -33,7 +33,7 @@
 #import "MLMovie+Init.h"
 #import "MLPlaylist+Init.h"
 #import "MLShow+Init.h"
-
+#import "MLUtils.h"
 
 struct MLMediaSearchAggregate
 {
@@ -143,24 +143,12 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto audioFiles = _ml->audioFiles((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &audioFile : audioFiles) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:audioFile]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_ml->audioFiles((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 - (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto videoFiles = _ml->videoFiles((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &videoFile : videoFiles) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:videoFile]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_ml->videoFiles((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 #pragma mark - Album
@@ -172,14 +160,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto albums = _ml->albums((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-    auto albums = _ml->albums((medialibrary::SortingCriteria)sort, desc);
-
-    for (const auto &album : albums) {
-        [result addObject:[[MLAlbum alloc] initWithAlbumPtr:album]];
-    }
-    return result;
+    return [MLUtils arrayFromAlbumPtrVector:_ml->albums((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 #pragma mark - Show
@@ -191,7 +172,7 @@ struct MLMediaSearchAggregate
 }
 
 #pragma mark - Movie
-//issue, if called multiple times with the same name mulitple instance of mlmovie will be created!
+
 - (MLMovie *)movieWithName:(NSString *)name
 {
     return [[MLMovie alloc] initWithMoviePtr:_ml->movie([name UTF8String])];
@@ -206,13 +187,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto artists = _ml->artists((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &artist : artists) {
-        [result addObject:[[MLArtist alloc] initWithArtistPtr:artist]];
-    }
-    return result;
+    return [MLUtils arrayFromArtistPtrVector:_ml->artists((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 #pragma mark - Genre
@@ -242,14 +217,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto playlists = _ml->playlists((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-    auto playlists = _ml->playlists((medialibrary::SortingCriteria)sort, desc);
-
-    for (const auto &playlist : playlists) {
-        [result addObject:[[MLPlaylist alloc] initWithPlaylistPtr:playlist]];
-    }
-    return result;
+   return [MLUtils arrayFromPlaylistPtrVector:_ml->playlists((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 - (MLPlaylist *)playlistWithIdentifier:(int64_t)identifier
@@ -282,13 +250,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLMedia *> *)lastMediaPlayed
 {
-    auto mediaList = _ml->lastMediaPlayed();
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &media : mediaList) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:media]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_ml->lastMediaPlayed()];
 }
 
 - (BOOL)clearHistory
@@ -301,24 +263,12 @@ struct MLMediaSearchAggregate
 #pragma mark -
 - (NSArray<MLPlaylist *> *)searchPlaylistsByName:(NSString *)name
 {
-    auto playlists = _ml->searchPlaylists([name UTF8String]);
-    NSMutableArray<MLPlaylist *> *result = [NSMutableArray array];
-
-    for (const auto &playlist : playlists) {
-        [result addObject:[[MLPlaylist alloc] initWithPlaylistPtr:playlist]];
-    }
-    return result;
+    return [MLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String])];
 }
 
 - (NSArray<MLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
 {
-    auto albums = _ml->searchAlbums([pattern UTF8String]);
-    NSMutableArray<MLAlbum *> *result = [NSMutableArray array];
-
-    for (const auto &album : albums) {
-        [result addObject:[[MLAlbum alloc] initWithAlbumPtr:album]];
-    }
-    return result;
+    return [MLUtils arrayFromAlbumPtrVector:_ml->searchAlbums([pattern UTF8String])];
 }
 
 - (NSArray<MLGenre *> *)searchGenreByName:(NSString *)name
@@ -334,13 +284,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLArtist *> *)searchArtistsByName:(NSString *)name
 {
-    auto artists = _ml->searchArtists([name UTF8String]);
-    NSMutableArray<MLArtist *> *result = [NSMutableArray array];
-
-    for (const auto &artist : artists) {
-        [result addObject:[[MLArtist alloc] initWithArtistPtr:artist]];
-    }
-    return result;
+    return [MLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String])];
 }
 
 #pragma mark - Discover

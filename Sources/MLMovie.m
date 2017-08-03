@@ -22,7 +22,7 @@
 
 #import "MLMovie.h"
 #import "MLMovie+Init.h"
-#import "MLMedia+Init.h"
+#import "MLUtils.h"
 
 @interface MLMovie ()
 {
@@ -72,13 +72,7 @@
 - (NSArray<MLMedia *> *)files
 {
     if (!_files) {
-        auto files = _movie->files();
-        NSMutableArray *result = [NSMutableArray array];
-
-        for (const auto &file : files) {
-            [result addObject:[[MLMedia alloc] initWithMediaPtr:file]];
-        }
-        _files = result;
+        _files = [MLUtils arrayFromMediaPtrVector:_movie->files()];
     }
     return _files;
 }

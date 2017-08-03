@@ -22,9 +22,9 @@
 
 #import "MLAlbum.h"
 #import "MLAlbum+Init.h"
-#import "MLMedia+Init.h"
 #import "MLArtist+Init.h"
 #import "MLGenre+Init.h"
+#import "MLUtils.h"
 
 @interface MLAlbum ()
 {
@@ -77,35 +77,17 @@
 
 - (NSArray *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    NSMutableArray *result = [NSMutableArray array];
-    auto tracks = _album->tracks((medialibrary::SortingCriteria)criteria, desc);
-
-    for (const auto &media : tracks) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:media]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 - (NSArray<MLMedia *> *)tracksByGenre:(MLGenre *)genre sortingCriteria:(MLSortingCriteria)criteria;
 {
-    auto tracks = _album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &track : tracks) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:track]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria)];
 }
 
 - (NSArray<MLArtist *> *)artistsOrderedBy:(BOOL)desc
 {
-    auto artists = _album->artists(desc);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &artist : artists) {
-        [result addObject:[[MLArtist alloc] initWithArtistPtr:artist]];
-    }
-    return result;
+    return [MLUtils arrayFromArtistPtrVector:_album->artists(desc)];
 }
 
 - (uint32_t)numberOfTracks

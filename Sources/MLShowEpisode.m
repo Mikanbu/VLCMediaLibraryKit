@@ -22,7 +22,7 @@
 
 #import "MLShowEpisode.h"
 #import "MLShow+Init.h"
-#import "MLMedia+Init.h"
+#import "MLUtils.h"
 
 @interface MLShowEpisode ()
 {
@@ -91,13 +91,7 @@
 - (NSArray<MLMedia *> *)files
 {
     if (!_files) {
-        auto files = _showEpisode->files();
-        NSMutableArray *result = [NSMutableArray array];
-
-        for (const auto &file : files) {
-            [result addObject:[[MLMedia alloc] initWithMediaPtr:file]];
-        }
-        _files = result;
+        _files = [MLUtils arrayFromMediaPtrVector:_showEpisode->files()];
     }
     return _files;
 }

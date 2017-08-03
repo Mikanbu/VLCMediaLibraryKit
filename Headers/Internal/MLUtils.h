@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLLabel.m
+ * MLUtils.h
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,51 +20,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLLabel.h"
-#import "MLUtils.h"
+@class MLMedia, MLAlbum, MLArtist, MLPlaylist;
 
-@interface MLLabel ()
-{
-    medialibrary::LabelPtr _label;
-}
-@end
+@interface MLUtils : NSObject
 
-@implementation MLLabel
+- (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier
-{
-    return _label->id();
-}
++ (NSArray<MLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media;
++ (NSArray<MLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums;
++ (NSArray<MLArtist *> *)arrayFromArtistPtrVector:(std::vector<medialibrary::ArtistPtr>)artists;
++ (NSArray<MLPlaylist *> *)arrayFromPlaylistPtrVector:(std::vector<medialibrary::PlaylistPtr>)playlists;
 
-- (NSString *)name
-{
-    if (!_name) {
-        _name = [[NSString alloc] initWithUTF8String:_label->name().c_str()];
-    }
-    return _name;
-}
-
-- (NSArray<MLMedia *> *)files
-{
-    return [MLUtils arrayFromMediaPtrVector:_label->files()];
-}
-
-@end
-
-@implementation MLLabel (Internal)
-
-- (instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr
-{
-    self = [super init];
-    if (self) {
-        _label = labelPtr;
-    }
-    return self;
-}
-
-- (medialibrary::LabelPtr)labelPtr
-{
-    return _label;
-}
 
 @end

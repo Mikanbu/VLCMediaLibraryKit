@@ -22,8 +22,7 @@
 
 #import "MLArtist.h"
 #import "MLArtist+Init.h"
-#import "MLMedia+Init.h"
-#import "MLAlbum+Init.h"
+#import "MLUtils.h"
 
 @interface MLArtist ()
 {
@@ -74,24 +73,12 @@
 
 - (NSArray *)albums:(MLSortingCriteria)sortingCriteria
 {
-    NSMutableArray *result = [NSMutableArray array];
-    auto albumVector = _artist->albums((medialibrary::SortingCriteria)sortingCriteria);
-
-    for (const auto &album : albumVector) {
-        [result addObject:[[MLAlbum alloc] initWithAlbumPtr:album]];
-    }
-    return result;
+    return [MLUtils arrayFromAlbumPtrVector:_artist->albums((medialibrary::SortingCriteria)sortingCriteria)];
 }
 
 - (NSArray *)media:(MLSortingCriteria)sortingCriteria
 {
-    NSMutableArray *result = [NSMutableArray array];
-    auto mediaVector = _artist->media((medialibrary::SortingCriteria)sortingCriteria);
-
-    for (const auto &media : mediaVector) {
-        [result addObject:[[MLMedia alloc] initWithMediaPtr:media]];
-    }
-    return result;
+    return [MLUtils arrayFromMediaPtrVector:_artist->media((medialibrary::SortingCriteria)sortingCriteria)];
 }
 
 @end
