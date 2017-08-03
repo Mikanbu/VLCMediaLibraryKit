@@ -37,6 +37,8 @@ typedef NS_ENUM(NSInteger, MLFileType) {
 
 @property (nonatomic, strong) NSString *mrl;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (int64_t)identifier;
 - (NSString *)mrl;
 - (MLFileType)type;

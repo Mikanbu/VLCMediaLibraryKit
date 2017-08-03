@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *videoDescription;
 @property (nonatomic, strong) NSString *language;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (int64_t)identifier;
 - (NSString *)codec;
 - (uint)width;

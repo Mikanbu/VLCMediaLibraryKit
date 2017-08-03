@@ -26,6 +26,8 @@
 
 @property(nonatomic, strong) NSString *name;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (int64_t)identifier;
 - (NSString *)name;
 - (NSArray<MLMedia *> *)files;

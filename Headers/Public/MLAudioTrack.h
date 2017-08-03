@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *audioDescription;
 @property (nonatomic, strong) NSString *language;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (int64_t)identifier;
 - (NSString *)codec;
 - (uint)bitrate;
