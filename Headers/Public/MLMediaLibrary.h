@@ -123,7 +123,7 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
  */
 + (void *)sharedInstance;
 
-- (BOOL)startMedialibrary;
+- (BOOL)start;
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
 
 #pragma mark -
@@ -220,5 +220,6 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 #pragma mark - Parser
 
 - (void)forceParserRetry;
+
 
 @end

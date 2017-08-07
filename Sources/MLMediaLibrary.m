@@ -22,7 +22,6 @@
 
 #import "MLMediaLibrary.h"
 #import "MLAlbumTrack.h"
-
 #import "MLAlbum+Init.h"
 #import "MLArtist+Init.h"
 #import "MLFolder+Init.h"
@@ -108,7 +107,7 @@ struct MLMediaSearchAggregate
     }
 }
 
-- (BOOL)startMedialibrary
+- (BOOL)start
 {
     BOOL success = _ml->start();
 
@@ -190,8 +189,7 @@ struct MLMediaSearchAggregate
 
 - (MLShow *)showWithName:(NSString *)name
 {
-    return [[MLShow alloc] initWithShowPtr:_ml->show([name UTF8String
-                                                      ])];
+    return [[MLShow alloc] initWithShowPtr:_ml->show([name UTF8String])];
 }
 
 #pragma mark - Movie
@@ -351,6 +349,7 @@ struct MLMediaSearchAggregate
 }
 
 #pragma mark - Thumbnail
+
 - (NSString *)thumbnailPath
 {
     if (!_thumbnailPath) {
