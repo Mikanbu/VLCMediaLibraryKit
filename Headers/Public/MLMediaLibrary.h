@@ -3,7 +3,7 @@
  * MobileMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010 Pierre d'Herbemont
- * Copyright (C) 2010-2014 VLC authors and VideoLAN
+ * Copyright (C) 2010-2017 VLC authors and VideoLAN
  * $Id$
  *
  * Authors: Pierre d'Herbemont <pdherbemont # videolan.org>
@@ -25,63 +25,85 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLFile;
+@class MLFile, MLLabel, MLMedia, MLAlbum, MLArtist, MLPlaylist, MLHistoryEntry;
+
+typedef NS_ENUM (NSUInteger, MLSortingCriteria) {
+    /*
+     * Default depends on the entity type:
+     * - By track number (and disc number) for album tracks
+     * - Alphabetical order for others
+     */
+    MLSortingCriteriaDefault,
+    MLSortingCriteriaAlpha,
+    MLSortingCriteriaDuration,
+    MLSortingCriteriaInsertionDate,
+    MLSortingCriteriaLastModificationDate,
+    MLSortingCriteriaReleaseDate,
+    MLSortingCriteriaFileSize,
+    MLSortingCriteriaArtist
+};
+
+typedef NS_ENUM (NSUInteger, MLLogLevel) {
+    MLLogLevelVerbose,
+    MLLogLevelDebug,
+    MLLogLevelInfo,
+    MLLogLevelWarning,
+    MLLogLevelError
+};
 
 @interface MLMediaLibrary : NSObject
 
-@property (nonatomic, strong) id delegate;
-// base path for the database and thumbnails
-// setting the library base path resets the path derived from it
-@property (nonatomic, copy) NSString *libraryBasePath;
-@property (nonatomic, strong) NSURL *persistentStoreURL;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, copy) NSDictionary *additionalPersitentStoreOptions;
-@property (nonatomic, readonly) int deviceSpeedCategory;
-// uses identifier from Info.plist in framework bundle or main bundle with key
-// MLKitGroupIdentifier by default
-// if key in Info.plist wasn't set it further defaults to group.org.videolan.vlc-ios
-@property (nonatomic, copy) NSString *applicationGroupIdentifier;
+/**
+ * Medialibrary instance warpped inside a MLMediaLibrary instance.
+ */
+@property (nonatomic) void *instance;
+@property (nonatomic, strong) NSString *dbPath;
+@property (nonatomic, strong) NSString *thumbnailPath;
 
-#if TARGET_OS_IOS
-@property (nonatomic, getter = isSpotlightIndexingEnabled) BOOL spotlightIndexingEnabled;
-#endif
-+ (id)sharedMediaLibrary;
+#pragma mark -
 
-- (BOOL)libraryMigrationNeeded;
-- (void)migrateLibrary;
-- (void)overrideLibraryWithLibraryFromURL:(NSURL *)replacementURL;
+/**
+ * Returns a `MLMedialibrary` shared instance.
+ * \return a `MLMedialibrary` shared instance.
+ */
++ (instancetype)sharedMediaLibrary;
 
+/**
+ * Returns a `medialibrary::IMediaLibrary *` shared instance.
+ * \return a `medialibrary::IMediaLibrary *` shared instance.
+ */
++ (void *)sharedInstance;
 
-- (void)addFilePaths:(NSArray *)filepaths;
-- (void)updateMediaDatabase;
+- (BOOL)startMedialibrary;
+- (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath forThumbnailPath:(NSString *)thumbnailPath;
 
-// May be internal
-//- (NSFetchRequest *)fetchRequestForEntity:(NSString *)entity;
-//- (id)createObjectForEntity:(NSString *)entity;
-//- (void)removeObject:(NSManagedObject *)object;
-- (NSString *)thumbnailFolderPath;
-- (NSString *)documentFolderPath;
+#pragma mark -
 
-- (NSString *)pathRelativeToDocumentsFolderFromAbsolutPath:(NSString *)absolutPath;
-- (NSString *)absolutPathFromPathRelativeToDocumentsFolder:(NSString *)relativePath;
+- (void)setVerbosity:(MLLogLevel)level;
 
-//- (NSManagedObject *)objectForURIRepresentation:(NSURL *)uriRepresenation;
-- (void)computeThumbnailForFile:(MLFile *)file;
-- (void)fetchMetaDataForFile:(MLFile *)file;
+#pragma mark -
 
-- (void)applicationWillStart;
-- (void)applicationWillExit;
+- (MLLabel *)createLabelWithName:(NSString *)name;
+- (MLMedia *)mediaWithIdentifier:(int64_t)identifier;
+- (MLMedia *)mediaWithMrl:(NSString *)mrl;
+- (MLMedia *)addMediaWithMrl:(NSString *)mrl;
+- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (MLAlbum *)albumWithIdentifier:(int64_t)identifier;
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
 
-- (void)save;
-- (void)libraryDidDisappear;
-- (void)libraryDidAppear;
+- (MLArtist *)artistWithIdentifier:(int64_t)identifier;
+- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
 
+- (MLPlaylist *)createPlaylistWithName:(NSString *)name;
+- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)sort desc:(BOOL)desc;
+- (MLPlaylist *)playlistWithIdentifier:(int64_t)identifier;
+- (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier;
 
-@end
-
-@protocol MLMediaLibrary <NSObject>
-
-@optional
-- (void)libraryUpgradeComplete;
+- (BOOL)addMediaToStreamHistory:(MLMedia *)media;
+- (NSArray<MLHistoryEntry *> *)lastStreamsPlayed;
+- (NSArray<MLMedia *> *)lastMediaPlayed;
+- (BOOL)clearHistory;
 
 @end
+
