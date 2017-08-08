@@ -1,5 +1,5 @@
 /*****************************************************************************
- * MLUtils.h
+ * MLMediaSearchAggregate.m
  * MediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2017 VLC authors and VideoLAN
@@ -20,16 +20,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLMedia, MLAlbum, MLArtist, MLPlaylist, MLGenre;
+#import "MLMediaSearchAggregate.h"
 
-@interface MLUtils : NSObject
+@implementation MLMediaSearchAggregate
 
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithEpisodes:(NSArray *)episodes movies:(NSArray *)movies others:(NSArray *)others tracks:(NSArray *)tracks
+{
+    self = [super init];
+    if (self) {
+        _episodes = episodes;
+        _movies = movies;
+        _others = others;
+        _tracks = tracks;
+    }
+    return self;
+}
 
-+ (NSArray<MLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media;
-+ (NSArray<MLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums;
-+ (NSArray<MLArtist *> *)arrayFromArtistPtrVector:(std::vector<medialibrary::ArtistPtr>)artists;
-+ (NSArray<MLPlaylist *> *)arrayFromPlaylistPtrVector:(std::vector<medialibrary::PlaylistPtr>)playlists;
-+ (NSArray<MLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres;
++ (instancetype)initWithEpisodes:(NSArray *)episodes movies:(NSArray *)movies others:(NSArray *)others tracks:(NSArray *)tracks
+{
+    return [[MLMediaSearchAggregate alloc] initWithEpisodes:episodes movies:movies others:others tracks:tracks];
+}
 
 @end

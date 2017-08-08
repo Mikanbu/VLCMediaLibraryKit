@@ -33,14 +33,9 @@
 #import "MLPlaylist+Init.h"
 #import "MLShow+Init.h"
 #import "MLUtils.h"
+#import "MLMediaSearchAggregate.h"
+#import "MLSearchAggregate.h"
 
-struct MLMediaSearchAggregate
-{
-    std::vector<medialibrary::MediaPtr> episodes;
-    std::vector<medialibrary::MediaPtr> movies;
-    std::vector<medialibrary::MediaPtr> others;
-    std::vector<medialibrary::MediaPtr> tracks;
-};
 #include "MediaLibraryCb.h"
 #include "DeviceListerCb.h"
 #include "MLDeviceLister.h"
@@ -231,13 +226,7 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
 {
-    auto genres = _ml->genres((medialibrary::SortingCriteria)criteria, desc);
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &genre : genres) {
-        [result addObject:[[MLGenre alloc] initWithGenrePtr:genre]];
-    }
-    return result;
+    return [MLUtils arrayFromGenrePtrVector:_ml->genres((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 - (MLGenre *)genreWithIdentifier:(int64_t)identifier
@@ -297,7 +286,19 @@ struct MLMediaSearchAggregate
 
 #pragma mark - Search
 
-#pragma mark -
+- (MLMediaSearchAggregate *)_convertMediaSearchAggregate:(medialibrary::MediaSearchAggregate)searchResult
+{
+    return [MLMediaSearchAggregate initWithEpisodes:[MLUtils arrayFromMediaPtrVector:searchResult.episodes]
+                                             movies:[MLUtils arrayFromMediaPtrVector:searchResult.movies]
+                                             others:[MLUtils arrayFromMediaPtrVector:searchResult.others]
+                                             tracks:[MLUtils arrayFromMediaPtrVector:searchResult.tracks]];
+}
+
+- (MLMediaSearchAggregate *)searchMedia:(NSString *)pattern
+{
+    return [self _convertMediaSearchAggregate:_ml->searchMedia([pattern UTF8String])];
+}
+
 - (NSArray<MLPlaylist *> *)searchPlaylistsByName:(NSString *)name
 {
     return [MLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String])];
@@ -310,18 +311,23 @@ struct MLMediaSearchAggregate
 
 - (NSArray<MLGenre *> *)searchGenreByName:(NSString *)name
 {
-    auto genres = _ml->searchGenre([name UTF8String]);
-    NSMutableArray<MLGenre *> *result = [NSMutableArray array];
-
-    for (const auto &genre : genres) {
-        [result addObject:[[MLGenre alloc] initWithGenrePtr:genre]];
-    }
-    return result;
+    return [MLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String])];
 }
 
 - (NSArray<MLArtist *> *)searchArtistsByName:(NSString *)name
 {
     return [MLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String])];
+}
+
+- (MLSearchAggregate *)search:(NSString *)pattern
+{
+    medialibrary::SearchAggregate searchResult = _ml->search([pattern UTF8String]);
+
+    return [MLSearchAggregate initWithAlbums:[MLUtils arrayFromAlbumPtrVector:searchResult.albums]
+                                     artists:[MLUtils arrayFromArtistPtrVector:searchResult.artists]
+                                      genres:[MLUtils arrayFromGenrePtrVector:searchResult.genres]
+                        mediaSearchAggregate:[self _convertMediaSearchAggregate:searchResult.media]
+                                   playlists:[MLUtils arrayFromPlaylistPtrVector:searchResult.playlists]];
 }
 
 #pragma mark - Discover

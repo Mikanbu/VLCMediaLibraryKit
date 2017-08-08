@@ -20,9 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class MLFile, MLLabel, MLMedia, MLAlbum, MLArtist, MLPlaylist, MLHistoryEntry, MLGenre, MLFolder, MLShow, MLMovie;
-
-struct MLMediaSearchAggregate;
+@class MLFile, MLLabel, MLMedia, MLMediaSearchAggregate, MLAlbum, MLAlbumTrack, MLArtist, MLPlaylist, MLHistoryEntry, MLGenre, MLFolder, MLShow, MLMovie, MLSearchAggregate;
 
 typedef NS_ENUM (NSUInteger, MLSortingCriteria) {
     /*
@@ -184,10 +182,12 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 #pragma mark - Search
 
+- (MLMediaSearchAggregate *)searchMedia:(NSString *)pattern;
 - (NSArray<MLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
 - (NSArray<MLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
 - (NSArray<MLGenre *> *)searchGenreByName:(NSString *)name;
 - (NSArray<MLArtist *> *)searchArtistsByName:(NSString *)name;
+- (MLSearchAggregate *)search:(NSString *)pattern;
 
 #pragma mark - Discover
 
@@ -221,5 +221,6 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 - (void)forceParserRetry;
 
+#pragma mark - DeviceLister
 
 @end

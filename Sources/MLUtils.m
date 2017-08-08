@@ -25,6 +25,7 @@
 #import "MLAlbum+Init.h"
 #import "MLArtist+Init.h"
 #import "MLPlaylist+Init.h"
+#import "MLGenre+Init.h"
 
 @implementation MLUtils
 
@@ -66,6 +67,16 @@
         [playlistList addObject:[[MLPlaylist alloc] initWithPlaylistPtr:playlist]];
     }
     return playlistList;
+}
+
++ (NSArray<MLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres
+{
+    NSMutableArray<MLGenre *> *genreList = [NSMutableArray array];
+
+    for (const auto &genre : genres) {
+        [genreList addObject:[[MLGenre alloc] initWithGenrePtr:genre]];
+    }
+    return genreList;
 }
 
 @end

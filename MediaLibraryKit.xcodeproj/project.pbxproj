@@ -50,6 +50,8 @@
 		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
 		8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* MLGenre.h */; };
 		8D05F9DC1F309AF9003000B6 /* MLFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D05F9DB1F309AF9003000B6 /* MLFolder.m */; };
+		8D1112E51F3A18C1000B4D3C /* MLMediaSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E41F3A18C1000B4D3C /* MLMediaSearchAggregate.m */; };
+		8D1112E91F3A252A000B4D3C /* MLSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E81F3A252A000B4D3C /* MLSearchAggregate.m */; };
 		8D31CE401F0A6873005A2895 /* MLArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* MLArtist.m */; };
 		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
@@ -159,6 +161,10 @@
 		8D05F9DA1F309AF9003000B6 /* MLFolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLFolder.h; path = Headers/Public/MLFolder.h; sourceTree = SOURCE_ROOT; };
 		8D05F9DB1F309AF9003000B6 /* MLFolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLFolder.m; path = Sources/MLFolder.m; sourceTree = SOURCE_ROOT; };
 		8D05F9DD1F309C13003000B6 /* MLHistoryEntry+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLHistoryEntry+Init.h"; sourceTree = "<group>"; };
+		8D1112E01F3A1828000B4D3C /* MLMediaSearchAggregate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMediaSearchAggregate.h; sourceTree = "<group>"; };
+		8D1112E41F3A18C1000B4D3C /* MLMediaSearchAggregate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMediaSearchAggregate.m; sourceTree = "<group>"; };
+		8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSearchAggregate.h; sourceTree = "<group>"; };
+		8D1112E81F3A252A000B4D3C /* MLSearchAggregate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSearchAggregate.m; sourceTree = "<group>"; };
 		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
 		8D31CE3F1F0A6873005A2895 /* MLArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLArtist.m; sourceTree = "<group>"; };
 		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
@@ -336,7 +342,10 @@
 				8DC6C4061F1E769B00FB8D07 /* MLMedia.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
 				8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */,
+				8D1112E01F3A1828000B4D3C /* MLMediaSearchAggregate.h */,
 				8DC50D851F30CBD700D6CCED /* MLMovie.h */,
+				8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */,
+				8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
 				7D0EF515170885130003ED47 /* MLShowEpisode.h */,
 				8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */,
@@ -361,7 +370,9 @@
 				7D0EF51C170885130003ED47 /* MLLabel.m */,
 				8DC6C4071F1E769B00FB8D07 /* MLMedia.m */,
 				7D0EF51D170885130003ED47 /* MLMediaLibrary.m */,
+				8D1112E41F3A18C1000B4D3C /* MLMediaSearchAggregate.m */,
 				8DC50D861F30CBD700D6CCED /* MLMovie.m */,
+				8D1112E81F3A252A000B4D3C /* MLSearchAggregate.m */,
 				7D0EF51F170885130003ED47 /* MLShow.m */,
 				7D0EF520170885130003ED47 /* MLShowEpisode.m */,
 				8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */,
@@ -501,11 +512,13 @@
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,
 				8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */,
+				8D1112E51F3A18C1000B4D3C /* MLMediaSearchAggregate.m in Sources */,
 				8DC50D8E1F321E2300D6CCED /* MLVideoTrack.m in Sources */,
 				8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */,
 				8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */,
 				7D0EF52C170885130003ED47 /* MLMediaLibrary.m in Sources */,
 				7D0EF52E170885130003ED47 /* MLShow.m in Sources */,
+				8D1112E91F3A252A000B4D3C /* MLSearchAggregate.m in Sources */,
 				7D0EF52F170885130003ED47 /* MLShowEpisode.m in Sources */,
 				8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */,
 				8D05F9DC1F309AF9003000B6 /* MLFolder.m in Sources */,
