@@ -88,6 +88,16 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 @end
 
+@protocol MLDeviceListerDelegate <NSObject>
+
+@optional
+
+- (BOOL)onDevicePluggedWithUuid:(NSString *)uuid mountPoint:(NSString *)mountPoint;
+- (void)onDeviceUnpluggedWithUuid:(NSString *)uuid;
+- (void)isDeviceKnown:(NSString *)uuid;
+
+@end
+
 @interface MLMediaLibrary : NSObject
 
 /**
@@ -97,6 +107,7 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 @property (nonatomic, strong) NSString *dbPath;
 @property (nonatomic, strong) NSString *thumbnailPath;
 @property (nonatomic, weak) id <MLMediaLibraryDelegate> delegate;
+@property (nonatomic, weak) id <MLDeviceListerDelegate> deviceListerDelegate;
 
 #pragma mark -
 

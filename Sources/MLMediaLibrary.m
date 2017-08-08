@@ -43,12 +43,14 @@ struct MLMediaSearchAggregate
     std::vector<medialibrary::MediaPtr> tracks;
 };
 #include "MediaLibraryCb.h"
+#include "DeviceListerCb.h"
 
 @interface MLMediaLibrary ()
 {
     BOOL _isInitialized;
 
     medialibrary::MediaLibraryCb *_mlCb;
+    medialibrary::DeviceListerCb *_deviceListerCb;
 
     medialibrary::IMediaLibrary *_ml;
 }
@@ -85,6 +87,7 @@ struct MLMediaSearchAggregate
         _ml = NewMediaLibrary();
         _instance = _ml;
         _mlCb = new medialibrary::MediaLibraryCb(_delegate);
+        _deviceListerCb = new medialibrary::DeviceListerCb(_deviceListerDelegate);
     }
     return self;
 }
