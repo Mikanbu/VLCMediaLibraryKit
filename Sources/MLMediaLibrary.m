@@ -43,6 +43,7 @@ struct MLMediaSearchAggregate
 };
 #include "MediaLibraryCb.h"
 #include "DeviceListerCb.h"
+#include "MLDeviceLister.h"
 
 @interface MLMediaLibrary ()
 {
@@ -52,6 +53,7 @@ struct MLMediaSearchAggregate
     medialibrary::DeviceListerCb *_deviceListerCb;
 
     medialibrary::IMediaLibrary *_ml;
+    medialibrary::DeviceListerPtr _deviceLister;
 }
 @end
 
@@ -91,6 +93,19 @@ struct MLMediaSearchAggregate
     return self;
 }
 
+- (void)dealloc
+{
+    if (_mlCb) {
+        delete _mlCb;
+    }
+    if (_deviceListerCb) {
+        delete _deviceListerCb;
+    }
+    if (_ml) {
+        delete _ml;
+    }
+}
+
 - (void)setDelegate:(id<MLMediaLibraryDelegate>)delegate
 {
     if (_delegate != delegate) {
@@ -116,6 +131,7 @@ struct MLMediaSearchAggregate
 
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath
 {
+    [self setDeviceLister:(_deviceLister)];
     BOOL success = _ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], _mlCb);
 
     if (success) {
@@ -389,6 +405,14 @@ struct MLMediaSearchAggregate
 - (void)forceParserRetry
 {
     _ml->forceParserRetry();
+}
+
+#pragma mark - DeviceLister
+
+- (void)setDeviceLister:(medialibrary::DeviceListerPtr)lister
+{
+    _deviceLister = std::make_shared<medialibrary::fs::MLDeviceLister>();
+    _ml->setDeviceLister(lister);
 }
 
 #pragma mark -
