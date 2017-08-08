@@ -69,6 +69,7 @@
 		8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */; };
 		8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* MLMovie.h */; };
 		8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */; };
+		8DC50D9D1F332D8A00D6CCED /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
 		8DC50DA01F335CD800D6CCED /* MLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9F1F335CD800D6CCED /* MLUtils.m */; };
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
@@ -189,6 +190,8 @@
 		8DC50D901F32226C00D6CCED /* MLAudioTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLAudioTrack.h; sourceTree = "<group>"; };
 		8DC50D911F32226C00D6CCED /* MLAudioTrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLAudioTrack.m; sourceTree = "<group>"; };
 		8DC50D931F32235F00D6CCED /* MLAudioTrack+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLAudioTrack+Init.h"; sourceTree = "<group>"; };
+		8DC50D9A1F32322A00D6CCED /* MediaLibraryCb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MediaLibraryCb.h; path = Headers/Internal/MediaLibraryCb.h; sourceTree = SOURCE_ROOT; };
+		8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MediaLibraryCb.mm; sourceTree = "<group>"; };
 		8DC50D9E1F335CD800D6CCED /* MLUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLUtils.h; sourceTree = "<group>"; };
 		8DC50D9F1F335CD800D6CCED /* MLUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLUtils.m; sourceTree = "<group>"; };
 		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
@@ -304,6 +307,7 @@
 				8DC50D841F30C30200D6CCED /* MLShowEpisode+Init.h */,
 				8DC50D8F1F32209200D6CCED /* MLVideoTrack+Init.h */,
 				8DC50D9E1F335CD800D6CCED /* MLUtils.h */,
+				8DC50D9A1F32322A00D6CCED /* MediaLibraryCb.h */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -336,6 +340,7 @@
 		7D0EF516170885130003ED47 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */,
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
 				8D31CE3F1F0A6873005A2895 /* MLArtist.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
@@ -480,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC50D9D1F332D8A00D6CCED /* MediaLibraryCb.mm in Sources */,
 				8DBE03E61F2F6A290061C878 /* MLGenre.m in Sources */,
 				7D0EF529170885130003ED47 /* MLFile.m in Sources */,
 				7D0EF52B170885130003ED47 /* MLLabel.m in Sources */,

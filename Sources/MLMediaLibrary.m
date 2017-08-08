@@ -42,11 +42,14 @@ struct MLMediaSearchAggregate
     std::vector<medialibrary::MediaPtr> others;
     std::vector<medialibrary::MediaPtr> tracks;
 };
+#include "MediaLibraryCb.h"
 
 @interface MLMediaLibrary ()
 {
     BOOL _isInitialized;
-    
+
+    medialibrary::MediaLibraryCb *_mlCb;
+
     medialibrary::IMediaLibrary *_ml;
 }
 @end
@@ -81,8 +84,25 @@ struct MLMediaSearchAggregate
         _isInitialized = NO;
         _ml = NewMediaLibrary();
         _instance = _ml;
+        _mlCb = new medialibrary::MediaLibraryCb(_delegate);
     }
     return self;
+}
+
+- (void)setDelegate:(id<MLMediaLibraryDelegate>)delegate
+{
+    if (_delegate != delegate) {
+        _delegate = delegate;
+        _mlCb->setDelegate(_delegate);
+    }
+}
+
+- (void)setDeviceListerDelegate:(id<MLDeviceListerDelegate>)deviceListerDelegate
+{
+    if (_deviceListerDelegate != deviceListerDelegate) {
+        _deviceListerDelegate = deviceListerDelegate;
+        _deviceListerCb->setDelegate(_deviceListerDelegate);
+    }
 }
 
 - (BOOL)startMedialibrary
@@ -94,7 +114,7 @@ struct MLMediaSearchAggregate
 
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath
 {
-    BOOL success = _ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], nil);
+    BOOL success = _ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], _mlCb);
 
     if (success) {
         _isInitialized = YES;

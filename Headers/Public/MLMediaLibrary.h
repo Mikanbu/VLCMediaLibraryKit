@@ -48,6 +48,46 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
     MLLogLevelError
 };
 
+@protocol MLMediaLibraryDelegate <NSObject>
+
+@optional
+
+- (void)onMediaAdded:(NSArray<MLMedia *> *)media;
+- (void)onMediaUpdated:(NSArray<MLMedia *> *)media;
+- (void)onMediaDeleted:(NSArray<NSNumber *> *)mediaIds;
+
+- (void)onArtistsAdded:(NSArray<MLArtist *> *)artists;
+- (void)onArtistsModified:(NSArray<MLArtist *> *)artists;
+- (void)onArtistsDeleted:(NSArray<NSNumber *> *)artistsIds;
+
+- (void)onAlbumsAdded:(NSArray<MLAlbum *> *)albums;
+- (void)onAlbumsModified:(NSArray<MLAlbum *> *)albums;
+- (void)onAlbumsDeleted:(NSArray<NSNumber *> *)albumsIds;
+
+- (void)onTracksAdded:(NSArray<MLAlbumTrack *> *)tracks;
+- (void)onTracksDeleted:(NSArray<NSNumber *> *)tracks;
+
+- (void)onPlaylistsAdded:(NSArray<MLPlaylist *> *)playlists;
+- (void)onPlaylistsModified:(NSArray<MLPlaylist *> *)playlists;
+- (void)onPlaylistsDeleted:(NSArray<NSNumber *> *)playlistsIds;
+
+- (void)onDiscoveryStarted:(NSString *)entryPoint;
+- (void)onDiscoveryProgress:(NSString *)entryPoint;
+- (void)onDiscoveryCompleted:(NSString *)entryPoint;
+
+- (void)onReloadStarted:(NSString *)entryPoint;
+- (void)onReloadCompleted:(NSString *)entryPoint;
+
+- (void)onEntryPointRemoved:(NSString *)entryPoint success:(BOOL)success;
+- (void)onEntryPointBanned:(NSString *)entryPoint success:(BOOL)success;
+- (void)onEntryPointUnbanned:(NSString *)entryPoint success:(BOOL)success;
+
+- (void)onParsingStatsUpdated:(uint32_t)percent;
+
+- (void)onBackgroundTasksIdleChanged:(BOOL)success;
+
+@end
+
 @interface MLMediaLibrary : NSObject
 
 /**
@@ -56,6 +96,7 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 @property (nonatomic) void *instance;
 @property (nonatomic, strong) NSString *dbPath;
 @property (nonatomic, strong) NSString *thumbnailPath;
+@property (nonatomic, weak) id <MLMediaLibraryDelegate> delegate;
 
 #pragma mark -
 
