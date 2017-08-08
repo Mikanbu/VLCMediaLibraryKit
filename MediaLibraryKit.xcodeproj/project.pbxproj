@@ -348,7 +348,6 @@
 				8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */,
 				7D0EF514170885130003ED47 /* MLShow.h */,
 				7D0EF515170885130003ED47 /* MLShowEpisode.h */,
-				8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */,
 				8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */,
 			);
 			path = Public;
@@ -359,10 +358,10 @@
 			children = (
 				8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */,
 				7D9E238717AEEA71008485E5 /* MLAlbum.m */,
-				8D31CE3F1F0A6873005A2895 /* MLArtist.m */,
 				7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */,
-				8DC6C4071F1E769B00FB8D07 /* MLMedia.m */,
+				8D31CE3F1F0A6873005A2895 /* MLArtist.m */,
 				8DC50D911F32226C00D6CCED /* MLAudioTrack.m */,
+				8DC50DBE1F38966A00D6CCED /* MLDeviceLister.mm */,
 				7D0EF519170885130003ED47 /* MLFile.m */,
 				8D05F9DB1F309AF9003000B6 /* MLFolder.m */,
 				8DBE03E51F2F6A290061C878 /* MLGenre.m */,
@@ -644,7 +643,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -669,7 +668,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
