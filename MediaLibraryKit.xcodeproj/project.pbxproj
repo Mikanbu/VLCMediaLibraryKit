@@ -56,8 +56,6 @@
 		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
 		8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
-		8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D31CE3E1F0A6873005A2895 /* MLArtist.h */; };
-		8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC6C4061F1E769B00FB8D07 /* MLMedia.h */; };
 		8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */; };
 		8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0EB1F2B9DDC00DBB850 /* MLHistoryEntry.m */; };
 		8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */; };
@@ -80,6 +78,8 @@
 		8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */; };
 		8DD4D3FE1F3B30C600404519 /* MLMediaSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E01F3A1828000B4D3C /* MLMediaSearchAggregate.h */; };
 		8DD4D3FF1F3B30C600404519 /* MLSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */; };
+		8DD4D40A1F3B34BB00404519 /* MLArtist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D4091F3B347A00404519 /* MLArtist.h */; };
+		8DD4D40C1F3B350300404519 /* MLMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D40B1F3B34FD00404519 /* MLMedia.h */; };
 		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
 		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
 		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
@@ -95,6 +95,8 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8DD4D40C1F3B350300404519 /* MLMedia.h in Copy Files (20 items) */,
+				8DD4D40A1F3B34BB00404519 /* MLArtist.h in Copy Files (20 items) */,
 				8DD4D3FE1F3B30C600404519 /* MLMediaSearchAggregate.h in Copy Files (20 items) */,
 				8DD4D3FF1F3B30C600404519 /* MLSearchAggregate.h in Copy Files (20 items) */,
 				8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files (20 items) */,
@@ -105,8 +107,6 @@
 				8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files (20 items) */,
 				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files (20 items) */,
 				8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files (20 items) */,
-				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files (20 items) */,
-				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files (20 items) */,
 				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files (20 items) */,
 				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files (20 items) */,
 				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */,
@@ -169,7 +169,6 @@
 		8D1112E41F3A18C1000B4D3C /* MLMediaSearchAggregate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMediaSearchAggregate.m; sourceTree = "<group>"; };
 		8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLSearchAggregate.h; sourceTree = "<group>"; };
 		8D1112E81F3A252A000B4D3C /* MLSearchAggregate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLSearchAggregate.m; sourceTree = "<group>"; };
-		8D31CE3E1F0A6873005A2895 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLArtist.h; path = ../../Sources/MLArtist.h; sourceTree = "<group>"; };
 		8D31CE3F1F0A6873005A2895 /* MLArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLArtist.m; sourceTree = "<group>"; };
 		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
 		8D34CEA11F2F93F7003A7DB6 /* MLGenre+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MLGenre+Init.h"; path = "Headers/Internal/MLGenre+Init.h"; sourceTree = SOURCE_ROOT; };
@@ -210,11 +209,12 @@
 		8DC50DBE1F38966A00D6CCED /* MLDeviceLister.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MLDeviceLister.mm; sourceTree = "<group>"; };
 		8DC50DC01F38A98F00D6CCED /* DeviceListerCb.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceListerCb.mm; sourceTree = "<group>"; };
 		8DC50DC11F38A98F00D6CCED /* DeviceListerCb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListerCb.h; sourceTree = "<group>"; };
-		8DC6C4061F1E769B00FB8D07 /* MLMedia.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MLMedia.h; path = Sources/MLMedia.h; sourceTree = SOURCE_ROOT; };
 		8DC6C4071F1E769B00FB8D07 /* MLMedia.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MLMedia.m; path = Sources/MLMedia.m; sourceTree = SOURCE_ROOT; };
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
 		8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLMediaMetadata.h; sourceTree = "<group>"; };
 		8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMediaMetadata.m; sourceTree = "<group>"; };
+		8DD4D4091F3B347A00404519 /* MLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLArtist.h; sourceTree = "<group>"; };
+		8DD4D40B1F3B34FD00404519 /* MLMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMedia.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,17 +333,17 @@
 		7D0EF50F170885130003ED47 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				8DD4D40B1F3B34FD00404519 /* MLMedia.h */,
 				7D0EF510170885130003ED47 /* MediaLibraryKit.h */,
 				7D9E238117AEE9F2008485E5 /* MLAlbum.h */,
 				7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */,
-				8D31CE3E1F0A6873005A2895 /* MLArtist.h */,
+				8DD4D4091F3B347A00404519 /* MLArtist.h */,
 				8DC50D901F32226C00D6CCED /* MLAudioTrack.h */,
 				7D0EF511170885130003ED47 /* MLFile.h */,
 				8D05F9DA1F309AF9003000B6 /* MLFolder.h */,
 				8DBE03E41F2F6A290061C878 /* MLGenre.h */,
 				8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */,
 				7D0EF512170885130003ED47 /* MLLabel.h */,
-				8DC6C4061F1E769B00FB8D07 /* MLMedia.h */,
 				7D0EF513170885130003ED47 /* MLMediaLibrary.h */,
 				8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */,
 				8D1112E01F3A1828000B4D3C /* MLMediaSearchAggregate.h */,
