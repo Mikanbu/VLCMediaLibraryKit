@@ -46,9 +46,9 @@
 		7D84E5131B42BA9900EA7D1F /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 		7D9E238617AEEA13008485E5 /* MLAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* MLAlbumTrack.m */; };
 		7D9E238817AEEA71008485E5 /* MLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* MLAlbum.m */; };
-		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
-		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
-		8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* MLGenre.h */; };
+		7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* MLAlbum.h */; };
+		7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* MLAlbumTrack.h */; };
+		8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* MLGenre.h */; };
 		8D05F9DC1F309AF9003000B6 /* MLFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D05F9DB1F309AF9003000B6 /* MLFolder.m */; };
 		8D1112E51F3A18C1000B4D3C /* MLMediaSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E41F3A18C1000B4D3C /* MLMediaSearchAggregate.m */; };
 		8D1112E91F3A252A000B4D3C /* MLSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E81F3A252A000B4D3C /* MLSearchAggregate.m */; };
@@ -56,21 +56,21 @@
 		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D3D64DD1F1D671F008E178E /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DB1F1D671F008E178E /* libsqlite3.a */; };
 		8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
-		8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D31CE3E1F0A6873005A2895 /* MLArtist.h */; };
-		8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC6C4061F1E769B00FB8D07 /* MLMedia.h */; };
+		8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D31CE3E1F0A6873005A2895 /* MLArtist.h */; };
+		8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC6C4061F1E769B00FB8D07 /* MLMedia.h */; };
 		8D90D0E81F2B7BEF00DBB850 /* MLPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* MLPlaylist.m */; };
 		8D90D0EC1F2B9DDC00DBB850 /* MLHistoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0EB1F2B9DDC00DBB850 /* MLHistoryEntry.m */; };
-		8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */; };
+		8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* MLPlaylist.h */; };
 		8DBE03E61F2F6A290061C878 /* MLGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE03E51F2F6A290061C878 /* MLGenre.m */; };
-		8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D05F9DA1F309AF9003000B6 /* MLFolder.h */; };
-		8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */; };
+		8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D05F9DA1F309AF9003000B6 /* MLFolder.h */; };
+		8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* MLHistoryEntry.h */; };
 		8DC50D871F30CBD700D6CCED /* MLMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* MLMovie.m */; };
 		8DC50D8E1F321E2300D6CCED /* MLVideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D8D1F321E2300D6CCED /* MLVideoTrack.m */; };
 		8DC50D921F32226C00D6CCED /* MLAudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D911F32226C00D6CCED /* MLAudioTrack.m */; };
-		8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D901F32226C00D6CCED /* MLAudioTrack.h */; };
-		8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */; };
-		8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* MLMovie.h */; };
-		8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */; };
+		8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D901F32226C00D6CCED /* MLAudioTrack.h */; };
+		8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* MLMediaMetadata.h */; };
+		8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* MLMovie.h */; };
+		8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* MLVideoTrack.h */; };
 		8DC50D9D1F332D8A00D6CCED /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
 		8DC50DA01F335CD800D6CCED /* MLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9F1F335CD800D6CCED /* MLUtils.m */; };
 		8DC50DBF1F38966A00D6CCED /* MLDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* MLDeviceLister.mm */; };
@@ -78,41 +78,45 @@
 		8DC6C4081F1E769B00FB8D07 /* MLMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* MLMedia.m */; };
 		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		8DC817651F2760C900DEEF9D /* MLMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* MLMediaMetadata.m */; };
-		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
-		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
-		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
-		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
-		A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
-		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
+		8DD4D3FE1F3B30C600404519 /* MLMediaSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E01F3A1828000B4D3C /* MLMediaSearchAggregate.h */; };
+		8DD4D3FF1F3B30C600404519 /* MLSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E71F3A2511000B4D3C /* MLSearchAggregate.h */; };
+		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
+		A7924689170F09A30036AAF2 /* MLFile.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* MLFile.h */; };
+		A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* MLLabel.h */; };
+		A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* MLMediaLibrary.h */; };
+		A792468C170F09A30036AAF2 /* MLShow.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* MLShow.h */; };
+		A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* MLShowEpisode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7D0EF49C170883940003ED47 /* Copy Files */ = {
+		7D0EF49C170883940003ED47 /* Copy Files (20 items) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files */,
-				8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files */,
-				8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files */,
-				8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files */,
-				8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files */,
-				8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files */,
-				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files */,
-				8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files */,
-				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files */,
-				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files */,
-				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files */,
-				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files */,
-				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files */,
-				A7924689170F09A30036AAF2 /* MLFile.h in Copy Files */,
-				A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files */,
-				A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files */,
-				A792468C170F09A30036AAF2 /* MLShow.h in Copy Files */,
-				A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files */,
+				8DD4D3FE1F3B30C600404519 /* MLMediaSearchAggregate.h in Copy Files (20 items) */,
+				8DD4D3FF1F3B30C600404519 /* MLSearchAggregate.h in Copy Files (20 items) */,
+				8DC50D941F32248B00D6CCED /* MLAudioTrack.h in Copy Files (20 items) */,
+				8DC50D951F32248B00D6CCED /* MLMediaMetadata.h in Copy Files (20 items) */,
+				8DC50D961F32248B00D6CCED /* MLMovie.h in Copy Files (20 items) */,
+				8DC50D971F32248B00D6CCED /* MLVideoTrack.h in Copy Files (20 items) */,
+				8DC50D7E1F30B3B700D6CCED /* MLFolder.h in Copy Files (20 items) */,
+				8DC50D7F1F30B3B700D6CCED /* MLHistoryEntry.h in Copy Files (20 items) */,
+				8D05F9D91F2F9863003000B6 /* MLGenre.h in Copy Files (20 items) */,
+				8D90D0ED1F2BA53300DBB850 /* MLPlaylist.h in Copy Files (20 items) */,
+				8D8078EA1F1F9A9A00CCFA56 /* MLMedia.h in Copy Files (20 items) */,
+				8D7910EF1F0D270B00D2E573 /* MLArtist.h in Copy Files (20 items) */,
+				7D9E238917AF0711008485E5 /* MLAlbum.h in Copy Files (20 items) */,
+				7D9E238A17AF0711008485E5 /* MLAlbumTrack.h in Copy Files (20 items) */,
+				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */,
+				A7924689170F09A30036AAF2 /* MLFile.h in Copy Files (20 items) */,
+				A792468A170F09A30036AAF2 /* MLLabel.h in Copy Files (20 items) */,
+				A792468B170F09A30036AAF2 /* MLMediaLibrary.h in Copy Files (20 items) */,
+				A792468C170F09A30036AAF2 /* MLShow.h in Copy Files (20 items) */,
+				A792468D170F09A30036AAF2 /* MLShowEpisode.h in Copy Files (20 items) */,
 			);
-			name = "Copy Files";
+			name = "Copy Files (20 items)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7D84E50B1B42BA9900EA7D1F /* Copy Files */ = {
@@ -410,7 +414,7 @@
 			buildPhases = (
 				7D0EF49A170883940003ED47 /* Sources */,
 				7D0EF49B170883940003ED47 /* Frameworks */,
-				7D0EF49C170883940003ED47 /* Copy Files */,
+				7D0EF49C170883940003ED47 /* Copy Files (20 items) */,
 			);
 			buildRules = (
 			);
