@@ -25,19 +25,13 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://code.videolan.org/videolan/MediaLibraryKit.git", :tag => "#{s.version}" }
 
   s.prefix_header_file = "MediaLibraryKit_Prefix.pch"
-  s.source_files  = "Headers/Internal/*.h", "Sources/*.m",
+  s.source_files  = "Headers/Public/*.h"
   s.public_header_files = "Headers/Public/*.h"
-  s.exclude_files = \
-      "Sources/MLMovieInfoGrabber.m", "Sources/MLTVShowEpisodesInfoGrabber.m", "Sources/MLTVShowInfoGrabber.m", \
-      "Sources/MLURLConnection.m", "Sources/NSXMLNode_Additions.m", \
-      "Headers/Internal/MLMovieInfoGrabber.h", "Headers/Internal/MLTVShowEpisodesInfoGrabber.h", "Headers/Internal/MLTVShowInfoGrabber.h", \
-      "Headers/Internal/MLURLConnection.h", "Headers/Internal/NSXMLNode_Additions.h", "Headers/Internal/TheTVDBGrabber.h"
 
   s.header_dir = "MediaLibraryKit"
 
-  s.resources = "MappingModel_2_5_to_2_6.xcmappingmodel", "MediaLibrary.xcdatamodeld"
-
-  s.frameworks = "Foundation", "libsqlite3.tbd",
+  s.frameworks = "Foundation"
+  s.library = 'sqlite3'
 
   s.requires_arc = true
 
