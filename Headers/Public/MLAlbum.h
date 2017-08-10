@@ -30,6 +30,13 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 @property (nonatomic, strong) NSString *shortSummary;
 @property (nonatomic, strong) NSString *artworkMrl;
 
+/**
+ * @brief Tracks represent the last query of tracks asked to the MediaLibrary.
+ * If no previous query has been done, a default set of track will be returned.
+ * @return Array of `MLMedia *`.
+ */
+@property (nonatomic, strong) NSArray<MLMedia *> *tracks;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 - (int64_t)identifier;
@@ -40,13 +47,14 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 
 - (MLArtist *)albumMainArtist;
 
-- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLMedia *> *)tracks;
+- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 - (NSArray<MLMedia *> *)tracksByGenre:(MLGenre *)genre sortingCriteria:(MLSortingCriteria)criteria;
 
 /**
  * Returns an array of MLArtist object.
  */
-- (NSArray<MLArtist *> *)artistsOrderedBy:(BOOL)desc;
+- (NSArray<MLArtist *> *)artistsByDesc:(BOOL)desc;
 
 - (uint32_t)numberOfTracks;
 - (uint)duration;

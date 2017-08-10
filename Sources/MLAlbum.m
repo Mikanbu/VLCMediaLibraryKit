@@ -25,6 +25,7 @@
 #import "MLArtist+Init.h"
 #import "MLGenre+Init.h"
 #import "MLUtils.h"
+#import "MLMediaLibrary.h"
 
 @interface MLAlbum ()
 {
@@ -75,17 +76,27 @@
     return [[MLArtist alloc] initWithArtistPtr:_album->albumArtist()];
 }
 
-- (NSArray *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLMedia *> *)tracks
 {
-    return [MLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)];
+    if (!_tracks) {
+        _tracks = [self tracksWithSortingCriteria:MLSortingCriteriaDefault desc:YES];
+    }
+    return _tracks;
+}
+
+- (NSArray *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
+{
+    _tracks = [MLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)];
+    return _tracks;
 }
 
 - (NSArray<MLMedia *> *)tracksByGenre:(MLGenre *)genre sortingCriteria:(MLSortingCriteria)criteria;
 {
-    return [MLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria)];
+    _tracks = [MLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria)];
+    return _tracks;
 }
 
-- (NSArray<MLArtist *> *)artistsOrderedBy:(BOOL)desc
+- (NSArray<MLArtist *> *)artistsByDesc:(BOOL)desc
 {
     return [MLUtils arrayFromArtistPtrVector:_album->artists(desc)];
 }

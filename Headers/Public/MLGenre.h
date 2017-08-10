@@ -34,8 +34,8 @@ typedef NS_ENUM (NSUInteger, MLSortingCriteria);
 - (NSString *)name;
 - (uint32_t)numberOfTracks;
 
-- (NSArray<MLArtist *> *)artistWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
-- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
-- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLArtist *> *)artistWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
+- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 
 @end

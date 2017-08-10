@@ -174,12 +174,12 @@
     return [[MLMedia alloc] initWithMediaPtr:_ml->addMedia([mrl UTF8String])];
 }
 
-- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromMediaPtrVector:_ml->audioFiles((medialibrary::SortingCriteria)criteria, desc)];
 }
 
-- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromMediaPtrVector:_ml->videoFiles((medialibrary::SortingCriteria)criteria, desc)];
 }
@@ -191,7 +191,7 @@
     return [[MLAlbum alloc] initWithAlbumPtr:_ml->album(identifier)];
 }
 
-- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromAlbumPtrVector:_ml->albums((medialibrary::SortingCriteria)criteria, desc)];
 }
@@ -217,14 +217,14 @@
     return [[MLArtist alloc] initWithArtistPtr:_ml->artist(identifier)];
 }
 
-- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromArtistPtrVector:_ml->artists((medialibrary::SortingCriteria)criteria, desc)];
 }
 
 #pragma mark - Genre
 
-- (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromGenrePtrVector:_ml->genres((medialibrary::SortingCriteria)criteria, desc)];
 }
@@ -241,7 +241,7 @@
     return [[MLPlaylist alloc] initWithPlaylistPtr:_ml->createPlaylist([name UTF8String])];
 }
 
-- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
    return [MLUtils arrayFromPlaylistPtrVector:_ml->playlists((medialibrary::SortingCriteria)criteria, desc)];
 }

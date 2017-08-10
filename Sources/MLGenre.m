@@ -50,17 +50,17 @@
     return _genre->nbTracks();
 }
 
-- (NSArray<MLArtist *> *)artistWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLArtist *> *)artistWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromArtistPtrVector:_genre->artists((medialibrary::SortingCriteria)criteria, desc)];
 }
 
-- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromMediaPtrVector:_genre->tracks((medialibrary::SortingCriteria)criteria, desc)];
 }
 
-- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     return [MLUtils arrayFromAlbumPtrVector:_genre->albums((medialibrary::SortingCriteria)criteria, desc)];
 }

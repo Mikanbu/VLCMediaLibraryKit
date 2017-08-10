@@ -140,13 +140,13 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 - (MLMedia *)mediaWithIdentifier:(int64_t)identifier;
 - (MLMedia *)mediaWithMrl:(NSString *)mrl;
 - (MLMedia *)addMediaWithMrl:(NSString *)mrl;
-- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
-- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLMedia *> *)audioFilesWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
+- (NSArray<MLMedia *> *)videoFilesWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Album
 
 - (MLAlbum *)albumWithIdentifier:(int64_t)identifier;
-- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLAlbum *> *)albumsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Show
 
@@ -159,17 +159,17 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 #pragma mark - Artist
 
 - (MLArtist *)artistWithIdentifier:(int64_t)identifier;
-- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLArtist *> *)artistsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Genre
 
-- (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLGenre *> *)genresWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 - (MLGenre *)genreWithIdentifier:(int64_t)identifier;
 
 #pragma mark - Playlist
 
 - (MLPlaylist *)createPlaylistWithName:(NSString *)name;
-- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria orderedBy:(BOOL)desc;
+- (NSArray<MLPlaylist *> *)playlistsWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc;
 - (MLPlaylist *)playlistWithIdentifier:(int64_t)identifier;
 - (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier;
 
