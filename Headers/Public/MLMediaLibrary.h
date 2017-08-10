@@ -98,10 +98,6 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 @interface MLMediaLibrary : NSObject
 
-/**
- * Medialibrary instance warpped inside a MLMediaLibrary instance.
- */
-@property (nonatomic) void *instance;
 @property (nonatomic, strong) NSString *dbPath;
 @property (nonatomic, strong) NSString *thumbnailPath;
 @property (nonatomic, weak) id <MLMediaLibraryDelegate> delegate;
@@ -114,12 +110,6 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
  * \return a `MLMedialibrary` shared instance.
  */
 + (instancetype)sharedMediaLibrary;
-
-/**
- * Returns a `medialibrary::IMediaLibrary *` shared instance.
- * \return a `medialibrary::IMediaLibrary *` shared instance.
- */
-+ (void *)sharedInstance;
 
 - (BOOL)start;
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;

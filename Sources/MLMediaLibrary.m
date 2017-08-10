@@ -68,11 +68,6 @@
     return sharedMediaLibrary;
 }
 
-+ (void *)sharedInstance
-{
-    return [[self sharedMediaLibrary] instance];
-}
-
 #pragma mark - Initializer
 
 - (instancetype)init
@@ -81,7 +76,6 @@
     if (self) {
         _isInitialized = NO;
         _ml = NewMediaLibrary();
-        _instance = _ml;
         _mlCb = new medialibrary::MediaLibraryCb(_delegate);
         _deviceListerCb = new medialibrary::DeviceListerCb(_deviceListerDelegate);
     }
