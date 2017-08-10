@@ -160,12 +160,6 @@
     return _labels;
 }
 
-- (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
-{
-
-    return [[MLMediaMetadata alloc] initWithMediaMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
-}
-
 - (NSString *)thumbnail
 {
     if (!_thumbnail) {
@@ -183,6 +177,23 @@
 {
     return _media->releaseDate();
 }
+
+- (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
+{
+
+    return [[MLMediaMetadata alloc] initWithMediaMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
+}
+
+- (BOOL)setMetadataOfType:(MLMetadataType)type stringValue:(NSString *)value
+{
+    return _media->setMetadata((medialibrary::IMedia::MetadataType)type , [value UTF8String]);
+}
+
+- (BOOL)setMetadataOfType:(MLMetadataType)type intValue:(int64_t)value
+{
+    return _media->setMetadata((medialibrary::IMedia::MetadataType)type, value);
+}
+
 
 @end
 

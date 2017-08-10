@@ -112,6 +112,8 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
 
 #pragma mark - Metadata
 - (MLMediaMetadata *)metadataOfType:(MLMetadataType)type;
+- (BOOL)setMetadataOfType:(MLMetadataType)type stringValue:(NSString *)value;
+- (BOOL)setMetadataOfType:(MLMetadataType)type intValue:(int64_t)value;
 
 @end
 
