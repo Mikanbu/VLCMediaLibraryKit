@@ -24,7 +24,7 @@
 
 @interface MLLabel : NSObject
 
-@property(nonatomic, strong) NSString *name;
+@property(nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 

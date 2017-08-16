@@ -22,9 +22,9 @@
 
 @interface MLAudioTrack : NSObject
 
-@property (nonatomic, strong) NSString *codec;
-@property (nonatomic, strong) NSString *audioDescription;
-@property (nonatomic, strong) NSString *language;
+@property (nonatomic, copy) NSString *codec;
+@property (nonatomic, copy) NSString *audioDescription;
+@property (nonatomic, copy) NSString *language;
 
 - (instancetype)init NS_UNAVAILABLE;
 

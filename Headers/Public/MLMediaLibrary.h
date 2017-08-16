@@ -98,8 +98,8 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 @interface MLMediaLibrary : NSObject
 
-@property (nonatomic, strong) NSString *dbPath;
-@property (nonatomic, strong) NSString *thumbnailPath;
+@property (nonatomic, copy) NSString *dbPath;
+@property (nonatomic, copy) NSString *thumbnailPath;
 @property (nonatomic, weak) id <MLMediaLibraryDelegate> delegate;
 @property (nonatomic, weak) id <MLDeviceListerDelegate> deviceListerDelegate;
 

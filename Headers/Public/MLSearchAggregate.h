@@ -24,11 +24,11 @@
 
 @interface MLSearchAggregate : NSObject
 
-@property (nonatomic, strong, readonly) NSArray<MLAlbum *> *albums;
-@property (nonatomic, strong, readonly) NSArray<MLArtist *> *artists;
-@property (nonatomic, strong, readonly) NSArray<MLGenre *> *genres;
+@property (nonatomic, copy, readonly) NSArray<MLAlbum *> *albums;
+@property (nonatomic, copy, readonly) NSArray<MLArtist *> *artists;
+@property (nonatomic, copy, readonly) NSArray<MLGenre *> *genres;
 @property (nonatomic, strong, readonly) MLMediaSearchAggregate *mediaSearchAggregate;
-@property (nonatomic, strong, readonly) NSArray<MLPlaylist *> *playlists;
+@property (nonatomic, copy, readonly) NSArray<MLPlaylist *> *playlists;
 
 + (instancetype)initWithAlbums:(NSArray<MLAlbum *> *)albums
                        artists:(NSArray<MLArtist *> *)artists

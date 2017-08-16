@@ -24,11 +24,11 @@
 
 @interface MLMovie : NSObject
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSString *artworkMrl;
-@property (nonatomic, strong) NSString *imdbId;
-@property (nonatomic, strong) NSArray<MLMedia *> *files;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *shortSummary;
+@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSString *imdbId;
+@property (nonatomic, copy) NSArray<MLMedia *> *files;
 
 - (instancetype)init NS_UNAVAILABLE;
 

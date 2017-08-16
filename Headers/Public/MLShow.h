@@ -24,12 +24,12 @@
 
 @interface MLShow : NSObject
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSDate *releaseDate;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSString *artworkMrl;
-@property (nonatomic, strong) NSString *tvdbId;
-@property (nonatomic, strong) NSArray<MLShowEpisode *> *episodes;
+@property (nonatomic, copy) NSString *shortSummary;
+@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSString *tvdbId;
+@property (nonatomic, copy) NSArray<MLShowEpisode *> *episodes;
 
 - (instancetype)init NS_UNAVAILABLE;
 

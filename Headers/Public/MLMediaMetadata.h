@@ -24,7 +24,7 @@
 
 @interface MLMediaMetadata : NSObject
 
-@property (nonatomic, strong) NSString *str;
+@property (nonatomic, copy) NSString *str;
 
 - (instancetype)init NS_UNAVAILABLE;
 

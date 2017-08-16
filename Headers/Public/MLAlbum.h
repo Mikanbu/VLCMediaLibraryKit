@@ -26,16 +26,16 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 
 @interface MLAlbum : NSObject
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *shortSummary;
-@property (nonatomic, strong) NSString *artworkMrl;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *shortSummary;
+@property (nonatomic, copy) NSString *artworkMrl;
 
 /**
  * @brief Tracks represent the last query of tracks asked to the MediaLibrary.
  * If no previous query has been done, a default set of track will be returned.
  * @return Array of `MLMedia *`.
  */
-@property (nonatomic, strong) NSArray<MLMedia *> *tracks;
+@property (nonatomic, copy) NSArray<MLMedia *> *tracks;
 
 - (instancetype)init NS_UNAVAILABLE;
 

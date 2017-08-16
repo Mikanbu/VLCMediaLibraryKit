@@ -26,10 +26,10 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
 
 @interface MLArtist : NSObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *shortBio;
-@property (nonatomic, strong) NSString *artworkMrl;
-@property (nonatomic, strong) NSString *musicBrainzId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *shortBio;
+@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSString *musicBrainzId;
 
 
 - (instancetype)init NS_UNAVAILABLE;

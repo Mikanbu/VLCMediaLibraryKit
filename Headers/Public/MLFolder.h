@@ -30,7 +30,7 @@
  * If for some reasons we can't compute the MRL, an empty string wil
  * @return The folder's mrl
  */
-@property (nonatomic, strong) NSString *mrl;
+@property (nonatomic, copy) NSString *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 

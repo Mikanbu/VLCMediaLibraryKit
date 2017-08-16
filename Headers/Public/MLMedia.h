@@ -71,12 +71,12 @@ typedef NS_ENUM(uint32_t, MLMetadataType) {
 
 @interface MLMedia : NSObject
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *thumbnail;
 @property (nonatomic, strong) MLAlbumTrack *albumTrack;
 @property (nonatomic, strong) MLShowEpisode *showEpisode;
 @property (nonatomic, strong) MLMovie *movie;
-@property (nonatomic, strong) NSArray<MLLabel *> *labels;
+@property (nonatomic, copy) NSArray<MLLabel *> *labels;
 
 - (instancetype)init NS_UNAVAILABLE;
 

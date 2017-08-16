@@ -24,10 +24,10 @@
 
 @interface MLMediaSearchAggregate : NSObject
 
-@property (nonatomic, strong, readonly) NSArray<MLMedia *> *episodes;
-@property (nonatomic, strong, readonly) NSArray<MLMedia *> *movies;
-@property (nonatomic, strong, readonly) NSArray<MLMedia *> *others;
-@property (nonatomic, strong, readonly) NSArray<MLMedia *> *tracks;
+@property (nonatomic, copy, readonly) NSArray<MLMedia *> *episodes;
+@property (nonatomic, copy, readonly) NSArray<MLMedia *> *movies;
+@property (nonatomic, copy, readonly) NSArray<MLMedia *> *others;
+@property (nonatomic, copy, readonly) NSArray<MLMedia *> *tracks;
 
 + (instancetype)initWithEpisodes:(NSArray<MLMedia *> *)episodes
                           movies:(NSArray<MLMedia *> *)movies

@@ -22,9 +22,9 @@
 
 @interface MLVideoTrack : NSObject
 
-@property (nonatomic, strong) NSString *codec;
-@property (nonatomic, strong) NSString *videoDescription;
-@property (nonatomic, strong) NSString *language;
+@property (nonatomic, copy) NSString *codec;
+@property (nonatomic, copy) NSString *videoDescription;
+@property (nonatomic, copy) NSString *language;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -38,7 +38,7 @@
  * For instance, in case of a featuring, Media::artist() might return
  * "Artist 1", while IAlbumTrack::artist() might return something like
  * "Artist 1 featuring Artist 2 and also artist 3 and a whole bunch of people"
- * @return
+ * @return A pointer to a MLArtist instance.
  */
 - (MLArtist *)artist;
 - (MLGenre *)genre;

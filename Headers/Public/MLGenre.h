@@ -26,7 +26,7 @@ typedef NS_ENUM (NSUInteger, MLSortingCriteria);
 
 @interface MLGenre : NSObject
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 
