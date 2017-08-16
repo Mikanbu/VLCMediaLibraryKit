@@ -29,7 +29,6 @@ medialibrary::DeviceListerCb::DeviceListerCb( id<MLDeviceListerDelegate> delegat
 
 void medialibrary::DeviceListerCb::setDelegate( id<MLDeviceListerDelegate> delegate )
 {
-    NSLog(@"DeviceListerCb: Added Delegate %@", delegate);
     this->m_delegate = delegate;
 }
 
