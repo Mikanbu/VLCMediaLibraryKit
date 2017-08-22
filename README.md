@@ -42,7 +42,7 @@ After a successfull building, a `MediaLibraryKit.framework` should be found in t
 
 **Notes:**
 
-Currently build by default for the following architectures:
+Currently builds by default for the following architectures:
 
 ```
 * armv7
@@ -56,11 +56,6 @@ Please use the `-s` option to enable in addition of previously said architecture
 * i386
 * x86_64
 ```
-
-## Warning
-
-This version of the MLKit repository contains a `build` directory only to facilitate the deployment using Cocoapods.
-
 
 [1]: https://code.videolan.org/videolan/medialibrary
 [2]: https://summerofcode.withgoogle.com/projects/#6366563499245568
