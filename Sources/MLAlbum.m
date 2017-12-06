@@ -84,7 +84,7 @@
     return _tracks;
 }
 
-- (NSArray *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
+- (NSArray<MLMedia *> *)tracksWithSortingCriteria:(MLSortingCriteria)criteria desc:(BOOL)desc
 {
     _tracks = [MLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)];
     return _tracks;
