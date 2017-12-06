@@ -71,12 +71,12 @@
     return _musicBrainzId;
 }
 
-- (NSArray *)albums:(MLSortingCriteria)sortingCriteria
+- (NSArray<MLAlbum *> *)albums:(MLSortingCriteria)sortingCriteria
 {
     return [MLUtils arrayFromAlbumPtrVector:_artist->albums((medialibrary::SortingCriteria)sortingCriteria)];
 }
 
-- (NSArray *)media:(MLSortingCriteria)sortingCriteria
+- (NSArray<MLMedia *> *)media:(MLSortingCriteria)sortingCriteria
 {
     return [MLUtils arrayFromMediaPtrVector:_artist->media((medialibrary::SortingCriteria)sortingCriteria)];
 }

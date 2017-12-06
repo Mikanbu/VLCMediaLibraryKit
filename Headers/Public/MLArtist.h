@@ -45,12 +45,12 @@ typedef NS_ENUM(NSUInteger, MLSortingCriteria);
  * Return all albums from the current artist.
  * \return a NSArray of MLAlbum object.
  */
-- (NSArray *)albums:(MLSortingCriteria)sortingCriteria;
+- (NSArray<MLAlbum *> *)albums:(MLSortingCriteria)sortingCriteria;
 
 /**
  * Return all medias from the current artist.
  * \return a NSArray of MLMedia object.
  */
-- (NSArray *)media:(MLSortingCriteria)sortingCriteria;
+- (NSArray<MLMedia *> *)media:(MLSortingCriteria)sortingCriteria;
 
 @end
