@@ -180,7 +180,6 @@
 
 - (MLMediaMetadata *)metadataOfType:(MLMetadataType)type
 {
-
     return [[MLMediaMetadata alloc] initWithMediaMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
 }
 

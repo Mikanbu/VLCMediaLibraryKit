@@ -46,6 +46,9 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
     MLLogLevelError
 };
 
+#pragma mark - MLMediaLibraryDelegate
+#pragma mark -
+
 @protocol MLMediaLibraryDelegate <NSObject>
 
 @optional
@@ -86,6 +89,9 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 
 @end
 
+#pragma mark - MLDeviceListerDelegate
+#pragma mark -
+
 @protocol MLDeviceListerDelegate <NSObject>
 
 @optional
@@ -95,6 +101,9 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 - (void)isDeviceKnown:(NSString *)uuid;
 
 @end
+
+#pragma mark - MLMediaLibrary
+#pragma mark -
 
 @interface MLMediaLibrary : NSObject
 
@@ -114,11 +123,10 @@ typedef NS_ENUM (NSUInteger, MLLogLevel) {
 - (BOOL)start;
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
 
-#pragma mark -
-
 - (void)setVerbosity:(MLLogLevel)level;
 
 #pragma mark -
+#pragma mark Medialibrary main methods
 
 #pragma mark - Label
 

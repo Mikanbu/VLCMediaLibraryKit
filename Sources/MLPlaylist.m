@@ -30,7 +30,6 @@
 
 @implementation MLPlaylist
 
-#pragma mark - Getters/Setters
 - (int64_t)identifier
 {
     return _playlist->id();
