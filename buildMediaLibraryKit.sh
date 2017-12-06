@@ -1,5 +1,6 @@
 #!/bin/sh
 
+ARCH="all"
 CLEAN=no
 SDK_MIN=9.0
 VERBOSE=no
@@ -26,10 +27,11 @@ usage()
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
+    -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
 EOF
 }
 
-while getopts "hvdmcsx" OPTION
+while getopts "hvdmcsxa:" OPTION
 do
     case $OPTION in
         h)
@@ -53,6 +55,9 @@ do
             ;;
         x)
             SKIP_DEPENDENCIES=yes
+            ;;
+        a)
+            ARCH=$OPTARG
             ;;
         ?)
             usage
@@ -102,6 +107,15 @@ log()
         msgType="error"
     fi
     echo "[${color}${msgType}${normal}] $2"
+}
+
+getActualArch()
+{
+    if [ "$1" = "aarch64" ]; then
+        echo "arm64"
+    else
+        echo "$1"
+    fi
 }
 
 # Retrieve medialibrary
@@ -245,12 +259,7 @@ buildMedialibrary()
                 mkdir build
             fi
             spushd build
-                local actualArch=$arch
-                if [ "${arch}" = "aarch64" ]; then
-                    #for the target triplet
-                    actualArch="arm64"
-                fi
-
+                local actualArch="`getActualArch ${arch}`"
                 local currentDir="`pwd`"
                 local prefix="${currentDir}/${os}${platform}-install/${actualArch}"
                 local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
@@ -320,18 +329,22 @@ buildXcodeproj()
     log "info" "Starting build $1 ($target, ${BUILD_TYPE}, $platform)..."
 
     local architectures=""
-    if [ "$TVOS" != "yes" ]; then
-        if [ "$platform" = "iphonesimulator" ]; then
-            architectures="i386 x86_64"
+    if [ "$ARCH" == "all" ]; then
+        if [ "$TVOS" != "yes" ]; then
+            if [ "$platform" = "iphonesimulator" ]; then
+                architectures="i386 x86_64"
+            else
+                architectures="armv7 armv7s arm64"
+            fi
         else
-            architectures="armv7 armv7s arm64"
+            if [ "$platform" = "appletvsimulator" ]; then
+                architectures="x86_64"
+            else
+                architectures="arm64"
+            fi
         fi
     else
-        if [ "$platform" = "appletvsimulator" ]; then
-            architectures="x86_64"
-        else
-            architectures="arm64"
-        fi
+        architectures="`getActualArch $ARCH`"
     fi
     xcodebuild -project "$1.xcodeproj" \
                -target "$target" \
@@ -437,13 +450,17 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     fetchMedialibrary
 
     #Mobile first!
-    if [ "$SIMULATOR" = "yes" ]; then
-        buildMedialibrary "iPhone" "i386" "Simulator"
-        buildMedialibrary "iPhone" "x86_64" "Simulator"
+    if [ "$ARCH" = "all" ]; then
+        if [ "$SIMULATOR" = "yes" ]; then
+            buildMedialibrary "iPhone" "i386" "Simulator"
+            buildMedialibrary "iPhone" "x86_64" "Simulator"
+        fi
+        buildMedialibrary "iPhone" "armv7" "OS"
+        buildMedialibrary "iPhone" "armv7s" "OS"
+        buildMedialibrary "iPhone" "aarch64" "OS"
+    else
+        buildMedialibrary "iPhone" "$ARCH" "OS"
     fi
-    buildMedialibrary "iPhone" "armv7" "OS"
-    buildMedialibrary "iPhone" "armv7s" "OS"
-    buildMedialibrary "iPhone" "aarch64" "OS"
 else
     log "warning" "Build of Medialibrary skipped..."
 fi
