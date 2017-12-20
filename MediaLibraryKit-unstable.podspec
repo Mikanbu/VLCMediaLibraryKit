@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "LGPLv2.1", :file => "COPYING" }
 
-  s.authors            = { "Pierre d'Herbemont" => "pdherbemont@videolan.org", "Felix Paul Kühne" => "fkuehne@videolan.org", "Tobias Conradi" => "videolan@tobias-conradi.de", "Carola Nitz" => "caro@videolan.org" }
+  s.authors            = {"Soomin Lee" => "thehungrybu@gmail.com", "Felix Paul Kühne" => "fkuehne@videolan.org", "Carola Nitz" => "caro@videolan.org"}
   s.social_media_url   = "http://twitter.com/videolan"
 
   s.ios.deployment_target = "7.0"
@@ -42,6 +42,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.watchos.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) MLKIT_READONLY_TARGET" }
-  s.ios.dependency "MobileVLCKit-unstable", "~>3.0.0a8"
+  s.ios.dependency "MobileVLCKit-unstable", "~>3.0.0a50"
 
 end
