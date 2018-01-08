@@ -121,14 +121,14 @@
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath
 {
     [self setDeviceLister:(_deviceLister)];
-    BOOL success = _ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], _mlCb);
+    medialibrary::InitializeResult success = _ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], _mlCb);
 
-    if (success) {
+    if (success == medialibrary::InitializeResult::Success) {
         _isInitialized = YES;
         _dbPath = dbPath;
         _thumbnailPath = thumbnailPath;
     }
-    return success;
+    return success == medialibrary::InitializeResult::Success;
 }
 
 - (void)setVerbosity:(MLLogLevel)level
