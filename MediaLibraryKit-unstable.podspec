@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
 
   s.resources = "MappingModel_2_5_to_2_6.xcmappingmodel", "MediaLibrary.xcdatamodeld"
 
-  s.frameworks = "Foundation", "CoreData"
+  s.frameworks = "Foundation", "libsqlite3.tbd",
 
   s.requires_arc = true
 

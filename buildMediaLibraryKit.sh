@@ -70,9 +70,6 @@ shift "$((OPTIND-1))"
 ROOT_DIR="$(pwd)"
 MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
 DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
-SQLITE_DIR="${DEPENDENCIES_DIR}/sqlite-autoconf-3180000"
-SQLITE_BUILD_DIR=""
-SQLITE_INCLUDE_DIR=""
 LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
@@ -183,55 +180,6 @@ buildLibJpeg()
     spopd
 }
 
-buildSqlite()
-{
-    local arch=$1
-    local target=$2
-    local sqliteRelease="sqlite-autoconf-3180000"
-    local sqliteSHA1="74559194e1dd9b9d577cac001c0e9d370856671b"
-    SQLITE_DIR="${DEPENDENCIES_DIR}/${sqliteRelease}"
-    local prefix="${SQLITE_DIR}/installation/${arch}"
-
-    if [ ! -d "${SQLITE_DIR}" ]; then
-        log "warning" "sqlite source not found! Starting download..."
-        wget https://download.videolan.org/pub/contrib/sqlite/${sqliteRelease}.tar.gz
-        if [ ! "`sha1sum ${sqliteRelease}.tar.gz`" = "${sqliteSHA1}  ${sqliteRelease}.tar.gz" ]; then
-            log "error" "Wrong sha1 for ${sqliteRelease}.tar.gz"
-            exit 1
-        fi
-        tar -xzf ${sqliteRelease}.tar.gz
-        rm -f ${sqliteRelease}.tar.gz
-    fi
-    spushd $SQLITE_DIR
-        log "info" "Starting SQLite configuration..."
-        if [ ! -d "build" ]; then
-            mkdir build
-        fi
-        spushd build
-            if [ ! -d "$arch" ]; then
-                mkdir $arch
-            fi
-            spushd $arch
-                log "error" $prefix
-                ${SQLITE_DIR}/configure \
-                    --host=$target \
-                    --prefix=$prefix \
-                    --disable-shared
-                log "info" "Starting SQLite make..."
-                make
-                if [ ! -d "${prefix}" ]; then
-                    mkdir -p $prefix
-                fi
-                make install
-                SQLITE_BUILD_DIR="`pwd`"
-                SQLITE_INCLUDE_DIR="${prefix}/include/"
-                log "info" "SQLite armed and ready for ${arch}!"
-            spopd
-        spopd
-    spopd
-}
-
-
 buildDependencies()
 {
     log "info" "Starting build for medialibrary dependencies..."
@@ -239,7 +187,6 @@ buildDependencies()
         mkdir -p $DEPENDENCIES_DIR
     fi
     spushd $DEPENDENCIES_DIR
-        buildSqlite $1 $2
         buildLibJpeg $1 $2
     spopd
 }
@@ -375,22 +322,6 @@ lipoMedialibrary()
     log "info" "libmedialibrary_macos.a bundle armed and ready to use!"
 }
 
-lipoSqlite()
-{
-    local sqliteInstallDir="${SQLITE_DIR}/installation"
-    local sqliteArch="`ls ${sqliteInstallDir}`"
-    local files=""
-
-    log "info" "Starting the creation of a libsqlite3.a bundle..."
-    for i in ${sqliteArch}
-    do
-        files="${sqliteInstallDir}/${i}/lib/libsqlite3.a ${files}"
-    done
-
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"
-    log "info" "libsqlite3.a bundle armed and ready to use!"
-}
-
 lipoJpeg()
 {
     local libjpegInstallDir="${LIBJPEG_DIR}/install"
@@ -475,7 +406,6 @@ if [ "$SIMULATOR" = "yes" ]; then
 fi
 
 lipoMedialibrary iPhoneOS
-lipoSqlite
 lipoJpeg
 
 buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
