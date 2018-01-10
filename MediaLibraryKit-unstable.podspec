@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
-  s.name         = "MediaLibraryKit-unstable"
-  s.version      = "2.6.4"
+  s.name         = "VLCMediaLibraryKit"
+  s.version      = "1.0.0"
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
