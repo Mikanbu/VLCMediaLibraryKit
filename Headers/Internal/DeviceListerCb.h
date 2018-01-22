@@ -20,7 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
+#import "VLCMediaLibrary.h"
 
 namespace medialibrary
 {
@@ -28,8 +28,8 @@ namespace medialibrary
 class DeviceListerCb : public IDeviceListerCb
 {
 public:
-    DeviceListerCb( id<MLDeviceListerDelegate> delegate );
-    void setDelegate( id<MLDeviceListerDelegate> delegate );
+    DeviceListerCb( id<VLCDeviceListerDelegate> delegate );
+    void setDelegate( id<VLCDeviceListerDelegate> delegate );
 
     /**
      * @brief onDevicePlugged Shall be invoked when a known device gets plugged
@@ -53,7 +53,7 @@ public:
     virtual bool isDeviceKnown( const std::string& uuid ) const;
 
 private:
-    id<MLDeviceListerDelegate> m_delegate;
+    id<VLCDeviceListerDelegate> m_delegate;
 };
 
 }

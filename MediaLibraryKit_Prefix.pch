@@ -39,7 +39,7 @@
 # define HAVE_BLOCK 0
 # import <UIKit/UIKit.h>
 
-# ifndef MLKIT_READONLY_TARGET
+# ifndef VLCKIT_READONLY_TARGET
 #  if !TARGET_OS_WATCH
 //#import <MobileVLCKit/MobileVLCKit.h>
 #  endif

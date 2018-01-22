@@ -20,7 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "MLMediaLibrary.h"
+#import "VLCMediaLibrary.h"
 
 namespace medialibrary
 {
@@ -28,9 +28,9 @@ namespace medialibrary
 class MediaLibraryCb : public IMediaLibraryCb
 {
 public:
-    MediaLibraryCb( id<MLMediaLibraryDelegate> delegate );
+    MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate );
 
-    void setDelegate( id<MLMediaLibraryDelegate> delegate );
+    void setDelegate( id<VLCMediaLibraryDelegate> delegate );
 
     /**
      * @brief onFileAdded Will be called when some media get added.
@@ -141,7 +141,7 @@ private:
     NSArray<NSNumber *> *intVectorToArray( std::vector<int64_t> vector );
 
 private:
-    id <MLMediaLibraryDelegate> m_delegate;
+    id <VLCMediaLibraryDelegate> m_delegate;
 };
 
 }
