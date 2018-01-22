@@ -1,6 +1,6 @@
 /*****************************************************************************
  * VLCPlaylist+Init.h
- * MediaLibraryKit
+ * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
  * $Id$

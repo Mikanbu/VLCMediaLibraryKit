@@ -1,6 +1,6 @@
 /*****************************************************************************
- * MediaLibraryKit_Prefix.pch
- * MediaLibraryKit
+ * VLCMediaLibraryKit_Prefix.pch
+ * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
  * $Id$

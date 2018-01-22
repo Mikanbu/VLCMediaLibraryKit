@@ -354,7 +354,7 @@ createFramework()
     spushd build
         rm -rf $framework && \
         mkdir $framework && \
-        lipo -create $BUILD_TYPE-$platform/libMediaLibraryKit.a \
+        lipo -create $BUILD_TYPE-$platform/libVLCMediaLibraryKit.a \
             -o $framework/$target && \
         chmod a+x $framework/$target && \
         cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
@@ -408,5 +408,5 @@ fi
 lipoMedialibrary iPhoneOS
 lipoJpeg
 
-buildXcodeproj MediaLibraryKit "MediaLibraryKit" iphoneos
-createFramework "MedialibraryKit" iphoneos
+buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphoneos
+createFramework "VLCMediaLibraryKit" iphoneos

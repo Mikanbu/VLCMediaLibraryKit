@@ -7,142 +7,141 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
-		7D0EF529170885130003ED47 /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
-		7D0EF52B170885130003ED47 /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
-		7D0EF52C170885130003ED47 /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
-		7D0EF52E170885130003ED47 /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
-		7D0EF52F170885130003ED47 /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
-		7D2DF7D31B677F1700FB78AB /* MediaLibraryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D41B677F1700FB78AB /* VLCAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D51B677F1700FB78AB /* VLCAlbumTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D61B677F1700FB78AB /* VLCFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D71B677F1700FB78AB /* VLCLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D81B677F1700FB78AB /* VLCMediaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7D91B677F1700FB78AB /* VLCShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7DA1B677F1700FB78AB /* VLCShowEpisode.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2DF7E81B677F3100FB78AB /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
-		7D2DF7EA1B677F3100FB78AB /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
-		7D2DF7EB1B677F3100FB78AB /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
-		7D2DF7EE1B677F3100FB78AB /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
-		7D2DF7EF1B677F3100FB78AB /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
-		7D2DF7F01B677F3100FB78AB /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
-		7D2DF7F11B677F3100FB78AB /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
-		7D84E4E91B42BA9900EA7D1F /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
-		7D84E4EC1B42BA9900EA7D1F /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
-		7D84E4ED1B42BA9900EA7D1F /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
-		7D84E4EF1B42BA9900EA7D1F /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
-		7D84E4F01B42BA9900EA7D1F /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
-		7D84E4F71B42BA9900EA7D1F /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
-		7D84E4F81B42BA9900EA7D1F /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
-		7D84E50A1B42BA9900EA7D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
-		7D84E50C1B42BA9900EA7D1F /* VLCAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; };
-		7D84E50D1B42BA9900EA7D1F /* VLCAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; };
-		7D84E50E1B42BA9900EA7D1F /* MediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
-		7D84E50F1B42BA9900EA7D1F /* VLCFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; };
-		7D84E5101B42BA9900EA7D1F /* VLCLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; };
-		7D84E5111B42BA9900EA7D1F /* VLCMediaLibrary.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; };
-		7D84E5121B42BA9900EA7D1F /* VLCShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; };
-		7D84E5131B42BA9900EA7D1F /* VLCShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; };
-		7D9E238617AEEA13008485E5 /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
-		7D9E238817AEEA71008485E5 /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
-		7D9E238917AF0711008485E5 /* VLCAlbum.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; };
-		7D9E238A17AF0711008485E5 /* VLCAlbumTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; };
-		8D05F9D91F2F9863003000B6 /* VLCGenre.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* VLCGenre.h */; };
-		8D05F9DC1F309AF9003000B6 /* VLCFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D05F9DB1F309AF9003000B6 /* VLCFolder.m */; };
-		8D1112E51F3A18C1000B4D3C /* VLCMediaSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E41F3A18C1000B4D3C /* VLCMediaSearchAggregate.m */; };
-		8D1112E91F3A252A000B4D3C /* VLCSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E81F3A252A000B4D3C /* VLCSearchAggregate.m */; };
-		8D31CE401F0A6873005A2895 /* VLCArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* VLCArtist.m */; };
-		8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
-		8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
-		8D90D0E81F2B7BEF00DBB850 /* VLCPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* VLCPlaylist.m */; };
-		8D90D0EC1F2B9DDC00DBB850 /* VLCHistoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0EB1F2B9DDC00DBB850 /* VLCHistoryEntry.m */; };
-		8D90D0ED1F2BA53300DBB850 /* VLCPlaylist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* VLCPlaylist.h */; };
-		8DBE03E61F2F6A290061C878 /* VLCGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE03E51F2F6A290061C878 /* VLCGenre.m */; };
-		8DC50D7E1F30B3B700D6CCED /* VLCFolder.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D05F9DA1F309AF9003000B6 /* VLCFolder.h */; };
-		8DC50D7F1F30B3B700D6CCED /* VLCHistoryEntry.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* VLCHistoryEntry.h */; };
-		8DC50D871F30CBD700D6CCED /* VLCMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* VLCMovie.m */; };
-		8DC50D8E1F321E2300D6CCED /* VLCVideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D8D1F321E2300D6CCED /* VLCVideoTrack.m */; };
-		8DC50D921F32226C00D6CCED /* VLCAudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D911F32226C00D6CCED /* VLCAudioTrack.m */; };
-		8DC50D941F32248B00D6CCED /* VLCAudioTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D901F32226C00D6CCED /* VLCAudioTrack.h */; };
-		8DC50D951F32248B00D6CCED /* VLCMediaMetadata.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* VLCMediaMetadata.h */; };
-		8DC50D961F32248B00D6CCED /* VLCMovie.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* VLCMovie.h */; };
-		8DC50D971F32248B00D6CCED /* VLCVideoTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* VLCVideoTrack.h */; };
-		8DC50D9D1F332D8A00D6CCED /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
-		8DC50DA01F335CD800D6CCED /* VLCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9F1F335CD800D6CCED /* VLCUtils.m */; };
-		8DC50DBF1F38966A00D6CCED /* VLCDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* VLCDeviceLister.mm */; };
-		8DC50DC21F38A98F00D6CCED /* DeviceListerCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DC01F38A98F00D6CCED /* DeviceListerCb.mm */; };
-		8DC6C4081F1E769B00FB8D07 /* VLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* VLCMedia.m */; };
-		8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
-		8DC817651F2760C900DEEF9D /* VLCMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* VLCMediaMetadata.m */; };
-		8DD4D3FE1F3B30C600404519 /* VLCMediaSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E01F3A1828000B4D3C /* VLCMediaSearchAggregate.h */; };
-		8DD4D3FF1F3B30C600404519 /* VLCSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E71F3A2511000B4D3C /* VLCSearchAggregate.h */; };
-		8DD4D40A1F3B34BB00404519 /* VLCArtist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D4091F3B347A00404519 /* VLCArtist.h */; };
-		8DD4D40C1F3B350300404519 /* VLCMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D40B1F3B34FD00404519 /* VLCMedia.h */; };
-		A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* MediaLibraryKit.h */; };
-		A7924689170F09A30036AAF2 /* VLCFile.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; };
-		A792468A170F09A30036AAF2 /* VLCLabel.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; };
-		A792468B170F09A30036AAF2 /* VLCMediaLibrary.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; };
-		A792468C170F09A30036AAF2 /* VLCShow.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; };
-		A792468D170F09A30036AAF2 /* VLCShowEpisode.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; };
+		8D8321FD20162EE100E30ACB /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
+		8D8321FE20162EE100E30ACB /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
+		8D8321FF20162EE100E30ACB /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
+		8D83220020162EE100E30ACB /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
+		8D83220120162EE100E30ACB /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
+		8D83220220162EE100E30ACB /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
+		8D83220320162EE100E30ACB /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
+		8D83220520162EE100E30ACB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
+		8D83220720162EE100E30ACB /* VLCAlbum.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; };
+		8D83220820162EE100E30ACB /* VLCAlbumTrack.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; };
+		8D83220920162EE100E30ACB /* VLCMediaLibraryKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */; };
+		8D83220A20162EE100E30ACB /* VLCFile.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; };
+		8D83220B20162EE100E30ACB /* VLCLabel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; };
+		8D83220C20162EE100E30ACB /* VLCMediaLibrary.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; };
+		8D83220D20162EE100E30ACB /* VLCShow.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; };
+		8D83220E20162EE100E30ACB /* VLCShowEpisode.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; };
+		8D83221520162EF100E30ACB /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
+		8D83221620162EF100E30ACB /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
+		8D83221720162EF100E30ACB /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
+		8D83221820162EF100E30ACB /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
+		8D83221920162EF100E30ACB /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
+		8D83221A20162EF100E30ACB /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
+		8D83221B20162EF100E30ACB /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
+		8D83221E20162EF100E30ACB /* VLCMediaLibraryKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83221F20162EF100E30ACB /* VLCAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222020162EF100E30ACB /* VLCAlbumTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222120162EF100E30ACB /* VLCFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222220162EF100E30ACB /* VLCLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222320162EF100E30ACB /* VLCMediaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222420162EF100E30ACB /* VLCShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D83222520162EF100E30ACB /* VLCShowEpisode.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DD39C7720162F19002E5423 /* VLCDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* VLCDeviceLister.mm */; };
+		8DD39C7820162F19002E5423 /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
+		8DD39C7920162F19002E5423 /* DeviceListerCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DC01F38A98F00D6CCED /* DeviceListerCb.mm */; };
+		8DD39C7A20162F19002E5423 /* VLCGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE03E51F2F6A290061C878 /* VLCGenre.m */; };
+		8DD39C7B20162F19002E5423 /* VLCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCFile.m */; };
+		8DD39C7C20162F19002E5423 /* VLCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCLabel.m */; };
+		8DD39C7D20162F19002E5423 /* VLCPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0E71F2B7BEF00DBB850 /* VLCPlaylist.m */; };
+		8DD39C7E20162F19002E5423 /* VLCMediaSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E41F3A18C1000B4D3C /* VLCMediaSearchAggregate.m */; };
+		8DD39C7F20162F19002E5423 /* VLCVideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D8D1F321E2300D6CCED /* VLCVideoTrack.m */; };
+		8DD39C8020162F19002E5423 /* VLCHistoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90D0EB1F2B9DDC00DBB850 /* VLCHistoryEntry.m */; };
+		8DD39C8120162F19002E5423 /* VLCMediaMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC817641F2760C900DEEF9D /* VLCMediaMetadata.m */; };
+		8DD39C8220162F19002E5423 /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
+		8DD39C8320162F19002E5423 /* VLCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51F170885130003ED47 /* VLCShow.m */; };
+		8DD39C8420162F19002E5423 /* VLCSearchAggregate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1112E81F3A252A000B4D3C /* VLCSearchAggregate.m */; };
+		8DD39C8520162F19002E5423 /* VLCShowEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF520170885130003ED47 /* VLCShowEpisode.m */; };
+		8DD39C8620162F19002E5423 /* VLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC6C4071F1E769B00FB8D07 /* VLCMedia.m */; };
+		8DD39C8720162F19002E5423 /* VLCFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D05F9DB1F309AF9003000B6 /* VLCFolder.m */; };
+		8DD39C8820162F19002E5423 /* VLCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9F1F335CD800D6CCED /* VLCUtils.m */; };
+		8DD39C8920162F19002E5423 /* VLCAudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D911F32226C00D6CCED /* VLCAudioTrack.m */; };
+		8DD39C8A20162F19002E5423 /* VLCAlbumTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */; };
+		8DD39C8B20162F19002E5423 /* VLCMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D861F30CBD700D6CCED /* VLCMovie.m */; };
+		8DD39C8C20162F19002E5423 /* VLCArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* VLCArtist.m */; };
+		8DD39C8D20162F19002E5423 /* VLCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCAlbum.m */; };
+		8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
+		8DD39C9020162F19002E5423 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
+		8DD39C9120162F19002E5423 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
+		8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
+		8DD39C9420162F19002E5423 /* VLCMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D40B1F3B34FD00404519 /* VLCMedia.h */; };
+		8DD39C9520162F19002E5423 /* VLCArtist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D4091F3B347A00404519 /* VLCArtist.h */; };
+		8DD39C9620162F19002E5423 /* VLCMediaSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E01F3A1828000B4D3C /* VLCMediaSearchAggregate.h */; };
+		8DD39C9720162F19002E5423 /* VLCSearchAggregate.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D1112E71F3A2511000B4D3C /* VLCSearchAggregate.h */; };
+		8DD39C9820162F19002E5423 /* VLCAudioTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D901F32226C00D6CCED /* VLCAudioTrack.h */; };
+		8DD39C9920162F19002E5423 /* VLCMediaMetadata.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC817631F2760C900DEEF9D /* VLCMediaMetadata.h */; };
+		8DD39C9A20162F19002E5423 /* VLCMovie.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D851F30CBD700D6CCED /* VLCMovie.h */; };
+		8DD39C9B20162F19002E5423 /* VLCVideoTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DC50D8C1F321E2300D6CCED /* VLCVideoTrack.h */; };
+		8DD39C9C20162F19002E5423 /* VLCFolder.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D05F9DA1F309AF9003000B6 /* VLCFolder.h */; };
+		8DD39C9D20162F19002E5423 /* VLCHistoryEntry.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0EA1F2B9DDC00DBB850 /* VLCHistoryEntry.h */; };
+		8DD39C9E20162F19002E5423 /* VLCGenre.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DBE03E41F2F6A290061C878 /* VLCGenre.h */; };
+		8DD39C9F20162F19002E5423 /* VLCPlaylist.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D90D0E61F2B7BEF00DBB850 /* VLCPlaylist.h */; };
+		8DD39CA020162F19002E5423 /* VLCAlbum.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238117AEE9F2008485E5 /* VLCAlbum.h */; };
+		8DD39CA120162F19002E5423 /* VLCAlbumTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */; };
+		8DD39CA220162F19002E5423 /* VLCMediaLibraryKit.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */; };
+		8DD39CA320162F19002E5423 /* VLCFile.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF511170885130003ED47 /* VLCFile.h */; };
+		8DD39CA420162F19002E5423 /* VLCLabel.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF512170885130003ED47 /* VLCLabel.h */; };
+		8DD39CA520162F19002E5423 /* VLCMediaLibrary.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF513170885130003ED47 /* VLCMediaLibrary.h */; };
+		8DD39CA620162F19002E5423 /* VLCShow.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF514170885130003ED47 /* VLCShow.h */; };
+		8DD39CA720162F19002E5423 /* VLCShowEpisode.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 7D0EF515170885130003ED47 /* VLCShowEpisode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7D0EF49C170883940003ED47 /* Copy Files (20 items) */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-				8DD4D40C1F3B350300404519 /* VLCMedia.h in Copy Files (20 items) */,
-				8DD4D40A1F3B34BB00404519 /* VLCArtist.h in Copy Files (20 items) */,
-				8DD4D3FE1F3B30C600404519 /* VLCMediaSearchAggregate.h in Copy Files (20 items) */,
-				8DD4D3FF1F3B30C600404519 /* VLCSearchAggregate.h in Copy Files (20 items) */,
-				8DC50D941F32248B00D6CCED /* VLCAudioTrack.h in Copy Files (20 items) */,
-				8DC50D951F32248B00D6CCED /* VLCMediaMetadata.h in Copy Files (20 items) */,
-				8DC50D961F32248B00D6CCED /* VLCMovie.h in Copy Files (20 items) */,
-				8DC50D971F32248B00D6CCED /* VLCVideoTrack.h in Copy Files (20 items) */,
-				8DC50D7E1F30B3B700D6CCED /* VLCFolder.h in Copy Files (20 items) */,
-				8DC50D7F1F30B3B700D6CCED /* VLCHistoryEntry.h in Copy Files (20 items) */,
-				8D05F9D91F2F9863003000B6 /* VLCGenre.h in Copy Files (20 items) */,
-				8D90D0ED1F2BA53300DBB850 /* VLCPlaylist.h in Copy Files (20 items) */,
-				7D9E238917AF0711008485E5 /* VLCAlbum.h in Copy Files (20 items) */,
-				7D9E238A17AF0711008485E5 /* VLCAlbumTrack.h in Copy Files (20 items) */,
-				A7924688170F09A30036AAF2 /* MediaLibraryKit.h in Copy Files (20 items) */,
-				A7924689170F09A30036AAF2 /* VLCFile.h in Copy Files (20 items) */,
-				A792468A170F09A30036AAF2 /* VLCLabel.h in Copy Files (20 items) */,
-				A792468B170F09A30036AAF2 /* VLCMediaLibrary.h in Copy Files (20 items) */,
-				A792468C170F09A30036AAF2 /* VLCShow.h in Copy Files (20 items) */,
-				A792468D170F09A30036AAF2 /* VLCShowEpisode.h in Copy Files (20 items) */,
-			);
-			name = "Copy Files (20 items)";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7D84E50B1B42BA9900EA7D1F /* Copy Files */ = {
+		8D83220620162EE100E30ACB /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "${PRODUCT_NAME}/MediaLibraryKit";
 			dstSubfolderSpec = 16;
 			files = (
-				7D84E50C1B42BA9900EA7D1F /* VLCAlbum.h in Copy Files */,
-				7D84E50D1B42BA9900EA7D1F /* VLCAlbumTrack.h in Copy Files */,
-				7D84E50E1B42BA9900EA7D1F /* MediaLibraryKit.h in Copy Files */,
-				7D84E50F1B42BA9900EA7D1F /* VLCFile.h in Copy Files */,
-				7D84E5101B42BA9900EA7D1F /* VLCLabel.h in Copy Files */,
-				7D84E5111B42BA9900EA7D1F /* VLCMediaLibrary.h in Copy Files */,
-				7D84E5121B42BA9900EA7D1F /* VLCShow.h in Copy Files */,
-				7D84E5131B42BA9900EA7D1F /* VLCShowEpisode.h in Copy Files */,
+				8D83220720162EE100E30ACB /* VLCAlbum.h in Copy Files */,
+				8D83220820162EE100E30ACB /* VLCAlbumTrack.h in Copy Files */,
+				8D83220920162EE100E30ACB /* VLCMediaLibraryKit.h in Copy Files */,
+				8D83220A20162EE100E30ACB /* VLCFile.h in Copy Files */,
+				8D83220B20162EE100E30ACB /* VLCLabel.h in Copy Files */,
+				8D83220C20162EE100E30ACB /* VLCMediaLibrary.h in Copy Files */,
+				8D83220D20162EE100E30ACB /* VLCShow.h in Copy Files */,
+				8D83220E20162EE100E30ACB /* VLCShowEpisode.h in Copy Files */,
 			);
 			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD39C9320162F19002E5423 /* Copy Files (20 items) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				8DD39C9420162F19002E5423 /* VLCMedia.h in Copy Files (20 items) */,
+				8DD39C9520162F19002E5423 /* VLCArtist.h in Copy Files (20 items) */,
+				8DD39C9620162F19002E5423 /* VLCMediaSearchAggregate.h in Copy Files (20 items) */,
+				8DD39C9720162F19002E5423 /* VLCSearchAggregate.h in Copy Files (20 items) */,
+				8DD39C9820162F19002E5423 /* VLCAudioTrack.h in Copy Files (20 items) */,
+				8DD39C9920162F19002E5423 /* VLCMediaMetadata.h in Copy Files (20 items) */,
+				8DD39C9A20162F19002E5423 /* VLCMovie.h in Copy Files (20 items) */,
+				8DD39C9B20162F19002E5423 /* VLCVideoTrack.h in Copy Files (20 items) */,
+				8DD39C9C20162F19002E5423 /* VLCFolder.h in Copy Files (20 items) */,
+				8DD39C9D20162F19002E5423 /* VLCHistoryEntry.h in Copy Files (20 items) */,
+				8DD39C9E20162F19002E5423 /* VLCGenre.h in Copy Files (20 items) */,
+				8DD39C9F20162F19002E5423 /* VLCPlaylist.h in Copy Files (20 items) */,
+				8DD39CA020162F19002E5423 /* VLCAlbum.h in Copy Files (20 items) */,
+				8DD39CA120162F19002E5423 /* VLCAlbumTrack.h in Copy Files (20 items) */,
+				8DD39CA220162F19002E5423 /* VLCMediaLibraryKit.h in Copy Files (20 items) */,
+				8DD39CA320162F19002E5423 /* VLCFile.h in Copy Files (20 items) */,
+				8DD39CA420162F19002E5423 /* VLCLabel.h in Copy Files (20 items) */,
+				8DD39CA520162F19002E5423 /* VLCMediaLibrary.h in Copy Files (20 items) */,
+				8DD39CA620162F19002E5423 /* VLCShow.h in Copy Files (20 items) */,
+				8DD39CA720162F19002E5423 /* VLCShowEpisode.h in Copy Files (20 items) */,
+			);
+			name = "Copy Files (20 items)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0EF4A1170883940003ED47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
-		7D0EF510170885130003ED47 /* MediaLibraryKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryKit.h; sourceTree = "<group>"; };
+		7D0EF4DF170883D80003ED47 /* VLCMediaLibraryKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCMediaLibraryKit_Prefix.pch; sourceTree = "<group>"; };
+		7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCMediaLibraryKit.h; sourceTree = "<group>"; };
 		7D0EF511170885130003ED47 /* VLCFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCFile.h; sourceTree = "<group>"; };
 		7D0EF512170885130003ED47 /* VLCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCLabel.h; sourceTree = "<group>"; };
 		7D0EF513170885130003ED47 /* VLCMediaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCMediaLibrary.h; sourceTree = "<group>"; };
@@ -153,9 +152,7 @@
 		7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCMediaLibrary.m; sourceTree = "<group>"; };
 		7D0EF51F170885130003ED47 /* VLCShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCShow.m; sourceTree = "<group>"; };
 		7D0EF520170885130003ED47 /* VLCShowEpisode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCShowEpisode.m; sourceTree = "<group>"; };
-		7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaLibraryKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xVLC; name = Info.plist; path = "MediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
-		7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D2DF7CF1B677EE600FB78AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "VLCMediaLibraryKit-watchOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D9E238117AEE9F2008485E5 /* VLCAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCAlbum.h; sourceTree = "<group>"; };
 		7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* VLCAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCAlbumTrack.m; sourceTree = "<group>"; };
@@ -172,9 +169,10 @@
 		8D31CE481F0B9917005A2895 /* Medialibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Medialibrary.h; sourceTree = "<group>"; };
 		8D34CEA11F2F93F7003A7DB6 /* VLCGenre+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "VLCGenre+Init.h"; path = "Headers/Internal/VLCGenre+Init.h"; sourceTree = SOURCE_ROOT; };
 		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
-		8D3D64DB1F1D671F008E178E /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
 		8D44EC641F03C084007F2C54 /* libmedialibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary.a; path = ../medialibrary/build/.libs/libmedialibrary.a; sourceTree = "<group>"; };
+		8D83221220162EE100E30ACB /* libVLCMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVLCMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D83222A20162EF100E30ACB /* VLCMediaLibraryKit_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VLCMediaLibraryKit_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D90D0DD1F2A41DB00DBB850 /* VLCMedia+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMedia+Init.h"; sourceTree = "<group>"; };
 		8D90D0E11F2A543D00DBB850 /* VLCAlbum+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "VLCAlbum+Init.h"; path = "Headers/Internal/VLCAlbum+Init.h"; sourceTree = SOURCE_ROOT; };
 		8D90D0E41F2B558000DBB850 /* VLCArtist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCArtist+Init.h"; sourceTree = "<group>"; };
@@ -212,34 +210,35 @@
 		8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = libmedialibrary/medialibrary/build/libmedialibrary_macos.a; sourceTree = "<group>"; };
 		8DC817631F2760C900DEEF9D /* VLCMediaMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMediaMetadata.h; sourceTree = "<group>"; };
 		8DC817641F2760C900DEEF9D /* VLCMediaMetadata.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMediaMetadata.m; sourceTree = "<group>"; };
+		8DD39CAB20162F19002E5423 /* libVLCMediaLibraryKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVLCMediaLibraryKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD4D4091F3B347A00404519 /* VLCArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCArtist.h; sourceTree = "<group>"; };
 		8DD4D40B1F3B34FD00404519 /* VLCMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCMedia.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7D0EF49B170883940003ED47 /* Frameworks */ = {
+		8D83220420162EE100E30ACB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D0EF4A2170883940003ED47 /* Foundation.framework in Frameworks */,
-				8D3D64DC1F1D671F008E178E /* libjpeg.a in Frameworks */,
-				8D44EC781F054F90007F2C54 /* libmedialibrary.a in Frameworks */,
-				8DC817581F2150A800DEEF9D /* libmedialibrary_macos.a in Frameworks */,
+				8D83220520162EE100E30ACB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D2DF7C71B677EE600FB78AB /* Frameworks */ = {
+		8D83221C20162EF100E30ACB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D84E5091B42BA9900EA7D1F /* Frameworks */ = {
+		8DD39C8E20162F19002E5423 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D84E50A1B42BA9900EA7D1F /* Foundation.framework in Frameworks */,
+				8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */,
+				8DD39C9020162F19002E5423 /* libjpeg.a in Frameworks */,
+				8DD39C9120162F19002E5423 /* libmedialibrary.a in Frameworks */,
+				8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,9 +260,9 @@
 		7D0EF49F170883940003ED47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */,
-				7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */,
-				7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */,
+				8D83221220162EE100E30ACB /* libVLCMediaLibraryKit-readonly.a */,
+				8D83222A20162EF100E30ACB /* VLCMediaLibraryKit_watchOS.framework */,
+				8DD39CAB20162F19002E5423 /* libVLCMediaLibraryKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +272,6 @@
 			children = (
 				8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */,
 				8D3D64DA1F1D671F008E178E /* libjpeg.a */,
-				8D3D64DB1F1D671F008E178E /* libsqlite3.a */,
 				8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */,
 				8D44EC641F03C084007F2C54 /* libmedialibrary.a */,
 				7D0EF4A1170883940003ED47 /* Foundation.framework */,
@@ -285,10 +283,9 @@
 			isa = PBXGroup;
 			children = (
 				7D2DF7CF1B677EE600FB78AB /* Info.plist */,
-				7D0EF4DF170883D80003ED47 /* MediaLibraryKit_Prefix.pch */,
+				7D0EF4DF170883D80003ED47 /* VLCMediaLibraryKit_Prefix.pch */,
 			);
 			name = "Supporting Files";
-			path = MediaLibraryKit;
 			sourceTree = "<group>";
 		};
 		7D0EF506170885130003ED47 /* Headers */ = {
@@ -332,7 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD4D40B1F3B34FD00404519 /* VLCMedia.h */,
-				7D0EF510170885130003ED47 /* MediaLibraryKit.h */,
+				7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */,
 				7D9E238117AEE9F2008485E5 /* VLCAlbum.h */,
 				7D9E238417AEEA13008485E5 /* VLCAlbumTrack.h */,
 				8DD4D4091F3B347A00404519 /* VLCArtist.h */,
@@ -388,74 +385,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7D2DF7C81B677EE600FB78AB /* Headers */ = {
+		8D83221D20162EF100E30ACB /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2DF7D31B677F1700FB78AB /* MediaLibraryKit.h in Headers */,
-				7D2DF7D41B677F1700FB78AB /* VLCAlbum.h in Headers */,
-				7D2DF7D51B677F1700FB78AB /* VLCAlbumTrack.h in Headers */,
-				7D2DF7D61B677F1700FB78AB /* VLCFile.h in Headers */,
-				7D2DF7D71B677F1700FB78AB /* VLCLabel.h in Headers */,
-				7D2DF7D81B677F1700FB78AB /* VLCMediaLibrary.h in Headers */,
-				7D2DF7D91B677F1700FB78AB /* VLCShow.h in Headers */,
-				7D2DF7DA1B677F1700FB78AB /* VLCShowEpisode.h in Headers */,
+				8D83221E20162EF100E30ACB /* VLCMediaLibraryKit.h in Headers */,
+				8D83221F20162EF100E30ACB /* VLCAlbum.h in Headers */,
+				8D83222020162EF100E30ACB /* VLCAlbumTrack.h in Headers */,
+				8D83222120162EF100E30ACB /* VLCFile.h in Headers */,
+				8D83222220162EF100E30ACB /* VLCLabel.h in Headers */,
+				8D83222320162EF100E30ACB /* VLCMediaLibrary.h in Headers */,
+				8D83222420162EF100E30ACB /* VLCShow.h in Headers */,
+				8D83222520162EF100E30ACB /* VLCShowEpisode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7D0EF49D170883940003ED47 /* MediaLibraryKit */ = {
+		8D8321FB20162EE100E30ACB /* VLCMediaLibraryKit-readonly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D0EF4AC170883940003ED47 /* Build configuration list for PBXNativeTarget "MediaLibraryKit" */;
+			buildConfigurationList = 8D83220F20162EE100E30ACB /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit-readonly" */;
 			buildPhases = (
-				7D0EF49A170883940003ED47 /* Sources */,
-				7D0EF49B170883940003ED47 /* Frameworks */,
-				7D0EF49C170883940003ED47 /* Copy Files (20 items) */,
+				8D8321FC20162EE100E30ACB /* Sources */,
+				8D83220420162EE100E30ACB /* Frameworks */,
+				8D83220620162EE100E30ACB /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MediaLibraryKit;
+			name = "VLCMediaLibraryKit-readonly";
 			productName = MediaLibraryKit;
-			productReference = 7D0EF49E170883940003ED47 /* libMediaLibraryKit.a */;
+			productReference = 8D83221220162EE100E30ACB /* libVLCMediaLibraryKit-readonly.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7D2DF7CA1B677EE600FB78AB /* MediaLibraryKit-watchOS */ = {
+		8D83221320162EF100E30ACB /* VLCMediaLibraryKit-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKit-watchOS" */;
+			buildConfigurationList = 8D83222720162EF100E30ACB /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit-watchOS" */;
 			buildPhases = (
-				7D2DF7C61B677EE600FB78AB /* Sources */,
-				7D2DF7C71B677EE600FB78AB /* Frameworks */,
-				7D2DF7C81B677EE600FB78AB /* Headers */,
-				7D2DF7C91B677EE600FB78AB /* Resources */,
+				8D83221420162EF100E30ACB /* Sources */,
+				8D83221C20162EF100E30ACB /* Frameworks */,
+				8D83221D20162EF100E30ACB /* Headers */,
+				8D83222620162EF100E30ACB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "MediaLibraryKit-watchOS";
+			name = "VLCMediaLibraryKit-watchOS";
 			productName = "MediaLibraryKit-watchOS";
-			productReference = 7D2DF7CB1B677EE600FB78AB /* MediaLibraryKit.framework */;
+			productReference = 8D83222A20162EF100E30ACB /* VLCMediaLibraryKit_watchOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */ = {
+		8DD39C7520162F19002E5423 /* VLCMediaLibraryKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D84E5151B42BA9900EA7D1F /* Build configuration list for PBXNativeTarget "MediaLibraryKit-readonly" */;
+			buildConfigurationList = 8DD39CA820162F19002E5423 /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit" */;
 			buildPhases = (
-				7D84E4E61B42BA9900EA7D1F /* Sources */,
-				7D84E5091B42BA9900EA7D1F /* Frameworks */,
-				7D84E50B1B42BA9900EA7D1F /* Copy Files */,
+				8DD39C7620162F19002E5423 /* Sources */,
+				8DD39C8E20162F19002E5423 /* Frameworks */,
+				8DD39C9320162F19002E5423 /* Copy Files (20 items) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "MediaLibraryKit-readonly";
+			name = VLCMediaLibraryKit;
 			productName = MediaLibraryKit;
-			productReference = 7D84E5181B42BA9900EA7D1F /* libMediaLibraryKit-readonly.a */;
+			productReference = 8DD39CAB20162F19002E5423 /* libVLCMediaLibraryKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -464,15 +461,16 @@
 		7D0EF496170883940003ED47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = VLC;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = VideoLAN;
 				TargetAttributes = {
-					7D2DF7CA1B677EE600FB78AB = {
-						CreatedOnToolsVersion = 7.0;
+					8D83221320162EF100E30ACB = {
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 7D0EF499170883940003ED47 /* Build configuration list for PBXProject "MediaLibraryKit" */;
+			buildConfigurationList = 7D0EF499170883940003ED47 /* Build configuration list for PBXProject "VLCMediaLibraryKit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -484,15 +482,15 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7D0EF49D170883940003ED47 /* MediaLibraryKit */,
-				7D84E4E51B42BA9900EA7D1F /* MediaLibraryKit-readonly */,
-				7D2DF7CA1B677EE600FB78AB /* MediaLibraryKit-watchOS */,
+				8DD39C7520162F19002E5423 /* VLCMediaLibraryKit */,
+				8D8321FB20162EE100E30ACB /* VLCMediaLibraryKit-readonly */,
+				8D83221320162EF100E30ACB /* VLCMediaLibraryKit-watchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7D2DF7C91B677EE600FB78AB /* Resources */ = {
+		8D83222620162EF100E30ACB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -502,61 +500,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7D0EF49A170883940003ED47 /* Sources */ = {
+		8D8321FC20162EE100E30ACB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DC50DBF1F38966A00D6CCED /* VLCDeviceLister.mm in Sources */,
-				8DC50D9D1F332D8A00D6CCED /* MediaLibraryCb.mm in Sources */,
-				8DC50DC21F38A98F00D6CCED /* DeviceListerCb.mm in Sources */,
-				8DBE03E61F2F6A290061C878 /* VLCGenre.m in Sources */,
-				7D0EF529170885130003ED47 /* VLCFile.m in Sources */,
-				7D0EF52B170885130003ED47 /* VLCLabel.m in Sources */,
-				8D90D0E81F2B7BEF00DBB850 /* VLCPlaylist.m in Sources */,
-				8D1112E51F3A18C1000B4D3C /* VLCMediaSearchAggregate.m in Sources */,
-				8DC50D8E1F321E2300D6CCED /* VLCVideoTrack.m in Sources */,
-				8D90D0EC1F2B9DDC00DBB850 /* VLCHistoryEntry.m in Sources */,
-				8DC817651F2760C900DEEF9D /* VLCMediaMetadata.m in Sources */,
-				7D0EF52C170885130003ED47 /* VLCMediaLibrary.m in Sources */,
-				7D0EF52E170885130003ED47 /* VLCShow.m in Sources */,
-				8D1112E91F3A252A000B4D3C /* VLCSearchAggregate.m in Sources */,
-				7D0EF52F170885130003ED47 /* VLCShowEpisode.m in Sources */,
-				8DC6C4081F1E769B00FB8D07 /* VLCMedia.m in Sources */,
-				8D05F9DC1F309AF9003000B6 /* VLCFolder.m in Sources */,
-				8DC50DA01F335CD800D6CCED /* VLCUtils.m in Sources */,
-				8DC50D921F32226C00D6CCED /* VLCAudioTrack.m in Sources */,
-				7D9E238617AEEA13008485E5 /* VLCAlbumTrack.m in Sources */,
-				8DC50D871F30CBD700D6CCED /* VLCMovie.m in Sources */,
-				8D31CE401F0A6873005A2895 /* VLCArtist.m in Sources */,
-				7D9E238817AEEA71008485E5 /* VLCAlbum.m in Sources */,
+				8D8321FD20162EE100E30ACB /* VLCFile.m in Sources */,
+				8D8321FE20162EE100E30ACB /* VLCLabel.m in Sources */,
+				8D8321FF20162EE100E30ACB /* VLCMediaLibrary.m in Sources */,
+				8D83220020162EE100E30ACB /* VLCShow.m in Sources */,
+				8D83220120162EE100E30ACB /* VLCShowEpisode.m in Sources */,
+				8D83220220162EE100E30ACB /* VLCAlbumTrack.m in Sources */,
+				8D83220320162EE100E30ACB /* VLCAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D2DF7C61B677EE600FB78AB /* Sources */ = {
+		8D83221420162EF100E30ACB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2DF7E81B677F3100FB78AB /* VLCFile.m in Sources */,
-				7D2DF7EA1B677F3100FB78AB /* VLCLabel.m in Sources */,
-				7D2DF7EB1B677F3100FB78AB /* VLCMediaLibrary.m in Sources */,
-				7D2DF7EE1B677F3100FB78AB /* VLCShow.m in Sources */,
-				7D2DF7EF1B677F3100FB78AB /* VLCShowEpisode.m in Sources */,
-				7D2DF7F01B677F3100FB78AB /* VLCAlbum.m in Sources */,
-				7D2DF7F11B677F3100FB78AB /* VLCAlbumTrack.m in Sources */,
+				8D83221520162EF100E30ACB /* VLCFile.m in Sources */,
+				8D83221620162EF100E30ACB /* VLCLabel.m in Sources */,
+				8D83221720162EF100E30ACB /* VLCMediaLibrary.m in Sources */,
+				8D83221820162EF100E30ACB /* VLCShow.m in Sources */,
+				8D83221920162EF100E30ACB /* VLCShowEpisode.m in Sources */,
+				8D83221A20162EF100E30ACB /* VLCAlbum.m in Sources */,
+				8D83221B20162EF100E30ACB /* VLCAlbumTrack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D84E4E61B42BA9900EA7D1F /* Sources */ = {
+		8DD39C7620162F19002E5423 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D84E4E91B42BA9900EA7D1F /* VLCFile.m in Sources */,
-				7D84E4EC1B42BA9900EA7D1F /* VLCLabel.m in Sources */,
-				7D84E4ED1B42BA9900EA7D1F /* VLCMediaLibrary.m in Sources */,
-				7D84E4EF1B42BA9900EA7D1F /* VLCShow.m in Sources */,
-				7D84E4F01B42BA9900EA7D1F /* VLCShowEpisode.m in Sources */,
-				7D84E4F71B42BA9900EA7D1F /* VLCAlbumTrack.m in Sources */,
-				7D84E4F81B42BA9900EA7D1F /* VLCAlbum.m in Sources */,
+				8DD39C7720162F19002E5423 /* VLCDeviceLister.mm in Sources */,
+				8DD39C7820162F19002E5423 /* MediaLibraryCb.mm in Sources */,
+				8DD39C7920162F19002E5423 /* DeviceListerCb.mm in Sources */,
+				8DD39C7A20162F19002E5423 /* VLCGenre.m in Sources */,
+				8DD39C7B20162F19002E5423 /* VLCFile.m in Sources */,
+				8DD39C7C20162F19002E5423 /* VLCLabel.m in Sources */,
+				8DD39C7D20162F19002E5423 /* VLCPlaylist.m in Sources */,
+				8DD39C7E20162F19002E5423 /* VLCMediaSearchAggregate.m in Sources */,
+				8DD39C7F20162F19002E5423 /* VLCVideoTrack.m in Sources */,
+				8DD39C8020162F19002E5423 /* VLCHistoryEntry.m in Sources */,
+				8DD39C8120162F19002E5423 /* VLCMediaMetadata.m in Sources */,
+				8DD39C8220162F19002E5423 /* VLCMediaLibrary.m in Sources */,
+				8DD39C8320162F19002E5423 /* VLCShow.m in Sources */,
+				8DD39C8420162F19002E5423 /* VLCSearchAggregate.m in Sources */,
+				8DD39C8520162F19002E5423 /* VLCShowEpisode.m in Sources */,
+				8DD39C8620162F19002E5423 /* VLCMedia.m in Sources */,
+				8DD39C8720162F19002E5423 /* VLCFolder.m in Sources */,
+				8DD39C8820162F19002E5423 /* VLCUtils.m in Sources */,
+				8DD39C8920162F19002E5423 /* VLCAudioTrack.m in Sources */,
+				8DD39C8A20162F19002E5423 /* VLCAlbumTrack.m in Sources */,
+				8DD39C8B20162F19002E5423 /* VLCMovie.m in Sources */,
+				8DD39C8C20162F19002E5423 /* VLCArtist.m in Sources */,
+				8DD39C8D20162F19002E5423 /* VLCAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +595,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/libmedialibrary/medialibrary/build";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = VLCMediaLibraryKit;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -627,155 +626,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/libmedialibrary/medialibrary/build";
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = VLCMediaLibraryKit;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		7D0EF4AD170883940003ED47 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/MediaLibraryKit.dst;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"$(inherited)",
-					"-lsqlite3",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		7D0EF4AE170883940003ED47 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/MediaLibraryKit.dst;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"$(inherited)",
-					"-lsqlite3",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		7D2DF7D11B677EE600FB78AB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					VLCKIT_READONLY_TARGET,
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "MediaLibraryKit-watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
-				PRODUCT_NAME = MediaLibraryKit;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		7D2DF7D21B677EE600FB78AB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = VLCKIT_READONLY_TARGET;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "MediaLibraryKit-watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.MediaLibraryKit-watchOS";
-				PRODUCT_NAME = MediaLibraryKit;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		7D84E5161B42BA9900EA7D1F /* Debug */ = {
+		8D83221020162EE100E30ACB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -783,9 +640,9 @@
 					armv7s,
 				);
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/MediaLibraryKit.dst;
+				DSTROOT = /tmp/VLCMediaLibraryKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -795,15 +652,15 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "MediaLibraryKit-readonly";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		7D84E5171B42BA9900EA7D1F /* Release */ = {
+		8D83221120162EE100E30ACB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -811,19 +668,170 @@
 					armv7s,
 				);
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/MediaLibraryKit.dst;
+				DSTROOT = /tmp/VLCMediaLibraryKit.dst;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = VLCKIT_READONLY_TARGET;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "MediaLibraryKit-readonly";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8D83222820162EF100E30ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					VLCKIT_READONLY_TARGET,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/VLCMediaLibraryKit-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.VLCMediaLibraryKit-watchOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		8D83222920162EF100E30ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = VLCKIT_READONLY_TARGET;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/VLCMediaLibraryKit-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.videolan.VLCMediaLibraryKit-watchOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		8DD39CA920162F19002E5423 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/VLCMediaLibraryKit.dst;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-lsqlite3",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8DD39CAA20162F19002E5423 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/VLCMediaLibraryKit.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-lsqlite3",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -831,7 +839,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7D0EF499170883940003ED47 /* Build configuration list for PBXProject "MediaLibraryKit" */ = {
+		7D0EF499170883940003ED47 /* Build configuration list for PBXProject "VLCMediaLibraryKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D0EF4AA170883940003ED47 /* Debug */,
@@ -840,29 +848,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D0EF4AC170883940003ED47 /* Build configuration list for PBXNativeTarget "MediaLibraryKit" */ = {
+		8D83220F20162EE100E30ACB /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit-readonly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D0EF4AD170883940003ED47 /* Debug */,
-				7D0EF4AE170883940003ED47 /* Release */,
+				8D83221020162EE100E30ACB /* Debug */,
+				8D83221120162EE100E30ACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D2DF7D01B677EE600FB78AB /* Build configuration list for PBXNativeTarget "MediaLibraryKit-watchOS" */ = {
+		8D83222720162EF100E30ACB /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D2DF7D11B677EE600FB78AB /* Debug */,
-				7D2DF7D21B677EE600FB78AB /* Release */,
+				8D83222820162EF100E30ACB /* Debug */,
+				8D83222920162EF100E30ACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D84E5151B42BA9900EA7D1F /* Build configuration list for PBXNativeTarget "MediaLibraryKit-readonly" */ = {
+		8DD39CA820162F19002E5423 /* Build configuration list for PBXNativeTarget "VLCMediaLibraryKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D84E5161B42BA9900EA7D1F /* Debug */,
-				7D84E5171B42BA9900EA7D1F /* Release */,
+				8DD39CA920162F19002E5423 /* Debug */,
+				8DD39CAA20162F19002E5423 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

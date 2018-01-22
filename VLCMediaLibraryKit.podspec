@@ -5,12 +5,12 @@ Pod::Spec.new do |s|
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
-  MediaLibraryKit is an abstraction of CoreData to be used with for any kind of audio-visual media. It can do thumbnailing, metadata parsing as well as playback state management. It is a proven code based deployed with VLC-iOS since day one.
+  VLCMediaLibraryKit is an abstraction of CoreData to be used with for any kind of audio-visual media. It can do thumbnailing, metadata parsing as well as playback state management. It is a proven code based deployed with VLC-iOS since day one.
   
   This pod depends on an unstable version of MobileVLCKit. It is NOT RECOMMEND to be used in production!
                    DESC
 
-  s.homepage     = "https://code.videolan.org/videolan/MediaLibraryKit"
+  s.homepage     = "https://code.videolan.org/videolan/VLCMediaLibraryKit"
 
   s.license      = { :type => "LGPLv2.1", :file => "COPYING" }
 
@@ -22,13 +22,13 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = "10.7"
   # s.tvos.deployment_target = "9.0"
 
-  s.source       = { :git => "https://code.videolan.org/videolan/MediaLibraryKit.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://code.videolan.org/videolan/VLCMediaLibraryKit.git", :tag => "#{s.version}" }
 
-  s.prefix_header_file = "MediaLibraryKit_Prefix.pch"
+  s.prefix_header_file = "VLCMediaLibraryKit_Prefix.pch"
   s.source_files  = "Headers/Public/*.h"
   s.public_header_files = "Headers/Public/*.h"
 
-  s.header_dir = "MediaLibraryKit"
+  s.header_dir = "VLCMediaLibraryKit"
 
   s.frameworks = "Foundation"
   s.library = 'sqlite3'

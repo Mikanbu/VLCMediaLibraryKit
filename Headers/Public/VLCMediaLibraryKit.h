@@ -1,6 +1,6 @@
 /*****************************************************************************
- * MediaLibraryKit.h
- * MediaLibraryKit
+ * VLCMediaLibraryKit.h
+ * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
  * $Id$
@@ -20,23 +20,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <MediaLibraryKit/VLCAlbum.h>
-#import <MediaLibraryKit/VLCAlbumTrack.h>
-#import <MediaLibraryKit/VLCArtist.h>
-#import <MediaLibraryKit/VLCAudioTrack.h>
-#import <MediaLibraryKit/VLCFile.h>
-#import <MediaLibraryKit/VLCFolder.h>
-#import <MediaLibraryKit/VLCGenre.h>
-#import <MediaLibraryKit/VLCHistoryEntry.h>
-#import <MediaLibraryKit/VLCLabel.h>
-#import <MediaLibraryKit/VLCMedia.h>
-#import <MediaLibraryKit/VLCMediaLibrary.h>
-#import <MediaLibraryKit/VLCMediaMetadata.h>
-#import <MediaLibraryKit/VLCMovie.h>
-#import <MediaLibraryKit/VLCPlaylist.h>
-#import <MediaLibraryKit/VLCShow.h>
-#import <MediaLibraryKit/VLCShowEpisode.h>
-#import <MediaLibraryKit/VLCVideoTrack.h>
+#import <VLCMediaLibraryKit/VLCAlbum.h>
+#import <VLCMediaLibraryKit/VLCAlbumTrack.h>
+#import <VLCMediaLibraryKit/VLCArtist.h>
+#import <VLCMediaLibraryKit/VLCAudioTrack.h>
+#import <VLCMediaLibraryKit/VLCFile.h>
+#import <VLCMediaLibraryKit/VLCFolder.h>
+#import <VLCMediaLibraryKit/VLCGenre.h>
+#import <VLCMediaLibraryKit/VLCHistoryEntry.h>
+#import <VLCMediaLibraryKit/VLCLabel.h>
+#import <VLCMediaLibraryKit/VLCMedia.h>
+#import <VLCMediaLibraryKit/VLCMediaLibrary.h>
+#import <VLCMediaLibraryKit/VLCMediaMetadata.h>
+#import <VLCMediaLibraryKit/VLCMovie.h>
+#import <VLCMediaLibraryKit/VLCPlaylist.h>
+#import <VLCMediaLibraryKit/VLCShow.h>
+#import <VLCMediaLibraryKit/VLCShowEpisode.h>
+#import <VLCMediaLibraryKit/VLCVideoTrack.h>
 
 
 @class VLCAlbum;
