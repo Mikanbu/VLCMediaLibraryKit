@@ -1,4 +1,4 @@
-# MediaLibraryKit
+# VLCMediaLibraryKit
 
 This is an experimental version of MediaLibraryKit for [GSoC 2017 with VideoLAN][2].
 
@@ -11,17 +11,13 @@ Therefore changing the whole structure of MLKit.
 
 For now this version is available either using CocoaPods or manual installation.
 
-### CocoaPods
-
-`pod 'MediaLibraryKit-unstable', :git => 'git://github.com/TheHungryBu/MediaLibraryKit.git', :branch => 'unstable'`
-
 ### Manually
 
-`git clone git@github.com:TheHungryBu/MediaLibraryKit.git`
+`git clone git@github.com:TheHungryBu/VLCMediaLibraryKit.git`
 
 ## Building
 
-A build script named `buildMediaLibraryKit.sh` is available on the repository.
+A build script named `buildVLCMediaLibraryKit.sh` is available on the repository.
 
 **Usage:**
 
@@ -32,30 +28,16 @@ A build script named `buildMediaLibraryKit.sh` is available on the repository.
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
+    -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
 ```
 
 **Example:**
 
-`./buildMediaLibraryKit.sh -vc`
+`./buildVLCMediaLibraryKit.sh -vc`
 
-After a successfull building, a `MediaLibraryKit.framework` should be found in the `build` directory.
+`./buildVLCMediaLibraryKit.sh -vca aarch64`
 
-**Notes:**
-
-Currently builds by default for the following architectures:
-
-```
-* armv7
-* armv7s
-* aarch64
-```
-
-Please use the `-s` option to enable in addition of previously said architecture the build for the following architectures:
-
-```
-* i386
-* x86_64
-```
+After a successfull building, a `VLCMediaLibraryKit.framework` should be found in the `build` directory.
 
 [1]: https://code.videolan.org/videolan/medialibrary
 [2]: https://summerofcode.withgoogle.com/projects/#6366563499245568
