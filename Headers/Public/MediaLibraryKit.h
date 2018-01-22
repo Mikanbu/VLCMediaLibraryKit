@@ -1,9 +1,9 @@
 /*****************************************************************************
+ * MediaLibraryKit.h
  * MediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2013 Felix Paul Kühne
- *
- * Authors: Felix Paul Kühne <fkuehne # videolan.org>
+ * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
