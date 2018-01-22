@@ -20,7 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "VLCDeviceLister.h"
+#import "VLCDeviceLister.h"
 
 std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCDeviceLister::devices() const
 {

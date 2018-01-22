@@ -36,9 +36,9 @@
 #import "VLCMediaSearchAggregate.h"
 #import "VLCSearchAggregate.h"
 
-#include "MediaLibraryCb.h"
-#include "DeviceListerCb.h"
-#include "VLCDeviceLister.h"
+#import "MediaLibraryCb.h"
+#import "DeviceListerCb.h"
+#import "VLCDeviceLister.h"
 
 @interface VLCMediaLibrary ()
 {

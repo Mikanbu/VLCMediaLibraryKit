@@ -27,7 +27,7 @@
 # import <Foundation/Foundation.h>
 #endif
 
-#include "Medialibrary.h"
+#import "Medialibrary.h"
 
 
 #if TARGET_OS_IPHONE

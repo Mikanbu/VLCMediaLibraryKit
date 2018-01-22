@@ -20,7 +20,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "MediaLibraryCb.h"
+#import "MediaLibraryCb.h"
 
 #import "VLCAlbumTrack+Init.h"
 #import "VLCUtils.h"
