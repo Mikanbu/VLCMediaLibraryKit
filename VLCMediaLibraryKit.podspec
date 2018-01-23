@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 
   s.description  = <<-DESC
   VLCMediaLibraryKit is an abstraction of CoreData to be used with for any kind of audio-visual media. It can do thumbnailing, metadata parsing as well as playback state management. It is a proven code based deployed with VLC-iOS since day one.
-  
+
   This pod depends on an unstable version of MobileVLCKit. It is NOT RECOMMEND to be used in production!
                    DESC
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://code.videolan.org/videolan/VLCMediaLibraryKit.git", :tag => "#{s.version}" }
 
   s.prefix_header_file = "VLCMediaLibraryKit_Prefix.pch"
-  s.source_files  = "Headers/Public/*.h"
+  s.source_files  = "Headers/Internal/*.h", "Sources/*.m", "Sources/*.mm"
   s.public_header_files = "Headers/Public/*.h"
 
   s.header_dir = "VLCMediaLibraryKit"
