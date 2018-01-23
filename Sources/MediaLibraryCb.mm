@@ -22,13 +22,13 @@
 
 #import "MediaLibraryCb.h"
 
-#import "VLCAlbumTrack+Init.h"
-#import "VLCUtils.h"
+#import "VLCMLAlbumTrack+Init.h"
+#import "VLCMLUtils.h"
 
 namespace medialibrary
 {
 
-MediaLibraryCb::MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate )
+    MediaLibraryCb::MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate )
     : m_delegate(delegate)
 {
 }
@@ -47,7 +47,7 @@ NSArray<NSNumber *> *MediaLibraryCb::intVectorToArray( std::vector<int64_t> vect
 
 #pragma mark - Setter
 
-void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
+    void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
 {
     this->m_delegate = delegate;
 }
@@ -57,14 +57,14 @@ void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
 void MediaLibraryCb::onMediaAdded( std::vector<MediaPtr> media )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaAdded:)]) {
-        [this->m_delegate onMediaAdded:[VLCUtils arrayFromMediaPtrVector:media]];
+        [this->m_delegate onMediaAdded:[VLCMLUtils arrayFromMediaPtrVector:media]];
     }
 }
 
 void MediaLibraryCb::onMediaUpdated( std::vector<MediaPtr> media )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaUpdated:)]) {
-        [this->m_delegate onMediaUpdated:[VLCUtils arrayFromMediaPtrVector:media]];
+        [this->m_delegate onMediaUpdated:[VLCMLUtils arrayFromMediaPtrVector:media]];
     }
 }
 
@@ -80,14 +80,14 @@ void MediaLibraryCb::onMediaDeleted( std::vector<int64_t> mediaIds )
 void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onArtistsAdded:)]) {
-        [this->m_delegate onArtistsAdded:[VLCUtils arrayFromArtistPtrVector:artists]];
+        [this->m_delegate onArtistsAdded:[VLCMLUtils arrayFromArtistPtrVector:artists]];
     }
 }
 
 void MediaLibraryCb::onArtistsModified( std::vector<ArtistPtr> artists )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onArtistsModified:)]) {
-        [this->m_delegate onArtistsModified:[VLCUtils arrayFromArtistPtrVector:artists]];
+        [this->m_delegate onArtistsModified:[VLCMLUtils arrayFromArtistPtrVector:artists]];
     }
 }
 
@@ -103,14 +103,14 @@ void MediaLibraryCb::onArtistsDeleted( std::vector<int64_t> artistsIds )
 void MediaLibraryCb::onAlbumsAdded( std::vector<AlbumPtr> albums )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onAlbumsAdded:)]) {
-        [this->m_delegate onAlbumsAdded:[VLCUtils arrayFromAlbumPtrVector:albums]];
+        [this->m_delegate onAlbumsAdded:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
     }
 }
 
 void MediaLibraryCb::onAlbumsModified( std::vector<AlbumPtr> albums )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onAlbumsModified:)]) {
-        [this->m_delegate onAlbumsModified:[VLCUtils arrayFromAlbumPtrVector:albums]];
+        [this->m_delegate onAlbumsModified:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
     }
 }
 
@@ -130,7 +130,7 @@ void MediaLibraryCb::onTracksAdded( std::vector<AlbumTrackPtr> tracks )
 
         for ( const auto &track : tracks )
         {
-            [res addObject:[[VLCAlbumTrack alloc] initWithAlbumTrackPtr:track]];
+            [res addObject:[[VLCMLAlbumTrack alloc] initWithAlbumTrackPtr:track]];
         }
         [this->m_delegate onTracksAdded:res];
     }
@@ -148,14 +148,14 @@ void MediaLibraryCb::onTracksDeleted( std::vector<int64_t> trackIds )
 void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onPlaylistsAdded:)]) {
-        [this->m_delegate onPlaylistsAdded:[VLCUtils arrayFromPlaylistPtrVector:playlists]];
+        [this->m_delegate onPlaylistsAdded:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
     }
 }
 
 void MediaLibraryCb::onPlaylistsModified( std::vector<PlaylistPtr> playlists )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onPlaylistsModified:)]) {
-        [this->m_delegate onPlaylistsModified:[VLCUtils arrayFromPlaylistPtrVector:playlists]];
+        [this->m_delegate onPlaylistsModified:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
     }
 }
 

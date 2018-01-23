@@ -22,12 +22,12 @@
 
 #import "DeviceListerCb.h"
 
-medialibrary::DeviceListerCb::DeviceListerCb( id<VLCDeviceListerDelegate> delegate )
+medialibrary::DeviceListerCb::DeviceListerCb( id<VLCMLDeviceListerDelegate> delegate )
     : m_delegate(delegate)
 {
 }
 
-void medialibrary::DeviceListerCb::setDelegate( id<VLCDeviceListerDelegate> delegate )
+void medialibrary::DeviceListerCb::setDelegate( id<VLCMLDeviceListerDelegate> delegate )
 {
     this->m_delegate = delegate;
 }

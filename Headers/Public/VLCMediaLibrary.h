@@ -20,30 +20,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class VLCFile, VLCLabel, VLCMedia, VLCMediaSearchAggregate, VLCAlbum, VLCAlbumTrack, VLCArtist, VLCPlaylist, VLCHistoryEntry, VLCGenre, VLCFolder, VLCShow, VLCMovie, VLCSearchAggregate;
+@class VLCMLFile, VLCMLLabel, VLCMLMedia, VLCMLMediaSearchAggregate, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
 
-typedef NS_ENUM (NSUInteger, VLCSortingCriteria) {
+typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     /*
      * Default depends on the entity type:
      * - By track number (and disc number) for album tracks
      * - Alphabetical order for others
      */
-    VLCSortingCriteriaDefault,
-    VLCSortingCriteriaAlpha,
-    VLCSortingCriteriaDuration,
-    VLCSortingCriteriaInsertionDate,
-    VLCSortingCriteriaLastModificationDate,
-    VLCSortingCriteriaReleaseDate,
-    VLCSortingCriteriaFileSize,
-    VLCSortingCriteriaArtist
+    VLCMLSortingCriteriaDefault,
+    VLCMLSortingCriteriaAlpha,
+    VLCMLSortingCriteriaDuration,
+    VLCMLSortingCriteriaInsertionDate,
+    VLCMLSortingCriteriaLastModificationDate,
+    VLCMLSortingCriteriaReleaseDate,
+    VLCMLSortingCriteriaFileSize,
+    VLCMLSortingCriteriaArtist
 };
 
-typedef NS_ENUM (NSUInteger, VLCLogLevel) {
-    VLCLogLevelVerbose,
-    VLCLogLevelDebug,
-    VLCLogLevelInfo,
-    VLCLogLevelWarning,
-    VLCLogLevelError
+typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
+    VLCMLLogLevelVerbose,
+    VLCMLLogLevelDebug,
+    VLCMLLogLevelInfo,
+    VLCMLLogLevelWarning,
+    VLCMLLogLevelError
 };
 
 #pragma mark - VLCMediaLibraryDelegate
@@ -53,23 +53,23 @@ typedef NS_ENUM (NSUInteger, VLCLogLevel) {
 
 @optional
 
-- (void)onMediaAdded:(NSArray<VLCMedia *> *)media;
-- (void)onMediaUpdated:(NSArray<VLCMedia *> *)media;
+- (void)onMediaAdded:(NSArray<VLCMLMedia *> *)media;
+- (void)onMediaUpdated:(NSArray<VLCMLMedia *> *)media;
 - (void)onMediaDeleted:(NSArray<NSNumber *> *)mediaIds;
 
-- (void)onArtistsAdded:(NSArray<VLCArtist *> *)artists;
-- (void)onArtistsModified:(NSArray<VLCArtist *> *)artists;
+- (void)onArtistsAdded:(NSArray<VLCMLArtist *> *)artists;
+- (void)onArtistsModified:(NSArray<VLCMLArtist *> *)artists;
 - (void)onArtistsDeleted:(NSArray<NSNumber *> *)artistsIds;
 
-- (void)onAlbumsAdded:(NSArray<VLCAlbum *> *)albums;
-- (void)onAlbumsModified:(NSArray<VLCAlbum *> *)albums;
+- (void)onAlbumsAdded:(NSArray<VLCMLAlbum *> *)albums;
+- (void)onAlbumsModified:(NSArray<VLCMLAlbum *> *)albums;
 - (void)onAlbumsDeleted:(NSArray<NSNumber *> *)albumsIds;
 
-- (void)onTracksAdded:(NSArray<VLCAlbumTrack *> *)tracks;
+- (void)onTracksAdded:(NSArray<VLCMLAlbumTrack *> *)tracks;
 - (void)onTracksDeleted:(NSArray<NSNumber *> *)tracks;
 
-- (void)onPlaylistsAdded:(NSArray<VLCPlaylist *> *)playlists;
-- (void)onPlaylistsModified:(NSArray<VLCPlaylist *> *)playlists;
+- (void)onPlaylistsAdded:(NSArray<VLCMLPlaylist *> *)playlists;
+- (void)onPlaylistsModified:(NSArray<VLCMLPlaylist *> *)playlists;
 - (void)onPlaylistsDeleted:(NSArray<NSNumber *> *)playlistsIds;
 
 - (void)onDiscoveryStarted:(NSString *)entryPoint;
@@ -89,10 +89,10 @@ typedef NS_ENUM (NSUInteger, VLCLogLevel) {
 
 @end
 
-#pragma mark - VLCDeviceListerDelegate
+#pragma mark - VLCMLDeviceListerDelegate
 #pragma mark -
 
-@protocol VLCDeviceListerDelegate <NSObject>
+@protocol VLCMLDeviceListerDelegate <NSObject>
 
 @optional
 
@@ -110,7 +110,7 @@ typedef NS_ENUM (NSUInteger, VLCLogLevel) {
 @property (nonatomic, copy) NSString *dbPath;
 @property (nonatomic, copy) NSString *thumbnailPath;
 @property (nonatomic, weak) id <VLCMediaLibraryDelegate> delegate;
-@property (nonatomic, weak) id <VLCDeviceListerDelegate> deviceListerDelegate;
+@property (nonatomic, weak) id <VLCMLDeviceListerDelegate> deviceListerDelegate;
 
 #pragma mark -
 
@@ -123,75 +123,75 @@ typedef NS_ENUM (NSUInteger, VLCLogLevel) {
 - (BOOL)start;
 - (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
 
-- (void)setVerbosity:(VLCLogLevel)level;
+- (void)setVerbosity:(VLCMLLogLevel)level;
 
 #pragma mark -
 #pragma mark Medialibrary main methods
 
 #pragma mark - Label
 
-- (VLCLabel *)createLabelWithName:(NSString *)name;
-- (BOOL)deleteLabel:(VLCLabel *)label;
+- (VLCMLLabel *)createLabelWithName:(NSString *)name;
+- (BOOL)deleteLabel:(VLCMLLabel *)label;
 
 #pragma mark - Media
 
-- (VLCMedia *)mediaWithIdentifier:(int64_t)identifier;
-- (VLCMedia *)mediaWithMrl:(NSString *)mrl;
-- (VLCMedia *)addMediaWithMrl:(NSString *)mrl;
-- (NSArray<VLCMedia *> *)audioFilesWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
-- (NSArray<VLCMedia *> *)videoFilesWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
+- (VLCMLMedia *)mediaWithIdentifier:(int64_t)identifier;
+- (VLCMLMedia *)mediaWithMrl:(NSString *)mrl;
+- (VLCMLMedia *)addMediaWithMrl:(NSString *)mrl;
+- (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Album
 
-- (VLCAlbum *)albumWithIdentifier:(int64_t)identifier;
-- (NSArray<VLCAlbum *> *)albumsWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
+- (VLCMLAlbum *)albumWithIdentifier:(int64_t)identifier;
+- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Show
 
-- (VLCShow *)showWithName:(NSString *)name;
+- (VLCMLShow *)showWithName:(NSString *)name;
 
 #pragma mark - Movie
 
-- (VLCMovie *)movieWithName:(NSString *)name;
+- (VLCMLMovie *)movieWithName:(NSString *)name;
 
 #pragma mark - Artist
 
-- (VLCArtist *)artistWithIdentifier:(int64_t)identifier;
-- (NSArray<VLCArtist *> *)artistsWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
+- (VLCMLArtist *)artistWithIdentifier:(int64_t)identifier;
+- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Genre
 
-- (NSArray<VLCGenre *> *)genresWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
-- (VLCGenre *)genreWithIdentifier:(int64_t)identifier;
+- (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (VLCMLGenre *)genreWithIdentifier:(int64_t)identifier;
 
 #pragma mark - Playlist
 
-- (VLCPlaylist *)createPlaylistWithName:(NSString *)name;
-- (NSArray<VLCPlaylist *> *)playlistsWithSortingCriteria:(VLCSortingCriteria)criteria desc:(BOOL)desc;
-- (VLCPlaylist *)playlistWithIdentifier:(int64_t)identifier;
+- (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
+- (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (VLCMLPlaylist *)playlistWithIdentifier:(int64_t)identifier;
 - (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier;
 
 #pragma mark - History
 
-- (BOOL)addMediaToStreamHistory:(VLCMedia *)media;
-- (NSArray<VLCHistoryEntry *> *)lastStreamsPlayed;
-- (NSArray<VLCMedia *> *)lastMediaPlayed;
+- (BOOL)addMediaToStreamHistory:(VLCMLMedia *)media;
+- (NSArray<VLCMLHistoryEntry *> *)lastStreamsPlayed;
+- (NSArray<VLCMLMedia *> *)lastMediaPlayed;
 - (BOOL)clearHistory;
 
 #pragma mark - Search
 
-- (VLCMediaSearchAggregate *)searchMedia:(NSString *)pattern;
-- (NSArray<VLCPlaylist *> *)searchPlaylistsByName:(NSString *)name;
-- (NSArray<VLCAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
-- (NSArray<VLCGenre *> *)searchGenreByName:(NSString *)name;
-- (NSArray<VLCArtist *> *)searchArtistsByName:(NSString *)name;
-- (VLCSearchAggregate *)search:(NSString *)pattern;
+- (VLCMLMediaSearchAggregate *)searchMedia:(NSString *)pattern;
+- (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
+- (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
+- (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;
+- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name;
+- (VLCMLSearchAggregate *)search:(NSString *)pattern;
 
 #pragma mark - Discover
 
 - (void)discoverOnEntryPoint:(NSString *)path;
 - (void)enableDiscoverNetwork:(BOOL)enable;
-- (NSArray<VLCFolder *> *)entryPoints;
+- (NSArray<VLCMLFolder *> *)entryPoints;
 - (void)removeEntryPointWithPath:(NSString *)path;
 
 #pragma mark - Folder

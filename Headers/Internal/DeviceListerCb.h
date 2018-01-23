@@ -28,8 +28,8 @@ namespace medialibrary
 class DeviceListerCb : public IDeviceListerCb
 {
 public:
-    DeviceListerCb( id<VLCDeviceListerDelegate> delegate );
-    void setDelegate( id<VLCDeviceListerDelegate> delegate );
+    DeviceListerCb( id<VLCMLDeviceListerDelegate> delegate );
+    void setDelegate( id<VLCMLDeviceListerDelegate> delegate );
 
     /**
      * @brief onDevicePlugged Shall be invoked when a known device gets plugged
@@ -53,7 +53,7 @@ public:
     virtual bool isDeviceKnown( const std::string& uuid ) const;
 
 private:
-    id<VLCDeviceListerDelegate> m_delegate;
+    id<VLCMLDeviceListerDelegate> m_delegate;
 };
 
 }
