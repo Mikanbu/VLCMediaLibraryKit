@@ -231,8 +231,6 @@ buildMedialibrary()
                     log "warning" "Build of medialibrary dependencies skipped..."
                     LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}"
                     LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}/include/"
-                    SQLITE_BUILD_DIR="${SQLITE_DIR}/build/${arch}"
-                    SQLITE_INCLUDE_DIR="${SQLITE_DIR}/installation/${arch}/include/"
                 fi
 
                 if [ "$VERBOSE" = "yes" ]; then
@@ -250,8 +248,6 @@ buildMedialibrary()
                                        OBJCXX=$OBJCXX_COMPILATOR \
                                        LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
                                        LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}"
-                                       SQLITE_LIBS="-L${SQLITE_BUILD_DIR} -lsqlite3" \
-                                       SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
 
                     log "info" "Starting make in ${buildDir}..."
                     make -C $buildDir $makeOptions > ${out}
