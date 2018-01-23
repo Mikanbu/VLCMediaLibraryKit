@@ -113,9 +113,7 @@
 
 - (BOOL)start
 {
-    BOOL success = _ml->start();
-
-    return success;
+    return _ml->start();
 }
 
 - (VLCMLInitializeResult)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath
