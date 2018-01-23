@@ -38,6 +38,23 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     VLCMLSortingCriteriaArtist
 };
 
+typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
+
+    //< Everything worked out fine
+    VLCMLInitializeResultSuccess,
+
+    //< Should be considered the same as Success, but is an indication of
+    // unrequired subsequent calls to initialize.
+    VLCMLInitializeResultAlreadyInitialized,
+
+    //< A fatal error occured, the IMediaLibrary instance should be destroyed
+    VLCMLInitializeResultFailed,
+
+    //< The database was reset, the caller needs to re-configure folders to
+    // discover at the bare minimum.
+    VLCMLInitializeResultDbReset
+};
+
 typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
     VLCMLLogLevelVerbose,
     VLCMLLogLevelDebug,
@@ -121,7 +138,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 + (instancetype)sharedMediaLibrary;
 
 - (BOOL)start;
-- (BOOL)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
+- (VLCMLInitializeResult)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
 
 - (void)setVerbosity:(VLCMLLogLevel)level;
 
