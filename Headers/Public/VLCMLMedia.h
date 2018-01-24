@@ -20,6 +20,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMediaMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
@@ -69,7 +71,7 @@ typedef NS_ENUM(uint32_t, VLCMLMetadataType) {
     VLCMLMetadataTypeApplicationSpecific = 250,
 };
 
-@interface VLCMLMedia : NSObject
+@interface VLCMLMedia : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *thumbnail;
@@ -81,8 +83,6 @@ typedef NS_ENUM(uint32_t, VLCMLMetadataType) {
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Getters/Setters
-
-- (int64_t)identifier;
 
 - (VLCMLMediaType)type;
 - (VLCMLMediaSubType)subType;

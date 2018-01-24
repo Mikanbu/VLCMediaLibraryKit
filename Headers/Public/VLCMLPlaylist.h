@@ -20,23 +20,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLMedia;
 
-@interface VLCMLPlaylist : NSObject
+@interface VLCMLPlaylist : NSObject <VLCMLObject>
 
 @property(nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)name;
 - (BOOL)updateName:(NSString *)name;
 - (uint)creationDate;
 - (NSArray<VLCMLMedia *> *)media;
 
-- (BOOL)appendMediaWithIdentifier:(int64_t)identifier;
-- (BOOL)addMediaWithIdentifier:(int64_t)identifier at:(uint)position;
-- (BOOL)moveMediaWithIdentifier:(int64_t)identifier at:(uint)position;
-- (BOOL)removeMediaWithIdentifier:(int64_t)identifier;
+- (BOOL)appendMediaWithIdentifier:(VLCMLIdentifier)identifier;
+- (BOOL)addMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position;
+- (BOOL)moveMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position;
+- (BOOL)removeMediaWithIdentifier:(VLCMLIdentifier)identifier;
 
 @end

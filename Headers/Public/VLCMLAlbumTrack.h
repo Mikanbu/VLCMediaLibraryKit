@@ -20,9 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLArtist, VLCMLGenre, VLCMLAlbum, VLCMLMedia;
 
-@interface VLCMLAlbumTrack : NSObject
+@interface VLCMLAlbumTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, strong) VLCMLArtist *artist;
 @property (nonatomic, strong) VLCMLGenre *genre;
@@ -31,7 +33,7 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 /**
  * @brief Returns the artist, as tagged in the media.
  * This can be different from the associated media's artist.

@@ -20,9 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLShowEpisode;
 
-@interface VLCMLShow : NSObject
+@interface VLCMLShow : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSDate *releaseDate;
@@ -33,7 +35,7 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)name;
 - (NSDate *)releaseDate;
 - (NSString *)shortSummary;

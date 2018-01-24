@@ -31,7 +31,7 @@
 
 @implementation VLCMLFile
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _file->id();
 }

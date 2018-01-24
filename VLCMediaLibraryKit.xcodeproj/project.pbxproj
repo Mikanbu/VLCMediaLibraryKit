@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D63525B2018997A003A87E4 /* VLCMLObject.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D6352582018919B003A87E4 /* VLCMLObject.h */; };
 		8D8321FD20162EE100E30ACB /* VLCMLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCMLFile.m */; };
 		8D8321FE20162EE100E30ACB /* VLCMLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCMLLabel.m */; };
 		8D8321FF20162EE100E30ACB /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
@@ -112,6 +113,7 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8D63525B2018997A003A87E4 /* VLCMLObject.h in Copy Files (20 items) */,
 				8DD39C9420162F19002E5423 /* VLCMLMedia.h in Copy Files (20 items) */,
 				8DD39C9520162F19002E5423 /* VLCMLArtist.h in Copy Files (20 items) */,
 				8DD39C9620162F19002E5423 /* VLCMLMediaSearchAggregate.h in Copy Files (20 items) */,
@@ -171,6 +173,7 @@
 		8D3D64DA1F1D671F008E178E /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = libmedialibrary/medialibrary/build/libjpeg.a; sourceTree = "<group>"; };
 		8D44EC631F03C084007F2C54 /* libmedialibrary_macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary_macos.a; path = ../medialibrary/build/.libs/libmedialibrary_macos.a; sourceTree = "<group>"; };
 		8D44EC641F03C084007F2C54 /* libmedialibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedialibrary.a; path = ../medialibrary/build/.libs/libmedialibrary.a; sourceTree = "<group>"; };
+		8D6352582018919B003A87E4 /* VLCMLObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLObject.h; sourceTree = "<group>"; };
 		8D83221220162EE100E30ACB /* libVLCMediaLibraryKit-readonly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVLCMediaLibraryKit-readonly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D83222A20162EF100E30ACB /* VLCMediaLibraryKit_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VLCMediaLibraryKit_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D90D0DD1F2A41DB00DBB850 /* VLCMLMedia+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLMedia+Init.h"; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 				8DC817631F2760C900DEEF9D /* VLCMLMediaMetadata.h */,
 				8D1112E01F3A1828000B4D3C /* VLCMLMediaSearchAggregate.h */,
 				8DC50D851F30CBD700D6CCED /* VLCMLMovie.h */,
+				8D6352582018919B003A87E4 /* VLCMLObject.h */,
 				8D90D0E61F2B7BEF00DBB850 /* VLCMLPlaylist.h */,
 				8D1112E71F3A2511000B4D3C /* VLCMLSearchAggregate.h */,
 				7D0EF514170885130003ED47 /* VLCMLShow.h */,

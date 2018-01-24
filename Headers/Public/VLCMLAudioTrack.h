@@ -20,7 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@interface VLCMLAudioTrack : NSObject
+#import "VLCMLObject.h"
+
+@interface VLCMLAudioTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *codec;
 @property (nonatomic, copy) NSString *audioDescription;
@@ -28,7 +30,7 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)codec;
 - (uint)bitrate;
 - (uint)sampleRate;

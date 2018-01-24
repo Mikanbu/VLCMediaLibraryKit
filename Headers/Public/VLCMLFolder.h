@@ -20,7 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@interface VLCMLFolder : NSObject
+#import "VLCMLObject.h"
+
+@interface VLCMLFolder : NSObject <VLCMLObject>
 
 /**
  * @brief mrl Returns the full mrl for this folder.
@@ -34,7 +36,7 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)mrl;
 - (BOOL)isPresent;
 

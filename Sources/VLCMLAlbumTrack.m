@@ -35,7 +35,7 @@
 
 @implementation VLCMLAlbumTrack
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _albumTrackPtr->id();
 }

@@ -31,7 +31,7 @@
 
 @implementation VLCMLVideoTrack
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _videoTrack->id();
 }

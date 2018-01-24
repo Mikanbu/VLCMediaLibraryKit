@@ -30,7 +30,7 @@
 
 @implementation VLCMLPlaylist
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _playlist->id();
 }
@@ -58,22 +58,22 @@
     return nil;
 }
 
-- (BOOL)appendMediaWithIdentifier:(int64_t)identifier
+- (BOOL)appendMediaWithIdentifier:(VLCMLIdentifier)identifier
 {
     return _playlist->append(identifier);
 }
 
-- (BOOL)addMediaWithIdentifier:(int64_t)identifier at:(uint)position
+- (BOOL)addMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position
 {
     return _playlist->add(identifier, position);
 }
 
-- (BOOL)moveMediaWithIdentifier:(int64_t)identifier at:(uint)position
+- (BOOL)moveMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position
 {
     return _playlist->move(identifier, position);
 }
 
-- (BOOL)removeMediaWithIdentifier:(int64_t)identifier
+- (BOOL)removeMediaWithIdentifier:(VLCMLIdentifier)identifier
 {
     return _playlist->remove(identifier);
 }

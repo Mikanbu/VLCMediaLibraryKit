@@ -20,6 +20,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLFile, VLCMLLabel, VLCMLMedia, VLCMLMediaSearchAggregate, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
 
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
@@ -152,7 +154,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 
 #pragma mark - Media
 
-- (VLCMLMedia *)mediaWithIdentifier:(int64_t)identifier;
+- (VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier;
 - (VLCMLMedia *)mediaWithMrl:(NSString *)mrl;
 - (VLCMLMedia *)addMediaWithMrl:(NSString *)mrl;
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
@@ -160,7 +162,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 
 #pragma mark - Album
 
-- (VLCMLAlbum *)albumWithIdentifier:(int64_t)identifier;
+- (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Show
@@ -173,20 +175,20 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 
 #pragma mark - Artist
 
-- (VLCMLArtist *)artistWithIdentifier:(int64_t)identifier;
+- (VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier;
 - (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Genre
 
 - (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
-- (VLCMLGenre *)genreWithIdentifier:(int64_t)identifier;
+- (VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Playlist
 
 - (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
 - (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
-- (VLCMLPlaylist *)playlistWithIdentifier:(int64_t)identifier;
-- (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier;
+- (VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier;
+- (BOOL)deletePlaylistWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - History
 

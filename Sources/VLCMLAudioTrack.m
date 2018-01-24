@@ -31,7 +31,7 @@
 
 @implementation VLCMLAudioTrack
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _audioTrack->id();
 }

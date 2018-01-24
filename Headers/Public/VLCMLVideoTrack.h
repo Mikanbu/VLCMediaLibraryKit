@@ -20,7 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@interface VLCMLVideoTrack : NSObject
+#import "VLCMLObject.h"
+
+@interface VLCMLVideoTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *codec;
 @property (nonatomic, copy) NSString *videoDescription;
@@ -28,7 +30,7 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)codec;
 - (uint)width;
 - (uint)height;

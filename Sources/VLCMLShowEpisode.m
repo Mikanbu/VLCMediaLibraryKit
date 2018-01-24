@@ -33,7 +33,7 @@
 @implementation VLCMLShowEpisode
 
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _showEpisode->id();
 }

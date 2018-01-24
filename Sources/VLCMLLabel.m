@@ -31,7 +31,7 @@
 
 @implementation VLCMLLabel
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _label->id();
 }

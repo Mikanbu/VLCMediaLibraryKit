@@ -20,15 +20,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 @class VLCMLMedia;
 
-@interface VLCMLLabel : NSObject
+@interface VLCMLLabel : NSObject <VLCMLObject>
 
 @property(nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)name;
 - (NSArray<VLCMLMedia *> *)files;
 

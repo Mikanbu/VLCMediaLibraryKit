@@ -40,8 +40,7 @@
 
 #pragma mark - Getters/Setters
 
-- (int64_t)identifier
-{
+- (VLCMLIdentifier)identifier {
     return _media->id();
 }
 
@@ -192,7 +191,6 @@
 {
     return _media->setMetadata((medialibrary::IMedia::MetadataType)type, value);
 }
-
 
 @end
 

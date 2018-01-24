@@ -20,17 +20,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria);
 
 @class VLCMLArtist, VLCMLMedia, VLCMLAlbum;
 
-@interface VLCMLGenre : NSObject
+@interface VLCMLGenre : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)name;
 - (uint32_t)numberOfTracks;
 

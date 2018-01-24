@@ -32,7 +32,7 @@
 
 @implementation VLCMLMovie
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _movie->id();
 }

@@ -37,7 +37,7 @@
 
 #pragma mark - Getters/Setters
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _album->id();
 }

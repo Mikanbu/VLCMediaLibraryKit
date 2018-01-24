@@ -20,6 +20,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
+
 typedef NS_ENUM(NSInteger, VLCMLFileType) {
     /// Unknown type, so far
     Unknown,
@@ -33,13 +35,13 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
     Subtitles
 };
 
-@interface VLCMLFile : NSObject
+@interface VLCMLFile : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)identifier;
+- (VLCMLIdentifier)identifier;
 - (NSString *)mrl;
 - (VLCMLFileType)type;
 - (uint)lastModificationDate;

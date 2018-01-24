@@ -1,5 +1,5 @@
 /*****************************************************************************
- * VLCMLArtist.h
+ * VLCMLObject.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -20,39 +20,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "VLCMLObject.h"
+typedef int64_t VLCMLIdentifier;
 
-typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
-
-@class VLCMLAlbum, VLCMLMedia;
-
-@interface VLCMLArtist : NSObject <VLCMLObject>
-
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *shortBio;
-@property (nonatomic, copy) NSString *artworkMrl;
-@property (nonatomic, copy) NSString *musicBrainzId;
-
-
-- (instancetype)init NS_UNAVAILABLE;
+@protocol VLCMLObject
 
 - (VLCMLIdentifier)identifier;
-
-- (NSString *)name;
-- (NSString *)shortBio;
-- (NSString *)artworkMrl;
-- (NSString *)musicBrainzId;
-
-/**
- * Return all albums from the current artist.
- * \return a NSArray of VLCMLAlbum object.
- */
-- (NSArray<VLCMLAlbum *> *)albums:(VLCMLSortingCriteria)sortingCriteria;
-
-/**
- * Return all medias from the current artist.
- * \return a NSArray of VLCMLMedia object.
- */
-- (NSArray<VLCMLMedia *> *)media:(VLCMLSortingCriteria)sortingCriteria;
 
 @end

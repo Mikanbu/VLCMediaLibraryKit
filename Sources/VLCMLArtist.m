@@ -34,7 +34,7 @@
 
 #pragma mark - Getters/Setters
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _artist->id();
 }

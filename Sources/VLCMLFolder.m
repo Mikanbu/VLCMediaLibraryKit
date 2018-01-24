@@ -31,7 +31,7 @@
 
 @implementation VLCMLFolder
 
-- (int64_t)identifier
+- (VLCMLIdentifier)identifier
 {
     return _folder->id();
 }

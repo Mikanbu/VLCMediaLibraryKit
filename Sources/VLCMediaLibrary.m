@@ -151,7 +151,7 @@
 
 #pragma mark - Media
 
-- (VLCMLMedia *)mediaWithIdentifier:(int64_t)identifier
+- (VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLMedia alloc] initWithMediaPtr:_ml->media(identifier)];
 }
@@ -178,7 +178,7 @@
 
 #pragma mark - Album
 
-- (VLCMLAlbum *)albumWithIdentifier:(int64_t)identifier
+- (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLAlbum alloc] initWithAlbumPtr:_ml->album(identifier)];
 }
@@ -204,7 +204,7 @@
 
 #pragma mark - Artist
 
-- (VLCMLArtist *)artistWithIdentifier:(int64_t)identifier
+- (VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLArtist alloc] initWithArtistPtr:_ml->artist(identifier)];
 }
@@ -221,7 +221,7 @@
     return [VLCMLUtils arrayFromGenrePtrVector:_ml->genres((medialibrary::SortingCriteria)criteria, desc)];
 }
 
-- (VLCMLGenre *)genreWithIdentifier:(int64_t)identifier
+- (VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLGenre alloc] initWithGenrePtr:_ml->genre(identifier)];
 }
@@ -238,12 +238,12 @@
    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->playlists((medialibrary::SortingCriteria)criteria, desc)];
 }
 
-- (VLCMLPlaylist *)playlistWithIdentifier:(int64_t)identifier
+- (VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLPlaylist alloc] initWithPlaylistPtr:_ml->playlist(identifier)];
 }
 
-- (BOOL)deletePlaylistWithIdentifier:(int64_t)identifier
+- (BOOL)deletePlaylistWithIdentifier:(VLCMLIdentifier)identifier
 {
     return _ml->deletePlaylist(identifier);
 }
