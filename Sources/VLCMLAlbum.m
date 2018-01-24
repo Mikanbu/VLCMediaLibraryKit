@@ -101,7 +101,7 @@
     return [VLCMLUtils arrayFromArtistPtrVector:_album->artists(desc)];
 }
 
-- (uint32_t)numberOfTracks
+- (UInt32)numberOfTracks
 {
     return _album->nbTracks();
 }

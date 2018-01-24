@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  */
 - (NSArray<VLCMLArtist *> *)artistsByDesc:(BOOL)desc;
 
-- (uint32_t)numberOfTracks;
+- (UInt32)numberOfTracks;
 - (uint)duration;
 
 @end

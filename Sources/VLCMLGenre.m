@@ -45,7 +45,7 @@
     return _name;
 }
 
-- (uint32_t)numberOfTracks
+- (UInt32)numberOfTracks
 {
     return _genre->nbTracks();
 }

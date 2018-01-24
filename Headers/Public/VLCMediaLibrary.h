@@ -102,7 +102,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 - (void)onEntryPointBanned:(NSString *)entryPoint success:(BOOL)success;
 - (void)onEntryPointUnbanned:(NSString *)entryPoint success:(BOOL)success;
 
-- (void)onParsingStatsUpdated:(uint32_t)percent;
+- (void)onParsingStatsUpdated:(UInt32)percent;
 
 - (void)onBackgroundTasksIdleChanged:(BOOL)success;
 

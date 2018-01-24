@@ -34,7 +34,7 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria);
 
 - (VLCMLIdentifier)identifier;
 - (NSString *)name;
-- (uint32_t)numberOfTracks;
+- (UInt32)numberOfTracks;
 
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;

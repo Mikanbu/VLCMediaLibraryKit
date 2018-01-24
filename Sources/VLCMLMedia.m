@@ -79,7 +79,7 @@
     return _albumTrack;
 }
 
-- (int64_t)duration
+- (SInt64)duration
 {
     return _media->duration();
 }
@@ -187,7 +187,7 @@
     return _media->setMetadata((medialibrary::IMedia::MetadataType)type , [value UTF8String]);
 }
 
-- (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(int64_t)value
+- (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value
 {
     return _media->setMetadata((medialibrary::IMedia::MetadataType)type, value);
 }

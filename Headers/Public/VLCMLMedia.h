@@ -26,20 +26,20 @@
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 
-typedef NS_ENUM(uint8_t, VLCMLMediaType) {
+typedef NS_ENUM(UInt8, VLCMLMediaType) {
     VLCMLMediaTypeUnknown,
     VLCMLMediaTypeVideo,
     VLCMLMediaTypeAudio
 };
 
-typedef NS_ENUM(uint8_t, VLCMLMediaSubType) {
+typedef NS_ENUM(UInt8, VLCMLMediaSubType) {
     VLCMLMediaSubTypeUnknown,
     VLCMLMediaSubTypeShowEpisode,
     VLCMLMediaSubTypeMovie,
     VLCMLMediaSubTypeAlbumTrack
 };
 
-typedef NS_ENUM(uint32_t, VLCMLMetadataType) {
+typedef NS_ENUM(UInt32, VLCMLMetadataType) {
     VLCMLMetadataTypeRating = 1,
 
     // Playback
@@ -90,7 +90,7 @@ typedef NS_ENUM(uint32_t, VLCMLMetadataType) {
 - (NSString *)title;
 - (BOOL)updateTitle:(NSString *)title;
 - (VLCMLAlbumTrack *)albumTrack;
-- (int64_t)duration;
+- (SInt64)duration;
 - (int)playCount;
 - (BOOL)increasePlayCount;
 - (VLCMLShowEpisode *)showEpisode;
@@ -113,7 +113,7 @@ typedef NS_ENUM(uint32_t, VLCMLMetadataType) {
 #pragma mark - Metadata
 - (VLCMLMediaMetadata *)metadataOfType:(VLCMLMetadataType)type;
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type stringValue:(NSString *)value;
-- (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(int64_t)value;
+- (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value;
 
 @end
 

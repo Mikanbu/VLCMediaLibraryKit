@@ -29,7 +29,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (BOOL)isSet;
-- (int64_t)integer;
+- (SInt64)integer;
 - (NSString *)str;
 
 @end
