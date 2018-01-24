@@ -331,7 +331,6 @@
 		7D0EF50F170885130003ED47 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8DD4D40B1F3B34FD00404519 /* VLCMLMedia.h */,
 				7D0EF510170885130003ED47 /* VLCMediaLibraryKit.h */,
 				7D9E238117AEE9F2008485E5 /* VLCMLAlbum.h */,
 				7D9E238417AEEA13008485E5 /* VLCMLAlbumTrack.h */,
@@ -343,6 +342,7 @@
 				8D90D0EA1F2B9DDC00DBB850 /* VLCMLHistoryEntry.h */,
 				7D0EF512170885130003ED47 /* VLCMLLabel.h */,
 				7D0EF513170885130003ED47 /* VLCMediaLibrary.h */,
+				8DD4D40B1F3B34FD00404519 /* VLCMLMedia.h */,
 				8DC817631F2760C900DEEF9D /* VLCMLMediaMetadata.h */,
 				8D1112E01F3A1828000B4D3C /* VLCMLMediaSearchAggregate.h */,
 				8DC50D851F30CBD700D6CCED /* VLCMLMovie.h */,
@@ -359,7 +359,6 @@
 		7D0EF516170885130003ED47 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */,
 				7D9E238717AEEA71008485E5 /* VLCMLAlbum.m */,
 				7D9E238517AEEA13008485E5 /* VLCMLAlbumTrack.m */,
 				8D31CE3F1F0A6873005A2895 /* VLCMLArtist.m */,
@@ -382,6 +381,7 @@
 				8DC50D8D1F321E2300D6CCED /* VLCMLVideoTrack.m */,
 				8DC50D9F1F335CD800D6CCED /* VLCMLUtils.m */,
 				8DC50DC01F38A98F00D6CCED /* DeviceListerCb.mm */,
+				8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
