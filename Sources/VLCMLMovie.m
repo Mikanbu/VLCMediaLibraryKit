@@ -83,6 +83,10 @@
 
 - (instancetype)initWithMoviePtr:(medialibrary::MoviePtr)moviePtr
 {
+    if (moviePtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _movie = moviePtr;

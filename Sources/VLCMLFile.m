@@ -70,6 +70,10 @@
 
 - (instancetype)initWithFilePtr:(medialibrary::FilePtr)filePtr
 {
+    if (filePtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _file = filePtr;

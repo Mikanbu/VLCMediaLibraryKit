@@ -117,6 +117,10 @@
 
 - (instancetype)initWithAlbumPtr:(medialibrary::AlbumPtr)albumPtr
 {
+    if (albumPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _album = albumPtr;

@@ -81,6 +81,10 @@
 
 - (instancetype)initWithAudioTrackPtr:(medialibrary::AudioTrackPtr)audioTrackPtr
 {
+    if (audioTrackPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _audioTrack = audioTrackPtr;

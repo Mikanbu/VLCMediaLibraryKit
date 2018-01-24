@@ -93,6 +93,10 @@
 
 - (instancetype)initWithShowPtr:(medialibrary::ShowPtr)showPtr
 {
+    if (showPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _show = showPtr;

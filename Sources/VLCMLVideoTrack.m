@@ -81,6 +81,10 @@
 
 - (instancetype)initWithVideoTrackPtr:(medialibrary::VideoTrackPtr)videoTrackPtr
 {
+    if (videoTrackPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _videoTrack = videoTrackPtr;

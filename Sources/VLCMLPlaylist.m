@@ -84,6 +84,10 @@
 
 - (instancetype)initWithPlaylistPtr:(medialibrary::PlaylistPtr)playlistPtr
 {
+    if (playlistPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _playlist = playlistPtr;

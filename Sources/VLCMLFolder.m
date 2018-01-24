@@ -55,6 +55,10 @@
 
 - (instancetype)initWithFolderPtr:(medialibrary::FolderPtr)folderPtr
 {
+    if (folderPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _folder = folderPtr;

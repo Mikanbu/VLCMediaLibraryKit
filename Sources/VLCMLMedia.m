@@ -198,6 +198,10 @@
 
 - (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr
 {
+    if (mediaPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _media = mediaPtr;

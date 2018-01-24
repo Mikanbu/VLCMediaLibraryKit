@@ -55,6 +55,10 @@
 
 - (instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr
 {
+    if (labelPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _label = labelPtr;

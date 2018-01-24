@@ -88,6 +88,10 @@
 
 - (instancetype)initWithAlbumTrackPtr:(medialibrary::AlbumTrackPtr)albumTrackPtr
 {
+    if (albumTrackPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _albumTrackPtr = albumTrackPtr;

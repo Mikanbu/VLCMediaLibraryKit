@@ -71,6 +71,10 @@
 
 - (instancetype)initWithGenrePtr:(medialibrary::GenrePtr)genrePtr
 {
+    if (genrePtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _genre = genrePtr;

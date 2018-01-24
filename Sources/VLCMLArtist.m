@@ -87,6 +87,10 @@
 
 - (instancetype)initWithArtistPtr:(medialibrary::ArtistPtr)artistPtr
 {
+    if (artistPtr == nullptr) {
+        return NULL;
+    }
+
     self = [super init];
     if (self) {
         _artist = artistPtr;
