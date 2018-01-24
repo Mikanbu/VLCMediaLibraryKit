@@ -97,3 +97,20 @@
 }
 
 @end
+
+@implementation VLCMLShowEpisode (Internal)
+
+- (instancetype)initWithShowEpisodePtr:(medialibrary::ShowEpisodePtr)showEpisodePtr
+{
+    if (showEpisodePtr == nullptr) {
+        return NULL;
+    }
+
+    self = [super init];
+    if (self) {
+        _showEpisode = showEpisodePtr;
+    }
+    return self;
+}
+
+@end
