@@ -42,17 +42,17 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
 
 typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
 
-    //< Everything worked out fine
+    // Everything worked out fine
     VLCMLInitializeResultSuccess,
 
-    //< Should be considered the same as Success, but is an indication of
+    // Should be considered the same as Success, but is an indication of
     // unrequired subsequent calls to initialize.
     VLCMLInitializeResultAlreadyInitialized,
 
-    //< A fatal error occured, the IMediaLibrary instance should be destroyed
+    // A fatal error occured, the IMediaLibrary instance should be destroyed
     VLCMLInitializeResultFailed,
 
-    //< The database was reset, the caller needs to re-configure folders to
+    // The database was reset, the caller needs to re-configure folders to
     // discover at the bare minimum.
     VLCMLInitializeResultDbReset
 };
