@@ -105,6 +105,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 - (void)onParsingStatsUpdated:(UInt32)percent;
 
 - (void)onBackgroundTasksIdleChanged:(BOOL)success;
+- (void)onMediaThumbnailReady:(VLCMLMedia *)media success:(BOOL)success;
 
 @end
 

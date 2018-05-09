@@ -23,12 +23,13 @@
 #import "MediaLibraryCb.h"
 
 #import "VLCMLAlbumTrack+Init.h"
+#import "VLCMLMedia+Init.h"
 #import "VLCMLUtils.h"
 
 namespace medialibrary
 {
 
-    MediaLibraryCb::MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate )
+MediaLibraryCb::MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate )
     : m_delegate(delegate)
 {
 }
@@ -47,7 +48,7 @@ NSArray<NSNumber *> *MediaLibraryCb::intVectorToArray( std::vector<int64_t> vect
 
 #pragma mark - Setter
 
-    void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
+void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
 {
     this->m_delegate = delegate;
 }
@@ -244,6 +245,13 @@ void MediaLibraryCb::onBackgroundTasksIdleChanged( bool isIdle )
 {
     if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onBackgroundTasksIdleChanged:)]) {
         [this->m_delegate onBackgroundTasksIdleChanged:isIdle];
+    }
+}
+
+void MediaLibraryCb::onMediaThumbnailReady( MediaPtr media, bool success )
+{
+    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaThumbnailReady:success:)]) {
+        [this->m_delegate onMediaThumbnailReady:[[VLCMLMedia alloc] initWithMediaPtr:media] success:success];
     }
 }
 
