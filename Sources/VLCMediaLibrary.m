@@ -209,9 +209,9 @@
     return [[VLCMLArtist alloc] initWithArtistPtr:_ml->artist(identifier)];
 }
 
-- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc all:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->artists((medialibrary::SortingCriteria)criteria, desc)];
+    return [VLCMLUtils arrayFromArtistPtrVector:_ml->artists(includeAll, (medialibrary::SortingCriteria)criteria, desc)];
 }
 
 #pragma mark - Genre
