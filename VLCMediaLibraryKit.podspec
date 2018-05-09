@@ -5,16 +5,14 @@ Pod::Spec.new do |s|
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
-  VLCMediaLibraryKit is an abstraction of CoreData to be used with for any kind of audio-visual media. It can do thumbnailing, metadata parsing as well as playback state management. It is a proven code based deployed with VLC-iOS since day one.
-
-  This pod depends on an unstable version of MobileVLCKit. It is NOT RECOMMEND to be used in production!
+                   A MediaLibrary framework in Objective-C for iOS and OS X
                    DESC
 
   s.homepage     = "https://code.videolan.org/videolan/VLCMediaLibraryKit"
 
   s.license      = { :type => "LGPLv2.1", :file => "COPYING" }
 
-  s.authors            = {"Soomin Lee" => "thehungrybu@gmail.com", "Felix Paul Kühne" => "fkuehne@videolan.org", "Carola Nitz" => "caro@videolan.org"}
+  s.authors            = {"Soomin Lee" => "bubu@mikan.io", "Felix Paul Kühne" => "fkuehne@videolan.org", "Carola Nitz" => "caro@videolan.org"}
   s.social_media_url   = "http://twitter.com/videolan"
 
   s.ios.deployment_target = "7.0"
@@ -36,6 +34,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.watchos.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) MLKIT_READONLY_TARGET" }
-  s.ios.dependency "MobileVLCKit-unstable", "~>3.0.0a50"
+  s.ios.dependency "MobileVLCKit"
 
 end
