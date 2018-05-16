@@ -63,7 +63,6 @@
 		8DD39C8C20162F19002E5423 /* VLCMLArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31CE3F1F0A6873005A2895 /* VLCMLArtist.m */; };
 		8DD39C8D20162F19002E5423 /* VLCMLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCMLAlbum.m */; };
 		8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EF4A1170883940003ED47 /* Foundation.framework */; };
-		8DD39C9020162F19002E5423 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8DD39C9120162F19002E5423 /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D44EC641F03C084007F2C54 /* libmedialibrary.a */; };
 		8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */; };
 		8DD39C9420162F19002E5423 /* VLCMLMedia.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8DD4D40B1F3B34FD00404519 /* VLCMLMedia.h */; };
@@ -239,7 +238,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */,
-				8DD39C9020162F19002E5423 /* libjpeg.a in Frameworks */,
 				8DD39C9120162F19002E5423 /* libmedialibrary.a in Frameworks */,
 				8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */,
 			);
@@ -841,6 +839,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
 		};
@@ -867,6 +866,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;
 		};
