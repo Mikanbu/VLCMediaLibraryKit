@@ -116,14 +116,17 @@
     return _ml->start();
 }
 
-- (VLCMLInitializeResult)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath
+- (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
+                                             thumbnailPath:(NSString *)thumbnailPath
 {
     [self setDeviceLister:(_deviceLister)];
-    VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([dbPath UTF8String], [thumbnailPath UTF8String], _mlCb);
+    VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
+                                                                          [thumbnailPath UTF8String],
+                                                                          _mlCb);
 
     if (result == VLCMLInitializeResultSuccess) {
         _isInitialized = YES;
-        _dbPath = dbPath;
+        _databasePath = databasePath;
         _thumbnailPath = thumbnailPath;
     }
     return result;

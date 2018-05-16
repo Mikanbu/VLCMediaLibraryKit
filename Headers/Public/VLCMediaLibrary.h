@@ -127,7 +127,7 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 
 @interface VLCMediaLibrary : NSObject
 
-@property (nonatomic, copy) NSString *dbPath;
+@property (nonatomic, copy) NSString *databasePath;
 @property (nonatomic, copy) NSString *thumbnailPath;
 @property (nonatomic, weak) id <VLCMediaLibraryDelegate> delegate;
 @property (nonatomic, weak) id <VLCMLDeviceListerDelegate> deviceListerDelegate;
@@ -141,7 +141,9 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 + (instancetype)sharedMediaLibrary;
 
 - (BOOL)start;
-- (VLCMLInitializeResult)setupMediaLibraryWithDb:(NSString *)dbPath thumbnailPath:(NSString *)thumbnailPath;
+- (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
+                                             thumbnailPath:(NSString *)thumbnailPath
+NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 - (void)setVerbosity:(VLCMLLogLevel)level;
 
