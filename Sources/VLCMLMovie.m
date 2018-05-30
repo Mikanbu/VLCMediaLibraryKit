@@ -72,7 +72,7 @@
 - (NSArray<VLCMLMedia *> *)files
 {
     if (!_files) {
-        _files = [VLCMLUtils arrayFromMediaPtrVector:_movie->files()];
+        _files = [VLCMLUtils arrayFromMediaPtrVector:_movie->media()->all()];
     }
     return _files;
 }

@@ -79,7 +79,7 @@
         auto episodes = _show->episodes();
         NSMutableArray *result = [NSMutableArray array];
 
-        for (const auto &episode : episodes) {
+        for (const auto &episode : episodes->all()) {
             [result addObject:[[VLCMLShowEpisode alloc] initWithShowEpisodePtr:episode]];
         }
         _episodes = result;

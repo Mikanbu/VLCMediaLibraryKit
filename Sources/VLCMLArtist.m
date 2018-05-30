@@ -73,12 +73,12 @@
 
 - (NSArray<VLCMLAlbum *> *)albums:(VLCMLSortingCriteria)sortingCriteria
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums((medialibrary::SortingCriteria)sortingCriteria)];
+    return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums((medialibrary::SortingCriteria)sortingCriteria)->all()];
 }
 
 - (NSArray<VLCMLMedia *> *)media:(VLCMLSortingCriteria)sortingCriteria
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_artist->media((medialibrary::SortingCriteria)sortingCriteria)];
+    return [VLCMLUtils arrayFromMediaPtrVector:_artist->media((medialibrary::SortingCriteria)sortingCriteria)->all()];
 }
 
 @end

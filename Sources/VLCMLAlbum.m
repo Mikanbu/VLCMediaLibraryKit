@@ -86,19 +86,19 @@
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)];
+    _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks((medialibrary::SortingCriteria)criteria, desc)->all()];
     return _tracks;
 }
 
 - (NSArray<VLCMLMedia *> *)tracksByGenre:(VLCMLGenre *)genre sortingCriteria:(VLCMLSortingCriteria)criteria;
 {
-    _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria)];
+    _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], (medialibrary::SortingCriteria)criteria)->all()];
     return _tracks;
 }
 
 - (NSArray<VLCMLArtist *> *)artistsByDesc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_album->artists(desc)];
+    return [VLCMLUtils arrayFromArtistPtrVector:_album->artists(desc)->all()];
 }
 
 - (UInt32)numberOfTracks

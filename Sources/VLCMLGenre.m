@@ -52,17 +52,17 @@
 
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists((medialibrary::SortingCriteria)criteria, desc)];
+    return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists((medialibrary::SortingCriteria)criteria, desc)->all()];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks((medialibrary::SortingCriteria)criteria, desc)];
+    return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks((medialibrary::SortingCriteria)criteria, desc)->all()];
 }
 
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_genre->albums((medialibrary::SortingCriteria)criteria, desc)];
+    return [VLCMLUtils arrayFromAlbumPtrVector:_genre->albums((medialibrary::SortingCriteria)criteria, desc)->all()];
 }
 
 @end

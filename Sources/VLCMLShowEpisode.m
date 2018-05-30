@@ -91,7 +91,7 @@
 - (NSArray<VLCMLMedia *> *)files
 {
     if (!_files) {
-        _files = [VLCMLUtils arrayFromMediaPtrVector:_showEpisode->files()];
+        _files = [VLCMLUtils arrayFromMediaPtrVector:_showEpisode->media()->all()];
     }
     return _files;
 }

@@ -152,7 +152,7 @@
         auto labels = _media->labels();
         NSMutableArray *result = [NSMutableArray array];
 
-        for (const auto &label : labels) {
+        for (const auto &label : labels->all()) {
             [result addObject:[[VLCMLLabel alloc] initWithLabelPtr:label]];
         }
     }
