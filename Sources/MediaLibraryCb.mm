@@ -29,8 +29,8 @@
 namespace medialibrary
 {
 
-MediaLibraryCb::MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate )
-    : m_delegate(delegate)
+MediaLibraryCb::MediaLibraryCb( VLCMediaLibrary *medialibrary, id<VLCMediaLibraryDelegate> delegate )
+    : m_medialibrary(medialibrary), m_delegate(delegate)
 {
 }
 
@@ -50,29 +50,29 @@ NSArray<NSNumber *> *MediaLibraryCb::intVectorToArray( std::vector<int64_t> vect
 
 void MediaLibraryCb::setDelegate( id<VLCMediaLibraryDelegate> delegate )
 {
-    this->m_delegate = delegate;
+    m_delegate = delegate;
 }
 
 #pragma mark - Media
 
 void MediaLibraryCb::onMediaAdded( std::vector<MediaPtr> media )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaAdded:)]) {
-        [this->m_delegate onMediaAdded:[VLCMLUtils arrayFromMediaPtrVector:media]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddMedia:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddMedia:[VLCMLUtils arrayFromMediaPtrVector:media]];
     }
 }
 
 void MediaLibraryCb::onMediaUpdated( std::vector<MediaPtr> media )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaUpdated:)]) {
-        [this->m_delegate onMediaUpdated:[VLCMLUtils arrayFromMediaPtrVector:media]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didUpdateMedia:)]) {
+        [m_delegate medialibrary:m_medialibrary didUpdateMedia:[VLCMLUtils arrayFromMediaPtrVector:media]];
     }
 }
 
 void MediaLibraryCb::onMediaDeleted( std::vector<int64_t> mediaIds )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaDeleted:)]) {
-        [this->m_delegate onMediaDeleted:this->intVectorToArray(mediaIds)];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteMediaWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didDeleteMediaWithIds:intVectorToArray(mediaIds)];
     }
 }
 
@@ -80,22 +80,22 @@ void MediaLibraryCb::onMediaDeleted( std::vector<int64_t> mediaIds )
 
 void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onArtistsAdded:)]) {
-        [this->m_delegate onArtistsAdded:[VLCMLUtils arrayFromArtistPtrVector:artists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddArtists:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddArtists:[VLCMLUtils arrayFromArtistPtrVector:artists]];
     }
 }
 
 void MediaLibraryCb::onArtistsModified( std::vector<ArtistPtr> artists )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onArtistsModified:)]) {
-        [this->m_delegate onArtistsModified:[VLCMLUtils arrayFromArtistPtrVector:artists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyArtists:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyArtists:[VLCMLUtils arrayFromArtistPtrVector:artists]];
     }
 }
 
 void MediaLibraryCb::onArtistsDeleted( std::vector<int64_t> artistsIds )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onArtistsDeleted:)]) {
-        [this->m_delegate onArtistsDeleted:this->intVectorToArray(artistsIds)];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteArtistsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didDeleteArtistsWithIds:intVectorToArray(artistsIds)];
     }
 }
 
@@ -103,22 +103,22 @@ void MediaLibraryCb::onArtistsDeleted( std::vector<int64_t> artistsIds )
 
 void MediaLibraryCb::onAlbumsAdded( std::vector<AlbumPtr> albums )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onAlbumsAdded:)]) {
-        [this->m_delegate onAlbumsAdded:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddAlbums:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddAlbums:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
     }
 }
 
 void MediaLibraryCb::onAlbumsModified( std::vector<AlbumPtr> albums )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onAlbumsModified:)]) {
-        [this->m_delegate onAlbumsModified:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyAlbums:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyAlbums:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
     }
 }
 
 void MediaLibraryCb::onAlbumsDeleted( std::vector<int64_t> albumsIds )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onAlbumsDeleted:)]) {
-        [this->m_delegate onAlbumsDeleted:this->intVectorToArray(albumsIds)];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteAlbumsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didDeleteAlbumsWithIds:intVectorToArray(albumsIds)];
     }
 }
 
@@ -126,21 +126,21 @@ void MediaLibraryCb::onAlbumsDeleted( std::vector<int64_t> albumsIds )
 
 void MediaLibraryCb::onTracksAdded( std::vector<AlbumTrackPtr> tracks )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onTracksAdded:)]) {
-        NSMutableArray *res = [NSMutableArray array];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddTracks:)]) {
+        NSMutableArray *objcTracks = [NSMutableArray array];
 
         for ( const auto &track : tracks )
         {
-            [res addObject:[[VLCMLAlbumTrack alloc] initWithAlbumTrackPtr:track]];
+            [objcTracks addObject:[[VLCMLAlbumTrack alloc] initWithAlbumTrackPtr:track]];
         }
-        [this->m_delegate onTracksAdded:res];
+        [m_delegate medialibrary:m_medialibrary didAddTracks:objcTracks];
     }
 }
 
 void MediaLibraryCb::onTracksDeleted( std::vector<int64_t> trackIds )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onTracksDeleted:)]) {
-        [this->m_delegate onTracksDeleted:this->intVectorToArray(trackIds)];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteTracksWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didDeleteTracksWithIds:intVectorToArray(trackIds)];
     }
 }
 
@@ -148,22 +148,22 @@ void MediaLibraryCb::onTracksDeleted( std::vector<int64_t> trackIds )
 
 void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onPlaylistsAdded:)]) {
-        [this->m_delegate onPlaylistsAdded:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddPlaylists:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddPlaylists:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
     }
 }
 
 void MediaLibraryCb::onPlaylistsModified( std::vector<PlaylistPtr> playlists )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onPlaylistsModified:)]) {
-        [this->m_delegate onPlaylistsModified:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyPlaylists:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyPlaylists:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
     }
 }
 
 void MediaLibraryCb::onPlaylistsDeleted( std::vector<int64_t> playlistIds )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onPlaylistsDeleted:)]) {
-        [this->m_delegate onPlaylistsDeleted:this->intVectorToArray(playlistIds)];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeletePlaylistsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didDeletePlaylistsWithIds:intVectorToArray(playlistIds)];
     }
 }
 
@@ -171,40 +171,39 @@ void MediaLibraryCb::onPlaylistsDeleted( std::vector<int64_t> playlistIds )
 
 void MediaLibraryCb::onDiscoveryStarted( const std::string& entryPoint )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onDiscoveryStarted:)]) {
-        [this->m_delegate onDiscoveryStarted:[[NSString alloc] initWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didStartDiscovery:)]) {
+        [m_delegate medialibrary:m_medialibrary didStartDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
 }
 
 void MediaLibraryCb::onDiscoveryProgress( const std::string& entryPoint )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onDiscoveryProgress:)]) {
-        [this->m_delegate onDiscoveryProgress:[[NSString alloc] initWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didProgressDiscovery:)]) {
+        [m_delegate medialibrary:m_medialibrary didProgressDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
 
 }
 
 void MediaLibraryCb::onDiscoveryCompleted( const std::string& entryPoint )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onDiscoveryCompleted:)]) {
-        [this->m_delegate onDiscoveryCompleted:[[NSString alloc] initWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteDiscovery:)]) {
+        [m_delegate medialibrary:m_medialibrary didCompleteDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
-
 }
 
 #pragma mark - Reload
 
 void MediaLibraryCb::onReloadStarted( const std::string& entryPoint )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onReloadStarted:)]) {
-        [this->m_delegate onReloadStarted:[[NSString alloc] initWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didStartReload:)]) {
+        [m_delegate medialibrary:m_medialibrary didStartReload:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
 }
 
 void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onReloadCompleted:)]) {
-        [this->m_delegate onReloadCompleted:[[NSString alloc] initWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteReload:)]) {
+        [m_delegate medialibrary:m_medialibrary didCompleteReload:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
 }
 
@@ -212,46 +211,50 @@ void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint )
 
 void MediaLibraryCb::onEntryPointRemoved( const std::string& entryPoint, bool success )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onEntryPointRemoved:success:)]) {
-        [this->m_delegate onEntryPointRemoved:[[NSString alloc] initWithUTF8String:entryPoint.c_str()] success:success];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didRemoveEntryPoint:withSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary didRemoveEntryPoint:[NSString stringWithUTF8String:entryPoint.c_str()]
+                     withSuccess:success];
     }
 }
 
 void MediaLibraryCb::onEntryPointBanned( const std::string& entryPoint, bool success )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onEntryPointBanned:success:)]) {
-        [this->m_delegate onEntryPointBanned:[[NSString alloc] initWithUTF8String:entryPoint.c_str()] success:success];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didBanEntryPoint:withSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary didBanEntryPoint:[NSString stringWithUTF8String:entryPoint.c_str()]
+                     withSuccess:success];
     }
 
 }
 
 void MediaLibraryCb::onEntryPointUnbanned( const std::string& entryPoint, bool success )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onEntryPointUnbanned:success:)]) {
-        [this->m_delegate onEntryPointUnbanned:[[NSString alloc] initWithUTF8String:entryPoint.c_str()] success:success];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didUnbanEntryPoint:withSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary didUnbanEntryPoint:[NSString stringWithUTF8String:entryPoint.c_str()]
+                     withSuccess:success];
     }
 }
 
 #pragma mark - Parsing
 void MediaLibraryCb::onParsingStatsUpdated( uint32_t percent)
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onParsingStatsUpdated:)]) {
-        [this->m_delegate onParsingStatsUpdated:percent];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didUpdateParsingStatsWithPercent:)]) {
+        [m_delegate medialibrary:m_medialibrary didUpdateParsingStatsWithPercent:percent];
     }
 }
 
 #pragma mark - Background
 void MediaLibraryCb::onBackgroundTasksIdleChanged( bool isIdle )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onBackgroundTasksIdleChanged:)]) {
-        [this->m_delegate onBackgroundTasksIdleChanged:isIdle];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didChangeIdleBackgroundTasksWithSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary didChangeIdleBackgroundTasksWithSuccess:isIdle];
     }
 }
 
 void MediaLibraryCb::onMediaThumbnailReady( MediaPtr media, bool success )
 {
-    if (this->m_delegate && [this->m_delegate respondsToSelector:@selector(onMediaThumbnailReady:success:)]) {
-        [this->m_delegate onMediaThumbnailReady:[[VLCMLMedia alloc] initWithMediaPtr:media] success:success];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:thumbnailReadyForMedia:withSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary thumbnailReadyForMedia:[[VLCMLMedia alloc] initWithMediaPtr:media]
+                     withSuccess:success];
     }
 }
 

@@ -65,6 +65,8 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
     VLCMLLogLevelError
 };
 
+@class VLCMediaLibrary;
+
 #pragma mark - VLCMediaLibraryDelegate
 #pragma mark -
 
@@ -72,40 +74,40 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 
 @optional
 
-- (void)onMediaAdded:(NSArray<VLCMLMedia *> *)media;
-- (void)onMediaUpdated:(NSArray<VLCMLMedia *> *)media;
-- (void)onMediaDeleted:(NSArray<NSNumber *> *)mediaIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMedia:(NSArray<VLCMLMedia *> *)media;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateMedia:(NSArray<VLCMLMedia *> *)media;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
 
-- (void)onArtistsAdded:(NSArray<VLCMLArtist *> *)artists;
-- (void)onArtistsModified:(NSArray<VLCMLArtist *> *)artists;
-- (void)onArtistsDeleted:(NSArray<NSNumber *> *)artistsIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddArtists:(NSArray<VLCMLArtist *> *)artists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyArtists:(NSArray<VLCMLArtist *> *)artists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteArtistsWithIds:(NSArray<NSNumber *> *)artistsIds;
 
-- (void)onAlbumsAdded:(NSArray<VLCMLAlbum *> *)albums;
-- (void)onAlbumsModified:(NSArray<VLCMLAlbum *> *)albums;
-- (void)onAlbumsDeleted:(NSArray<NSNumber *> *)albumsIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddAlbums:(NSArray<VLCMLAlbum *> *)albums;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyAlbums:(NSArray<VLCMLAlbum *> *)albums;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteAlbumsWithIds:(NSArray<NSNumber *> *)albumsIds;
 
-- (void)onTracksAdded:(NSArray<VLCMLAlbumTrack *> *)tracks;
-- (void)onTracksDeleted:(NSArray<NSNumber *> *)tracks;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddTracks:(NSArray<VLCMLAlbumTrack *> *)tracks;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteTracksWithIds:(NSArray<NSNumber *> *)tracksIds;
 
-- (void)onPlaylistsAdded:(NSArray<VLCMLPlaylist *> *)playlists;
-- (void)onPlaylistsModified:(NSArray<VLCMLPlaylist *> *)playlists;
-- (void)onPlaylistsDeleted:(NSArray<NSNumber *> *)playlistsIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeletePlaylistsWithIds:(NSArray<NSNumber *> *)playlistsIds;
 
-- (void)onDiscoveryStarted:(NSString *)entryPoint;
-- (void)onDiscoveryProgress:(NSString *)entryPoint;
-- (void)onDiscoveryCompleted:(NSString *)entryPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didStartDiscovery:(NSString *)entryPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didProgressDiscovery:(NSString *)entryPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didCompleteDiscovery:(NSString *)entryPoint;
 
-- (void)onReloadStarted:(NSString *)entryPoint;
-- (void)onReloadCompleted:(NSString *)entryPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didStartReload:(NSString *)entryPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didCompleteReload:(NSString *)entryPoint;
 
-- (void)onEntryPointRemoved:(NSString *)entryPoint success:(BOOL)success;
-- (void)onEntryPointBanned:(NSString *)entryPoint success:(BOOL)success;
-- (void)onEntryPointUnbanned:(NSString *)entryPoint success:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didRemoveEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didBanEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUnbanEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
 
-- (void)onParsingStatsUpdated:(UInt32)percent;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateParsingStatsWithPercent:(UInt32)percent;
 
-- (void)onBackgroundTasksIdleChanged:(BOOL)success;
-- (void)onMediaThumbnailReady:(VLCMLMedia *)media success:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didChangeIdleBackgroundTasksWithSuccess:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary thumbnailReadyForMedia:(VLCMLMedia *)media withSuccess:(BOOL)success;
 
 @end
 

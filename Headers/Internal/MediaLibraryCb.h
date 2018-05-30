@@ -28,7 +28,7 @@ namespace medialibrary
 class MediaLibraryCb : public IMediaLibraryCb
 {
 public:
-    MediaLibraryCb( id<VLCMediaLibraryDelegate> delegate );
+    MediaLibraryCb( VLCMediaLibrary *medialibrary, id<VLCMediaLibraryDelegate> delegate );
 
     void setDelegate( id<VLCMediaLibraryDelegate> delegate );
 
@@ -149,6 +149,7 @@ private:
 
 private:
     id <VLCMediaLibraryDelegate> m_delegate;
+    VLCMediaLibrary *m_medialibrary;
 };
 
 }

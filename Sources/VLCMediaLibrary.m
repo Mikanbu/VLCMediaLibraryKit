@@ -76,7 +76,7 @@
     if (self) {
         _isInitialized = NO;
         _ml = NewMediaLibrary();
-        _mlCb = new medialibrary::MediaLibraryCb(_delegate);
+        _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
         _deviceListerCb = new medialibrary::DeviceListerCb(_deviceListerDelegate);
     }
     return self;
