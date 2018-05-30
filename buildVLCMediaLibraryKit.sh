@@ -115,6 +115,14 @@ getActualArch()
     fi
 }
 
+isSimulatorArch() {
+    if [ "$1" = "i386" -o "$1" = "x86_64" ];then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Retrieve medialibrary
 
 fetchMedialibrary()
@@ -384,10 +392,15 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
         fi
         buildMedialibrary "iPhone" "armv7" "OS"
         buildMedialibrary "iPhone" "armv7s" "OS"
-        buildMedialibrary "iPhone" "aarch64" "OS"
     else
-        buildMedialibrary "iPhone" "$ARCH" "OS"
+        platform="OS"
+
+        if isSimulatorArch $ARCH; then
+            platform="Simulator"
+        fi
+        buildMedialibrary "iPhone" "$ARCH" "$platform"
     fi
+
 else
     log "warning" "Build of Medialibrary skipped..."
 fi
@@ -397,12 +410,14 @@ if [ "$CLEAN" = "yes" ]; then
     log "info" "Xcode build cleaned!"
 fi
 
-if [ "$SIMULATOR" = "yes" ]; then
-    lipoMedialibrary iPhoneSimulator
+if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
+        lipoMedialibrary iPhoneSimulator
+        buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
+        createFramework "VLCMediaLibraryKit" iphonesimulator
+fi
+if [ "$ARCH" = "all" ] || ! isSimulatorArch $ARCH; then
+    lipoMedialibrary iPhoneOS
+    buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphoneos
+    createFramework "VLCMediaLibraryKit" iphoneos
 fi
 
-lipoMedialibrary iPhoneOS
-lipoJpeg
-
-buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphoneos
-createFramework "VLCMediaLibraryKit" iphoneos
