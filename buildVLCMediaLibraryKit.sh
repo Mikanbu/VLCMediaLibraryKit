@@ -7,6 +7,7 @@ VERBOSE=no
 ROOT_DIR=default
 SIMULATOR=no
 BUILD_TYPE="Release"
+TESTED_HASH="082216a"
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
@@ -133,9 +134,11 @@ fetchMedialibrary()
         if [ -d medialibrary ]; then
             spushd medialibrary
                 git pull --rebase
+                git reset --hard ${TESTED_HASH}
         else
             git clone git@code.videolan.org:videolan/medialibrary.git
             spushd medialibrary
+                git checkout -B localBranch ${TESTED_HASH}
         fi
         git submodule update --init
         spopd #medialibrary
