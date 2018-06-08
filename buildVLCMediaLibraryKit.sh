@@ -408,7 +408,7 @@ if [ "$CLEAN" = "yes" ]; then
     xcodebuild -alltargets clean
     log "info" "Xcode build cleaned!"
 fi
-
+lipoJpeg
 if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
     lipoMedialibrary iPhoneSimulator
     buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
