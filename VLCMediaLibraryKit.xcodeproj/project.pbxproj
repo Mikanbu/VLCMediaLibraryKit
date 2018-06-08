@@ -610,7 +610,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/libmedialibrary/medialibrary/build";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = VLCMediaLibraryKit;
 				SDKROOT = iphoneos;
