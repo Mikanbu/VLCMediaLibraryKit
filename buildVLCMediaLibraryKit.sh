@@ -13,6 +13,8 @@ CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
 SKIP_DEPENDENCIES=no
 OBJCXX_COMPILATOR=clang++
+OSVERSIONMINCFLAG=miphoneos-version-min
+OSVERSIONMINLDFLAG=ios_version_min
 
 set -e
 
@@ -124,6 +126,24 @@ isSimulatorArch() {
     fi
 }
 
+cleanEnvironment()
+{
+    export AS=""
+    export CCAS=""
+    export ASCPP=""
+    export CC=""
+    export CFLAGS=""
+    export CPPFLAGS=""
+    export CXX=""
+    export CXXFLAGS=""
+    export CXXCPPFLAGS=""
+    export OBJC=""
+    export OBJCFLAGS=""
+    export LD=""
+    export LDFLAGS=""
+    export STRIP=""
+}
+
 # Retrieve medialibrary
 
 fetchMedialibrary()
@@ -176,7 +196,8 @@ buildLibJpeg()
                 ${LIBJPEG_DIR}/configure \
                                --host=$target \
                                --prefix=$prefix \
-                               --disable-shared
+                               --disable-shared \
+                               CXX=$CXX_COMPILATOR
                 log "info" "Starting libjpeg make..."
                 make
                 if [ ! -d "${prefix}" ]; then
@@ -232,9 +253,18 @@ buildMedialibrary()
                 fi
 
                 CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
+                CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
+                EXTRA_CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
+
+                LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
+                EXTRA_LDFLAGS="-arch ${actualArch}"
+                LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
+                EXTRA_LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
+
                 export CFLAGS="${CFLAGS}"
                 export CXXFLAGS="${CFLAGS}"
                 export CPPFLAGS="${CFLAGS}"
+                export LDFLAGS=${LDFLAGS}
 
                 if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
                     buildDependencies $actualArch $target
@@ -393,6 +423,8 @@ if [ "x$1" != "x" ]; then
     usage
     exit 1
 fi
+
+cleanEnvironment
 
 if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     fetchMedialibrary
