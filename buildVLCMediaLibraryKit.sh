@@ -284,18 +284,10 @@ buildXcodeproj()
 
     local architectures=""
     if [ "$ARCH" == "all" ]; then
-        if [ "$TVOS" != "yes" ]; then
-            if [ "$platform" = "iphonesimulator" ]; then
-                architectures="i386 x86_64"
-            else
-                architectures="armv7 armv7s arm64"
-            fi
+        if [ "$platform" = "iphonesimulator" ]; then
+            architectures="x86_64"
         else
-            if [ "$platform" = "appletvsimulator" ]; then
-                architectures="x86_64"
-            else
-                architectures="arm64"
-            fi
+            architectures="armv7 armv7s arm64"
         fi
     else
         architectures="`getActualArch $ARCH`"
@@ -322,7 +314,6 @@ lipoMedialibrary()
         files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
         darwinFiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary_macos.a ${darwinFiles}"
     done
-
     lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
     lipo ${darwinFiles} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary_macos.a"
     log "info" "libmedialibrary.a bundle armed and ready to use!"
@@ -349,20 +340,27 @@ lipoJpeg()
 createFramework()
 {
     local target="$1"
-    local platform="$2"
+    local libPath=""
+    local platform="iphoneos"
     local framework="${target}.framework"
     local medialibraryLibDir="${MEDIALIBRARY_DIR}/build"
 
-    log "info" "Starting the creation of $framework ($target, $platform)..."
+    log "info" "Starting the creation of $framework..."
 
     if [ ! -d build ]; then
         mkdir build
     fi
+    if [ "$ARCH" = "all" ] || ! isSimulatorArch $ARCH; then
+        libPath="${libPath} $BUILD_TYPE-iphoneos/libVLCMediaLibraryKit.a"
+    fi
+    if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
+        platform="iphonesimulator"
+        libPath="${libPath} $BUILD_TYPE-iphonesimulator/libVLCMediaLibraryKit.a"
+    fi
     spushd build
         rm -rf $framework && \
         mkdir $framework && \
-        lipo -create $BUILD_TYPE-$platform/libVLCMediaLibraryKit.a \
-            -o $framework/$target && \
+        lipo -create ${libPath} -o $framework/$target && \
         chmod a+x $framework/$target && \
         cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
     spopd
@@ -389,12 +387,10 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
 
     #Mobile first!
     if [ "$ARCH" = "all" ]; then
-        if [ "$SIMULATOR" = "yes" ]; then
-            buildMedialibrary "iPhone" "i386" "Simulator"
-            buildMedialibrary "iPhone" "x86_64" "Simulator"
-        fi
+        buildMedialibrary "iPhone" "x86_64" "Simulator"
         buildMedialibrary "iPhone" "armv7" "OS"
         buildMedialibrary "iPhone" "armv7s" "OS"
+        buildMedialibrary "iPhone" "aarch64" "OS"
     else
         platform="OS"
 
@@ -414,13 +410,12 @@ if [ "$CLEAN" = "yes" ]; then
 fi
 
 if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
-        lipoMedialibrary iPhoneSimulator
-        buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
-        createFramework "VLCMediaLibraryKit" iphonesimulator
+    lipoMedialibrary iPhoneSimulator
+    buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
 fi
 if [ "$ARCH" = "all" ] || ! isSimulatorArch $ARCH; then
     lipoMedialibrary iPhoneOS
     buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphoneos
-    createFramework "VLCMediaLibraryKit" iphoneos
 fi
 
+createFramework "VLCMediaLibraryKit"
