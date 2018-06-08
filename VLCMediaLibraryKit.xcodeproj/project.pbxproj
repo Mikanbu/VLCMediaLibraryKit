@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D13B6E020CAD15B00FE5FDC /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D64DA1F1D671F008E178E /* libjpeg.a */; };
 		8D63525B2018997A003A87E4 /* VLCMLObject.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D6352582018919B003A87E4 /* VLCMLObject.h */; };
 		8D8321FD20162EE100E30ACB /* VLCMLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF519170885130003ED47 /* VLCMLFile.m */; };
 		8D8321FE20162EE100E30ACB /* VLCMLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51C170885130003ED47 /* VLCMLLabel.m */; };
@@ -238,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */,
+				8D13B6E020CAD15B00FE5FDC /* libjpeg.a in Frameworks */,
 				8DD39C9120162F19002E5423 /* libmedialibrary.a in Frameworks */,
 				8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */,
 			);
@@ -831,7 +833,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libmedialibrary/medialibrary/build",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -858,7 +863,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libmedialibrary/medialibrary/build",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
