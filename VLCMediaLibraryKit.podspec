@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
 
   s.source = {
-   :http => 'https://mikanbu.com/public/VLCMediaLibraryKit.tar.xz'
+   :http => 'https://mikanbu.com/public/VLCMediaLibraryKit.zip'
   }
   s.prefix_header_file = "VLCMediaLibraryKit_Prefix.pch"
 
