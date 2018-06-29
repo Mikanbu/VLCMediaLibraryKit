@@ -80,7 +80,7 @@
         _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
 
         _deviceLister = std::make_shared<medialibrary::fs::VLCMLDeviceLister>();
-        _deviceListerCb = new medialibrary::DeviceListerCb(_deviceListerDelegate);
+        _deviceListerCb = new medialibrary::DeviceListerCb(self, _deviceListerDelegate);
     }
     return self;
 }

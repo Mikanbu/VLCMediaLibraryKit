@@ -120,9 +120,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
-- (BOOL)onDevicePluggedWithUuid:(NSString *)uuid mountPoint:(NSString *)mountPoint;
-- (void)onDeviceUnpluggedWithUuid:(NSString *)uuid;
-- (void)isDeviceKnown:(NSString *)uuid;
+- (BOOL)medialibrary:(VLCMediaLibrary *)medialibrary devicePluggedWithUUID:(NSString *)uuid withMountPoint:(NSString *)mountPoint;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary deviceUnPluggedWithUUID:(NSString *)uuid;
+- (BOOL)medialibrary:(VLCMediaLibrary *)medialibrary isDeviceKnownWithUUID:(NSString *)uuid;
 
 @end
 

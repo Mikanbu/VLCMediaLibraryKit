@@ -28,7 +28,7 @@ namespace medialibrary
 class DeviceListerCb : public IDeviceListerCb
 {
 public:
-    DeviceListerCb( id<VLCMLDeviceListerDelegate> delegate );
+    DeviceListerCb( VLCMediaLibrary *medialibrary, id<VLCMLDeviceListerDelegate> delegate );
     void setDelegate( id<VLCMLDeviceListerDelegate> delegate );
 
     /**
@@ -54,6 +54,7 @@ public:
 
 private:
     id<VLCMLDeviceListerDelegate> m_delegate;
+    VLCMediaLibrary *m_medialibrary;
 };
 
 }
