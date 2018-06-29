@@ -70,6 +70,8 @@ typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
 #pragma mark - VLCMediaLibraryDelegate
 #pragma mark -
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol VLCMediaLibraryDelegate <NSObject>
 
 @optional
@@ -256,3 +258,5 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 #pragma mark - DeviceLister
 
 @end
+
+NS_ASSUME_NONNULL_END
