@@ -6,6 +6,7 @@ SDK_MIN=9.0
 VERBOSE=no
 ROOT_DIR=default
 SIMULATOR=no
+NO_NETWORK=no
 BUILD_TYPE="Release"
 TESTED_HASH="082216a"
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
@@ -27,6 +28,7 @@ usage()
     -v      Be more verbose
     -d      Enable debug mode
     -m      Skip medialibrary compilation
+    -n      Skip script steps requiring network interaction
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
@@ -34,7 +36,7 @@ usage()
 EOF
 }
 
-while getopts "hvdmcsxa:" OPTION
+while getopts "hvdmncsxa:" OPTION
 do
     case $OPTION in
         h)
@@ -49,6 +51,9 @@ do
             ;;
         m)
             SKIP_MEDIALIBRARY=yes
+            ;;
+        n)
+            NO_NETWORK=yes
             ;;
         c)
             CLEAN=yes
@@ -151,17 +156,19 @@ fetchMedialibrary()
     log "info" "Fetching Medialibrary..."
     mkdir -p libmedialibrary
     spushd libmedialibrary
-        if [ -d medialibrary ]; then
-            spushd medialibrary
-                git pull --rebase
-                git reset --hard ${TESTED_HASH}
-        else
-            git clone git@code.videolan.org:videolan/medialibrary.git
-            spushd medialibrary
-                git checkout -B localBranch ${TESTED_HASH}
+        if [ "$NO_NETWORK" = "no" ]; then
+            if [ -d medialibrary ]; then
+                spushd medialibrary
+                    git pull --rebase
+                    git reset --hard ${TESTED_HASH}
+            else
+                git clone git@code.videolan.org:videolan/medialibrary.git
+                spushd medialibrary
+                    git checkout -B localBranch ${TESTED_HASH}
+            fi
+            git submodule update --init
+            spopd #medialibrary
         fi
-        git submodule update --init
-        spopd #medialibrary
     spopd #libmedialibrary
 }
 
@@ -174,11 +181,13 @@ buildLibJpeg()
     local prefix="${LIBJPEG_DIR}/install/${arch}"
 
     if [ ! -d "${LIBJPEG_DIR}" ]; then
-        log "warning" "libjpeg source not found! Starting download..."
-        git clone git@github.com:libjpeg-turbo/libjpeg-turbo.git
-        spushd libjpeg-turbo
-            git checkout tags/${libjpegRelease}
-        spopd
+        if [ "$NO_NETWORK" = "no" ]; then
+            log "warning" "libjpeg source not found! Starting download..."
+            git clone git@github.com:libjpeg-turbo/libjpeg-turbo.git
+            spushd libjpeg-turbo
+                git checkout tags/${libjpegRelease}
+            spopd
+        fi
     fi
     log "info" "Starting libjpeg configuration..."
     spushd libjpeg-turbo
