@@ -26,7 +26,9 @@ std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLD
 {
     std::vector<std::tuple<std::string, std::string, bool>> res;
 
-    res.emplace_back( std::make_tuple( "", [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] UTF8String], false ) );
+    res.emplace_back( std::make_tuple( "",
+                                      [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] UTF8String],
+                                      false ) );
     return res;
 }
 
