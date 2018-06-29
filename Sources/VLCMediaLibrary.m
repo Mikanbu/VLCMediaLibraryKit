@@ -119,7 +119,7 @@
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                              thumbnailPath:(NSString *)thumbnailPath
 {
-    [self setDeviceLister:(_deviceLister)];
+    [self setDeviceLister:_deviceLister];
     VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
                                                                           [thumbnailPath UTF8String],
                                                                           _mlCb);
