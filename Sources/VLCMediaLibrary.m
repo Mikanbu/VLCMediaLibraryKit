@@ -75,8 +75,11 @@
     self = [super init];
     if (self) {
         _isInitialized = NO;
+
         _ml = NewMediaLibrary();
         _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
+
+        _deviceLister = std::make_shared<medialibrary::fs::VLCMLDeviceLister>();
         _deviceListerCb = new medialibrary::DeviceListerCb(_deviceListerDelegate);
     }
     return self;
@@ -119,7 +122,9 @@
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                              thumbnailPath:(NSString *)thumbnailPath
 {
-    [self setDeviceLister:_deviceLister];
+
+    _ml->setDeviceLister(_deviceLister);
+
     VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
                                                                           [thumbnailPath UTF8String],
                                                                           _mlCb);
@@ -408,14 +413,6 @@
 - (void)forceParserRetry
 {
     _ml->forceParserRetry();
-}
-
-#pragma mark - DeviceLister
-
-- (void)setDeviceLister:(medialibrary::DeviceListerPtr)lister
-{
-    _deviceLister = std::make_shared<medialibrary::fs::VLCMLDeviceLister>();
-    _ml->setDeviceLister(lister);
 }
 
 #pragma mark -
