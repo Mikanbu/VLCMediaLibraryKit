@@ -184,7 +184,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 - (VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier;
 /**
- * @brief artists List all artists that have at least an album.
+ * @brief List all artists that have at least an album.
  * Artists that only appear on albums as guests won't be listed from here, but will be
  * returned when querying an album for all its appearing artists
  * @param sort A sorting criteria. So far, this is ignored, and artists are sorted by lexial order
@@ -226,7 +226,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 #pragma mark - Discover
 
 /**
- * @brief discover Launch a discovery on the provided entry point.
+ * @brief Launch a discovery on the provided entry point.
  * The actuall discovery will run asynchronously, meaning this method will immediatly return.
  * Depending on which discoverer modules where provided, this might or might not work
  * \note This must be called after start()
