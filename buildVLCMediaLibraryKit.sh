@@ -252,6 +252,7 @@ buildMedialibrary()
                 local prefix="${currentDir}/${os}${platform}-install/${actualArch}"
                 local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
                 local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
+                local optim="-03 -g"
 
                 log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
 
@@ -261,7 +262,11 @@ buildMedialibrary()
                     exit 1
                 fi
 
-                CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
+                if [ "$BUILD_TYPE" = "Debug" ]; then
+                    optim="-O0 -g"
+                fi
+
+                CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
                 CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
                 EXTRA_CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
 
