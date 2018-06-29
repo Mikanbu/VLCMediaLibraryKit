@@ -225,6 +225,13 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Discover
 
+/**
+ * @brief discover Launch a discovery on the provided entry point.
+ * The actuall discovery will run asynchronously, meaning this method will immediatly return.
+ * Depending on which discoverer modules where provided, this might or might not work
+ * \note This must be called after start()
+ * @param entryPoint What to discover.
+ */
 - (void)discoverOnEntryPoint:(NSString *)path;
 - (void)enableDiscoverNetwork:(BOOL)enable;
 - (NSArray<VLCMLFolder *> *)entryPoints;
