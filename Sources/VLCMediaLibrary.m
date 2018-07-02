@@ -164,14 +164,14 @@
     return [[VLCMLMedia alloc] initWithMediaPtr:_ml->media(identifier)];
 }
 
-- (VLCMLMedia *)mediaWithMrl:(NSString *)mrl
+- (VLCMLMedia *)mediaWithMrl:(NSURL *)mrl
 {
-    return [[VLCMLMedia alloc] initWithMediaPtr:_ml->media([mrl UTF8String])];
+    return [[VLCMLMedia alloc] initWithMediaPtr:_ml->media([mrl.absoluteString UTF8String])];
 }
 
-- (VLCMLMedia *)addMediaWithMrl:(NSString *)mrl
+- (VLCMLMedia *)addMediaWithMrl:(NSURL *)mrl
 {
-    return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addMedia([mrl UTF8String])];
+    return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addMedia([mrl.absoluteString UTF8String])];
 }
 
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc

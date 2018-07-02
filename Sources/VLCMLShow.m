@@ -57,10 +57,10 @@
     return _shortSummary;
 }
 
-- (NSString *)artworkMrl
+- (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
-        _artworkMrl = [[NSString alloc] initWithUTF8String:_show->artworkMrl().c_str()];
+        _artworkMrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_show->artworkMrl().c_str()]];
     }
     return _artworkMrl;
 }

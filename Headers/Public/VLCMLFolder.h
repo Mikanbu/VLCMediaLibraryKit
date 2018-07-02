@@ -29,15 +29,14 @@
  * Caller is responsible for checking isPresent() beforehand, as we
  * can't compute an for a folder that is/was present on a removable storage
  * or network share that has been unplugged
- * If for some reasons we can't compute the MRL, an empty string wil
  * @return The folder's mrl
  */
-@property (nonatomic, copy) NSString *mrl;
+@property (nonatomic, copy) NSURL *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)mrl;
+- (NSURL *)mrl;
 - (BOOL)isPresent;
 
 @end

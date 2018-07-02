@@ -36,10 +36,10 @@
     return _file->id();
 }
 
-- (NSString *)mrl
+- (NSURL *)mrl
 {
     if (!_mrl) {
-        _mrl = [[NSString alloc] initWithUTF8String:_file->mrl().c_str()];
+        _mrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_file->mrl().c_str()]];
     }
     return _mrl;
 }

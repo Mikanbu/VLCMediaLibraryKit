@@ -28,7 +28,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *imdbId;
 @property (nonatomic, copy) NSArray<VLCMLMedia *> *files;
 
@@ -37,7 +37,7 @@
 - (VLCMLIdentifier)identifier;
 - (NSString *)title;
 - (NSString *)shortSummary;
-- (NSString *)artworkMrl;
+- (NSURL *)artworkMrl;
 - (NSString *)imdbId;
 - (NSArray<VLCMLMedia *> *)files;
 

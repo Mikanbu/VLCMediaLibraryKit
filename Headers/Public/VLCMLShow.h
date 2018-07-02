@@ -29,7 +29,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSDate *releaseDate;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *tvdbId;
 @property (nonatomic, copy) NSArray<VLCMLShowEpisode *> *episodes;
 
@@ -39,7 +39,7 @@
 - (NSString *)name;
 - (NSDate *)releaseDate;
 - (NSString *)shortSummary;
-- (NSString *)artworkMrl;
+- (NSURL *)artworkMrl;
 - (NSString *)tvdbId;
 - (NSArray<VLCMLShowEpisode *> *)episodes;
 

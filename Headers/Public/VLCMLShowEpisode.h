@@ -28,7 +28,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *tvdbId;
 @property (nonatomic, strong) VLCMLShow *show;
 @property (nonatomic, copy) NSArray<VLCMLMedia *> *files;
@@ -36,7 +36,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)artworkMrl;
+- (NSURL *)artworkMrl;
 - (uint)episodeNumber;
 - (NSString *)name;
 - (uint)seasonNumber;

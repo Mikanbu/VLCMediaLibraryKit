@@ -55,10 +55,10 @@
     return _shortBio;
 }
 
-- (NSString *)artworkMrl
+- (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
-        _artworkMrl = [NSString stringWithUTF8String:_artist->artworkMrl().c_str()];
+        _artworkMrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_artist->artworkMrl().c_str()]];
     }
     return _artworkMrl;
 }

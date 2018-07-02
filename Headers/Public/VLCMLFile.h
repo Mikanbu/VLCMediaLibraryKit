@@ -37,12 +37,12 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
 
 @interface VLCMLFile : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *mrl;
+@property (nonatomic, copy) NSURL *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)mrl;
+- (NSURL *)mrl;
 - (VLCMLFileType)type;
 - (uint)lastModificationDate;
 - (uint)size;

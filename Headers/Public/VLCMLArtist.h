@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *shortBio;
-@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *musicBrainzId;
 
 
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 - (NSString *)name;
 - (NSString *)shortBio;
-- (NSString *)artworkMrl;
+- (NSURL *)artworkMrl;
 - (NSString *)musicBrainzId;
 
 /**

@@ -113,9 +113,10 @@
     return result;
 }
 
-- (VLCMLFile *)addExternalMrl:(NSString *)mrl fileType:(VLCMLFileType)type
+- (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type
 {
-    return [[VLCMLFile alloc] initWithFilePtr:_media->addExternalMrl([mrl UTF8String], (medialibrary::IFile::Type)type)];
+    return [[VLCMLFile alloc] initWithFilePtr:_media->addExternalMrl([mrl.absoluteString UTF8String],
+                                                                     (medialibrary::IFile::Type)type)];
 }
 
 - (BOOL)isFavorite

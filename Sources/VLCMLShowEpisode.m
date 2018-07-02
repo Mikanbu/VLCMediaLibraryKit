@@ -38,10 +38,10 @@
     return _showEpisode->id();
 }
 
-- (NSString *)artworkMrl
+- (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
-        _artworkMrl = [[NSString alloc] initWithUTF8String:_showEpisode->artworkMrl().c_str()];
+        _artworkMrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_showEpisode->artworkMrl().c_str()]];
     }
     return _artworkMrl;
 }

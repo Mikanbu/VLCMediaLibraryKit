@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSString *artworkMrl;
+@property (nonatomic, copy) NSURL *artworkMrl;
 
 /**
  * @brief Tracks represent the last query of tracks asked to the MediaLibrary.
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (NSString *)title;
 - (uint)releaseYear;
 - (NSString *)shortSummary;
-- (NSString *)artworkMrl;
+- (NSURL *)artworkMrl;
 
 - (VLCMLArtist *)albumMainArtist;
 
