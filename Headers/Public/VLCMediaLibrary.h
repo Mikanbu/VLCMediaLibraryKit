@@ -37,7 +37,11 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     VLCMLSortingCriteriaLastModificationDate,
     VLCMLSortingCriteriaReleaseDate,
     VLCMLSortingCriteriaFileSize,
-    VLCMLSortingCriteriaArtist
+    VLCMLSortingCriteriaArtist,
+    VLCMLSortingCriteriaPlayCount,
+    VLCMLSortingCriteriaAlbum,
+    VLCMLSortingCriteriaFilename,
+    VLCMLSortingCriteriaTrackNumber
 };
 
 typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
