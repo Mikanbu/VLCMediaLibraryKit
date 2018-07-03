@@ -42,7 +42,8 @@
 - (NSURL *)artworkMrl;
 - (NSString *)tvdbId;
 - (NSArray<VLCMLMedia *> *)episodes;
-
+- (UInt32)numberOfSeasons;
+- (UInt32)numberOfEpisodes;
 
 @end
 

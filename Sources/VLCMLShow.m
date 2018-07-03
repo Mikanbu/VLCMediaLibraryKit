@@ -82,6 +82,14 @@
     return _episodes;
 }
 
+- (UInt32)numberOfSeasons {
+    return _show->nbSeasons();
+}
+
+- (UInt32)numberOfEpisodes {
+    return _show->nbEpisodes();
+}
+
 @end
 
 @implementation VLCMLShow (Internal)
