@@ -73,15 +73,10 @@
 
 - (VLCMLArtist *)albumMainArtist
 {
-    return [[VLCMLArtist alloc] initWithArtistPtr:_album->albumArtist()];
-}
-
-- (NSArray<VLCMLMedia *> *)tracks
-{
-    if (!_tracks) {
-        _tracks = [self tracksWithSortingCriteria:VLCMLSortingCriteriaDefault desc:YES];
+    if (!_albumArtist) {
+        _albumArtist =  [[VLCMLArtist alloc] initWithArtistPtr:_album->albumArtist()];
     }
-    return _tracks;
+    return _albumArtist;
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
