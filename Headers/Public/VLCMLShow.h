@@ -22,26 +22,26 @@
 
 #import "VLCMLObject.h"
 
-@class VLCMLShowEpisode;
+@class VLCMLMedia;
 
 @interface VLCMLShow : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSDate *releaseDate;
 @property (nonatomic, copy) NSString *shortSummary;
 @property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *tvdbId;
-@property (nonatomic, copy) NSArray<VLCMLShowEpisode *> *episodes;
+@property (nonatomic, copy) NSArray<VLCMLMedia *> *episodes;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)name;
+- (NSString *)title;
 - (NSDate *)releaseDate;
 - (NSString *)shortSummary;
 - (NSURL *)artworkMrl;
 - (NSString *)tvdbId;
-- (NSArray<VLCMLShowEpisode *> *)episodes;
+- (NSArray<VLCMLMedia *> *)episodes;
 
 
 @end

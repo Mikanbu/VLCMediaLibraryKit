@@ -38,25 +38,9 @@
     return _showEpisode->id();
 }
 
-- (NSURL *)artworkMrl
-{
-    if (!_artworkMrl) {
-        _artworkMrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_showEpisode->artworkMrl().c_str()]];
-    }
-    return _artworkMrl;
-}
-
 - (uint)episodeNumber
 {
     return _showEpisode->episodeNumber();
-}
-
-- (NSString *)name
-{
-    if (!_name) {
-        _name = [[NSString alloc] initWithUTF8String:_showEpisode->name().c_str()];
-    }
-    return _name;
 }
 
 - (uint)seasonNumber
@@ -86,14 +70,6 @@
         _show = [[VLCMLShow alloc] initWithShowPtr:_showEpisode->show()];
     }
     return _show;
-}
-
-- (NSArray<VLCMLMedia *> *)files
-{
-    if (!_files) {
-        _files = [VLCMLUtils arrayFromMediaPtrVector:_showEpisode->media()->all()];
-    }
-    return _files;
 }
 
 @end

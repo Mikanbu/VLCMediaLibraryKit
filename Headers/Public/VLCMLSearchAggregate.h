@@ -20,20 +20,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-@class VLCMLAlbum, VLCMLArtist, VLCMLGenre, VLCMLMediaSearchAggregate, VLCMLPlaylist;
+@class VLCMLAlbum, VLCMLArtist, VLCMLGenre, VLCMLMedia, VLCMLPlaylist;
 
 @interface VLCMLSearchAggregate : NSObject
 
 @property (nonatomic, copy, readonly) NSArray<VLCMLAlbum *> *albums;
 @property (nonatomic, copy, readonly) NSArray<VLCMLArtist *> *artists;
 @property (nonatomic, copy, readonly) NSArray<VLCMLGenre *> *genres;
-@property (nonatomic, strong, readonly) VLCMLMediaSearchAggregate *mediaSearchAggregate;
+@property (nonatomic, copy, readonly) NSArray<VLCMLMedia *> *media;
 @property (nonatomic, copy, readonly) NSArray<VLCMLPlaylist *> *playlists;
 
 + (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums
                        artists:(NSArray<VLCMLArtist *> *)artists
                         genres:(NSArray<VLCMLGenre *> *)genres
-          mediaSearchAggregate:(VLCMLMediaSearchAggregate *)mediaSearchAggregate
+                         media:(NSArray<VLCMLMedia *> *)media
                      playlists:(NSArray<VLCMLPlaylist *> *)playlists;
 
 @end

@@ -31,7 +31,7 @@
 #import <VLCMediaLibraryKit/VLCMLLabel.h>
 #import <VLCMediaLibraryKit/VLCMLMedia.h>
 #import <VLCMediaLibraryKit/VLCMediaLibrary.h>
-#import <VLCMediaLibraryKit/VLCMLMediaMetadata.h>
+#import <VLCMediaLibraryKit/VLCMLMetadata.h>
 #import <VLCMediaLibraryKit/VLCMLMovie.h>
 #import <VLCMediaLibraryKit/VLCMLObject.h>
 #import <VLCMediaLibraryKit/VLCMLPlaylist.h>

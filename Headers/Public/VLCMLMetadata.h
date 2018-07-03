@@ -1,5 +1,5 @@
 /*****************************************************************************
- * VLCMLMediaMetadata.m
+ * VLCMLMetadata.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -20,47 +20,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "VLCMLMediaMetadata.h"
-#import "VLCMLMediaMetadata+Init.h"
-#import "VLCMLMedia.h"
+@class VLCMLMedia;
 
-@interface VLCMLMediaMetadata ()
-{
-    const medialibrary::IMediaMetadata *_metadata;
-}
-@end
+@interface VLCMLMetadata : NSObject
 
-@implementation VLCMLMediaMetadata
+@property (nonatomic, copy) NSString *str;
 
-- (BOOL)isSet
-{
-    return _metadata->isSet();
-}
+- (instancetype)init NS_UNAVAILABLE;
 
-- (int64_t)integer
-{
-    return _metadata->integer();
-}
-
-- (NSString *)str
-{
-    if (!_str) {
-        _str = [[NSString alloc] initWithUTF8String:_metadata->str().c_str()];
-    }
-    return _str;
-}
+- (BOOL)isSet;
+- (SInt64)integer;
+- (NSString *)str;
 
 @end
 
-@implementation VLCMLMediaMetadata (Internal)
-
-- (instancetype)initWithMediaMetadata:(const medialibrary::IMediaMetadata &)metadata
-{
-    self = [super init];
-    if (self) {
-        _metadata = &metadata;
-    }
-    return self;
-}
-
-@end

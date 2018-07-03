@@ -35,6 +35,7 @@
 # include <medialibrary/IHistoryEntry.h>
 # include <medialibrary/ILabel.h>
 # include <medialibrary/IMedia.h>
+# include <medialibrary/IMetadata.h>
 # include <medialibrary/IMediaLibrary.h>
 # include <medialibrary/IMovie.h>
 # include <medialibrary/IPlaylist.h>

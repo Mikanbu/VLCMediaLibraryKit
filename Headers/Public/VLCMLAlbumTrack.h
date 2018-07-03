@@ -29,7 +29,6 @@
 @property (nonatomic, strong) VLCMLArtist *artist;
 @property (nonatomic, strong) VLCMLGenre *genre;
 @property (nonatomic, strong) VLCMLAlbum *album;
-@property (nonatomic, strong) VLCMLMedia *media;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -46,7 +45,6 @@
 - (VLCMLGenre *)genre;
 - (uint)trackNumber;
 - (VLCMLAlbum *)album;
-- (VLCMLMedia *)media;
 
 /**
  * @return Which disc this tracks appears on (or 0 if unspecified)

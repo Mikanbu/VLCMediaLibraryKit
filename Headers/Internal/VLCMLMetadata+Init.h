@@ -1,5 +1,5 @@
 /*****************************************************************************
- * VLCMLMedia+Init.h
+ * VLCMLMetadata+Init.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -20,11 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "VLCMLMediaMetadata.h"
+#import "VLCMLMetadata.h"
 
-@interface VLCMLMediaMetadata (Internal)
+@interface VLCMLMetadata (Internal)
 
-- (instancetype)initWithMediaMetadata:(const medialibrary::IMediaMetadata &)metadata;
+- (instancetype)initWithMetadata:(const medialibrary::IMetadata &)metadata;
 
 @end
 

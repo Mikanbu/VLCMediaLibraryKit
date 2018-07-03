@@ -24,26 +24,26 @@
 
 @implementation VLCMLSearchAggregate
 
-- (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres mediaSearchAggregate:(VLCMLMediaSearchAggregate *)mediaSearchAggregate playlists:(NSArray<VLCMLPlaylist *> *)playlists
+- (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres media:(NSArray<VLCMLMedia *> *)media playlists:(NSArray<VLCMLPlaylist *> *)playlists
 {
     self = [super init];
     if (self) {
         _albums = albums;
         _artists = artists;
         _genres = genres;
-        _mediaSearchAggregate = mediaSearchAggregate;
+        _media = media;
         _playlists = playlists;
     }
     return self;
 }
 
-+ (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres mediaSearchAggregate:(VLCMLMediaSearchAggregate *)mediaSearchAggregate playlists:(NSArray<VLCMLPlaylist *> *)playlists
++ (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres media:(NSArray<VLCMLMedia *> *)media playlists:(NSArray<VLCMLPlaylist *> *)playlists
 {
     return [[VLCMLSearchAggregate alloc] initWithAlbums:albums
-                                             artists:artists
-                                              genres:genres
-                                mediaSearchAggregate:mediaSearchAggregate
-                                           playlists:playlists];
+                                                artists:artists
+                                                 genres:genres
+                                                  media:media
+                                              playlists:playlists];
 }
 
 @end

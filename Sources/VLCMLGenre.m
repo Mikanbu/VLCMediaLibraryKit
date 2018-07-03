@@ -52,17 +52,32 @@
 
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists((medialibrary::SortingCriteria)criteria, desc)->all()];
+    medialibrary::QueryParameters param = (medialibrary::QueryParameters) {
+        .sort = (medialibrary::SortingCriteria)criteria,
+        .desc = static_cast<bool>(desc)
+    };
+
+    return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists(&param)->all()];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks((medialibrary::SortingCriteria)criteria, desc)->all()];
+    medialibrary::QueryParameters param = (medialibrary::QueryParameters) {
+        .sort = (medialibrary::SortingCriteria)criteria,
+        .desc = static_cast<bool>(desc)
+    };
+
+    return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks(&param)->all()];
 }
 
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_genre->albums((medialibrary::SortingCriteria)criteria, desc)->all()];
+    medialibrary::QueryParameters param = (medialibrary::QueryParameters) {
+        .sort = (medialibrary::SortingCriteria)criteria,
+        .desc = static_cast<bool>(desc)
+    };
+
+    return [VLCMLUtils arrayFromAlbumPtrVector:_genre->albums(&param)->all()];
 }
 
 @end

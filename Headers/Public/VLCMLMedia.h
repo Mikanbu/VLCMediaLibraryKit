@@ -22,7 +22,7 @@
 
 #import "VLCMLObject.h"
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMediaMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile;
+@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 
@@ -111,7 +111,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (uint)releaseDate;
 
 #pragma mark - Metadata
-- (VLCMLMediaMetadata *)metadataOfType:(VLCMLMetadataType)type;
+- (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type;
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type stringValue:(NSString *)value;
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value;
 

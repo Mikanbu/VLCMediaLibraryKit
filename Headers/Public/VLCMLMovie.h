@@ -22,23 +22,15 @@
 
 #import "VLCMLObject.h"
 
-@class VLCMLMedia;
-
 @interface VLCMLMovie : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *imdbId;
-@property (nonatomic, copy) NSArray<VLCMLMedia *> *files;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)title;
 - (NSString *)shortSummary;
-- (NSURL *)artworkMrl;
 - (NSString *)imdbId;
-- (NSArray<VLCMLMedia *> *)files;
 
 @end

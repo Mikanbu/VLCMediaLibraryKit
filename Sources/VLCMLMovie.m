@@ -37,14 +37,6 @@
     return _movie->id();
 }
 
-- (NSString *)title
-{
-    if (!_title) {
-        _title = [[NSString alloc] initWithUTF8String:_movie->title().c_str()];
-    }
-    return _title;
-}
-
 - (NSString *)shortSummary
 {
     if (!_shortSummary) {
@@ -53,28 +45,12 @@
     return _shortSummary;
 }
 
-- (NSURL *)artworkMrl
-{
-    if (!_artworkMrl) {
-        _artworkMrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:_movie->artworkMrl().c_str()]];
-    }
-    return _artworkMrl;
-}
-
 - (NSString *)imdbId
 {
     if (!_imdbId) {
         _imdbId = [[NSString alloc] initWithUTF8String:_movie->imdbId().c_str()];
     }
     return _imdbId;
-}
-
-- (NSArray<VLCMLMedia *> *)files
-{
-    if (!_files) {
-        _files = [VLCMLUtils arrayFromMediaPtrVector:_movie->media()->all()];
-    }
-    return _files;
 }
 
 @end

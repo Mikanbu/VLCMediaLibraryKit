@@ -69,14 +69,6 @@
     return _album;
 }
 
-- (VLCMLMedia *)media
-{
-    if (!_media) {
-        _media = [[VLCMLMedia alloc] initWithMediaPtr:_albumTrackPtr->media()];
-    }
-    return _media;
-}
-
 - (uint)discNumber
 {
     return _albumTrackPtr->discNumber();

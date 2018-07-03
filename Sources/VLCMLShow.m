@@ -22,6 +22,7 @@
 
 #import "VLCMLShow.h"
 #import "VLCMLShowEpisode+Init.h"
+#import "VLCMLUtils.h"
 
 @interface VLCMLShow ()
 {
@@ -36,12 +37,12 @@
     return _show->id();
 }
 
-- (NSString *)name
+- (NSString *)title
 {
-    if (!_name) {
-        _name = [[NSString alloc] initWithUTF8String:_show->name().c_str()];
+    if (!_title) {
+        _title = [[NSString alloc] initWithUTF8String:_show->title().c_str()];
     }
-    return _name;
+    return _title;
 }
 
 - (NSDate *)releaseDate
@@ -73,16 +74,10 @@
     return _tvdbId;
 }
 
-- (NSArray<VLCMLShowEpisode *> *)episodes
+- (NSArray<VLCMLMedia *> *)episodes
 {
     if (!_episodes) {
-        auto episodes = _show->episodes();
-        NSMutableArray *result = [NSMutableArray array];
-
-        for (const auto &episode : episodes->all()) {
-            [result addObject:[[VLCMLShowEpisode alloc] initWithShowEpisodePtr:episode]];
-        }
-        _episodes = result;
+        _episodes = [VLCMLUtils arrayFromMediaPtrVector:_show->episodes()->all()];
     }
     return _episodes;
 }

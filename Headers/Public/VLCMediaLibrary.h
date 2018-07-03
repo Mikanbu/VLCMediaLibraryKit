@@ -22,7 +22,7 @@
 
 #import "VLCMLObject.h"
 
-@class VLCMLFile, VLCMLLabel, VLCMLMedia, VLCMLMediaSearchAggregate, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
+@class VLCMLFile, VLCMLLabel, VLCMLMedia, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
 
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     /*
@@ -178,11 +178,11 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Show
 
-- (VLCMLShow *)showWithName:(NSString *)name;
+- (VLCMLShow *)showWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Movie
 
-- (VLCMLMovie *)movieWithName:(NSString *)name;
+- (VLCMLMovie *)movieWitIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Artist
 
@@ -220,7 +220,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Search
 
-- (VLCMLMediaSearchAggregate *)searchMedia:(NSString *)pattern;
+- (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
 - (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;

@@ -27,7 +27,7 @@
 #import "VLCMLFile+Init.h"
 #import "VLCMLAlbumTrack+Init.h"
 #import "VLCMLShowEpisode+Init.h"
-#import "VLCMLMediaMetadata+Init.h"
+#import "VLCMLMetadata+Init.h"
 
 
 @interface VLCMLMedia ()
@@ -178,9 +178,9 @@
     return _media->releaseDate();
 }
 
-- (VLCMLMediaMetadata *)metadataOfType:(VLCMLMetadataType)type
+- (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type
 {
-    return [[VLCMLMediaMetadata alloc] initWithMediaMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
+    return [[VLCMLMetadata alloc] initWithMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
 }
 
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type stringValue:(NSString *)value
