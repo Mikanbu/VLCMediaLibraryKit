@@ -159,6 +159,7 @@
         for (const auto &label : labels->all()) {
             [result addObject:[[VLCMLLabel alloc] initWithLabelPtr:label]];
         }
+        _labels = [result copy];
     }
     return _labels;
 }
