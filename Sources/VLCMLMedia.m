@@ -28,7 +28,7 @@
 #import "VLCMLAlbumTrack+Init.h"
 #import "VLCMLShowEpisode+Init.h"
 #import "VLCMLMetadata+Init.h"
-
+#import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
 {
@@ -104,13 +104,16 @@
 
 - (NSArray<VLCMLFile *> *)files
 {
-    auto files = _media->files();
-    NSMutableArray *result = [NSMutableArray array];
+    if (!_files) {
+        auto files = _media->files();
+        NSMutableArray *result = [NSMutableArray array];
 
-    for (const auto &file : files) {
-        [result addObject:[[VLCMLFile alloc] initWithFilePtr:file]];
+        for (const auto &file : files) {
+            [result addObject:[[VLCMLFile alloc] initWithFilePtr:file]];
+        }
+        _files = [result copy];
     }
-    return result;
+    return _files;
 }
 
 - (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type
