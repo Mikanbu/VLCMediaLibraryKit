@@ -24,15 +24,15 @@
 
 typedef NS_ENUM(NSInteger, VLCMLFileType) {
     /// Unknown type, so far
-    Unknown,
+    VLCMLFileTypeUnknown,
     /// The main file of a media.
-    Main,
+    VLCMLFileTypeMain,
     /// A part of a media (for instance, the first half of a movie)
-    Part,
+    VLCMLFileTypePart,
     /// External soundtrack
-    Soundtrack,
+    VLCMLFileTypeSoundtrack,
     /// External subtitles
-    Subtitles
+    VLCMLFileTypeSubtitles
 };
 
 @interface VLCMLFile : NSObject <VLCMLObject>
