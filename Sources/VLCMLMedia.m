@@ -116,6 +116,16 @@
     return _files;
 }
 
+- (VLCMLFile *)mainFile
+{
+    for (VLCMLFile *file in _files) {
+        if (file.type == VLCMLFileTypeMain) {
+            return file;
+        }
+    }
+    return nil;
+}
+
 - (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type
 {
     return [[VLCMLFile alloc] initWithFilePtr:_media->addExternalMrl([mrl.absoluteString UTF8String],

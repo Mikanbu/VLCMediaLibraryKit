@@ -96,6 +96,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)increasePlayCount;
 - (VLCMLShowEpisode *)showEpisode;
 
+- (VLCMLFile *)mainFile;
 - (NSArray<VLCMLFile *> *)files;
 - (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type;
 
