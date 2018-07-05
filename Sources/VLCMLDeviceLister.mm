@@ -22,11 +22,12 @@
 
 #import "VLCMLDeviceLister.h"
 
+#define DEFAULT_UUID 4242
+
 std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLDeviceLister::devices() const
 {
     std::vector<std::tuple<std::string, std::string, bool>> res;
-
-    res.emplace_back( std::make_tuple( "",
+    res.emplace_back( std::make_tuple( [[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
                                       [[NSString stringWithFormat:@"file://%@", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]] UTF8String],
                                       false ) );
     return res;
