@@ -1,5 +1,5 @@
 /*****************************************************************************
- * VLCMLDeviceLister.m
+ * VLCMLDeviceLister.mm
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -26,9 +26,18 @@
 
 std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLDeviceLister::devices() const
 {
+    NSURL *documentDir = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] objectAtIndex:0];
+
+    char realPath[PATH_MAX];
+
+    realpath([documentDir.path UTF8String], realPath);
+
+    NSURL *mrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:realPath]];
+
     std::vector<std::tuple<std::string, std::string, bool>> res;
+
     res.emplace_back( std::make_tuple( [[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
-                                      [[NSString stringWithFormat:@"file://%@", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]] UTF8String],
+                                      [mrl.absoluteString UTF8String],
                                       false ) );
     return res;
 }
