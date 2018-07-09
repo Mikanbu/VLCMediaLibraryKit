@@ -118,6 +118,9 @@
 
 - (VLCMLFile *)mainFile
 {
+    if (!_files) {
+        [self files];
+    }
     for (VLCMLFile *file in _files) {
         if (file.type == VLCMLFileTypeMain) {
             return file;
