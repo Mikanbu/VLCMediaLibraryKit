@@ -32,11 +32,11 @@ typedef NS_ENUM(UInt8, VLCMLMediaType) {
     VLCMLMediaTypeAudio
 };
 
-typedef NS_ENUM(UInt8, VLCMLMediaSubType) {
-    VLCMLMediaSubTypeUnknown,
-    VLCMLMediaSubTypeShowEpisode,
-    VLCMLMediaSubTypeMovie,
-    VLCMLMediaSubTypeAlbumTrack
+typedef NS_ENUM(UInt8, VLCMLMediaSubtype) {
+    VLCMLMediaSubtypeUnknown,
+    VLCMLMediaSubtypeShowEpisode,
+    VLCMLMediaSubtypeMovie,
+    VLCMLMediaSubtypeAlbumTrack
 };
 
 typedef NS_ENUM(UInt32, VLCMLMetadataType) {
@@ -86,7 +86,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 #pragma mark - Getters/Setters
 
 - (VLCMLMediaType)type;
-- (VLCMLMediaSubType)subType;
+- (VLCMLMediaSubtype)subtype;
 
 - (NSString *)title;
 - (BOOL)updateTitle:(NSString *)title;

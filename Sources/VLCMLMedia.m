@@ -49,9 +49,9 @@
     return (VLCMLMediaType)_media->type();
 }
 
-- (VLCMLMediaSubType)subType
+- (VLCMLMediaSubtype)subtype
 {
-    return (VLCMLMediaSubType)_media->subType();
+    return (VLCMLMediaSubtype)_media->subType();
 }
 
 - (NSString *)title
