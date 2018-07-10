@@ -1,10 +1,8 @@
 # VLCMediaLibraryKit
 
-This is an experimental version of MediaLibraryKit for [GSoC 2017 with VideoLAN][2].
+This is an experimental version of MediaLibraryKit created for [GSoC 2017 with VideoLAN][2].
 
-**Version 3.0**
-
-The 3.0 version includes the usage of the [VideoLAN medialibrary][1] written by Hugo Beauzée-Luyssen.
+This version includes the usage of the [VideoLAN medialibrary][1] written by Hugo Beauzée-Luyssen.
 Therefore changing the whole structure of MLKit.
 
 ## Installation
@@ -13,7 +11,7 @@ For now this version is available either using CocoaPods or manual installation.
 
 ### Manually
 
-`git clone git@github.com:TheHungryBu/VLCMediaLibraryKit.git`
+`git clone git@github.com:Mikanbu/VLCMediaLibraryKit.git`
 
 ## Building
 
@@ -25,6 +23,7 @@ A build script named `buildVLCMediaLibraryKit.sh` is available on the repository
     -v      Be more verbose
     -d      Enable debug mode
     -m      Skip medialibrary compilation
+    -n      Skip script steps requiring network interaction
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
@@ -37,7 +36,7 @@ A build script named `buildVLCMediaLibraryKit.sh` is available on the repository
 
 `./buildVLCMediaLibraryKit.sh -vca aarch64`
 
-After a successfull building, a `VLCMediaLibraryKit.framework` should be found in the `build` directory.
+After a successfull build, a `VLCMediaLibraryKit.framework` should be found in the `build` directory.
 
 [1]: https://code.videolan.org/videolan/medialibrary
 [2]: https://summerofcode.withgoogle.com/projects/#6366563499245568
