@@ -249,6 +249,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 #pragma mark - Thumbnail
 
 - (NSString *)thumbnailPath;
+- (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media;
 
 #pragma mark - Logger
 
