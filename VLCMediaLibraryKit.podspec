@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VLCMediaLibraryKit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
