@@ -167,7 +167,9 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 - (VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier;
 - (VLCMLMedia *)mediaWithMrl:(NSURL *)mrl;
-- (VLCMLMedia *)addMediaWithMrl:(NSURL *)mrl;
+- (VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
+- (VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
+
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 - (NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
