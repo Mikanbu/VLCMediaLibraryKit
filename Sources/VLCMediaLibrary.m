@@ -26,7 +26,6 @@
 #import "VLCMLArtist+Init.h"
 #import "VLCMLFolder+Init.h"
 #import "VLCMLGenre+Init.h"
-#import "VLCMLHistoryEntry+Init.h"
 #import "VLCMLLabel+Init.h"
 #import "VLCMLMedia+Init.h"
 #import "VLCMLMovie+Init.h"

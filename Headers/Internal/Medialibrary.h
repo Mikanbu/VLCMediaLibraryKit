@@ -32,7 +32,6 @@
 # include <medialibrary/IDeviceLister.h>
 # include <medialibrary/IFolder.h>
 # include <medialibrary/IGenre.h>
-# include <medialibrary/IHistoryEntry.h>
 # include <medialibrary/ILabel.h>
 # include <medialibrary/IMedia.h>
 # include <medialibrary/IMetadata.h>
