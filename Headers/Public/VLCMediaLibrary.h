@@ -215,9 +215,8 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - History
 
-- (BOOL)addMediaToStreamHistory:(VLCMLMedia *)media;
-- (NSArray<VLCMLHistoryEntry *> *)lastStreamsPlayed;
-- (NSArray<VLCMLMedia *> *)lastMediaPlayed;
+- (NSArray<VLCMLMedia *> *)history;
+- (NSArray<VLCMLMedia *> *)streamHistory;
 - (BOOL)clearHistory;
 
 #pragma mark - Search

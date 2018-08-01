@@ -291,25 +291,26 @@
 
 #pragma mark - History
 
-- (BOOL)addMediaToStreamHistory:(VLCMLMedia *)media
+- (NSArray<VLCMLMedia *> *)history
 {
-    return _ml->addToStreamHistory([media mediaPtr]);
-}
-
-- (NSArray<VLCMLHistoryEntry *> *)lastStreamsPlayed
-{
-    auto history = _ml->lastStreamsPlayed();
+    auto history = _ml->history();
     NSMutableArray *result = [NSMutableArray array];
 
-    for (const auto &historyEntry : history->all()) {
-        [result addObject:[[VLCMLHistoryEntry alloc] initWithHistoryPtr:historyEntry]];
+    for (const auto &media : history->all()) {
+        [result addObject:[[VLCMLMedia alloc] initWithMediaPtr:media]];
     }
     return result;
 }
 
-- (NSArray<VLCMLMedia *> *)lastMediaPlayed
+- (NSArray<VLCMLMedia *> *)streamHistory
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->lastMediaPlayed()->all()];
+    auto history = _ml->streamHistory();
+    NSMutableArray *result = [NSMutableArray array];
+
+    for (const auto &media : history->all()) {
+        [result addObject:[[VLCMLMedia alloc] initWithMediaPtr:media]];
+    }
+    return result;
 }
 
 - (BOOL)clearHistory
