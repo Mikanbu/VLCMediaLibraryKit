@@ -159,7 +159,7 @@ fetchMedialibrary()
         if [ "$NO_NETWORK" = "no" ]; then
             if [ -d medialibrary ]; then
                 spushd medialibrary
-                    git pull --rebase
+                    git pull origin master --rebase
                     git reset --hard ${TESTED_HASH}
             else
                 git clone git@code.videolan.org:videolan/medialibrary.git
