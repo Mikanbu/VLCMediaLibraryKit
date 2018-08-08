@@ -27,7 +27,6 @@
 #import <VLCMediaLibraryKit/VLCMLFile.h>
 #import <VLCMediaLibraryKit/VLCMLFolder.h>
 #import <VLCMediaLibraryKit/VLCMLGenre.h>
-#import <VLCMediaLibraryKit/VLCMLHistoryEntry.h>
 #import <VLCMediaLibraryKit/VLCMLLabel.h>
 #import <VLCMediaLibraryKit/VLCMLMedia.h>
 #import <VLCMediaLibraryKit/VLCMediaLibrary.h>
@@ -47,7 +46,6 @@
 @class VLCMLFile;
 @class VLCMLFolder;
 @class VLCMLGenre;
-@class VLCMLHistoryEntry;
 @class VLCMLLabel;
 @class VLCMLMedia;
 @class VLCMediaLibrary;
