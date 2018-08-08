@@ -252,7 +252,7 @@ buildMedialibrary()
                 local prefix="${currentDir}/${os}${platform}-install/${actualArch}"
                 local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
                 local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
-                local optim="-03 -g"
+                local optim="-O3"
 
                 log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
 
