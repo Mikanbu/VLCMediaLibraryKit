@@ -38,7 +38,11 @@ std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLD
 
     res.emplace_back( std::make_tuple( [[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
                                       [mrl.absoluteString UTF8String],
+#ifdef DEBUG
+                                      true ) );
+#else
                                       false ) );
+#endif
     return res;
 }
 
