@@ -92,9 +92,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyAlbums:(NSArray<VLCMLAlbum *> *)albums;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteAlbumsWithIds:(NSArray<NSNumber *> *)albumsIds;
 
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddTracks:(NSArray<VLCMLAlbumTrack *> *)tracks;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteTracksWithIds:(NSArray<NSNumber *> *)tracksIds;
-
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeletePlaylistsWithIds:(NSArray<NSNumber *> *)playlistsIds;

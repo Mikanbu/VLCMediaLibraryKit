@@ -55,13 +55,6 @@ public:
     virtual void onAlbumsAdded( std::vector<AlbumPtr> albums );
     virtual void onAlbumsModified( std::vector<AlbumPtr> albums );
     virtual void onAlbumsDeleted( std::vector<int64_t> albumsIds );
-    /**
-     * @brief onTrackAdded Called when a media gets detected as an album track
-     * and after it has been added to the album representation
-     */
-    virtual void onTracksAdded( std::vector<AlbumTrackPtr> tracks );
-    // Tracks are never modified after their creation, so there is no tracksModified event
-    virtual void onTracksDeleted( std::vector<int64_t> trackIds );
 
     virtual void onPlaylistsAdded( std::vector<PlaylistPtr> playlists );
     virtual void onPlaylistsModified( std::vector<PlaylistPtr> playlists );
@@ -91,7 +84,7 @@ public:
      * This will also be invoked with an empty entryPoint when the initial reload of the medialibrary
      * has completed.
      */
-    virtual void onDiscoveryCompleted( const std::string& entryPoint );
+    virtual void onDiscoveryCompleted( const std::string& entryPoint, bool success );
     /**
      * @brief onReloadStarted will be invoked when a reload operation begins.
      * @param entryPoint Will be an empty string is the reload is a global reload, or the specific
@@ -103,7 +96,7 @@ public:
      * @param entryPoint Will be an empty string is the reload was a global reload, or the specific
      * entry point that has been reloaded
      */
-    virtual void onReloadCompleted( const std::string& entryPoint );
+    virtual void onReloadCompleted( const std::string& entryPoint, bool success );
     /**
      * @brief onEntryPointRemoved will be invoked when an entrypoint removal request gets processsed
      * by the appropriate worker thread.

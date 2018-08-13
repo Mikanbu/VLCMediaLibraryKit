@@ -22,7 +22,6 @@
 
 #import "MediaLibraryCb.h"
 
-#import "VLCMLAlbumTrack+Init.h"
 #import "VLCMLMedia+Init.h"
 #import "VLCMLUtils.h"
 
@@ -122,28 +121,6 @@ void MediaLibraryCb::onAlbumsDeleted( std::vector<int64_t> albumsIds )
     }
 }
 
-#pragma mark - Album trakcs
-
-void MediaLibraryCb::onTracksAdded( std::vector<AlbumTrackPtr> tracks )
-{
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddTracks:)]) {
-        NSMutableArray *objcTracks = [NSMutableArray array];
-
-        for ( const auto &track : tracks )
-        {
-            [objcTracks addObject:[[VLCMLAlbumTrack alloc] initWithAlbumTrackPtr:track]];
-        }
-        [m_delegate medialibrary:m_medialibrary didAddTracks:objcTracks];
-    }
-}
-
-void MediaLibraryCb::onTracksDeleted( std::vector<int64_t> trackIds )
-{
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteTracksWithIds:)]) {
-        [m_delegate medialibrary:m_medialibrary didDeleteTracksWithIds:intVectorToArray(trackIds)];
-    }
-}
-
 #pragma mark - Playlists
 
 void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
@@ -184,7 +161,7 @@ void MediaLibraryCb::onDiscoveryProgress( const std::string& entryPoint )
 
 }
 
-void MediaLibraryCb::onDiscoveryCompleted( const std::string& entryPoint )
+void MediaLibraryCb::onDiscoveryCompleted( const std::string& entryPoint, bool success )
 {
     if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteDiscovery:)]) {
         [m_delegate medialibrary:m_medialibrary didCompleteDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
@@ -200,7 +177,7 @@ void MediaLibraryCb::onReloadStarted( const std::string& entryPoint )
     }
 }
 
-void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint )
+void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint, bool success )
 {
     if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteReload:)]) {
         [m_delegate medialibrary:m_medialibrary didCompleteReload:[NSString stringWithUTF8String:entryPoint.c_str()]];
