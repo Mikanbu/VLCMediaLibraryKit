@@ -293,6 +293,7 @@ buildMedialibrary()
                     makeOptions="${makeOptions} V=1"
                 fi
 
+                local currentXcode="/Application/Xcode.app/Contents/Developer/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}.sdk/usr"
                 mkdir -p $buildDir && spushd $buildDir
 
                     $MEDIALIBRARY_DIR/bootstrap && \
@@ -303,7 +304,9 @@ buildMedialibrary()
                                        CXX=$CXX_COMPILATOR \
                                        OBJCXX=$OBJCXX_COMPILATOR \
                                        LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
-                                       LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}"
+                                       LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}" \
+                                       SQLITE_LIBS="-L${currentXcode}/lib -lsqlite3" \
+                                       SQLITE_CFLAGS="-I${currentXcode}/include"
 
                     log "info" "Starting make in ${buildDir}..."
                     make -C $buildDir $makeOptions > ${out}
