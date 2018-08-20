@@ -213,7 +213,7 @@ buildLibJpeg()
                     mkdir -p $prefix
                 fi
                 make install
-                LIBJPEG_BUILD_DIR="`pwd`"
+                LIBJPEG_BUILD_DIR="${prefix}/lib/"
                 LIBJPEG_INCLUDE_DIR="${prefix}/include/"
                 log "info" "libjpeg armed and ready for ${arch}!"
             spopd
