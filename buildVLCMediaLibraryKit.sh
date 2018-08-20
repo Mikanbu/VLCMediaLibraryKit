@@ -147,6 +147,7 @@ cleanEnvironment()
     export LD=""
     export LDFLAGS=""
     export STRIP=""
+    export PKG_CONFIG_LIBDIR=""
 }
 
 # Retrieve medialibrary
