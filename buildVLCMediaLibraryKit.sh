@@ -9,6 +9,7 @@ SIMULATOR=no
 NO_NETWORK=no
 BUILD_TYPE="Release"
 TESTED_HASH="bc1399bf"
+VLCKIT_PATH=~
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
@@ -33,10 +34,11 @@ usage()
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
+    -p      VLCKit path(default is ~/)
 EOF
 }
 
-while getopts "hvdmncsxa:" OPTION
+while getopts "hvdmncsxa:p:" OPTION
 do
     case $OPTION in
         h)
@@ -67,6 +69,9 @@ do
         a)
             ARCH=$OPTARG
             ;;
+        p)
+            VLCKIT_PATH=$OPTARG
+            ;;
         ?)
             usage
             exit 1
@@ -78,6 +83,7 @@ shift "$((OPTIND-1))"
 ROOT_DIR="$(pwd)"
 MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
 DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
+VLC_DIR=""
 LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
@@ -148,6 +154,33 @@ cleanEnvironment()
     export LDFLAGS=""
     export STRIP=""
     export PKG_CONFIG_LIBDIR=""
+}
+
+locateVLCKit()
+{
+    log "info" "Looking for VLCKit..."
+    if [ "$VLCKIT_PATH" == ~ ]; then
+        log "warning" "VLCKit path not provided, will look for it at ~/"
+    fi
+
+    local path="`find ${VLCKIT_PATH} -maxdepth 5 -type d -name 'VLCKit' -print -quit`"
+    if [ -z "${path}" ]; then
+        log "error" "Unable to find VLCKit!"
+        exit 1
+    fi
+    VLC_DIR="${path}/libvlc/vlc"
+    log "info" "Found at ${path}"
+    log "info" "Setting libvlc directory at ${VLC_DIR}"
+}
+
+exportVLC()
+{
+    local os=$1
+    local platform=$2
+    local architecture=$3
+
+    export PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig"
+    log "info" "PKG_CONFIG_PATH setted to ${PKG_CONFIG_PATH}"
 }
 
 # Retrieve medialibrary
@@ -280,6 +313,8 @@ buildMedialibrary()
                 export CXXFLAGS="${CFLAGS}"
                 export CPPFLAGS="${CFLAGS}"
                 export LDFLAGS=${LDFLAGS}
+
+                exportVLC ${os} ${platform} ${actualArch}
 
                 if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
                     buildDependencies $actualArch $target
@@ -443,6 +478,8 @@ if [ "x$1" != "x" ]; then
 fi
 
 cleanEnvironment
+
+locateVLCKit
 
 if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     fetchMedialibrary
