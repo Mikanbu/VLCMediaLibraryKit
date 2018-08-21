@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMedia:(NSArray<VLCMLMedia *> *)media;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateMedia:(NSArray<VLCMLMedia *> *)media;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMedia:(NSArray<VLCMLMedia *> *)media;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddArtists:(NSArray<VLCMLArtist *> *)artists;
