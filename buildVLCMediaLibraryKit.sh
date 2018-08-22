@@ -218,7 +218,7 @@ buildLibJpeg()
     if [ ! -d "${LIBJPEG_DIR}" ]; then
         if [ "$NO_NETWORK" = "no" ]; then
             log "warning" "libjpeg source not found! Starting download..."
-            git clone git@github.com:libjpeg-turbo/libjpeg-turbo.git
+            git clone https://github.com/libjpeg-turbo/libjpeg-turbo.git
             spushd libjpeg-turbo
                 git checkout tags/${libjpegRelease}
             spopd
