@@ -197,7 +197,7 @@ fetchMedialibrary()
                     git pull origin master --rebase
                     git reset --hard ${TESTED_HASH}
             else
-                git clone git@code.videolan.org:videolan/medialibrary.git
+                git clone https://code.videolan.org/videolan/medialibrary.git
                 spushd medialibrary
                     git checkout -B localBranch ${TESTED_HASH}
             fi
