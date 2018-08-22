@@ -154,6 +154,7 @@ cleanEnvironment()
     export LDFLAGS=""
     export STRIP=""
     export PKG_CONFIG_LIBDIR=""
+    export PKG_CONFIG_PATH=""
 }
 
 locateVLCKit()
