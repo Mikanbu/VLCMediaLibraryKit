@@ -185,6 +185,11 @@
     return _thumbnail;
 }
 
+- (BOOL)isThumbnailGenerated
+{
+    return _media->isThumbnailGenerated();
+}
+
 - (uint)insertionDate
 {
     return _media->insertionDate();

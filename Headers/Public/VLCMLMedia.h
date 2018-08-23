@@ -109,6 +109,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (NSArray<VLCMLLabel *> *)labels;
 
 - (NSURL *)thumbnail;
+- (BOOL)isThumbnailGenerated;
 
 - (uint)insertionDate;
 - (uint)releaseDate;
