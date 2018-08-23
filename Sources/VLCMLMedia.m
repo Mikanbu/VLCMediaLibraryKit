@@ -177,10 +177,10 @@
     return _labels;
 }
 
-- (NSString *)thumbnail
+- (NSURL *)thumbnail
 {
     if (!_thumbnail) {
-        _thumbnail = [[NSString alloc] initWithUTF8String:_media->thumbnail().c_str()];
+        _thumbnail = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_media->thumbnail().c_str()]];
     }
     return _thumbnail;
 }

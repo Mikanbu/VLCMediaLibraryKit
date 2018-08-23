@@ -74,7 +74,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @interface VLCMLMedia : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *thumbnail;
+@property (nonatomic, copy) NSURL *thumbnail;
 @property (nonatomic, strong) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong) VLCMLMovie *movie;
@@ -108,7 +108,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (VLCMLMovie *)movie;
 - (NSArray<VLCMLLabel *> *)labels;
 
-- (NSString *)thumbnail;
+- (NSURL *)thumbnail;
+
 - (uint)insertionDate;
 - (uint)releaseDate;
 
