@@ -160,15 +160,18 @@ cleanEnvironment()
 locateVLCKit()
 {
     log "info" "Looking for VLCKit..."
+    local path=$VLCKIT_PATH
+
     if [ "$VLCKIT_PATH" == ~ ]; then
         log "warning" "VLCKit path not provided, will look for it at ~/"
+
+        path="`find ${VLCKIT_PATH} -maxdepth 5 -type d -name 'VLCKit' -print -quit`"
+        if [ -z "${path}" ]; then
+            log "error" "Unable to find VLCKit!"
+            exit 1
+        fi
     fi
 
-    local path="`find ${VLCKIT_PATH} -maxdepth 5 -type d -name 'VLCKit' -print -quit`"
-    if [ -z "${path}" ]; then
-        log "error" "Unable to find VLCKit!"
-        exit 1
-    fi
     VLC_DIR="${path}/libvlc/vlc"
     log "info" "Found at ${path}"
     log "info" "Setting libvlc directory at ${VLC_DIR}"
