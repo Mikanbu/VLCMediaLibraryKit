@@ -204,7 +204,10 @@ fetchMedialibrary()
                 spushd medialibrary
                     git checkout -B localBranch ${TESTED_HASH}
             fi
-            git submodule update --init
+                    git submodule update --init
+                    spushd libvlcpp
+                        git am $ROOT_DIR/Resources/patches/*.patch
+                    spopd #libvlcpp
             spopd #medialibrary
         fi
     spopd #libmedialibrary

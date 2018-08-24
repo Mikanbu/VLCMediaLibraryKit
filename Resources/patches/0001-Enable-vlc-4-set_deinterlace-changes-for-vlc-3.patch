@@ -1,0 +1,37 @@
+From f998607f2a051a474cb8431645526283bbb412b2 Mon Sep 17 00:00:00 2001
+From: Soomin Lee <bubu@mikan.io>
+Date: Thu, 23 Aug 2018 16:00:58 +0200
+Subject: [PATCH] Enable vlc 4 set_deinterlace changes for vlc 3
+
+Since we're linking to a libvlc build with VLCKit, even if it's 3.0
+we need to change it since this change is backported and applied
+during compilation
+---
+ vlcpp/MediaPlayer.hpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/vlcpp/MediaPlayer.hpp b/vlcpp/MediaPlayer.hpp
+index 37ccf52..560665b 100644
+--- a/vlcpp/MediaPlayer.hpp
++++ b/vlcpp/MediaPlayer.hpp
+@@ -65,7 +65,7 @@ private:
+         VideoCleanup,
+     };
+ public:
+-#if LIBVLC_VERSION_INT >= LIBVLC_VERSION(4, 0, 0, 0)
++#if LIBVLC_VERSION_INT >= LIBVLC_VERSION(3, 0, 0, 0)
+     enum class DeinterlaceState : signed char
+     {
+         Auto     = -1,
+@@ -1539,7 +1539,7 @@ public:
+      * \param mode      The deinterlace mode, or empty string for the current
+      *                  or default filter.
+      */
+-#if LIBVLC_VERSION_INT >= LIBVLC_VERSION(4, 0, 0, 0)
++#if LIBVLC_VERSION_INT >= LIBVLC_VERSION(3, 0, 0, 0)
+     void setDeinterlace(DeinterlaceState state, const std::string& mode)
+     {
+         libvlc_video_set_deinterlace(*this, static_cast<int>( state ),
+-- 
+2.18.0
+
