@@ -1,17 +1,18 @@
 # VLCMediaLibraryKit
 
-This is an experimental version of MediaLibraryKit created for [GSoC 2017 with VideoLAN][2].
-
-This version includes the usage of the [VideoLAN medialibrary][1] written by Hugo Beauzée-Luyssen.
-Therefore changing the whole structure of MLKit.
+VLCMediaLibraryKit is a wrapper of the [VideoLAN medialibrary][1] in Objective-C/C++.
 
 ## Installation
 
-For now this version is available either using CocoaPods or manual installation.
+## Cocoapods
 
-### Manually
+To integrate VLCMediaLibraryKit into your project, specify it in your Podfile:
 
-`git clone git@github.com:Mikanbu/VLCMediaLibraryKit.git`
+`pod 'VLCMediaLibraryKit'`
+
+Then, run the following command:
+
+`pod install`
 
 ## Building
 
@@ -28,15 +29,23 @@ A build script named `buildVLCMediaLibraryKit.sh` is available on the repository
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
+    -p      VLCKit path(default is ~/)
 ```
+
+
+In able to build VLCMediaLibraryKit, you **need** [VLCKit][2] compiled for the architecture you want to build.
+By default, if `-p SPECIFIC_PATH_TO_VLCKIT` is not passed to the build script, it will try to find VLCKit starting from the user home directory.
+
 
 **Example:**
 
 `./buildVLCMediaLibraryKit.sh -vc`
 
-`./buildVLCMediaLibraryKit.sh -vca aarch64`
+`./buildVLCMediaLibraryKit.sh -vdca aarch64`
 
-After a successfull build, a `VLCMediaLibraryKit.framework` should be found in the `build` directory.
+`./buildVLCMediaLibraryKit.sh -vdca x86_64 -p SPECIFIC_PATH_TO_VLCKIT`
+
+After a successfull build, a `VLCMediaLibraryKit.framework` can be found in the `build` directory.
 
 [1]: https://code.videolan.org/videolan/medialibrary
-[2]: https://summerofcode.withgoogle.com/projects/#6366563499245568
+[2]: https://code.videolan.org/videolan/VLCKit
