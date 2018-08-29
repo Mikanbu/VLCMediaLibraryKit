@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #import "VLCMLPlaylist.h"
+#import "VLCMLUtils.h"
 
 @interface VLCMLPlaylist ()
 {
@@ -55,7 +56,10 @@
 
 - (NSArray<VLCMLMedia *> *)media
 {
-    return nil;
+    if (!_media) {
+        _media = [VLCMLUtils arrayFromMediaPtrVector:_playlist->media()->all()];
+    }
+    return _media;
 }
 
 - (BOOL)appendMediaWithIdentifier:(VLCMLIdentifier)identifier

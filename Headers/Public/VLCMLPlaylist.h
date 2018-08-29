@@ -26,7 +26,8 @@
 
 @interface VLCMLPlaylist : NSObject <VLCMLObject>
 
-@property(nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSArray<VLCMLMedia *> *media;
 
 - (instancetype)init NS_UNAVAILABLE;
 
