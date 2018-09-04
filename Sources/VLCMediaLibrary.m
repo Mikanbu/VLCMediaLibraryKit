@@ -345,9 +345,9 @@
     return [VLCMLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String])->all()];
 }
 
-- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name
+- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String])->all()];
+    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String], includeAll)->all()];
 }
 
 - (VLCMLSearchAggregate *)search:(NSString *)pattern

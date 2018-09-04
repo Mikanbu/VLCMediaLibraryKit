@@ -226,7 +226,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 - (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;
-- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name;
+- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll;
 - (VLCMLSearchAggregate *)search:(NSString *)pattern;
 
 #pragma mark - Discover
