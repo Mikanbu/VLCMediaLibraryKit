@@ -404,14 +404,6 @@
 
 #pragma mark - Thumbnail
 
-- (NSString *)thumbnailPath
-{
-    if (!_thumbnailPath) {
-        _thumbnailPath = [[NSString alloc] initWithUTF8String:_ml->thumbnailPath().c_str()];
-    }
-    return _thumbnailPath;
-}
-
 - (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media {
     return _ml->requestThumbnail(media.mediaPtr);
 }
