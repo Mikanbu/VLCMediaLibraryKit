@@ -322,10 +322,13 @@
 
 - (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
 {
-    medialibrary::QueryParameters param = (medialibrary::QueryParameters) {
-        .sort = medialibrary::SortingCriteria::Default,
-        .desc = false
-    };
+    return [VLCMLUtils arrayFromMediaPtrVector:_ml->searchMedia([pattern UTF8String])->all()];
+}
+
+- (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
+                                  sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
     return [VLCMLUtils arrayFromMediaPtrVector:_ml->searchMedia([pattern UTF8String], &param)->all()];
 }
@@ -335,9 +338,27 @@
     return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String])->all()];
 }
 
+- (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
+                                               sort:(VLCMLSortingCriteria)criteria
+                                               desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String], &param)->all()];
+}
+
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
 {
     return [VLCMLUtils arrayFromAlbumPtrVector:_ml->searchAlbums([pattern UTF8String])->all()];
+}
+
+- (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
+                                            sort:(VLCMLSortingCriteria)criteria
+                                            desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromAlbumPtrVector:_ml->searchAlbums([pattern UTF8String], &param)->all()];
 }
 
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
@@ -345,21 +366,53 @@
     return [VLCMLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String])->all()];
 }
 
+- (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
+                                        sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String], &param)->all()];
+}
+
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String], includeAll)->all()];
+    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String],
+                                                                   includeAll)->all()];
+}
+
+- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
+                                           sort:(VLCMLSortingCriteria)criteria
+                                           desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String],
+                                                                   includeAll, &param)->all()];
+}
+
+- (VLCMLSearchAggregate *)convertSearchResult:(medialibrary::SearchAggregate *)searchResult
+{
+    return [VLCMLSearchAggregate
+            initWithAlbums:[VLCMLUtils arrayFromAlbumPtrVector:searchResult->albums->all()]
+            artists:[VLCMLUtils arrayFromArtistPtrVector:searchResult->artists->all()]
+            genres:[VLCMLUtils arrayFromGenrePtrVector:searchResult->genres->all()]
+            media:[VLCMLUtils arrayFromMediaPtrVector:searchResult->media->all()]
+            playlists:[VLCMLUtils arrayFromPlaylistPtrVector:searchResult->playlists->all()]];
 }
 
 - (VLCMLSearchAggregate *)search:(NSString *)pattern
 {
     medialibrary::SearchAggregate searchResult = _ml->search([pattern UTF8String]);
+    return [self convertSearchResult:&searchResult];
+}
 
-    return [VLCMLSearchAggregate
-            initWithAlbums:[VLCMLUtils arrayFromAlbumPtrVector:searchResult.albums->all()]
-            artists:[VLCMLUtils arrayFromArtistPtrVector:searchResult.artists->all()]
-            genres:[VLCMLUtils arrayFromGenrePtrVector:searchResult.genres->all()]
-            media:[VLCMLUtils arrayFromMediaPtrVector:searchResult.media->all()]
-            playlists:[VLCMLUtils arrayFromPlaylistPtrVector:searchResult.playlists->all()]];
+- (VLCMLSearchAggregate *)search:(NSString *)pattern
+                            sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+    medialibrary::SearchAggregate searchResult = _ml->search([pattern UTF8String], &param);
+
+    return [self convertSearchResult:&searchResult];
 }
 
 #pragma mark - Discover

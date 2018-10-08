@@ -222,12 +222,53 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Search
 
+/**
+ * @brief searchMedia, searchAudio, and searchVideo search for some media, based on a pattern.
+ * @param pattern A 3 character or more pattern that will be matched against the media's title
+ *                or filename if no title was set for this media.
+ * @param params Some query parameters. Valid sorting criteria are:
+ *               - Duration
+ *               - InsertionDate
+ *               - ReleaseDate
+ *               - PlayCount
+ *               - Filename
+ *               - LastModificationDate
+ *               - FileSize
+ *              Default sorting parameter uses the media's title.
+ *              Passing nullptr will default to default ascending sort
+ *
+ * Only media that were discovered by the medialibrary will be included.
+ * For instance, media that are added explicitely, playlist items that
+ * point to remote content, will *not* be included
+ */
+
 - (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
+- (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
+                                  sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+
 - (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
+- (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
+                                               sort:(VLCMLSortingCriteria)criteria
+                                               desc:(BOOL)desc;
+
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
+- (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
+                                            sort:(VLCMLSortingCriteria)criteria
+                                            desc:(BOOL)desc;
+
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;
+- (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
+                                        sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll;
+- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
+                                           sort:(VLCMLSortingCriteria)criteria
+                                           desc:(BOOL)desc;
+
 - (VLCMLSearchAggregate *)search:(NSString *)pattern;
+- (VLCMLSearchAggregate *)search:(NSString *)pattern
+                            sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+
 
 #pragma mark - Discover
 
