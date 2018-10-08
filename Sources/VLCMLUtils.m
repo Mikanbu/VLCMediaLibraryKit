@@ -79,4 +79,12 @@
     return genreList;
 }
 
++ (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    return medialibrary::QueryParameters {
+        .sort = (medialibrary::SortingCriteria)criteria,
+        .desc = static_cast<bool>(desc)
+    };
+}
+
 @end
