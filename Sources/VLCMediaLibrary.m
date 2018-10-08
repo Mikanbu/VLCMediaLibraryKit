@@ -276,7 +276,7 @@
         .desc = static_cast<bool>(desc)
     };
 
-   return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->playlists(&param)->all()];
+    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->playlists(&param)->all()];
 }
 
 - (VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier
