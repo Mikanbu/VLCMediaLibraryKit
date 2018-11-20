@@ -26,6 +26,7 @@
 #import "VLCMLArtist+Init.h"
 #import "VLCMLPlaylist+Init.h"
 #import "VLCMLGenre+Init.h"
+#import "VLCMLFolder+Init.h"
 
 @implementation VLCMLUtils
 
@@ -77,6 +78,16 @@
         [genreList addObject:[[VLCMLGenre alloc] initWithGenrePtr:genre]];
     }
     return [genreList copy];
+}
+
++ (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(std::vector<medialibrary::FolderPtr>)folders
+{
+    NSMutableArray<VLCMLFolder *> *folderList = [NSMutableArray array];
+
+    for (const auto &folder : folders) {
+        [folderList addObject:[[VLCMLFolder alloc] initWithFolderPtr:folder]];
+    }
+    return [folderList copy];
 }
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
