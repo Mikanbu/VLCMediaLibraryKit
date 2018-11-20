@@ -20,6 +20,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLUtils.h"
+
 #import "VLCMLFolder.h"
 #import "VLCMLFolder+Init.h"
 
@@ -44,9 +46,39 @@
     return _mrl;
 }
 
+- (NSString *)name
+{
+    if (_name) {
+        _name = [NSString stringWithUTF8String:_folder->name().c_str()];
+    }
+    return _name;
+}
+
 - (BOOL)isPresent
 {
     return _folder->isPresent();
+}
+
+- (BOOL)isBanned
+{
+    return _folder->isBanned();
+}
+
+- (NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
+                       sortingCriteria:(VLCMLSortingCriteria)criteria
+                                  desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromMediaPtrVector:_folder->media((medialibrary::IMedia::Type)type, &param)->all()];
+}
+
+- (NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                     desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromFolderPtrVector:_folder->subfolders(&param)->all()];
 }
 
 @end

@@ -21,6 +21,9 @@
  *****************************************************************************/
 
 #import "VLCMLObject.h"
+#import "VLCMLMedia.h"
+
+typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @interface VLCMLFolder : NSObject <VLCMLObject>
 
@@ -32,11 +35,69 @@
  * @return The folder's mrl
  */
 @property (nonatomic, copy) NSURL *mrl;
+@property (nonatomic, copy) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSURL *)mrl;
+
 - (BOOL)isPresent;
+
+/**
+ * @brief isBanned Will return true if the folder was explicitely banned
+ * from being discovered.
+ */
+- (BOOL)isBanned;
+
+/**
+ * @brief media Returns the media contained by this folder.
+ * @param type The media type, or VLCMLMediaTypeUnknown for all types
+ * @param criteria A VLCMLSortingCriteria to sort the result
+ * @param desc Sort by asc or desc
+ * @return An array of VLCMLMedia objects found
+ *
+ * This function will only return the media contained in the folder, not
+ * the media contained in subfolders.
+ * A media is considered to be in a directory when the main file representing
+ * it is part of the directory.
+ * For instance, in this file hierarchy:
+ * .
+ * ├── a
+ * │   ├── c
+ * │   │   └── NakedMoleRat.asf
+ * │   └── seaotter_themovie.srt
+ * └── b
+ *     └── seaotter_themovie.mkv
+ * Media of 'a' would be empty (since the only file is a subtitle file and
+ *                              not the actual media, and NakedMoleRat.asf
+ *                              is in a subfolder)
+ * Media of 'c' would contain NakedMoleRat.asf
+ * Media of 'b' would contain seaotter_themovie.mkv
+ */
+- (NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
+                       sortingCriteria:(VLCMLSortingCriteria)criteria
+                                  desc:(BOOL)desc;
+
+
+/**
+ * @brief subfolders Returns the subfolders contained folder
+ * @param criteria A VLCMLSortingCriteria to sort the result
+ * @param desc Sort by asc or desc
+ * @return An array of VLCMLFolder objects found
+ *
+ * all of the folder subfolders, regardless of the folder content.
+ * For instance, in this hierarchy:
+ * ├── a
+ * │   └── w
+ * │       └── x
+ * a->subfolders() would return w; w->subfolders would return x, even though
+ * x is empty.
+ * This is done for optimization purposes, as keeping track of the entire
+ * folder hierarchy would be quite heavy.
+ * As an alternative, it is possible to use IMediaLibrary::folders to return
+ * a flattened list of all folders that contain media.
+ */
+- (NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                     desc:(BOOL)desc;
 
 @end
