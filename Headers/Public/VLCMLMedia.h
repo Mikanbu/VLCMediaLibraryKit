@@ -113,8 +113,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (NSURL *)thumbnail;
 - (BOOL)isThumbnailGenerated;
 
-- (uint)insertionDate;
-- (uint)releaseDate;
+- (NSDate *)insertionDate;
+- (NSDate *)releaseDate;
 
 #pragma mark - Metadata
 - (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type;

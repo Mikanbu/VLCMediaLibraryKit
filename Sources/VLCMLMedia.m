@@ -195,14 +195,14 @@
     return _media->isThumbnailGenerated();
 }
 
-- (uint)insertionDate
+- (NSDate *)insertionDate
 {
-    return _media->insertionDate();
+    return [NSDate dateWithTimeIntervalSince1970:_media->insertionDate()];
 }
 
-- (uint)releaseDate
+- (NSDate *)releaseDate
 {
-    return _media->releaseDate();
+    return [NSDate dateWithTimeIntervalSince1970:_media->releaseDate()];
 }
 
 - (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type
