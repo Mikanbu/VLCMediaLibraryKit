@@ -117,7 +117,25 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (NSDate *)releaseDate;
 
 #pragma mark - Metadata
+
+/**
+ * @brief metadataOfType Returns the specified metadata contained by this media
+ * @param type The metadata type VLCMLMetadataType
+ * @return A VLCMLMetadata object with the metadata
+ */
 - (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type;
+
+/**
+ * @brief setMetadataOfType Set the specified metadata contained by this media
+ * @param type The metadata type VLCMLMetadataType
+ * @param value A value for the said metadata
+ * @return A Bool depending on success
+ *
+ * This function sets the metadata described by <type> to the given value
+ * The C++ medialibrary translate and store the given data as a string
+ * This means that the application is in charge of knowing the meaning
+ * \of each value for the given type.
+ */
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type stringValue:(NSString *)value;
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value;
 
