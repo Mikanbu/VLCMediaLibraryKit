@@ -36,7 +36,7 @@
     for (const auto &medium : media) {
         [mediaList addObject:[[VLCMLMedia alloc] initWithMediaPtr:medium]];
     }
-    return mediaList;
+    return [mediaList copy];
 }
 
 + (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums
@@ -46,7 +46,7 @@
     for (const auto &album : albums) {
         [albumList addObject:[[VLCMLAlbum alloc] initWithAlbumPtr:album]];
     }
-    return albumList;
+    return [albumList copy];
 }
 
 + (NSArray<VLCMLArtist *> *)arrayFromArtistPtrVector:(std::vector<medialibrary::ArtistPtr>)artists
@@ -56,7 +56,7 @@
     for (const auto &artist : artists) {
         [artistList addObject:[[VLCMLArtist alloc] initWithArtistPtr:artist]];
     }
-    return artistList;
+    return [artistList copy];
 }
 
 + (NSArray<VLCMLPlaylist *> *)arrayFromPlaylistPtrVector:(std::vector<medialibrary::PlaylistPtr>)playlists
@@ -66,7 +66,7 @@
     for (const auto &playlist : playlists) {
         [playlistList addObject:[[VLCMLPlaylist alloc] initWithPlaylistPtr:playlist]];
     }
-    return playlistList;
+    return [playlistList copy];
 }
 
 + (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres
@@ -76,7 +76,7 @@
     for (const auto &genre : genres) {
         [genreList addObject:[[VLCMLGenre alloc] initWithGenrePtr:genre]];
     }
-    return genreList;
+    return [genreList copy];
 }
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
