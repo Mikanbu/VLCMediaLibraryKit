@@ -441,13 +441,7 @@
 
 - (NSArray<VLCMLFolder *> *)entryPoints
 {
-    auto entryPoints = _ml->entryPoints();
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &entryPoint : entryPoints->all()) {
-        [result addObject:[[VLCMLFolder alloc] initWithFolderPtr:entryPoint]];
-    }
-    return result;
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->entryPoints()->all()];
 }
 
 - (void)removeEntryPointWithPath:(NSString *)path
