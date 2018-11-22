@@ -284,6 +284,11 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
                                            sort:(VLCMLSortingCriteria)criteria
                                            desc:(BOOL)desc;
 
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern;
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                     sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc;
+
 - (VLCMLSearchAggregate *)search:(NSString *)pattern;
 - (VLCMLSearchAggregate *)search:(NSString *)pattern
                             sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
@@ -318,6 +323,34 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 - (void)removeEntryPointWithPath:(NSString *)path;
 
 #pragma mark - Folder
+
+- (VLCMLFolder *)folderWithIdentifier:(VLCMLIdentifier)identifier;
+- (VLCMLFolder *)folderAtMrl:(NSURL *)mrl;
+
+/**
+ * @brief folders Returns a flattened list of all folders containing at least a media
+ * @param params A query parameters object
+ * @return An array of VLCMLFolder object
+ *
+ * This is flattened, ie.
+ * ├── a
+ * │   └── w
+ * │       └── x
+ * │           └── y
+ * │               └── z
+ * │                   └── DogMeme.avi
+ * ├── c
+ * │   └── NakedMoleRat.asf
+ *
+ * would return a query containing 'z' and 'c' as the other folders are
+ * not containing any media.
+ * In case a non flattened list is desired, the
+ * entryPoints() & VLCMLFolder::subFolders() methods should be used.
+ */
+- (NSArray<VLCMLFolder *> *)folders;
+- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc;
+
 
 /**
  * @brief banFolderWithPath will prevent an entry point folder from being discovered.

@@ -402,6 +402,20 @@
                                                                    includeAll, &param)->all()];
 }
 
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+{
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String])->all()];
+}
+
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                     sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String], &param)->all()];
+}
+
 - (VLCMLSearchAggregate *)convertSearchResult:(medialibrary::SearchAggregate *)searchResult
 {
     return [VLCMLSearchAggregate
@@ -450,6 +464,29 @@
 }
 
 #pragma mark - Folder
+
+- (VLCMLFolder *)folderWithIdentifier:(VLCMLIdentifier)identifier
+{
+    return [[VLCMLFolder alloc] initWithFolderPtr:_ml->folder(identifier)];
+}
+
+- (VLCMLFolder *)folderAtMrl:(NSURL *)mrl
+{
+    return [[VLCMLFolder alloc] initWithFolderPtr:_ml->folder([mrl.absoluteString UTF8String])];
+}
+
+- (NSArray<VLCMLFolder *> *)folders
+{
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders()->all()];
+}
+
+- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders(&param)->all()];
+}
 
 - (void)banFolderWithPath:(NSString *)path
 {
