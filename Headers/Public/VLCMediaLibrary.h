@@ -171,12 +171,17 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 - (VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
 - (VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
 
+- (NSArray<VLCMLMedia *> *)audioFiles;
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+
+- (NSArray<VLCMLMedia *> *)videoFiles;
 - (NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Album
 
 - (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;
+
+- (NSArray<VLCMLAlbum *> *)albums;
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Show
@@ -190,6 +195,17 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 #pragma mark - Artist
 
 - (VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier;
+
+/**
+ * @brief List all artists that have at least an album.
+ * Artists that only appear on albums as guests won't be listed from here, but will be
+ * returned when querying an album for all its appearing artists
+ * @param includeAll If true, all artists including those without album
+ *                   will be returned. If false, only artists which have
+ *                   an album will be returned.
+ */
+- (NSArray<VLCMLArtist *> *)artists:(BOOL)includeAll;
+
 /**
  * @brief List all artists that have at least an album.
  * Artists that only appear on albums as guests won't be listed from here, but will be
@@ -204,14 +220,17 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Genre
 
-- (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 - (VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier;
+- (NSArray<VLCMLGenre *> *)genres;
+- (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Playlist
 
-- (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
-- (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 - (VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier;
+- (NSArray<VLCMLPlaylist *> *)playlists;
+- (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+
+- (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
 - (BOOL)deletePlaylistWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - History
