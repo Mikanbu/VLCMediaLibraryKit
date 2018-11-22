@@ -299,24 +299,68 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * @param entryPoint What to discover.
  */
 - (void)discoverOnEntryPoint:(NSString *)path;
+
+/**
+ * @brief enableDiscoverNetwork Enable discovery of network shares
+ *
+ * This can be called at any time, but won't have any effect before
+ * initialize() has been called.
+ * When disabling network discovery, all content that was discovered on
+ * the network will be marked as non-present, meaning they won't be
+ * returned until network discovery gets enabled again.
+ * As far as the user is concerned, this is equivalent to (un)plugging
+ * a USB drive, in the sense that the medialibrary will still store
+ * information about network content and won't have to discover/parse it
+ * again.
+ */
 - (void)enableDiscoverNetwork:(BOOL)enable;
 - (NSArray<VLCMLFolder *> *)entryPoints;
 - (void)removeEntryPointWithPath:(NSString *)path;
 
 #pragma mark - Folder
 
+/**
+ * @brief banFolderWithPath will prevent an entry point folder from being discovered.
+ * If the folder was already discovered, it will be removed prior to the ban, and all
+ * associated media will be discarded.
+ * * @note This method is asynchronous and will run after all currently stacked
+ * discovery/ban/unban operations have completed.
+ */
 - (void)banFolderWithPath:(NSString *)path;
+
+/**
+ * @brief unbanFolderWithEntryPoint Unban an entrypoint.
+ * In case this entry point was indeed previously banned, this will issue a reload of
+ * that entry point
+ * @param entryPoint The entry point to unban
+ * @note This method is asynchronous and will run after all currently stacked
+ * discovery/ban/unban operations have completed.
+ */
 - (void)unbanFolderWithEntryPoint:(NSString *)entryPoint;
 
 #pragma mark - Thumbnail
 
+/**
+ * \brief requestThumbnail Queues a thumbnail generation request for
+ * this media, to be run asynchronously.
+ */
 - (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media;
 
 #pragma mark - Logger
 
 #pragma mark - Background Operation
 
+/**
+ * @brief pauseBackgroundOperations Will stop potentially CPU intensive background
+ * operations, until resumeBackgroundOperations() is called.
+ * If an operation is currently running, it will finish before pausing.
+ */
 - (void)pauseBackgroundOperations;
+
+/**
+ * @brief resumeBackgroundOperations Resumes background tasks, previously
+ * interrupted by pauseBackgroundOperations().
+ */
 - (void)resumeBackgroundOperations;
 
 #pragma mark - Reload
@@ -326,6 +370,10 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Parser
 
+/**
+ * @brief forceParserRetry Forces a re-run of all metadata parsers and resets any
+ * unterminated file retry count to 0, granting them 3 new tries at being parsed
+ */
 - (void)forceParserRetry;
 
 #pragma mark - Scan
