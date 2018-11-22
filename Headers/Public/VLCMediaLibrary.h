@@ -328,6 +328,17 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 - (void)forceParserRetry;
 
+#pragma mark - Scan
+
+/**
+ * @brief forceRescan Deletes all entities except Media and Playlist, and
+ *                    forces all media to be rescanned.
+ *
+ * This can be called anytime after the medialibrary has been initialized. * It will make all held instances outdated. Those should be considered
+ * as invalid the moment this method returns.
+ */
+- (void)forceRescan;
+
 #pragma mark - DeviceLister
 
 @end

@@ -506,6 +506,13 @@
     _ml->forceParserRetry();
 }
 
+#pragma mark - Scan
+
+- (void)forceRescan
+{
+    _ml->forceRescan();
+}
+
 #pragma mark -
 
 @end
