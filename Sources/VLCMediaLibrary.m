@@ -186,7 +186,6 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-
     return [VLCMLUtils arrayFromMediaPtrVector:_ml->audioFiles(&param)->all()];
 }
 
