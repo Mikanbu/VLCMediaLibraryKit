@@ -32,7 +32,11 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
     /// External soundtrack
     VLCMLFileTypeSoundtrack,
     /// External subtitles
-    VLCMLFileTypeSubtitles
+    VLCMLFileTypeSubtitles,
+    /// A playlist File
+    VLCMLFileTypePlaylist,
+    /// A disc file. Also considered to be a "main" file
+    VLCMLFileTypeDisc
 };
 
 @interface VLCMLFile : NSObject <VLCMLObject>
@@ -46,6 +50,26 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
 - (VLCMLFileType)type;
 - (uint)lastModificationDate;
 - (uint)size;
+
+- (BOOL)isRemovable;
+
+/**
+ * @brief isExternal returns true if this stream isn't managed by the medialibrary
+ */
 - (BOOL)isExternal;
+
+/**
+ * @brief isNetwork returns true if this file is on a network location
+ *
+ * If the file is external, this is a best guess effort.
+ */
+- (BOOL)isNetwork;
+
+/**
+ * @brief isMain Returns true if this file is the main file of a media
+ *
+ * This can be used to have a Disc file considered as the main file
+ */
+- (BOOL)isMain;
 
 @end

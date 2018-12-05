@@ -59,9 +59,24 @@
     return _file->size();
 }
 
+- (BOOL)isRemovable
+{
+    return _file->isRemovable();
+}
+
 - (BOOL)isExternal
 {
     return _file->isExternal();
+}
+
+- (BOOL)isNetwork
+{
+    return _file->isNetwork();
+}
+
+- (BOOL)isMain
+{
+    return _file->isMain();
 }
 
 @end
