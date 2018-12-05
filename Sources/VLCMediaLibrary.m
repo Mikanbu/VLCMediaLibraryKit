@@ -404,16 +404,35 @@
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
 {
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String])->all()];
+    return [self searchFoldersWithPattern:pattern type:VLCMLMediaTypeUnknown];
+}
+
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern type:(VLCMLMediaType)type
+{
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String],
+                                                                   (medialibrary::IMedia::Type)type)->all()];
 }
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
                                      sortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc
 {
+    return [self searchFoldersWithPattern:pattern
+                                     type:VLCMLMediaTypeUnknown
+                          sortingCriteria:criteria
+                                     desc:desc];
+}
+
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                                type:(VLCMLMediaType)type
+                                     sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
+{
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String], &param)->all()];
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String],
+                                                                   (medialibrary::IMedia::Type)type,
+                                                                   &param)->all()];
 }
 
 - (VLCMLSearchAggregate *)convertSearchResult:(medialibrary::SearchAggregate *)searchResult
@@ -477,15 +496,28 @@
 
 - (NSArray<VLCMLFolder *> *)folders
 {
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders()->all()];
+    return [self foldersOfType:VLCMLMediaTypeUnknown];
+}
+
+- (NSArray<VLCMLFolder *> *)foldersOfType:(VLCMLMediaType)type
+{
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders((medialibrary::IMedia::Type)type)->all()];
 }
 
 - (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                   desc:(BOOL)desc
 {
+    return [self foldersWithSortingCriteria:criteria type:VLCMLMediaTypeUnknown desc:desc];
+}
+
+- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  type:(VLCMLMediaType)type
+                                                  desc:(BOOL)desc
+{
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders(&param)->all()];
+    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders((medialibrary::IMedia::Type)type,
+                                                             &param)->all()];
 }
 
 - (void)banFolderWithPath:(NSString *)path

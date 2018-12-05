@@ -21,8 +21,9 @@
  *****************************************************************************/
 
 #import "VLCMLObject.h"
+#import "VLCMLMedia.h"
 
-@class VLCMLFile, VLCMLLabel, VLCMLMedia, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
+@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
 
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     /*
@@ -288,6 +289,13 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern;
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                                type:(VLCMLMediaType)type;
+
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                     sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc;
+- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                                type:(VLCMLMediaType)type
                                      sortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
 
@@ -330,8 +338,14 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 - (VLCMLFolder *)folderAtMrl:(NSURL *)mrl;
 
 /**
- * @brief folders Returns a flattened list of all folders containing at least a media
- * @param params A query parameters object
+ * @brief folders Returns a flattened list of all folders of any type
+ * @return An array of VLCMLFolder object
+ */
+- (NSArray<VLCMLFolder *> *)folders;
+
+/**
+ * @brief folders Returns a flattened list of all folders containing at least a media of a given type
+ * @param type A required type of media, or VLCMediaTypeUnknown if any media type is fine.
  * @return An array of VLCMLFolder object
  *
  * This is flattened, ie.
@@ -349,8 +363,12 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * In case a non flattened list is desired, the
  * entryPoints() & VLCMLFolder::subFolders() methods should be used.
  */
-- (NSArray<VLCMLFolder *> *)folders;
+- (NSArray<VLCMLFolder *> *)foldersOfType:(VLCMLMediaType)type;
+
 - (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc;
+- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  type:(VLCMLMediaType)type
                                                   desc:(BOOL)desc;
 
 
