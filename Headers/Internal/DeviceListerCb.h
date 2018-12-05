@@ -37,12 +37,12 @@ public:
      * @param mountpoint The device new mountpoint
      * @return true is the device was unknown. false otherwise
      */
-    virtual bool onDevicePlugged( const std::string& uuid, const std::string& mountpoint );
+    virtual bool onDeviceMounted( const std::string& uuid, const std::string& mountpoint );
     /**
      * @brief onDeviceUnplugged Shall be invoked when a known device gets unplugged
      * @param uuid The device UUID
      */
-    virtual void onDeviceUnplugged( const std::string& uuid );
+    virtual void onDeviceUnmounted( const std::string& uuid, const std::string& mountpoint );
     /**
      * @brief isDeviceKnown Returns true is the provided device is already known to the media library
      *

@@ -32,21 +32,23 @@ void medialibrary::DeviceListerCb::setDelegate( id<VLCMLDeviceListerDelegate> de
     m_delegate = delegate;
 }
 
-bool medialibrary::DeviceListerCb::onDevicePlugged( const std::string& uuid, const std::string& mountpoint )
+bool medialibrary::DeviceListerCb::onDeviceMounted( const std::string& uuid, const std::string& mountpoint )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:devicePluggedWithUUID:withMountPoint:)]) {
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:deviceMountedWithUUID:withMountPoint:)]) {
         return [m_delegate medialibrary:m_medialibrary
-                        devicePluggedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]
-                               withMountPoint:[NSString stringWithUTF8String:mountpoint.c_str()]];
+                  deviceMountedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]
+                         withMountPoint:[NSString stringWithUTF8String:mountpoint.c_str()]];
     }
     return false;
 }
 
-void medialibrary::DeviceListerCb::onDeviceUnplugged( const std::string& uuid )
+void medialibrary::DeviceListerCb::onDeviceUnmounted( const std::string& uuid,
+                                                     const std::string& mountpoint )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:deviceUnPluggedWithUUID:)]) {
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:deviceUnmountedWithUUID:withMountPoint:)]) {
         [m_delegate medialibrary:m_medialibrary
-               deviceUnPluggedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]];
+         deviceUnmountedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]
+                  withMountPoint:[NSString stringWithUTF8String:mountpoint.c_str()]];
     }
 }
 
