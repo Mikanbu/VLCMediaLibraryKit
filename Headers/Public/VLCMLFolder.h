@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (VLCMLIdentifier)identifier;
 
 - (BOOL)isPresent;
+- (BOOL)isRemovable;
 
 /**
  * @brief isBanned Will return true if the folder was explicitely banned

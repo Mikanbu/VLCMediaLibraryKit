@@ -59,6 +59,11 @@
     return _folder->isPresent();
 }
 
+- (BOOL)isRemovable
+{
+    return _folder->isRemovable();
+}
+
 - (BOOL)isBanned
 {
     return _folder->isBanned();
