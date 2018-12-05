@@ -127,7 +127,7 @@
         [self files];
     }
     for (VLCMLFile *file in _files) {
-        if (file.type == VLCMLFileTypeMain) {
+        if (file.isMain) {
             return file;
         }
     }
