@@ -396,6 +396,9 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 /**
  * \brief requestThumbnail Queues a thumbnail generation request for
  * this media, to be run asynchronously.
+ * Upon completion (successful or not) thumbnailReadyForMedia will be called.
+ * In case a thumbnail was already generated for the media, false will be returned.
+ * If so, no callback will be invoked
  */
 - (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media;
 
