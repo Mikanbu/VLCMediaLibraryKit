@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Medialibrary.h
+ * VLCMLSubtitleTrack+Init.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -20,33 +20,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLSubtitleTrack.h"
 
-#ifndef Medialibrary_h
-# define Medialibrary_h
+@interface VLCMLSubtitleTrack (Internal)
 
-// medialibrary
-# include <medialibrary/IAlbum.h>
-# include <medialibrary/IAlbumTrack.h>
-# include <medialibrary/IArtist.h>
-# include <medialibrary/IAudioTrack.h>
-# include <medialibrary/IDeviceLister.h>
-# include <medialibrary/IFolder.h>
-# include <medialibrary/IGenre.h>
-# include <medialibrary/ILabel.h>
-# include <medialibrary/IMedia.h>
-# include <medialibrary/IMetadata.h>
-# include <medialibrary/IMediaLibrary.h>
-# include <medialibrary/IMovie.h>
-# include <medialibrary/IPlaylist.h>
-# include <medialibrary/IShow.h>
-# include <medialibrary/IShowEpisode.h>
-# include <medialibrary/ISubtitleTrack.h>
-# include <medialibrary/IVideoTrack.h>
+- (instancetype)initWithSubtitleTrackPtr:(medialibrary::SubtitleTrackPtr)subTrackPtr;
+- (medialibrary::SubtitleTrackPtr)subTrackPtr;
 
-// devicelister
-# include <medialibrary/IDeviceLister.h>
+@end
 
-// utils
-# include <medialibrary/Types.h>
 
-#endif /* Medialibrary_h */

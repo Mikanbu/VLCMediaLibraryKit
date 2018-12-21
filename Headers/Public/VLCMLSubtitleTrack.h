@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Medialibrary.h
+ * VLCMLSubtitleTrack.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2018 VLC authors and VideoLAN
@@ -20,33 +20,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
+#import "VLCMLObject.h"
 
-#ifndef Medialibrary_h
-# define Medialibrary_h
+@interface VLCMLSubtitleTrack : NSObject <VLCMLObject>
 
-// medialibrary
-# include <medialibrary/IAlbum.h>
-# include <medialibrary/IAlbumTrack.h>
-# include <medialibrary/IArtist.h>
-# include <medialibrary/IAudioTrack.h>
-# include <medialibrary/IDeviceLister.h>
-# include <medialibrary/IFolder.h>
-# include <medialibrary/IGenre.h>
-# include <medialibrary/ILabel.h>
-# include <medialibrary/IMedia.h>
-# include <medialibrary/IMetadata.h>
-# include <medialibrary/IMediaLibrary.h>
-# include <medialibrary/IMovie.h>
-# include <medialibrary/IPlaylist.h>
-# include <medialibrary/IShow.h>
-# include <medialibrary/IShowEpisode.h>
-# include <medialibrary/ISubtitleTrack.h>
-# include <medialibrary/IVideoTrack.h>
+@property (nonatomic, copy) NSString *codec;
+@property (nonatomic, copy) NSString *language;
+@property (nonatomic, copy) NSString *trackDescription;
+@property (nonatomic, copy) NSString *encoding;
 
-// devicelister
-# include <medialibrary/IDeviceLister.h>
+- (instancetype)init NS_UNAVAILABLE;
 
-// utils
-# include <medialibrary/Types.h>
+- (VLCMLIdentifier)identifier;
 
-#endif /* Medialibrary_h */
+@end
