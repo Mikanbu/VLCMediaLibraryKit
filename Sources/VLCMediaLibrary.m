@@ -532,6 +532,11 @@
 
 #pragma mark - Thumbnail
 
+- (void)enableFailedThumbnailRegeneration
+{
+    _ml->enableFailedThumbnailRegeneration();
+}
+
 - (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media {
     return _ml->requestThumbnail(media.mediaPtr);
 }

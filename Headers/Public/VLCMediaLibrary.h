@@ -394,6 +394,14 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 #pragma mark - Thumbnail
 
 /**
+ * @brief enableFailedThumbnailRegeneration Allow failed thumbnail attempt to be retried
+ *
+ * This will not attempt to regenerate the thumbnail immediatly, requestThumbnail
+ * still has to be called afterward.
+ */
+- (void)enableFailedThumbnailRegeneration;
+
+/**
  * \brief requestThumbnail Queues a thumbnail generation request for
  * this media, to be run asynchronously.
  * Upon completion (successful or not) thumbnailReadyForMedia will be called.
