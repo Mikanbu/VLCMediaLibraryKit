@@ -29,6 +29,7 @@
 #import "VLCMLShowEpisode+Init.h"
 #import "VLCMLMetadata+Init.h"
 #import "VLCMLAudioTrack+Init.h"
+#import "VLCMLVideoTrack+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
@@ -195,6 +196,20 @@
         _audioTracks = [result copy];
     }
     return _audioTracks;
+}
+
+- (NSArray<VLCMLVideoTrack *> *)videoTracks
+{
+    if (!_videoTracks) {
+        auto videoTracks = _media->videoTracks();
+        NSMutableArray *result = [NSMutableArray array];
+
+        for (const auto &videoTrack : videoTracks->all()) {
+            [result addObject:[[VLCMLVideoTrack alloc] initWithVideoTrackPtr:videoTrack]];
+        }
+        _videoTracks = [result copy];
+    }
+    return _videoTracks;
 }
 
 - (NSURL *)thumbnail

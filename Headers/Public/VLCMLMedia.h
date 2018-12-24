@@ -22,7 +22,7 @@
 
 #import "VLCMLObject.h"
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack;
+@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 
@@ -81,6 +81,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, copy) NSArray<VLCMLFile *> *files;
 @property (nonatomic, copy) NSArray<VLCMLLabel *> *labels;
 @property (nonatomic, copy) NSArray<VLCMLAudioTrack *> *audioTracks;
+@property (nonatomic, copy) NSArray<VLCMLVideoTrack *> *videoTracks;
 
 - (instancetype)init NS_UNAVAILABLE;
 
