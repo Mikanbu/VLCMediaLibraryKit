@@ -30,6 +30,7 @@
 #import "VLCMLMetadata+Init.h"
 #import "VLCMLAudioTrack+Init.h"
 #import "VLCMLVideoTrack+Init.h"
+#import "VLCMLSubtitleTrack+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
@@ -210,6 +211,20 @@
         _videoTracks = [result copy];
     }
     return _videoTracks;
+}
+
+- (NSArray<VLCMLSubtitleTrack *> *)subtitleTracks
+{
+    if (!_subtitleTracks) {
+        auto subtitleTracks = _media->subtitleTracks();
+        NSMutableArray *result = [NSMutableArray array];
+
+        for (const auto &subtitleTrack : subtitleTracks->all()) {
+            [result addObject:[[VLCMLSubtitleTrack alloc] initWithSubtitleTrackPtr:subtitleTrack]];
+        }
+        _subtitleTracks = [result copy];
+    }
+    return _subtitleTracks;
 }
 
 - (NSURL *)thumbnail
