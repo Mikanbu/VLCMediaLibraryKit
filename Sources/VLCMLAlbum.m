@@ -71,7 +71,7 @@
     return _artworkMrl;
 }
 
-- (VLCMLArtist *)albumMainArtist
+- (VLCMLArtist *)albumArtist
 {
     if (!_albumArtist) {
         _albumArtist =  [[VLCMLArtist alloc] initWithArtistPtr:_album->albumArtist()];
