@@ -50,6 +50,14 @@
     return _title;
 }
 
+- (NSArray<VLCMLMedia *> *)tracks
+{
+    if (!_tracks) {
+        _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks()->all()];
+    }
+    return _tracks;
+}
+
 - (uint)releaseYear
 {
     return _album->releaseYear();
