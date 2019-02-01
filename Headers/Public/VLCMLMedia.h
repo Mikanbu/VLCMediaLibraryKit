@@ -91,18 +91,13 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (VLCMLMediaType)type;
 - (VLCMLMediaSubtype)subtype;
 
-- (NSString *)title;
 - (BOOL)updateTitle:(NSString *)title;
-- (VLCMLAlbumTrack *)albumTrack;
 - (SInt64)duration;
 - (int)playCount;
 - (BOOL)increasePlayCount;
 - (BOOL)setPlayCount:(UInt32)playCount;
 
-- (VLCMLShowEpisode *)showEpisode;
-
 - (VLCMLFile *)mainFile;
-- (NSArray<VLCMLFile *> *)files;
 - (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type;
 
 - (BOOL)isFavorite;
@@ -110,10 +105,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 - (BOOL)addLabel:(VLCMLLabel *)label;
 - (BOOL)removeLabel:(VLCMLLabel *)label;
-- (VLCMLMovie *)movie;
-- (NSArray<VLCMLLabel *> *)labels;
 
-- (NSURL *)thumbnail;
 - (BOOL)isThumbnailGenerated;
 
 - (NSDate *)insertionDate;

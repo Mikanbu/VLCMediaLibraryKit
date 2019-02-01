@@ -25,14 +25,6 @@
 @class VLCMLArtist, VLCMLGenre, VLCMLAlbum, VLCMLMedia;
 
 @interface VLCMLAlbumTrack : NSObject <VLCMLObject>
-
-@property (nonatomic, strong) VLCMLArtist *artist;
-@property (nonatomic, strong) VLCMLGenre *genre;
-@property (nonatomic, strong) VLCMLAlbum *album;
-
-- (instancetype)init NS_UNAVAILABLE;
-
-- (VLCMLIdentifier)identifier;
 /**
  * @brief Returns the artist, as tagged in the media.
  * This can be different from the associated media's artist.
@@ -41,10 +33,15 @@
  * "Artist 1 featuring Artist 2 and also artist 3 and a whole bunch of people"
  * @return A pointer to a VLCMLArtist instance.
  */
-- (VLCMLArtist *)artist;
-- (VLCMLGenre *)genre;
+@property (nonatomic, strong) VLCMLArtist *artist;
+@property (nonatomic, strong) VLCMLGenre *genre;
+@property (nonatomic, strong) VLCMLAlbum *album;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (VLCMLIdentifier)identifier;
+
 - (uint)trackNumber;
-- (VLCMLAlbum *)album;
 
 /**
  * @return Which disc this tracks appears on (or 0 if unspecified)

@@ -30,7 +30,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)shortSummary;
-- (NSString *)imdbId;
 
 @end

@@ -46,7 +46,6 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSURL *)mrl;
 - (VLCMLFileType)type;
 - (uint)lastModificationDate;
 - (uint)size;

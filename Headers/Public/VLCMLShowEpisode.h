@@ -35,9 +35,6 @@
 - (VLCMLIdentifier)identifier;
 - (uint)episodeNumber;
 - (uint)seasonNumber;
-- (NSString *)shortSummary;
-- (NSString *)tvdbId;
-- (VLCMLShow *)show;
 
 @end
 

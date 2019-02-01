@@ -30,7 +30,6 @@
 
 - (BOOL)isSet;
 - (SInt64)integer;
-- (NSString *)str;
 
 @end
 

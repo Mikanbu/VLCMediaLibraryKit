@@ -36,12 +36,6 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)title;
-- (NSDate *)releaseDate;
-- (NSString *)shortSummary;
-- (NSURL *)artworkMrl;
-- (NSString *)tvdbId;
-- (NSArray<VLCMLMedia *> *)episodes;
 - (UInt32)numberOfSeasons;
 - (UInt32)numberOfEpisodes;
 

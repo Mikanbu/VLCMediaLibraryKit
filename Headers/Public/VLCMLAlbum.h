@@ -43,9 +43,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)title;
 - (uint)releaseYear;
-- (NSString *)shortSummary;
 
 /**
  * @brief isThumbnailGenerated Returns true is a thumbnail generation was attempted.
@@ -54,9 +52,6 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * associated thumbnail mrl will be empty.
  */
 - (BOOL)isArtworkGenerated;
-- (NSURL *)artworkMrl;
-
-- (VLCMLArtist *)albumArtist;
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;

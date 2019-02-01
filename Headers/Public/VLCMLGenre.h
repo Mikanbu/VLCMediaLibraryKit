@@ -33,7 +33,6 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria);
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)name;
 - (UInt32)numberOfTracks;
 
 - (NSArray<VLCMLArtist *> *)artists;

@@ -29,12 +29,18 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 @interface VLCMLPlaylist : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *name;
+
+/**
+ * @brief media Returns the media contained in this playlist
+ * @return An array representing the media in this playlist
+ *
+ * The media will always be sorted by their ascending position in the playlist.
+ */
 @property (nonatomic, copy) NSArray<VLCMLMedia *> *media;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)name;
 - (BOOL)updateName:(NSString *)name;
 
 /**
@@ -51,14 +57,6 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * \return An artwork, or an empty string if none is available.
  */
 - (NSString *)artworkMrl;
-
-/**
- * @brief media Returns the media contained in this playlist
- * @return An array representing the media in this playlist
- *
- * The media will always be sorted by their ascending position in the playlist.
- */
-- (NSArray<VLCMLMedia *> *)media;
 
 /**
  * @brief searchMedia Search some media in a playlist

@@ -31,7 +31,6 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)name;
 - (NSArray<VLCMLMedia *> *)files;
 
 @end

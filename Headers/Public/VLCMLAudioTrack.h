@@ -31,12 +31,9 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)codec;
 - (uint)bitrate;
 - (uint)sampleRate;
 - (uint)nbChannels;
-- (NSString *)audioDescription;
-- (NSString *)language;
 
 @end
 

@@ -38,9 +38,6 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 - (VLCMLIdentifier)identifier;
 
-- (NSString *)name;
-- (NSString *)shortBio;
-
 /**
  * @brief isThumbnailGenerated Returns true is a thumbnail generation was attempted.
  *
@@ -48,8 +45,6 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * associated thumbnail mrl will be empty.
  */
 - (BOOL)isArtworkGenerated;
-- (NSURL *)artworkMrl;
-- (NSString *)musicBrainzId;
 
 /**
  * Return all albums from the current artist.

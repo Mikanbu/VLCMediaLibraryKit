@@ -31,11 +31,8 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSString *)codec;
 - (uint)width;
 - (uint)height;
 - (float)fps;
-- (NSString *)videoDescription;
-- (NSString *)language;
 
 @end
