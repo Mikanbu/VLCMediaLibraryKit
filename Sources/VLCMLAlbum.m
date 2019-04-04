@@ -74,7 +74,7 @@
 - (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
-        _artworkMrl = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_album->artworkMrl().c_str()]];
+        _artworkMrl = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_album->thumbnailMrl().c_str()]];
     }
     return _artworkMrl;
 }
