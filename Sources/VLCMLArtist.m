@@ -63,7 +63,8 @@
 - (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
-        _artworkMrl = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_artist->thumbnailMrl().c_str()]];
+        _artworkMrl = [[NSURL alloc] initWithString:[NSString
+                                                     stringWithUTF8String:_artist->thumbnailMrl().c_str()]];
     }
     return _artworkMrl;
 }
@@ -76,7 +77,8 @@
     return _musicBrainzId;
 }
 
-- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
@@ -84,7 +86,8 @@
     return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums(&param)->all()];
 }
 
-- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
