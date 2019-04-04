@@ -3,6 +3,7 @@
 set -e
 
 ZIP="zip"
+VERSION=""
 COMPRESSION_FORMAT="zip"
 STABLE_UPLOAD_URL="https://download.videolan.org/pub/cocoapods/prod/"
 
@@ -14,11 +15,12 @@ usage: $0 [options]
 OPTIONS
     -t Use tar
     -z Use zip(default)
+    -v Version
     -h Help
 EOF
 }
 
-while getopts "htz" OPTION
+while getopts "htzv:" OPTION
 do
      case $OPTION in
          h)
@@ -31,6 +33,9 @@ do
          z)
              COMPRESSION_FORMAT="${ZIP}"
              ;;
+         v)
+             VERSION=$OPTARG
+             ;;
          \?)
             usage
             exit 1
@@ -40,7 +45,6 @@ done
 shift "$((OPTIND-1))"
 
 TARGET="VLCMediaLibraryKit"
-VERSION=""
 ROOT_DIR="$(dirname "$(pwd)")"
 PODSPEC="VLCMediaLibraryKit.podspec"
 MEDIALIBRARY_HASH=""
@@ -95,7 +99,6 @@ clean()
 getVLCHashes()
 {
     VLCMEDIALIBRARYKIT_HASH=$(git rev-parse --short HEAD)
-    VERSION=$(git describe --tags HEAD)
     MEDIALIBRARY_HASH=`awk -F'"' '/TESTED_HASH=/ {print $2}' buildVLCMediaLibraryKit.sh`
 }
 
@@ -188,6 +191,11 @@ if [ "$CLEAN" = "yes" ]; then
 fi
 
 UPLOAD_URL=${STABLE_UPLOAD_URL}
+
+if [ "$VERSION" = "" ]; then
+    log "Error" "Failed to retreive version. Please precise a valid version!"
+    exit 1
+fi
 
 getVLCHashes
 packageBuild $options
