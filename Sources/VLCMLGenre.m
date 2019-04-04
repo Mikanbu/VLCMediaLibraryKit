@@ -50,6 +50,11 @@
     return _genre->nbTracks();
 }
 
+- (NSArray<VLCMLArtist *> *)artists
+{
+    return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists()->all()];
+}
+
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                  desc:(BOOL)desc
 {
@@ -59,6 +64,11 @@
     return [VLCMLUtils arrayFromArtistPtrVector:_genre->artists(&param)->all()];
 }
 
+- (NSArray<VLCMLMedia *> *)tracks
+{
+    return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks()->all()];
+}
+
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc
 {
@@ -66,6 +76,11 @@
                                                                          desc:desc];
 
     return [VLCMLUtils arrayFromMediaPtrVector:_genre->tracks(&param)->all()];
+}
+
+- (NSArray<VLCMLAlbum *> *)albums
+{
+    return [VLCMLUtils arrayFromAlbumPtrVector:_genre->albums()->all()];
 }
 
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria

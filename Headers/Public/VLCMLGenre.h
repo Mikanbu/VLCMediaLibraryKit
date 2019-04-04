@@ -36,10 +36,15 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria);
 - (NSString *)name;
 - (UInt32)numberOfTracks;
 
+- (NSArray<VLCMLArtist *> *)artists;
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                  desc:(BOOL)desc;
+
+- (NSArray<VLCMLMedia *> *)tracks;
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
+
+- (NSArray<VLCMLAlbum *> *)albums;
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
 
