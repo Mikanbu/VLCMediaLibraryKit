@@ -67,6 +67,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 /**
  * Returns an array of VLCMLArtist object.
  */
+- (NSArray<VLCMLArtist *> *)artists;
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                  desc:(BOOL)desc;
 

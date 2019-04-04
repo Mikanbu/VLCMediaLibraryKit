@@ -113,6 +113,11 @@
     return _tracks;
 }
 
+- (NSArray<VLCMLArtist *> *)artists
+{
+    return [VLCMLUtils arrayFromArtistPtrVector:_album->artists()->all()];
+}
+
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                  desc:(BOOL)desc
 {
