@@ -46,6 +46,14 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (NSString *)title;
 - (uint)releaseYear;
 - (NSString *)shortSummary;
+
+/**
+ * @brief isThumbnailGenerated Returns true is a thumbnail generation was attempted.
+ *
+ * If the thumbnail generation failed, this will still return true, and the
+ * associated thumbnail mrl will be empty.
+ */
+- (BOOL)isArtworkGenerated;
 - (NSURL *)artworkMrl;
 
 - (VLCMLArtist *)albumArtist;

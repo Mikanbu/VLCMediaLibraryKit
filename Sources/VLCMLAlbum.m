@@ -71,6 +71,11 @@
     return _shortSummary;
 }
 
+- (BOOL)isArtworkGenerated
+{
+    return _album->isThumbnailGenerated();
+}
+
 - (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {

@@ -55,6 +55,11 @@
     return _shortBio;
 }
 
+- (BOOL)isArtworkGenerated
+{
+    return _artist->isThumbnailGenerated();
+}
+
 - (NSURL *)artworkMrl
 {
     if (!_artworkMrl) {
