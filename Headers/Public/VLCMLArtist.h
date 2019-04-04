@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * Return all albums from the current artist.
  * \return a NSArray of VLCMLAlbum object.
  */
+- (NSArray<VLCMLAlbum *> *)albums;
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
 
@@ -62,6 +63,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * Return all medias from the current artist.
  * \return a NSArray of VLCMLMedia object.
  */
+- (NSArray<VLCMLMedia *> *)tracks;
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
 

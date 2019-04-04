@@ -77,6 +77,11 @@
     return _musicBrainzId;
 }
 
+- (NSArray<VLCMLAlbum *> *)albums
+{
+    return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums()->all()];
+}
+
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc
 {
@@ -84,6 +89,11 @@
                                                                          desc:desc];
 
     return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums(&param)->all()];
+}
+
+- (NSArray<VLCMLMedia *> *)tracks
+{
+    return [VLCMLUtils arrayFromMediaPtrVector:_artist->tracks()->all()];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
