@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #import "VLCMLPlaylist.h"
+#import "VLCMLMedia+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLPlaylist ()
@@ -54,12 +55,30 @@
     return _playlist->creationDate();
 }
 
+- (NSString *)artworkMrl
+{
+    return [NSString stringWithUTF8String:_playlist->artworkMrl().c_str()];
+}
+
 - (NSArray<VLCMLMedia *> *)media
 {
-    if (!_media) {
-        _media = [VLCMLUtils arrayFromMediaPtrVector:_playlist->media()->all()];
-    }
-    return _media;
+    return [VLCMLUtils arrayFromMediaPtrVector:_playlist->media()->all()];;
+}
+
+- (NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
+                                             sort:(VLCMLSortingCriteria)criteria
+                                             desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
+                                                                         desc:desc];
+
+    return [VLCMLUtils arrayFromMediaPtrVector:_playlist->searchMedia([pattern UTF8String],
+                                                                      &param)->all()];
+}
+
+- (BOOL)appendMedia:(VLCMLMedia *)media
+{
+    return _playlist->append(*media.mediaPtr);
 }
 
 - (BOOL)appendMediaWithIdentifier:(VLCMLIdentifier)identifier
@@ -67,19 +86,24 @@
     return _playlist->append(identifier);
 }
 
-- (BOOL)addMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position
+- (BOOL)addMedia:(VLCMLMedia *)media atPosition:(uint32_t)position
+{
+    return _playlist->add(*media.mediaPtr, position);
+}
+
+- (BOOL)addMediaWithIdentifier:(VLCMLIdentifier)identifier atPosition:(uint32_t)position
 {
     return _playlist->add(identifier, position);
 }
 
-- (BOOL)moveMediaWithIdentifier:(VLCMLIdentifier)identifier at:(uint)position
+- (BOOL)moveMediaFromPosition:(uint32_t)position toDestination:(uint32_t)destination
 {
-    return _playlist->move(identifier, position);
+    return _playlist->move(position, destination);
 }
 
-- (BOOL)removeMediaWithIdentifier:(VLCMLIdentifier)identifier
+- (BOOL)removeMediaFromPosition:(uint32_t)position
 {
-    return _playlist->remove(identifier);
+    return _playlist->remove(position);
 }
 
 @end
