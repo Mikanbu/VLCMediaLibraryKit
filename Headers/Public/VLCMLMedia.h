@@ -22,6 +22,8 @@
 
 #import "VLCMLObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
@@ -75,7 +77,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSURL *thumbnail;
-@property (nonatomic, strong) VLCMLAlbumTrack *albumTrack;
+@property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong) VLCMLMovie *movie;
 @property (nonatomic, copy) NSArray<VLCMLFile *> *files;
@@ -135,4 +137,4 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value;
 
 @end
-
+NS_ASSUME_NONNULL_END
