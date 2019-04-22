@@ -38,22 +38,3 @@
 #import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
 #import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
 #import <VLCMediaLibraryKit/VLCMLVideoTrack.h>
-
-
-@class VLCMLAlbum;
-@class VLCMLAlbumTrack;
-@class VLCMLArtist;
-@class VLCMLAudioTrack;
-@class VLCMLFile;
-@class VLCMLFolder;
-@class VLCMLGenre;
-@class VLCMLLabel;
-@class VLCMLMedia;
-@class VLCMediaLibrary;
-@class VLCMLMediaMetadata;
-@class VLCMLMovie;
-@class VLCMLPlaylist;
-@class VLCMLShow;
-@class VLCMLShowEpisode;
-@class VLCMLSubtitleTrack;
-@class VLCMLVideoTrack;
