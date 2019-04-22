@@ -36,6 +36,7 @@
 #import <VLCMediaLibraryKit/VLCMLPlaylist.h>
 #import <VLCMediaLibraryKit/VLCMLShow.h>
 #import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
+#import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
 #import <VLCMediaLibraryKit/VLCMLVideoTrack.h>
 
 
@@ -54,4 +55,5 @@
 @class VLCMLPlaylist;
 @class VLCMLShow;
 @class VLCMLShowEpisode;
+@class VLCMLSubtitleTrack;
 @class VLCMLVideoTrack;
