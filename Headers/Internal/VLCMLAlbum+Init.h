@@ -24,6 +24,6 @@
 
 @interface VLCMLAlbum (Internal)
 
-- (instancetype)initWithAlbumPtr:(medialibrary::AlbumPtr)albumPtr;
+- (nullable instancetype)initWithAlbumPtr:(medialibrary::AlbumPtr)albumPtr;
 
 @end

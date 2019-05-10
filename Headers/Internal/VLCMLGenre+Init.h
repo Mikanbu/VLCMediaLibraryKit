@@ -24,7 +24,7 @@
 
 @interface VLCMLGenre (Internal)
 
-- (instancetype)initWithGenrePtr:(medialibrary::GenrePtr)genrePtr;
+- (nullable instancetype)initWithGenrePtr:(medialibrary::GenrePtr)genrePtr;
 - (medialibrary::GenrePtr)genrePtr;
 
 @end

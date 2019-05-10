@@ -24,7 +24,7 @@
 
 @interface VLCMLShow (Internal)
 
-- (instancetype)initWithShowPtr:(medialibrary::ShowPtr)showPtr;
+- (nullable instancetype)initWithShowPtr:(medialibrary::ShowPtr)showPtr;
 - (medialibrary::ShowPtr)showPtr;
 
 @end

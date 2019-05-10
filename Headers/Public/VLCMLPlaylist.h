@@ -26,6 +26,8 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @class VLCMLMedia;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLPlaylist : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *name;
@@ -134,3 +136,5 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (BOOL)removeMediaFromPosition:(uint32_t)position;
 
 @end
+
+NS_ASSUME_NONNULL_END

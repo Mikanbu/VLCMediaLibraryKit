@@ -22,6 +22,8 @@
 
 #import "VLCMLObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLAudioTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *codec;
@@ -37,3 +39,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

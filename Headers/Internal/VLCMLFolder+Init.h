@@ -24,7 +24,7 @@
 
 @interface VLCMLFolder (Internal)
 
-- (instancetype)initWithFolderPtr:(medialibrary::FolderPtr)folderPtr;
+- (nullable instancetype)initWithFolderPtr:(medialibrary::FolderPtr)folderPtr;
 
 @end
 

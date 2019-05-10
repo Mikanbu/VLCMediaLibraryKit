@@ -24,7 +24,7 @@
 
 @interface VLCMLSubtitleTrack (Internal)
 
-- (instancetype)initWithSubtitleTrackPtr:(medialibrary::SubtitleTrackPtr)subTrackPtr;
+- (nullable instancetype)initWithSubtitleTrackPtr:(medialibrary::SubtitleTrackPtr)subTrackPtr;
 - (medialibrary::SubtitleTrackPtr)subTrackPtr;
 
 @end

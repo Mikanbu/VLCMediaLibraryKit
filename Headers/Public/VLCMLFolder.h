@@ -25,6 +25,8 @@
 
 typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLFolder : NSObject <VLCMLObject>
 
 /**
@@ -102,3 +104,5 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
                                                      desc:(BOOL)desc;
 
 @end
+
+NS_ASSUME_NONNULL_END

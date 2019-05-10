@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
     VLCMLFileTypeDisc
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLFile : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSURL *mrl;
@@ -72,3 +74,5 @@ typedef NS_ENUM(NSInteger, VLCMLFileType) {
 - (BOOL)isMain;
 
 @end
+
+NS_ASSUME_NONNULL_END

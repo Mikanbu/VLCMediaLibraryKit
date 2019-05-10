@@ -24,7 +24,7 @@
 
 @interface VLCMLLabel (Internal)
 
-- (instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr;
+- (nullable instancetype)initWithLabelPtr:(medialibrary::LabelPtr)labelPtr;
 - (medialibrary::LabelPtr)labelPtr;
 
 @end

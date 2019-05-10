@@ -24,7 +24,7 @@
 
 @interface VLCMLPlaylist (Internal)
 
-- (instancetype)initWithPlaylistPtr:(medialibrary::PlaylistPtr)playlistPtr;
+- (nullable instancetype)initWithPlaylistPtr:(medialibrary::PlaylistPtr)playlistPtr;
 
 @end
 

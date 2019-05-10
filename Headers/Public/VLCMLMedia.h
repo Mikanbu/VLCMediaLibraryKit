@@ -78,8 +78,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSURL *thumbnail;
 @property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
-@property (nonatomic, strong) VLCMLShowEpisode *showEpisode;
-@property (nonatomic, strong) VLCMLMovie *movie;
+@property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
+@property (nonatomic, strong, nullable) VLCMLMovie *movie;
 @property (nonatomic, copy) NSArray<VLCMLFile *> *files;
 @property (nonatomic, copy) NSArray<VLCMLLabel *> *labels;
 @property (nonatomic, copy) NSArray<VLCMLAudioTrack *> *audioTracks;
@@ -99,8 +99,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)increasePlayCount;
 - (BOOL)setPlayCount:(UInt32)playCount;
 
-- (VLCMLFile *)mainFile;
-- (VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type;
+- (nullable VLCMLFile *)mainFile;
+- (nullable VLCMLFile *)addExternalMrl:(NSURL *)mrl fileType:(VLCMLFileType)type;
 
 - (BOOL)isFavorite;
 - (BOOL)setFavorite:(BOOL)favorite;

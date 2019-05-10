@@ -24,11 +24,13 @@
 
 @class VLCMLShow;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLShowEpisode : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *shortSummary;
 @property (nonatomic, copy) NSString *tvdbId;
-@property (nonatomic, strong) VLCMLShow *show;
+@property (nonatomic, strong, nullable) VLCMLShow *show;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -38,3 +40,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

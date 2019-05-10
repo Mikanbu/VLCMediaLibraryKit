@@ -24,7 +24,7 @@
 
 @interface VLCMLMovie (Internal)
 
-- (instancetype)initWithMoviePtr:(medialibrary::MoviePtr)moviePtr;
+- (nullable instancetype)initWithMoviePtr:(medialibrary::MoviePtr)moviePtr;
 
 @end
 

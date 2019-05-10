@@ -24,6 +24,8 @@
 
 @class VLCMLArtist, VLCMLGenre, VLCMLAlbum, VLCMLMedia;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLAlbumTrack : NSObject <VLCMLObject>
 /**
  * @brief Returns the artist, as tagged in the media.
@@ -33,9 +35,9 @@
  * "Artist 1 featuring Artist 2 and also artist 3 and a whole bunch of people"
  * @return A pointer to a VLCMLArtist instance.
  */
-@property (nonatomic, strong) VLCMLArtist *artist;
-@property (nonatomic, strong) VLCMLGenre *genre;
-@property (nonatomic, strong) VLCMLAlbum *album;
+@property (nonatomic, strong, nullable) VLCMLArtist *artist;
+@property (nonatomic, strong, nullable) VLCMLGenre *genre;
+@property (nonatomic, strong, nullable) VLCMLAlbum *album;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -49,3 +51,5 @@
 - (uint)discNumber;
 
 @end
+
+NS_ASSUME_NONNULL_END

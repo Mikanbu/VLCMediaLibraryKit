@@ -22,6 +22,8 @@
 
 #import "VLCMLObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLSubtitleTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *codec;
@@ -34,3 +36,5 @@
 - (VLCMLIdentifier)identifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -24,7 +24,7 @@
 
 @interface VLCMLMedia (Internal)
 
-- (instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr;
+- (nullable instancetype)initWithMediaPtr:(medialibrary::MediaPtr)mediaPtr;
 - (medialibrary::MediaPtr)mediaPtr;
 
 @end

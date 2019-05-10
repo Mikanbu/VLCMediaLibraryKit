@@ -24,6 +24,6 @@
 
 @interface VLCMLFile (Internal)
 
-- (instancetype)initWithFilePtr:(medialibrary::FilePtr)filePtr;
+- (nullable instancetype)initWithFilePtr:(medialibrary::FilePtr)filePtr;
 
 @end

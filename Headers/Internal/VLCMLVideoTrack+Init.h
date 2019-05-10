@@ -24,6 +24,6 @@
 
 @interface VLCMLVideoTrack (Internal)
 
-- (instancetype)initWithVideoTrackPtr:(medialibrary::VideoTrackPtr)videoTrackPtr;
+- (nullable instancetype)initWithVideoTrackPtr:(medialibrary::VideoTrackPtr)videoTrackPtr;
 
 @end

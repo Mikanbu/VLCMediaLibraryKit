@@ -164,15 +164,15 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Label
 
-- (VLCMLLabel *)createLabelWithName:(NSString *)name;
+- (nullable VLCMLLabel *)createLabelWithName:(NSString *)name;
 - (BOOL)deleteLabel:(VLCMLLabel *)label;
 
 #pragma mark - Media
 
-- (VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier;
-- (VLCMLMedia *)mediaWithMrl:(NSURL *)mrl;
-- (VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
-- (VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
+- (nullable VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLMedia *)mediaWithMrl:(NSURL *)mrl;
+- (nullable VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
+- (nullable VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
 
 - (NSArray<VLCMLMedia *> *)audioFiles;
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
@@ -182,22 +182,22 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Album
 
-- (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;
 
 - (NSArray<VLCMLAlbum *> *)albums;
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Show
 
-- (VLCMLShow *)showWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLShow *)showWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Movie
 
-- (VLCMLMovie *)movieWitIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLMovie *)movieWitIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Artist
 
-- (VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLArtist *)artistWithIdentifier:(VLCMLIdentifier)identifier;
 
 /**
  * @brief List all artists that have at least an album.
@@ -223,17 +223,17 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Genre
 
-- (VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier;
 - (NSArray<VLCMLGenre *> *)genres;
 - (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 #pragma mark - Playlist
 
-- (VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier;
 - (NSArray<VLCMLPlaylist *> *)playlists;
 - (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
-- (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
+- (nullable VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
 - (BOOL)deletePlaylistWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - History
@@ -334,8 +334,8 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 
 #pragma mark - Folder
 
-- (VLCMLFolder *)folderWithIdentifier:(VLCMLIdentifier)identifier;
-- (VLCMLFolder *)folderAtMrl:(NSURL *)mrl;
+- (nullable VLCMLFolder *)folderWithIdentifier:(VLCMLIdentifier)identifier;
+- (nullable VLCMLFolder *)folderAtMrl:(NSURL *)mrl;
 
 /**
  * @brief folders Returns a flattened list of all folders of any type

@@ -24,6 +24,8 @@
 
 @class VLCMLArtist, VLCMLMedia, VLCMLGenre;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @interface VLCMLAlbum : NSObject <VLCMLObject>
@@ -31,7 +33,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
 @property (nonatomic, copy) NSURL *artworkMrl;
-@property (nonatomic, copy) VLCMLArtist *albumArtist;
+@property (nonatomic, copy, nullable) VLCMLArtist *albumArtist;
 
 /**
  * @brief Tracks represent the last query of tracks asked to the MediaLibrary.
@@ -70,3 +72,5 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (uint)duration;
 
 @end
+
+NS_ASSUME_NONNULL_END

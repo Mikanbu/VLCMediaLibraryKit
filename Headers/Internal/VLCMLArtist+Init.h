@@ -24,7 +24,7 @@
 
 @interface VLCMLArtist (Internal)
 
-- (instancetype)initWithArtistPtr:(medialibrary::ArtistPtr)artistPtr;
+- (nullable instancetype)initWithArtistPtr:(medialibrary::ArtistPtr)artistPtr;
 - (medialibrary::ArtistPtr)artistPtr;
 
 @end

@@ -22,6 +22,8 @@
 
 #import "VLCMLObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLVideoTrack : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *codec;
@@ -36,3 +38,5 @@
 - (float)fps;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -26,6 +26,8 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @class VLCMLAlbum, VLCMLMedia;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLArtist : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *name;
@@ -63,3 +65,5 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
                                                 desc:(BOOL)desc;
 
 @end
+
+NS_ASSUME_NONNULL_END

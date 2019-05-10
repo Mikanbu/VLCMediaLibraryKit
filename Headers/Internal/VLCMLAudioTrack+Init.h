@@ -24,7 +24,7 @@
 
 @interface VLCMLAudioTrack (Internal)
 
-- (instancetype)initWithAudioTrackPtr:(medialibrary::AudioTrackPtr)AudioTrackPtr;
+- (nullable instancetype)initWithAudioTrackPtr:(medialibrary::AudioTrackPtr)AudioTrackPtr;
 
 @end
 

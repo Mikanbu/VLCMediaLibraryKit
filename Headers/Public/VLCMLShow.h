@@ -24,6 +24,8 @@
 
 @class VLCMLMedia;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLShow : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *title;
@@ -41,3 +43,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

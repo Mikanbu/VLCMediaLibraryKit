@@ -24,7 +24,7 @@
 
 @interface VLCMLShowEpisode (Internal)
 
-- (instancetype)initWithShowEpisodePtr:(medialibrary::ShowEpisodePtr)showEpisodePtr;
+- (nullable instancetype)initWithShowEpisodePtr:(medialibrary::ShowEpisodePtr)showEpisodePtr;
 
 @end
 

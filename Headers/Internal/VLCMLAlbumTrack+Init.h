@@ -24,6 +24,6 @@
 
 @interface VLCMLAlbumTrack (Internal)
 
-- (instancetype)initWithAlbumTrackPtr:(medialibrary::AlbumTrackPtr)albumTrackPtr;
+- (nullable instancetype)initWithAlbumTrackPtr:(medialibrary::AlbumTrackPtr)albumTrackPtr;
 
 @end

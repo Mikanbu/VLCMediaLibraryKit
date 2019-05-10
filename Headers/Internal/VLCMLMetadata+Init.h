@@ -24,7 +24,7 @@
 
 @interface VLCMLMetadata (Internal)
 
-- (instancetype)initWithMetadata:(const medialibrary::IMetadata &)metadata;
+- (nullable instancetype)initWithMetadata:(const medialibrary::IMetadata &)metadata;
 
 @end
 
