@@ -82,6 +82,26 @@
     return _episodes;
 }
 
+- (NSArray<VLCMLMedia *> *)episodesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
+                                                                         desc:desc];
+
+    return [VLCMLUtils arrayFromMediaPtrVector:_show->episodes(&param)->all()];
+}
+
+- (NSArray<VLCMLMedia *> *)searchEpisodesWithPattern:(NSString *)pattern
+                                                sort:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
+                                                                         desc:desc];
+
+    return [VLCMLUtils arrayFromMediaPtrVector:_show->searchEpisodes([pattern UTF8String],
+                                                                      &param)->all()];
+}
+
 - (UInt32)numberOfSeasons {
     return _show->nbSeasons();
 }

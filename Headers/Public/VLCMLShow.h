@@ -22,6 +22,8 @@
 
 #import "VLCMLObject.h"
 
+typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
+
 @class VLCMLMedia;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,6 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
+
+- (NSArray<VLCMLMedia *> *)episodesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc;
+
+- (NSArray<VLCMLMedia *> *)searchEpisodesWithPattern:(NSString *)pattern
+                                                sort:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc;
+
 - (UInt32)numberOfSeasons;
 - (UInt32)numberOfEpisodes;
 
