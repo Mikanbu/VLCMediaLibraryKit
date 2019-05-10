@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (NSArray<VLCMLMedia *> *)files;
+- (NSArray<VLCMLMedia *> *)media;
 
 @end
 
