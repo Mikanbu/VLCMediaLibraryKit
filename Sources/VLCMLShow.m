@@ -77,7 +77,7 @@
 - (NSArray<VLCMLMedia *> *)episodes
 {
     if (!_episodes) {
-        _episodes = [VLCMLUtils arrayFromMediaPtrVector:_show->episodes()->all()];
+        _episodes = [VLCMLUtils arrayFromMediaQuery:_show->episodes()];
     }
     return _episodes;
 }
@@ -88,7 +88,7 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_show->episodes(&param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_show->episodes(&param)];
 }
 
 - (NSArray<VLCMLMedia *> *)searchEpisodesWithPattern:(NSString *)pattern
@@ -98,8 +98,8 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_show->searchEpisodes([pattern UTF8String],
-                                                                      &param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_show->searchEpisodes([pattern UTF8String],
+                                                                 &param)];
 }
 
 - (UInt32)numberOfSeasons {

@@ -24,7 +24,11 @@
 
 @implementation VLCMLSearchAggregate
 
-- (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres media:(NSArray<VLCMLMedia *> *)media playlists:(NSArray<VLCMLPlaylist *> *)playlists
+- (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums
+                       artists:(NSArray<VLCMLArtist *> *)artists
+                        genres:(NSArray<VLCMLGenre *> *)genres
+                         media:(NSArray<VLCMLMedia *> *)media
+                     playlists:(NSArray<VLCMLPlaylist *> *)playlists
 {
     self = [super init];
     if (self) {
@@ -37,7 +41,11 @@
     return self;
 }
 
-+ (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums artists:(NSArray<VLCMLArtist *> *)artists genres:(NSArray<VLCMLGenre *> *)genres media:(NSArray<VLCMLMedia *> *)media playlists:(NSArray<VLCMLPlaylist *> *)playlists
++ (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums
+                       artists:(NSArray<VLCMLArtist *> *)artists
+                        genres:(NSArray<VLCMLGenre *> *)genres
+                         media:(NSArray<VLCMLMedia *> *)media
+                     playlists:(NSArray<VLCMLPlaylist *> *)playlists
 {
     return [[VLCMLSearchAggregate alloc] initWithAlbums:albums
                                                 artists:artists

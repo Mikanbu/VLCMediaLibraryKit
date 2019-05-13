@@ -175,6 +175,11 @@
 {
     if (!_labels) {
         auto labels = _media->labels();
+
+        if (!labels) {
+            return nil;
+        }
+
         NSMutableArray *result = [NSMutableArray array];
 
         for (const auto &label : labels->all()) {
@@ -189,6 +194,11 @@
 {
     if (!_audioTracks) {
         auto audioTracks = _media->audioTracks();
+
+        if (!audioTracks) {
+            return nil;
+        }
+
         NSMutableArray *result = [NSMutableArray array];
 
         for (const auto &audioTrack : audioTracks->all()) {
@@ -203,6 +213,11 @@
 {
     if (!_videoTracks) {
         auto videoTracks = _media->videoTracks();
+
+        if (!videoTracks) {
+            return nil;
+        }
+
         NSMutableArray *result = [NSMutableArray array];
 
         for (const auto &videoTrack : videoTracks->all()) {
@@ -217,6 +232,11 @@
 {
     if (!_subtitleTracks) {
         auto subtitleTracks = _media->subtitleTracks();
+
+        if (!subtitleTracks) {
+            return nil;
+        }
+
         NSMutableArray *result = [NSMutableArray array];
 
         for (const auto &subtitleTrack : subtitleTracks->all()) {
@@ -230,7 +250,7 @@
 - (NSURL *)thumbnail
 {
     if (!_thumbnail) {
-        _thumbnail = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_media->thumbnail().c_str()]];
+        _thumbnail = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_media->thumbnailMrl().c_str()]];
     }
     return _thumbnail;
 }

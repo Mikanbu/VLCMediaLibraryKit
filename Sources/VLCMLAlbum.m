@@ -52,10 +52,7 @@
 
 - (NSArray<VLCMLMedia *> *)tracks
 {
-    if (!_tracks) {
-        _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks()->all()];
-    }
-    return _tracks;
+    return [VLCMLUtils arrayFromMediaQuery:_album->tracks()];
 }
 
 - (uint)releaseYear
@@ -99,7 +96,7 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_album->tracks(&param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_album->tracks(&param)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksByGenre:(VLCMLGenre *)genre
@@ -109,13 +106,12 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    _tracks = [VLCMLUtils arrayFromMediaPtrVector:_album->tracks([genre genrePtr], &param)->all()];
-    return _tracks;
+    return [VLCMLUtils arrayFromMediaQuery:_album->tracks([genre genrePtr], &param)];
 }
 
 - (NSArray<VLCMLArtist *> *)artists
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_album->artists()->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_album->artists()];
 }
 
 - (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -124,7 +120,7 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromArtistPtrVector:_album->artists(&param)->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_album->artists(&param)];
 }
 
 - (UInt32)numberOfTracks

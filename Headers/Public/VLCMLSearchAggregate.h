@@ -22,18 +22,22 @@
 
 @class VLCMLAlbum, VLCMLArtist, VLCMLGenre, VLCMLMedia, VLCMLPlaylist;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VLCMLSearchAggregate : NSObject
 
-@property (nonatomic, copy, readonly) NSArray<VLCMLAlbum *> *albums;
-@property (nonatomic, copy, readonly) NSArray<VLCMLArtist *> *artists;
-@property (nonatomic, copy, readonly) NSArray<VLCMLGenre *> *genres;
-@property (nonatomic, copy, readonly) NSArray<VLCMLMedia *> *media;
-@property (nonatomic, copy, readonly) NSArray<VLCMLPlaylist *> *playlists;
+@property (nonatomic, copy, readonly, nullable) NSArray<VLCMLAlbum *> *albums;
+@property (nonatomic, copy, readonly, nullable) NSArray<VLCMLArtist *> *artists;
+@property (nonatomic, copy, readonly, nullable) NSArray<VLCMLGenre *> *genres;
+@property (nonatomic, copy, readonly, nullable) NSArray<VLCMLMedia *> *media;
+@property (nonatomic, copy, readonly, nullable) NSArray<VLCMLPlaylist *> *playlists;
 
-+ (instancetype)initWithAlbums:(NSArray<VLCMLAlbum *> *)albums
-                       artists:(NSArray<VLCMLArtist *> *)artists
-                        genres:(NSArray<VLCMLGenre *> *)genres
-                         media:(NSArray<VLCMLMedia *> *)media
-                     playlists:(NSArray<VLCMLPlaylist *> *)playlists;
++ (instancetype)initWithAlbums:(nullable NSArray<VLCMLAlbum *> *)albums
+                       artists:(nullable NSArray<VLCMLArtist *> *)artists
+                        genres:(nullable NSArray<VLCMLGenre *> *)genres
+                         media:(nullable NSArray<VLCMLMedia *> *)media
+                     playlists:(nullable NSArray<VLCMLPlaylist *> *)playlists;
 
 @end
+
+NS_ASSUME_NONNULL_END

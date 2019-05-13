@@ -75,7 +75,7 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_folder->media((medialibrary::IMedia::Type)type, &param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_folder->media((medialibrary::IMedia::Type)type, &param)];
 }
 
 - (NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -83,7 +83,7 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromFolderPtrVector:_folder->subfolders(&param)->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_folder->subfolders(&param)];
 }
 
 @end

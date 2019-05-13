@@ -46,7 +46,7 @@
 
 - (NSArray<VLCMLMedia *> *)media
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_label->media()->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_label->media()];
 }
 
 @end

@@ -80,11 +80,12 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong, nullable) VLCMLMovie *movie;
+
 @property (nonatomic, copy) NSArray<VLCMLFile *> *files;
-@property (nonatomic, copy) NSArray<VLCMLLabel *> *labels;
-@property (nonatomic, copy) NSArray<VLCMLAudioTrack *> *audioTracks;
-@property (nonatomic, copy) NSArray<VLCMLVideoTrack *> *videoTracks;
-@property (nonatomic, copy) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLLabel *> *labels;
+@property (nonatomic, copy, nullable) NSArray<VLCMLAudioTrack *> *audioTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLVideoTrack *> *videoTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -179,26 +179,26 @@
 
 - (NSArray<VLCMLMedia *> *)audioFiles
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->audioFiles()->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->audioFiles()];
 }
 
 - (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->audioFiles(&param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->audioFiles(&param)];
 }
 
 - (NSArray<VLCMLMedia *> *)videoFiles
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->videoFiles()->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->videoFiles()];
 }
 
 - (NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->videoFiles(&param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->videoFiles(&param)];
 }
 
 #pragma mark - Album
@@ -210,14 +210,14 @@
 
 - (NSArray<VLCMLAlbum *> *)albums
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_ml->albums()->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_ml->albums()];
 }
 
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromAlbumPtrVector:_ml->albums(&param)->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_ml->albums(&param)];
 }
 
 #pragma mark - Show
@@ -243,14 +243,15 @@
 
 - (NSArray<VLCMLArtist *> *)artists:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->artists(includeAll)->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll)];
 }
 
-- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc all:(BOOL)includeAll
+- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                  desc:(BOOL)desc all:(BOOL)includeAll
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->artists(includeAll, &param)->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll, &param)];
 }
 
 #pragma mark - Genre
@@ -262,14 +263,14 @@
 
 - (NSArray<VLCMLGenre *> *)genres
 {
-    return [VLCMLUtils arrayFromGenrePtrVector:_ml->genres()->all()];
+    return [VLCMLUtils arrayFromGenreQuery:_ml->genres()];
 }
 
 - (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromGenrePtrVector:_ml->genres(&param)->all()];
+    return [VLCMLUtils arrayFromGenreQuery:_ml->genres(&param)];
 }
 
 #pragma mark - Playlist
@@ -281,14 +282,14 @@
 
 - (NSArray<VLCMLPlaylist *> *)playlists
 {
-    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->playlists()->all()];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists()];
 }
 
 - (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->playlists(&param)->all()];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists(&param)];
 }
 
 - (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name
@@ -305,24 +306,12 @@
 
 - (NSArray<VLCMLMedia *> *)history
 {
-    auto history = _ml->history();
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &media : history->all()) {
-        [result addObject:[[VLCMLMedia alloc] initWithMediaPtr:media]];
-    }
-    return result;
+    return [VLCMLUtils arrayFromMediaQuery:_ml->history()];
 }
 
 - (NSArray<VLCMLMedia *> *)streamHistory
 {
-    auto history = _ml->streamHistory();
-    NSMutableArray *result = [NSMutableArray array];
-
-    for (const auto &media : history->all()) {
-        [result addObject:[[VLCMLMedia alloc] initWithMediaPtr:media]];
-    }
-    return result;
+    return [VLCMLUtils arrayFromMediaQuery:_ml->streamHistory()];
 }
 
 - (BOOL)clearHistory
@@ -334,7 +323,7 @@
 
 - (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->searchMedia([pattern UTF8String])->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->searchMedia([pattern UTF8String])];
 }
 
 - (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
@@ -342,12 +331,12 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_ml->searchMedia([pattern UTF8String], &param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->searchMedia([pattern UTF8String], &param)];
 }
 
 - (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
 {
-    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String])->all()];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->searchPlaylists([name UTF8String])];
 }
 
 - (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
@@ -356,12 +345,12 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromPlaylistPtrVector:_ml->searchPlaylists([name UTF8String], &param)->all()];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->searchPlaylists([name UTF8String], &param)];
 }
 
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_ml->searchAlbums([pattern UTF8String])->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_ml->searchAlbums([pattern UTF8String])];
 }
 
 - (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
@@ -370,12 +359,12 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromAlbumPtrVector:_ml->searchAlbums([pattern UTF8String], &param)->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_ml->searchAlbums([pattern UTF8String], &param)];
 }
 
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
 {
-    return [VLCMLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String])->all()];
+    return [VLCMLUtils arrayFromGenreQuery:_ml->searchGenre([name UTF8String])];
 }
 
 - (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
@@ -383,13 +372,13 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromGenrePtrVector:_ml->searchGenre([name UTF8String], &param)->all()];
+    return [VLCMLUtils arrayFromGenreQuery:_ml->searchGenre([name UTF8String], &param)];
 }
 
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String],
-                                                                   includeAll)->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->searchArtists([name UTF8String],
+                                                               includeAll)];
 }
 
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
@@ -398,8 +387,8 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromArtistPtrVector:_ml->searchArtists([name UTF8String],
-                                                                   includeAll, &param)->all()];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->searchArtists([name UTF8String],
+                                                               includeAll, &param)];
 }
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
@@ -409,8 +398,8 @@
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern type:(VLCMLMediaType)type
 {
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String],
-                                                                   (medialibrary::IMedia::Type)type)->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_ml->searchFolders([pattern UTF8String],
+                                                               (medialibrary::IMedia::Type)type)];
 }
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
@@ -430,19 +419,19 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->searchFolders([pattern UTF8String],
-                                                                   (medialibrary::IMedia::Type)type,
-                                                                   &param)->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_ml->searchFolders([pattern UTF8String],
+                                                               (medialibrary::IMedia::Type)type,
+                                                               &param)];
 }
 
 - (VLCMLSearchAggregate *)convertSearchResult:(medialibrary::SearchAggregate *)searchResult
 {
     return [VLCMLSearchAggregate
-            initWithAlbums:[VLCMLUtils arrayFromAlbumPtrVector:searchResult->albums->all()]
-            artists:[VLCMLUtils arrayFromArtistPtrVector:searchResult->artists->all()]
-            genres:[VLCMLUtils arrayFromGenrePtrVector:searchResult->genres->all()]
-            media:[VLCMLUtils arrayFromMediaPtrVector:searchResult->media->all()]
-            playlists:[VLCMLUtils arrayFromPlaylistPtrVector:searchResult->playlists->all()]];
+            initWithAlbums:[VLCMLUtils arrayFromAlbumQuery:std::move(searchResult->albums)]
+            artists:[VLCMLUtils arrayFromArtistQuery:std::move(searchResult->artists)]
+            genres:[VLCMLUtils arrayFromGenreQuery:std::move(searchResult->genres)]
+            media:[VLCMLUtils arrayFromMediaQuery:std::move(searchResult->media)]
+            playlists:[VLCMLUtils arrayFromPlaylistQuery:std::move(searchResult->playlists)]];
 }
 
 - (VLCMLSearchAggregate *)search:(NSString *)pattern
@@ -474,7 +463,7 @@
 
 - (NSArray<VLCMLFolder *> *)entryPoints
 {
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->entryPoints()->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_ml->entryPoints()];
 }
 
 - (void)removeEntryPointWithPath:(NSString *)path
@@ -501,7 +490,7 @@
 
 - (NSArray<VLCMLFolder *> *)foldersOfType:(VLCMLMediaType)type
 {
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders((medialibrary::IMedia::Type)type)->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_ml->folders((medialibrary::IMedia::Type)type)];
 }
 
 - (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -516,8 +505,8 @@
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromFolderPtrVector:_ml->folders((medialibrary::IMedia::Type)type,
-                                                             &param)->all()];
+    return [VLCMLUtils arrayFromFolderQuery:_ml->folders((medialibrary::IMedia::Type)type,
+                                                         &param)];
 }
 
 - (void)banFolderWithPath:(NSString *)path

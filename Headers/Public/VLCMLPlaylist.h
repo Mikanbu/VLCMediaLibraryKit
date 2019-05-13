@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The media will always be sorted by their ascending position in the playlist.
  */
-@property (nonatomic, copy) NSArray<VLCMLMedia *> *media;
+@property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *media;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -67,9 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param desc Sorting order ascending or descending
  * @return An array of media, or empty in case of error or if the pattern is too short
  */
-- (NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
-                                             sort:(VLCMLSortingCriteria)criteria
-                                             desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
+                                                      sort:(VLCMLSortingCriteria)criteria
+                                                      desc:(BOOL)desc;
 
 /**
  * @brief append Appends a media to a playlist

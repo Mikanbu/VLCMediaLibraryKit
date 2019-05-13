@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  * If no previous query has been done, a default set of track will be returned.
  * @return Array of `VLCMLMedia *`.
  */
-@property (nonatomic, copy) NSArray<VLCMLMedia *> *tracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *tracks;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -55,18 +55,19 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
  */
 - (BOOL)isArtworkGenerated;
 
-- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
-- (NSArray<VLCMLMedia *> *)tracksByGenre:(VLCMLGenre *)genre
-                         sortingCriteria:(VLCMLSortingCriteria)criteria
-                                    desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
+
+- (nullable NSArray<VLCMLMedia *> *)tracksByGenre:(VLCMLGenre *)genre
+                                  sortingCriteria:(VLCMLSortingCriteria)criteria
+                                             desc:(BOOL)desc;
 
 /**
  * Returns an array of VLCMLArtist object.
  */
-- (NSArray<VLCMLArtist *> *)artists;
-- (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                 desc:(BOOL)desc;
+- (nullable NSArray<VLCMLArtist *> *)artists;
+- (nullable NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                          desc:(BOOL)desc;
 
 - (UInt32)numberOfTracks;
 - (uint)duration;

@@ -174,18 +174,21 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
 - (nullable VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
 - (nullable VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
 
-- (NSArray<VLCMLMedia *> *)audioFiles;
-- (NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)audioFiles;
+- (nullable NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                             desc:(BOOL)desc;
 
-- (NSArray<VLCMLMedia *> *)videoFiles;
-- (NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)videoFiles;
+- (nullable NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                             desc:(BOOL)desc;
 
 #pragma mark - Album
 
 - (nullable VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;
 
-- (NSArray<VLCMLAlbum *> *)albums;
-- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLAlbum *> *)albums;
+- (nullable NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 #pragma mark - Show
 
@@ -207,7 +210,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  *                   will be returned. If false, only artists which have
  *                   an album will be returned.
  */
-- (NSArray<VLCMLArtist *> *)artists:(BOOL)includeAll;
+- (nullable NSArray<VLCMLArtist *> *)artists:(BOOL)includeAll;
 
 /**
  * @brief List all artists that have at least an album.
@@ -219,27 +222,30 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  *                   will be returned. If false, only artists which have
  *                   an album will be returned.
  */
-- (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc all:(BOOL)includeAll;
+- (nullable NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                           desc:(BOOL)desc all:(BOOL)includeAll;
 
 #pragma mark - Genre
 
 - (nullable VLCMLGenre *)genreWithIdentifier:(VLCMLIdentifier)identifier;
-- (NSArray<VLCMLGenre *> *)genres;
-- (NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLGenre *> *)genres;
+- (nullable NSArray<VLCMLGenre *> *)genresWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 #pragma mark - Playlist
 
 - (nullable VLCMLPlaylist *)playlistWithIdentifier:(VLCMLIdentifier)identifier;
-- (NSArray<VLCMLPlaylist *> *)playlists;
-- (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLPlaylist *> *)playlists;
+- (nullable NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                               desc:(BOOL)desc;
 
 - (nullable VLCMLPlaylist *)createPlaylistWithName:(NSString *)name;
 - (BOOL)deletePlaylistWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - History
 
-- (NSArray<VLCMLMedia *> *)history;
-- (NSArray<VLCMLMedia *> *)streamHistory;
+- (nullable NSArray<VLCMLMedia *> *)history;
+- (nullable NSArray<VLCMLMedia *> *)streamHistory;
 - (BOOL)clearHistory;
 
 #pragma mark - Search
@@ -264,40 +270,40 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * point to remote content, will *not* be included
  */
 
-- (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
-- (NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
-                                  sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
+- (nullable NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
+                                           sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
-- (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
-- (NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
-                                               sort:(VLCMLSortingCriteria)criteria
-                                               desc:(BOOL)desc;
+- (nullable NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
+- (nullable NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name
+                                                        sort:(VLCMLSortingCriteria)criteria
+                                                        desc:(BOOL)desc;
 
-- (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
-- (NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
-                                            sort:(VLCMLSortingCriteria)criteria
-                                            desc:(BOOL)desc;
+- (nullable NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern;
+- (nullable NSArray<VLCMLAlbum *> *)searchAlbumsByPattern:(NSString *)pattern
+                                                     sort:(VLCMLSortingCriteria)criteria
+                                                     desc:(BOOL)desc;
 
-- (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;
-- (NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
-                                        sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name;
+- (nullable NSArray<VLCMLGenre *> *)searchGenreByName:(NSString *)name
+                                                 sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
-- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll;
-- (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
-                                           sort:(VLCMLSortingCriteria)criteria
-                                           desc:(BOOL)desc;
+- (nullable NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll;
+- (nullable NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
+                                                    sort:(VLCMLSortingCriteria)criteria
+                                                    desc:(BOOL)desc;
 
-- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern;
-- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
-                                                type:(VLCMLMediaType)type;
+- (nullable NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern;
+- (nullable NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                                         type:(VLCMLMediaType)type;
 
-- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
-                                     sortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
-- (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
-                                                type:(VLCMLMediaType)type
-                                     sortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
+- (nullable NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                              sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
+- (nullable NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern
+                                                         type:(VLCMLMediaType)type
+                                              sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 - (VLCMLSearchAggregate *)search:(NSString *)pattern;
 - (VLCMLSearchAggregate *)search:(NSString *)pattern
@@ -329,7 +335,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * again.
  */
 - (void)enableDiscoverNetwork:(BOOL)enable;
-- (NSArray<VLCMLFolder *> *)entryPoints;
+- (nullable NSArray<VLCMLFolder *> *)entryPoints;
 - (void)removeEntryPointWithPath:(NSString *)path;
 
 #pragma mark - Folder
@@ -363,13 +369,13 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * In case a non flattened list is desired, the
  * entryPoints() & VLCMLFolder::subFolders() methods should be used.
  */
-- (NSArray<VLCMLFolder *> *)foldersOfType:(VLCMLMediaType)type;
+- (nullable NSArray<VLCMLFolder *> *)foldersOfType:(VLCMLMediaType)type;
 
-- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                  desc:(BOOL)desc;
-- (NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                  type:(VLCMLMediaType)type
-                                                  desc:(BOOL)desc;
+- (nullable NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                           desc:(BOOL)desc;
+- (nullable NSArray<VLCMLFolder *> *)foldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                           type:(VLCMLMediaType)type
+                                                           desc:(BOOL)desc;
 
 
 /**

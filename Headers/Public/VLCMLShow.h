@@ -35,18 +35,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *shortSummary;
 @property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *tvdbId;
-@property (nonatomic, copy) NSArray<VLCMLMedia *> *episodes;
+@property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *episodes;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
 
-- (NSArray<VLCMLMedia *> *)episodesWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                  desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)episodesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                           desc:(BOOL)desc;
 
-- (NSArray<VLCMLMedia *> *)searchEpisodesWithPattern:(NSString *)pattern
-                                                sort:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)searchEpisodesWithPattern:(NSString *)pattern
+                                                         sort:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 - (UInt32)numberOfSeasons;
 - (UInt32)numberOfEpisodes;

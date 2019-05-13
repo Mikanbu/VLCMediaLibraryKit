@@ -79,7 +79,7 @@
 
 - (NSArray<VLCMLAlbum *> *)albums
 {
-    return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums()->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_artist->albums()];
 }
 
 - (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -88,12 +88,12 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromAlbumPtrVector:_artist->albums(&param)->all()];
+    return [VLCMLUtils arrayFromAlbumQuery:_artist->albums(&param)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracks
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_artist->tracks()->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_artist->tracks()];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -102,7 +102,7 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_artist->tracks(&param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_artist->tracks(&param)];
 }
 
 @end

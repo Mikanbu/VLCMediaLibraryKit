@@ -52,16 +52,16 @@ NS_ASSUME_NONNULL_BEGIN
  * Return all albums from the current artist.
  * \return a NSArray of VLCMLAlbum object.
  */
-- (NSArray<VLCMLAlbum *> *)albums;
-- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
+- (nullable NSArray<VLCMLAlbum *> *)albums;
+- (nullable NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 /**
  * Return all medias from the current artist.
  * \return a NSArray of VLCMLMedia object.
  */
-- (NSArray<VLCMLMedia *> *)tracks;
-- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+- (nullable NSArray<VLCMLMedia *> *)tracks;
+- (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                 desc:(BOOL)desc;
 
 @end

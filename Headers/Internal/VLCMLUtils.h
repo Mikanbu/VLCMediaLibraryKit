@@ -20,13 +20,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
-
 @class VLCMLMedia, VLCMLAlbum, VLCMLArtist, VLCMLPlaylist, VLCMLGenre, VLCMLFolder;
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 
 @interface VLCMLUtils : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
+
++ (nullable NSArray<VLCMLMedia *> *)arrayFromMediaQuery:(medialibrary::Query<medialibrary::IMedia>)mediaQuery;
++ (nullable NSArray<VLCMLAlbum *> *)arrayFromAlbumQuery:(medialibrary::Query<medialibrary::IAlbum>)albumQuery;
++ (nullable NSArray<VLCMLArtist *> *)arrayFromArtistQuery:(medialibrary::Query<medialibrary::IArtist>)artistQuery;
++ (nullable NSArray<VLCMLPlaylist *> *)arrayFromPlaylistQuery:(medialibrary::Query<medialibrary::IPlaylist>)playlistQuery;
++ (nullable NSArray<VLCMLGenre *> *)arrayFromGenreQuery:(medialibrary::Query<medialibrary::IGenre>)genreQuery;
++ (nullable NSArray<VLCMLFolder *> *)arrayFromFolderQuery:(medialibrary::Query<medialibrary::IFolder>)folderQuery;
 
 + (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media;
 + (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums;
@@ -38,3 +47,5 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 
 @end
+
+NS_ASSUME_NONNULL_END

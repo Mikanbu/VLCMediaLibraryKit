@@ -37,17 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (VLCMLIdentifier)identifier;
 - (UInt32)numberOfTracks;
 
-- (NSArray<VLCMLArtist *> *)artists;
-- (NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                 desc:(BOOL)desc;
+- (nullable NSArray<VLCMLArtist *> *)artists;
+- (nullable NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                          desc:(BOOL)desc;
 
-- (NSArray<VLCMLMedia *> *)tracks;
-- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)tracks;
+- (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
-- (NSArray<VLCMLAlbum *> *)albums;
-- (NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                desc:(BOOL)desc;
+- (nullable NSArray<VLCMLAlbum *> *)albums;
+- (nullable NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
 
 @end
 

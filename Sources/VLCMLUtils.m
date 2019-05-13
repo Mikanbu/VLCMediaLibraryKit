@@ -30,6 +30,48 @@
 
 @implementation VLCMLUtils
 
++ (nullable NSArray<VLCMLMedia *> *)arrayFromMediaQuery:(medialibrary::Query<medialibrary::IMedia>)mediaQuery
+{
+    if (!mediaQuery)
+        return nil;
+    return [self arrayFromMediaPtrVector:mediaQuery->all()];
+}
+
++ (nullable NSArray<VLCMLAlbum *> *)arrayFromAlbumQuery:(medialibrary::Query<medialibrary::IAlbum>)albumQuery
+{
+    if (!albumQuery)
+        return nil;
+    return [self arrayFromAlbumPtrVector:albumQuery->all()];
+}
+
++ (nullable NSArray<VLCMLArtist *> *)arrayFromArtistQuery:(medialibrary::Query<medialibrary::IArtist>)artistQuery
+{
+    if (!artistQuery)
+        return nil;
+    return [self arrayFromArtistPtrVector:artistQuery->all()];
+}
+
++ (nullable NSArray<VLCMLPlaylist *> *)arrayFromPlaylistQuery:(medialibrary::Query<medialibrary::IPlaylist>)playlistQuery
+{
+    if (!playlistQuery)
+        return nil;
+    return [self arrayFromPlaylistPtrVector:playlistQuery->all()];
+}
+
++ (nullable NSArray<VLCMLGenre *> *)arrayFromGenreQuery:(medialibrary::Query<medialibrary::IGenre>)genreQuery
+{
+    if (!genreQuery)
+        return nil;
+    return [self arrayFromGenrePtrVector:genreQuery->all()];
+}
+
++ (nullable NSArray<VLCMLFolder *> *)arrayFromFolderQuery:(medialibrary::Query<medialibrary::IFolder>)folderQuery
+{
+    if (!folderQuery)
+        return nil;
+    return [self arrayFromFolderPtrVector:folderQuery->all()];
+}
+
 + (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media
 {
     NSMutableArray *mediaList = [NSMutableArray array];

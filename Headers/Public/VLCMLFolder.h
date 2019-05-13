@@ -77,9 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Media of 'c' would contain NakedMoleRat.asf
  * Media of 'b' would contain seaotter_themovie.mkv
  */
-- (NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
-                       sortingCriteria:(VLCMLSortingCriteria)criteria
-                                  desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
+                                sortingCriteria:(VLCMLSortingCriteria)criteria
+                                           desc:(BOOL)desc;
 
 
 /**
@@ -100,8 +100,8 @@ NS_ASSUME_NONNULL_BEGIN
  * As an alternative, it is possible to use IMediaLibrary::folders to return
  * a flattened list of all folders that contain media.
  */
-- (NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                     desc:(BOOL)desc;
+- (nullable NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                              desc:(BOOL)desc;
 
 @end
 

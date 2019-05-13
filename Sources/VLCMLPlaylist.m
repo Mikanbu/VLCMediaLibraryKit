@@ -62,7 +62,7 @@
 
 - (NSArray<VLCMLMedia *> *)media
 {
-    return [VLCMLUtils arrayFromMediaPtrVector:_playlist->media()->all()];;
+    return [VLCMLUtils arrayFromMediaQuery:_playlist->media()];;
 }
 
 - (NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
@@ -72,8 +72,8 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaPtrVector:_playlist->searchMedia([pattern UTF8String],
-                                                                      &param)->all()];
+    return [VLCMLUtils arrayFromMediaQuery:_playlist->searchMedia([pattern UTF8String],
+                                                                  &param)];
 }
 
 - (BOOL)appendMedia:(VLCMLMedia *)media
