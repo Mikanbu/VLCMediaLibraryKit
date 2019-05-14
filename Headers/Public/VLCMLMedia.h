@@ -75,6 +75,12 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 @interface VLCMLMedia : NSObject <VLCMLObject>
 
+@property (nonatomic, assign) float progress;
+@property (nonatomic, assign) BOOL isNew;
+@property (nonatomic, assign) SInt64 audioTrackIndex;
+@property (nonatomic, assign) SInt64 subtitleTrackIndex;
+@property (nonatomic, assign) SInt64 chapterIndex;
+@property (nonatomic, assign) SInt64 titleIndex;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSURL *thumbnail;
 @property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;

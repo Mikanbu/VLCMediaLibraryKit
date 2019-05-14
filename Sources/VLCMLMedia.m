@@ -42,8 +42,74 @@
 @implementation VLCMLMedia
 
 #pragma mark - Getters/Setters
+- (float)progress
+{
+    VLCMLMetadata *progressMetadata = [self metadataOfType:VLCMLMetadataTypeProgress];
+    if (!progressMetadata.str || [progressMetadata.str isEqualToString:@""]) {
+        return 0.0;
+    }
 
-- (VLCMLIdentifier)identifier {
+    return progressMetadata.str.floatValue;
+}
+
+- (void)setProgress:(float)progress
+{
+    [self setMetadataOfType:VLCMLMetadataTypeProgress stringValue:[NSString stringWithFormat: @"%f", progress]];
+}
+
+- (BOOL)isNew
+{
+    VLCMLMetadata *seenMetadata = [self metadataOfType:VLCMLMetadataTypeSeen];
+    return seenMetadata.integer == 0;
+}
+
+- (void)setIsNew:(BOOL)isNew
+{
+    [self setMetadataOfType:VLCMLMetadataTypeSeen intValue: isNew ? 0 : 1];
+}
+
+- (SInt64)audioTrackIndex
+{
+    return [self metadataOfType:VLCMLMetadataTypeAudioTrack].integer;
+}
+
+- (void)setAudioTrackIndex:(SInt64)audioTrackIndex
+{
+     [self setMetadataOfType:VLCMLMetadataTypeAudioTrack intValue: audioTrackIndex];
+}
+
+- (SInt64)subtitleTrackIndex
+{
+    return [self metadataOfType:VLCMLMetadataTypeSubtitleTrack].integer;
+}
+
+- (void)setSubtitleTrackIndex:(SInt64)subtitleTrackIndex
+{
+    [self setMetadataOfType:VLCMLMetadataTypeSubtitleTrack intValue: subtitleTrackIndex];
+}
+
+- (SInt64)chapterIndex
+{
+    return [self metadataOfType:VLCMLMetadataTypeChapter].integer;
+}
+
+- (void)setTitleIndex:(SInt64)titleIndex
+{
+    [self setMetadataOfType:VLCMLMetadataTypeTitle intValue: titleIndex];
+}
+
+- (SInt64)titleIndex
+{
+    return [self metadataOfType:VLCMLMetadataTypeTitle].integer;
+}
+
+- (void)setChapterIndex:(SInt64)chapterIndex
+{
+    [self setMetadataOfType:VLCMLMetadataTypeChapter intValue: chapterIndex];
+}
+
+- (VLCMLIdentifier)identifier
+{
     return _media->id();
 }
 
