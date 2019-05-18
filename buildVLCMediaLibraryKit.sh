@@ -311,6 +311,11 @@ buildMedialibrary()
                 CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
                 EXTRA_CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
 
+                # there is no thread_local in the C++ i386 runtime
+                if [ "$actualArch" = "i386" ]; then
+                    CFLAGS+=" -D__thread="
+                fi
+
                 LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
                 EXTRA_LDFLAGS="-arch ${actualArch}"
                 LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
@@ -375,7 +380,7 @@ buildXcodeproj()
     local architectures=""
     if [ "$ARCH" == "all" ]; then
         if [ "$platform" = "iphonesimulator" ]; then
-            architectures="x86_64"
+            architectures="x86_64 i386"
         else
             architectures="armv7 armv7s arm64"
         fi
@@ -493,6 +498,7 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
 
     #Mobile first!
     if [ "$ARCH" = "all" ]; then
+        buildMedialibrary "iPhone" "i386" "Simulator"
         buildMedialibrary "iPhone" "x86_64" "Simulator"
         buildMedialibrary "iPhone" "armv7" "OS"
         buildMedialibrary "iPhone" "armv7s" "OS"
