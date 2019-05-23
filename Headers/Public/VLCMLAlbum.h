@@ -70,7 +70,15 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
                                                           desc:(BOOL)desc;
 
 - (UInt32)numberOfTracks;
+- (UInt32)numberOfDiscs;
 - (uint)duration;
+
+- (BOOL)isUnknownAlbum;
+
+- (nullable NSArray<VLCMLMedia *> *)searchTracks:(NSString *)pattern;
+- (nullable NSArray<VLCMLMedia *> *)searchTracks:(NSString *)pattern
+                                 sortingCriteria:(VLCMLSortingCriteria)criteria
+                                            desc:(BOOL)desc;
 
 @end
 

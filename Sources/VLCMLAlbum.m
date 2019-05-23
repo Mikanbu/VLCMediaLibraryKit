@@ -128,9 +128,35 @@
     return _album->nbTracks();
 }
 
+- (UInt32)numberOfDiscs
+{
+    return _album->nbDiscs();
+}
+
 - (uint)duration
 {
     return _album->duration();
+}
+
+- (BOOL)isUnknownAlbum
+{
+    return _album->isUnknownAlbum();
+}
+
+- (NSArray<VLCMLMedia *> *)searchTracks:(NSString *)pattern
+{
+    return [VLCMLUtils
+            arrayFromMediaQuery:_album->searchTracks([pattern UTF8String])];
+}
+
+- (NSArray<VLCMLMedia *> *)searchTracks:(NSString *)pattern
+                        sortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils
+                                           queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromMediaQuery:_album->searchTracks([pattern UTF8String],
+                                                                &param)];
 }
 
 @end
