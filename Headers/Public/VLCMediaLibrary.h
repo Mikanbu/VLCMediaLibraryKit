@@ -146,12 +146,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-/**
- * Returns a `VLCMedialibrary` shared instance.
- * \return a `VLCMedialibrary` shared instance.
- */
-+ (instancetype)sharedMediaLibrary;
-
 - (BOOL)start;
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                              thumbnailPath:(NSString *)thumbnailPath

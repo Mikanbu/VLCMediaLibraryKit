@@ -52,20 +52,6 @@
 
 @implementation VLCMediaLibrary
 
-#pragma mark - Shared methods
-
-+ (instancetype)sharedMediaLibrary
-{
-    static VLCMediaLibrary *sharedMediaLibrary = nil;
-    static dispatch_once_t onceToken;
-
-    dispatch_once(&onceToken, ^{
-        sharedMediaLibrary = [[VLCMediaLibrary alloc] init];
-    });
-
-    return sharedMediaLibrary;
-}
-
 #pragma mark - Initializer
 
 - (instancetype)init
