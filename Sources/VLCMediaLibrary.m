@@ -38,6 +38,9 @@
 #import "DeviceListerCb.h"
 #import "VLCMLDeviceLister.h"
 
+VLCMLIdentifier const UnknownArtistID = 1u;
+VLCMLIdentifier const VariousArtistID = 2u;
+
 @interface VLCMediaLibrary ()
 {
     BOOL _isInitialized;

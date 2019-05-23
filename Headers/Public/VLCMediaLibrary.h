@@ -25,6 +25,9 @@
 
 @class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
 
+extern VLCMLIdentifier const UnknownArtistID;
+extern VLCMLIdentifier const VariousArtistID;
+
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     /*
      * Default depends on the entity type:
