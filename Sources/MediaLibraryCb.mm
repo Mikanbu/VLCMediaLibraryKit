@@ -209,6 +209,14 @@ void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint, bool succ
 
 #pragma mark - EntryPoints
 
+void MediaLibraryCb::onEntryPointAdded( const std::string& entryPoint, bool success )
+{
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didAddEntryPoint:withSuccess:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddEntryPoint:[NSString stringWithUTF8String:entryPoint.c_str()]
+                     withSuccess:success];
+    }
+}
+
 void MediaLibraryCb::onEntryPointRemoved( const std::string& entryPoint, bool success )
 {
     if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didRemoveEntryPoint:withSuccess:)]) {
