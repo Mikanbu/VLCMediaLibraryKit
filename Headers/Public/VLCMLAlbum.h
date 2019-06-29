@@ -27,12 +27,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
 
 @interface VLCMLAlbum : NSObject <VLCMLObject>
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy, nullable) VLCMLArtist *albumArtist;
 
 /**
@@ -48,12 +48,29 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 - (uint)releaseYear;
 
 /**
- * @brief isThumbnailGenerated Returns true is a thumbnail generation was attempted.
+ * @brief isThumbnailGenerated Returns true is a thumbnail generation was
+ *                             attempted for the provided size.
+ *
+ * @param sizeType The targeted thumbnail size
  *
  * If the thumbnail generation failed, this will still return true, and the
  * associated thumbnail mrl will be empty.
+ * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
 - (BOOL)isArtworkGenerated;
+- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief artworkMRL Returns the mrl of an artwork of the given size for an album
+ * \param sizeType The targeted artwork size
+ * \return An mrl, representing the absolute path to the album artwork
+ *         or nil, if the artwork generation failed
+ *
+ * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
+ * \sa{isThumbnailGenerated}
+ */
+- (nullable NSURL *)artworkMRL;
+- (nullable NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type;
 
 - (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                          desc:(BOOL)desc;

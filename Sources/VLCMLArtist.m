@@ -57,16 +57,31 @@
 
 - (BOOL)isArtworkGenerated
 {
-    return _artist->isThumbnailGenerated();
+    return [self
+            isArtworkGeneratedForType:((VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail)];
 }
 
-- (NSURL *)artworkMrl
+- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
 {
-    if (!_artworkMrl) {
-        _artworkMrl = [[NSURL alloc] initWithString:[NSString
-                                                     stringWithUTF8String:_artist->thumbnailMrl().c_str()]];
-    }
-    return _artworkMrl;
+    return _artist->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+}
+
+- (NSURL *)artworkMRL
+{
+    return [self artworkMRLOfType:(VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail];
+}
+
+- (NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type
+{
+    return [[NSURL alloc]
+            initWithString:[NSString
+                            stringWithUTF8String:_artist->thumbnailMrl((medialibrary::ThumbnailSizeType)type).c_str()]];
+}
+
+- (BOOL)setArtworkWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type
+{
+    return _artist->setThumbnail([mrl.absoluteString UTF8String],
+                                 (medialibrary::ThumbnailSizeType)type);
 }
 
 - (NSString *)musicBrainzId

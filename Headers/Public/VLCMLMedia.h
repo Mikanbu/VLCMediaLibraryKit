@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
 
 typedef NS_ENUM(UInt8, VLCMLMediaType) {
     VLCMLMediaTypeUnknown,
@@ -82,7 +83,6 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, assign) SInt64 chapterIndex;
 @property (nonatomic, assign) SInt64 titleIndex;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSURL *thumbnail;
 @property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong, nullable) VLCMLMovie *movie;
@@ -115,7 +115,59 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)addLabel:(VLCMLLabel *)label;
 - (BOOL)removeLabel:(VLCMLLabel *)label;
 
+/**
+ * \brief thumbnail Returns the mrl of a thumbnail of the given size for this media
+ * \param sizeType The targeted thumbnail size
+ * \return An mrl, representing the absolute path to the media thumbnail
+ *         or nil, if the thumbnail generation failed
+ *
+ * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
+ * \sa{isThumbnailGenerated}
+ */
+- (nullable NSURL *)thumbnail;
+- (nullable NSURL *)thumbnailOfType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief isThumbnailGenerated Returns true if a thumbnail generation was
+ *                             attempted, or if a thumbnail was assigned to thie media
+ * \param sizeType The targeted thumbnail size type
+ * In case the thumbnail generation failed, this will still be true, but
+ * the mrl returned by \sa{thumbnail} will be empty.
+ * This is intended as a helper for the client application, so it doesn't
+ * attempt ask for a new thumbmail generation.
+ * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
+ */
 - (BOOL)isThumbnailGenerated;
+- (BOOL)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief requestThumbnail Queues a thumbnail generation request for
+ * this media, to be run asynchronously.
+ * Upon completion (successful or not) IMediaLibraryCb::onMediaThumbnailReady
+ * will be called.
+ * In case a thumbnail was already generated for the media, a new thumbnail
+ * will be generated, and the previous one will be overriden.
+ * In case a previous thumbnailing attempt failed, false will be returned
+ * and no new generation will occur.
+ * If you want to force a new generation, you need to
+ * call \sa{IMediaLibrary::enableFailedThumbnailRegeneration} beforehand.
+ * \param sizeType The size type of the thumbnail to generate
+ * \param desiredWidth The desired thumbnail width
+ * \param desiredHeight The desired thumbnail height
+ * \param position The position at which to generate the thumbnail, in [0;1] range
+ *
+ * The generated thumbnail will try to oblige by the requested size, while
+ * respecting the source aspect ratio. If the aspect ratios differ, the
+ * source image will be cropped.
+ * If one of the dimension is 0, the other one will be deduced from the
+ * source aspect ratio. If both are 0, the source dimensions will be used.
+ *
+ * This function is thread-safe
+ */
+- (BOOL)requestThumbnailOfType:(VLCMLThumbnailSizeType)type
+                  desiredWidth:(NSUInteger)width
+                 desiredHeight:(NSUInteger)height
+                      atPosition:(float)position;
 
 - (NSDate *)insertionDate;
 - (NSDate *)releaseDate;

@@ -137,9 +137,10 @@ public:
     /**
      * @brief onMediaThumbnailReady Called when a thumbnail generation completed.
      * @param media The media for which a thumbnail was generated
+     * @param sizeType The size type that was requerested
      * @param success true if the thumbnail was generated, false if the generation failed
      */
-    virtual void onMediaThumbnailReady( MediaPtr media, bool success );
+    virtual void onMediaThumbnailReady( MediaPtr media, ThumbnailSizeType sizeType, bool success );
 
 private:
     NSArray<NSNumber *> *intVectorToArray( std::vector<int64_t> vector );

@@ -65,6 +65,15 @@ typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
     VLCMLInitializeResultDbReset
 };
 
+typedef NS_ENUM (NSUInteger, VLCMLThumbnailSizeType) {
+    // A small sized thumbnail. Considered to be the default value before model 17
+    VLCMLThumbnailSizeTypeThumbnail,
+    // A banner type thumbnail. The exact size is application dependent.
+    VLCMLThumbnailSizeTypeBanner,
+    // The number of different size type
+    VLCMLThumbnailSizeTypeCount
+};
+
 typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
     VLCMLLogLevelVerbose,
     VLCMLLogLevelDebug,
@@ -118,7 +127,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateParsingStatsWithPercent:(UInt32)percent;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didChangeIdleBackgroundTasksWithSuccess:(BOOL)success;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary thumbnailReadyForMedia:(VLCMLMedia *)media withSuccess:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary thumbnailReadyForMedia:(VLCMLMedia *)media
+              ofType:(VLCMLThumbnailSizeType)type withSuccess:(BOOL)success;
 
 @end
 
@@ -403,15 +413,6 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
  * still has to be called afterward.
  */
 - (void)enableFailedThumbnailRegeneration;
-
-/**
- * \brief requestThumbnail Queues a thumbnail generation request for
- * this media, to be run asynchronously.
- * Upon completion (successful or not) thumbnailReadyForMedia will be called.
- * In case a thumbnail was already generated for the media, false will be returned.
- * If so, no callback will be invoked
- */
-- (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media;
 
 #pragma mark - Logger
 

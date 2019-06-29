@@ -70,16 +70,24 @@
 
 - (BOOL)isArtworkGenerated
 {
-    return _album->isThumbnailGenerated();
+    return [self isArtworkGeneratedForType:(VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail];
 }
 
-- (NSURL *)artworkMrl
+- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
 {
-    if (!_artworkMrl) {
-        _artworkMrl = [[NSURL alloc] initWithString:[NSString
-                                                     stringWithUTF8String:_album->thumbnailMrl().c_str()]];
-    }
-    return _artworkMrl;
+    return _album->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+}
+
+- (NSURL *)artworkMRL
+{
+    return [self artworkMRLOfType:(VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail];
+}
+
+- (NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type
+{
+    return [[NSURL alloc]
+     initWithString:[NSString
+                     stringWithUTF8String:_album->thumbnailMrl((medialibrary::ThumbnailSizeType)type).c_str()]];
 }
 
 - (VLCMLArtist *)albumArtist

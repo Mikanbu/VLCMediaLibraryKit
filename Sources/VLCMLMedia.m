@@ -315,15 +315,33 @@
 
 - (NSURL *)thumbnail
 {
-    if (!_thumbnail) {
-        _thumbnail = [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_media->thumbnailMrl().c_str()]];
-    }
-    return _thumbnail;
+    return [self thumbnailOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
+}
+
+- (NSURL *)thumbnailOfType:(VLCMLThumbnailSizeType)type
+{
+    return  [[NSURL alloc]
+             initWithString:[NSString
+                             stringWithUTF8String:_media->thumbnailMrl(medialibrary::ThumbnailSizeType::Thumbnail).c_str()]];;
 }
 
 - (BOOL)isThumbnailGenerated
 {
-    return _media->isThumbnailGenerated();
+    return [self isThumbnailGeneratedOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
+}
+
+- (BOOL)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type
+{
+    return _media->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+}
+
+- (BOOL)requestThumbnailOfType:(VLCMLThumbnailSizeType)type
+                  desiredWidth:(NSUInteger)width
+                 desiredHeight:(NSUInteger)height
+                    atPosition:(float)position
+{
+    return _media->requestThumbnail((medialibrary::ThumbnailSizeType)type,
+                                    (int)width, (int)height, position);
 }
 
 - (NSDate *)insertionDate

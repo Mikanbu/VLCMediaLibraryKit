@@ -515,10 +515,6 @@ VLCMLIdentifier const VariousArtistID = 2u;
     _ml->enableFailedThumbnailRegeneration();
 }
 
-- (BOOL)requestThumbnailForMedia:(VLCMLMedia *)media {
-    return _ml->requestThumbnail(media.mediaPtr);
-}
-
 #pragma mark - Logger
 
 #pragma mark - Background Operation

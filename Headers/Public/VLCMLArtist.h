@@ -23,6 +23,7 @@
 #import "VLCMLObject.h"
 
 typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
 
 @class VLCMLAlbum, VLCMLMedia;
 
@@ -32,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *shortBio;
-@property (nonatomic, copy) NSURL *artworkMrl;
 @property (nonatomic, copy) NSString *musicBrainzId;
 
 
@@ -41,12 +41,40 @@ NS_ASSUME_NONNULL_BEGIN
 - (VLCMLIdentifier)identifier;
 
 /**
- * @brief isThumbnailGenerated Returns true is a thumbnail generation was attempted.
+ * @brief isThumbnailGenerated Returns true is a thumbnail generation was
+ *                             attempted for the provided size.
+ *
+ * @param sizeType The targeted thumbnail size
  *
  * If the thumbnail generation failed, this will still return true, and the
  * associated thumbnail mrl will be empty.
+ * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
 - (BOOL)isArtworkGenerated;
+- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief artworkMRL Returns the mrl of an artwork of the given size for an artist
+ * \param sizeType The targeted artwork size
+ * \return An mrl, representing the absolute path to the artist artwork
+ *         or nil, if the artwork generation failed
+ *
+ * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
+ * \sa{isThumbnailGenerated}
+ */
+- (nullable NSURL *)artworkMRL;
+- (nullable NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * @brief setThumbnail Assign a thumbnail to the artist
+ * @param thumbnailMrl An mrl pointing to the thumbnail
+ * @return true in case of success, false otherwise
+ *
+ * @note The medialibrary does not take ownership of the thumbnail. It is
+ * application responsibility to ensure that it will always be available
+ * or that a later call will invalidate the thumbnail if it gets (re)moved
+ */
+- (BOOL)setArtworkWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type;
 
 /**
  * Return all albums from the current artist.

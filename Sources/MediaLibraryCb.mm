@@ -250,10 +250,12 @@ void MediaLibraryCb::onBackgroundTasksIdleChanged( bool isIdle )
     }
 }
 
-void MediaLibraryCb::onMediaThumbnailReady( MediaPtr media, bool success )
+void MediaLibraryCb::onMediaThumbnailReady( MediaPtr media, ThumbnailSizeType sizeType, bool success )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:thumbnailReadyForMedia:withSuccess:)]) {
+    if (m_delegate && [m_delegate
+                       respondsToSelector:@selector(medialibrary:thumbnailReadyForMedia:ofType:withSuccess:)]) {
         [m_delegate medialibrary:m_medialibrary thumbnailReadyForMedia:[[VLCMLMedia alloc] initWithMediaPtr:media]
+                          ofType:(VLCMLThumbnailSizeType)sizeType
                      withSuccess:success];
     }
 }
