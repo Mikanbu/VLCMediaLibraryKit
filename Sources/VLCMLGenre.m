@@ -66,7 +66,12 @@
 
 - (NSArray<VLCMLMedia *> *)tracks
 {
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks()];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(false)];
+}
+
+- (NSArray<VLCMLMedia *> *)tracksWithThumbnails:(BOOL)thumbnails
+{
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(thumbnails)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -75,7 +80,17 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(&param)];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(false, &param)];
+}
+
+- (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                desc:(BOOL)desc
+                                          thumbnails:(BOOL)thumbnails
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
+                                                                         desc:desc];
+
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(thumbnails, &param)];
 }
 
 - (NSArray<VLCMLAlbum *> *)albums

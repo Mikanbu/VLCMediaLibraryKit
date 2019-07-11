@@ -41,9 +41,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                           desc:(BOOL)desc;
 
+/**
+ * @brief tracks Returns the tracks associated with this genre
+ * @param withThumbnail True if only tracks with thumbnail should be fetched.
+ *                      False if any track can be returned.
+ * @param params Some query parameters, or nullptr for the default.
+ *
+ * This function supports sorting by:
+ * - Duration
+ * - InsertionDate
+ * - ReleaseDate
+ * - Alpha
+ *
+ * The default sort is to group tracks by their artist, album, disc number,
+ * track number, and finally file name in case of ambiguous results.
+ * Sort is ascending by default.
+ */
 - (nullable NSArray<VLCMLMedia *> *)tracks;
+- (nullable NSArray<VLCMLMedia *> *)tracksWithThumbnails:(BOOL)thumbnails;
 - (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                          desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc
+                                                   thumbnails:(BOOL)thumbnails;
 
 - (nullable NSArray<VLCMLAlbum *> *)albums;
 - (nullable NSArray<VLCMLAlbum *> *)albumsWithSortingCriteria:(VLCMLSortingCriteria)criteria
