@@ -167,7 +167,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)requestThumbnailOfType:(VLCMLThumbnailSizeType)type
                   desiredWidth:(NSUInteger)width
                  desiredHeight:(NSUInteger)height
-                      atPosition:(float)position;
+                    atPosition:(float)position;
 
 - (NSDate *)insertionDate;
 - (NSDate *)releaseDate;

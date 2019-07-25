@@ -75,7 +75,7 @@
 
 - (void)setAudioTrackIndex:(SInt64)audioTrackIndex
 {
-     [self setMetadataOfType:VLCMLMetadataTypeAudioTrack intValue: audioTrackIndex];
+    [self setMetadataOfType:VLCMLMetadataTypeAudioTrack intValue: audioTrackIndex];
 }
 
 - (SInt64)subtitleTrackIndex
