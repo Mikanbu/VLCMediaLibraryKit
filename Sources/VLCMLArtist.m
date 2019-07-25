@@ -73,9 +73,13 @@
 
 - (NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type
 {
-    return [[NSURL alloc]
-            initWithString:[NSString
-                            stringWithUTF8String:_artist->thumbnailMrl((medialibrary::ThumbnailSizeType)type).c_str()]];
+    auto mrl = _artist->thumbnailMrl((medialibrary::ThumbnailSizeType)type);
+
+    if ( mrl.empty() ) {
+        return nil;
+    }
+
+    return  [[NSURL alloc] initWithString:[NSString stringWithUTF8String:mrl.c_str()]];
 }
 
 - (BOOL)setArtworkWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type

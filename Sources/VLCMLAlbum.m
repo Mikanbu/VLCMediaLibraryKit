@@ -85,9 +85,13 @@
 
 - (NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type
 {
-    return [[NSURL alloc]
-     initWithString:[NSString
-                     stringWithUTF8String:_album->thumbnailMrl((medialibrary::ThumbnailSizeType)type).c_str()]];
+    auto mrl = _album->thumbnailMrl((medialibrary::ThumbnailSizeType)type);
+
+    if ( mrl.empty() ) {
+        return nil;
+    }
+
+    return  [[NSURL alloc] initWithString:[NSString stringWithUTF8String:mrl.c_str()]];
 }
 
 - (VLCMLArtist *)albumArtist

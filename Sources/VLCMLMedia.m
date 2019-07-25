@@ -320,9 +320,13 @@
 
 - (NSURL *)thumbnailOfType:(VLCMLThumbnailSizeType)type
 {
-    return  [[NSURL alloc]
-             initWithString:[NSString
-                             stringWithUTF8String:_media->thumbnailMrl(medialibrary::ThumbnailSizeType::Thumbnail).c_str()]];;
+    auto mrl = _media->thumbnailMrl((medialibrary::ThumbnailSizeType)type);
+
+    if ( mrl.empty() ) {
+        return nil;
+    }
+
+    return  [[NSURL alloc] initWithString:[NSString stringWithUTF8String:mrl.c_str()]];
 }
 
 - (BOOL)isThumbnailGenerated
