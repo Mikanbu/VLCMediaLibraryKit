@@ -145,7 +145,7 @@
     return _album->nbDiscs();
 }
 
-- (uint)duration
+- (SInt64)duration
 {
     return _album->duration();
 }

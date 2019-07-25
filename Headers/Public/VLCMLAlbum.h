@@ -88,7 +88,7 @@ typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
 
 - (UInt32)numberOfTracks;
 - (UInt32)numberOfDiscs;
-- (uint)duration;
+- (SInt64)duration;
 
 - (BOOL)isUnknownAlbum;
 
