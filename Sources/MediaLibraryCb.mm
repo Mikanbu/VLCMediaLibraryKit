@@ -42,7 +42,7 @@ NSArray<NSNumber *> *MediaLibraryCb::intVectorToArray( std::vector<int64_t> vect
     {
         [res addObject:[NSNumber numberWithLongLong:it]];
     }
-    return res;
+    return [res copy];
 }
 
 #pragma mark - Setter
