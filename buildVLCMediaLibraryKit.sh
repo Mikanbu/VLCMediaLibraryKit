@@ -8,7 +8,7 @@ ROOT_DIR=default
 SIMULATOR=no
 NO_NETWORK=no
 BUILD_TYPE="Release"
-TESTED_HASH="35bbe667"
+TESTED_HASH="862ceb54"
 VLCKIT_PATH=~
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
@@ -197,11 +197,12 @@ fetchMedialibrary()
         if [ "$NO_NETWORK" = "no" ]; then
             if [ -d medialibrary ]; then
                 spushd medialibrary
-                    git pull origin master --rebase
+                    git pull origin 0.5.x --rebase
                     git reset --hard ${TESTED_HASH}
             else
                 git clone https://code.videolan.org/videolan/medialibrary.git
                 spushd medialibrary
+                    git checkout 0.5.x
                     git checkout -B localBranch ${TESTED_HASH}
             fi
                     git submodule update --init
