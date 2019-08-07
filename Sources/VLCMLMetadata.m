@@ -40,13 +40,13 @@
 
 - (int64_t)integer
 {
-    return _metadata->integer();
+    return _metadata->asInt();
 }
 
 - (NSString *)str
 {
     if (!_str) {
-        _str = [[NSString alloc] initWithUTF8String:_metadata->str().c_str()];
+        _str = [[NSString alloc] initWithUTF8String:_metadata->asStr().c_str()];
     }
     return _str;
 }
