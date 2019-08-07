@@ -268,4 +268,11 @@ void MediaLibraryCb::onMediaThumbnailReady( MediaPtr media, ThumbnailSizeType si
     }
 }
 
+void MediaLibraryCb::onHistoryChanged( HistoryType type )
+{
+    if (m_delegate && [m_delegate
+                       respondsToSelector:@selector(medialibrary:historyChangedOfType:)]) {
+        [m_delegate medialibrary:m_medialibrary historyChangedOfType:(VLCMLHistoryType)type];
+    }
+}
 }// namespace - medialibrary

@@ -74,6 +74,13 @@ typedef NS_ENUM (NSUInteger, VLCMLThumbnailSizeType) {
     VLCMLThumbnailSizeTypeCount
 };
 
+typedef NS_ENUM (NSUInteger, VLCMLHistoryType) {
+    /// The history of media analyzed by the media library
+    VLCMLHistoryTypeMedia,
+    /// The network streams history
+    VLCMLHistoryTypeNetwork
+};
+
 typedef NS_ENUM (NSUInteger, VLCMLLogLevel) {
     VLCMLLogLevelVerbose,
     VLCMLLogLevelDebug,
@@ -130,6 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didChangeIdleBackgroundTasksWithSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary thumbnailReadyForMedia:(VLCMLMedia *)media
               ofType:(VLCMLThumbnailSizeType)type withSuccess:(BOOL)success;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary historyChangedOfType:(VLCMLHistoryType)type;
 
 @end
 

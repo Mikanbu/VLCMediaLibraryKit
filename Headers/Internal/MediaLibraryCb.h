@@ -157,6 +157,12 @@ public:
      */
     virtual void onMediaThumbnailReady( MediaPtr media, ThumbnailSizeType sizeType, bool success );
 
+    /**
+     * @brief onHistoryChanged Called when a media history gets modified (including when cleared)
+     * @param type The history type
+     */
+    virtual void onHistoryChanged( HistoryType type );
+
 private:
     NSArray<NSNumber *> *intVectorToArray( std::vector<int64_t> vector );
 
