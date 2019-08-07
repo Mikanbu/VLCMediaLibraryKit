@@ -294,6 +294,7 @@ buildMedialibrary()
                 local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
                 local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
                 local optim="-O3"
+                local medialibraryReleaseFlag="--disable-debug"
 
                 log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
 
@@ -305,6 +306,7 @@ buildMedialibrary()
 
                 if [ "$BUILD_TYPE" = "Debug" ]; then
                     optim="-O0 -g"
+                    medialibraryReleaseFlag="--enable-debug"
                 fi
 
                 CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
@@ -346,6 +348,7 @@ buildMedialibrary()
                     $MEDIALIBRARY_DIR/bootstrap && \
                     $MEDIALIBRARY_DIR/configure \
                                        --disable-shared \
+                                       $medialibraryReleaseFlag \
                                        --prefix=$prefix \
                                        --host=$target \
                                        CXX=$CXX_COMPILATOR \
