@@ -116,22 +116,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)moveMediaFromPosition:(uint32_t)position toDestination:(uint32_t)destination;
 
 /**
- * @brief move Change the position of a media
- * @param from The position of the item being moved
- * @param to The moved item target position
+ * @brief remove Removes an item from the playlist
+ * @param mediaId The position of the item to remove.
  *
  * @return true on success, false on failure
- *
- * In case there is already an item at the given position, it will be placed before
- * the media being moved. This will cascade to any media placed afterward.
- * For instance, a playlist with <media,position> like
- * [<A,0>, <B,1>, <C,2>] on which move(0, 1) is called will result in the
- * playlist being changed to
- * [<B,0>, <A,1>, <C,2>]
- * If the target position is out of range (ie greater than the playlist size)
- * the target position will be interpreted as the playlist size (prior to insertion).
- * For instance, on the playlist [<B,0>, <A,1>, <C,2>], if move(0, 999)
- * gets called, the resulting playlist will be [<A,0>, <C,1>, <B,2>]
  */
 - (BOOL)removeMediaFromPosition:(uint32_t)position;
 
