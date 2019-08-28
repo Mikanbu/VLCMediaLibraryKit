@@ -62,7 +62,11 @@ typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
 
     // The database was reset, the caller needs to re-configure folders to
     // discover at the bare minimum.
-    VLCMLInitializeResultDbReset
+    VLCMLInitializeResultDbReset,
+
+    // Something is wrong with the database. It is up to the application to
+    // chose what to do, the DB needs to be recovered or dropped in any case.
+    VLCMLInitializeResultDbCorrupted
 };
 
 typedef NS_ENUM (NSUInteger, VLCMLThumbnailSizeType) {
