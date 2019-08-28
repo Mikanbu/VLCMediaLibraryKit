@@ -162,7 +162,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VLCMediaLibrary : NSObject
 
 @property (nonatomic, copy) NSString *databasePath;
-@property (nonatomic, copy) NSString *thumbnailPath;
+@property (nonatomic, copy) NSString *medialibraryPath;
 @property (nonatomic, weak) id <VLCMediaLibraryDelegate> delegate;
 @property (nonatomic, weak) id <VLCMLDeviceListerDelegate> deviceListerDelegate;
 
@@ -170,8 +170,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)start;
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
-                                             thumbnailPath:(NSString *)thumbnailPath
-NS_SWIFT_NAME(setupMediaLibrary(databasePath:thumbnailPath:));
+                                          medialibraryPath:(NSString *)medialibraryPath
+NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 
 - (void)setVerbosity:(VLCMLLogLevel)level;
 

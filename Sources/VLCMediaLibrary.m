@@ -107,19 +107,18 @@ VLCMLIdentifier const VariousArtistID = 2u;
 }
 
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
-                                             thumbnailPath:(NSString *)thumbnailPath
+                                          medialibraryPath:(NSString *)medialibraryPath
 {
-
     _ml->setDeviceLister(_deviceLister);
 
     VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
-                                                                          [thumbnailPath UTF8String],
+                                                                          [medialibraryPath UTF8String],
                                                                           _mlCb);
 
     if (result == VLCMLInitializeResultSuccess) {
         _isInitialized = YES;
         _databasePath = databasePath;
-        _thumbnailPath = thumbnailPath;
+        _medialibraryPath = medialibraryPath;
     }
     return result;
 }
