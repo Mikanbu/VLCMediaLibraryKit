@@ -553,6 +553,12 @@ VLCMLIdentifier const VariousArtistID = 2u;
 {
     _ml->forceRescan();
 }
+#pragma mark - Database
+
+- (void)clearDatabaseWithRestorePlaylists:(BOOL)restorePlaylists
+{
+    _ml->clearDatabase(restorePlaylists);
+}
 
 #pragma mark -
 

@@ -464,6 +464,16 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
  */
 - (void)forceRescan;
 
+#pragma mark - Database
+
+/**
+ * @brief clearDatabase Will drop & recreate the database
+ * @param restorePlaylists If true, the media library will attempt to keep
+ *                         the user created playlists
+ */
+- (void)clearDatabaseWithRestorePlaylists:(BOOL)restorePlaylists
+NS_SWIFT_NAME(clearDatabase(restorePlaylists:));
+
 #pragma mark - DeviceLister
 
 @end
