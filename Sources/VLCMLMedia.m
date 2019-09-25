@@ -190,6 +190,11 @@
     return _files;
 }
 
+- (NSString *)fileName
+{
+    return [NSString stringWithUTF8String:_media->fileName().c_str()];
+}
+
 - (VLCMLFile *)mainFile
 {
     if (!_files) {
