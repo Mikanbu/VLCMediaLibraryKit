@@ -12,6 +12,7 @@
 		8D72F4D021CD410D00E3199B /* VLCMLSubtitleTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F4CF21CD410D00E3199B /* VLCMLSubtitleTrack.m */; };
 		8D72F4D221CD45EF00E3199B /* VLCMLSubtitleTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D72F4CE21CD410D00E3199B /* VLCMLSubtitleTrack.h */; };
 		8D832196233D2C6100B28912 /* VLCMLVideoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */; };
+		8D832199233D518100B28912 /* VLCMLVideoGroup.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D832197233D2CA900B28912 /* VLCMLVideoGroup.h */; };
 		8D996CA921514F9B00F342AD /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D996CA821514F9B00F342AD /* libmedialibrary.a */; };
 		8DD39C7720162F19002E5423 /* VLCMLDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* VLCMLDeviceLister.mm */; };
 		8DD39C7820162F19002E5423 /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
@@ -63,6 +64,7 @@
 			dstPath = "${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				8D832199233D518100B28912 /* VLCMLVideoGroup.h in Copy Files (20 items) */,
 				8D72F4D221CD45EF00E3199B /* VLCMLSubtitleTrack.h in Copy Files (20 items) */,
 				8D63525B2018997A003A87E4 /* VLCMLObject.h in Copy Files (20 items) */,
 				8DD39C9420162F19002E5423 /* VLCMLMedia.h in Copy Files (20 items) */,
