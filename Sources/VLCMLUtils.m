@@ -27,6 +27,7 @@
 #import "VLCMLPlaylist+Init.h"
 #import "VLCMLGenre+Init.h"
 #import "VLCMLFolder+Init.h"
+#import "VLCMLVideoGroup+Init.h"
 
 @implementation VLCMLUtils
 
@@ -70,6 +71,14 @@
     if (!folderQuery)
         return nil;
     return [self arrayFromFolderPtrVector:folderQuery->all()];
+}
+
++ (nullable
+   NSArray<VLCMLVideoGroup *> *)arrayFromVideoGroupQuery:(medialibrary::Query<medialibrary::IVideoGroup>)videoGroupQuery
+{
+    if (!videoGroupQuery)
+        return nil;
+    return [self arrayFromVideoGroupPtrVector:videoGroupQuery->all()];
 }
 
 + (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media
@@ -130,6 +139,16 @@
         [folderList addObject:[[VLCMLFolder alloc] initWithFolderPtr:folder]];
     }
     return [folderList copy];
+}
+
++ (NSArray<VLCMLVideoGroup *> *)arrayFromVideoGroupPtrVector:(std::vector<medialibrary::VideoGroupPtr>) videoGroups
+{
+    NSMutableArray<VLCMLVideoGroup *> *videoGroupList = [NSMutableArray array];
+
+    for (const auto &videoGroup : videoGroups) {
+        [videoGroupList addObject:[[VLCMLVideoGroup alloc] initWithVideoGroupPtr:videoGroup]];
+    }
+    return [videoGroupList copy];
 }
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
