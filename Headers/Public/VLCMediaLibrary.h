@@ -23,7 +23,7 @@
 #import "VLCMLObject.h"
 #import "VLCMLMedia.h"
 
-@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate;
+@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate, VLCMLVideoGroup;
 
 extern VLCMLIdentifier const UnknownArtistID;
 extern VLCMLIdentifier const VariousArtistID;
@@ -208,6 +208,38 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMedia *> *)videoFiles;
 - (nullable NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                              desc:(BOOL)desc;
+
+#pragma mark - Video group
+
+/**
+ * @brief videoGroups Returns the media, grouped by their first characters
+ *  Some query parameter. Only Alpha & NbMedia/NbVideo sorting criteria
+ *  are supported. The default is Alpha
+ * @return An array if VLCMLVideoGroup, or nil in case of an error.
+ */
+- (nullable NSArray<VLCMLVideoGroup *> *)videoGroups;
+- (nullable NSArray<VLCMLVideoGroup *> *)videoGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                                   desc:(BOOL)desc;
+
+/**
+ * @brief videoGroup Return the representation of a specific video group
+ * @param name The group name
+ * @return The associated VLCMLVideoGroup, or nil if that group doesn't exist
+ */
+- (nullable VLCMLVideoGroup *)videoGroupWithName:(NSString *)name;
+
+/**
+ * @brief setVideoGroupsPrefixLength Sets the size of the common prefix for
+ *                                   a video group
+ *
+ * The provided value is the size of each group. For instance, if set to 4
+ * "TestGroup" and "TestSomething" will be part of the same group, but if set
+ * to 5, they will not.
+ * This can be called at any point during the program lifetime.
+ * The value will persist in database across multiple executions
+ * The default value is 6
+ */
+- (void)setVideoGroupPrefixLength:(UInt32)prefixLength;
 
 #pragma mark - Album
 

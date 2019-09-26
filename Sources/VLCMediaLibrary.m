@@ -31,6 +31,7 @@
 #import "VLCMLMovie+Init.h"
 #import "VLCMLPlaylist+Init.h"
 #import "VLCMLShow+Init.h"
+#import "VLCMLVideoGroup+Init.h"
 #import "VLCMLUtils.h"
 #import "VLCMLSearchAggregate.h"
 
@@ -192,6 +193,31 @@ VLCMLIdentifier const VariousArtistID = 2u;
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
     return [VLCMLUtils arrayFromMediaQuery:_ml->videoFiles(&param)];
+}
+
+#pragma mark - Video group
+
+- (nullable NSArray<VLCMLVideoGroup *> *)videoGroups
+{
+    return [VLCMLUtils arrayFromVideoGroupQuery:_ml->videoGroups()];
+}
+
+- (nullable NSArray<VLCMLVideoGroup *> *)videoGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                                   desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromVideoGroupQuery:_ml->videoGroups(&param)];
+}
+
+- (nullable VLCMLVideoGroup *)videoGroupWithName:(NSString *)name
+{
+    return [[VLCMLVideoGroup alloc] initWithVideoGroupPtr:_ml->videoGroup([name UTF8String])];
+}
+
+- (void)setVideoGroupPrefixLength:(UInt32)prefixLength
+{
+    return  _ml->setVideoGroupsPrefixLength(prefixLength);
 }
 
 #pragma mark - Album
