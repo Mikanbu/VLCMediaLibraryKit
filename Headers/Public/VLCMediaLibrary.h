@@ -45,7 +45,12 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     VLCMLSortingCriteriaPlayCount,
     VLCMLSortingCriteriaAlbum,
     VLCMLSortingCriteriaFilename,
-    VLCMLSortingCriteriaTrackNumber
+    VLCMLSortingCriteriaTrackNumber,
+    // Valid for folders only. Default order is descending
+    VLCMLSortingCriteriaNbVideo,
+    VLCMLSortingCriteriaNbAudio,
+    // Valid for folders & media groups
+    VLCMLSortingCriteriaNbMedia
 };
 
 typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
