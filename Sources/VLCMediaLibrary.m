@@ -165,6 +165,11 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addStream([mrl.absoluteString UTF8String])];
 }
 
+- (BOOL)removeExternalMedia:(VLCMLMedia *)media
+{
+    return _ml->removeExternalMedia(media.mediaPtr);
+}
+
 - (NSArray<VLCMLMedia *> *)audioFiles
 {
     return [VLCMLUtils arrayFromMediaQuery:_ml->audioFiles()];

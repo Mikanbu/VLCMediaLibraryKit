@@ -194,6 +194,8 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
 - (nullable VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
 
+- (BOOL)removeExternalMedia:(VLCMLMedia *)media;
+
 - (nullable NSArray<VLCMLMedia *> *)audioFiles;
 - (nullable NSArray<VLCMLMedia *> *)audioFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                              desc:(BOOL)desc;
