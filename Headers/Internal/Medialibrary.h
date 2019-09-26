@@ -41,6 +41,7 @@
 # include <medialibrary/IShow.h>
 # include <medialibrary/IShowEpisode.h>
 # include <medialibrary/ISubtitleTrack.h>
+# include <medialibrary/IVideoGroup.h>
 # include <medialibrary/IVideoTrack.h>
 
 // devicelister

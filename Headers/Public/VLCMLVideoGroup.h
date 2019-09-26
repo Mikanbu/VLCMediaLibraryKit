@@ -1,9 +1,8 @@
 /*****************************************************************************
- * VLCMediaLibraryKit.h
+ * VLCMLVideoGroup.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
- * $Id$
+ * Copyright (C) 2010-2019 VLC authors and VideoLAN
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -20,22 +19,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <VLCMediaLibraryKit/VLCMLAlbum.h>
-#import <VLCMediaLibraryKit/VLCMLAlbumTrack.h>
-#import <VLCMediaLibraryKit/VLCMLArtist.h>
-#import <VLCMediaLibraryKit/VLCMLAudioTrack.h>
-#import <VLCMediaLibraryKit/VLCMLFile.h>
-#import <VLCMediaLibraryKit/VLCMLFolder.h>
-#import <VLCMediaLibraryKit/VLCMLGenre.h>
-#import <VLCMediaLibraryKit/VLCMLLabel.h>
-#import <VLCMediaLibraryKit/VLCMLMedia.h>
-#import <VLCMediaLibraryKit/VLCMediaLibrary.h>
-#import <VLCMediaLibraryKit/VLCMLMetadata.h>
-#import <VLCMediaLibraryKit/VLCMLMovie.h>
-#import <VLCMediaLibraryKit/VLCMLObject.h>
-#import <VLCMediaLibraryKit/VLCMLPlaylist.h>
-#import <VLCMediaLibraryKit/VLCMLShow.h>
-#import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
-#import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
-#import <VLCMediaLibraryKit/VLCMLVideoGroup.h>
-#import <VLCMediaLibraryKit/VLCMLVideoTrack.h>
+#import "VLCMLObject.h"
+
+typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
+
+@class VLCMLMedia;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface VLCMLVideoGroup : NSObject
+
+- (NSString *)name;
+
+- (UInt64)count;
+
+- (nullable NSArray<VLCMLMedia *> *)media;
+- (nullable NSArray<VLCMLMedia *> *)mediaWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                        desc:(BOOL)desc;
+
+- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern;
+- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
+                                                      sort:(VLCMLSortingCriteria)criteria
+                                                      desc:(BOOL)desc;
+
+@end
+
+NS_ASSUME_NONNULL_END

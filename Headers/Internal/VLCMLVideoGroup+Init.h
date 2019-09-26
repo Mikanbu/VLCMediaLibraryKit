@@ -1,8 +1,8 @@
 /*****************************************************************************
- * VLCMediaLibraryKit.h
+ * VLCMLVideoGroup+Init.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2019 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -20,22 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import <VLCMediaLibraryKit/VLCMLAlbum.h>
-#import <VLCMediaLibraryKit/VLCMLAlbumTrack.h>
-#import <VLCMediaLibraryKit/VLCMLArtist.h>
-#import <VLCMediaLibraryKit/VLCMLAudioTrack.h>
-#import <VLCMediaLibraryKit/VLCMLFile.h>
-#import <VLCMediaLibraryKit/VLCMLFolder.h>
-#import <VLCMediaLibraryKit/VLCMLGenre.h>
-#import <VLCMediaLibraryKit/VLCMLLabel.h>
-#import <VLCMediaLibraryKit/VLCMLMedia.h>
-#import <VLCMediaLibraryKit/VLCMediaLibrary.h>
-#import <VLCMediaLibraryKit/VLCMLMetadata.h>
-#import <VLCMediaLibraryKit/VLCMLMovie.h>
-#import <VLCMediaLibraryKit/VLCMLObject.h>
-#import <VLCMediaLibraryKit/VLCMLPlaylist.h>
-#import <VLCMediaLibraryKit/VLCMLShow.h>
-#import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
-#import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
-#import <VLCMediaLibraryKit/VLCMLVideoGroup.h>
-#import <VLCMediaLibraryKit/VLCMLVideoTrack.h>
+#import "VLCMLVideoGroup.h"
+
+@interface VLCMLVideoGroup (Internal)
+
+- (nullable
+   instancetype)initWithVideoGroupPtr:(medialibrary::VideoGroupPtr)videoGroupPtr;
+
+@end

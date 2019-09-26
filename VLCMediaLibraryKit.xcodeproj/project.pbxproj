@@ -11,6 +11,7 @@
 		8D63525B2018997A003A87E4 /* VLCMLObject.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D6352582018919B003A87E4 /* VLCMLObject.h */; };
 		8D72F4D021CD410D00E3199B /* VLCMLSubtitleTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F4CF21CD410D00E3199B /* VLCMLSubtitleTrack.m */; };
 		8D72F4D221CD45EF00E3199B /* VLCMLSubtitleTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D72F4CE21CD410D00E3199B /* VLCMLSubtitleTrack.h */; };
+		8D832196233D2C6100B28912 /* VLCMLVideoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */; };
 		8D996CA921514F9B00F342AD /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D996CA821514F9B00F342AD /* libmedialibrary.a */; };
 		8DD39C7720162F19002E5423 /* VLCMLDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* VLCMLDeviceLister.mm */; };
 		8DD39C7820162F19002E5423 /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
@@ -120,6 +121,9 @@
 		8D72F4CE21CD410D00E3199B /* VLCMLSubtitleTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLSubtitleTrack.h; sourceTree = "<group>"; };
 		8D72F4CF21CD410D00E3199B /* VLCMLSubtitleTrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMLSubtitleTrack.m; sourceTree = "<group>"; };
 		8D72F4D121CD426600E3199B /* VLCMLSubtitleTrack+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLSubtitleTrack+Init.h"; sourceTree = "<group>"; };
+		8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMLVideoGroup.m; sourceTree = "<group>"; };
+		8D832197233D2CA900B28912 /* VLCMLVideoGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLVideoGroup.h; sourceTree = "<group>"; };
+		8D832198233D36A700B28912 /* VLCMLVideoGroup+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLVideoGroup+Init.h"; sourceTree = "<group>"; };
 		8D90D0DD1F2A41DB00DBB850 /* VLCMLMedia+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLMedia+Init.h"; sourceTree = "<group>"; };
 		8D90D0E11F2A543D00DBB850 /* VLCMLAlbum+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "VLCMLAlbum+Init.h"; path = "Headers/Internal/VLCMLAlbum+Init.h"; sourceTree = SOURCE_ROOT; };
 		8D90D0E41F2B558000DBB850 /* VLCMLArtist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLArtist+Init.h"; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				8DC50D831F30C1E500D6CCED /* VLCMLShow+Init.h */,
 				8DC50D841F30C30200D6CCED /* VLCMLShowEpisode+Init.h */,
 				8D72F4D121CD426600E3199B /* VLCMLSubtitleTrack+Init.h */,
+				8D832198233D36A700B28912 /* VLCMLVideoGroup+Init.h */,
 				8DC50D8F1F32209200D6CCED /* VLCMLVideoTrack+Init.h */,
 				8DC50D9E1F335CD800D6CCED /* VLCMLUtils.h */,
 				8DC50DC11F38A98F00D6CCED /* DeviceListerCb.h */,
@@ -274,6 +279,7 @@
 				8D1112E71F3A2511000B4D3C /* VLCMLSearchAggregate.h */,
 				7D0EF514170885130003ED47 /* VLCMLShow.h */,
 				7D0EF515170885130003ED47 /* VLCMLShowEpisode.h */,
+				8D832197233D2CA900B28912 /* VLCMLVideoGroup.h */,
 				8DC50D8C1F321E2300D6CCED /* VLCMLVideoTrack.h */,
 				8D72F4CE21CD410D00E3199B /* VLCMLSubtitleTrack.h */,
 			);
@@ -301,6 +307,7 @@
 				8D90D0E71F2B7BEF00DBB850 /* VLCMLPlaylist.m */,
 				8DC817641F2760C900DEEF9D /* VLCMLMetadata.m */,
 				8D72F4CF21CD410D00E3199B /* VLCMLSubtitleTrack.m */,
+				8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */,
 				8DC50D8D1F321E2300D6CCED /* VLCMLVideoTrack.m */,
 				8DC50D9F1F335CD800D6CCED /* VLCMLUtils.m */,
 				8DC50DC01F38A98F00D6CCED /* DeviceListerCb.mm */,
@@ -380,6 +387,7 @@
 				8DD39C8820162F19002E5423 /* VLCMLUtils.m in Sources */,
 				8DD39C8920162F19002E5423 /* VLCMLAudioTrack.m in Sources */,
 				8DD39C8A20162F19002E5423 /* VLCMLAlbumTrack.m in Sources */,
+				8D832196233D2C6100B28912 /* VLCMLVideoGroup.m in Sources */,
 				8DD39C8B20162F19002E5423 /* VLCMLMovie.m in Sources */,
 				8DD39C8C20162F19002E5423 /* VLCMLArtist.m in Sources */,
 				8DD39C8D20162F19002E5423 /* VLCMLAlbum.m in Sources */,
