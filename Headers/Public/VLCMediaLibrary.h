@@ -105,23 +105,23 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMedia:(NSArray<VLCMLMedia *> *)media;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMedia:(NSArray<VLCMLMedia *> *)media;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddArtists:(NSArray<VLCMLArtist *> *)artists;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyArtists:(NSArray<VLCMLArtist *> *)artists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyArtistsWithIds:(NSArray<NSNumber *> *)artistsIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteArtistsWithIds:(NSArray<NSNumber *> *)artistsIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddAlbums:(NSArray<VLCMLAlbum *> *)albums;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyAlbums:(NSArray<VLCMLAlbum *> *)albums;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyAlbumsWithIds:(NSArray<NSNumber *> *)albumsIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteAlbumsWithIds:(NSArray<NSNumber *> *)albumsIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyPlaylists:(NSArray<VLCMLPlaylist *> *)playlists;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyPlaylistsWithIds:(NSArray<NSNumber *> *)playlistsIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeletePlaylistsWithIds:(NSArray<NSNumber *> *)playlistsIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddGenres:(NSArray<VLCMLGenre *> *)genres;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyGenres:(NSArray<VLCMLGenre *> *)genres;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyGenresWithIds:(NSArray<NSNumber *> *)genresIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteGenresWithIds:(NSArray<NSNumber *> *)genresIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didStartDiscovery:(NSString *)entryPoint;

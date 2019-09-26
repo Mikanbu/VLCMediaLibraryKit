@@ -61,10 +61,10 @@ void MediaLibraryCb::onMediaAdded( std::vector<MediaPtr> media )
     }
 }
 
-void MediaLibraryCb::onMediaModified( std::vector<MediaPtr> media )
+void MediaLibraryCb::onMediaModified( std::vector<int64_t> media )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMedia:)]) {
-        [m_delegate medialibrary:m_medialibrary didModifyMedia:[VLCMLUtils arrayFromMediaPtrVector:media]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMediaWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyMediaWithIds:intVectorToArray(media)];
     }
 }
 
@@ -84,10 +84,10 @@ void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
     }
 }
 
-void MediaLibraryCb::onArtistsModified( std::vector<ArtistPtr> artists )
+void MediaLibraryCb::onArtistsModified( std::vector<int64_t> artists )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyArtists:)]) {
-        [m_delegate medialibrary:m_medialibrary didModifyArtists:[VLCMLUtils arrayFromArtistPtrVector:artists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyArtistsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyArtistsWithIds:intVectorToArray(artists)];
     }
 }
 
@@ -107,10 +107,10 @@ void MediaLibraryCb::onAlbumsAdded( std::vector<AlbumPtr> albums )
     }
 }
 
-void MediaLibraryCb::onAlbumsModified( std::vector<AlbumPtr> albums )
+void MediaLibraryCb::onAlbumsModified( std::vector<int64_t> albums )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyAlbums:)]) {
-        [m_delegate medialibrary:m_medialibrary didModifyAlbums:[VLCMLUtils arrayFromAlbumPtrVector:albums]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyAlbumsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyAlbumsWithIds:intVectorToArray(albums)];
     }
 }
 
@@ -130,10 +130,10 @@ void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
     }
 }
 
-void MediaLibraryCb::onPlaylistsModified( std::vector<PlaylistPtr> playlists )
+void MediaLibraryCb::onPlaylistsModified( std::vector<int64_t> playlists )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyPlaylists:)]) {
-        [m_delegate medialibrary:m_medialibrary didModifyPlaylists:[VLCMLUtils arrayFromPlaylistPtrVector:playlists]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyPlaylistsWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyPlaylistsWithIds:intVectorToArray(playlists)];
     }
 }
 
@@ -153,10 +153,10 @@ void MediaLibraryCb::onGenresAdded( std::vector<GenrePtr> genres )
     }
 }
 
-void MediaLibraryCb::onGenresModified( std::vector<GenrePtr> genres )
+void MediaLibraryCb::onGenresModified( std::vector<int64_t> genres )
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyGenres:)]) {
-        [m_delegate medialibrary:m_medialibrary didModifyGenres:[VLCMLUtils arrayFromGenrePtrVector:genres]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didModifyGenresWithIds:)]) {
+        [m_delegate medialibrary:m_medialibrary didModifyGenresWithIds:intVectorToArray(genres)];
     }
 }
 
