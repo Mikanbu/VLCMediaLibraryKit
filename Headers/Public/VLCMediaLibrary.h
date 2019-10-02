@@ -241,6 +241,15 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
  */
 - (void)setVideoGroupPrefixLength:(UInt32)prefixLength;
 
+/**
+ * @brief setAllowSingleVideoGroups Allow groups with a single video.
+ *
+ * The default is YES. If this is set to NO, only groups with at least
+ * 2 videos will be returned
+ * The vallue will persist in database across multiple executions.
+ */
+- (void)setVideoGroupsAllowSingleVideo:(BOOL)enable;
+
 #pragma mark - Album
 
 - (nullable VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;

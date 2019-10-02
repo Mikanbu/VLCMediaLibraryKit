@@ -220,6 +220,11 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return  _ml->setVideoGroupsPrefixLength(prefixLength);
 }
 
+- (void)setVideoGroupsAllowSingleVideo:(BOOL)enable
+{
+    _ml->setVideoGroupsAllowSingleVideo(enable);
+}
+
 #pragma mark - Album
 
 - (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier
