@@ -28,7 +28,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'VLCMediaLibraryKit.framework/Headers/*.h'
 
   s.frameworks = "Foundation"
-  s.library = 'sqlite3'
 
   s.requires_arc = true
   s.static_framework = true
