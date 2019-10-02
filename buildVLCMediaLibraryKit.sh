@@ -224,7 +224,6 @@ buildLibJpeg()
     local arch=$1
     local target=$2
     local libjpegRelease="1.5.2"
-    LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
     local prefix="${LIBJPEG_DIR}/install/${arch}"
 
     if [ ! -d "${LIBJPEG_DIR}" ]; then
