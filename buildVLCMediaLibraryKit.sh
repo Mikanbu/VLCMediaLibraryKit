@@ -88,6 +88,12 @@ LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
 
+SQLITE_RELEASE="sqlite-autoconf-3260000"
+SQLITE_SHA1="9af2df1a6da5db6e2ecf3f463625f16740e036e9"
+SQLITE_DIR="${DEPENDENCIES_DIR}/${SQLITE_RELEASE}"
+SQLITE_INCLUDE_DIR=""
+SQLITE_BUILD_DIR=""
+
 # Helpers
 
 spushd()
@@ -262,6 +268,54 @@ buildLibJpeg()
     spopd
 }
 
+buildSqlite()
+{
+    local arch=$1
+    local target=$2
+    local prefix="${SQLITE_DIR}/build/${arch}/install-dir"
+
+    if [ ! -d "${SQLITE_DIR}" ]; then
+        if [ "$NO_NETWORK" = "no" ]; then
+            log "warning" "sqlite source not found! Starting download..."
+            wget https://download.videolan.org/pub/contrib/sqlite/${SQLITE_RELEASE}.tar.gz
+
+            if [ ! "`sha1sum ${SQLITE_RELEASE}.tar.gz`" = "${SQLITE_SHA1}  ${SQLITE_RELEASE}.tar.gz" ]; then
+                log "error" "Wrong sha1 for ${SQLITE_RELEASE}.tar.gz"
+                exit 1
+            fi
+
+            tar -xozf ${SQLITE_RELEASE}.tar.gz
+            rm -f ${SQLITE_RELEASE}.tar.gz
+        fi
+    fi
+    log "info" "Starting sqlite configuration..."
+    spushd ${SQLITE_RELEASE}
+        if [ ! -d "configure" ]; then
+            autoreconf --install
+        fi
+        if [ ! -d "build" ]; then
+            mkdir build
+        fi
+        spushd build
+            if [ ! -d "$arch" ]; then
+                mkdir $arch
+            fi
+            spushd $arch
+                ${SQLITE_DIR}/configure \
+                               --host=$target \
+                               --disable-shared \
+                               --disable-readline \
+                               CXX=$CXX_COMPILATOR
+                log "info" "Starting sqlite make..."
+                make libsqlite3.la
+                SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
+                SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
+                log "info" "sqlite armed and ready for ${arch}!"
+            spopd # $arch
+        spopd # build
+     spopd # $SQLITE_RELEASE
+}
+
 buildDependencies()
 {
     log "info" "Starting build for medialibrary dependencies..."
@@ -270,6 +324,7 @@ buildDependencies()
     fi
     spushd $DEPENDENCIES_DIR
         buildLibJpeg $1 $2
+        buildSqlite $1 $2
     spopd
 }
 
@@ -336,6 +391,8 @@ buildMedialibrary()
                     log "warning" "Build of medialibrary dependencies skipped..."
                     LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}"
                     LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}/include/"
+                    SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
+                    SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
                 fi
 
                 if [ "$VERBOSE" = "yes" ]; then
@@ -355,8 +412,8 @@ buildMedialibrary()
                                        OBJCXX=$OBJCXX_COMPILATOR \
                                        LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
                                        LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}" \
-                                       SQLITE_LIBS="-L${currentXcode}/lib -lsqlite3" \
-                                       SQLITE_CFLAGS="-I${currentXcode}/include"
+                                       SQLITE_LIBS="-L${SQLITE_BUILD_DIR}${actualArch}/.libs -lsqlite3" \
+                                       SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
 
                     log "info" "Starting make in ${buildDir}..."
                     make -C $buildDir $makeOptions > ${out}
@@ -447,6 +504,23 @@ lipoJpeg()
     log "info" "libjpeg.a bundle armed and ready to use!"
 }
 
+lipoSqlite()
+{
+    local sqliteInstallDir="${SQLITE_BUILD_DIR}"
+    local sqliteArch="`ls ${sqliteInstallDir}`"
+    local files=""
+
+    log "info" "Starting the creation of a libsqlite3.a bundle..."
+
+    for i in ${sqliteArch}
+    do
+        files="${sqliteInstallDir}/${i}/.libs/libsqlite3.a ${files}"
+    done
+
+    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"
+    log "info" "libsqlite3.a bundle armed and ready to use!"
+}
+
 createFramework()
 {
     local target="$1"
@@ -524,6 +598,7 @@ if [ "$CLEAN" = "yes" ]; then
     log "info" "Xcode build cleaned!"
 fi
 lipoJpeg
+lipoSqlite
 lipoMedialibrary
 if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
     buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
