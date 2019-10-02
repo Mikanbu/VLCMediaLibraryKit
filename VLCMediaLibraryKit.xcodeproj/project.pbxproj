@@ -528,7 +528,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
-					"-lsqlite3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -559,7 +558,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
-					"-lsqlite3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
