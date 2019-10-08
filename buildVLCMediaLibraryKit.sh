@@ -505,7 +505,7 @@ lipoJpeg()
 
 lipoSqlite()
 {
-    local sqliteInstallDir="${SQLITE_BUILD_DIR}"
+    local sqliteInstallDir="${SQLITE_DIR}/build"
     local sqliteArch="`ls ${sqliteInstallDir}`"
     local files=""
 
