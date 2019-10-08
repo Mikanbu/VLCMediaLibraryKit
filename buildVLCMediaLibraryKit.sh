@@ -423,6 +423,7 @@ buildMedialibrary()
                 if [ $? -ne 0 ]; then
                     log "error" "medialibrary build failed!"
                 fi
+                log "info" "medialibrary armed and ready for ${arch}!"
             spopd #build
         spopd #medialibrary
     spopd #libmedialibrary
