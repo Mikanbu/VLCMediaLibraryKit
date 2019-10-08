@@ -499,7 +499,10 @@ lipoJpeg()
         files="${libjpegInstallDir}/${i}/lib/libjpeg.a ${files}"
     done
 
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libjpeg.a"
+    if [ !`lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libjpeg.a"` ]; then
+       log "error" "Failed to lipo libjpeg.a"
+        exit 1
+    fi
     log "info" "libjpeg.a bundle armed and ready to use!"
 }
 
@@ -516,7 +519,10 @@ lipoSqlite()
         files="${sqliteInstallDir}/${i}/.libs/libsqlite3.a ${files}"
     done
 
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"
+    if [ !`lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"` ]; then
+        log "error" "Failed to lipo libsqlite3.a"
+        exit 1
+    fi
     log "info" "libsqlite3.a bundle armed and ready to use!"
 }
 
