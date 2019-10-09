@@ -13,6 +13,7 @@
 		8D72F4D221CD45EF00E3199B /* VLCMLSubtitleTrack.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D72F4CE21CD410D00E3199B /* VLCMLSubtitleTrack.h */; };
 		8D832196233D2C6100B28912 /* VLCMLVideoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */; };
 		8D832199233D518100B28912 /* VLCMLVideoGroup.h in Copy Files (20 items) */ = {isa = PBXBuildFile; fileRef = 8D832197233D2CA900B28912 /* VLCMLVideoGroup.h */; };
+		8D83219D234DCBE200B28912 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D83219C234DCBE200B28912 /* libsqlite3.a */; };
 		8D996CA921514F9B00F342AD /* libmedialibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D996CA821514F9B00F342AD /* libmedialibrary.a */; };
 		8DD39C7720162F19002E5423 /* VLCMLDeviceLister.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50DBE1F38966A00D6CCED /* VLCMLDeviceLister.mm */; };
 		8DD39C7820162F19002E5423 /* MediaLibraryCb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DC50D9C1F33280900D6CCED /* MediaLibraryCb.mm */; };
@@ -126,6 +127,7 @@
 		8D832195233D2C6100B28912 /* VLCMLVideoGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMLVideoGroup.m; sourceTree = "<group>"; };
 		8D832197233D2CA900B28912 /* VLCMLVideoGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLVideoGroup.h; sourceTree = "<group>"; };
 		8D832198233D36A700B28912 /* VLCMLVideoGroup+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLVideoGroup+Init.h"; sourceTree = "<group>"; };
+		8D83219C234DCBE200B28912 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = libmedialibrary/medialibrary/build/libsqlite3.a; sourceTree = "<group>"; };
 		8D90D0DD1F2A41DB00DBB850 /* VLCMLMedia+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLMedia+Init.h"; sourceTree = "<group>"; };
 		8D90D0E11F2A543D00DBB850 /* VLCMLAlbum+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "VLCMLAlbum+Init.h"; path = "Headers/Internal/VLCMLAlbum+Init.h"; sourceTree = SOURCE_ROOT; };
 		8D90D0E41F2B558000DBB850 /* VLCMLArtist+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLArtist+Init.h"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			files = (
 				8DD39C8F20162F19002E5423 /* Foundation.framework in Frameworks */,
 				8D13B6E020CAD15B00FE5FDC /* libjpeg.a in Frameworks */,
+				8D83219D234DCBE200B28912 /* libsqlite3.a in Frameworks */,
 				8D996CA921514F9B00F342AD /* libmedialibrary.a in Frameworks */,
 				8DD39C9220162F19002E5423 /* libmedialibrary_macos.a in Frameworks */,
 			);
@@ -205,6 +208,7 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D83219C234DCBE200B28912 /* libsqlite3.a */,
 				8D996CA821514F9B00F342AD /* libmedialibrary.a */,
 				8DC817571F21505600DEEF9D /* libmedialibrary_macos.a */,
 				8D3D64DA1F1D671F008E178E /* libjpeg.a */,
