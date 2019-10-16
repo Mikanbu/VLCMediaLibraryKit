@@ -322,4 +322,18 @@ void MediaLibraryCb::onHistoryChanged( HistoryType type )
         [m_delegate medialibrary:m_medialibrary historyChangedOfType:(VLCMLHistoryType)type];
     }
 }
+
+bool MediaLibraryCb::onUnhandledException(const char *context,
+                                          const char *errMsg, bool clearSuggested)
+{
+    if (m_delegate
+        && [m_delegate
+            respondsToSelector:@selector(medialibrary:unhandledExceptionWithContext:errorMessage:clearSuggested:)]) {
+        return [m_delegate medialibrary:m_medialibrary
+          unhandledExceptionWithContext:[NSString stringWithUTF8String:context]
+                           errorMessage:[NSString stringWithUTF8String:errMsg]
+                         clearSuggested:clearSuggested];
+    }
+    return false;
+}
 }// namespace - medialibrary

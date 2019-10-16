@@ -148,6 +148,26 @@ NS_ASSUME_NONNULL_BEGIN
               ofType:(VLCMLThumbnailSizeType)type withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary historyChangedOfType:(VLCMLHistoryType)type;
 
+
+/**
+ * @brief unhandledExceptionWithContext will be invoked in case of an unhandled exception
+ *
+ * @param context A minimal context hint
+ * @param errorMessage  The exception string
+ * @param clearSuggested A boolean to inform the application that a database
+ *                       clearing is suggested.
+ *
+ * If the application chooses to handle the error to present it to the user
+ * or report it somehow, it should:
+ * - Return true
+ * - Assume the media library is no longer in a usable state and restart it.
+ * If the implementation returns false, then the exception will be rethrown
+ */
+
+- (BOOL)medialibrary:(VLCMediaLibrary *)medialibrary unhandledExceptionWithContext:(NSString *)context
+        errorMessage:(NSString *)errorMessage
+      clearSuggested:(BOOL)clearSuggested;
+
 @end
 
 #pragma mark - VLCMLDeviceListerDelegate
