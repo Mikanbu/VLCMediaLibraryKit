@@ -49,19 +49,19 @@ public:
     virtual void onMediaDeleted( std::vector<int64_t> mediaIds );
 
     virtual void onArtistsAdded( std::vector<ArtistPtr> artists );
-    virtual void onArtistsModified( std::vector<int64_t> artists );
+    virtual void onArtistsModified( std::vector<int64_t> artistsIds );
     virtual void onArtistsDeleted( std::vector<int64_t> artistsIds );
 
     virtual void onAlbumsAdded( std::vector<AlbumPtr> albums );
-    virtual void onAlbumsModified( std::vector<int64_t> albums );
+    virtual void onAlbumsModified( std::vector<int64_t> albumsIds );
     virtual void onAlbumsDeleted( std::vector<int64_t> albumsIds );
 
     virtual void onPlaylistsAdded( std::vector<PlaylistPtr> playlists );
-    virtual void onPlaylistsModified( std::vector<int64_t> playlists );
+    virtual void onPlaylistsModified( std::vector<int64_t> playlistsIds );
     virtual void onPlaylistsDeleted( std::vector<int64_t> playlistIds );
 
     virtual void onGenresAdded( std::vector<GenrePtr> genres );
-    virtual void onGenresModified( std::vector<int64_t> genres );
+    virtual void onGenresModified( std::vector<int64_t> genresIds );
     virtual void onGenresDeleted( std::vector<int64_t> genreIds );
 
     /**

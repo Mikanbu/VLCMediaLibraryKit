@@ -62,12 +62,12 @@ void MediaLibraryCb::onMediaAdded( std::vector<MediaPtr> media )
     }
 }
 
-void MediaLibraryCb::onMediaModified( std::vector<int64_t> media )
+void MediaLibraryCb::onMediaModified( std::vector<int64_t> mediaIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMediaWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-           didModifyMediaWithIds:intVectorToArray(media)];
+           didModifyMediaWithIds:intVectorToArray(mediaIds)];
     }
 }
 
@@ -90,12 +90,12 @@ void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
     }
 }
 
-void MediaLibraryCb::onArtistsModified( std::vector<int64_t> artists )
+void MediaLibraryCb::onArtistsModified( std::vector<int64_t> artistsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyArtistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-         didModifyArtistsWithIds:intVectorToArray(artists)];
+         didModifyArtistsWithIds:intVectorToArray(artistsIds)];
     }
 }
 
@@ -118,12 +118,12 @@ void MediaLibraryCb::onAlbumsAdded( std::vector<AlbumPtr> albums )
     }
 }
 
-void MediaLibraryCb::onAlbumsModified( std::vector<int64_t> albums )
+void MediaLibraryCb::onAlbumsModified( std::vector<int64_t> albumsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyAlbumsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-          didModifyAlbumsWithIds:intVectorToArray(albums)];
+          didModifyAlbumsWithIds:intVectorToArray(albumsIds)];
     }
 }
 
@@ -146,12 +146,12 @@ void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
     }
 }
 
-void MediaLibraryCb::onPlaylistsModified( std::vector<int64_t> playlists )
+void MediaLibraryCb::onPlaylistsModified( std::vector<int64_t> playlistsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyPlaylistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-       didModifyPlaylistsWithIds:intVectorToArray(playlists)];
+       didModifyPlaylistsWithIds:intVectorToArray(playlistsIds)];
     }
 }
 
