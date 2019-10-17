@@ -54,7 +54,7 @@
     return _file->lastModificationDate();
 }
 
-- (uint)size
+- (int64_t)size
 {
     return _file->size();
 }
