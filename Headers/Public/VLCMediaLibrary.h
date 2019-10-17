@@ -174,6 +174,14 @@ NS_ASSUME_NONNULL_BEGIN
         errorMessage:(NSString *)errorMessage
       clearSuggested:(BOOL)clearSuggested;
 
+/**
+ * @brief onRescanStarted will be invoked when a rescan is started.
+ *
+ * This won't be emited when the media library issues a rescan itself, due
+ * to a migration.
+ */
+- (void)medialibraryDidStartRescan:(VLCMediaLibrary *)medialibrary;
+
 @end
 
 #pragma mark - VLCMLDeviceListerDelegate

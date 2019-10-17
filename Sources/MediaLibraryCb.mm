@@ -336,4 +336,13 @@ bool MediaLibraryCb::onUnhandledException(const char *context,
     }
     return false;
 }
+
+void MediaLibraryCb::onRescanStarted()
+{
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibraryDidStartRescan:)]) {
+        [m_delegate medialibraryDidStartRescan:m_medialibrary];
+    }
+}
+
 }// namespace - medialibrary
