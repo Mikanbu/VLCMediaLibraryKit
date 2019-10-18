@@ -55,6 +55,16 @@
     return _shortBio;
 }
 
+- (int)albumsCount
+{
+    return _artist->nbAlbums();
+}
+
+- (int)tracksCount
+{
+    return _artist->nbTracks();
+}
+
 - (BOOL)isArtworkGenerated
 {
     return [self

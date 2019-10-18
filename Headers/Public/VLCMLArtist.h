@@ -40,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (VLCMLIdentifier)identifier;
 
+
+/**
+ * @brief albumsCount
+ * @return The number of albums *by* this artist. This doesn't include the
+ *         albums an artist appears on.
+ */
+- (int)albumsCount;
+- (int)tracksCount;
+
 /**
  * @brief isThumbnailGenerated Returns true is a thumbnail generation was
  *                             attempted for the provided size.
