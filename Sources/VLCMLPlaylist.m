@@ -50,6 +50,11 @@
     return _playlist->setName([name UTF8String]);
 }
 
+- (BOOL)isReadOnly
+{
+    return _playlist->isReadOnly();
+}
+
 - (uint)creationDate
 {
     return _playlist->creationDate();

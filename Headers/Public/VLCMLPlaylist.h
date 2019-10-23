@@ -40,6 +40,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *media;
 
+
+/**
+ * @brief isReadOnly Return true if the playlist is backed by an actual file
+ *                   and should therefor not modified directly.
+ * @return true if the playlist should be considered read-only, false otherwise
+ *
+ * If the application doesn't respect this, the medialibrary will, for
+ * now, accept the changes, but if the playlist file changes, any user
+ * provided changes will be discarded without warning.
+ */
+@property (nonatomic) BOOL isReadOnly;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
