@@ -52,6 +52,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) BOOL isReadOnly;
 
+/**
+ * @brief mrl Return the file backing this playlist.
+ *
+ * This must be called only when isReadOnly() returns true, as a modifiable
+ * playlist has no file associated with it.
+ * In case of errors, an empty string will be returned.
+ */
+@property (nonatomic, copy, nullable) NSURL *mrl;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;

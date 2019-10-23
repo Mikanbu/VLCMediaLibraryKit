@@ -55,6 +55,11 @@
     return _playlist->isReadOnly();
 }
 
+- (nullable NSURL *)mrl
+{
+    return [[NSURL alloc] initWithString:[NSString stringWithUTF8String:_playlist->mrl().c_str()]];
+}
+
 - (uint)creationDate
 {
     return _playlist->creationDate();
