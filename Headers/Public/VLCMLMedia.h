@@ -31,24 +31,14 @@ typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailStatus);
 
 typedef NS_ENUM(UInt8, VLCMLMediaType) {
+    /**
+     * Unknown media type. Type is used to avoid 0 being a valid value
+     * Media that are discovered by the medialibrary will not be
+     * added to the collection when their type can't be determined
+     */
     VLCMLMediaTypeUnknown,
     VLCMLMediaTypeVideo,
-    VLCMLMediaTypeAudio,
-    /**
-     * External media, ie. media that were not discovered by the media
-     * library, but that were added manually by the user.
-     * These media are not analyzed, so their subtype, tracks, or other
-     * details are not known.
-     * They can, however, be used to store meta or be included in the
-     * playback history.
-     */
-    VLCMLMediaTypeExternal,
-    /**
-     * Represent a stream, which is a specific kind of External media.
-     * This type of media is also intended to be inserted manually by
-     * the user.
-     */
-    VLCMLMediaTypeStream
+    VLCMLMediaTypeAudio
 };
 
 typedef NS_ENUM(UInt8, VLCMLMediaSubtype) {
