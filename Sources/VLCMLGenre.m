@@ -50,6 +50,29 @@
     return _genre->nbTracks();
 }
 
+#pragma mark - Thumbnail
+
+- (NSString *)thumbnailMRLWithType:(VLCMLThumbnailSizeType)type
+{
+    return [NSString
+            stringWithUTF8String:_genre->thumbnailMrl((medialibrary::ThumbnailSizeType)type).c_str()];
+}
+
+- (BOOL)hasThumbnailOfType:(VLCMLThumbnailSizeType)type
+{
+    return _genre->hasThumbnail((medialibrary::ThumbnailSizeType)type);
+}
+
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl
+                   sizeType:(VLCMLThumbnailSizeType)type
+              takeOwnership:(BOOL)takeOwnership
+{
+    return _genre->setThumbnail([mrl.absoluteString UTF8String],
+                                (medialibrary::ThumbnailSizeType)type, takeOwnership);
+}
+
+#pragma mark -
+
 - (NSArray<VLCMLArtist *> *)artists
 {
     return [VLCMLUtils arrayFromArtistQuery:_genre->artists()];

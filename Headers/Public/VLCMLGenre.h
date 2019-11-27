@@ -23,6 +23,8 @@
 #import "VLCMLObject.h"
 
 typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailStatus);
 
 @class VLCMLArtist, VLCMLMedia, VLCMLAlbum;
 
@@ -36,6 +38,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (VLCMLIdentifier)identifier;
 - (UInt32)numberOfTracks;
+
+/**
+ * @brief thumbnailMRLWithType Returns this genre thumbnail mrl
+ * @param sizeType The target thumbnail size type
+ * @return An mrl to the thumbnail if any, or an empty string
+ */
+- (NSString *)thumbnailMRLWithType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * @brief hasThumbnailOfType Returns true if this genre has a thumbnail available
+ * @param sizeType The probed thumbnail size type
+ * @return true if a thumbnail is available, false otherwise
+ */
+- (BOOL)hasThumbnailOfType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * @brief setThumbnailWithMRL Set a thumbnail for this genre
+ * @param mrl The thumbnail mrl
+ * @param sizeType The thumbnail size type
+ * @param takeOwnership If true, the medialibrary will copy the thumbnail in
+ *                      its thumbnail directory and will manage its lifetime
+ * @return true if the thumbnail was successfully overriden, false otherwise.
+ */
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl
+                   sizeType:(VLCMLThumbnailSizeType)type
+              takeOwnership:(BOOL)takeOwnership;
 
 - (nullable NSArray<VLCMLArtist *> *)artists;
 - (nullable NSArray<VLCMLArtist *> *)artistWithSortingCriteria:(VLCMLSortingCriteria)criteria
