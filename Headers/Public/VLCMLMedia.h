@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailStatus);
 
 typedef NS_ENUM(UInt8, VLCMLMediaType) {
     VLCMLMediaTypeUnknown,
@@ -157,8 +158,19 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  * attempt ask for a new thumbmail generation.
  * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
-- (BOOL)isThumbnailGenerated;
-- (BOOL)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)isThumbnailGenerated;
+- (VLCMLThumbnailStatus)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief setThumbnailWithMRL Sets a thumbnail for the current media
+ * \param mrl A mrl pointing the the thumbnail file.
+ * \param type The targeted thumbnail size type
+ * \return true in case the thumbnail was successfully stored to database
+ *         false otherwise
+ * This is intended to be used by applications that have their own way
+ * of computing thumbnails.
+ */
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type;
 
 /**
  * \brief requestThumbnail Queues a thumbnail generation request for

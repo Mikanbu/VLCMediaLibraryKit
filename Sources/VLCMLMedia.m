@@ -334,14 +334,20 @@
     return  [[NSURL alloc] initWithString:[NSString stringWithUTF8String:mrl.c_str()]];
 }
 
-- (BOOL)isThumbnailGenerated
+- (VLCMLThumbnailStatus)isThumbnailGenerated
 {
     return [self isThumbnailGeneratedOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
 }
 
-- (BOOL)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type
+- (VLCMLThumbnailStatus)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type
 {
-    return _media->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+    return (VLCMLThumbnailStatus)_media->thumbnailStatus((medialibrary::ThumbnailSizeType)type);
+}
+
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type
+{
+    return _media->setThumbnail([mrl.absoluteString UTF8String],
+                                (medialibrary::ThumbnailSizeType)type);
 }
 
 - (BOOL)requestThumbnailOfType:(VLCMLThumbnailSizeType)type

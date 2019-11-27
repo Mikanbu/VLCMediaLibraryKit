@@ -83,6 +83,25 @@ typedef NS_ENUM (NSUInteger, VLCMLThumbnailSizeType) {
     VLCMLThumbnailSizeTypeCount
 };
 
+typedef NS_ENUM (NSUInteger, VLCMLThumbnailStatus) {
+    // No thumbnail for this entity
+    VLCMLThumbnailStatusMissing,
+    // This thumbnail was successfully generated or was provided by the user
+    // and is available to use
+    VLCMLThumbnailStatusAvailable,
+    // The thumbnail generation failed, without specific reason, usually
+    // because of a timeout.
+    // It is fine to ask for a new generation in this case
+    VLCMLThumbnailStatusFailure,
+    // The thumbnail generation failed at least 3 times. A new generation might
+    // be required, but is likely to fail again.
+    VLCMLThumbnailStatusPersistentFailure,
+    // The thumbnail generation failed because of a crash. Asking for a new
+    // generation is not recommended, unless you know the underlying issue was
+    // fixed.
+    VLCMLThumbnailStatusCrash
+};
+
 typedef NS_ENUM (NSUInteger, VLCMLHistoryType) {
     /// The history of media analyzed by the media library
     VLCMLHistoryTypeMedia,

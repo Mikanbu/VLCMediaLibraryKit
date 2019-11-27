@@ -24,6 +24,7 @@
 
 typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
+typedef NS_ENUM(NSUInteger, VLCMLThumbnailStatus);
 
 @class VLCMLAlbum, VLCMLMedia;
 
@@ -50,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (int)tracksCount;
 
 /**
- * @brief isThumbnailGenerated Returns true is a thumbnail generation was
+ * @brief isArtworkGenerated Returns true is a thumbnail generation was
  *                             attempted for the provided size.
  *
  * @param sizeType The targeted thumbnail size
@@ -59,8 +60,19 @@ NS_ASSUME_NONNULL_BEGIN
  * associated thumbnail mrl will be empty.
  * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
-- (BOOL)isArtworkGenerated;
-- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)isArtworkGenerated;
+- (VLCMLThumbnailStatus)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+
+/**
+ * \brief setThumbnailWithMRL Sets a thumbnail for the current media
+ * \param mrl A mrl pointing the the thumbnail file.
+ * \param type The targeted thumbnail size type
+ * \return true in case the thumbnail was successfully stored to database
+ *         false otherwise
+ * This is intended to be used by applications that have their own way
+ * of computing thumbnails.
+ */
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type;
 
 /**
  * \brief artworkMRL Returns the mrl of an artwork of the given size for an artist
@@ -69,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  *         or nil, if the artwork generation failed
  *
  * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
- * \sa{isThumbnailGenerated}
+ * \sa{isArtworkGenerated}
  */
 - (nullable NSURL *)artworkMRL;
 - (nullable NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type;

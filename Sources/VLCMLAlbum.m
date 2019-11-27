@@ -68,14 +68,14 @@
     return _shortSummary;
 }
 
-- (BOOL)isArtworkGenerated
+- (VLCMLThumbnailStatus)isArtworkGenerated
 {
     return [self isArtworkGeneratedForType:(VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail];
 }
 
-- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
+- (VLCMLThumbnailStatus)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
 {
-    return _album->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+    return (VLCMLThumbnailStatus)_album->thumbnailStatus((medialibrary::ThumbnailSizeType)type);
 }
 
 - (NSURL *)artworkMRL

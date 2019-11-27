@@ -65,15 +65,21 @@
     return _artist->nbTracks();
 }
 
-- (BOOL)isArtworkGenerated
+- (VLCMLThumbnailStatus)isArtworkGenerated
 {
     return [self
             isArtworkGeneratedForType:((VLCMLThumbnailSizeType)medialibrary::ThumbnailSizeType::Thumbnail)];
 }
 
-- (BOOL)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
+- (VLCMLThumbnailStatus)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type
 {
-    return _artist->isThumbnailGenerated((medialibrary::ThumbnailSizeType)type);
+    return (VLCMLThumbnailStatus)_artist->thumbnailStatus((medialibrary::ThumbnailSizeType)type);
+}
+
+- (BOOL)setThumbnailWithMRL:(NSURL *)mrl ofType:(VLCMLThumbnailSizeType)type
+{
+    return _artist->setThumbnail([mrl.absoluteString UTF8String],
+                                 (medialibrary::ThumbnailSizeType)type);
 }
 
 - (NSURL *)artworkMRL
