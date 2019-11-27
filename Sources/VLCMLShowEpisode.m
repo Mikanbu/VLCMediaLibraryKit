@@ -38,14 +38,14 @@
     return _showEpisode->id();
 }
 
-- (uint)episodeNumber
+- (uint)episodeID
 {
-    return _showEpisode->episodeNumber();
+    return _showEpisode->episodeId();
 }
 
-- (uint)seasonNumber
+- (uint)seasonID
 {
-    return _showEpisode->seasonNumber();
+    return _showEpisode->seasonId();
 }
 
 - (NSString *)shortSummary

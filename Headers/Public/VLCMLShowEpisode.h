@@ -35,8 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
-- (uint)episodeNumber;
-- (uint)seasonNumber;
+- (uint)episodeID;
+- (uint)seasonID;
 
 @end
 
