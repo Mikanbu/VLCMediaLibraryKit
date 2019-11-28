@@ -45,6 +45,7 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     VLCMLSortingCriteriaPlayCount,
     VLCMLSortingCriteriaAlbum,
     VLCMLSortingCriteriaFilename,
+    // Sort by number of tracks in the containing entity (album, genre, artist, ...)
     VLCMLSortingCriteriaTrackNumber,
     // Sort by track ID (Track #1, track #2, ...)
     VLCMLSortingCriteriaTrackID,
