@@ -267,7 +267,8 @@ VLCMLIdentifier const VariousArtistID = 2u;
 
 - (NSArray<VLCMLArtist *> *)artists:(BOOL)includeAll
 {
-    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll)];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll ? medialibrary::ArtistIncluded::All :
+                                                         medialibrary::ArtistIncluded::AlbumArtistOnly)];
 }
 
 - (NSArray<VLCMLArtist *> *)artistsWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -275,7 +276,9 @@ VLCMLIdentifier const VariousArtistID = 2u;
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll, &param)];
+    return [VLCMLUtils arrayFromArtistQuery:_ml->artists(includeAll ? medialibrary::ArtistIncluded::All :
+                                                         medialibrary::ArtistIncluded::AlbumArtistOnly,
+                                                         &param)];
 }
 
 #pragma mark - Genre
@@ -402,7 +405,8 @@ VLCMLIdentifier const VariousArtistID = 2u;
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
 {
     return [VLCMLUtils arrayFromArtistQuery:_ml->searchArtists([name UTF8String],
-                                                               includeAll)];
+                                                               includeAll ? medialibrary::ArtistIncluded::All :
+                                                               medialibrary::ArtistIncluded::AlbumArtistOnly)];
 }
 
 - (NSArray<VLCMLArtist *> *)searchArtistsByName:(NSString *)name all:(BOOL)includeAll
@@ -412,7 +416,9 @@ VLCMLIdentifier const VariousArtistID = 2u;
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
     return [VLCMLUtils arrayFromArtistQuery:_ml->searchArtists([name UTF8String],
-                                                               includeAll, &param)];
+                                                               includeAll ? medialibrary::ArtistIncluded::All :
+                                                               medialibrary::ArtistIncluded::AlbumArtistOnly,
+                                                               &param)];
 }
 
 - (NSArray<VLCMLFolder *> *)searchFoldersWithPattern:(NSString *)pattern

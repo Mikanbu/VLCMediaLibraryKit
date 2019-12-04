@@ -89,12 +89,12 @@
 
 - (NSArray<VLCMLMedia *> *)tracks
 {
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(false)];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(medialibrary::IGenre::TracksIncluded::All)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithThumbnails:(BOOL)thumbnails
 {
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(thumbnails)];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(medialibrary::IGenre::TracksIncluded::WithThumbnailOnly)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -103,7 +103,8 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(false, &param)];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(medialibrary::IGenre::TracksIncluded::All,
+                                                          &param)];
 }
 
 - (NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
@@ -113,7 +114,8 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
                                                                          desc:desc];
 
-    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(thumbnails, &param)];
+    return [VLCMLUtils arrayFromMediaQuery:_genre->tracks(medialibrary::IGenre::TracksIncluded::WithThumbnailOnly,
+                                                          &param)];
 }
 
 - (NSArray<VLCMLAlbum *> *)albums
