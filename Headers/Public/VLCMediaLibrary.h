@@ -23,7 +23,7 @@
 #import "VLCMLObject.h"
 #import "VLCMLMedia.h"
 
-@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate, VLCMLVideoGroup;
+@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate, VLCMLMediaGroup;
 
 extern VLCMLIdentifier const UnknownArtistID;
 extern VLCMLIdentifier const VariousArtistID;
@@ -170,6 +170,13 @@ NS_ASSUME_NONNULL_BEGIN
               ofType:(VLCMLThumbnailSizeType)type withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary historyChangedOfType:(VLCMLHistoryType)type;
 
+/**
+ * MediaGroup delegation apply to all groups, including subgroups.
+ */
+
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMediaGroups:(NSArray<VLCMLMediaGroup *> *)mediaGroups;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;
 
 /**
  * @brief unhandledExceptionWithContext will be invoked in case of an unhandled exception
@@ -265,46 +272,42 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                              desc:(BOOL)desc;
 
-#pragma mark - Video group
+#pragma mark - Media groups
 
 /**
- * @brief videoGroups Returns the media, grouped by their first characters
- *  Some query parameter. Only Alpha & NbMedia/NbVideo sorting criteria
- *  are supported. The default is Alpha
- * @return An array if VLCMLVideoGroup, or nil in case of an error.
- */
-- (nullable NSArray<VLCMLVideoGroup *> *)videoGroups;
-- (nullable NSArray<VLCMLVideoGroup *> *)videoGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                                   desc:(BOOL)desc;
-
-/**
- * @brief videoGroup Return the representation of a specific video group
+ * @brief createMediaGroup Creates a media group
  * @param name The group name
- * @return The associated VLCMLVideoGroup, or nil if that group doesn't exist
+ * @return The new group instance, or nil in case of error
  */
-- (nullable VLCMLVideoGroup *)videoGroupWithName:(NSString *)name;
+- (nullable VLCMLMediaGroup *)createMediaGroupWithName:(NSString *)name;
 
 /**
- * @brief setVideoGroupsPrefixLength Sets the size of the common prefix for
- *                                   a video group
- *
- * The provided value is the size of each group. For instance, if set to 4
- * "TestGroup" and "TestSomething" will be part of the same group, but if set
- * to 5, they will not.
- * This can be called at any point during the program lifetime.
- * The value will persist in database across multiple executions
- * The default value is 6
+ * @brief mediaGroup Returns a media group with the given identifier
+ * @return A media group, or nil if the group doesn't exist, or in case
+ *         of sporadic failure.
  */
-- (void)setVideoGroupPrefixLength:(UInt32)prefixLength;
+- (nullable VLCMLMediaGroup *)mediaGroupWithIdentifier:(VLCMLIdentifier)identifier;
 
 /**
- * @brief setAllowSingleVideoGroups Allow groups with a single video.
- *
- * The default is YES. If this is set to NO, only groups with at least
- * 2 videos will be returned
- * The vallue will persist in database across multiple executions.
+ * @brief mediaGroup Returns a media group with the given name
+ * @return A media group, or nil if the group doesn't exist, or in case
+ *         of sporadic failure.
  */
-- (void)setVideoGroupsAllowSingleVideo:(BOOL)enable;
+- (nullable VLCMLMediaGroup *)mediaGroupWithName:(NSString *)name;
+
+/**
+ * @brief mediaGroups Returns a query representing the root media groups
+ * @param params A query parameter
+ *
+ * The supported sorting criteria are:
+ * - Alpha (default)
+ * - NbVideo
+ * - NbAudio
+ * - NbMedia
+ */
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups;
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                                   desc:(BOOL)desc;
 
 #pragma mark - Album
 
@@ -428,6 +431,12 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
                                                          type:(VLCMLMediaType)type
                                               sortingCriteria:(VLCMLSortingCriteria)criteria
                                                          desc:(BOOL)desc;
+
+- (nullable NSArray<VLCMLMediaGroup *> *)searchMediaGroupsWithPattern:(NSString *)pattern;
+- (nullable NSArray<VLCMLMediaGroup *> *)searchMediaGroupsWithPattern:(NSString *)pattern
+                                                                 sort:(VLCMLSortingCriteria)criteria
+                                                                 desc:(BOOL)desc;
+
 
 - (VLCMLSearchAggregate *)search:(NSString *)pattern;
 - (VLCMLSearchAggregate *)search:(NSString *)pattern

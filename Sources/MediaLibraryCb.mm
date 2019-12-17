@@ -192,6 +192,38 @@ void MediaLibraryCb::onGenresDeleted( std::vector<int64_t> genresIds )
     }
 }
 
+#pragma mark - Media Groups
+
+void MediaLibraryCb::onMediaGroupAdded( std::vector<MediaGroupPtr> mediaGroups )
+{
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:didAddMediaGroups:)]) {
+        [m_delegate
+         medialibrary:m_medialibrary
+         didAddMediaGroups:[VLCMLUtils arrayFromMediaGroupPtrVector:mediaGroups]];
+    }
+}
+
+void MediaLibraryCb::onMediaGroupModified( std::vector<int64_t> mediaGroupsIds )
+{
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMediaGroupsWithIds:)]) {
+        [m_delegate
+         medialibrary:m_medialibrary
+         didModifyMediaGroupsWithIds:intVectorToArray(mediaGroupsIds)];
+    }
+}
+
+void MediaLibraryCb::onMediaGroupDeleted( std::vector<int64_t> mediaGroupsIds )
+{
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteMediaGroupsWithIds:)]) {
+        [m_delegate
+         medialibrary:m_medialibrary
+         didDeleteMediaGroupsWithIds:intVectorToArray(mediaGroupsIds)];
+    }
+}
+
 #pragma mark - Discovery
 
 void MediaLibraryCb::onDiscoveryStarted( const std::string& entryPoint )

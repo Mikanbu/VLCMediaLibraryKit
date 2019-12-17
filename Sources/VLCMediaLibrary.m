@@ -31,7 +31,7 @@
 #import "VLCMLMovie+Init.h"
 #import "VLCMLPlaylist+Init.h"
 #import "VLCMLShow+Init.h"
-#import "VLCMLVideoGroup+Init.h"
+#import "VLCMLMediaGroup+Init.h"
 #import "VLCMLUtils.h"
 #import "VLCMLSearchAggregate.h"
 
@@ -195,34 +195,35 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [VLCMLUtils arrayFromMediaQuery:_ml->videoFiles(&param)];
 }
 
-#pragma mark - Video group
+#pragma mark - Media groups
 
-- (nullable NSArray<VLCMLVideoGroup *> *)videoGroups
+- (nullable VLCMLMediaGroup *)createMediaGroupWithName:(NSString *)name
 {
-    return [VLCMLUtils arrayFromVideoGroupQuery:_ml->videoGroups()];
+    return [[VLCMLMediaGroup alloc]
+            initWithMediaGroupPtr:_ml->createMediaGroup([name UTF8String])];
 }
 
-- (nullable NSArray<VLCMLVideoGroup *> *)videoGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
+- (nullable VLCMLMediaGroup *)mediaGroupWithIdentifier:(VLCMLIdentifier)identifier
+{
+    return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_ml->mediaGroup(identifier)];
+}
+
+- (nullable VLCMLMediaGroup *)mediaGroupWithName:(NSString *)name
+{
+    return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_ml->mediaGroup([name UTF8String])];
+}
+
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups
+{
+    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups()];
+}
+
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromVideoGroupQuery:_ml->videoGroups(&param)];
-}
-
-- (nullable VLCMLVideoGroup *)videoGroupWithName:(NSString *)name
-{
-    return [[VLCMLVideoGroup alloc] initWithVideoGroupPtr:_ml->videoGroup([name UTF8String])];
-}
-
-- (void)setVideoGroupPrefixLength:(UInt32)prefixLength
-{
-    return  _ml->setVideoGroupsPrefixLength(prefixLength);
-}
-
-- (void)setVideoGroupsAllowSingleVideo:(BOOL)enable
-{
-    _ml->setVideoGroupsAllowSingleVideo(enable);
+    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups(&param)];
 }
 
 #pragma mark - Album
@@ -452,6 +453,22 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [VLCMLUtils arrayFromFolderQuery:_ml->searchFolders([pattern UTF8String],
                                                                (medialibrary::IMedia::Type)type,
                                                                &param)];
+}
+
+- (nullable NSArray<VLCMLMediaGroup *> *)searchMediaGroupsWithPattern:(NSString *)pattern
+{
+    return [self searchMediaGroupsWithPattern:pattern
+                                         sort:VLCMLSortingCriteriaDefault desc:NO];
+}
+
+- (nullable NSArray<VLCMLMediaGroup *> *)searchMediaGroupsWithPattern:(NSString *)pattern
+                                                                 sort:(VLCMLSortingCriteria)criteria
+                                                                 desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->searchMediaGroups([pattern UTF8String],
+                                                                       &param)];
 }
 
 - (VLCMLSearchAggregate *)convertSearchResult:(medialibrary::SearchAggregate *)searchResult

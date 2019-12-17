@@ -37,5 +37,5 @@
 #import <VLCMediaLibraryKit/VLCMLShow.h>
 #import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
 #import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
-#import <VLCMediaLibraryKit/VLCMLVideoGroup.h>
+#import <VLCMediaLibraryKit/VLCMLMediaGroup.h>
 #import <VLCMediaLibraryKit/VLCMLVideoTrack.h>

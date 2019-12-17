@@ -27,7 +27,7 @@
 #import "VLCMLPlaylist+Init.h"
 #import "VLCMLGenre+Init.h"
 #import "VLCMLFolder+Init.h"
-#import "VLCMLVideoGroup+Init.h"
+#import "VLCMLMediaGroup+Init.h"
 
 @implementation VLCMLUtils
 
@@ -74,11 +74,11 @@
 }
 
 + (nullable
-   NSArray<VLCMLVideoGroup *> *)arrayFromVideoGroupQuery:(medialibrary::Query<medialibrary::IVideoGroup>)videoGroupQuery
+   NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupQuery:(medialibrary::Query<medialibrary::IMediaGroup>)mediaGroupQuery
 {
-    if (!videoGroupQuery)
+    if (!mediaGroupQuery)
         return nil;
-    return [self arrayFromVideoGroupPtrVector:videoGroupQuery->all()];
+    return [self arrayFromMediaGroupPtrVector:mediaGroupQuery->all()];
 }
 
 + (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media
@@ -141,14 +141,14 @@
     return [folderList copy];
 }
 
-+ (NSArray<VLCMLVideoGroup *> *)arrayFromVideoGroupPtrVector:(std::vector<medialibrary::VideoGroupPtr>) videoGroups
++ (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(std::vector<medialibrary::MediaGroupPtr>)mediaGroups
 {
-    NSMutableArray<VLCMLVideoGroup *> *videoGroupList = [NSMutableArray array];
+    NSMutableArray<VLCMLMediaGroup *> *mediaGroupList = [NSMutableArray array];
 
-    for (const auto &videoGroup : videoGroups) {
-        [videoGroupList addObject:[[VLCMLVideoGroup alloc] initWithVideoGroupPtr:videoGroup]];
+    for (const auto &mediaGroup : mediaGroups) {
+        [mediaGroupList addObject:[[VLCMLMediaGroup alloc] initWithMediaGroupPtr:mediaGroup]];
     }
-    return [videoGroupList copy];
+    return [mediaGroupList copy];
 }
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc

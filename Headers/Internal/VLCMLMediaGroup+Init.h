@@ -1,8 +1,9 @@
 /*****************************************************************************
- * VLCMLVideoGroup.h
+ * VLCMLMediaGroup+Init.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2019 VLC authors and VideoLAN
+ * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,29 +20,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "VLCMLObject.h"
+#import "VLCMLMediaGroup.h"
 
-typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
+@interface VLCMLMediaGroup (Internal)
 
-@class VLCMLMedia;
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface VLCMLVideoGroup : NSObject
-
-- (NSString *)name;
-
-- (UInt64)count;
-
-- (nullable NSArray<VLCMLMedia *> *)media;
-- (nullable NSArray<VLCMLMedia *> *)mediaWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                        desc:(BOOL)desc;
-
-- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern;
-- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
-                                                      sort:(VLCMLSortingCriteria)criteria
-                                                      desc:(BOOL)desc;
+- (nullable
+   instancetype)initWithMediaGroupPtr:(medialibrary::MediaGroupPtr)mediaGroupPtr;
 
 @end
-
-NS_ASSUME_NONNULL_END
