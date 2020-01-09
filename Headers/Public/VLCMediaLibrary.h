@@ -241,6 +241,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 
 - (BOOL)start;
+/**
+ * @brief isStarted Convenience helper to know if the media library was
+ *                  already started.
+ * @return true if the media library is started, false otherwise.
+ */
+- (BOOL)isStarted;
+
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
