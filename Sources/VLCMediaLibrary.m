@@ -112,6 +112,11 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return _ml->isStarted();
 }
 
+- (BOOL)isInitialized
+{
+    return _ml->isInitialized();
+}
+
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 {

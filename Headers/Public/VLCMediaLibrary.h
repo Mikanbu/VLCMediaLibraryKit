@@ -259,6 +259,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isStarted;
 
 /**
+ * @brief isInitialized Convenience helper to know if the media library is
+ *                      already initialized.
+ *
+ * @return true is the media library is already initialized, false otherwise.
+ */
+- (BOOL)isInitialized;
+
+/**
  * @brief  initialize Initializes the media library.
  *
  * @param databasePath        Path to the database file
