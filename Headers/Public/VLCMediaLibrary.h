@@ -240,6 +240,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
+/**
+ * @brief start Starts the background thread and reload the medialibrary content
+ * This *MUST* be called after setupMediaLibrary.
+ *
+ * @return true in case of success or if already started, false otherwise.
+ * * If start returns false, this medialibrary must not be used anymore,
+ * and should be disposed off.
+ * If it returns true the first time, calling this method again is a no-op
+ * This method is thread-safe
+ */
 - (BOOL)start;
 /**
  * @brief isStarted Convenience helper to know if the media library was
@@ -248,6 +258,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)isStarted;
 
+/**
+ * @brief  initialize Initializes the media library.
+ *
+ * @param databasePath        Path to the database file
+ * @param medialibraryPath    Path to a folder that will contain medialibrary's files.
+ * @return An \see{VLCMLInitializeResult} code.
+ *
+ * If initialize returns Failed, this medialibrary must not be used
+ * anymore, and should be disposed off.
+ * If it returns Ok the first time, calling this method again is a no-op and
+ * AlreadyInitialized will be returned
+ * In case DbReset is returned, it is up to application to decide what
+ * to do to repopulate the database.
+ *
+ * The medialibraryPath path is assumed to be a folder dedicated to store the
+ * various media library files. It might be emptied or modified at any time.
+ *
+ * This method is thread safe. If multiple initialization start simultaneously
+ * only the first one will return Success, the later ones will return
+ * AlreadyInitialized
+ */
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
