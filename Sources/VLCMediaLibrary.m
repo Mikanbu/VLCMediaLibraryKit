@@ -102,9 +102,9 @@ VLCMLIdentifier const VariousArtistID = 2u;
     }
 }
 
-- (BOOL)start
+- (VLCMLStartResult)start
 {
-    return _ml->start();
+    return (VLCMLStartResult)_ml->start();
 }
 
 - (BOOL)isStarted

@@ -76,6 +76,17 @@ typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
     VLCMLInitializeResultDbCorrupted
 };
 
+typedef NS_ENUM(NSUInteger, VLCMLStartResult) {
+    // The media library was successfully started
+    VLCMLStartResultSuccess,
+    // Should be considered the same as Success, but is an indication of
+    // unrequired subsequent calls to start.
+    VLCMLStartResultAlreadyStarted,
+    // A fatal error occurred, it is possible to use the media library in read
+    // mode only (no new media will be discovered nor analyzed)
+    VLCMLStartResultFailed
+};
+
 typedef NS_ENUM (NSUInteger, VLCMLThumbnailSizeType) {
     // A small sized thumbnail. Considered to be the default value before model 17
     VLCMLThumbnailSizeTypeThumbnail,
@@ -243,13 +254,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief start Starts the background thread and reload the medialibrary content
  * This *MUST* be called after setupMediaLibrary.
  *
- * @return true in case of success or if already started, false otherwise.
- * * If start returns false, this medialibrary must not be used anymore,
+ * @return Success in case of success or if already started, false otherwise.
+ * * If start returns Failed, this medialibrary must not be used anymore,
  * and should be disposed off.
- * If it returns true the first time, calling this method again is a no-op
+ * If it returns Success the first time, calling this method again is a
+ * no-op and AlreadyStarted will be returned
  * This method is thread-safe
  */
-- (BOOL)start;
+- (VLCMLStartResult)start;
 /**
  * @brief isStarted Convenience helper to know if the media library was
  *                  already started.
