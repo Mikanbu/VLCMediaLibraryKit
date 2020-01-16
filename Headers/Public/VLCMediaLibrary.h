@@ -57,7 +57,6 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
 };
 
 typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
-
     // Everything worked out fine
     VLCMLInitializeResultSuccess,
 
