@@ -334,12 +334,12 @@
     return  [[NSURL alloc] initWithString:[NSString stringWithUTF8String:mrl.c_str()]];
 }
 
-- (VLCMLThumbnailStatus)isThumbnailGenerated
+- (VLCMLThumbnailStatus)thumbnailStatus
 {
-    return [self isThumbnailGeneratedOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
+    return [self thumbnailStatusOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
 }
 
-- (VLCMLThumbnailStatus)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type
+- (VLCMLThumbnailStatus)thumbnailStatusOfType:(VLCMLThumbnailSizeType)type
 {
     return (VLCMLThumbnailStatus)_media->thumbnailStatus((medialibrary::ThumbnailSizeType)type);
 }

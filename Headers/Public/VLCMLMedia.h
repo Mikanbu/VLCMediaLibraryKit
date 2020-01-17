@@ -133,23 +133,21 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  *         or nil, if the thumbnail generation failed
  *
  * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
- * \sa{isThumbnailGenerated}
+ * \sa{thumbnailStatus}
  */
 - (nullable NSURL *)thumbnail;
 - (nullable NSURL *)thumbnailOfType:(VLCMLThumbnailSizeType)type;
 
 /**
- * \brief isThumbnailGenerated Returns true if a thumbnail generation was
- *                             attempted, or if a thumbnail was assigned to thie media
- * \param sizeType The targeted thumbnail size type
- * In case the thumbnail generation failed, this will still be true, but
- * the mrl returned by \sa{thumbnail} will be empty.
- * This is intended as a helper for the client application, so it doesn't
- * attempt ask for a new thumbmail generation.
- * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
+ * @brief thumbnailStatus Returns this media thumbnail status
+ * @param type The targeted thumbnail size
+ *
+ * This will return Missing if no thumbnail generation has been requested
+ * for this media, or Success/Failure/Crash, depending on the generation
+ * results.
  */
-- (VLCMLThumbnailStatus)isThumbnailGenerated;
-- (VLCMLThumbnailStatus)isThumbnailGeneratedOfType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)thumbnailStatus;
+- (VLCMLThumbnailStatus)thumbnailStatusOfType:(VLCMLThumbnailSizeType)type;
 
 /**
  * \brief setThumbnailWithMRL Sets a thumbnail for the current media
