@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLMediaGroup : NSObject <VLCMLObject>
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (VLCMLIdentifier)identifier;
 
 /**
