@@ -28,7 +28,9 @@ typedef NS_ENUM(UInt8, VLCMLMediaType);
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VLCMLMediaGroup : NSObject
+@interface VLCMLMediaGroup : NSObject <VLCMLObject>
+
+- (VLCMLIdentifier)identifier;
 
 /**
  * @brief name Returns this group name

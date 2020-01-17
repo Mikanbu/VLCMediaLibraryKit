@@ -36,6 +36,11 @@
 
 @implementation VLCMLMediaGroup
 
+- (VLCMLIdentifier)identifier
+{
+    return _mediaGroup->id();
+}
+
 - (NSString *)name
 {
     return [NSString stringWithUTF8String:_mediaGroup->name().c_str()];
