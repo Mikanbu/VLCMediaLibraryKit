@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack;
+@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
@@ -252,6 +252,43 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  *                   of type stream.
  */
 - (BOOL)isStream;
+
+#pragma mark - Groups
+
+/**
+ * @brief addToGroup Adds this media to the given group
+ * @param group The target media group
+ * @return true if the media was successfully added, false otherwise
+ */
+- (BOOL)addToGroup:(VLCMLMediaGroup *)group;
+
+/**
+ * @brief addToGroup Adds this media to the given group
+ * @param groupId The target group ID
+ * @return true if the media was successfully added, false otherwise
+ */
+- (BOOL)addToGroupWithIdentifier:(VLCMLIdentifier)identifier;
+
+/**
+ * @brief removeFromGroup Remove this media from its group
+ * @return true if the media was successfully removed, false otherwise.
+ *
+ * If this media is not part of any group, true is returned, and no action
+ * will occur.
+ */
+- (BOOL)removeFromGroup;
+
+/**
+ * @brief isGrouped Returns true if the media belongs to a group, false otherwise
+ */
+- (BOOL)isGrouped;
+
+/**
+ * @brief groupId Returns this media's group ID, or 0 if not grouped
+ */
+- (VLCMLIdentifier)groupIdentifier;
+
+- (nullable VLCMLMediaGroup *)group;
 
 @end
 NS_ASSUME_NONNULL_END

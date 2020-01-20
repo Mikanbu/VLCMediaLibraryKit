@@ -27,6 +27,7 @@
 #import "VLCMLFile+Init.h"
 #import "VLCMLAlbumTrack+Init.h"
 #import "VLCMLShowEpisode+Init.h"
+#import "VLCMLMediaGroup+Init.h"
 #import "VLCMLMetadata+Init.h"
 #import "VLCMLAudioTrack+Init.h"
 #import "VLCMLVideoTrack+Init.h"
@@ -404,6 +405,38 @@
 - (BOOL)isStream
 {
     return _media->isStream();
+}
+
+#pragma mark - Groups
+
+- (BOOL)addToGroup:(VLCMLMediaGroup *)group
+{
+    return _media->addToGroup(*group.mediaGroupPtr);
+}
+
+- (BOOL)addToGroupWithIdentifier:(VLCMLIdentifier)identifier
+{
+    return _media->addToGroup(identifier);
+}
+
+- (BOOL)removeFromGroup
+{
+    return _media->removeFromGroup();
+}
+
+- (BOOL)isGrouped
+{
+    return _media->isGrouped();
+}
+
+- (VLCMLIdentifier)groupIdentifier
+{
+    return _media->groupId();
+}
+
+- (nullable VLCMLMediaGroup *)group
+{
+    return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_media->group()];
 }
 
 @end
