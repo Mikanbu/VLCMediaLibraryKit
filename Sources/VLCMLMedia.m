@@ -384,6 +384,28 @@
     return _media->setMetadata((medialibrary::IMedia::MetadataType)type, value);
 }
 
+#pragma mark -
+
+- (BOOL)removeFromHistory
+{
+    return _media->removeFromHistory();
+}
+
+- (BOOL)isDiscoveredMedia
+{
+    return _media->isDiscoveredMedia();
+}
+
+- (BOOL)isExternalMedia
+{
+    return _media->isExternalMedia();
+}
+
+- (BOOL)isStream
+{
+    return _media->isStream();
+}
+
 @end
 
 @implementation VLCMLMedia (Internal)

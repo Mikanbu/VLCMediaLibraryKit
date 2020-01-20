@@ -215,5 +215,43 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type stringValue:(NSString *)value;
 - (BOOL)setMetadataOfType:(VLCMLMetadataType)type intValue:(SInt64)value;
 
+#pragma mark -
+
+/**
+ * @brief removeFromHistory Removes a media from the history.
+ * @return true in case of success, false otherwise
+ *
+ * This can be used for all type of media, including streams & network.
+ * If this call succeeds, the media will have a play count of 0, and
+ * won't appear in the history anymore. Any potential progress will
+ * also be lost.
+ * After calling this method, the observable state is as if the media
+ * was never played.
+ *
+ * This will return false in case of a database failure
+ */
+- (BOOL)removeFromHistory;
+
+/**
+ *  @brief isDiscoveredMedia Returns true if this media was discovered
+ *                           during a scan.
+ *  false means that the media has been explicitely added by the user
+ *  as a stream, or an external media
+ */
+- (BOOL)isDiscoveredMedia;
+
+/**
+ * @brief isExternalMedia Returns true if the media was explicitely added
+ *                        by the application.
+ * This is the opposite counterpart of isDiscoveredMedia
+ */
+- (BOOL)isExternalMedia;
+
+/**
+ *  @brief isStream Returns true if this media is an external media, and
+ *                   of type stream.
+ */
+- (BOOL)isStream;
+
 @end
 NS_ASSUME_NONNULL_END
