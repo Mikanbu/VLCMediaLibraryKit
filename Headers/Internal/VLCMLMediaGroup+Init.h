@@ -26,5 +26,6 @@
 
 - (nullable
    instancetype)initWithMediaGroupPtr:(medialibrary::MediaGroupPtr)mediaGroupPtr;
+- (medialibrary::MediaGroupPtr)mediaGroupPtr;
 
 @end

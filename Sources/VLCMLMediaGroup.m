@@ -183,4 +183,9 @@
     return self;
 }
 
+- (medialibrary::MediaGroupPtr)mediaGroupPtr
+{
+    return _mediaGroup;
+}
+
 @end
