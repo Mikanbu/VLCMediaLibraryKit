@@ -650,6 +650,35 @@ NS_SWIFT_NAME(clearDatabase(restorePlaylists:));
 
 #pragma mark - DeviceLister
 
+#pragma mark - Extensions
+
+/**
+ * @brief supportedMediaExtensions Returns the supported media extensions
+ *
+ * The list is guaranteed to be ordered alphabetically
+ */
+
+- (NSArray<NSString *> *)supportedMediaExtensions;
+
+/**
+ * @brief isMediaExtensionSupported Checks if the provided media extension
+ *                                  is supported.
+ */
+- (BOOL)isMediaExtensionSupported:(NSString *)extension;
+
+/**
+ * @brief supportedPlaylistExtensions Returns the supported playlist extensions
+ *
+ * The list is guaranteed to be ordered alphabetically
+ */
+- (NSArray<NSString *> *)supportedPlaylistExtensions;
+
+/**
+ * @brief isPlaylistExtensionSupported Checks if the provided playlist extension
+ *                                     is supported.
+ */
+- (BOOL)isPlaylistExtensionSupported:(NSString *)extension;
+
 @end
 
 NS_ASSUME_NONNULL_END

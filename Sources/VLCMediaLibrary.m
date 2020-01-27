@@ -629,6 +629,39 @@ VLCMLIdentifier const VariousArtistID = 2u;
     _ml->clearDatabase(restorePlaylists);
 }
 
+#pragma mark - Extensions
+
+- (NSArray<NSString *> *)arrayFromVector:(std::vector<const char*>)vector
+{
+    NSMutableArray *res = [NSMutableArray array];
+
+    for ( const auto &it :vector )
+    {
+        [res addObject:[NSString stringWithUTF8String:it]];
+    }
+    return [res copy];
+}
+
+- (NSArray<NSString *> *)supportedMediaExtensions
+{
+    return [self arrayFromVector:_ml->supportedMediaExtensions()];
+}
+
+- (BOOL)isMediaExtensionSupported:(NSString *)extension
+{
+    return _ml->isMediaExtensionSupported(extension.UTF8String);
+}
+
+- (NSArray<NSString *> *)supportedPlaylistExtensions
+{
+    return [self arrayFromVector:_ml->supportedPlaylistExtensions()];
+}
+
+- (BOOL)isPlaylistExtensionSupported:(NSString *)extension
+{
+    return _ml->isPlaylistExtensionSupported(extension.UTF8String);
+}
+
 #pragma mark -
 
 @end
