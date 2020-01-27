@@ -44,32 +44,32 @@ public:
     /**
      * @brief onFileUpdated Will be called when a file metadata gets updated.
      */
-    virtual void onMediaModified( std::vector<int64_t> media );
+    virtual void onMediaModified( std::set<int64_t> mediaIds );
 
-    virtual void onMediaDeleted( std::vector<int64_t> mediaIds );
+    virtual void onMediaDeleted( std::set<int64_t> mediaIds );
 
     virtual void onArtistsAdded( std::vector<ArtistPtr> artists );
-    virtual void onArtistsModified( std::vector<int64_t> artistsIds );
-    virtual void onArtistsDeleted( std::vector<int64_t> artistsIds );
+    virtual void onArtistsModified( std::set<int64_t> artistsIds );
+    virtual void onArtistsDeleted( std::set<int64_t> artistsIds );
 
     virtual void onAlbumsAdded( std::vector<AlbumPtr> albums );
-    virtual void onAlbumsModified( std::vector<int64_t> albumsIds );
-    virtual void onAlbumsDeleted( std::vector<int64_t> albumsIds );
+    virtual void onAlbumsModified( std::set<int64_t> albumsIds );
+    virtual void onAlbumsDeleted( std::set<int64_t> albumsIds );
 
     virtual void onPlaylistsAdded( std::vector<PlaylistPtr> playlists );
-    virtual void onPlaylistsModified( std::vector<int64_t> playlistsIds );
-    virtual void onPlaylistsDeleted( std::vector<int64_t> playlistIds );
+    virtual void onPlaylistsModified( std::set<int64_t> playlistsIds );
+    virtual void onPlaylistsDeleted( std::set<int64_t> playlistIds );
 
     virtual void onGenresAdded( std::vector<GenrePtr> genres );
-    virtual void onGenresModified( std::vector<int64_t> genresIds );
-    virtual void onGenresDeleted( std::vector<int64_t> genreIds );
+    virtual void onGenresModified( std::set<int64_t> genresIds );
+    virtual void onGenresDeleted( std::set<int64_t> genreIds );
 
     /**
      * MediaGroup notification apply to all groups, including subgroups.
      */
-    virtual void onMediaGroupAdded( std::vector<MediaGroupPtr> mediaGroups );
-    virtual void onMediaGroupModified( std::vector<int64_t> mediaGroupsIds );
-    virtual void onMediaGroupDeleted( std::vector<int64_t> mediaGroupsIds );
+    virtual void onMediaGroupsAdded( std::vector<MediaGroupPtr> mediaGroups );
+    virtual void onMediaGroupsModified( std::set<int64_t> mediaGroupsIds );
+    virtual void onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds );
 
     /**
      * @brief onDiscoveryStarted This callback will be invoked when a folder queued for discovery
@@ -203,7 +203,7 @@ public:
     virtual void onRescanStarted();
 
 private:
-    NSArray<NSNumber *> *intVectorToArray( std::vector<int64_t> vector );
+    NSArray<NSNumber *> *intSetToArray( std::set<int64_t> set );
 
 private:
     id <VLCMediaLibraryDelegate> m_delegate;

@@ -34,11 +34,12 @@ MediaLibraryCb::MediaLibraryCb( VLCMediaLibrary *medialibrary, id<VLCMediaLibrar
 }
 
 #pragma mark - Private
-NSArray<NSNumber *> *MediaLibraryCb::intVectorToArray( std::vector<int64_t> vector )
+
+NSArray<NSNumber *> *MediaLibraryCb::intSetToArray( std::set<int64_t> set )
 {
     NSMutableArray *res = [NSMutableArray array];
 
-    for ( const auto &it : vector )
+    for ( const auto &it : set )
     {
         [res addObject:[NSNumber numberWithLongLong:it]];
     }
@@ -62,21 +63,21 @@ void MediaLibraryCb::onMediaAdded( std::vector<MediaPtr> media )
     }
 }
 
-void MediaLibraryCb::onMediaModified( std::vector<int64_t> mediaIds )
+void MediaLibraryCb::onMediaModified( std::set<int64_t> mediaIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMediaWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-           didModifyMediaWithIds:intVectorToArray(mediaIds)];
+           didModifyMediaWithIds:intSetToArray(mediaIds)];
     }
 }
 
-void MediaLibraryCb::onMediaDeleted( std::vector<int64_t> mediaIds )
+void MediaLibraryCb::onMediaDeleted( std::set<int64_t> mediaIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteMediaWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-           didDeleteMediaWithIds:intVectorToArray(mediaIds)];
+           didDeleteMediaWithIds:intSetToArray(mediaIds)];
     }
 }
 
@@ -90,21 +91,21 @@ void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
     }
 }
 
-void MediaLibraryCb::onArtistsModified( std::vector<int64_t> artistsIds )
+void MediaLibraryCb::onArtistsModified( std::set<int64_t> artistsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyArtistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-         didModifyArtistsWithIds:intVectorToArray(artistsIds)];
+         didModifyArtistsWithIds:intSetToArray(artistsIds)];
     }
 }
 
-void MediaLibraryCb::onArtistsDeleted( std::vector<int64_t> artistsIds )
+void MediaLibraryCb::onArtistsDeleted( std::set<int64_t> artistsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteArtistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-         didDeleteArtistsWithIds:intVectorToArray(artistsIds)];
+         didDeleteArtistsWithIds:intSetToArray(artistsIds)];
     }
 }
 
@@ -118,21 +119,21 @@ void MediaLibraryCb::onAlbumsAdded( std::vector<AlbumPtr> albums )
     }
 }
 
-void MediaLibraryCb::onAlbumsModified( std::vector<int64_t> albumsIds )
+void MediaLibraryCb::onAlbumsModified( std::set<int64_t> albumsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyAlbumsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-          didModifyAlbumsWithIds:intVectorToArray(albumsIds)];
+          didModifyAlbumsWithIds:intSetToArray(albumsIds)];
     }
 }
 
-void MediaLibraryCb::onAlbumsDeleted( std::vector<int64_t> albumsIds )
+void MediaLibraryCb::onAlbumsDeleted( std::set<int64_t> albumsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteAlbumsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-          didDeleteAlbumsWithIds:intVectorToArray(albumsIds)];
+          didDeleteAlbumsWithIds:intSetToArray(albumsIds)];
     }
 }
 
@@ -146,21 +147,21 @@ void MediaLibraryCb::onPlaylistsAdded( std::vector<PlaylistPtr> playlists )
     }
 }
 
-void MediaLibraryCb::onPlaylistsModified( std::vector<int64_t> playlistsIds )
+void MediaLibraryCb::onPlaylistsModified( std::set<int64_t> playlistsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyPlaylistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-       didModifyPlaylistsWithIds:intVectorToArray(playlistsIds)];
+       didModifyPlaylistsWithIds:intSetToArray(playlistsIds)];
     }
 }
 
-void MediaLibraryCb::onPlaylistsDeleted( std::vector<int64_t> playlistIds )
+void MediaLibraryCb::onPlaylistsDeleted( std::set<int64_t> playlistIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeletePlaylistsWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-       didDeletePlaylistsWithIds:intVectorToArray(playlistIds)];
+       didDeletePlaylistsWithIds:intSetToArray(playlistIds)];
     }
 }
 
@@ -174,27 +175,27 @@ void MediaLibraryCb::onGenresAdded( std::vector<GenrePtr> genres )
     }
 }
 
-void MediaLibraryCb::onGenresModified( std::vector<int64_t> genres )
+void MediaLibraryCb::onGenresModified( std::set<int64_t> genres )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyGenresWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-          didModifyGenresWithIds:intVectorToArray(genres)];
+          didModifyGenresWithIds:intSetToArray(genres)];
     }
 }
 
-void MediaLibraryCb::onGenresDeleted( std::vector<int64_t> genresIds )
+void MediaLibraryCb::onGenresDeleted( std::set<int64_t> genresIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteGenresWithIds:)]) {
         [m_delegate medialibrary:m_medialibrary
-          didDeleteGenresWithIds:intVectorToArray(genresIds)];
+          didDeleteGenresWithIds:intSetToArray(genresIds)];
     }
 }
 
 #pragma mark - Media Groups
 
-void MediaLibraryCb::onMediaGroupAdded( std::vector<MediaGroupPtr> mediaGroups )
+void MediaLibraryCb::onMediaGroupsAdded( std::vector<MediaGroupPtr> mediaGroups )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didAddMediaGroups:)]) {
@@ -204,23 +205,23 @@ void MediaLibraryCb::onMediaGroupAdded( std::vector<MediaGroupPtr> mediaGroups )
     }
 }
 
-void MediaLibraryCb::onMediaGroupModified( std::vector<int64_t> mediaGroupsIds )
+void MediaLibraryCb::onMediaGroupsModified( std::set<int64_t> mediaGroupsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didModifyMediaGroupsWithIds:)]) {
         [m_delegate
          medialibrary:m_medialibrary
-         didModifyMediaGroupsWithIds:intVectorToArray(mediaGroupsIds)];
+         didModifyMediaGroupsWithIds:intSetToArray(mediaGroupsIds)];
     }
 }
 
-void MediaLibraryCb::onMediaGroupDeleted( std::vector<int64_t> mediaGroupsIds )
+void MediaLibraryCb::onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didDeleteMediaGroupsWithIds:)]) {
         [m_delegate
          medialibrary:m_medialibrary
-         didDeleteMediaGroupsWithIds:intVectorToArray(mediaGroupsIds)];
+         didDeleteMediaGroupsWithIds:intSetToArray(mediaGroupsIds)];
     }
 }
 
