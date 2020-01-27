@@ -48,6 +48,11 @@
     return _showEpisode->seasonId();
 }
 
+- (NSString *)title
+{
+    return [NSString stringWithUTF8String:_showEpisode->title().c_str()];
+}
+
 - (NSString *)shortSummary
 {
     if (!_shortSummary) {

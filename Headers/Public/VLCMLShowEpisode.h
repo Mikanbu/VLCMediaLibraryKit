@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLShowEpisode : NSObject <VLCMLObject>
 
+@property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *shortSummary;
 @property (nonatomic, copy) NSString *tvdbId;
 @property (nonatomic, strong, nullable) VLCMLShow *show;
