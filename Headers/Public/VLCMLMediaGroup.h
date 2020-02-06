@@ -105,6 +105,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)renameWithName:(NSString *)name;
 
 /**
+ * @brief destroy Destroys a media group.
+ * @return true in case of success, false otherwise
+ *
+ * This will ungroup all media that are part of this group.
+ */
+- (BOOL)destroy;
+
+/**
  * @brief media List the media that belong to this group
  * @param type The type of media to return, or Unknown to return them all
  * @param criteria Some sorting criteria

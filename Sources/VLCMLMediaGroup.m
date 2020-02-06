@@ -91,6 +91,11 @@
     return _mediaGroup->rename([name UTF8String]);
 }
 
+- (BOOL)destroy
+{
+    return _mediaGroup->destroy();
+}
+
 - (nullable NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
 {
     return [self mediaOfType:type sort:VLCMLSortingCriteriaDefault desc:NO];
