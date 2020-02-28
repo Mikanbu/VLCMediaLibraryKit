@@ -60,6 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (UInt32)nbUnknown;
 
 /**
+ * @brief hasBeenRenamed Returns true if the group was manually renamed
+ */
+- (BOOL)hasBeenRenamed;
+
+/**
  * @brief add Adds a media to this group.
  * @param media A reference to the media to add
  * @return true if the media was successfully added to the group, false otherwise

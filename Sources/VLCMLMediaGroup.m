@@ -66,6 +66,11 @@
     return _mediaGroup->nbUnknown();
 }
 
+- (BOOL)hasBeenRenamed
+{
+    return _mediaGroup->hasBeenRenamed();
+}
+
 - (BOOL)addMedia:(VLCMLMedia *)media
 {
     return _mediaGroup->add(*media.mediaPtr);
