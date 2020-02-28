@@ -288,7 +288,21 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  */
 - (VLCMLIdentifier)groupIdentifier;
 
+/**
+ * @brief group Return this media's group, or nullptr if the media isn't grouped
+ */
 - (nullable VLCMLMediaGroup *)group;
+
+/**
+ * @brief regroup Attempts to group this media with other ungrouped media
+ * @return true in case of success, false otherwise
+ *
+ * This will attempt to find other ungrouped media which start with the
+ * same prefix (currently, 6 characters) as the current media.
+ * This can only be used on ungroupped media, as we don't want to tinkle
+ * with groups that may have been organized manually by the user.
+ */
+- (BOOL)regroup;
 
 @end
 NS_ASSUME_NONNULL_END

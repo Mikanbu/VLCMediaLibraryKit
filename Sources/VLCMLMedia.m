@@ -439,6 +439,11 @@
     return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_media->group()];
 }
 
+- (BOOL)regroup
+{
+    return _media->regroup();
+}
+
 @end
 
 @implementation VLCMLMedia (Internal)
