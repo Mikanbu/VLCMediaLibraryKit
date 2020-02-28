@@ -213,14 +213,25 @@ VLCMLIdentifier const VariousArtistID = 2u;
             initWithMediaGroupPtr:_ml->createMediaGroup([name UTF8String])];
 }
 
+- (nullable VLCMLMediaGroup *)createMediaGroupWithMediaIds:(NSArray<NSNumber *> *)mediaIds
+{
+    std::vector<int64_t> cppMediaIds(mediaIds.count);
+
+    for (NSNumber *mediaId in mediaIds) {
+        cppMediaIds.push_back(mediaId.longLongValue);
+    }
+    return [[VLCMLMediaGroup alloc]
+            initWithMediaGroupPtr:_ml->createMediaGroup(cppMediaIds)];
+}
+
+- (BOOL)deleteMediaGroupWithIdentifier:(VLCMLIdentifier)identifer
+{
+    return _ml->deleteMediaGroup(identifer);
+}
+
 - (nullable VLCMLMediaGroup *)mediaGroupWithIdentifier:(VLCMLIdentifier)identifier
 {
     return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_ml->mediaGroup(identifier)];
-}
-
-- (nullable VLCMLMediaGroup *)mediaGroupWithName:(NSString *)name
-{
-    return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_ml->mediaGroup([name UTF8String])];
 }
 
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups

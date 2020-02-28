@@ -339,18 +339,31 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable VLCMLMediaGroup *)createMediaGroupWithName:(NSString *)name;
 
 /**
+ * @brief createMediaGroup Creates a media group with the provided media
+ * @param mediaIds A list of media to be included in the group
+ * @return The new group instance, or nullptr in case of error
+ *
+ * If the provided media are already part of a group, they will be moved to
+ * the newly created one.
+ * The group will have no name and will return an empty string.
+ */
+- (nullable VLCMLMediaGroup *)createMediaGroupWithMediaIds:(NSArray<NSNumber *> *)mediaIds;
+
+/**
+ * @brief deleteMediaGroup Deletes a media group
+ * @param identifer The group ID
+ * @return true in case of success, false otherwise
+ *
+ * This will ungroup all media that were part of the group.
+ */
+- (BOOL)deleteMediaGroupWithIdentifier:(VLCMLIdentifier)identifer;
+
+/**
  * @brief mediaGroup Returns a media group with the given identifier
  * @return A media group, or nil if the group doesn't exist, or in case
  *         of sporadic failure.
  */
 - (nullable VLCMLMediaGroup *)mediaGroupWithIdentifier:(VLCMLIdentifier)identifier;
-
-/**
- * @brief mediaGroup Returns a media group with the given name
- * @return A media group, or nil if the group doesn't exist, or in case
- *         of sporadic failure.
- */
-- (nullable VLCMLMediaGroup *)mediaGroupWithName:(NSString *)name;
 
 /**
  * @brief mediaGroups Returns a query representing the root media groups
