@@ -60,9 +60,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (UInt32)nbUnknown;
 
 /**
- * @brief hasBeenRenamed Returns true if the group was manually renamed
+ * @brief userInteracted Returns true if the group has had user interactions
+ *
+ * This includes being renamed, or being explicitely created with some specific
+ * media or an explicit title.
+ * It doesn't include groups that were automatically created by the media library
+ * Removing a media from an automatically created group won't be interpreted
+ * as a user interaction.
  */
-- (BOOL)hasBeenRenamed;
+- (BOOL) userInteracted;
 
 /**
  * @brief add Adds a media to this group.
@@ -145,44 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
                                                       type:(VLCMLMediaType)type
                                                       sort:(VLCMLSortingCriteria)criteria
                                                       desc:(BOOL)desc;
-
-#pragma mark - Sub groups
-
-/**
- * @brief createSubgroup Create a subgroup
- * @param name This subgroup name
- * @return The newly created group, or nullptr in case of error
- *
- * Names are required to be unique for a given parent group.
- */
-- (nullable VLCMLMediaGroup *)createSubgroupWithName:(NSString *)name;
-
-/**
- * @brief subgroups Returns the subgroups for this group
- *
- * Supported sorting criteria are:
- * - Alpha (default)
- * - NbVideo
- * - NbAudio
- * - NbMedia
- */
-- (nullable NSArray<VLCMLMediaGroup *> *)subgroups;
-- (nullable NSArray<VLCMLMediaGroup *> *)subgroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                                 desc:(BOOL)desc;
-
-- (BOOL)isSubGroup;
-
-/**
- * @brief parent Returns this group's parent group, or nullptr if there are none
- */
-- (nullable VLCMLMediaGroup *)parent;
-
-/**
- * @brief path Returns a virtual path to this group
- *
- * This consists of <parent group 1>/<parent group 2>/.../<group>
- */
-- (nullable NSString *)path;
 
 @end
 

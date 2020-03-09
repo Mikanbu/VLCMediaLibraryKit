@@ -424,11 +424,6 @@
     return _media->removeFromGroup();
 }
 
-- (BOOL)isGrouped
-{
-    return _media->isGrouped();
-}
-
 - (VLCMLIdentifier)groupIdentifier
 {
     return _media->groupId();

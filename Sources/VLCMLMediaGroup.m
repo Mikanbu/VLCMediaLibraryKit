@@ -66,9 +66,9 @@
     return _mediaGroup->nbUnknown();
 }
 
-- (BOOL)hasBeenRenamed
+- (BOOL)userInteracted
 {
-    return _mediaGroup->hasBeenRenamed();
+    return _mediaGroup->userInteracted();
 }
 
 - (BOOL)addMedia:(VLCMLMedia *)media
@@ -138,45 +138,7 @@
                                                                     &param)];
 }
 
-#pragma mark - Sub groups
-
-- (nullable VLCMLMediaGroup *)createSubgroupWithName:(NSString *)name
-{
-    return [[VLCMLMediaGroup alloc]
-            initWithMediaGroupPtr:_mediaGroup->createSubgroup([name UTF8String])];
-}
-
-- (nullable NSArray<VLCMLMediaGroup *> *)subgroups
-{
-    return [self subgroupsWithSortingCriteria:VLCMLSortingCriteriaDefault desc:NO];
-}
-
-- (nullable NSArray<VLCMLMediaGroup *> *)subgroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
-                                                                 desc:(BOOL)desc
-{
-    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria
-                                                                         desc:desc];
-
-    return [VLCMLUtils arrayFromMediaGroupQuery:_mediaGroup->subgroups(&param)];
-}
-
-- (BOOL)isSubGroup
-{
-    return _mediaGroup->isSubgroup();
-}
-
-- (nullable VLCMLMediaGroup *)parent
-{
-    return [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:_mediaGroup->parent()];
-}
-
-- (nullable NSString *)path
-{
-    return [NSString stringWithUTF8String:_mediaGroup->path().c_str()];
-}
-
 @end
-
 
 @implementation VLCMLMediaGroup (Internal)
 

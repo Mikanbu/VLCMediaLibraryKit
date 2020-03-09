@@ -272,24 +272,16 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 /**
  * @brief removeFromGroup Remove this media from its group
  * @return true if the media was successfully removed, false otherwise.
- *
- * If this media is not part of any group, true is returned, and no action
- * will occur.
  */
 - (BOOL)removeFromGroup;
 
 /**
- * @brief isGrouped Returns true if the media belongs to a group, false otherwise
- */
-- (BOOL)isGrouped;
-
-/**
- * @brief groupId Returns this media's group ID, or 0 if not grouped
+ * @brief groupId Returns this media's group ID
  */
 - (VLCMLIdentifier)groupIdentifier;
 
 /**
- * @brief group Return this media's group, or nullptr if the media isn't grouped
+ * @brief group Return this media's group
  */
 - (nullable VLCMLMediaGroup *)group;
 
