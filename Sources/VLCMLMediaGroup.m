@@ -66,6 +66,23 @@
     return _mediaGroup->nbUnknown();
 }
 
+- (UInt64)duration
+{
+    return _mediaGroup->duration();
+}
+
+- (NSDate *)createDate
+{
+    return [NSDate
+            dateWithTimeIntervalSince1970:_mediaGroup->creationDate()];
+}
+
+- (NSDate *)lastModificationDate
+{
+    return [NSDate
+            dateWithTimeIntervalSince1970:_mediaGroup->lastModificationDate()];
+}
+
 - (BOOL)userInteracted
 {
     return _mediaGroup->userInteracted();

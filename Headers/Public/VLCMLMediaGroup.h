@@ -60,6 +60,30 @@ NS_ASSUME_NONNULL_BEGIN
 - (UInt32)nbUnknown;
 
 /**
+ * @brief duration Returns this group duration
+ *
+ * Which is equal to the sum of all its member's durations
+ */
+- (UInt64)duration;
+
+/**
+ * @brief creationDate Returns the group creation date
+ *
+ * The date is expressed as per time(2), ie. a number of seconds since
+ * Epoch (UTC)
+ */
+- (NSDate *)createDate;
+
+/**
+ * @brief lastModificationDate Returns the group last modification date
+ *
+ * Modification date include last media addition/removal, and renaming
+ * The date is expressed as per time(2), ie. a number of seconds since
+ * Epoch (UTC)
+ */
+- (NSDate *)lastModificationDate;
+
+/**
  * @brief userInteracted Returns true if the group has had user interactions
  *
  * This includes being renamed, or being explicitely created with some specific
