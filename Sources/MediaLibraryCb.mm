@@ -225,6 +225,23 @@ void MediaLibraryCb::onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds )
     }
 }
 
+#pragma mark - Bookmarks
+
+void MediaLibraryCb::onBookmarksAdded(std::vector<BookmarkPtr> bookmarks)
+{
+
+}
+
+void MediaLibraryCb::onBookmarksModified(std::set<int64_t> bookmarkIds)
+{
+
+}
+
+void MediaLibraryCb::onBookmarksDeleted(std::set<int64_t> bookmarkIds)
+{
+
+}
+
 #pragma mark - Discovery
 
 void MediaLibraryCb::onDiscoveryStarted( const std::string& entryPoint )

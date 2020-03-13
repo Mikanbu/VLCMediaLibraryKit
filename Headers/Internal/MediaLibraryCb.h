@@ -71,6 +71,10 @@ public:
     virtual void onMediaGroupsModified( std::set<int64_t> mediaGroupsIds );
     virtual void onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds );
 
+    virtual void onBookmarksAdded( std::vector<BookmarkPtr> bookmarks );
+    virtual void onBookmarksModified( std::set<int64_t> bookmarkIds );
+    virtual void onBookmarksDeleted( std::set<int64_t> bookmarkIds );
+
     /**
      * @brief onDiscoveryStarted This callback will be invoked when a folder queued for discovery
      * (by calling IMediaLibrary::discover()) gets processed.
