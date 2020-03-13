@@ -180,10 +180,6 @@ NS_ASSUME_NONNULL_BEGIN
               ofType:(VLCMLThumbnailSizeType)type withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary historyChangedOfType:(VLCMLHistoryType)type;
 
-/**
- * MediaGroup delegation apply to all groups, including subgroups.
- */
-
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMediaGroups:(NSArray<VLCMLMediaGroup *> *)mediaGroups;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;

@@ -64,9 +64,6 @@ public:
     virtual void onGenresModified( std::set<int64_t> genresIds );
     virtual void onGenresDeleted( std::set<int64_t> genreIds );
 
-    /**
-     * MediaGroup notification apply to all groups, including subgroups.
-     */
     virtual void onMediaGroupsAdded( std::vector<MediaGroupPtr> mediaGroups );
     virtual void onMediaGroupsModified( std::set<int64_t> mediaGroupsIds );
     virtual void onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds );
