@@ -375,6 +375,24 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc;
 
+/**
+ * @brief regroupAll Attemps to regroup all media that belong to a forced singleton group
+ *
+ * This will try to regroup all media that were manually removed from their
+ * group, and now belong to a forced singleton group.
+ * Media that belong to a group of only 1 element will not be affected by this.
+ * Usual regrouping rules apply, meaning that a minimum of 6 characters match
+ * is required for 2 media to be grouped together, and if applicable, the longest
+ * match will be used to name the created group
+ * In case of error, false will be returned, but some media might have been
+ * regrouped already.
+ *
+ * @warning This might be a relatively long operation as it must fetch the
+ *          first media being part of a singleton group and regroup it with
+ *          its matching media, in a loop, until all media are regrouped
+ */
+- (BOOL)regroupAll;
+
 #pragma mark - Album
 
 - (nullable VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier;

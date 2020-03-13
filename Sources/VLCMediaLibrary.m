@@ -247,6 +247,11 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups(&param)];
 }
 
+- (BOOL)regroupAll
+{
+    return _ml->regroupAll();
+}
+
 #pragma mark - Album
 
 - (VLCMLAlbum *)albumWithIdentifier:(VLCMLIdentifier)identifier
