@@ -464,28 +464,23 @@ lipoMedialibrary()
     local medialibraryArch="`ls ${medialibraryInstallDir}`"
     local medialibrarySimulatorArch="`ls ${medialibrarySimulatorInstallDir}`"
     local files=""
-    local darwinFiles=""
 
     log "info" "Starting the creation of a libmedialibrary.a bundle..."
 
     for i in ${medialibraryArch}
     do
         files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
-        darwinFiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary_macos.a ${darwinFiles}"
     done
 
     if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
         for i in ${medialibrarySimulatorArch}
         do
             files="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${files}"
-            darwinFiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary_macos.a ${darwinFiles}"
         done
     fi
 
     lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
-    lipo ${darwinFiles} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary_macos.a"
     log "info" "libmedialibrary.a bundle armed and ready to use!"
-    log "info" "libmedialibrary_macos.a bundle armed and ready to use!"
 }
 
 lipoJpeg()
