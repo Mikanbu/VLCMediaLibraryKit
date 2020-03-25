@@ -46,7 +46,7 @@ bool medialibrary::DeviceListerCb::onDeviceMounted( const std::string& uuid,
 }
 
 void medialibrary::DeviceListerCb::onDeviceUnmounted( const std::string& uuid,
-                                                     const std::string& mountpoint )
+                                                      const std::string& mountpoint )
 {
     if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:deviceUnmountedWithUUID:withMountPoint:)]) {
         [m_delegate medialibrary:m_medialibrary
