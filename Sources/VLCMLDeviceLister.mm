@@ -24,8 +24,14 @@
 
 #define DEFAULT_UUID 4242
 
-std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLDeviceLister::devices() const
+void medialibrary::fs::VLCMLDeviceLister::refresh()
 {
+}
+
+bool medialibrary::fs::VLCMLDeviceLister::start(IDeviceListerCb *cb)
+{
+    m_deviceListerCb = cb;
+
     NSURL *documentDir = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] objectAtIndex:0];
 
     char realPath[PATH_MAX];
@@ -34,13 +40,13 @@ std::vector<std::tuple<std::string, std::string, bool>> medialibrary::fs::VLCMLD
 
     NSURL *mrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:realPath]];
 
-    std::vector<std::tuple<std::string, std::string, bool>> res;
-
-    res.emplace_back( std::make_tuple( [[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
+    m_deviceListerCb->onDeviceMounted([[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
                                       [mrl.absoluteString UTF8String],
-                                      true ) );
-    return res;
+                                      true );
+
+    return true;
 }
 
-
-
+void medialibrary::fs::VLCMLDeviceLister::stop()
+{
+}

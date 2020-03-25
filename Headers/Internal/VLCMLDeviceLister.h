@@ -27,7 +27,27 @@ namespace fs
 
 class VLCMLDeviceLister : public IDeviceLister
 {
-    virtual std::vector<std::tuple<std::string, std::string, bool>> devices() const override;
+    /**
+     * @brief refresh Force a device refresh
+     *
+     * Implementation that solely rely on callback can implement this as a no-op
+     * as long as they are guaranteed to invoke onDeviceMounted &
+     * onDeviceUnmounted as soon as the information is available.
+     */
+    virtual void refresh();
+    /**
+     * @brief start Starts watching for new device
+     * @param cb An IDeviceListerCb implementation to invoke upon device changes
+     * @return true in case of success, false otherwise
+     */
+    virtual bool start( IDeviceListerCb* cb );
+    /**
+     * @brief stop Stop watching for new device
+     */
+    virtual void stop();
+
+private:
+    IDeviceListerCb *m_deviceListerCb;
 };
 
 }

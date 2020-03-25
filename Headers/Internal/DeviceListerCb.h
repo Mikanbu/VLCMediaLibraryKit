@@ -35,22 +35,19 @@ public:
      * @brief onDevicePlugged Shall be invoked when a known device gets plugged
      * @param uuid The device UUID
      * @param mountpoint The device new mountpoint
+     * @param removable The removable state of the mounted device
      * @return true is the device was unknown. false otherwise
      */
-    virtual bool onDeviceMounted( const std::string& uuid, const std::string& mountpoint );
+    virtual bool onDeviceMounted( const std::string& uuid,
+                                  const std::string& mountpoint,
+                                  bool removable );
     /**
      * @brief onDeviceUnplugged Shall be invoked when a known device gets unplugged
      * @param uuid The device UUID
+     * @param mountpoint The mountpoint the device was mounted on
      */
-    virtual void onDeviceUnmounted( const std::string& uuid, const std::string& mountpoint );
-    /**
-     * @brief isDeviceKnown Returns true is the provided device is already known to the media library
-     *
-     * @note This doesn't reflect the plugged/unplugged state of the device. This is merely an
-     * indication that the device has been seen at least once by the media library
-     * @param uuid The device UUID
-     */
-    virtual bool isDeviceKnown( const std::string& uuid ) const;
+    virtual void onDeviceUnmounted( const std::string& uuid,
+                                    const std::string& mountpoint );
 
 private:
     id<VLCMLDeviceListerDelegate> m_delegate;

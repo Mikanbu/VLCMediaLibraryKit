@@ -68,7 +68,6 @@ VLCMLIdentifier const VariousArtistID = 2u;
         _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
 
         _deviceLister = std::make_shared<medialibrary::fs::VLCMLDeviceLister>();
-        _deviceListerCb = new medialibrary::DeviceListerCb(self, _deviceListerDelegate);
     }
     return self;
 }
@@ -120,8 +119,7 @@ VLCMLIdentifier const VariousArtistID = 2u;
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 {
-    _ml->setDeviceLister(_deviceLister);
-
+    _ml->registerDeviceLister(_deviceLister, "file://");
     VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
                                                                           [medialibraryPath UTF8String],
                                                                           _mlCb);
