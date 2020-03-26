@@ -101,16 +101,6 @@ VLCMLIdentifier const VariousArtistID = 2u;
     }
 }
 
-- (VLCMLStartResult)start
-{
-    return (VLCMLStartResult)_ml->start();
-}
-
-- (BOOL)isStarted
-{
-    return _ml->isStarted();
-}
-
 - (BOOL)isInitialized
 {
     return _ml->isInitialized();
