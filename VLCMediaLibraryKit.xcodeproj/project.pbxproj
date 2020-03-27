@@ -219,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				7D2DF7CF1B677EE600FB78AB /* Info.plist */,
-				7D0EF4DF170883D80003ED47 /* VLCMediaLibraryKit_Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -237,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				8D31CE481F0B9917005A2895 /* Medialibrary.h */,
+				7D0EF4DF170883D80003ED47 /* VLCMediaLibraryKit_Prefix.pch */,
 				8D90D0E11F2A543D00DBB850 /* VLCMLAlbum+Init.h */,
 				8DC50D8A1F320AF800D6CCED /* VLCMLAlbumTrack+Init.h */,
 				8D90D0E41F2B558000DBB850 /* VLCMLArtist+Init.h */,
@@ -517,7 +517,7 @@
 				DSTROOT = /tmp/VLCMediaLibraryKit.dst;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = Headers/Internal/VLCMediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -547,7 +547,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = VLCMediaLibraryKit_Prefix.pch;
+				GCC_PREFIX_HEADER = Headers/Internal/VLCMediaLibraryKit_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
