@@ -32,11 +32,18 @@ bool medialibrary::fs::VLCMLDeviceLister::start(IDeviceListerCb *cb)
 {
     m_deviceListerCb = cb;
 
-    NSURL *documentDir = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] objectAtIndex:0];
+    NSURL *documentDir = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                 inDomains:NSUserDomainMask] firstObject];
+
+    if (documentDir == nil) {
+        return false;
+    }
 
     char realPath[PATH_MAX];
 
-    realpath([documentDir.path UTF8String], realPath);
+    if (realpath([documentDir.path UTF8String], realPath) == NULL) {
+        return false;
+    }
 
     NSURL *mrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:realPath]];
 
