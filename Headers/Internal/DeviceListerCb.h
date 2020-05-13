@@ -36,9 +36,8 @@ public:
      * @param uuid The device UUID
      * @param mountpoint The device new mountpoint
      * @param removable The removable state of the mounted device
-     * @return true is the device was unknown. false otherwise
      */
-    virtual bool onDeviceMounted( const std::string& uuid,
+    virtual void onDeviceMounted( const std::string& uuid,
                                   const std::string& mountpoint,
                                   bool removable );
     /**

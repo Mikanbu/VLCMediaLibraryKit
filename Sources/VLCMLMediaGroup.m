@@ -46,6 +46,11 @@
     return [NSString stringWithUTF8String:_mediaGroup->name().c_str()];
 }
 
+- (UInt32)nbTotalMedia
+{
+    return _mediaGroup->nbTotalMedia();
+}
+
 - (UInt32)nbMedia
 {
     return _mediaGroup->nbMedia();

@@ -32,17 +32,16 @@ void medialibrary::DeviceListerCb::setDelegate( id<VLCMLDeviceListerDelegate> de
     m_delegate = delegate;
 }
 
-bool medialibrary::DeviceListerCb::onDeviceMounted( const std::string& uuid,
+void medialibrary::DeviceListerCb::onDeviceMounted( const std::string& uuid,
                                                     const std::string& mountpoint,
                                                     bool removable )
 {
     if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:deviceMountedWithUUID:withMountPoint:isRemovable:)]) {
-        return [m_delegate medialibrary:m_medialibrary
-                  deviceMountedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]
-                         withMountPoint:[NSString stringWithUTF8String:mountpoint.c_str()]
-                            isRemovable:removable];
+        [m_delegate medialibrary:m_medialibrary
+           deviceMountedWithUUID:[NSString stringWithUTF8String:uuid.c_str()]
+                  withMountPoint:[NSString stringWithUTF8String:mountpoint.c_str()]
+                     isRemovable:removable];
     }
-    return false;
 }
 
 void medialibrary::DeviceListerCb::onDeviceUnmounted( const std::string& uuid,

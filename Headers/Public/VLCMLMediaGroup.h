@@ -40,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)name;
 
 /**
+ * @brief nbTotalMedia Returns the number of media in this group, not accounting
+ *                     for their presence.
+ *
+ * Even if all this group's media are missing, this will still return a non
+ * 0 count.
+ */
+- (UInt32)nbTotalMedia;
+
+/**
  * @brief nbMedia Returns the number of media in this group
  */
 - (UInt32)nbMedia;
