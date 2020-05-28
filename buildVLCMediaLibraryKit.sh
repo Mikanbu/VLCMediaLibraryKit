@@ -291,7 +291,7 @@ buildSqlite()
     if [ ! -d "${SQLITE_DIR}" ]; then
         if [ "$NO_NETWORK" = "no" ]; then
             log "warning" "sqlite source not found! Starting download..."
-            wget https://download.videolan.org/pub/contrib/sqlite/${SQLITE_RELEASE}.tar.gz
+            curl -O https://download.videolan.org/pub/contrib/sqlite/${SQLITE_RELEASE}.tar.gz
 
             if [ ! "`sha1sum ${SQLITE_RELEASE}.tar.gz`" = "${SQLITE_SHA1}  ${SQLITE_RELEASE}.tar.gz" ]; then
                 log "error" "Wrong sha1 for ${SQLITE_RELEASE}.tar.gz"
