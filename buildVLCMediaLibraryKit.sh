@@ -293,7 +293,7 @@ buildSqlite()
             log "warning" "sqlite source not found! Starting download..."
             curl -O https://download.videolan.org/pub/contrib/sqlite/${SQLITE_RELEASE}.tar.gz
 
-            if [ ! "`sha1sum ${SQLITE_RELEASE}.tar.gz`" = "${SQLITE_SHA1}  ${SQLITE_RELEASE}.tar.gz" ]; then
+            if [ ! "`shasum ${SQLITE_RELEASE}.tar.gz`" = "${SQLITE_SHA1}  ${SQLITE_RELEASE}.tar.gz" ]; then
                 log "error" "Wrong sha1 for ${SQLITE_RELEASE}.tar.gz"
                 exit 1
             fi
