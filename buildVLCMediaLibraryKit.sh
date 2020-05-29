@@ -305,6 +305,7 @@ buildSqlite()
     log "info" "Starting sqlite configuration..."
     spushd ${SQLITE_RELEASE}
         if [ ! -d "configure" ]; then
+            log "warning" "Found configure file, launching autoreconf..."
             autoreconf --install
         fi
         if [ ! -d "build" ]; then
