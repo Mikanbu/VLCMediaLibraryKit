@@ -1,0 +1,22 @@
+stages:
+    - release
+
+####################
+## Release builds ##
+####################
+
+.release-job-base:
+    tags:
+        - macos
+    stage: release
+    only:
+        - tags
+    artifacts:
+        paths:
+            - ./build/*.zip
+
+VLCMediaLibraryKit:
+    extends: .release-job-base
+    script:
+        - ./buildVLCMediaLibraryKit.sh -vck
+        - ./createDeployable.sh -v ${CI_COMMIT_TAG}
