@@ -10,6 +10,7 @@ NO_NETWORK=no
 BUILD_TYPE="Release"
 TESTED_HASH="83fc3ba3"
 VLCKIT_PATH=~
+BUILD_VLCKIT=no
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
@@ -35,10 +36,11 @@ usage()
     -x      Skip medialibrary dependencies build
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
     -p      VLCKit path(default is ~/)
+    -k      Build VLCKit
 EOF
 }
 
-while getopts "hvdmncsxa:p:" OPTION
+while getopts "hvdmncsxa:p:k" OPTION
 do
     case $OPTION in
         h)
@@ -71,6 +73,9 @@ do
             ;;
         p)
             VLCKIT_PATH=$OPTARG
+            ;;
+        k)
+            BUILD_VLCKIT=yes
             ;;
         ?)
             usage
@@ -168,7 +173,17 @@ locateVLCKit()
     log "info" "Looking for VLCKit..."
     local path=$VLCKIT_PATH
 
-    if [ "$VLCKIT_PATH" == ~ ]; then
+    if [ "$BUILD_VLCKIT" == "yes" ]; then
+        log "info" "Cloning VLCKit..."
+        git clone https://code.videolan.org/videolan/VLCKit.git
+        spushd VLCKit
+            git checkout 3.0
+            log "info" "Starting VLCKit 3.0 build..."
+            # A specific architecture isn't needed, aarch64 was choosen.
+            ./buildMobileVLCKit.sh -vfa aarch64
+            path="`pwd`"
+        spopd # VLCKit
+    elif [ "$VLCKIT_PATH" == ~ ]; then
         log "warning" "VLCKit path not provided, will look for it at ~/"
 
         path="`find ${VLCKIT_PATH} -maxdepth 5 -type d -name 'VLCKit' -print -quit`"
