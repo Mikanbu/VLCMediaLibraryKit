@@ -344,10 +344,12 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc;
 
-- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type;
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
+NS_SWIFT_NAME(mediaGroups(type:));
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
                                            sortingCriteria:(VLCMLSortingCriteria)criteria
-                                                      desc:(BOOL)desc;
+                                                      desc:(BOOL)desc
+NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
 
 /**
  * @brief regroupAll Attemps to regroup all media that belong to a forced singleton group
