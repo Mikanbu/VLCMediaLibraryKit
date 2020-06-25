@@ -45,17 +45,12 @@
 #pragma mark - Getters/Setters
 - (float)progress
 {
-    VLCMLMetadata *progressMetadata = [self metadataOfType:VLCMLMetadataTypeProgress];
-    if (!progressMetadata.str || [progressMetadata.str isEqualToString:@""]) {
-        return 0.0;
-    }
-
-    return progressMetadata.str.floatValue;
+    return _media->progress();
 }
 
-- (void)setProgress:(float)progress
+- (BOOL)setProgress:(float)progress
 {
-    [self setMetadataOfType:VLCMLMetadataTypeProgress stringValue:[NSString stringWithFormat: @"%f", progress]];
+    return _media->setProgress(progress);
 }
 
 - (BOOL)isNew
@@ -157,11 +152,6 @@
 - (int)playCount
 {
     return _media->playCount();
-}
-
-- (BOOL)increasePlayCount
-{
-    return _media->increasePlayCount();
 }
 
 - (BOOL)setPlayCount:(UInt32)playCount

@@ -293,6 +293,22 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                              desc:(BOOL)desc;
 
+
+/**
+ * @brief inProgressMedia Returns media for which playback wasn't completed
+ * @param type The type of media to fetch, or 'Unknown' for all
+ * @param params Some query parameters
+ * @return A query representing the results set
+ *
+ * @see{VLCMLMedia::setProgress}
+ */
+- (nullable NSArray<VLCMLMedia *> *)inProgressMediaOfType:(VLCMLMediaType)type
+NS_SWIFT_NAME(inProgressMedia(type:));
+- (nullable NSArray<VLCMLMedia *> *)inProgressMediaOfType:(VLCMLMediaType)type
+                                          sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                     desc:(BOOL)desc
+NS_SWIFT_NAME(inProgressMedia(type:sortingCriteria:desc:));
+
 #pragma mark - Media groups
 
 /**
