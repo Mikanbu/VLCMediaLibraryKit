@@ -224,15 +224,29 @@ VLCMLIdentifier const VariousArtistID = 2u;
 
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups
 {
-    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups()];
+    return [self mediaGroupsOfType:VLCMLMediaTypeUnknown];
 }
 
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc
 {
+    return [self mediaGroupsOfType:VLCMLMediaTypeUnknown
+                   sortingCriteria:criteria
+                              desc:desc];
+}
+
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
+{
+    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups((medialibrary::IMedia::Type)type)];
+}
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
+                                           sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                      desc:(BOOL)desc
+{
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups(&param)];
+    return [VLCMLUtils arrayFromMediaGroupQuery:_ml->mediaGroups((medialibrary::IMedia::Type)type,
+                                                                 &param)];
 }
 
 - (BOOL)regroupAll

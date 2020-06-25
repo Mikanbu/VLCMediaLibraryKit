@@ -330,7 +330,8 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable VLCMLMediaGroup *)mediaGroupWithIdentifier:(VLCMLIdentifier)identifier;
 
 /**
- * @brief mediaGroups Returns a query representing the root media groups
+ * @brief mediaGroups Returns a query representing the root media groups of type unknown.
+ *        For specific type, \see{mediaGroupsOfType:} code.
  * @param params A query parameter
  *
  * The supported sorting criteria are:
@@ -342,6 +343,11 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups;
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc;
+
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type;
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
+                                           sortingCriteria:(VLCMLSortingCriteria)criteria
+                                                      desc:(BOOL)desc;
 
 /**
  * @brief regroupAll Attemps to regroup all media that belong to a forced singleton group
