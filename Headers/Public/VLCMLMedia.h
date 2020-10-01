@@ -52,8 +52,12 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
     VLCMLMetadataTypeRating = 1,
 
     // Playback
-    VLCMLMetadataTypeProgress = 50,
-    VLCMLMetadataTypeSpeed,
+    /*
+     * Removed starting from model 27, this is now a full field in the
+     * media table
+     * VLCMLMetadataTypeProgress = 50,
+     */
+    VLCMLMetadataTypeSpeed = 51,
     VLCMLMetadataTypeTitle,
     VLCMLMetadataTypeChapter,
     VLCMLMetadataTypeProgram,
@@ -82,7 +86,6 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 @interface VLCMLMedia : NSObject <VLCMLObject>
 
-@property (nonatomic, assign) float progress;
 @property (nonatomic, assign) BOOL isNew;
 @property (nonatomic, assign) SInt64 audioTrackIndex;
 @property (nonatomic, assign) SInt64 subtitleTrackIndex;
@@ -109,7 +112,41 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)updateTitle:(NSString *)title;
 - (SInt64)duration;
 - (int)playCount;
-- (BOOL)increasePlayCount;
+
+/**
+ * @brief progress Returns the media progress, in percent
+ *
+ * This is the same unit as VLC's playback position, ie. a float between
+ * 0 and 1.
+ * If the value is negative, it means the playback has either never been
+ * played, or it was played to completion
+ */
+- (float)progress;
+
+/**
+ * @brief setProgress updates the media playback progress
+ *
+ * @param progress The current media progress
+ *
+ * The media library will interpret the value to determine if the playback
+ * is completed and the media should be marked as watched (therefor increasing
+ * the playcount). If the progress isn't large enough, the media library will
+ * ignore the new progress.
+ * The base value for the beginning/end of a media is 5%, meaning that the
+ * first 5% will not increase the progress, and the last 5% will mark the
+ * media as watched and reset the progress value (so that next playback
+ * restarts from the beginning)
+ * These 5% are decreased by 1% for every playback hour, so for instance, a
+ * 3h movie will use 5% - (3h * 1%), so the first 2% will be ignored, the last
+ * 2% will trigger the completion.
+ *
+ * This returns true in case of success, false otherwise.
+ * Calling progress() or playCount() afterward will fetch the curated values.
+ * This will also bump the media last played date, causing it to appear at
+ * the top of the history
+ */
+- (BOOL)setProgress:(float)progress;
+
 - (BOOL)setPlayCount:(UInt32)playCount;
 
 /**
