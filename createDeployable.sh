@@ -5,6 +5,7 @@ set -e
 ZIP="zip"
 VERSION=""
 COMPRESSION_FORMAT="zip"
+ENABLE_PODS_COMMANDS=no
 STABLE_UPLOAD_URL="https://download.videolan.org/pub/cocoapods/prod/"
 
 usage()
@@ -14,19 +15,23 @@ usage: $0 [options]
 
 OPTIONS
     -t Use tar
+    -p Enable Cocoapods related commands for release
     -z Use zip(default)
     -v Version
     -h Help
 EOF
 }
 
-while getopts "htzv:" OPTION
+while getopts "hptzv:" OPTION
 do
      case $OPTION in
          h)
             usage
             exit 1
             ;;
+         p)
+             ENABLE_PODS_COMMANDS=yes
+             ;;
          t)
              COMPRESSION_FORMAT="tar.xz"
              ;;
@@ -199,5 +204,7 @@ fi
 
 getVLCHashes
 packageBuild $options
-bumpPodspec $PODSPEC
-gitCommit $PODSPEC
+if [ "$ENABLE_PODS_COMMANDS" = "yes" ]; then
+    bumpPodspec $PODSPEC
+    gitCommit $PODSPEC
+fi
