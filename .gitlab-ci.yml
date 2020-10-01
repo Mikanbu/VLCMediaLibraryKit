@@ -19,4 +19,4 @@ VLCMediaLibraryKit:
     extends: .release-job-base
     script:
         - ./buildVLCMediaLibraryKit.sh -vck
-        - ./createDeployable.sh -v ${CI_COMMIT_TAG}
+        - ./createDeployable.sh -v ${CI_COMMIT_TAG} -p
