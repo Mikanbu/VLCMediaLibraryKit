@@ -1,5 +1,26 @@
 stages:
+    - nightly
     - release
+
+####################
+## Nightly builds ##
+####################
+
+.nightly-job-base:
+   tags:
+       - macos
+   stage: nightly
+   only:
+       - schedules
+   artifacts:
+       paths:
+           - ./build/*.zip
+
+nightly-VLCMediaLibraryKit:
+    extends: .nightly-job-base
+    script:
+        - ./buildVLCMediaLibraryKit.sh -vck
+        - ./createDeployable.sh -v `date +%Y%m%d-%H%M`
 
 ####################
 ## Release builds ##
