@@ -34,7 +34,7 @@ usage()
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
-    -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
+    -a      Build for specific architecture(all|x86_64|armv7|armv7s|aarch64)
     -p      VLCKit path(default is ~/)
     -k      Build VLCKit
 EOF
@@ -141,7 +141,7 @@ getActualArch()
 }
 
 isSimulatorArch() {
-    if [ "$1" = "i386" -o "$1" = "x86_64" ];then
+    if [ "$1" = "x86_64" ];then
         return 0
     else
         return 1
@@ -205,7 +205,7 @@ exportVLC()
     local architecture=$3
 
     export PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig"
-    log "info" "PKG_CONFIG_PATH setted to ${PKG_CONFIG_PATH}"
+    log "info" "PKG_CONFIG_PATH set to ${PKG_CONFIG_PATH}"
 }
 
 # Retrieve medialibrary
@@ -383,11 +383,6 @@ buildMedialibrary()
                 CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
                 EXTRA_CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
 
-                # there is no thread_local in the C++ i386 runtime
-                if [ "$actualArch" = "i386" ]; then
-                    CFLAGS+=" -D__thread="
-                fi
-
                 LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
                 EXTRA_LDFLAGS="-arch ${actualArch}"
                 LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
@@ -457,7 +452,7 @@ buildXcodeproj()
     local architectures=""
     if [ "$ARCH" == "all" ]; then
         if [ "$platform" = "iphonesimulator" ]; then
-            architectures="x86_64 i386"
+            architectures="x86_64"
         else
             architectures="armv7 armv7s arm64"
         fi
@@ -587,7 +582,6 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
 
     #Mobile first!
     if [ "$ARCH" = "all" ]; then
-        buildMedialibrary "iPhone" "i386" "Simulator"
         buildMedialibrary "iPhone" "x86_64" "Simulator"
         buildMedialibrary "iPhone" "armv7" "OS"
         buildMedialibrary "iPhone" "armv7s" "OS"
