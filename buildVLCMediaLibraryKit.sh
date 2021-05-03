@@ -16,8 +16,8 @@ CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
 SKIP_DEPENDENCIES=no
 OBJCXX_COMPILATOR=clang++
-OSVERSIONMINCFLAG=miphoneos-version-min
-OSVERSIONMINLDFLAG=ios_version_min
+OSVERSIONMINCFLAG=mios
+OSVERSIONMINLDFLAG=ios
 
 set -e
 
@@ -206,6 +206,9 @@ exportVLC()
 
     export PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig"
     log "info" "PKG_CONFIG_PATH set to ${PKG_CONFIG_PATH}"
+
+    export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
+    log "info" "PATH set to ${PATH}"
 }
 
 # Retrieve medialibrary
@@ -238,8 +241,9 @@ buildLibJpeg()
 {
     local arch=$1
     local target=$2
+    local platform=$3
     local libjpegRelease="1.5.2"
-    local prefix="${LIBJPEG_DIR}/install/${arch}"
+    local prefix="${LIBJPEG_DIR}/install/${arch}-${platform}"
 
     if [ ! -d "${LIBJPEG_DIR}" ]; then
         if [ "$NO_NETWORK" = "no" ]; then
@@ -338,8 +342,8 @@ buildDependencies()
         mkdir -p $DEPENDENCIES_DIR
     fi
     spushd $DEPENDENCIES_DIR
-        buildLibJpeg $1 $2
-        buildSqlite $1 $2
+        buildLibJpeg $1 $2 $3
+        buildSqlite $1 $2 $3
     spopd
 }
 
@@ -380,13 +384,18 @@ buildMedialibrary()
                 fi
 
                 CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
-                CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
-                EXTRA_CFLAGS+=" -${OSVERSIONMINCFLAG}=${SDK_MIN}"
-
                 LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
-                EXTRA_LDFLAGS="-arch ${actualArch}"
-                LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
-                EXTRA_LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG},${SDK_MIN}"
+
+                if [ "$platform" = "Simulator" ]; then
+                    CFLAGS+=" -${OSVERSIONMINCFLAG}-simulator-version-min=${SDK_MIN}"
+                    LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_simulator_version_min,${SDK_MIN}"
+                else
+                    CFLAGS+=" -${OSVERSIONMINCFLAG}-version-min=${SDK_MIN}"
+                    LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_version_min,${SDK_MIN}"
+                fi
+
+                EXTRA_CFLAGS="${CFLAGS}"
+                EXTRA_LDFLAGS="${LDFLAGS}"
 
                 export CFLAGS="${CFLAGS}"
                 export CXXFLAGS="${CFLAGS}"
@@ -396,11 +405,11 @@ buildMedialibrary()
                 exportVLC ${os} ${platform} ${actualArch}
 
                 if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
-                    buildDependencies $actualArch $target
+                    buildDependencies $actualArch $target $platform
                 else
                     log "warning" "Build of medialibrary dependencies skipped..."
-                    LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}"
-                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}/include/"
+                    LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}-${platform}"
+                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}-${platform}/include/"
                     SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
                     SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
                 fi
