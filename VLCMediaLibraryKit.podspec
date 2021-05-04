@@ -20,17 +20,11 @@ Pod::Spec.new do |s|
   s.source = {
    :http => 'https://download.videolan.org/pub/cocoapods/prod/VLCMediaLibraryKit-0.7.3-8272544-83fc3ba3.zip',
   }
-  s.prefix_header_file = "VLCMediaLibraryKit_Prefix.pch"
-
-  s.ios.vendored_framework = 'VLCMediaLibraryKit.framework'
-
-  s.source_files = 'VLCMediaLibraryKit.framework/Headers/*.h'
-  s.public_header_files = 'VLCMediaLibraryKit.framework/Headers/*.h'
+  s.ios.vendored_framework = 'VLCMediaLibraryKit.xcframework'
 
   s.frameworks = "Foundation"
 
   s.requires_arc = true
-  s.static_framework = true
 
   s.ios.dependency "MobileVLCKit"
   s.xcconfig = {
