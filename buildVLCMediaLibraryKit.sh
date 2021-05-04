@@ -18,6 +18,12 @@ SKIP_DEPENDENCIES=no
 OBJCXX_COMPILATOR=clang++
 OSVERSIONMINCFLAG=mios
 OSVERSIONMINLDFLAG=ios
+BUILTJPEGLIBSSIM=
+BUILTJPEGLIBSDEVICE=
+BUILTSQLITELIBSSIM=
+BUILTSQLITELIBSDEVICE=
+BUILTMEDIALIBRARYLIBSSIM=
+BUILTMEDIALIBRARYLIBSDEVICE=
 
 set -e
 
@@ -89,6 +95,7 @@ ROOT_DIR="$(pwd)"
 MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
 DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
 VLC_DIR=""
+VLCKIT_DIR=""
 LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
@@ -194,6 +201,7 @@ locateVLCKit()
     fi
 
     VLC_DIR="${path}/libvlc/vlc"
+    VLCKIT_DIR="${path}/build"
     log "info" "Found at ${path}"
     log "info" "Setting libvlc directory at ${VLC_DIR}"
 }
@@ -243,7 +251,7 @@ buildLibJpeg()
     local target=$2
     local platform=$3
     local libjpegRelease="1.5.2"
-    local prefix="${LIBJPEG_DIR}/install/${arch}-${platform}"
+    local prefix="${LIBJPEG_DIR}/install/${platform}/${arch}"
 
     if [ ! -d "${LIBJPEG_DIR}" ]; then
         if [ "$NO_NETWORK" = "no" ]; then
@@ -263,10 +271,13 @@ buildLibJpeg()
             mkdir build
         fi
         spushd build
-            if [ ! -d "$arch" ]; then
-                mkdir $arch
+            if [ ! -d "$platform" ]; then
+                mkdir $platform
             fi
-            spushd $arch
+            if [ ! -d "$platform/$arch" ]; then
+                mkdir $platform/$arch
+            fi
+            spushd $platform/$arch
                 ${LIBJPEG_DIR}/configure \
                                --host=$target \
                                --prefix=$prefix \
@@ -316,10 +327,13 @@ buildSqlite()
             mkdir build
         fi
         spushd build
-            if [ ! -d "$arch" ]; then
-                mkdir $arch
+            if [ ! -d "$platform" ]; then
+                mkdir $platform
             fi
-            spushd $arch
+            if [ ! -d "$platform/$arch" ]; then
+                mkdir $platform/$arch
+            fi
+            spushd $platform/$arch
                 ${SQLITE_DIR}/configure \
                                --host=$target \
                                --disable-shared \
@@ -409,7 +423,7 @@ buildMedialibrary()
                 else
                     log "warning" "Build of medialibrary dependencies skipped..."
                     LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}-${platform}"
-                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${arch}-${platform}/include/"
+                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${platform}/${arch}/include/"
                     SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
                     SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
                 fi
@@ -461,80 +475,102 @@ buildXcodeproj()
     local architectures=""
     if [ "$ARCH" == "all" ]; then
         if [ "$platform" = "iphonesimulator" ]; then
-            architectures="x86_64"
+            architectures="x86_64 arm64"
         else
             architectures="armv7 armv7s arm64"
         fi
     else
         architectures="`getActualArch $ARCH`"
     fi
-    xcodebuild -project "$1.xcodeproj" \
-               -target "$target" \
+    xcodebuild archive \
+               -project "$1.xcodeproj" \
                -sdk $platform$SDK \
                -configuration ${BUILD_TYPE} \
                ARCHS="${architectures}" \
                IPHONEOS_DEPLOYMENT_TARGET=${SDK_MIN} \
+               -scheme "$target" \
+               -archivePath build/"$target"-$platform$SDK.xcarchive \
+               SKIP_INSTALL=no \
                > ${out}
 }
 
-lipoMedialibrary()
+collectBuiltMedialibraryLibs()
 {
     local medialibraryInstallDir="${MEDIALIBRARY_DIR}/build/iPhoneOS-install"
     local medialibrarySimulatorInstallDir="${MEDIALIBRARY_DIR}/build/iPhoneSimulator-install"
     local medialibraryArch="`ls ${medialibraryInstallDir}`"
     local medialibrarySimulatorArch="`ls ${medialibrarySimulatorInstallDir}`"
-    local files=""
+    local devicefiles=""
+    local simulatorfiles=""
 
-    log "info" "Starting the creation of a libmedialibrary.a bundle..."
+    log "info" "Finding libmedialibrary.a binaries..."
 
     for i in ${medialibraryArch}
     do
-        files="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${files}"
+        devicefiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${devicefiles}"
     done
 
     if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
         for i in ${medialibrarySimulatorArch}
         do
-            files="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${files}"
+            simulatorfiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${simulatorfiles}"
         done
     fi
 
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libmedialibrary.a"
-    log "info" "libmedialibrary.a bundle armed and ready to use!"
+    BUILTMEDIALIBRARYLIBSSIM=$simulatorfiles
+    BUILTMEDIALIBRARYLIBSDEVICE=$devicefiles
+
+    log "info" "libmedialibrary libs collected!"
 }
 
-lipoJpeg()
+collectBuiltJPEGLibs()
 {
     local libjpegInstallDir="${LIBJPEG_DIR}/install"
-    local libjpegArch="`ls ${libjpegInstallDir}`"
     local files=""
 
-    log "info" "Starting the creation of a libjpeg.a bundle..."
+    log "info" "Finding libjpeg.a binaries..."
 
-    for i in ${libjpegArch}
+    spushd ${libjpegInstallDir}
+    for i in `ls OS`
     do
-        files="${libjpegInstallDir}/${i}/lib/libjpeg.a ${files}"
+        files="${libjpegInstallDir}/OS/${i}/lib/libjpeg.a ${files}"
     done
+    BUILTJPEGLIBSDEVICE=$files
 
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libjpeg.a"
-    log "info" "libjpeg.a bundle armed and ready to use!"
+    files=""
+    for i in `ls Simulator`
+    do
+        files="${libjpegInstallDir}/Simulator/${i}/lib/libjpeg.a ${files}"
+    done
+    BUILTJPEGLIBSSIM=$files
+    spopd
+
+    log "info" "libJPEG libs collected!"
 }
 
-lipoSqlite()
+collectBuiltSQliteLibs()
 {
     local sqliteInstallDir="${SQLITE_DIR}/build"
-    local sqliteArch="`ls ${sqliteInstallDir}`"
-    local files=""
+    local sqliteArchDevice="`ls ${sqliteInstallDir}/OS`"
+    local sqliteArchSimulator="`ls ${sqliteInstallDir}/Simulator`"
+    local deviceFiles=""
+    local simulatorFiles=""
 
-    log "info" "Starting the creation of a libsqlite3.a bundle..."
+    log "info" "Finding libsqlite3.a binaries..."
 
-    for i in ${sqliteArch}
+    for i in ${sqliteArchDevice}
     do
-        files="${sqliteInstallDir}/${i}/.libs/libsqlite3.a ${files}"
+        deviceFiles="${sqliteInstallDir}/OS/${i}/.libs/libsqlite3.a ${deviceFiles}"
     done
+    BUILTSQLITELIBSDEVICE=$deviceFiles
 
-    lipo ${files} -create -output "${MEDIALIBRARY_DIR}/build/libsqlite3.a"
-    log "info" "libsqlite3.a bundle armed and ready to use!"
+    for i in ${sqliteArchSimulator}
+    do
+        simulatorFiles="${sqliteInstallDir}/Simulator/${i}/.libs/libsqlite3.a ${simulatorFiles}"
+    done
+    BUILTSQLITELIBSSIM=$simulatorFiles
+
+    log "info" "libsqlite3.a libs collected!"
 }
 
 createFramework()
@@ -542,30 +578,43 @@ createFramework()
     local target="$1"
     local libPath=""
     local platform="iphoneos"
-    local framework="${target}.framework"
+    local framework="${target}.xcframework"
     local medialibraryLibDir="${MEDIALIBRARY_DIR}/build"
+    local productPath=""
+    local frameworks=""
 
     log "info" "Starting the creation of $framework..."
 
-    if [ ! -d build ]; then
-        mkdir build
+    productPath=$ROOT_DIR/build/VLCMediaLibraryKit-${platform}.xcarchive
+    if [ -d ${productPath} ];then
+        dsymfolder=${productPath}/dSYMs/VLCMediaLibraryKit.framework.dSYM
+        bcsymbolmapfolder=${productPath}/BCSymbolMaps
+        frameworks="$frameworks -framework VLCMediaLibraryKit-${platform}.xcarchive/Products/Library/Frameworks/VLCMediaLibraryKit.framework -debug-symbols $dsymfolder"
+        if [ -d ${bcsymbolmapfolder} ];then
+            info "Bitcode support found"
+            spushd $bcsymbolmapfolder
+            for i in `ls *.bcsymbolmap`
+            do
+                frameworks+=" -debug-symbols $bcsymbolmapfolder/$i"
+            done
+            spopd
+        fi
     fi
-    if [ "$ARCH" = "all" ] || ! isSimulatorArch $ARCH; then
-        libPath="${libPath} $BUILD_TYPE-iphoneos/libVLCMediaLibraryKit.a"
-    fi
-    if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
-        platform="iphonesimulator"
-        libPath="${libPath} $BUILD_TYPE-iphonesimulator/libVLCMediaLibraryKit.a"
-    fi
-    spushd build
-        rm -rf $framework && \
-        mkdir $framework && \
-        lipo -create ${libPath} -o $framework/$target && \
-        chmod a+x $framework/$target && \
-        cp -pr $BUILD_TYPE-$platform/$target $framework/Headers
-    spopd
 
-    log "info" "$framework armed and ready to use!"
+    platform="iphonesimulator"
+    productPath=$ROOT_DIR/build/VLCMediaLibraryKit-${platform}.xcarchive
+    if [ -d ${productPath} ];then
+        dsymfolder=${productPath}/dSYMs/VLCMediaLibraryKit.framework.dSYM
+        frameworks="$frameworks -framework VLCMediaLibraryKit-${platform}.xcarchive/Products/Library/Frameworks/VLCMediaLibraryKit.framework -debug-symbols $dsymfolder"
+    fi
+
+    # Assumes both platforms were built currently
+    spushd build
+    rm -rf VLCMediaLibraryKit.xcframework
+    xcodebuild -create-xcframework $frameworks -output VLCMediaLibraryKit.xcframework
+    spopd # build
+
+    log "info" "$framework created!"
 }
 
 out="/dev/null"
@@ -592,6 +641,7 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     #Mobile first!
     if [ "$ARCH" = "all" ]; then
         buildMedialibrary "iPhone" "x86_64" "Simulator"
+        buildMedialibrary "iPhone" "aarch64" "Simulator"
         buildMedialibrary "iPhone" "armv7" "OS"
         buildMedialibrary "iPhone" "armv7s" "OS"
         buildMedialibrary "iPhone" "aarch64" "OS"
@@ -612,9 +662,21 @@ if [ "$CLEAN" = "yes" ]; then
     xcodebuild -alltargets clean
     log "info" "Xcode build cleaned!"
 fi
-lipoJpeg
-lipoSqlite
-lipoMedialibrary
+collectBuiltJPEGLibs
+collectBuiltSQliteLibs
+collectBuiltMedialibraryLibs
+
+rm -f $ROOT_DIR/Resources/dependencies.xcconfig
+touch $ROOT_DIR/Resources/dependencies.xcconfig
+echo "// This file is autogenerated by $(basename $0)" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "LIBJPEG_LIBRARIES_SIMULATOR=$BUILTJPEGLIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "SQLITE_LIBRARIES_SIMULATOR=$BUILTSQLITELIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "MEDIALIBRARY_LIBRARIES_SIMULATOR=$BUILTMEDIALIBRARYLIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "LIBJPEG_LIBRARIES_DEVICE=$BUILTJPEGLIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "SQLITE_LIBRARIES_DEVICE=$BUILTSQLITELIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "MEDIALIBRARY_LIBRARIES_DEVICE=$BUILTMEDIALIBRARYLIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
+echo "MOBILEVLCKIT_XCFRAMEWORK=$VLCKIT_DIR" >> $ROOT_DIR/Resources/dependencies.xcconfig
+
 if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
     buildXcodeproj VLCMediaLibraryKit "VLCMediaLibraryKit" iphonesimulator
 fi
