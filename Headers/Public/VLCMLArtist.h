@@ -55,14 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief isArtworkGenerated Returns true is a thumbnail generation was
  *                             attempted for the provided size.
  *
- * @param sizeType The targeted thumbnail size
+ * @param type The targeted thumbnail size
  *
  * If the thumbnail generation failed, this will still return true, and the
  * associated thumbnail mrl will be empty.
  * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
-- (VLCMLThumbnailStatus)isArtworkGenerated;
 - (VLCMLThumbnailStatus)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)isArtworkGenerated;
 
 /**
  * \brief setThumbnailWithMRL Sets a thumbnail for the current media
@@ -77,19 +77,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * \brief artworkMRL Returns the mrl of an artwork of the given size for an artist
- * \param sizeType The targeted artwork size
+ * \param type The targeted artwork size
  * \return An mrl, representing the absolute path to the artist artwork
  *         or nil, if the artwork generation failed
  *
  * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
  * \sa{isArtworkGenerated}
  */
-- (nullable NSURL *)artworkMRL;
 - (nullable NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type;
+- (nullable NSURL *)artworkMRL;
 
 /**
  * @brief setThumbnail Assign a thumbnail to the artist
- * @param thumbnailMrl An mrl pointing to the thumbnail
+ * @param mrl An mrl pointing to the thumbnail
  * @return true in case of success, false otherwise
  *
  * @note The medialibrary does not take ownership of the thumbnail. It is

@@ -2,7 +2,7 @@
  * VLCMLMedia.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -129,15 +129,15 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 /**
  * \brief thumbnail Returns the mrl of a thumbnail of the given size for this media
- * \param sizeType The targeted thumbnail size
+ * \param type The targeted thumbnail size
  * \return An mrl, representing the absolute path to the media thumbnail
  *         or nil, if the thumbnail generation failed
  *
  * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
  * \sa{thumbnailStatus}
  */
-- (nullable NSURL *)thumbnail;
 - (nullable NSURL *)thumbnailOfType:(VLCMLThumbnailSizeType)type;
+- (nullable NSURL *)thumbnail;
 
 /**
  * @brief thumbnailStatus Returns this media thumbnail status
@@ -147,8 +147,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  * for this media, or Success/Failure/Crash, depending on the generation
  * results.
  */
-- (VLCMLThumbnailStatus)thumbnailStatus;
 - (VLCMLThumbnailStatus)thumbnailStatusOfType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)thumbnailStatus;
 
 /**
  * \brief setThumbnailWithMRL Sets a thumbnail for the current media
@@ -172,9 +172,9 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  * and no new generation will occur.
  * If you want to force a new generation, you need to
  * call \sa{IMediaLibrary::enableFailedThumbnailRegeneration} beforehand.
- * \param sizeType The size type of the thumbnail to generate
- * \param desiredWidth The desired thumbnail width
- * \param desiredHeight The desired thumbnail height
+ * \param type The size type of the thumbnail to generate
+ * \param width The desired thumbnail width
+ * \param height The desired thumbnail height
  * \param position The position at which to generate the thumbnail, in [0;1] range
  *
  * The generated thumbnail will try to oblige by the requested size, while
@@ -265,7 +265,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 /**
  * @brief addToGroup Adds this media to the given group
- * @param groupId The target group ID
+ * @param identifier The target group identifier
  * @return true if the media was successfully added, false otherwise
  */
 - (BOOL)addToGroupWithIdentifier:(VLCMLIdentifier)identifier;

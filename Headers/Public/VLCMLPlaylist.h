@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * @brief searchMedia Search some media in a playlist
  * @param pattern The search pattern. Minimal length is 3 characters
- * @param sort Sorting criteria. \see VLCMLSortingCriteria
+ * @param criteria Sorting criteria. \see VLCMLSortingCriteria
  * @param desc Sorting order ascending or descending
  * @return An array of media, or empty in case of error or if the pattern is too short
  */
@@ -119,8 +119,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @brief move Change the position of a media
- * @param from The position of the item being moved
- * @param to The moved item target position
+ * @param position The position of the item being moved
+ * @param destination The moved item target position
  *
  * @return true on success, false on failure
  *
@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @brief remove Removes an item from the playlist
- * @param mediaId The position of the item to remove.
+ * @param position The position of the item to remove.
  *
  * @return true on success, false on failure
  */

@@ -333,7 +333,7 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 /**
  * @brief mediaGroups Returns a query representing the root media groups of type unknown.
  *        For specific type, \see{mediaGroupsOfType:} code.
- * @param params A query parameter
+ * @param criteria A query parameter
  *
  * The supported sorting criteria are:
  * - Alpha (default)
@@ -341,9 +341,10 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
  * - NbAudio
  * - NbMedia
  */
-- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups;
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                                    desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMediaGroup *> *)mediaGroups;
+
 
 - (nullable NSArray<VLCMLMediaGroup *> *)mediaGroupsOfType:(VLCMLMediaType)type
 NS_SWIFT_NAME(mediaGroups(type:));
@@ -404,7 +405,7 @@ NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
  * @brief List all artists that have at least an album.
  * Artists that only appear on albums as guests won't be listed from here, but will be
  * returned when querying an album for all its appearing artists
- * @param sort A sorting criteria. So far, this is ignored, and artists are sorted by lexial order
+ * @param criteria A sorting criteria. So far, this is ignored, and artists are sorted by lexial order
  * @param desc If true, the provided sorting criteria will be reversed.
  * @param includeAll If true, all artists including those without album
  *                   will be returned. If false, only artists which have
@@ -442,7 +443,7 @@ NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
  * @brief searchMedia, searchAudio, and searchVideo search for some media, based on a pattern.
  * @param pattern A 3 character or more pattern that will be matched against the media's title
  *                or filename if no title was set for this media.
- * @param params Some query parameters. Valid sorting criteria are:
+ * @param criteria Some query parameters. Valid sorting criteria are:
  *               - Duration
  *               - InsertionDate
  *               - ReleaseDate
@@ -457,10 +458,9 @@ NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
  * For instance, media that are added explicitely, playlist items that
  * point to remote content, will *not* be included
  */
-
-- (nullable NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
 - (nullable NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern
                                            sort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)searchMedia:(NSString *)pattern;
 
 - (nullable NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name;
 - (nullable NSArray<VLCMLPlaylist *> *)searchPlaylistsByName:(NSString *)name

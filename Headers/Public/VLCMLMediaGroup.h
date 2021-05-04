@@ -165,10 +165,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A NSArray object representing the results
  *
  */
-- (nullable NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type;
 - (nullable NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type
                                            sort:(VLCMLSortingCriteria)criteria
                                            desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)mediaOfType:(VLCMLMediaType)type;
 
 /**
  * @brief searchMedia Search amongst the media belonging to this group
@@ -180,11 +180,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
-                                                      type:(VLCMLMediaType)type;
-- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
                                                       type:(VLCMLMediaType)type
                                                       sort:(VLCMLSortingCriteria)criteria
                                                       desc:(BOOL)desc;
+- (nullable NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern
+                                                      type:(VLCMLMediaType)type;
 
 @end
 

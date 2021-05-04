@@ -53,26 +53,27 @@ typedef NS_ENUM(NSUInteger, VLCMLThumbnailStatus);
  * @brief isArtworkGenerated Returns true is a thumbnail generation was
  *                             attempted for the provided size.
  *
- * @param sizeType The targeted thumbnail size
+ * @param type The targeted thumbnail size
  *
  * If the thumbnail generation failed, this will still return true, and the
  * associated thumbnail mrl will be empty.
  * \note By default this queries the thumbnail of type VLCMLThumbnailSizeTypeThumbnail
  */
-- (VLCMLThumbnailStatus)isArtworkGenerated;
 - (VLCMLThumbnailStatus)isArtworkGeneratedForType:(VLCMLThumbnailSizeType)type;
+- (VLCMLThumbnailStatus)isArtworkGenerated;
+
 
 /**
  * \brief artworkMRL Returns the mrl of an artwork of the given size for an album
- * \param sizeType The targeted artwork size
+ * \param type The targeted artwork size
  * \return An mrl, representing the absolute path to the album artwork
  *         or nil, if the artwork generation failed
  *
  * \note By default this returns the mrl for VLCMLThumbnailSizeTypeThumbnail
  * \sa{isArtworkGenerated}
  */
-- (nullable NSURL *)artworkMRL;
 - (nullable NSURL *)artworkMRLOfType:(VLCMLThumbnailSizeType)type;
+- (nullable NSURL *)artworkMRL;
 
 - (nullable NSArray<VLCMLMedia *> *)tracksWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                          desc:(BOOL)desc;
