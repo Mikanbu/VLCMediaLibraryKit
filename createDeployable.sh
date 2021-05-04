@@ -106,7 +106,7 @@ packageBuild()
 {
     spushd "build"
         local packageName="${TARGET}-${VERSION}-${VLCMEDIALIBRARYKIT_HASH}-${MEDIALIBRARY_HASH}.${COMPRESSION_FORMAT}"
-        local toPackage="VLCMediaLibraryKit.framework COPYING"
+        local toPackage="VLCMediaLibraryKit.xcframework COPYING"
 
         cp ../COPYING .
         if [ "$COMPRESSION_FORMAT" = "$ZIP" ]; then
