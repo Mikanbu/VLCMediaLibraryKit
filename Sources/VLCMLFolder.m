@@ -20,10 +20,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#import "VLCMLUtils.h"
-
 #import "VLCMLFolder.h"
 #import "VLCMLFolder+Init.h"
+#import "VLCMLUtils.h"
 
 @interface VLCMLFolder ()
 {
