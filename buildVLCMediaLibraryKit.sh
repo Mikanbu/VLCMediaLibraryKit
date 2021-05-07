@@ -92,7 +92,7 @@ done
 shift "$((OPTIND-1))"
 
 ROOT_DIR="$(pwd)"
-MEDIALIBRARY_DIR="${ROOT_DIR}/libmedialibrary/medialibrary"
+MEDIALIBRARY_DIR="${ROOT_DIR}/medialibrary"
 DEPENDENCIES_DIR="${MEDIALIBRARY_DIR}/dependencies"
 VLC_DIR=""
 VLCKIT_DIR=""
@@ -224,25 +224,22 @@ exportVLC()
 fetchMedialibrary()
 {
     log "info" "Fetching Medialibrary..."
-    mkdir -p libmedialibrary
-    spushd libmedialibrary
-        if [ "$NO_NETWORK" = "no" ]; then
-            if [ -d medialibrary ]; then
-                spushd medialibrary
-                    git pull origin master --rebase
-                    git reset --hard ${TESTED_HASH}
-            else
-                git clone https://code.videolan.org/videolan/medialibrary.git
-                spushd medialibrary
-                    git checkout -B localBranch ${TESTED_HASH}
-            fi
-                    git submodule update --init
-                    spushd libvlcpp
-                        git am $ROOT_DIR/Resources/patches/*.patch
-                    spopd #libvlcpp
-            spopd #medialibrary
+    if [ "$NO_NETWORK" = "no" ]; then
+        if [ -d ${MEDIALIBRARY_DIR} ]; then
+            spushd ${MEDIALIBRARY_DIR}
+                git pull origin master --rebase
+                git reset --hard ${TESTED_HASH}
+        else
+            git clone https://code.videolan.org/videolan/medialibrary.git
+            spushd ${MEDIALIBRARY_DIR}
+                git checkout -B localBranch ${TESTED_HASH}
         fi
-    spopd #libmedialibrary
+                git submodule update --init
+                spushd libvlcpp
+                    git am $ROOT_DIR/Resources/patches/*.patch
+                spopd #libvlcpp
+        spopd #medialibrary
+    fi
 }
 
 buildLibJpeg()
@@ -370,103 +367,101 @@ buildMedialibrary()
     local platform=$3
     local makeOptions=""
 
-    spushd libmedialibrary
-        spushd medialibrary
-            if [ ! -d build ]; then
-                mkdir build
+    spushd ${MEDIALIBRARY_DIR}
+        if [ ! -d build ]; then
+            mkdir build
+        fi
+        spushd build
+            local actualArch="`getActualArch ${arch}`"
+            local currentDir="`pwd`"
+            local prefix="${currentDir}/${os}${platform}-install/${actualArch}"
+            local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
+            local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
+            local optim="-O3 -g"
+            local medialibraryFlag="--disable-debug"
+
+            log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
+
+            SDKROOT=`xcode-select -print-path`/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}${SDK_VERSION}.sdk
+            if [ ! -d "${SDKROOT}" ]; then
+                log "error" "${SDKROOT} does not exist, please install required SDK, or set SDKROOT manually."
+                exit 1
             fi
-            spushd build
-                local actualArch="`getActualArch ${arch}`"
-                local currentDir="`pwd`"
-                local prefix="${currentDir}/${os}${platform}-install/${actualArch}"
-                local buildDir="${currentDir}/${os}${platform}-build/${actualArch}"
-                local target="${arch}-apple-darwin16.5.0" #xcode 8.3 clang version
-                local optim="-O3 -g"
-                local medialibraryFlag="--disable-debug"
 
-                log "info" "Building ${arch} with SDK version ${SDK_VERSION} for platform: ${platform}"
+            if [ "$BUILD_TYPE" = "Debug" ]; then
+                optim="-O0 -g"
+                medialibraryFlag="--enable-debug"
+            fi
 
-                SDKROOT=`xcode-select -print-path`/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}${SDK_VERSION}.sdk
-                if [ ! -d "${SDKROOT}" ]; then
-                    log "error" "${SDKROOT} does not exist, please install required SDK, or set SDKROOT manually."
-                    exit 1
-                fi
+            CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
+            LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
 
-                if [ "$BUILD_TYPE" = "Debug" ]; then
-                    optim="-O0 -g"
-                    medialibraryFlag="--enable-debug"
-                fi
+            # there is no thread_local in the C++ i386 runtime
+            if [ "$actualArch" = "i386" ]; then
+                CFLAGS+=" -D__thread="
+            fi
 
-                CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
-                LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
+            if [ "$platform" = "Simulator" ]; then
+                CFLAGS+=" -${OSVERSIONMINCFLAG}-simulator-version-min=${SDK_MIN}"
+                LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_simulator_version_min,${SDK_MIN}"
+            else
+                CFLAGS+=" -${OSVERSIONMINCFLAG}-version-min=${SDK_MIN}"
+                LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_version_min,${SDK_MIN}"
+            fi
 
-                # there is no thread_local in the C++ i386 runtime
-                if [ "$actualArch" = "i386" ]; then
-                    CFLAGS+=" -D__thread="
-                fi
+            EXTRA_CFLAGS="${CFLAGS}"
+            EXTRA_LDFLAGS="${LDFLAGS}"
 
-                if [ "$platform" = "Simulator" ]; then
-                    CFLAGS+=" -${OSVERSIONMINCFLAG}-simulator-version-min=${SDK_MIN}"
-                    LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_simulator_version_min,${SDK_MIN}"
-                else
-                    CFLAGS+=" -${OSVERSIONMINCFLAG}-version-min=${SDK_MIN}"
-                    LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_version_min,${SDK_MIN}"
-                fi
+            export CFLAGS="${CFLAGS}"
+            export CXXFLAGS="${CFLAGS}"
+            export CPPFLAGS="${CFLAGS}"
+            export LDFLAGS=${LDFLAGS}
 
-                EXTRA_CFLAGS="${CFLAGS}"
-                EXTRA_LDFLAGS="${LDFLAGS}"
+            exportVLC ${os} ${platform} ${actualArch}
 
-                export CFLAGS="${CFLAGS}"
-                export CXXFLAGS="${CFLAGS}"
-                export CPPFLAGS="${CFLAGS}"
-                export LDFLAGS=${LDFLAGS}
+            if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
+                buildDependencies $actualArch $target $platform
+            else
+                log "warning" "Build of medialibrary dependencies skipped..."
+                LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}-${platform}"
+                LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${platform}/${arch}/include/"
+                SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
+                SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
+            fi
 
-                exportVLC ${os} ${platform} ${actualArch}
+            if [ "$VERBOSE" = "yes" ]; then
+                makeOptions="${makeOptions} V=1"
+            fi
 
-                if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
-                    buildDependencies $actualArch $target $platform
-                else
-                    log "warning" "Build of medialibrary dependencies skipped..."
-                    LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}-${platform}"
-                    LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${platform}/${arch}/include/"
-                    SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
-                    SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
-                fi
+            local currentXcode="/Application/Xcode.app/Contents/Developer/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}.sdk/usr"
+            mkdir -p $buildDir && spushd $buildDir
 
-                if [ "$VERBOSE" = "yes" ]; then
-                    makeOptions="${makeOptions} V=1"
-                fi
+                $MEDIALIBRARY_DIR/bootstrap && \
+                $MEDIALIBRARY_DIR/configure \
+                                   --disable-shared \
+                                   $medialibraryFlag \
+                                   --prefix=$prefix \
+                                   --host=$target \
+                                   CXX=$CXX_COMPILATOR \
+                                   OBJCXX=$OBJCXX_COMPILATOR \
+                                   LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
+                                   LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}" \
+                                   SQLITE_LIBS="-L${SQLITE_BUILD_DIR}${actualArch}/.libs -lsqlite3" \
+                                   SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
 
-                local currentXcode="/Application/Xcode.app/Contents/Developer/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}.sdk/usr"
-                mkdir -p $buildDir && spushd $buildDir
+                log "info" "Starting make in ${buildDir}..."
+                make -C $buildDir $makeOptions > ${out}
+                make -C $buildDir install > ${out}
 
-                    $MEDIALIBRARY_DIR/bootstrap && \
-                    $MEDIALIBRARY_DIR/configure \
-                                       --disable-shared \
-                                       $medialibraryFlag \
-                                       --prefix=$prefix \
-                                       --host=$target \
-                                       CXX=$CXX_COMPILATOR \
-                                       OBJCXX=$OBJCXX_COMPILATOR \
-                                       LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
-                                       LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}" \
-                                       SQLITE_LIBS="-L${SQLITE_BUILD_DIR}${actualArch}/.libs -lsqlite3" \
-                                       SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
+            spopd
 
-                    log "info" "Starting make in ${buildDir}..."
-                    make -C $buildDir $makeOptions > ${out}
-                    make -C $buildDir install > ${out}
-
-                spopd
-
-                if [ $? -ne 0 ]; then
-                    log "error" "medialibrary build failed!"
-                    exit 1
-                fi
-                log "info" "medialibrary armed and ready for ${arch}!"
-            spopd #build
-        spopd #medialibrary
-    spopd #libmedialibrary
+            if [ $? -ne 0 ]; then
+                log "error" "medialibrary build failed!"
+                exit 1
+            fi
+            log "info" "medialibrary armed and ready for ${arch}!"
+        spopd #build
+    spopd #medialibrary
 }
 
 # from buildMobileVLCKit.sh
