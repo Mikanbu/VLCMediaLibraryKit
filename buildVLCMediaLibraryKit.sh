@@ -40,7 +40,7 @@ usage()
     -c      Clean all target build
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
-    -a      Build for specific architecture(all|x86_64|armv7|armv7s|aarch64)
+    -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
     -p      VLCKit path(default is ~/)
     -k      Build VLCKit
 EOF
@@ -148,7 +148,7 @@ getActualArch()
 }
 
 isSimulatorArch() {
-    if [ "$1" = "x86_64" ];then
+    if [ "$1" = "i386" -o "$1" = "x86_64" ];then
         return 0
     else
         return 1
@@ -400,6 +400,11 @@ buildMedialibrary()
                 CFLAGS="-isysroot ${SDKROOT} -arch ${actualArch} ${optim}"
                 LDFLAGS="-isysroot ${SDKROOT} -arch ${actualArch}"
 
+                # there is no thread_local in the C++ i386 runtime
+                if [ "$actualArch" = "i386" ]; then
+                    CFLAGS+=" -D__thread="
+                fi
+
                 if [ "$platform" = "Simulator" ]; then
                     CFLAGS+=" -${OSVERSIONMINCFLAG}-simulator-version-min=${SDK_MIN}"
                     LDFLAGS+=" -Wl,-${OSVERSIONMINLDFLAG}_simulator_version_min,${SDK_MIN}"
@@ -475,7 +480,7 @@ buildXcodeproj()
     local architectures=""
     if [ "$ARCH" == "all" ]; then
         if [ "$platform" = "iphonesimulator" ]; then
-            architectures="x86_64 arm64"
+            architectures="i386 x86_64 arm64"
         else
             architectures="armv7 armv7s arm64"
         fi
@@ -640,6 +645,7 @@ if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
 
     #Mobile first!
     if [ "$ARCH" = "all" ]; then
+        buildMedialibrary "iPhone" "i386" "Simulator"
         buildMedialibrary "iPhone" "x86_64" "Simulator"
         buildMedialibrary "iPhone" "aarch64" "Simulator"
         buildMedialibrary "iPhone" "armv7" "OS"

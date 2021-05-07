@@ -588,7 +588,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_x86_64-simulator";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Headers/Internal/VLCMediaLibraryKit_Prefix.pch;
@@ -663,7 +663,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_x86_64-simulator";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Headers/Internal/VLCMediaLibraryKit_Prefix.pch;
