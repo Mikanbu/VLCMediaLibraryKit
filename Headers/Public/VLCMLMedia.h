@@ -110,7 +110,6 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 - (BOOL)updateTitle:(NSString *)title;
 - (SInt64)duration;
 - (int)playCount;
-- (BOOL)increasePlayCount;
 - (BOOL)setPlayCount:(UInt32)playCount;
 
 /**

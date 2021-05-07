@@ -159,11 +159,6 @@
     return _media->playCount();
 }
 
-- (BOOL)increasePlayCount
-{
-    return _media->increasePlayCount();
-}
-
 - (BOOL)setPlayCount:(UInt32)playCount
 {
     return _media->setPlayCount(playCount);
