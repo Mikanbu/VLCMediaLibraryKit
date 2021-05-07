@@ -25,6 +25,10 @@ BUILTSQLITELIBSDEVICE=
 BUILTMEDIALIBRARYLIBSSIM=
 BUILTMEDIALIBRARYLIBSDEVICE=
 
+if [ -z "$MAKEFLAGS" ]; then
+    MAKEFLAGS="-j$(sysctl -n machdep.cpu.core_count || nproc)";
+fi
+
 set -e
 
 usage()
@@ -55,6 +59,7 @@ do
             ;;
         v)
             VERBOSE=yes
+            MAKEFLAGS=""
             ;;
         d)
             BUILD_TYPE="Debug"
@@ -281,7 +286,7 @@ buildLibJpeg()
                                --disable-shared \
                                CXX=$CXX_COMPILATOR
                 log "info" "Starting libjpeg make..."
-                make
+                make ${MAKEFLAGS}
                 if [ ! -d "${prefix}" ]; then
                     mkdir -p $prefix
                 fi
@@ -337,7 +342,7 @@ buildSqlite()
                                --disable-readline \
                                CXX=$CXX_COMPILATOR
                 log "info" "Starting sqlite make..."
-                make libsqlite3.la
+                make ${MAKEFLAGS} libsqlite3.la
                 SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
                 SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
                 log "info" "sqlite armed and ready for ${arch}!"
@@ -431,6 +436,8 @@ buildMedialibrary()
 
             if [ "$VERBOSE" = "yes" ]; then
                 makeOptions="${makeOptions} V=1"
+            else
+                makeOptions=${MAKEFLAGS}
             fi
 
             local currentXcode="/Application/Xcode.app/Contents/Developer/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}.sdk/usr"
