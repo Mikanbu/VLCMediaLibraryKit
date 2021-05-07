@@ -20,8 +20,6 @@ OSVERSIONMINCFLAG=mios
 OSVERSIONMINLDFLAG=ios
 BUILTJPEGLIBSSIM=
 BUILTJPEGLIBSDEVICE=
-BUILTSQLITELIBSSIM=
-BUILTSQLITELIBSDEVICE=
 BUILTMEDIALIBRARYLIBSSIM=
 BUILTMEDIALIBRARYLIBSDEVICE=
 
@@ -104,12 +102,6 @@ VLCKIT_DIR=""
 LIBJPEG_DIR="${DEPENDENCIES_DIR}/libjpeg-turbo"
 LIBJPEG_BUILD_DIR=""
 LIBJPEG_INCLUDE_DIR=""
-
-SQLITE_RELEASE="sqlite-autoconf-3260000"
-SQLITE_SHA1="9af2df1a6da5db6e2ecf3f463625f16740e036e9"
-SQLITE_DIR="${DEPENDENCIES_DIR}/${SQLITE_RELEASE}"
-SQLITE_INCLUDE_DIR=""
-SQLITE_BUILD_DIR=""
 
 # Helpers
 
@@ -299,58 +291,6 @@ buildLibJpeg()
     spopd
 }
 
-buildSqlite()
-{
-    local arch=$1
-    local target=$2
-    local prefix="${SQLITE_DIR}/build/${arch}/install-dir"
-
-    if [ ! -d "${SQLITE_DIR}" ]; then
-        if [ "$NO_NETWORK" = "no" ]; then
-            log "warning" "sqlite source not found! Starting download..."
-            curl -O https://download.videolan.org/pub/contrib/sqlite/${SQLITE_RELEASE}.tar.gz
-
-            if [ ! "`shasum ${SQLITE_RELEASE}.tar.gz`" = "${SQLITE_SHA1}  ${SQLITE_RELEASE}.tar.gz" ]; then
-                log "error" "Wrong sha1 for ${SQLITE_RELEASE}.tar.gz"
-                exit 1
-            fi
-
-            tar -xozf ${SQLITE_RELEASE}.tar.gz
-            rm -f ${SQLITE_RELEASE}.tar.gz
-        fi
-    fi
-    log "info" "Starting sqlite configuration..."
-    spushd ${SQLITE_RELEASE}
-        if [ ! -e "configure" ]; then
-            log "warning" "Found configure file, launching autoreconf..."
-            autoreconf --install
-        fi
-        if [ ! -d "build" ]; then
-            mkdir build
-        fi
-        spushd build
-            if [ ! -d "$platform" ]; then
-                mkdir $platform
-            fi
-            if [ ! -d "$platform/$arch" ]; then
-                mkdir $platform/$arch
-            fi
-            spushd $platform/$arch
-                ${SQLITE_DIR}/configure \
-                               --host=$target \
-                               --disable-shared \
-                               --disable-readline \
-                               CXX=$CXX_COMPILATOR
-                log "info" "Starting sqlite make..."
-                make ${MAKEFLAGS} libsqlite3.la
-                SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
-                SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
-                log "info" "sqlite armed and ready for ${arch}!"
-            spopd # $arch
-        spopd # build
-     spopd # $SQLITE_RELEASE
-}
-
 buildDependencies()
 {
     log "info" "Starting build for medialibrary dependencies..."
@@ -359,7 +299,6 @@ buildDependencies()
     fi
     spushd $DEPENDENCIES_DIR
         buildLibJpeg $1 $2 $3
-        buildSqlite $1 $2 $3
     spopd
 }
 
@@ -430,8 +369,6 @@ buildMedialibrary()
                 log "warning" "Build of medialibrary dependencies skipped..."
                 LIBJPEG_BUILD_DIR="${LIBJPEG_DIR}/build/${arch}-${platform}"
                 LIBJPEG_INCLUDE_DIR="${LIBJPEG_DIR}/install/${platform}/${arch}/include/"
-                SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
-                SQLITE_INCLUDE_DIR="${SQLITE_DIR}"
             fi
 
             if [ "$VERBOSE" = "yes" ]; then
@@ -453,8 +390,8 @@ buildMedialibrary()
                                    OBJCXX=$OBJCXX_COMPILATOR \
                                    LIBJPEG_LIBS="-L${LIBJPEG_BUILD_DIR} -ljpeg" \
                                    LIBJPEG_CFLAGS="-I${LIBJPEG_INCLUDE_DIR}" \
-                                   SQLITE_LIBS="-L${SQLITE_BUILD_DIR}${actualArch}/.libs -lsqlite3" \
-                                   SQLITE_CFLAGS="-I${SQLITE_INCLUDE_DIR}"
+                                   SQLITE_LIBS="-L${currentXcode}/lib/libsqlite3.dylib -lsqlite3" \
+                                   SQLITE_CFLAGS="-I${currentXcode}/include"
 
                 log "info" "Starting make in ${buildDir}..."
                 make -C $buildDir $makeOptions > ${out}
@@ -555,31 +492,6 @@ collectBuiltJPEGLibs()
     log "info" "libJPEG libs collected!"
 }
 
-collectBuiltSQliteLibs()
-{
-    local sqliteInstallDir="${SQLITE_DIR}/build"
-    local sqliteArchDevice="`ls ${sqliteInstallDir}/OS`"
-    local sqliteArchSimulator="`ls ${sqliteInstallDir}/Simulator`"
-    local deviceFiles=""
-    local simulatorFiles=""
-
-    log "info" "Finding libsqlite3.a binaries..."
-
-    for i in ${sqliteArchDevice}
-    do
-        deviceFiles="${sqliteInstallDir}/OS/${i}/.libs/libsqlite3.a ${deviceFiles}"
-    done
-    BUILTSQLITELIBSDEVICE=$deviceFiles
-
-    for i in ${sqliteArchSimulator}
-    do
-        simulatorFiles="${sqliteInstallDir}/Simulator/${i}/.libs/libsqlite3.a ${simulatorFiles}"
-    done
-    BUILTSQLITELIBSSIM=$simulatorFiles
-
-    log "info" "libsqlite3.a libs collected!"
-}
-
 createFramework()
 {
     local target="$1"
@@ -671,17 +583,14 @@ if [ "$CLEAN" = "yes" ]; then
     log "info" "Xcode build cleaned!"
 fi
 collectBuiltJPEGLibs
-collectBuiltSQliteLibs
 collectBuiltMedialibraryLibs
 
 rm -f $ROOT_DIR/Resources/dependencies.xcconfig
 touch $ROOT_DIR/Resources/dependencies.xcconfig
 echo "// This file is autogenerated by $(basename $0)" >> $ROOT_DIR/Resources/dependencies.xcconfig
 echo "LIBJPEG_LIBRARIES_SIMULATOR=$BUILTJPEGLIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
-echo "SQLITE_LIBRARIES_SIMULATOR=$BUILTSQLITELIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
 echo "MEDIALIBRARY_LIBRARIES_SIMULATOR=$BUILTMEDIALIBRARYLIBSSIM" >> $ROOT_DIR/Resources/dependencies.xcconfig
 echo "LIBJPEG_LIBRARIES_DEVICE=$BUILTJPEGLIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
-echo "SQLITE_LIBRARIES_DEVICE=$BUILTSQLITELIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
 echo "MEDIALIBRARY_LIBRARIES_DEVICE=$BUILTMEDIALIBRARYLIBSDEVICE" >> $ROOT_DIR/Resources/dependencies.xcconfig
 echo "MOBILEVLCKIT_XCFRAMEWORK=$VLCKIT_DIR" >> $ROOT_DIR/Resources/dependencies.xcconfig
 
