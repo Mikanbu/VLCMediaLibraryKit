@@ -172,7 +172,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @brief searchMedia Search amongst the media belonging to this group
- * @brief pattern The search pattern (3 characters minimum)
+ * @param pattern The search pattern (3 characters minimum)
  * @param type The type of media to return, or Unknown to return them all
  * @param criteria Some sorting criteria
  * @param desc Result by descending order

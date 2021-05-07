@@ -511,7 +511,7 @@ NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
  * The actuall discovery will run asynchronously, meaning this method will immediatly return.
  * Depending on which discoverer modules where provided, this might or might not work
  * \note This must be called after start()
- * @param entryPoint What to discover.
+ * @param path What to discover.
  */
 - (void)discoverOnEntryPoint:(NSString *)path;
 
