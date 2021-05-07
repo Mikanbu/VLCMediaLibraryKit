@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (VLCMLIdentifier)identifier;
 - (VLCMLFileType)type;
-- (uint)lastModificationDate;
+- (time_t)lastModificationDate;
 - (int64_t)size;
 
 - (BOOL)isRemovable;

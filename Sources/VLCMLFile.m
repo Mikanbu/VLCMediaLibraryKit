@@ -49,7 +49,7 @@
     return (VLCMLFileType)_file->type();
 }
 
-- (uint)lastModificationDate
+- (time_t)lastModificationDate
 {
     return _file->lastModificationDate();
 }
