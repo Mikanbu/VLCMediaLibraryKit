@@ -8,7 +8,7 @@ ROOT_DIR=default
 SIMULATOR=no
 NO_NETWORK=no
 BUILD_TYPE="Release"
-TESTED_HASH="5b4c2180"
+TESTED_HASH="f624aad5"
 VLCKIT_PATH=~
 BUILD_VLCKIT=no
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
@@ -252,7 +252,7 @@ buildLibJpeg()
     local arch=$1
     local target=$2
     local platform=$3
-    local libjpegRelease="1.5.2"
+    local libjpegRelease="1.5.3"
     local prefix="${LIBJPEG_DIR}/install/${platform}/${arch}"
 
     if [ ! -d "${LIBJPEG_DIR}" ]; then
