@@ -2,7 +2,7 @@
  * VLCMLMetadata.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLMetadata : NSObject
 
-@property (nonatomic, copy) NSString *str;
+@property (nonatomic, copy, readonly) NSString *str;
 
 - (instancetype)init NS_UNAVAILABLE;
 

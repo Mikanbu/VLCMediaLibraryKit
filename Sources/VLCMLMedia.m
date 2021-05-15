@@ -2,7 +2,7 @@
  * VLCMLMedia.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -38,6 +38,17 @@
 {
     medialibrary::MediaPtr _media;
 }
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
+@property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
+@property (nonatomic, strong, nullable) VLCMLMovie *movie;
+
+@property (nonatomic, copy) NSArray<VLCMLFile *> *files;
+@property (nonatomic, copy, nullable) NSArray<VLCMLLabel *> *labels;
+@property (nonatomic, copy, nullable) NSArray<VLCMLAudioTrack *> *audioTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLVideoTrack *> *videoTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 @end
 
 @implementation VLCMLMedia

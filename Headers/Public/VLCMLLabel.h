@@ -2,7 +2,7 @@
  * VLCMLLabel.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLLabel : NSObject <VLCMLObject>
 
-@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy, readonly) NSString *name;
 
 - (instancetype)init NS_UNAVAILABLE;
 

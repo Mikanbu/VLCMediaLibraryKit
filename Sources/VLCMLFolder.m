@@ -2,7 +2,7 @@
  * VLCMLFolder.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -28,6 +28,9 @@
 {
     medialibrary::FolderPtr _folder;
 }
+
+@property (nonatomic, copy) NSURL *mrl;
+@property (nonatomic, copy) NSString *name;
 @end
 
 @implementation VLCMLFolder

@@ -2,7 +2,7 @@
  * VLCMLAlbumTrack.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -36,9 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
  * "Artist 1 featuring Artist 2 and also artist 3 and a whole bunch of people"
  * @return A pointer to a VLCMLArtist instance.
  */
-@property (nonatomic, strong, nullable) VLCMLArtist *artist;
-@property (nonatomic, strong, nullable) VLCMLGenre *genre;
-@property (nonatomic, strong, nullable) VLCMLAlbum *album;
+@property (nonatomic, strong, nullable, readonly) VLCMLArtist *artist;
+@property (nonatomic, strong, nullable, readonly) VLCMLGenre *genre;
+@property (nonatomic, strong, nullable, readonly) VLCMLAlbum *album;
 
 - (instancetype)init NS_UNAVAILABLE;
 

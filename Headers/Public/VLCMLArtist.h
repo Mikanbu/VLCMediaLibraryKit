@@ -2,7 +2,7 @@
  * VLCMLArtist.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -33,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLArtist : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *shortBio;
-@property (nonatomic, copy) NSString *musicBrainzId;
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSString *shortBio;
+@property (nonatomic, copy, readonly) NSString *musicBrainzId;
 
 
 - (instancetype)init NS_UNAVAILABLE;

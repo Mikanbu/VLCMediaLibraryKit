@@ -2,7 +2,7 @@
  * VLCMediaLibrary.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -52,6 +52,9 @@ VLCMLIdentifier const VariousArtistID = 2u;
     medialibrary::IMediaLibrary *_ml;
     medialibrary::DeviceListerPtr _deviceLister;
 }
+
+@property (nonatomic, copy) NSString *databasePath;
+@property (nonatomic, copy) NSString *medialibraryPath;
 @end
 
 @implementation VLCMediaLibrary

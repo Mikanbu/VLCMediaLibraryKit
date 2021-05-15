@@ -2,7 +2,7 @@
  * VLCMLSubtitleTrack.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLSubtitleTrack : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *codec;
-@property (nonatomic, copy) NSString *language;
-@property (nonatomic, copy) NSString *trackDescription;
-@property (nonatomic, copy) NSString *encoding;
+@property (nonatomic, copy, readonly) NSString *codec;
+@property (nonatomic, copy, readonly) NSString *language;
+@property (nonatomic, copy, readonly) NSString *trackDescription;
+@property (nonatomic, copy, readonly) NSString *encoding;
 
 - (instancetype)init NS_UNAVAILABLE;
 

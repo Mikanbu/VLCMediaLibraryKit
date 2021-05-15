@@ -2,7 +2,7 @@
  * VLCMLFile.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLFile : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSURL *mrl;
+@property (nonatomic, copy, readonly) NSURL *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 

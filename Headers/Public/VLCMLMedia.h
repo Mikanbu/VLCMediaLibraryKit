@@ -89,16 +89,16 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, assign) SInt64 subtitleTrackIndex;
 @property (nonatomic, assign) SInt64 chapterIndex;
 @property (nonatomic, assign) SInt64 titleIndex;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
-@property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
-@property (nonatomic, strong, nullable) VLCMLMovie *movie;
+@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, strong, nullable, readonly) VLCMLAlbumTrack *albumTrack;
+@property (nonatomic, strong, nullable, readonly) VLCMLShowEpisode *showEpisode;
+@property (nonatomic, strong, nullable, readonly) VLCMLMovie *movie;
 
-@property (nonatomic, copy) NSArray<VLCMLFile *> *files;
-@property (nonatomic, copy, nullable) NSArray<VLCMLLabel *> *labels;
-@property (nonatomic, copy, nullable) NSArray<VLCMLAudioTrack *> *audioTracks;
-@property (nonatomic, copy, nullable) NSArray<VLCMLVideoTrack *> *videoTracks;
-@property (nonatomic, copy, nullable) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
+@property (nonatomic, copy, readonly) NSArray<VLCMLFile *> *files;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLLabel *> *labels;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLAudioTrack *> *audioTracks;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLVideoTrack *> *videoTracks;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -2,7 +2,7 @@
  * VLCMLAlbum.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -31,6 +31,11 @@
 {
     medialibrary::AlbumPtr _album;
 }
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *shortSummary;
+@property (nonatomic, copy, nullable) VLCMLArtist *albumArtist;
+
 @end
 
 @implementation VLCMLAlbum

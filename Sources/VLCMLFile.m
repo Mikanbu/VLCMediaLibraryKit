@@ -2,7 +2,7 @@
  * VLCMLFile.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,6 +27,8 @@
 {
     medialibrary::FilePtr _file;
 }
+
+@property (nonatomic, copy) NSURL *mrl;
 @end
 
 @implementation VLCMLFile

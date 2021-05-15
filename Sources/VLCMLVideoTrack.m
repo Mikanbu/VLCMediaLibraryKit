@@ -2,7 +2,7 @@
  * VLCMLVideoTrack.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,6 +27,10 @@
 {
     medialibrary::VideoTrackPtr _videoTrack;
 }
+
+@property (nonatomic, copy) NSString *codec;
+@property (nonatomic, copy) NSString *videoDescription;
+@property (nonatomic, copy) NSString *language;
 @end
 
 @implementation VLCMLVideoTrack

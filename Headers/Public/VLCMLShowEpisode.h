@@ -2,7 +2,7 @@
  * VLCMLShowEpisode.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLShowEpisode : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *shortSummary;
-@property (nonatomic, copy) NSString *tvdbId;
-@property (nonatomic, strong, nullable) VLCMLShow *show;
+@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, copy, readonly) NSString *shortSummary;
+@property (nonatomic, copy, readonly) NSString *tvdbId;
+@property (nonatomic, strong, nullable, readonly) VLCMLShow *show;
 
 - (instancetype)init NS_UNAVAILABLE;
 

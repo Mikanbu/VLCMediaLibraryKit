@@ -2,7 +2,7 @@
  * VLCMLPlaylist.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -28,6 +28,11 @@
 {
     medialibrary::PlaylistPtr _playlist;
 }
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *media;
+@property (nonatomic) BOOL isReadOnly;
+@property (nonatomic, copy, nullable) NSURL *mrl;
 @end
 
 @implementation VLCMLPlaylist

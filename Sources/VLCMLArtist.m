@@ -2,7 +2,7 @@
  * VLCMLArtist.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -28,6 +28,10 @@
 {
     medialibrary::ArtistPtr _artist;
 }
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *shortBio;
+@property (nonatomic, copy) NSString *musicBrainzId;
 @end
 
 @implementation VLCMLArtist

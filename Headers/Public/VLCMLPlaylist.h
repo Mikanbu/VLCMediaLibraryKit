@@ -2,7 +2,7 @@
  * VLCMLPlayst.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VLCMLPlaylist : NSObject <VLCMLObject>
 
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy, readonly) NSString *name;
 
 /**
  * @brief media Returns the media contained in this playlist
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The media will always be sorted by their ascending position in the playlist.
  */
-@property (nonatomic, copy, nullable) NSArray<VLCMLMedia *> *media;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLMedia *> *media;
 
 
 /**
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  * now, accept the changes, but if the playlist file changes, any user
  * provided changes will be discarded without warning.
  */
-@property (nonatomic) BOOL isReadOnly;
+@property (nonatomic, readonly) BOOL isReadOnly;
 
 /**
  * @brief mrl Return the file backing this playlist.
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  * playlist has no file associated with it.
  * In case of errors, an empty string will be returned.
  */
-@property (nonatomic, copy, nullable) NSURL *mrl;
+@property (nonatomic, copy, nullable, readonly) NSURL *mrl;
 
 - (instancetype)init NS_UNAVAILABLE;
 
