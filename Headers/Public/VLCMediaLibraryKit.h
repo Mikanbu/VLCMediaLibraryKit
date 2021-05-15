@@ -2,7 +2,7 @@
  * VLCMediaLibraryKit.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -34,6 +34,7 @@
 #import <VLCMediaLibraryKit/VLCMLMovie.h>
 #import <VLCMediaLibraryKit/VLCMLObject.h>
 #import <VLCMediaLibraryKit/VLCMLPlaylist.h>
+#import <VLCMediaLibraryKit/VLCMLSearchAggregate.h>
 #import <VLCMediaLibraryKit/VLCMLShow.h>
 #import <VLCMediaLibraryKit/VLCMLShowEpisode.h>
 #import <VLCMediaLibraryKit/VLCMLSubtitleTrack.h>
