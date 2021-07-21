@@ -2,7 +2,7 @@
  * VLCMLDeviceLister.mm
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
+ * Copyright (C) 2010-2021 VLC authors and VideoLAN
  * $Id$
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -40,16 +40,8 @@ bool medialibrary::fs::VLCMLDeviceLister::start(IDeviceListerCb *cb)
         return false;
     }
 
-    char realPath[PATH_MAX];
-
-    if (realpath([documentDir.path UTF8String], realPath) == NULL) {
-        return false;
-    }
-
-    NSURL *mrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:realPath]];
-
     m_deviceListerCb->onDeviceMounted([[NSString stringWithFormat:@"%d", DEFAULT_UUID] UTF8String],
-                                      [mrl.absoluteString UTF8String],
+                                      [documentDir.filePathURL.absoluteString UTF8String],
                                       true );
 
     return true;
