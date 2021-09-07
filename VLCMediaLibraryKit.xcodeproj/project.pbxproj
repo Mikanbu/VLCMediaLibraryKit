@@ -74,7 +74,6 @@
 		7D2ACC282641496600FE919A /* VLCMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EF51D170885130003ED47 /* VLCMediaLibrary.m */; };
 		7D2ACC292641496600FE919A /* VLCMLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E238717AEEA71008485E5 /* VLCMLAlbum.m */; };
 		7D2ACC2B2641498900FE919A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2ACC2A2641498900FE919A /* Foundation.framework */; platformFilter = ios; };
-		7DDA227A2645551D00A63139 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DBB596B264551240009FEC5 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +97,6 @@
 		7D9E238417AEEA13008485E5 /* VLCMLAlbumTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCMLAlbumTrack.h; sourceTree = "<group>"; };
 		7D9E238517AEEA13008485E5 /* VLCMLAlbumTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCMLAlbumTrack.m; sourceTree = "<group>"; };
 		7D9E238717AEEA71008485E5 /* VLCMLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCMLAlbum.m; sourceTree = "<group>"; };
-		7DBB596B264551240009FEC5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8D05F9D81F2F97D2003000B6 /* VLCMLLabel+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLLabel+Init.h"; sourceTree = "<group>"; };
 		8D05F9DA1F309AF9003000B6 /* VLCMLFolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLCMLFolder.h; path = Headers/Public/VLCMLFolder.h; sourceTree = SOURCE_ROOT; };
 		8D05F9DB1F309AF9003000B6 /* VLCMLFolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VLCMLFolder.m; path = Sources/VLCMLFolder.m; sourceTree = SOURCE_ROOT; };
@@ -157,7 +155,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DDA227A2645551D00A63139 /* libsqlite3.tbd in Frameworks */,
 				7D2ACC2B2641498900FE919A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,7 +185,6 @@
 		7D0EF4A0170883940003ED47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7DBB596B264551240009FEC5 /* libsqlite3.tbd */,
 				7D2ACC2A2641498900FE919A /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -617,12 +613,14 @@
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
 					"$(MEDIALIBRARY_LIBRARIES_DEVICE)",
+					"$(SQLITE_LIBRARIES_DEVICE)",
 					"$(LIBJPEG_LIBRARIES_DEVICE)",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
 					"$(MEDIALIBRARY_LIBRARIES_SIMULATOR)",
+					"$(SQLITE_LIBRARIES_SIMULATOR)",
 					"$(LIBJPEG_LIBRARIES_SIMULATOR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.videolan.VLCMediaLibraryKit;
@@ -691,12 +689,14 @@
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
 					"$(MEDIALIBRARY_LIBRARIES_DEVICE)",
+					"$(SQLITE_LIBRARIES_DEVICE)",
 					"$(LIBJPEG_LIBRARIES_DEVICE)",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
 					"$(MEDIALIBRARY_LIBRARIES_SIMULATOR)",
+					"$(SQLITE_LIBRARIES_SIMULATOR)",
 					"$(LIBJPEG_LIBRARIES_SIMULATOR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.videolan.VLCMediaLibraryKit;
