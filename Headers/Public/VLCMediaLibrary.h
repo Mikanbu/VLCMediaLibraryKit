@@ -134,6 +134,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddMedia:(NSArray<VLCMLMedia *> *)media;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaWithIds:(NSArray<NSNumber *> *)mediaIds;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didConvertMediaToExternal
+                    :(NSArray<NSNumber *> *)mediaIds;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddArtists:(NSArray<VLCMLArtist *> *)artists;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyArtistsWithIds:(NSArray<NSNumber *> *)artistsIds;
@@ -151,19 +153,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyGenresWithIds:(NSArray<NSNumber *> *)genresIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteGenresWithIds:(NSArray<NSNumber *> *)genresIds;
 
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didStartDiscovery:(NSString *)entryPoint;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didProgressDiscovery:(NSString *)entryPoint;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didCompleteDiscovery:(NSString *)entryPoint;
-
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didStartReload:(NSString *)entryPoint;
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didCompleteReload:(NSString *)entryPoint;
+- (void)medialibraryDidStartDiscovery:(VLCMediaLibrary *)medialibrary;
+- (void)medialibraryDidEndDiscovery:(VLCMediaLibrary *)medialibrary;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didProgressDiscovery:(NSString *)currentFolder;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didFailDiscovery:(NSString *)entryPoint;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didRemoveEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didBanEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didUnbanEntryPoint:(NSString *)entryPoint withSuccess:(BOOL)success;
 
-- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateParsingStatsWithPercent:(UInt32)percent;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didUpdateParsingStatsWithOpsDone:(UInt32)opsDone
+        opsScheduled:(UInt32)opsScheduled;
 
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didChangeIdleBackgroundTasksWithSuccess:(BOOL)success;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary thumbnailReadyForMedia:(VLCMLMedia *)media
@@ -233,14 +234,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <VLCMLDeviceListerDelegate> deviceListerDelegate;
 
 #pragma mark -
-
-/**
- * @brief isInitialized Convenience helper to know if the media library is
- *                      already initialized.
- *
- * @return true is the media library is already initialized, false otherwise.
- */
-- (BOOL)isInitialized;
 
 /**
  * @brief  initialize Initializes the media library.

@@ -51,9 +51,24 @@
     return _mediaGroup->nbTotalMedia();
 }
 
-- (UInt32)nbMedia
+- (UInt32)nbPresentMedia
 {
-    return _mediaGroup->nbMedia();
+    return _mediaGroup->nbPresentMedia();
+}
+
+- (UInt32)nbPresentVideo
+{
+    return _mediaGroup->nbPresentVideo();
+}
+
+- (UInt32)nbPresentAudio
+{
+    return _mediaGroup->nbPresentAudio();
+}
+
+- (UInt32)nbPresentUnknown
+{
+    return _mediaGroup->nbPresentUnknown();
 }
 
 - (UInt32)nbVideo

@@ -4,5 +4,6 @@
 xcuserdata
 .DS_Store
 build
+buildsystem
 medialibrary
 Resources/dependencies.xcconfig

@@ -66,10 +66,6 @@ VLCMLIdentifier const VariousArtistID = 2u;
     self = [super init];
     if (self) {
         _isInitialized = NO;
-
-        _ml = NewMediaLibrary();
-        _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
-
         _deviceLister = std::make_shared<medialibrary::fs::VLCMLDeviceLister>();
     }
     return self;
@@ -104,18 +100,16 @@ VLCMLIdentifier const VariousArtistID = 2u;
     }
 }
 
-- (BOOL)isInitialized
-{
-    return _ml->isInitialized();
-}
-
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 {
+    _ml = NewMediaLibrary([databasePath UTF8String], [medialibraryPath UTF8String],
+                           false);
+
+    _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
+
     _ml->registerDeviceLister(_deviceLister, "file://");
-    VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize([databasePath UTF8String],
-                                                                          [medialibraryPath UTF8String],
-                                                                          _mlCb);
+    VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize(_mlCb);
 
     if (result == VLCMLInitializeResultSuccess) {
         _isInitialized = YES;

@@ -81,6 +81,15 @@ void MediaLibraryCb::onMediaDeleted( std::set<int64_t> mediaIds )
     }
 }
 
+void MediaLibraryCb::onMediaConvertedToExternal( std::set<int64_t> mediaIds )
+{
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:didConvertMediaToExternal:)]) {
+        [m_delegate medialibrary:m_medialibrary
+       didConvertMediaToExternal:intSetToArray(mediaIds)];
+    }
+}
+
 #pragma mark - Artists
 
 void MediaLibraryCb::onArtistsAdded( std::vector<ArtistPtr> artists )
@@ -244,50 +253,36 @@ void MediaLibraryCb::onBookmarksDeleted(std::set<int64_t> bookmarkIds)
 
 #pragma mark - Discovery
 
-void MediaLibraryCb::onDiscoveryStarted( const std::string& entryPoint )
+void MediaLibraryCb::onDiscoveryStarted()
 {
-    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibrary:didStartDiscovery:)]) {
-        [m_delegate medialibrary:m_medialibrary
-               didStartDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
+    if (m_delegate && [m_delegate respondsToSelector:@selector(medialibraryDidStartDiscovery:)]) {
+        [m_delegate medialibraryDidStartDiscovery:m_medialibrary];
     }
 }
 
-void MediaLibraryCb::onDiscoveryProgress( const std::string& entryPoint )
+void MediaLibraryCb::onDiscoveryProgress( const std::string& currentFolder )
 {
     if (m_delegate
         && [m_delegate respondsToSelector:@selector(medialibrary:didProgressDiscovery:)]) {
         [m_delegate medialibrary:m_medialibrary
-            didProgressDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
-    }
-
-}
-
-void MediaLibraryCb::onDiscoveryCompleted( const std::string& entryPoint, bool success )
-{
-    if (m_delegate
-        && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteDiscovery:)]) {
-        [m_delegate medialibrary:m_medialibrary
-            didCompleteDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
+            didProgressDiscovery:[NSString stringWithUTF8String:currentFolder.c_str()]];
     }
 }
 
-#pragma mark - Reload
-
-void MediaLibraryCb::onReloadStarted( const std::string& entryPoint )
+void MediaLibraryCb::onDiscoveryCompleted()
 {
     if (m_delegate
-        && [m_delegate respondsToSelector:@selector(medialibrary:didStartReload:)]) {
-        [m_delegate medialibrary:m_medialibrary
-                  didStartReload:[NSString stringWithUTF8String:entryPoint.c_str()]];
+        && [m_delegate respondsToSelector:@selector(medialibraryDidEndDiscovery:)]) {
+        [m_delegate medialibraryDidEndDiscovery:m_medialibrary];
     }
 }
 
-void MediaLibraryCb::onReloadCompleted( const std::string& entryPoint, bool success )
+void MediaLibraryCb::onDiscoveryFailed( const std::string& entryPoint )
 {
     if (m_delegate
-        && [m_delegate respondsToSelector:@selector(medialibrary:didCompleteReload:)]) {
+        && [m_delegate respondsToSelector:@selector(medialibrary:didFailDiscovery:)]) {
         [m_delegate medialibrary:m_medialibrary
-               didCompleteReload:[NSString stringWithUTF8String:entryPoint.c_str()]];
+                didFailDiscovery:[NSString stringWithUTF8String:entryPoint.c_str()]];
     }
 }
 
@@ -335,11 +330,13 @@ void MediaLibraryCb::onEntryPointUnbanned( const std::string& entryPoint, bool s
 }
 
 #pragma mark - Parsing
-void MediaLibraryCb::onParsingStatsUpdated( uint32_t percent)
+void MediaLibraryCb::onParsingStatsUpdated( uint32_t opsDone, uint32_t opsScheduled )
 {
     if (m_delegate
-        && [m_delegate respondsToSelector:@selector(medialibrary:didUpdateParsingStatsWithPercent:)]) {
-        [m_delegate medialibrary:m_medialibrary didUpdateParsingStatsWithPercent:percent];
+        && [m_delegate respondsToSelector:@selector(medialibrary:didUpdateParsingStatsWithOpsDone:opsScheduled:)]) {
+        [m_delegate medialibrary:m_medialibrary
+didUpdateParsingStatsWithOpsDone:opsDone
+                    opsScheduled:opsScheduled];
     }
 }
 

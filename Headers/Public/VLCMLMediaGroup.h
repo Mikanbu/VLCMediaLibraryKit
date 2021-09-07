@@ -50,12 +50,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (UInt32)nbTotalMedia;
 
 /**
- * @brief nbMedia Returns the number of media in this group
+ * @brief nbMedia Returns the number of present media in this group
  */
-- (UInt32)nbMedia;
+- (UInt32)nbPresentMedia;
 
 /**
- * @brief nbVideo returns the number of video media in this group
+ * @brief nbVideo returns the number of present video media in this group
+ */
+- (UInt32)nbPresentVideo;
+
+/**
+ * @brief nbAudio Returns the number of present audio media in this group
+ */
+- (UInt32)nbPresentAudio;
+
+/**
+ * @brief nbUnknown Returns the number of present media of unknown type in this group
+ */
+- (UInt32)nbPresentUnknown;
+
+/**
+ * @brief nbVideo Returns the number of video (present or not ) media in this group
  */
 - (UInt32)nbVideo;
 

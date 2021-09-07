@@ -83,6 +83,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)artworkMrl;
 
 /**
+ * @brief nbMedia Return the number of media in this playlist
+ * This number doesn't reflect media presence. For the count of present
+ * media, use nbPresentMedia
+*/
+- (UInt32)nbMedia;
+
+/**
+ * @brief nbPresentMedia Returns the number of present media in this playlist
+ */
+- (UInt32)nbPresentMedia;
+
+/**
  * @brief searchMedia Search some media in a playlist
  * @param pattern The search pattern. Minimal length is 3 characters
  * @param criteria Sorting criteria. \see VLCMLSortingCriteria

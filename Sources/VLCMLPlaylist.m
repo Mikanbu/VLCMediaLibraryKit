@@ -23,6 +23,7 @@
 #import "VLCMLPlaylist.h"
 #import "VLCMLMedia+Init.h"
 #import "VLCMLUtils.h"
+#import "VLCMediaLibrary.h"
 
 @interface VLCMLPlaylist ()
 {
@@ -75,9 +76,22 @@
     return [NSString stringWithUTF8String:_playlist->artworkMrl().c_str()];
 }
 
+- (UInt32)nbMedia
+{
+    return _playlist->nbMedia();
+}
+
+- (UInt32)nbPresentMedia
+{
+    return _playlist->nbPresentMedia();
+}
+
 - (NSArray<VLCMLMedia *> *)media
 {
-    return [VLCMLUtils arrayFromMediaQuery:_playlist->media()];;
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:VLCMLSortingCriteriaDefault
+                                                                     desc:false];
+
+    return [VLCMLUtils arrayFromMediaQuery:_playlist->media(&param)];;
 }
 
 - (NSArray<VLCMLMedia *> *)searchMediaWithPattern:(NSString *)pattern

@@ -48,6 +48,18 @@ public:
 
     virtual void onMediaDeleted( std::set<int64_t> mediaIds );
 
+    /**
+     * @brief onMediaConvertedToExternal Will be invoked when some media are converted
+     * from internal to external
+     * @param mediaIds The converted media IDs
+     *
+     * A media will be converted from internal to external if the entrypoint which
+     * contains it gets removed from the list of known entry points. The media
+     * will only be deleted at a later point from the database, if they haven't
+     * been played for around 6 months, and are not part of any playlist
+     */
+    virtual void onMediaConvertedToExternal( std::set<int64_t> mediaIds );
+
     virtual void onArtistsAdded( std::vector<ArtistPtr> artists );
     virtual void onArtistsModified( std::set<int64_t> artistsIds );
     virtual void onArtistsDeleted( std::set<int64_t> artistsIds );
@@ -73,55 +85,39 @@ public:
     virtual void onBookmarksDeleted( std::set<int64_t> bookmarkIds );
 
     /**
-     * @brief onDiscoveryStarted This callback will be invoked when a folder queued for discovery
-     * (by calling IMediaLibrary::discover()) gets processed.
-     * @param entryPoint The entrypoint being discovered
-     * This callback will be invoked once per endpoint.
+     * @brief onDiscoveryStarted This callback will be invoked when the discoverer
+     * starts to crawl an entrypoint that was scheduled for discovery or reload.
+     *
+     * This callback will be invoked when the discoverer thread gets woken up
+     * regardless of how many entry points need to be discovered.
      */
-    virtual void onDiscoveryStarted( const std::string& entryPoint );
+    virtual void onDiscoveryStarted();
     /**
-     * @brief onDiscoveryProgress This callback will be invoked each time the discoverer enters a new
-     * entrypoint. Typically, everytime it enters a new folder.
-     * @param entryPoint The entrypoint being discovered
+     * @brief onDiscoveryProgress This callback will be invoked each time the
+     * discoverer enters a new folder.
+     * @param currentFolder The folder being discovered
+     *
      * This callback can be invoked multiple times even though a single entry point was asked to be
      * discovered. ie. In the case of a file system discovery, discovering a folder would make this
      * callback being invoked for all subfolders
      */
-    virtual void onDiscoveryProgress( const std::string& entryPoint );
+    virtual void onDiscoveryProgress( const std::string& currentFolder );
     /**
-     * @brief onDiscoveryCompleted Will be invoked when the discovery of a specified entrypoint has
-     * completed.
-     * ie. in the case of a filesystem discovery, once the folder, and all its files and subfolders
-     * have been discovered.
-     * This will also be invoked with an empty entryPoint when the initial reload of the medialibrary
-     * has completed.
+     * @brief onDiscoveryCompleted Will be invoked when the discoverer finishes
+     * all its queued operations and goes back to idle.
+     *
+     * This callback will be invoked once for each invocation fo onDiscoveryStarted
      */
-    virtual void onDiscoveryCompleted( const std::string& entryPoint, bool success );
+    virtual void onDiscoveryCompleted();
+    /**
+     * @brief onDiscoveryFailed Will be invoked when a discovery operation fails
+     * @param entryPoint The entry point for which the discovery failed.
+     */
+    virtual void onDiscoveryFailed( const std::string& entryPoint );
     /**
      * @brief onReloadStarted will be invoked when a reload operation begins.
      * @param entryPoint Will be an empty string is the reload is a global reload, or the specific
      * entry point that gets reloaded
-     */
-    virtual void onReloadStarted( const std::string& entryPoint );
-    /**
-     * @brief onReloadCompleted will be invoked when a reload operation gets completed.
-     * @param entryPoint Will be an empty string is the reload was a global reload, or the specific
-     * entry point that has been reloaded
-     */
-    virtual void onReloadCompleted( const std::string& entryPoint, bool success );
-    /**
-     * @brief onEntryPointAdded will be invoked when an entrypoint gets added
-     * @param entryPoint The entry point which was scheduled for discovery
-     * @param success A boolean to represent the operation's success
-     *
-     * This callback will only be emitted the first time the entry point gets
-     * processed, after it has been inserted to the database.
-     * In case of failure, it might be emited every time the request is sent, since
-     * the provided entry point would most likely be invalid, and couldn't be inserted.
-     * Later processing of that entry point will still cause \sa{onDiscoveryStarted}
-     * \sa{onDiscoveryProgress} and \sa{onDiscoveryCompleted} events to be fired
-     * \warning This event will be fired after \sa{onDiscoveryStarted} since we
-     * don't know if an entry point is known before starting it's processing
      */
     virtual void onEntryPointAdded( const std::string& entryPoint, bool success );
     /**
@@ -147,10 +143,11 @@ public:
      * @brief onParsingStatsUpdated Called when the parser statistics are updated
      *
      * There is no waranty about how often this will be called.
-     * @param percent The progress percentage [0,100]
+     * @param opsDone The number of operation the parser completed
+     * @param opsScheduled The number of operations currently scheduled by the parser
      *
      */
-    virtual void onParsingStatsUpdated( uint32_t percent);
+    virtual void onParsingStatsUpdated( uint32_t opsDone, uint32_t opsScheduled );
     /**
      * @brief onBackgroundTasksIdleChanged Called when background tasks idle state change
      * @param isIdle true when all background tasks are idle, false otherwise
