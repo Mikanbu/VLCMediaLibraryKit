@@ -569,20 +569,26 @@ collectBuiltMedialibraryLibs()
 
     log "info" "Finding libmedialibrary.a binaries..."
 
-    for i in ${medialibraryArch}
-    do
-        devicefiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${devicefiles}"
-    done
-
-    if [ "$ARCH" = "all" ] || isSimulatorArch $ARCH; then
-        for i in ${medialibrarySimulatorArch}
+    if [ "$ARCH" = "all" ]; then
+        for i in ${medialibraryArch}
         do
-            simulatorfiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${simulatorfiles}"
+            devicefiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${devicefiles}"
         done
+
+        if isSimulatorArch $ARCH; then
+            for i in ${medialibrarySimulatorArch}
+            do
+                simulatorfiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${simulatorfiles}"
+            done
+        fi
+    else
+        local actualArch="`getActualArch ${ARCH}`"
+        devicefiles="${medialibraryInstallDir}/${actualArch}/lib/libmedialibrary.a"
+        simulatorfiles="${medialibrarySimulatorInstallDir}/${actualArch}/lib/libmedialibrary.a"
     fi
 
-    BUILTMEDIALIBRARYLIBSSIM=$simulatorfiles
     BUILTMEDIALIBRARYLIBSDEVICE=$devicefiles
+    BUILTMEDIALIBRARYLIBSSIM=$simulatorfiles
 
     log "info" "libmedialibrary libs collected!"
 }
@@ -595,18 +601,24 @@ collectBuiltJPEGLibs()
     log "info" "Finding libjpeg.a binaries..."
 
     spushd ${libjpegInstallDir}
-    for i in `ls OS`
-    do
-        files="${libjpegInstallDir}/OS/${i}/lib/libjpeg.a ${files}"
-    done
-    BUILTJPEGLIBSDEVICE=$files
+        if [ "$ARCH" = "all" ]; then
+            for i in `ls OS`
+            do
+                files="${libjpegInstallDir}/OS/${i}/lib/libjpeg.a ${files}"
+            done
+            BUILTJPEGLIBSDEVICE=$files
 
-    files=""
-    for i in `ls Simulator`
-    do
-        files="${libjpegInstallDir}/Simulator/${i}/lib/libjpeg.a ${files}"
-    done
-    BUILTJPEGLIBSSIM=$files
+            files=""
+            for i in `ls Simulator`
+            do
+                files="${libjpegInstallDir}/Simulator/${i}/lib/libjpeg.a ${files}"
+            done
+            BUILTJPEGLIBSSIM=$files
+        else
+            local actualArch="`getActualArch ${ARCH}`"
+            BUILTJPEGLIBSDEVICE="${libjpegInstallDir}/OS/${actualArch}/lib/libjpeg.a"
+            BUILTJPEGLIBSSIM="${libjpegInstallDir}/Simulator/${actualArch}/lib/libjpeg.a"
+        fi
     spopd
 
     log "info" "libJPEG libs collected!"
@@ -622,17 +634,23 @@ collectBuiltSQliteLibs()
 
     log "info" "Finding libsqlite3.a binaries..."
 
-    for i in ${sqliteArchDevice}
-    do
-        deviceFiles="${sqliteInstallDir}/OS/${i}/.libs/libsqlite3.a ${deviceFiles}"
-    done
-    BUILTSQLITELIBSDEVICE=$deviceFiles
+    if [ "$ARCH" = "all" ]; then
+        for i in ${sqliteArchDevice}
+        do
+            deviceFiles="${sqliteInstallDir}/OS/${i}/.libs/libsqlite3.a ${deviceFiles}"
+        done
+        BUILTSQLITELIBSDEVICE=$deviceFiles
 
-    for i in ${sqliteArchSimulator}
-    do
-        simulatorFiles="${sqliteInstallDir}/Simulator/${i}/.libs/libsqlite3.a ${simulatorFiles}"
-    done
-    BUILTSQLITELIBSSIM=$simulatorFiles
+        for i in ${sqliteArchSimulator}
+        do
+            simulatorFiles="${sqliteInstallDir}/Simulator/${i}/.libs/libsqlite3.a ${simulatorFiles}"
+        done
+        BUILTSQLITELIBSSIM=$simulatorFiles
+    else
+        local actualArch="`getActualArch ${ARCH}`"
+        BUILTSQLITELIBSDEVICE="${sqliteInstallDir}/OS/${actualArch}/.libs/libsqlite3.a"
+        BUILTSQLITELIBSSIM="${sqliteInstallDir}/Simulator/${actualArch}/.libs/libsqlite3.a"
+    fi
 
     log "info" "libsqlite3.a libs collected!"
 }
