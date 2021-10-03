@@ -335,14 +335,14 @@ VLCMLIdentifier const VariousArtistID = 2u;
 
 - (NSArray<VLCMLPlaylist *> *)playlists
 {
-    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists()];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists( medialibrary::PlaylistType::All )];
 }
 
 - (NSArray<VLCMLPlaylist *> *)playlistsWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
-    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists(&param)];
+    return [VLCMLUtils arrayFromPlaylistQuery:_ml->playlists( medialibrary::PlaylistType::All, &param)];
 }
 
 - (VLCMLPlaylist *)createPlaylistWithName:(NSString *)name
