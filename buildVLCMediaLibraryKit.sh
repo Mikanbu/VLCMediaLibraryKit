@@ -486,6 +486,9 @@ buildMedialibrary()
             export CPPFLAGS="${CFLAGS}"
             export LDFLAGS=${LDFLAGS}
 
+            export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
+            log "info" "PATH set to ${PATH}"
+
             if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
                 buildDependencies $actualArch $target $platform
             else
