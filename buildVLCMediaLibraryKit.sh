@@ -224,9 +224,14 @@ exportPKG()
 
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
     log "info" "PKG_CONFIG_PATH set to ${PKG_CONFIG_PATH}"
+}
 
-    export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
-    log "info" "PATH set to ${PATH}"
+getCPUFamily() {
+    if [ "$1" = "i386" ]; then
+        echo "x86"
+    else
+        echo "$1"
+    fi
 }
 
 generateCrossFile()
@@ -277,7 +282,7 @@ generateCrossFile()
 
         echo "[host_machine]" >> "$crossfileName"
         echo "system = 'darwin'" >> "$crossfileName"
-        echo "cpu_family = '$architecture'" >> "$crossfileName"
+        echo "cpu_family = '`getCPUFamily $architecture`'" >> "$crossfileName"
         echo "endian = 'little'" >> "$crossfileName"
         echo "cpu = '$architecture'" >> "$crossfileName"
     spopd #crossfilesDir
