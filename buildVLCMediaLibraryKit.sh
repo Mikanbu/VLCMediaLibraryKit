@@ -583,12 +583,10 @@ collectBuiltMedialibraryLibs()
             devicefiles="${medialibraryInstallDir}/${i}/lib/libmedialibrary.a ${devicefiles}"
         done
 
-        if isSimulatorArch $ARCH; then
-            for i in ${medialibrarySimulatorArch}
-            do
-                simulatorfiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${simulatorfiles}"
-            done
-        fi
+        for i in ${medialibrarySimulatorArch}
+        do
+            simulatorfiles="${medialibrarySimulatorInstallDir}/${i}/lib/libmedialibrary.a ${simulatorfiles}"
+        done
     else
         local actualArch="`getActualArch ${ARCH}`"
         devicefiles="${medialibraryInstallDir}/${actualArch}/lib/libmedialibrary.a"
