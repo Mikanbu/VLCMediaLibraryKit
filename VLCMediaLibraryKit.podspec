@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VLCMediaLibraryKit"
-  s.version      = '0.8.1b1'
+  s.version      = '0.8.1b2'
   s.summary      = "A MediaLibrary framework in Objective-C for iOS and OS X"
 
   s.description  = <<-DESC
@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
 
   s.source = {
-   :http => 'https://download.videolan.org/pub/cocoapods/prod/VLCMediaLibraryKit-0.8.1b1-4334c78-5b4c2180.zip',
-   :sha256 => '269c4edacbc1e27c583d53046180f5c715b05d84e56d08d7171ee10b8f30fed1'
+   :http => 'https://download.videolan.org/pub/cocoapods/prod/VLCMediaLibraryKit-0.8.1b2-f18cfae-5c74aacc.zip',
+   :sha256 => '975ed215283ea888b9d5228b079adf4c23fbbb73c7837ae4cd4ce7a06b135900'
   }
   s.ios.vendored_framework = 'VLCMediaLibraryKit.xcframework'
 
