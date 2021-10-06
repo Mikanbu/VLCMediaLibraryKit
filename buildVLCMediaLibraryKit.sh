@@ -517,7 +517,7 @@ buildMedialibrary()
             meson \
                 -Ddebug=true \
                 -Doptimization="${medialibraryOptimization}" \
-                -Dd_ndebug="${medialibraryNDebug}" \
+                -Db_ndebug="${medialibraryNDebug}" \
                 --cross-file "${ROOT_DIR}/buildsystem/crossfiles/$actualArch-$platform.crossfile" \
                 --prefix "${prefix}" \
                 -Ddefault_library=static \
