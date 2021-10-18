@@ -522,6 +522,7 @@ buildMedialibrary()
                 --prefix "${prefix}" \
                 -Ddefault_library=static \
                 -Dtests=disabled \
+                -Dforce_attachment_api=true \
                 $buildDir
         fi
         spushd $buildDir
