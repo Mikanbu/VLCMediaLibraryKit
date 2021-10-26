@@ -7,7 +7,7 @@ stages:
 
 .release-job-base:
     tags:
-        - macos
+        - catalina
     stage: release
     only:
         - tags
