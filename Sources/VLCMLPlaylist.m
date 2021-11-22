@@ -38,6 +38,12 @@
 
 @implementation VLCMLPlaylist
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, nbmedia: %u nbPresentMedia: %u",
+            NSStringFromClass([self class]), self.identifier, self.name, self.nbMedia, self.nbPresentMedia];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _playlist->id();

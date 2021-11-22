@@ -36,6 +36,12 @@
 
 @implementation VLCMLMediaGroup
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, nbTotalMedia: %u, nbPresentMedia: %u",
+            NSStringFromClass([self class]), self.identifier, self.name, self.nbTotalMedia, self.nbPresentMedia];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _mediaGroup->id();

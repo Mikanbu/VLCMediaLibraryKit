@@ -35,6 +35,11 @@
 
 @implementation VLCMLMetadata
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — isSet: %i", NSStringFromClass([self class]), self.isSet];
+}
+
 - (BOOL)isSet
 {
     return _metadata->isSet();

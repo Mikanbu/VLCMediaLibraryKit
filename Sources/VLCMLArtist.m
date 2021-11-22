@@ -38,6 +38,12 @@
 
 #pragma mark - Getters/Setters
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@",
+            NSStringFromClass([self class]), self.identifier, self.name];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _artist->id();

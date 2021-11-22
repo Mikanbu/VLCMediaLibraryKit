@@ -35,6 +35,12 @@
 
 @implementation VLCMLFolder
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, mrl: %@",
+            NSStringFromClass([self class]), self.identifier, self.name, self.mrl];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _folder->id();

@@ -53,6 +53,12 @@
 
 @implementation VLCMLMedia
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, type: %hhu, title: %@",
+            NSStringFromClass([self class]), self.identifier, self.type, self.title];
+}
+
 #pragma mark - Getters/Setters
 - (float)progress
 {

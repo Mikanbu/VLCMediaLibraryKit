@@ -35,6 +35,12 @@
 
 @implementation VLCMLVideoTrack
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, codec: %@, desc: %@",
+            NSStringFromClass([self class]), self.identifier, self.codec, self.videoDescription];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _videoTrack->id();

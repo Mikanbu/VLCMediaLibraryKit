@@ -35,6 +35,12 @@
 
 @implementation VLCMLAudioTrack
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, desc: %@",
+            NSStringFromClass([self class]), self.identifier, self.audioDescription];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _audioTrack->id();

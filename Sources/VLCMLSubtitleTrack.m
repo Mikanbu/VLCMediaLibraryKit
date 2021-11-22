@@ -36,6 +36,12 @@
 
 @implementation VLCMLSubtitleTrack
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, codec %@, desc: %@",
+            NSStringFromClass([self class]), self.identifier, self.codec, self.trackDescription];
+}
+
 - (VLCMLIdentifier)identifier {
     return _subTrack->id();
 }

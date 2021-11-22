@@ -33,6 +33,12 @@
 
 @implementation VLCMLFile
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, type: %li, mrl: %@",
+            NSStringFromClass([self class]), self.identifier, self.type, self.mrl];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _file->id();

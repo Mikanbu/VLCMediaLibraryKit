@@ -35,6 +35,12 @@
 
 @implementation VLCMLMovie
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, IMBD ID: %@",
+            NSStringFromClass([self class]), self.identifier, self.imdbId];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _movie->id();

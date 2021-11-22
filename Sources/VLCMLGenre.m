@@ -34,6 +34,12 @@
 
 @implementation VLCMLGenre
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, NoT: %u",
+            NSStringFromClass([self class]), self.identifier, self.name, (unsigned int)self.numberOfTracks];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _genre->id();

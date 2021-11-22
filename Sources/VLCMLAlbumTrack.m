@@ -39,6 +39,12 @@
 
 @implementation VLCMLAlbumTrack
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, artist: %@",
+            NSStringFromClass([self class]), self.identifier, self.artist];
+}
+
 - (VLCMLIdentifier)identifier
 {
     return _albumTrackPtr->id();

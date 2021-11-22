@@ -37,6 +37,11 @@
 
 @implementation VLCMLShowEpisode
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ — ID: %lli, title: %@",
+            NSStringFromClass([self class]), self.identifier, self.title];
+}
 
 - (VLCMLIdentifier)identifier
 {
