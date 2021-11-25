@@ -7,6 +7,10 @@ VERBOSE=no
 ROOT_DIR=default
 SIMULATOR=no
 NO_NETWORK=no
+PREBUILT_VLCKIT=no
+SKIP_LIBVLC_TOOLS=no
+VLCKIT_RELEASE="3.3.18b6-24e52c1c-9bc28dab"
+VLCKIT_SHASUM256="590baf022ec4c8c23da0cd5557528642711cc056b368f8b48d7247c351fc8927"
 BUILD_TYPE="Release"
 TESTED_HASH="5db47475"
 VLCKIT_PATH=~
@@ -48,10 +52,12 @@ usage()
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
     -p      VLCKit path(default is ~/)
     -k      Build VLCKit
+    -t      Skip libvlc tools compilation (not recommended)
+    -b      Building using a prebuilt VLCKit
 EOF
 }
 
-while getopts "hvdmncsxa:p:k" OPTION
+while getopts "hvdbmncstxa:p:k" OPTION
 do
     case $OPTION in
         h)
@@ -89,6 +95,12 @@ do
         k)
             BUILD_VLCKIT=yes
             ;;
+        b)
+            PREBUILT_VLCKIT=yes
+            ;;
+        t)
+            SKIP_LIBVLC_TOOLS=yes
+            ;;
         ?)
             usage
             exit 1
@@ -111,6 +123,10 @@ SQLITE_SHA1="c20286e11fe5c2e3712ce74890e1692417de6890"
 SQLITE_DIR="${DEPENDENCIES_DIR}/${SQLITE_RELEASE}"
 SQLITE_INCLUDE_DIR=""
 SQLITE_BUILD_DIR=""
+
+VLCKIT_PREBUILT_DIR="${DEPENDENCIES_DIR}/MobileVLCKit"
+LIBVLC_TOOLS_DIR="${VLCKIT_PREBUILT_DIR}/LibVLCTools"
+VLCKIT_PKGCONFIG_DIR="${VLCKIT_PREBUILT_DIR}/pkgconfig"
 
 # Helpers
 
@@ -218,7 +234,11 @@ exportPKG()
     local platform=$2
     local architecture=$3
 
-    PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig:"
+    if [ "$PREBUILT_VLCKIT" != "yes" ]; then
+        PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig:"
+    else
+        PKG_CONFIG_PATH="${VLCKIT_PKGCONFIG_DIR}/${architecture}-${platform}:"
+    fi
     PKG_CONFIG_PATH+="${LIBJPEG_BUILD_DIR}/pkgconfig:"
     PKG_CONFIG_PATH+="${SQLITE_BUILD_DIR}/${platform}/${architecture}"
 
@@ -286,6 +306,78 @@ generateCrossFile()
         echo "endian = 'little'" >> "$crossfileName"
         echo "cpu = '$architecture'" >> "$crossfileName"
     spopd #crossfilesDir
+}
+
+generateVLCKitPkgConfigFile()
+{
+    local arch=$1
+    local platform=$2
+
+    log "info" "Creating pkgconfig for $arch/$platform..."
+
+    mkdir -p "$VLCKIT_PKGCONFIG_DIR" && spushd "$VLCKIT_PKGCONFIG_DIR"
+    mkdir -p "$arch-$platform" && spushd "$arch-$platform"
+
+    if [ "$platform" = "Simulator" ]; then
+    local PCPREFIX="${VLCKIT_PREBUILT_DIR}/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator/MobileVLCKit.framework"
+    else
+    local PCPREFIX="${VLCKIT_PREBUILT_DIR}/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s/MobileVLCKit.framework"
+    fi
+
+    rm -f libvlc.pc
+    touch libvlc.pc
+    echo "prefix=$PCPREFIX" >> libvlc.pc
+    echo "exec_prefix=\${prefix}" >> libvlc.pc
+    echo "libdir=\${exec_prefix}" >> libvlc.pc
+    echo "includedir=\${prefix}/Headers" >> libvlc.pc
+    echo "" >> libvlc.pc
+    echo "Name: MobileVLCKit libvlc" >> libvlc.pc
+    echo "Description: VLC media player external control library through MobileVLCKit" >> libvlc.pc
+    echo "Version: 3.0.18" >> libvlc.pc
+    echo "Cflags: -I\${includedir}" >> libvlc.pc
+    echo "Libs: -L\${libdir} -lvlc" >> libvlc.pc
+    echo "Libs.private: -lvlccore" >> libvlc.pc
+
+    spopd # $architecture-$platform
+    spopd # $VLCKIT_PKGCONFIG_DIR
+}
+
+fetchPrebuiltVLCKit()
+{
+    if [ ! -d "${VLCKIT_PREBUILT_DIR}" ]; then
+        mkdir -p "$VLCKIT_PREBUILT_DIR" && spushd "$VLCKIT_PREBUILT_DIR"
+
+        curl -O http://download.videolan.org/cocoapods/prod/MobileVLCKit-${VLCKIT_RELEASE}.tar.xz
+
+        if [ ! "`shasum -a 256 MobileVLCKit-${VLCKIT_RELEASE}.tar.xz`" = "${VLCKIT_SHASUM256}  MobileVLCKit-${VLCKIT_RELEASE}.tar.xz" ]; then
+            log "error" "Wrong sha256 for MobileVLCKit-${VLCKIT_RELEASE}.tar.xz"
+            exit 1
+        fi
+
+        tar -xozf MobileVLCKit-${VLCKIT_RELEASE}.tar.xz
+        rm -f MobileVLCKit-${VLCKIT_RELEASE}.tar.xz
+        mv MobileVLCKit-binary/MobileVLCKit.xcframework MobileVLCKit.xcframework
+        rm -rf MobileVLCKit-binary
+        spopd # VLCKIT_PREBUILT_DIR
+    fi
+
+    if [ "$SKIP_LIBVLC_TOOLS" = "no" ]; then
+        if [ ! -d "${LIBVLC_TOOLS_DIR}" ]; then
+            mkdir -p "$LIBVLC_TOOLS_DIR" && spushd "$LIBVLC_TOOLS_DIR"
+            git init
+            git remote add -f origin https://code.videolan.org/videolan/vlc.git
+            git config core.sparseCheckout true
+            echo "extras/tools/" >> .git/info/sparse-checkout
+            git pull origin 3.0.x
+    
+            spushd ${LIBVLC_TOOLS_DIR}/extras/tools
+            ./bootstrap && make
+            spopd # ${LIBVLC_TOOLS_DIR}/extras/tools
+            spopd # LIBVLC_TOOLS_DIR
+        fi
+    fi
+
+    generateVLCKitPkgConfigFile $1 $2
 }
 
 # Retrieve medialibrary
@@ -421,6 +513,9 @@ buildDependencies()
     if [ ! -d "${DEPENDENCIES_DIR}" ]; then
         mkdir -p $DEPENDENCIES_DIR
     fi
+    if [ "$PREBUILT_VLCKIT" = "yes" ]; then
+        fetchPrebuiltVLCKit $1 $3
+    fi
     spushd $DEPENDENCIES_DIR
         buildLibJpeg $1 $2 $3
         buildSqlite $1 $2 $3
@@ -486,7 +581,15 @@ buildMedialibrary()
             export CPPFLAGS="${CFLAGS}"
             export LDFLAGS=${LDFLAGS}
 
-            export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
+            if [ "$PREBUILT_VLCKIT" != "yes" ]; then
+                export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
+            else
+                if [ "$SKIP_LIBVLC_TOOLS" = "no" ]; then
+                    export PATH="${LIBVLC_TOOLS_DIR}/extras/tools/build/bin:${PATH}"
+                else
+                    export PATH="${PATH}"
+                fi
+            fi
             log "info" "PATH set to ${PATH}"
 
             if [ "${SKIP_DEPENDENCIES}" != "yes" ]; then
@@ -722,7 +825,11 @@ fi
 
 cleanEnvironment
 
-locateVLCKit
+if [ "$PREBUILT_VLCKIT" != "yes" ]; then
+    locateVLCKit
+else
+    VLCKIT_DIR=${VLCKIT_PREBUILT_DIR}
+fi
 
 if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
     fetchMedialibrary
