@@ -1,5 +1,28 @@
 stages:
     - release
+    - build
+
+######################
+## Continous Builds ##
+######################
+
+.continous-job-base:
+    tags:
+        - catalina
+        - amd64
+    stage: build
+    only:
+        - merge_requests
+    interruptible: true
+
+.continous-build-base:
+    script:
+        - ./buildVLCMediaLibraryKit.sh -b -t -v
+
+continous-VLCMediaLibraryKit:
+    extends:
+        - .continous-job-base
+        - .continous-build-base
 
 ####################
 ## Release builds ##
