@@ -37,6 +37,7 @@ continous-VLCMediaLibraryKit:
     artifacts:
         paths:
             - ./build/*.zip
+            - ./build/*.patch
 
 VLCMediaLibraryKit:
     extends: .release-job-base
