@@ -140,6 +140,8 @@ gitCommit()
 
     git add "$podspec"
     git commit -m "${podspec}: Update version to ${VERSION}"
+    git format-patch HEAD~1
+    mv *.patch build/
 }
 
 checkIfExistOnRemote()
