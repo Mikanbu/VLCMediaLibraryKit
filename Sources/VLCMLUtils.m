@@ -86,7 +86,10 @@
     NSMutableArray *mediaList = [NSMutableArray array];
 
     for (const auto &medium : media) {
-        [mediaList addObject:[[VLCMLMedia alloc] initWithMediaPtr:medium]];
+        VLCMLMedia *mlMedium = [[VLCMLMedia alloc] initWithMediaPtr:medium];
+        if (mlMedium) {
+            [mediaList addObject:mlMedium];
+        }
     }
     return [mediaList copy];
 }
@@ -96,7 +99,10 @@
     NSMutableArray<VLCMLAlbum *> *albumList = [NSMutableArray array];
 
     for (const auto &album : albums) {
-        [albumList addObject:[[VLCMLAlbum alloc] initWithAlbumPtr:album]];
+        VLCMLAlbum *mlAlbum = [[VLCMLAlbum alloc] initWithAlbumPtr:album];
+        if (mlAlbum) {
+            [albumList addObject:mlAlbum];
+        }
     }
     return [albumList copy];
 }
@@ -106,7 +112,10 @@
     NSMutableArray<VLCMLArtist *> *artistList = [NSMutableArray array];
 
     for (const auto &artist : artists) {
-        [artistList addObject:[[VLCMLArtist alloc] initWithArtistPtr:artist]];
+        VLCMLArtist *mlArtist = [[VLCMLArtist alloc] initWithArtistPtr:artist];
+        if (mlArtist) {
+            [artistList addObject:mlArtist];
+        }
     }
     return [artistList copy];
 }
@@ -116,7 +125,10 @@
     NSMutableArray<VLCMLPlaylist *> *playlistList = [NSMutableArray array];
 
     for (const auto &playlist : playlists) {
-        [playlistList addObject:[[VLCMLPlaylist alloc] initWithPlaylistPtr:playlist]];
+        VLCMLPlaylist *mlPlaylist = [[VLCMLPlaylist alloc] initWithPlaylistPtr:playlist];
+        if (mlPlaylist) {
+            [playlistList addObject:mlPlaylist];
+        }
     }
     return [playlistList copy];
 }
@@ -126,7 +138,10 @@
     NSMutableArray<VLCMLGenre *> *genreList = [NSMutableArray array];
 
     for (const auto &genre : genres) {
-        [genreList addObject:[[VLCMLGenre alloc] initWithGenrePtr:genre]];
+        VLCMLGenre *mlGenre = [[VLCMLGenre alloc] initWithGenrePtr:genre];
+        if (mlGenre) {
+            [genreList addObject:mlGenre];
+        }
     }
     return [genreList copy];
 }
@@ -136,7 +151,10 @@
     NSMutableArray<VLCMLFolder *> *folderList = [NSMutableArray array];
 
     for (const auto &folder : folders) {
-        [folderList addObject:[[VLCMLFolder alloc] initWithFolderPtr:folder]];
+        VLCMLFolder *mlFolder = [[VLCMLFolder alloc] initWithFolderPtr:folder];
+        if (mlFolder) {
+            [folderList addObject:mlFolder];
+        }
     }
     return [folderList copy];
 }
@@ -146,7 +164,10 @@
     NSMutableArray<VLCMLMediaGroup *> *mediaGroupList = [NSMutableArray array];
 
     for (const auto &mediaGroup : mediaGroups) {
-        [mediaGroupList addObject:[[VLCMLMediaGroup alloc] initWithMediaGroupPtr:mediaGroup]];
+        VLCMLMediaGroup *mlMediaGroup = [[VLCMLMediaGroup alloc] initWithMediaGroupPtr:mediaGroup];
+        if (mlMediaGroup) {
+            [mediaGroupList addObject:mlMediaGroup];
+        }
     }
     return [mediaGroupList copy];
 }
