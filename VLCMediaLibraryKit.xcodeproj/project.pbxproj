@@ -498,7 +498,23 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
+				OTHER_LDFLAGS = "";
+				"OTHER_LDFLAGS[sdk=appletvos*]" = (
+					"$(inherited)",
+					"-framework",
+					TVVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=appletvsimulator*]" = (
+					"$(inherited)",
+					"-framework",
+					TVVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"-framework",
+					MobileVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
 					"-framework",
 					MobileVLCKit,
@@ -550,7 +566,22 @@
 					"$(SRCROOT)/medialibrary/include",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = (
+				"OTHER_LDFLAGS[sdk=appletvos*]" = (
+					"$(inherited)",
+					"-framework",
+					TVVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=appletvsimulator*]" = (
+					"$(inherited)",
+					"-framework",
+					TVVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"-framework",
+					MobileVLCKit,
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
 					"-framework",
 					MobileVLCKit,
@@ -587,6 +618,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletvos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/TVVLCKit.xcframework/tvos-arm64";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletvsimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/TVVLCKit.xcframework/tvos-arm64_x86_64-simulator";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -608,6 +641,20 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
+				);
+				"OTHER_LDFLAGS[sdk=appletvos*]" = (
+					"$(inherited)",
+					"$(VLCKIT_XCFRAMEWORK)",
+					"$(MEDIALIBRARY_LIBRARIES_DEVICE)",
+					"$(SQLITE_LIBRARIES_DEVICE)",
+					"$(LIBJPEG_LIBRARIES_DEVICE)",
+				);
+				"OTHER_LDFLAGS[sdk=appletvsimulator*]" = (
+					"$(inherited)",
+					"$(VLCKIT_XCFRAMEWORK)",
+					"$(MEDIALIBRARY_LIBRARIES_SIMULATOR)",
+					"$(SQLITE_LIBRARIES_SIMULATOR)",
+					"$(LIBJPEG_LIBRARIES_SIMULATOR)",
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
 					"$(inherited)",
@@ -663,6 +710,8 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletvos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/TVVLCKit.xcframework/tvos-arm64";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletvsimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/TVVLCKit.xcframework/tvos-arm64_x86_64-simulator";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s";
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(MOBILEVLCKIT_XCFRAMEWORK)/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -684,6 +733,20 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"$(VLCKIT_XCFRAMEWORK)",
+				);
+				"OTHER_LDFLAGS[sdk=appletvos*]" = (
+					"$(inherited)",
+					"$(VLCKIT_XCFRAMEWORK)",
+					"$(MEDIALIBRARY_LIBRARIES_DEVICE)",
+					"$(SQLITE_LIBRARIES_DEVICE)",
+					"$(LIBJPEG_LIBRARIES_DEVICE)",
+				);
+				"OTHER_LDFLAGS[sdk=appletvsimulator*]" = (
+					"$(inherited)",
+					"$(VLCKIT_XCFRAMEWORK)",
+					"$(MEDIALIBRARY_LIBRARIES_SIMULATOR)",
+					"$(SQLITE_LIBRARIES_SIMULATOR)",
+					"$(LIBJPEG_LIBRARIES_SIMULATOR)",
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
 					"$(inherited)",
