@@ -52,12 +52,12 @@ usage()
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
     -p      VLCKit path(default is ~/)
     -k      Build VLCKit
-    -t      Skip libvlc tools compilation (not recommended)
+    -l      Skip libvlc tools compilation (not recommended)
     -b      Building using a prebuilt VLCKit
 EOF
 }
 
-while getopts "hvdbmncstxa:p:k" OPTION
+while getopts "hvdblmncsxa:p:k" OPTION
 do
     case $OPTION in
         h)
@@ -98,7 +98,7 @@ do
         b)
             PREBUILT_VLCKIT=yes
             ;;
-        t)
+        l)
             SKIP_LIBVLC_TOOLS=yes
             ;;
         ?)

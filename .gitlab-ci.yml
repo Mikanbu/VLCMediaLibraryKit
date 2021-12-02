@@ -17,7 +17,7 @@ stages:
 
 .continous-build-base:
     script:
-        - ./buildVLCMediaLibraryKit.sh -b -t -v
+        - ./buildVLCMediaLibraryKit.sh -b -l -v
 
 continous-VLCMediaLibraryKit:
     extends:
@@ -42,5 +42,5 @@ continous-VLCMediaLibraryKit:
 VLCMediaLibraryKit:
     extends: .release-job-base
     script:
-        - ./buildVLCMediaLibraryKit.sh -b -t
+        - ./buildVLCMediaLibraryKit.sh -b -l
         - ./createDeployable.sh -v ${CI_COMMIT_TAG}
