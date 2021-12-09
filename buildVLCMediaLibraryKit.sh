@@ -165,10 +165,10 @@ log()
     local color=$green
     local msgType=$1
 
-    if [ "$1" = "warning" ]; then
+    if [ "$msgType" = "warning" ]; then
         color=$orange
         msgType="warning"
-    elif [ "$1" = "error" ]; then
+    elif [ "$msgType" = "error" ]; then
         color=$red
         msgType="error"
     fi
@@ -177,15 +177,17 @@ log()
 
 getActualArch()
 {
-    if [ "$1" = "aarch64" ]; then
+    local architecture=$1
+    if [ "$architecture" = "aarch64" ]; then
         echo "arm64"
     else
-        echo "$1"
+        echo "$architecture"
     fi
 }
 
 isSimulatorArch() {
-    if [ "$1" = "i386" -o "$1" = "x86_64" ];then
+    local architecture=$1
+    if [ "$architecture" = "i386" -o "$architecture" = "x86_64" ];then
         return 0
     else
         return 1
@@ -242,10 +244,11 @@ exportPKG()
 }
 
 getCPUFamily() {
-    if [ "$1" = "i386" ]; then
+    local cpuname=$1
+    if [ "$cpuname" = "i386" ]; then
         echo "x86"
     else
-        echo "$1"
+        echo "$cpuname"
     fi
 }
 
@@ -347,6 +350,9 @@ generateVLCKitPkgConfigFile()
 
 fetchPrebuiltVLCKit()
 {
+    local actualArch=$1
+    local platform=$2
+
     if [ ! -d "${VLCKIT_DIR}" ]; then
         mkdir -p "$VLCKIT_DIR" && spushd "$VLCKIT_DIR"
 
@@ -389,7 +395,7 @@ fetchPrebuiltVLCKit()
         fi
     fi
 
-    generateVLCKitPkgConfigFile $1 $2
+    generateVLCKitPkgConfigFile $actualArch $platform
 }
 
 # Retrieve medialibrary
@@ -521,10 +527,14 @@ buildSqlite()
 
 buildDependencies()
 {
+    local actualArch=$1
+    local target=$2
+    local platform=$3
+
     log "info" "Starting build for medialibrary dependencies..."
     spushd $DEPENDENCIES_DIR
-        buildLibJpeg $1 $2 $3
-        buildSqlite $1 $2 $3
+        buildLibJpeg $actualArch $target $platform
+        buildSqlite $actualArch $target $platform
     spopd
 }
 
@@ -654,10 +664,11 @@ buildMedialibrary()
 # from buildMobileVLCKit.sh
 buildXcodeproj()
 {
+    local xcproject="$1"
     local target="$2"
     local platform="$3"
 
-    log "info" "Starting build $1 ($target, ${BUILD_TYPE}, $platform)..."
+    log "info" "Starting build $xcproject ($target, ${BUILD_TYPE}, $platform)..."
 
     local architectures=""
     if [ "$ARCH" == "all" ]; then
@@ -684,7 +695,7 @@ buildXcodeproj()
     fi
 
     xcodebuild archive \
-               -project "$1.xcodeproj" \
+               -project $xcproject.xcodeproj \
                -sdk $platform$SDK \
                -configuration ${BUILD_TYPE} \
                ARCHS="${architectures}" \
