@@ -9,7 +9,6 @@ VERBOSE=no
 ROOT_DIR=default
 SIMULATOR=no
 NO_NETWORK=no
-PREBUILT_VLCKIT=no
 SKIP_LIBVLC_TOOLS=no
 VLCKIT_BASEURL="https://download.videolan.org/cocoapods/prod/"
 VLCKIT_NAME="MobileVLCKit"
@@ -18,8 +17,7 @@ VLCKIT_SHASUM256_IOS="590baf022ec4c8c23da0cd5557528642711cc056b368f8b48d7247c351
 VLCKIT_SHASUM256_TVOS="0bd40b4c1bc86b7e50e175afca8ee0660fa94fb870468836d49d450c9a27fc05"
 BUILD_TYPE="Release"
 TESTED_HASH="5db47475"
-VLCKIT_PATH=~
-BUILD_VLCKIT=no
+CUSTOM_VLCKIT_PATH=~
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
@@ -58,16 +56,14 @@ usage()
     -s      Enable medialibrary build for simulators
     -x      Skip medialibrary dependencies build
     -a      Build for specific architecture(all|i386|x86_64|armv7|armv7s|aarch64)
-    -p      VLCKit path(default is ~/)
-    -k      Build VLCKit
+    -p      Path to VLCKit xcframework binary (name of the framework not included in the path)
     -l      Skip libvlc tools compilation (not recommended)
-    -b      Building using a prebuilt VLCKit
     -t      Compile for tvOS
     -f      Create xcframework
 EOF
 }
 
-while getopts "hvfdblmncstxa:p:k" OPTION
+while getopts "hvfdlmncstxa:p:" OPTION
 do
     case $OPTION in
         h)
@@ -100,13 +96,7 @@ do
             ARCH=$OPTARG
             ;;
         p)
-            VLCKIT_PATH=$OPTARG
-            ;;
-        k)
-            BUILD_VLCKIT=yes
-            ;;
-        b)
-            PREBUILT_VLCKIT=yes
+            CUSTOM_VLCKIT_PATH=$OPTARG
             ;;
         l)
             SKIP_LIBVLC_TOOLS=yes
@@ -149,9 +139,9 @@ SQLITE_DIR="${DEPENDENCIES_DIR}/${SQLITE_RELEASE}"
 SQLITE_INCLUDE_DIR=""
 SQLITE_BUILD_DIR=""
 
-VLCKIT_PREBUILT_DIR="${DEPENDENCIES_DIR}/${VLCKIT_NAME}"
+VLCKIT_DIR="${DEPENDENCIES_DIR}/${VLCKIT_NAME}"
 LIBVLC_TOOLS_DIR="${DEPENDENCIES_DIR}/LibVLCTools"
-VLCKIT_PKGCONFIG_DIR="${VLCKIT_PREBUILT_DIR}/pkgconfig"
+VLCKIT_PKGCONFIG_DIR="${VLCKIT_DIR}/pkgconfig"
 
 # Helpers
 
@@ -225,32 +215,16 @@ cleanEnvironment()
 locateVLCKit()
 {
     log "info" "Looking for VLCKit..."
-    local path=$VLCKIT_PATH
+    local path=$CUSTOM_VLCKIT_PATH
 
-    if [ "$BUILD_VLCKIT" == "yes" ]; then
-        log "info" "Cloning VLCKit..."
-        git clone https://code.videolan.org/videolan/VLCKit.git
-        spushd VLCKit
-            git checkout 3.0
-            log "info" "Starting VLCKit 3.0 build..."
-            # A specific architecture isn't needed, aarch64 was choosen.
-            ./buildMobileVLCKit.sh -vfa aarch64
-            path="`pwd`"
-        spopd # VLCKit
-    elif [ "$VLCKIT_PATH" == ~ ]; then
-        log "warning" "VLCKit path not provided, will look for it at ~/"
-
-        path="`find ${VLCKIT_PATH} -maxdepth 5 -type d -name 'VLCKit' -print -quit`"
-        if [ -z "${path}" ]; then
-            log "error" "Unable to find VLCKit!"
-            exit 1
-        fi
+    if [ "$CUSTOM_VLCKIT_PATH" == ~ ]; then
+        log "error" "VLCKit path not provided but requested"
+        exit 1
     fi
 
-    VLC_DIR="${path}/libvlc/vlc"
-    VLCKIT_DIR="${path}/build"
-    log "info" "Found at ${path}"
-    log "info" "Setting libvlc directory at ${VLC_DIR}"
+    VLC_DIR=""
+    VLCKIT_DIR="${path}"
+    log "info" "Using custom VLCKit at ${path}"
 }
 
 exportPKG()
@@ -259,11 +233,7 @@ exportPKG()
     local platform=$2
     local architecture=$3
 
-    if [ "$PREBUILT_VLCKIT" != "yes" ]; then
-        PKG_CONFIG_PATH="${VLC_DIR}/install-${os}${platform}/${architecture}/lib/pkgconfig:"
-    else
-        PKG_CONFIG_PATH="${VLCKIT_PKGCONFIG_DIR}/${architecture}-${platform}:"
-    fi
+    PKG_CONFIG_PATH="${VLCKIT_PKGCONFIG_DIR}/${architecture}-${platform}:"
     PKG_CONFIG_PATH+="${LIBJPEG_BUILD_DIR}/pkgconfig:"
     PKG_CONFIG_PATH+="${SQLITE_BUILD_DIR}/${os}${platform}/${architecture}"
 
@@ -345,15 +315,15 @@ generateVLCKitPkgConfigFile()
 
     if [ "$COMPILE_FOR_TVOS" = "no" ]; then
         if [ "$platform" = "Simulator" ]; then
-            local PCPREFIX="${VLCKIT_PREBUILT_DIR}/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator/MobileVLCKit.framework"
+            local PCPREFIX="${VLCKIT_DIR}/MobileVLCKit.xcframework/ios-arm64_i386_x86_64-simulator/MobileVLCKit.framework"
         else
-            local PCPREFIX="${VLCKIT_PREBUILT_DIR}/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s/MobileVLCKit.framework"
+            local PCPREFIX="${VLCKIT_DIR}/MobileVLCKit.xcframework/ios-arm64_armv7_armv7s/MobileVLCKit.framework"
         fi
     else
         if [ "$platform" = "Simulator" ]; then
-            local PCPREFIX="${VLCKIT_PREBUILT_DIR}/TVVLCKit.xcframework/tvos-arm64_x86_64-simulator/TVVLCKit.framework"
+            local PCPREFIX="${VLCKIT_DIR}/TVVLCKit.xcframework/tvos-arm64_x86_64-simulator/TVVLCKit.framework"
         else
-            local PCPREFIX="${VLCKIT_PREBUILT_DIR}/TVVLCKit.xcframework/tvos-arm64/TVVLCKit.framework"
+            local PCPREFIX="${VLCKIT_DIR}/TVVLCKit.xcframework/tvos-arm64/TVVLCKit.framework"
         fi
     fi
 
@@ -377,8 +347,8 @@ generateVLCKitPkgConfigFile()
 
 fetchPrebuiltVLCKit()
 {
-    if [ ! -d "${VLCKIT_PREBUILT_DIR}" ]; then
-        mkdir -p "$VLCKIT_PREBUILT_DIR" && spushd "$VLCKIT_PREBUILT_DIR"
+    if [ ! -d "${VLCKIT_DIR}" ]; then
+        mkdir -p "$VLCKIT_DIR" && spushd "$VLCKIT_DIR"
 
         log "info" "Downloading prebuilt VLCKit from ${VLCKIT_BASEURL}${VLCKIT_NAME}-${VLCKIT_RELEASE}.tar.xz"
         curl -O ${VLCKIT_BASEURL}${VLCKIT_NAME}-${VLCKIT_RELEASE}.tar.xz
@@ -400,7 +370,7 @@ fetchPrebuiltVLCKit()
         rm -f ${VLCKIT_NAME}-${VLCKIT_RELEASE}.tar.xz
         mv ${VLCKIT_NAME}-binary/${VLCKIT_NAME}.xcframework ${VLCKIT_NAME}.xcframework
         rm -rf ${VLCKIT_NAME}-binary
-        spopd # VLCKIT_PREBUILT_DIR
+        spopd # VLCKIT_DIR
     fi
 
     if [ "$SKIP_LIBVLC_TOOLS" = "no" ]; then
@@ -585,9 +555,7 @@ buildMedialibrary()
             if [ ! -d "${DEPENDENCIES_DIR}" ]; then
                 mkdir -p $DEPENDENCIES_DIR
             fi
-            if [ "$PREBUILT_VLCKIT" = "yes" ]; then
-                fetchPrebuiltVLCKit $actualArch $platform
-            fi
+            fetchPrebuiltVLCKit $actualArch $platform
 
             SDKROOT=`xcode-select -print-path`/Platforms/${os}${platform}.platform/Developer/SDKs/${os}${platform}${SDK_VERSION}.sdk
             if [ ! -d "${SDKROOT}" ]; then
@@ -628,14 +596,10 @@ buildMedialibrary()
             export CPPFLAGS="${CFLAGS}"
             export LDFLAGS=${LDFLAGS}
 
-            if [ "$PREBUILT_VLCKIT" != "yes" ]; then
-                export PATH="${VLC_DIR}/extras/tools/build/bin:${PATH}"
+            if [ "$SKIP_LIBVLC_TOOLS" = "no" ]; then
+                export PATH="${LIBVLC_TOOLS_DIR}/extras/tools/build/bin:${PATH}"
             else
-                if [ "$SKIP_LIBVLC_TOOLS" = "no" ]; then
-                    export PATH="${LIBVLC_TOOLS_DIR}/extras/tools/build/bin:${PATH}"
-                else
-                    export PATH="${PATH}"
-                fi
+                export PATH="${PATH}"
             fi
             log "info" "PATH set to ${PATH}"
 
@@ -911,10 +875,8 @@ fi
 
 cleanEnvironment
 
-if [ "$PREBUILT_VLCKIT" != "yes" ]; then
+if [ "$CUSTOM_VLCKIT_PATH" != ~ ]; then
     locateVLCKit
-else
-    VLCKIT_DIR=${VLCKIT_PREBUILT_DIR}
 fi
 
 if [ "$SKIP_MEDIALIBRARY" != "yes" ]; then
