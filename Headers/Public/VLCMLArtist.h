@@ -48,8 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The number of albums *by* this artist. This doesn't include the
  *         albums an artist appears on.
  */
-- (int)albumsCount;
-- (int)tracksCount;
+- (uint)albumsCount;
+- (uint)tracksCount;
 
 /**
  * @brief isArtworkGenerated Returns true is a thumbnail generation was

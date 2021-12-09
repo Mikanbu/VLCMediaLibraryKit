@@ -65,12 +65,12 @@
     return _shortBio;
 }
 
-- (int)albumsCount
+- (uint)albumsCount
 {
     return _artist->nbAlbums();
 }
 
-- (int)tracksCount
+- (uint)tracksCount
 {
     return _artist->nbTracks();
 }

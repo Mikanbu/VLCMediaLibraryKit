@@ -171,7 +171,7 @@
     return _media->duration();
 }
 
-- (int)playCount
+- (UInt32)playCount
 {
     return _media->playCount();
 }
