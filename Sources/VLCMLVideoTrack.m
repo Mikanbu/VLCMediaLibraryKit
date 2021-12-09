@@ -69,6 +69,31 @@
     return _videoTrack->fps();
 }
 
+- (UInt32)fpsNum
+{
+    return _videoTrack->fpsNum();
+}
+
+- (UInt32)fpsDen
+{
+    return _videoTrack->fpsDen();
+}
+
+- (UInt32)bitrate
+{
+    return _videoTrack->bitrate();
+}
+
+- (UInt32)sarNum
+{
+    return _videoTrack->sarNum();
+}
+
+- (UInt32)sarDen
+{
+    return _videoTrack->sarDen();
+}
+
 - (NSString *)videoDescription
 {
     if (!_videoDescription) {

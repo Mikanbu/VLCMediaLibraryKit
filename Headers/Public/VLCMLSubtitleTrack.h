@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *language;
 @property (nonatomic, copy, readonly) NSString *trackDescription;
 @property (nonatomic, copy, readonly) NSString *encoding;
+@property (nonatomic, readonly) BOOL isInAttachedFile;
 
 - (instancetype)init NS_UNAVAILABLE;
 

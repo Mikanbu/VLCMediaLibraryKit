@@ -1,5 +1,5 @@
 /*****************************************************************************
- * VLCMLPlayst.h
+ * VLCMLPlaylist.h
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2021 VLC authors and VideoLAN
@@ -93,6 +93,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief nbPresentMedia Returns the number of present media in this playlist
  */
 - (UInt32)nbPresentMedia;
+
+/**
+ * @brief duration Returns the duration of this playlist
+ */
+- (SInt64)duration;
 
 /**
  * @brief searchMedia Search some media in a playlist

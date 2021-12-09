@@ -50,6 +50,11 @@
     return _metadata->asInt();
 }
 
+- (double)double
+{
+    return _metadata->asDouble();
+}
+
 - (NSString *)str
 {
     if (!_str) {

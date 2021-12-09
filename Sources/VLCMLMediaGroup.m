@@ -92,6 +92,11 @@
     return _mediaGroup->nbUnknown();
 }
 
+- (UInt32)nbSeen
+{
+    return _mediaGroup->nbSeen();
+}
+
 - (UInt64)duration
 {
     return _mediaGroup->duration();

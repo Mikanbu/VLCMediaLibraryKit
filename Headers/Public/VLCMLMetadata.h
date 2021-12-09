@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isSet;
 - (SInt64)integer;
+- (double)double;
 
 @end
 
