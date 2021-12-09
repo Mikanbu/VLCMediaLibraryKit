@@ -19,11 +19,9 @@ BUILD_TYPE="Release"
 TESTED_HASH="5db47475"
 CUSTOM_VLCKIT_PATH=~
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
-CXX_COMPILATOR=clang++
 SKIP_MEDIALIBRARY=no
 SKIP_DEPENDENCIES=no
 COMPILE_FOR_TVOS=no
-OBJCXX_COMPILATOR=clang++
 BITCODE=no
 OSVERSIONMINCFLAG=mios
 OSVERSIONMINLDFLAG=ios
@@ -437,8 +435,7 @@ buildLibJpeg()
                 ${LIBJPEG_DIR}/configure \
                                --host=$target \
                                --prefix=$prefix \
-                               --disable-shared \
-                               CXX=$CXX_COMPILATOR
+                               --disable-shared
                 log "info" "Starting libjpeg make..."
                 make ${MAKEFLAGS}
                 if [ ! -d "${prefix}" ]; then
@@ -493,8 +490,7 @@ buildSqlite()
                 ${SQLITE_DIR}/configure \
                                --host=$target \
                                --disable-shared \
-                               --disable-readline \
-                               CXX=$CXX_COMPILATOR
+                               --disable-readline
                 log "info" "Starting sqlite make..."
                 make ${MAKEFLAGS} libsqlite3.la
                 SQLITE_BUILD_DIR="${SQLITE_DIR}/build/"
