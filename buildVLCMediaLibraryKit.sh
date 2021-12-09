@@ -194,26 +194,6 @@ isSimulatorArch() {
     fi
 }
 
-cleanEnvironment()
-{
-    export AS=""
-    export CCAS=""
-    export ASCPP=""
-    export CC=""
-    export CFLAGS=""
-    export CPPFLAGS=""
-    export CXX=""
-    export CXXFLAGS=""
-    export CXXCPPFLAGS=""
-    export OBJC=""
-    export OBJCFLAGS=""
-    export LD=""
-    export LDFLAGS=""
-    export STRIP=""
-    export PKG_CONFIG_LIBDIR=""
-    export PKG_CONFIG_PATH=""
-}
-
 locateVLCKit()
 {
     log "info" "Looking for VLCKit..."
@@ -883,8 +863,6 @@ if [ "x$1" != "x" ]; then
     usage
     exit 1
 fi
-
-cleanEnvironment
 
 if [ "$CUSTOM_VLCKIT_PATH" != ~ ]; then
     locateVLCKit
