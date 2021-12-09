@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (uint)width;
 - (uint)height;
 - (float)fps;
+- (UInt32)fpsNum;
+- (UInt32)fpsDen;
+- (UInt32)bitrate;
+- (UInt32)sarNum;
+- (UInt32)sarDen;
 
 @end
 

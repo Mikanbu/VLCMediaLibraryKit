@@ -78,6 +78,11 @@
     return _encoding;
 }
 
+- (BOOL)isInAttachedFile
+{
+    return _subTrack->isInAttachedFile();
+}
+
 @end
 
 @implementation VLCMLSubtitleTrack (Internal)

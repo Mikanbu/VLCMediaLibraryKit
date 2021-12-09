@@ -85,6 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (UInt32)nbUnknown;
 
 /**
+ * @brief nbSeen Returns the number of seen media (present or not) in this group
+ */
+- (UInt32)nbSeen;
+
+/**
  * @brief duration Returns this group duration
  *
  * Which is equal to the sum of all its member's durations
