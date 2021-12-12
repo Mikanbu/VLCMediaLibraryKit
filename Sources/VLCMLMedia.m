@@ -33,6 +33,7 @@
 #import "VLCMLVideoTrack+Init.h"
 #import "VLCMLSubtitleTrack+Init.h"
 #import "VLCMLChapter+Init.h"
+#import "VLCMLBookmark+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
@@ -347,6 +348,17 @@
     return _chapters;
 }
 
+- (NSArray<VLCMLBookmark *> *)bookmarks
+{
+    auto bookmarks = _media->bookmarks()->all();
+    NSMutableArray *result = [NSMutableArray array];
+
+    for (medialibrary::BookmarkPtr const& bookmark : bookmarks) {
+        [result addObject:[[VLCMLBookmark alloc] initWithBookmarkPointer:bookmark]];
+    }
+    return [result copy];
+}
+
 - (NSURL *)thumbnail
 {
     return [self thumbnailOfType:VLCMLThumbnailSizeType(medialibrary::ThumbnailSizeType::Thumbnail)];
@@ -465,6 +477,32 @@
 - (BOOL)regroup
 {
     return _media->regroup();
+}
+
+#pragma mark - bookmarks
+
+- (VLCMLBookmark *)addBookmarkAtTime:(SInt64)time
+{
+    medialibrary::BookmarkPtr bookmark = _media->addBookmark(time);
+    VLCMLBookmark *mlBookmark = [[VLCMLBookmark alloc] initWithBookmarkPointer:bookmark];
+    return mlBookmark;
+}
+
+- (VLCMLBookmark *)bookmarkAtTime:(SInt64)time
+{
+    medialibrary::BookmarkPtr bookmark = _media->bookmark(time);
+    VLCMLBookmark *mlBookmark = [[VLCMLBookmark alloc] initWithBookmarkPointer:bookmark];
+    return mlBookmark;
+}
+
+- (BOOL)removeBookmarkAtTime:(SInt64)time
+{
+    return _media->removeBookmark(time);
+}
+
+- (BOOL)removeAllBookmarks
+{
+    return _media->removeAllBookmarks();
 }
 
 @end
