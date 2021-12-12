@@ -104,6 +104,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSArray<VLCMLFolder *> *)subfoldersWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                               desc:(BOOL)desc;
 
+/**
+* @brief nbVideo Returns the number of video (present or not ) media in this folder
+*/
+- (UInt32)nbVideo;
+
+/**
+* @brief nbAudio Returns the number of audio media in this folder
+*/
+- (UInt32)nbAudio;
+
+/**
+* @brief nbUnknown Returns the number of media in this folder
+*/
+- (UInt32)nbMedia;
+
 @end
 
 NS_ASSUME_NONNULL_END
