@@ -77,6 +77,9 @@
 		7DA4C3112766367100EF5E78 /* VLCMLChapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA4C30F2766367100EF5E78 /* VLCMLChapter.h */; };
 		7DA4C3122766367100EF5E78 /* VLCMLChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA4C3102766367100EF5E78 /* VLCMLChapter.m */; };
 		7DA4C3142766375B00EF5E78 /* VLCMLChapter+Init.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA4C3132766375B00EF5E78 /* VLCMLChapter+Init.h */; };
+		7DF3E2DC27663ABA005CD59A /* VLCMLBookmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DF3E2DA27663ABA005CD59A /* VLCMLBookmark.h */; };
+		7DF3E2DD27663ABA005CD59A /* VLCMLBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF3E2DB27663ABA005CD59A /* VLCMLBookmark.m */; };
+		7DF3E2DF27663AD6005CD59A /* VLCMLBookmark+Init.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DF3E2DE27663AD6005CD59A /* VLCMLBookmark+Init.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +106,9 @@
 		7DA4C30F2766367100EF5E78 /* VLCMLChapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLChapter.h; sourceTree = "<group>"; };
 		7DA4C3102766367100EF5E78 /* VLCMLChapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMLChapter.m; sourceTree = "<group>"; };
 		7DA4C3132766375B00EF5E78 /* VLCMLChapter+Init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VLCMLChapter+Init.h"; sourceTree = "<group>"; };
+		7DF3E2DA27663ABA005CD59A /* VLCMLBookmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLCMLBookmark.h; sourceTree = "<group>"; };
+		7DF3E2DB27663ABA005CD59A /* VLCMLBookmark.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VLCMLBookmark.m; sourceTree = "<group>"; };
+		7DF3E2DE27663AD6005CD59A /* VLCMLBookmark+Init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VLCMLBookmark+Init.h"; sourceTree = "<group>"; };
 		8D05F9D81F2F97D2003000B6 /* VLCMLLabel+Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCMLLabel+Init.h"; sourceTree = "<group>"; };
 		8D05F9DA1F309AF9003000B6 /* VLCMLFolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLCMLFolder.h; path = Headers/Public/VLCMLFolder.h; sourceTree = SOURCE_ROOT; };
 		8D05F9DB1F309AF9003000B6 /* VLCMLFolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VLCMLFolder.m; path = Sources/VLCMLFolder.m; sourceTree = SOURCE_ROOT; };
@@ -223,6 +229,7 @@
 				8DC50D8A1F320AF800D6CCED /* VLCMLAlbumTrack+Init.h */,
 				8D90D0E41F2B558000DBB850 /* VLCMLArtist+Init.h */,
 				8DC50D931F32235F00D6CCED /* VLCMLAudioTrack+Init.h */,
+				7DF3E2DE27663AD6005CD59A /* VLCMLBookmark+Init.h */,
 				7DA4C3132766375B00EF5E78 /* VLCMLChapter+Init.h */,
 				8DC50DBD1F38966A00D6CCED /* VLCMLDeviceLister.h */,
 				8DC50D8B1F320EC900D6CCED /* VLCMLFile+Init.h */,
@@ -253,6 +260,7 @@
 				7D9E238417AEEA13008485E5 /* VLCMLAlbumTrack.h */,
 				8DD4D4091F3B347A00404519 /* VLCMLArtist.h */,
 				8DC50D901F32226C00D6CCED /* VLCMLAudioTrack.h */,
+				7DF3E2DA27663ABA005CD59A /* VLCMLBookmark.h */,
 				7DA4C30F2766367100EF5E78 /* VLCMLChapter.h */,
 				7D0EF511170885130003ED47 /* VLCMLFile.h */,
 				8D05F9DA1F309AF9003000B6 /* VLCMLFolder.h */,
@@ -281,6 +289,7 @@
 				7D9E238517AEEA13008485E5 /* VLCMLAlbumTrack.m */,
 				8D31CE3F1F0A6873005A2895 /* VLCMLArtist.m */,
 				8DC50D911F32226C00D6CCED /* VLCMLAudioTrack.m */,
+				7DF3E2DB27663ABA005CD59A /* VLCMLBookmark.m */,
 				7DA4C3102766367100EF5E78 /* VLCMLChapter.m */,
 				8DC50DBE1F38966A00D6CCED /* VLCMLDeviceLister.mm */,
 				7D0EF519170885130003ED47 /* VLCMLFile.m */,
@@ -343,6 +352,8 @@
 				7D2ACC042641492600FE919A /* VLCMLFolder+Init.h in Headers */,
 				7D2ACC052641492900FE919A /* VLCMLGenre+Init.h in Headers */,
 				7D2ACC062641492D00FE919A /* VLCMLLabel+Init.h in Headers */,
+				7DF3E2DC27663ABA005CD59A /* VLCMLBookmark.h in Headers */,
+				7DF3E2DF27663AD6005CD59A /* VLCMLBookmark+Init.h in Headers */,
 				7D2ACC072641493000FE919A /* VLCMLMedia+Init.h in Headers */,
 				7D2ACC082641493200FE919A /* VLCMLMetadata+Init.h in Headers */,
 				7D2ACC092641493600FE919A /* VLCMLMovie+Init.h in Headers */,
@@ -443,6 +454,7 @@
 				7D2ACC1C2641496600FE919A /* VLCMLAudioTrack.m in Sources */,
 				7D2ACC1D2641496600FE919A /* VLCMLShow.m in Sources */,
 				7D2ACC192641496600FE919A /* VLCMLSearchAggregate.m in Sources */,
+				7DF3E2DD27663ABA005CD59A /* VLCMLBookmark.m in Sources */,
 				7D2ACC242641496600FE919A /* MediaLibraryCb.mm in Sources */,
 				7D2ACC132641496600FE919A /* VLCMLFile.m in Sources */,
 				7D2ACC252641496600FE919A /* VLCMLMediaGroup.m in Sources */,
