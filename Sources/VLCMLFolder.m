@@ -37,8 +37,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, mrl: %@",
-            NSStringFromClass([self class]), self.identifier, self.name, self.mrl];
+    return [NSString stringWithFormat:@"%@ — ID: %lli, name: %@, mrl: %@, nbMedia: %u",
+            NSStringFromClass([self class]), self.identifier, self.name, self.mrl, self.nbMedia];
 }
 
 - (VLCMLIdentifier)identifier
@@ -92,6 +92,21 @@
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
     return [VLCMLUtils arrayFromFolderQuery:_folder->subfolders(&param)];
+}
+
+- (UInt32)nbVideo
+{
+    return _folder->nbVideo();
+}
+
+- (UInt32)nbAudio
+{
+    return _folder->nbAudio();
+}
+
+- (UInt32)nbMedia
+{
+    return _folder->nbMedia();
 }
 
 @end
