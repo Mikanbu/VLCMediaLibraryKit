@@ -32,6 +32,7 @@
 #import "VLCMLAudioTrack+Init.h"
 #import "VLCMLVideoTrack+Init.h"
 #import "VLCMLSubtitleTrack+Init.h"
+#import "VLCMLChapter+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
@@ -49,6 +50,7 @@
 @property (nonatomic, copy, nullable) NSArray<VLCMLAudioTrack *> *audioTracks;
 @property (nonatomic, copy, nullable) NSArray<VLCMLVideoTrack *> *videoTracks;
 @property (nonatomic, copy, nullable) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
+@property (nonatomic, copy, nullable) NSArray<VLCMLChapter *> *chapters;
 @end
 
 @implementation VLCMLMedia
@@ -329,6 +331,20 @@
         _subtitleTracks = [result copy];
     }
     return _subtitleTracks;
+}
+
+- (NSArray<VLCMLChapter *> *)chapters
+{
+    if (!_chapters) {
+        auto chapters = _media->chapters()->all();
+        NSMutableArray *result = [NSMutableArray array];
+
+        for (medialibrary::ChapterPtr const& chapter : chapters) {
+            [result addObject:[[VLCMLChapter alloc] initWithChapterPointer:chapter]];
+        }
+        _chapters = [result copy];
+    }
+    return _chapters;
 }
 
 - (NSURL *)thumbnail

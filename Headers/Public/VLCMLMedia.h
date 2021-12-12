@@ -25,7 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup;
+@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
@@ -99,6 +99,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLAudioTrack *> *audioTracks;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLVideoTrack *> *videoTracks;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLChapter *> *chapters;
 
 - (instancetype)init NS_UNAVAILABLE;
 
