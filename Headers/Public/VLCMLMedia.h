@@ -25,7 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter;
+@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter, VLCMLBookmark;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
@@ -100,6 +100,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLVideoTrack *> *videoTracks;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLChapter *> *chapters;
+@property (nonatomic, copy, nullable, readonly) NSArray<VLCMLBookmark *> *bookmarks;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -296,6 +297,12 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  * with groups that may have been organized manually by the user.
  */
 - (BOOL)regroup;
+
+#pragma mark - Bookmarps
+- (nullable VLCMLBookmark *)addBookmarkAtTime:(SInt64)time;
+- (nullable VLCMLBookmark *)bookmarkAtTime:(SInt64)time;
+- (BOOL)removeBookmarkAtTime:(SInt64)time;
+- (BOOL)removeAllBookmarks;
 
 @end
 NS_ASSUME_NONNULL_END
