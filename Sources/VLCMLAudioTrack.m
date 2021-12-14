@@ -97,7 +97,7 @@
 
     self = [super init];
     if (self) {
-        _audioTrack = audioTrackPtr;
+        _audioTrack = std::move(audioTrackPtr);
     }
     return self;
 }

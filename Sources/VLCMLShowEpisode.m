@@ -99,7 +99,7 @@
 
     self = [super init];
     if (self) {
-        _showEpisode = showEpisodePtr;
+        _showEpisode = std::move(showEpisodePtr);
     }
     return self;
 }

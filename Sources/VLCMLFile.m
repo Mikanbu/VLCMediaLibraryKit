@@ -99,7 +99,7 @@
 
     self = [super init];
     if (self) {
-        _file = filePtr;
+        _file = std::move(filePtr);
     }
     return self;
 }

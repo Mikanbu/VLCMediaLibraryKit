@@ -122,7 +122,7 @@
 
     self = [super init];
     if (self) {
-        _videoTrack = videoTrackPtr;
+        _videoTrack = std::move(videoTrackPtr);
     }
     return self;
 }

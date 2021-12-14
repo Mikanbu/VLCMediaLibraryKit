@@ -517,7 +517,7 @@
 
     self = [super init];
     if (self) {
-        _media = mediaPtr;
+        _media = std::move(mediaPtr);
     }
     return self;
 }

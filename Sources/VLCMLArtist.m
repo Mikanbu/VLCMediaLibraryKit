@@ -162,7 +162,7 @@
 
     self = [super init];
     if (self) {
-        _artist = artistPtr;
+        _artist = std::move(artistPtr);
     }
     return self;
 }

@@ -95,7 +95,7 @@
 
     self = [super init];
     if (self) {
-        _subTrack = subTrackPtr;
+        _subTrack = std::move(subTrackPtr);
     }
     return self;
 }

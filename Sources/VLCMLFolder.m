@@ -121,7 +121,7 @@
 
     self = [super init];
     if (self) {
-        _folder = folderPtr;
+        _folder = std::move(folderPtr);
     }
     return self;
 }

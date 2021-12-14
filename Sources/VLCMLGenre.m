@@ -152,7 +152,7 @@
 
     self = [super init];
     if (self) {
-        _genre = genrePtr;
+        _genre = std::move(genrePtr);
     }
     return self;
 }

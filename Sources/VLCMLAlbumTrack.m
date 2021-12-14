@@ -96,7 +96,7 @@
 
     self = [super init];
     if (self) {
-        _albumTrackPtr = albumTrackPtr;
+        _albumTrackPtr = std::move(albumTrackPtr);
     }
     return self;
 }

@@ -198,7 +198,7 @@
 
     self = [super init];
     if (self) {
-        _mediaGroup = mediaGroupPtr;
+        _mediaGroup = std::move(mediaGroupPtr);
     }
     return self;
 }

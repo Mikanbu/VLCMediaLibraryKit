@@ -74,7 +74,7 @@
 
     self = [super init];
     if (self) {
-        _movie = moviePtr;
+        _movie = std::move(moviePtr);
     }
     return self;
 }
