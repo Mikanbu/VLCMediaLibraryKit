@@ -69,7 +69,7 @@
 
     self = [super init];
     if (self) {
-        _chapter = ChapterPtr;
+        _chapter = std::move(ChapterPtr);
     }
     return self;
 }

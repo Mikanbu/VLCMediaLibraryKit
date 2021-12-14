@@ -101,7 +101,7 @@
 
     self = [super init];
     if (self) {
-        _bookmark = BookmarkPtr;
+        _bookmark = std::move(BookmarkPtr);
     }
     return self;
 }

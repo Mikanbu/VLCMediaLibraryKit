@@ -69,7 +69,7 @@
 
     self = [super init];
     if (self) {
-        _label = labelPtr;
+        _label = std::move(labelPtr);
     }
     return self;
 }

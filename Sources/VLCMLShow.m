@@ -135,7 +135,7 @@
 
     self = [super init];
     if (self) {
-        _show = showPtr;
+        _show = std::move(showPtr);
     }
     return self;
 }

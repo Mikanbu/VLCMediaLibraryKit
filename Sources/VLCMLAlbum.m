@@ -194,7 +194,7 @@
 
     self = [super init];
     if (self) {
-        _album = albumPtr;
+        _album = std::move(albumPtr);
     }
     return self;
 }

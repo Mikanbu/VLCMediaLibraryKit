@@ -158,7 +158,7 @@
 
     self = [super init];
     if (self) {
-        _playlist = playlistPtr;
+        _playlist = std::move(playlistPtr);
     }
     return self;
 }
