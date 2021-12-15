@@ -2,8 +2,10 @@
  * VLCMLArtist.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2021 VLC authors and VideoLAN
- * $Id$
+ * Copyright (C) 2017-2021 VLC authors and VideoLAN
+ *
+ * Authors: Soomin Lee <bubu@mikan.io>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by

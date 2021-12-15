@@ -2,8 +2,9 @@
  * VLCMLPlaylist+Init.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2018 VLC authors and VideoLAN
- * $Id$
+ * Copyright (C) 2017-2019 VLC authors and VideoLAN
+ *
+ * Author: Soomin Lee <bubu@mikan.io>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by

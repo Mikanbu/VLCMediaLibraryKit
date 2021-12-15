@@ -3,7 +3,11 @@
  * VLCMediaLibraryKit
  *****************************************************************************
  * Copyright (C) 2010-2021 VLC authors and VideoLAN
- * $Id$
+ *
+ * Authors: Soomin Lee <bubu@mikan.io>
+ *          Felix Paul Kühne <fkuehne # videolan.org>
+ *          Pierre d'Herbemont <pdherbemont # videolan.org>
+ *          Tobias Conradi <videolan # tobias-conradi.de>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
