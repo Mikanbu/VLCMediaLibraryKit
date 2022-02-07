@@ -280,6 +280,8 @@ NS_SWIFT_NAME(setupMediaLibrary(databasePath:medialibraryPath:));
 - (nullable VLCMLMedia *)mediaWithIdentifier:(VLCMLIdentifier)identifier;
 - (nullable VLCMLMedia *)mediaWithMrl:(NSURL *)mrl;
 - (nullable VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl;
+- (nullable VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl duration:(int64_t)duration
+NS_SWIFT_NAME(addExternalMedia(mrl:duration:));
 - (nullable VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl;
 
 - (BOOL)removeExternalMedia:(VLCMLMedia *)media;
