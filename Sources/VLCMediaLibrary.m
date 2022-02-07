@@ -160,6 +160,11 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addExternalMedia([mrl.absoluteString UTF8String], -1)];
 }
 
+- (VLCMLMedia *)addExternalMediaWithMrl:(NSURL *)mrl duration:(int64_t)duration
+{
+    return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addExternalMedia([mrl.absoluteString UTF8String], duration)];
+}
+
 - (VLCMLMedia *)addStreamWithMrl:(NSURL *)mrl
 {
     return [[VLCMLMedia alloc] initWithMediaPtr:_ml->addStream([mrl.absoluteString UTF8String])];
