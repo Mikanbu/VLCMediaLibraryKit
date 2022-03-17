@@ -107,12 +107,14 @@ VLCMLIdentifier const VariousArtistID = 2u;
 - (VLCMLInitializeResult)setupMediaLibraryWithDatabasePath:(NSString *)databasePath
                                           medialibraryPath:(NSString *)medialibraryPath
 {
+    medialibrary::SetupConfig config;
+    config.deviceListers["file://"] = _deviceLister;
+
     _ml = NewMediaLibrary([databasePath UTF8String], [medialibraryPath UTF8String],
-                           false, nullptr);
+                           false, &config);
 
     _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
 
-    _ml->registerDeviceLister(_deviceLister, "file://");
     VLCMLInitializeResult result = (VLCMLInitializeResult)_ml->initialize(_mlCb);
 
     if (result == VLCMLInitializeResultSuccess) {
