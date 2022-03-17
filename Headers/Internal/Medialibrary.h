@@ -27,22 +27,27 @@
 
 // medialibrary
 # include <medialibrary/IAlbum.h>
-# include <medialibrary/IAlbumTrack.h>
 # include <medialibrary/IArtist.h>
 # include <medialibrary/IAudioTrack.h>
+# include <medialibrary/IBookmark.h>
+# include <medialibrary/IChapter.h>
 # include <medialibrary/IDeviceLister.h>
+# include <medialibrary/IFile.h>
 # include <medialibrary/IFolder.h>
 # include <medialibrary/IGenre.h>
 # include <medialibrary/ILabel.h>
+# include <medialibrary/ILogger.h>
 # include <medialibrary/IMedia.h>
+# include <medialibrary/IMediaGroup.h>
 # include <medialibrary/IMetadata.h>
 # include <medialibrary/IMediaLibrary.h>
 # include <medialibrary/IMovie.h>
 # include <medialibrary/IPlaylist.h>
+# include <medialibrary/IQuery.h>
 # include <medialibrary/IShow.h>
 # include <medialibrary/IShowEpisode.h>
 # include <medialibrary/ISubtitleTrack.h>
-# include <medialibrary/IMediaGroup.h>
+# include <medialibrary/IThumbnailer.h>
 # include <medialibrary/IVideoTrack.h>
 
 // devicelister
@@ -50,5 +55,12 @@
 
 // utils
 # include <medialibrary/Types.h>
+
+// file system
+# include <medialibrary/filesystem/Errors.h>
+# include <medialibrary/filesystem/IDirectory.h>
+# include <medialibrary/filesystem/IFileSystemFactory.h>
+# include <medialibrary/filesystem/IDevice.h>
+# include <medialibrary/filesystem/IFile.h>
 
 #endif /* Medialibrary_h */
