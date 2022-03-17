@@ -24,7 +24,6 @@
  *****************************************************************************/
 
 #import <VLCMediaLibraryKit/VLCMLAlbum.h>
-#import <VLCMediaLibraryKit/VLCMLAlbumTrack.h>
 #import <VLCMediaLibraryKit/VLCMLArtist.h>
 #import <VLCMediaLibraryKit/VLCMLAudioTrack.h>
 #import <VLCMediaLibraryKit/VLCMLBookmark.h>

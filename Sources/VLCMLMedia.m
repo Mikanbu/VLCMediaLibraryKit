@@ -28,7 +28,6 @@
 #import "VLCMLLabel+Init.h"
 #import "VLCMLMovie+Init.h"
 #import "VLCMLFile+Init.h"
-#import "VLCMLAlbumTrack+Init.h"
 #import "VLCMLShowEpisode+Init.h"
 #import "VLCMLMediaGroup+Init.h"
 #import "VLCMLMetadata+Init.h"
@@ -162,14 +161,6 @@
     NSAssert(success, @"Failed to update title.");
     _title = title;
     return success;
-}
-
-- (VLCMLAlbumTrack *)albumTrack
-{
-    if (!_albumTrack) {
-        _albumTrack = [[VLCMLAlbumTrack alloc] initWithAlbumTrackPtr:_media->albumTrack()];
-    }
-    return _albumTrack;
 }
 
 - (SInt64)duration
