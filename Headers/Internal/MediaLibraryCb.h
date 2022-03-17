@@ -85,6 +85,10 @@ public:
     virtual void onBookmarksModified( std::set<int64_t> bookmarkIds );
     virtual void onBookmarksDeleted( std::set<int64_t> bookmarkIds );
 
+    virtual void onFoldersAdded( std::vector<FolderPtr> folders );
+    virtual void onFoldersModified( std::set<int64_t> folderIds );
+    virtual void onFoldersDeleted( std::set<int64_t> folderIds );
+
     /**
      * @brief onDiscoveryStarted This callback will be invoked when the discoverer
      * starts to crawl an entrypoint that was scheduled for discovery or reload.

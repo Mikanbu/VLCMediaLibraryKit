@@ -108,7 +108,7 @@ VLCMLIdentifier const VariousArtistID = 2u;
                                           medialibraryPath:(NSString *)medialibraryPath
 {
     _ml = NewMediaLibrary([databasePath UTF8String], [medialibraryPath UTF8String],
-                           false);
+                           false, nullptr);
 
     _mlCb = new medialibrary::MediaLibraryCb(self, _delegate);
 
