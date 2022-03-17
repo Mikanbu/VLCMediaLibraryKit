@@ -253,6 +253,23 @@ void MediaLibraryCb::onBookmarksDeleted(std::set<int64_t> bookmarkIds)
 
 }
 
+#pragma mark - folders
+
+void MediaLibraryCb::onFoldersAdded( std::vector<FolderPtr> folders )
+{
+
+}
+
+void MediaLibraryCb::onFoldersModified( std::set<int64_t> folderIds )
+{
+
+}
+
+void MediaLibraryCb::onFoldersDeleted( std::set<int64_t> folderIds )
+{
+
+}
+
 #pragma mark - Discovery
 
 void MediaLibraryCb::onDiscoveryStarted()
