@@ -25,7 +25,6 @@
  *****************************************************************************/
 
 #import "VLCMediaLibrary.h"
-#import "VLCMLAlbumTrack.h"
 #import "VLCMLAlbum+Init.h"
 #import "VLCMLArtist+Init.h"
 #import "VLCMLFolder+Init.h"
