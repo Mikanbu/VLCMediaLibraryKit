@@ -12,9 +12,9 @@ NO_NETWORK=no
 SKIP_LIBVLC_TOOLS=no
 VLCKIT_BASEURL="https://download.videolan.org/cocoapods/prod/"
 VLCKIT_NAME="MobileVLCKit"
-VLCKIT_RELEASE="3.3.18b6-24e52c1c-9bc28dab"
-VLCKIT_SHASUM256_IOS="590baf022ec4c8c23da0cd5557528642711cc056b368f8b48d7247c351fc8927"
-VLCKIT_SHASUM256_TVOS="0bd40b4c1bc86b7e50e175afca8ee0660fa94fb870468836d49d450c9a27fc05"
+VLCKIT_RELEASE="3.4.0-8da19f3b-426513d8"
+VLCKIT_SHASUM256_IOS="e80bad21b716bba06b6ff3e40a998214f250352b37e8c4fdc79d71cc2293cdee"
+VLCKIT_SHASUM256_TVOS="4597b0773eaffe077ece0276d1d2fe49a9fa793ce078d244440ead6ac4a1c072"
 BUILD_TYPE="Release"
 TESTED_HASH="725ff59a"
 CUSTOM_VLCKIT_PATH=~
@@ -109,7 +109,6 @@ do
             VLCKIT_NAME="TVVLCKit"
             PLATFORM_NAME="AppleTV"
             PLATFORM_NAME_LOWERCASE="appletv"
-            VLCKIT_RELEASE="3.3.18b6-24e52c1-9bc28dab" # remove this for future VLCKit releases that are correctly named
             ;;
         f)
             CREATE_XCFRAMEWORK=yes
