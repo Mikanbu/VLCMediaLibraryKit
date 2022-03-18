@@ -2,7 +2,7 @@
  * VLCMediaLibrary.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2010-2021 VLC authors and VideoLAN
+ * Copyright (C) 2010-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -29,7 +29,7 @@
 #import "VLCMLObject.h"
 #import "VLCMLMedia.h"
 
-@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLAlbumTrack, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate, VLCMLMediaGroup;
+@class VLCMLFile, VLCMLLabel, VLCMLAlbum, VLCMLArtist, VLCMLPlaylist, VLCMLHistoryEntry, VLCMLGenre, VLCMLFolder, VLCMLShow, VLCMLMovie, VLCMLSearchAggregate, VLCMLMediaGroup;
 
 extern VLCMLIdentifier const UnknownArtistID;
 extern VLCMLIdentifier const VariousArtistID;

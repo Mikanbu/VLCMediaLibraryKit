@@ -2,7 +2,7 @@
  * VLCMLMedia.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2017-2021 VLC authors and VideoLAN
+ * Copyright (C) 2017-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -36,6 +36,9 @@
 #import "VLCMLSubtitleTrack+Init.h"
 #import "VLCMLChapter+Init.h"
 #import "VLCMLBookmark+Init.h"
+#import "VLCMLArtist+Init.h"
+#import "VLCMLGenre+Init.h"
+#import "VLCMLAlbum+Init.h"
 #import "VLCMLUtils.h"
 
 @interface VLCMLMedia ()
@@ -44,7 +47,6 @@
 }
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, strong, nullable) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong, nullable) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong, nullable) VLCMLMovie *movie;
 
@@ -54,6 +56,10 @@
 @property (nonatomic, copy, nullable) NSArray<VLCMLVideoTrack *> *videoTracks;
 @property (nonatomic, copy, nullable) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 @property (nonatomic, copy, nullable) NSArray<VLCMLChapter *> *chapters;
+
+@property (nonatomic, strong, nullable) VLCMLArtist *artist;
+@property (nonatomic, strong, nullable) VLCMLGenre *genre;
+@property (nonatomic, strong, nullable) VLCMLAlbum *album;
 @end
 
 @implementation VLCMLMedia
@@ -497,6 +503,42 @@
 - (BOOL)removeAllBookmarks
 {
     return _media->removeAllBookmarks();
+}
+
+#pragma mark - album track
+
+- (VLCMLArtist *)artist
+{
+    if (!_artist) {
+        _artist = [[VLCMLArtist alloc] initWithArtistPtr:_media->artist()];
+    }
+    return _artist;
+}
+
+- (VLCMLGenre *)genre
+{
+    if (!_genre) {
+        _genre = [[VLCMLGenre alloc] initWithGenrePtr:_media->genre()];
+    }
+    return _genre;
+}
+
+- (VLCMLAlbum *)album
+{
+    if (!_album) {
+        _album = [[VLCMLAlbum alloc] initWithAlbumPtr:_media->album()];
+    }
+    return _album;
+}
+
+- (uint)trackNumber
+{
+    return _media->trackNumber();
+}
+
+- (uint)discNumber
+{
+    return _media->discNumber();
 }
 
 @end
