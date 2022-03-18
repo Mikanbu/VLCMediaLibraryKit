@@ -2,7 +2,7 @@
  * VLCMLUtils.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2018-2021 VLC authors and VideoLAN
+ * Copyright (C) 2018-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -30,6 +30,7 @@
 #import "VLCMLGenre+Init.h"
 #import "VLCMLFolder+Init.h"
 #import "VLCMLMediaGroup+Init.h"
+#import "VLCMLBookmark+Init.h"
 
 @implementation VLCMLUtils
 
@@ -172,6 +173,19 @@
         }
     }
     return [mediaGroupList copy];
+}
+
++ (NSArray<VLCMLBookmark *> *)arrayFromBookmarkPtrVector:(const std::vector<medialibrary::BookmarkPtr>&)bookmarks
+{
+    NSMutableArray<VLCMLBookmark *> *bookmarkList = [NSMutableArray array];
+
+    for (const auto &bookmark : bookmarks) {
+        VLCMLBookmark *mlBookmark = [[VLCMLBookmark alloc] initWithBookmarkPointer:bookmark];
+        if (mlBookmark) {
+            [bookmarkList addObject:mlBookmark];
+        }
+    }
+    return [bookmarkList copy];
 }
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc

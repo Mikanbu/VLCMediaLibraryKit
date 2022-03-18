@@ -183,6 +183,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didModifyMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;
 - (void)medialibrary:(VLCMediaLibrary *)medialibrary didDeleteMediaGroupsWithIds:(NSArray<NSNumber *> *)mediaGroupsIds;
 
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary didAddBookmarks:(NSArray<VLCMLBookmark *> *)bookmarks;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary modifiedBookmarks:(NSArray<NSNumber *> *)bookmarks;
+- (void)medialibrary:(VLCMediaLibrary *)medialibrary deletedBookmarks:(NSArray<NSNumber *> *)bookmarks;
+
 /**
  * @brief unhandledExceptionWithContext will be invoked in case of an unhandled exception
  *
@@ -304,6 +308,10 @@ NS_SWIFT_NAME(addExternalMedia(mrl:duration:));
 - (nullable NSArray<VLCMLMedia *> *)inProgressMediaOfType:(VLCMLMediaType)type
                                       withSortingCriteria:(VLCMLSortingCriteria)criteria
                                                      desc:(BOOL)desc;
+
+#pragma mark - bookmark
+
+- (nullable VLCMLBookmark *)bookmarkWithIdentifier:(VLCMLIdentifier)identifier;
 
 #pragma mark - Media groups
 
