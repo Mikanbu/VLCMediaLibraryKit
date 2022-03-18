@@ -294,6 +294,10 @@ NS_SWIFT_NAME(addExternalMedia(mrl:duration:));
 - (nullable NSArray<VLCMLMedia *> *)videoFilesWithSortingCriteria:(VLCMLSortingCriteria)criteria
                                                              desc:(BOOL)desc;
 
+- (nullable NSArray<VLCMLMedia *> *)movies;
+- (nullable NSArray<VLCMLMedia *> *)moviesWithSortingCriteria:(VLCMLSortingCriteria)criteria
+                                                         desc:(BOOL)desc;
+
 #pragma mark - Media groups
 
 /**
