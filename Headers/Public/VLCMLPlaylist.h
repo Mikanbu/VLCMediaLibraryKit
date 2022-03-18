@@ -103,6 +103,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (SInt64)duration;
 
 /**
+ * @brief unknownDuration Returns the number of media for which the duration is unknown
+ */
+- (UInt32)unknownDuration;
+
+/**
  * @brief searchMedia Search some media in a playlist
  * @param pattern The search pattern. Minimal length is 3 characters
  * @param criteria Sorting criteria. \see VLCMLSortingCriteria
