@@ -444,7 +444,7 @@ NS_SWIFT_NAME(mediaGroups(type:sortingCriteria:desc:));;
 
 #pragma mark - History
 
-- (nullable NSArray<VLCMLMedia *> *)history;
+- (nullable NSArray<VLCMLMedia *> *)historyOfType:(VLCMLMediaType)type;
 - (nullable NSArray<VLCMLMedia *> *)streamHistory;
 - (BOOL)clearHistory;
 
