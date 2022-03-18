@@ -2,7 +2,7 @@
  * VLCMLMedia.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2018-2021 VLC authors and VideoLAN
+ * Copyright (C) 2018-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -28,7 +28,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VLCMLAlbum, VLCMLAlbumTrack, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter, VLCMLBookmark;
+@class VLCMLAlbum, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter, VLCMLBookmark, VLCMLArtist, VLCMLGenre, VLCMLAlbum;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
@@ -93,7 +93,6 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, assign) SInt64 chapterIndex;
 @property (nonatomic, assign) SInt64 titleIndex;
 @property (nonatomic, copy, readonly) NSString *title;
-@property (nonatomic, strong, nullable, readonly) VLCMLAlbumTrack *albumTrack;
 @property (nonatomic, strong, nullable, readonly) VLCMLShowEpisode *showEpisode;
 @property (nonatomic, strong, nullable, readonly) VLCMLMovie *movie;
 
@@ -301,11 +300,24 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
  */
 - (BOOL)regroup;
 
-#pragma mark - Bookmarps
+#pragma mark - Bookmarks
 - (nullable VLCMLBookmark *)addBookmarkAtTime:(SInt64)time;
 - (nullable VLCMLBookmark *)bookmarkAtTime:(SInt64)time;
 - (BOOL)removeBookmarkAtTime:(SInt64)time;
 - (BOOL)removeAllBookmarks;
+
+#pragma mark - album track
+
+@property (nonatomic, strong, nullable, readonly) VLCMLArtist *artist;
+@property (nonatomic, strong, nullable, readonly) VLCMLGenre *genre;
+@property (nonatomic, strong, nullable, readonly) VLCMLAlbum *album;
+
+@property (nonatomic, readonly) uint trackNumber;
+
+/**
+ * @return Which disc this tracks appears on (or 0 if unspecified)
+ */
+@property (nonatomic, readonly) uint discNumber;
 
 @end
 NS_ASSUME_NONNULL_END
