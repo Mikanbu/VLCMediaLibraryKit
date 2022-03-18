@@ -2,7 +2,7 @@
  * VLCMLPlaylist.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2017-2021 VLC authors and VideoLAN
+ * Copyright (C) 2017-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -89,9 +89,39 @@
     return _playlist->nbMedia();
 }
 
+- (UInt32)nbVideo
+{
+    return _playlist->nbVideo();
+}
+
+- (UInt32)nbAudio
+{
+    return _playlist->nbAudio();
+}
+
+- (UInt32)nbUnknown
+{
+    return _playlist->nbUnknown();
+}
+
 - (UInt32)nbPresentMedia
 {
     return _playlist->nbPresentMedia();
+}
+
+- (UInt32)nbPresentVideo
+{
+    return _playlist->nbPresentVideo();
+}
+
+- (UInt32)nbPresentAudio
+{
+    return _playlist->nbPresentAudio();
+}
+
+- (UInt32)nbPresentUnknown
+{
+    return _playlist->nbPresentUnknown();
 }
 
 - (SInt64)duration

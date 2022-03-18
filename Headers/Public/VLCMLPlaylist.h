@@ -2,7 +2,7 @@
  * VLCMLPlaylist.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2017-2021 VLC authors and VideoLAN
+ * Copyright (C) 2017-2022 VLC authors and VideoLAN
  *
  * Authors: Soomin Lee <bubu@mikan.io>
  *          Felix Paul Kühne <fkuehne # videolan.org>
@@ -91,11 +91,17 @@ NS_ASSUME_NONNULL_BEGIN
  * media, use nbPresentMedia
 */
 - (UInt32)nbMedia;
+- (UInt32)nbVideo;
+- (UInt32)nbAudio;
+- (UInt32)nbUnknown;
 
 /**
  * @brief nbPresentMedia Returns the number of present media in this playlist
  */
 - (UInt32)nbPresentMedia;
+- (UInt32)nbPresentVideo;
+- (UInt32)nbPresentAudio;
+- (UInt32)nbPresentUnknown;
 
 /**
  * @brief duration Returns the duration of this playlist
