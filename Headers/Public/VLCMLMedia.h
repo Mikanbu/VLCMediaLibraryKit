@@ -28,7 +28,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VLCMLAlbum, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLShowEpisode, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter, VLCMLBookmark, VLCMLArtist, VLCMLGenre, VLCMLAlbum;
+@class VLCMLAlbum, VLCMLShowEpisode, VLCMLMetadata, VLCMLLabel, VLCMLMovie, VLCMLFile, VLCMLAudioTrack, VLCMLVideoTrack, VLCMLSubtitleTrack, VLCMLMediaGroup, VLCMLChapter, VLCMLBookmark, VLCMLArtist, VLCMLGenre, VLCMLAlbum;
 
 typedef NS_ENUM(NSInteger, VLCMLFileType);
 typedef NS_ENUM(NSUInteger, VLCMLThumbnailSizeType);
@@ -196,6 +196,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 
 - (NSDate *)insertionDate;
 - (NSDate *)releaseDate;
+- (NSDate *)lastPlayedDate;
 
 #pragma mark - Metadata
 
