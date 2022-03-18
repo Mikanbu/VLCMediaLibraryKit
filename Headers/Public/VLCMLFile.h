@@ -48,12 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VLCMLFile : NSObject <VLCMLObject>
 
 @property (nonatomic, copy, readonly) NSURL *mrl;
+@property (nonatomic, copy, readonly) NSDate *lastModificationDate;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 - (VLCMLIdentifier)identifier;
 - (VLCMLFileType)type;
-- (time_t)lastModificationDate;
 - (int64_t)size;
 
 - (BOOL)isRemovable;

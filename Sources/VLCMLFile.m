@@ -60,9 +60,9 @@
     return (VLCMLFileType)_file->type();
 }
 
-- (time_t)lastModificationDate
+- (NSDate *)lastModificationDate
 {
-    return _file->lastModificationDate();
+    return [NSDate dateWithTimeIntervalSince1970:_file->lastModificationDate()];
 }
 
 - (int64_t)size
