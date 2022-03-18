@@ -200,6 +200,18 @@ VLCMLIdentifier const VariousArtistID = 2u;
     return [VLCMLUtils arrayFromMediaQuery:_ml->videoFiles(&param)];
 }
 
+- (NSArray<VLCMLMedia *> *)movies
+{
+    return [VLCMLUtils arrayFromMediaQuery:_ml->movies()];
+}
+
+- (NSArray<VLCMLMedia *> *)moviesWithSortingCriteria:(VLCMLSortingCriteria)criteria desc:(BOOL)desc
+{
+    medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
+
+    return [VLCMLUtils arrayFromMediaQuery:_ml->movies(&param)];
+}
+
 #pragma mark - Media groups
 
 - (nullable VLCMLMediaGroup *)createMediaGroupWithName:(NSString *)name
