@@ -416,6 +416,11 @@
     return [NSDate dateWithTimeIntervalSince1970:_media->releaseDate()];
 }
 
+- (NSDate *)lastPlayedDate
+{
+    return [NSDate dateWithTimeIntervalSince1970:_media->lastPlayedDate()];
+}
+
 - (VLCMLMetadata *)metadataOfType:(VLCMLMetadataType)type
 {
     return [[VLCMLMetadata alloc] initWithMetadata:_media->metadata((medialibrary::IMedia::MetadataType)type)];
