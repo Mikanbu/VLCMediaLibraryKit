@@ -2,7 +2,7 @@
  * VLCMLBookmark.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2021 VLC authors and VideoLAN
+ * Copyright (C) 2021-2022 VLC authors and VideoLAN
  *
  * Author: Felix Paul Kühne <fkuehne # videolan.org>
  *
@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VLCMLBookmark : NSObject
 
 - (VLCMLIdentifier)identifier;
+
+/**
+ * @brief mediaIdentifier returns the associated Media ID
+ */
+- (VLCMLIdentifier)mediaIdentifier;
 
 @property (readwrite) SInt64 time;
 @property (readwrite, copy) NSString *name;

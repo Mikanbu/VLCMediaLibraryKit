@@ -2,7 +2,7 @@
  * VLCMLBookmark.m
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2021 VLC authors and VideoLAN
+ * Copyright (C) 2021-2022 VLC authors and VideoLAN
  *
  * Author: Felix Paul Kühne <fkuehne # videolan.org>
  *
@@ -42,6 +42,11 @@
 - (VLCMLIdentifier)identifier
 {
     return _bookmark->id();
+}
+
+- (VLCMLIdentifier)mediaIdentifier
+{
+    return _bookmark->mediaId();
 }
 
 - (SInt64)time
