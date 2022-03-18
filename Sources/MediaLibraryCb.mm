@@ -240,17 +240,26 @@ void MediaLibraryCb::onMediaGroupsDeleted( std::set<int64_t> mediaGroupsIds )
 
 void MediaLibraryCb::onBookmarksAdded(std::vector<BookmarkPtr> bookmarks)
 {
-
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:didAddBookmarks:)]) {
+        [m_delegate medialibrary:m_medialibrary didAddBookmarks:[VLCMLUtils arrayFromBookmarkPtrVector:bookmarks]];
+    }
 }
 
 void MediaLibraryCb::onBookmarksModified(std::set<int64_t> bookmarkIds)
 {
-
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:modifiedBookmarks:)]) {
+        [m_delegate medialibrary:m_medialibrary modifiedBookmarks:intSetToArray(bookmarkIds)];
+    }
 }
 
 void MediaLibraryCb::onBookmarksDeleted(std::set<int64_t> bookmarkIds)
 {
-
+    if (m_delegate
+        && [m_delegate respondsToSelector:@selector(medialibrary:deletedBookmarks:)]) {
+        [m_delegate medialibrary:m_medialibrary deletedBookmarks:intSetToArray(bookmarkIds)];
+    }
 }
 
 #pragma mark - folders

@@ -23,7 +23,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class VLCMLMedia, VLCMLAlbum, VLCMLArtist, VLCMLPlaylist, VLCMLGenre, VLCMLFolder, VLCMLMediaGroup;
+@class VLCMLMedia, VLCMLAlbum, VLCMLArtist, VLCMLPlaylist, VLCMLGenre, VLCMLFolder, VLCMLMediaGroup, VLCMLBookmark;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 + (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres;
 + (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(std::vector<medialibrary::FolderPtr>)folders;
 + (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(std::vector<medialibrary::MediaGroupPtr>)mediaGroups;
++ (NSArray<VLCMLBookmark *> *)arrayFromBookmarkPtrVector:(const std::vector<medialibrary::BookmarkPtr>&)bookmarks;
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;
 

@@ -27,6 +27,7 @@
 #import "VLCMediaLibrary.h"
 #import "VLCMLAlbum+Init.h"
 #import "VLCMLArtist+Init.h"
+#import "VLCMLBookmark+Init.h"
 #import "VLCMLFolder+Init.h"
 #import "VLCMLGenre+Init.h"
 #import "VLCMLLabel+Init.h"
@@ -219,6 +220,13 @@ VLCMLIdentifier const VariousArtistID = 2u;
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:criteria desc:desc];
 
     return [VLCMLUtils arrayFromMediaQuery:_ml->inProgressMedia((medialibrary::IMedia::Type)type, &param)];
+}
+
+#pragma mark - bookmarks
+
+- (VLCMLBookmark *)bookmarkWithIdentifier:(VLCMLIdentifier)identifier
+{
+    return [[VLCMLBookmark alloc] initWithBookmarkPointer:_ml->bookmark(identifier)];
 }
 
 #pragma mark - Media groups
