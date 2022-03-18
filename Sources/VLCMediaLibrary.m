@@ -388,9 +388,9 @@ VLCMLIdentifier const VariousArtistID = 2u;
 
 #pragma mark - History
 
-- (NSArray<VLCMLMedia *> *)history
+- (NSArray<VLCMLMedia *> *)historyOfType:(VLCMLMediaType)type
 {
-    return [VLCMLUtils arrayFromMediaQuery:_ml->history()];
+    return [VLCMLUtils arrayFromMediaQuery:_ml->history((medialibrary::IMedia::Type)type)];
 }
 
 - (NSArray<VLCMLMedia *> *)streamHistory
