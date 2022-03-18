@@ -59,7 +59,10 @@ typedef NS_ENUM (NSUInteger, VLCMLSortingCriteria) {
     VLCMLSortingCriteriaNbVideo,
     VLCMLSortingCriteriaNbAudio,
     // Valid for folders & media groups
-    VLCMLSortingCriteriaNbMedia
+    VLCMLSortingCriteriaNbMedia,
+    // Only valid for artists for now
+    VLCMLSortingCriteriaNbAlbum,
+    VLCMLSortingCriteriaLastPlaybackDate,
 };
 
 typedef NS_ENUM (NSUInteger, VLCMLInitializeResult) {
