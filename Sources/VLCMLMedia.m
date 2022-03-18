@@ -60,6 +60,7 @@
 @property (nonatomic, strong, nullable) VLCMLArtist *artist;
 @property (nonatomic, strong, nullable) VLCMLGenre *genre;
 @property (nonatomic, strong, nullable) VLCMLAlbum *album;
+@property (nonatomic, strong, nullable) NSString *lyrics;
 @end
 
 @implementation VLCMLMedia
@@ -539,6 +540,16 @@
 - (uint)discNumber
 {
     return _media->discNumber();
+}
+
+- (NSString *)lyrics
+{
+    if (!_lyrics) {
+        if (!_media->lyrics().empty()) {
+            _lyrics = [NSString stringWithUTF8String:_media->lyrics().c_str()];
+        }
+    }
+    return _lyrics;
 }
 
 @end

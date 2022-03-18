@@ -103,6 +103,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLSubtitleTrack *> *subtitleTracks;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLChapter *> *chapters;
 @property (nonatomic, copy, nullable, readonly) NSArray<VLCMLBookmark *> *bookmarks;
+@property (nonatomic, copy, nullable, readonly) NSString *lyrics;
 
 - (instancetype)init NS_UNAVAILABLE;
 
