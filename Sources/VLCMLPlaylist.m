@@ -99,6 +99,11 @@
     return _playlist->duration();
 }
 
+- (UInt32)unknownDuration
+{
+    return _playlist->nbDurationUnknown();
+}
+
 - (NSArray<VLCMLMedia *> *)media
 {
     medialibrary::QueryParameters param = [VLCMLUtils queryParamatersFromSort:VLCMLSortingCriteriaDefault
