@@ -90,6 +90,26 @@
     return _file->isMain();
 }
 
+- (void)deleteFile
+{
+    /* for safety reasons, we don't allow deleting files that
+     * are not indexed by the media library
+     * or are on the network */
+    if (self.isExternal || self.isNetwork) {
+        return;
+    }
+
+    __block NSString *path = self.mrl.path;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        }
+        @catch (NSException *exception) {
+            NSAssert(1, @"VLCMLFile: Delete failed: %@", exception.reason);
+        }
+    });
+}
+
 @end
 
 @implementation VLCMLFile (Internal)

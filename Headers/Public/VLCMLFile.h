@@ -77,6 +77,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)isMain;
 
+/**
+ * @brief this deletes the file represented by this class
+ *
+ * This is performed on a background thread avoiding blocking the main thread
+ * and there-by avoid to have the app killed by the watch dog because it is
+ * assumed to be unresponsive.
+ */
+- (void)deleteFile;
+
 @end
 
 NS_ASSUME_NONNULL_END
