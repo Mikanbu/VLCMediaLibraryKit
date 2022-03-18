@@ -89,13 +89,18 @@
 
 - (BOOL)isNew
 {
-    VLCMLMetadata *seenMetadata = [self metadataOfType:VLCMLMetadataTypeSeen];
-    return seenMetadata.integer == 0;
+    return _media->playCount() == 0;
 }
 
 - (void)setIsNew:(BOOL)isNew
 {
-    [self setMetadataOfType:VLCMLMetadataTypeSeen intValue: isNew ? 0 : 1];
+    if (isNew) {
+        _media->setPlayCount(0);
+    } else {
+        if (_media->playCount() == 0) {
+            _media->setPlayCount(1);
+        }
+    }
 }
 
 - (SInt64)audioTrackIndex

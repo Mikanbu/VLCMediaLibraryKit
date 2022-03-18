@@ -61,7 +61,7 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
     VLCMLMetadataTypeTitle,
     VLCMLMetadataTypeChapter,
     VLCMLMetadataTypeProgram,
-    VLCMLMetadataTypeSeen,
+    // VLCMLMetadataTypeSeen, // Replaced by the media playcount
 
     // Video:
     VLCMLMetadataTypeVideoTrack = 100,
