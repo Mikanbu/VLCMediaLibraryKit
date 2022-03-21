@@ -2,7 +2,7 @@
  * VLCMLUtils.h
  * VLCMediaLibraryKit
  *****************************************************************************
- * Copyright (C) 2017-2021 VLC authors and VideoLAN
+ * Copyright (C) 2017-2022 VLC authors and VideoLAN
  *
  * Author: Soomin Lee <bubu@mikan.io>
  *
@@ -42,13 +42,13 @@ typedef NS_ENUM(NSUInteger, VLCMLSortingCriteria);
 + (nullable
    NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupQuery:(medialibrary::Query<medialibrary::IMediaGroup>)mediaGroupQuery;
 
-+ (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media;
-+ (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums;
-+ (NSArray<VLCMLArtist *> *)arrayFromArtistPtrVector:(std::vector<medialibrary::ArtistPtr>)artists;
-+ (NSArray<VLCMLPlaylist *> *)arrayFromPlaylistPtrVector:(std::vector<medialibrary::PlaylistPtr>)playlists;
-+ (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres;
-+ (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(std::vector<medialibrary::FolderPtr>)folders;
-+ (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(std::vector<medialibrary::MediaGroupPtr>)mediaGroups;
++ (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(const std::vector<medialibrary::MediaPtr>&)media;
++ (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(const std::vector<medialibrary::AlbumPtr>&)albums;
++ (NSArray<VLCMLArtist *> *)arrayFromArtistPtrVector:(const std::vector<medialibrary::ArtistPtr>&)artists;
++ (NSArray<VLCMLPlaylist *> *)arrayFromPlaylistPtrVector:(const std::vector<medialibrary::PlaylistPtr>&)playlists;
++ (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(const std::vector<medialibrary::GenrePtr>&)genres;
++ (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(const std::vector<medialibrary::FolderPtr>&)folders;
++ (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(const std::vector<medialibrary::MediaGroupPtr>&)mediaGroups;
 + (NSArray<VLCMLBookmark *> *)arrayFromBookmarkPtrVector:(const std::vector<medialibrary::BookmarkPtr>&)bookmarks;
 
 + (medialibrary::QueryParameters)queryParamatersFromSort:(VLCMLSortingCriteria)criteria desc:(BOOL)desc;

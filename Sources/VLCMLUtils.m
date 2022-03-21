@@ -84,7 +84,7 @@
     return [self arrayFromMediaGroupPtrVector:mediaGroupQuery->all()];
 }
 
-+ (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(std::vector<medialibrary::MediaPtr>)media
++ (NSArray<VLCMLMedia *> *)arrayFromMediaPtrVector:(const std::vector<medialibrary::MediaPtr>&)media
 {
     NSMutableArray *mediaList = [NSMutableArray array];
 
@@ -97,7 +97,7 @@
     return [mediaList copy];
 }
 
-+ (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(std::vector<medialibrary::AlbumPtr>)albums
++ (NSArray<VLCMLAlbum *> *)arrayFromAlbumPtrVector:(const std::vector<medialibrary::AlbumPtr>&)albums
 {
     NSMutableArray<VLCMLAlbum *> *albumList = [NSMutableArray array];
 
@@ -110,7 +110,7 @@
     return [albumList copy];
 }
 
-+ (NSArray<VLCMLArtist *> *)arrayFromArtistPtrVector:(std::vector<medialibrary::ArtistPtr>)artists
++ (NSArray<VLCMLArtist *> *)arrayFromArtistPtrVector:(const std::vector<medialibrary::ArtistPtr>&)artists
 {
     NSMutableArray<VLCMLArtist *> *artistList = [NSMutableArray array];
 
@@ -123,7 +123,7 @@
     return [artistList copy];
 }
 
-+ (NSArray<VLCMLPlaylist *> *)arrayFromPlaylistPtrVector:(std::vector<medialibrary::PlaylistPtr>)playlists
++ (NSArray<VLCMLPlaylist *> *)arrayFromPlaylistPtrVector:(const std::vector<medialibrary::PlaylistPtr>&)playlists
 {
     NSMutableArray<VLCMLPlaylist *> *playlistList = [NSMutableArray array];
 
@@ -136,7 +136,7 @@
     return [playlistList copy];
 }
 
-+ (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(std::vector<medialibrary::GenrePtr>)genres
++ (NSArray<VLCMLGenre *> *)arrayFromGenrePtrVector:(const std::vector<medialibrary::GenrePtr>&)genres
 {
     NSMutableArray<VLCMLGenre *> *genreList = [NSMutableArray array];
 
@@ -149,7 +149,7 @@
     return [genreList copy];
 }
 
-+ (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(std::vector<medialibrary::FolderPtr>)folders
++ (NSArray<VLCMLFolder *> *)arrayFromFolderPtrVector:(const std::vector<medialibrary::FolderPtr>&)folders
 {
     NSMutableArray<VLCMLFolder *> *folderList = [NSMutableArray array];
 
@@ -162,7 +162,7 @@
     return [folderList copy];
 }
 
-+ (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(std::vector<medialibrary::MediaGroupPtr>)mediaGroups
++ (NSArray<VLCMLMediaGroup *> *)arrayFromMediaGroupPtrVector:(const std::vector<medialibrary::MediaGroupPtr>&)mediaGroups
 {
     NSMutableArray<VLCMLMediaGroup *> *mediaGroupList = [NSMutableArray array];
 
