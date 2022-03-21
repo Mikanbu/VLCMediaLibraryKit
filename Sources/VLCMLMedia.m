@@ -401,6 +401,11 @@
                                     (int)width, (int)height, position);
 }
 
+- (BOOL)removeThumbnailOfType:(VLCMLThumbnailSizeType)type
+{
+    return _media->removeThumbnail((medialibrary::ThumbnailSizeType)type);
+}
+
 - (NSDate *)insertionDate
 {
     return [NSDate dateWithTimeIntervalSince1970:_media->insertionDate()];

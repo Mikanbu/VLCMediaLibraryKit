@@ -194,6 +194,13 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
                  desiredHeight:(NSUInteger)height
                     atPosition:(float)position;
 
+/**
+ * \brief Clear this media's thumbnail
+ * \param type the type of the thumbnail to remove
+ * \return true if the thumbnail was successfully cleared, false otherwise
+ */
+- (BOOL)removeThumbnailOfType:(VLCMLThumbnailSizeType)type;
+
 - (NSDate *)insertionDate;
 - (NSDate *)releaseDate;
 - (NSDate *)lastPlayedDate;
