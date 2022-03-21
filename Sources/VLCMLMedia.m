@@ -74,17 +74,12 @@
 #pragma mark - Getters/Setters
 - (float)progress
 {
-    VLCMLMetadata *progressMetadata = [self metadataOfType:VLCMLMetadataTypeProgress];
-    if (!progressMetadata.str || [progressMetadata.str isEqualToString:@""]) {
-        return 0.0;
-    }
-
-    return progressMetadata.str.floatValue;
+    return _media->lastPosition();
 }
 
 - (void)setProgress:(float)progress
 {
-    [self setMetadataOfType:VLCMLMetadataTypeProgress stringValue:[NSString stringWithFormat: @"%f", progress]];
+    _media->setLastPosition(progress);
 }
 
 - (BOOL)isNew

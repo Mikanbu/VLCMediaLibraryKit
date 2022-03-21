@@ -56,8 +56,8 @@ typedef NS_ENUM(UInt32, VLCMLMetadataType) {
     VLCMLMetadataTypeRating = 1,
 
     // Playback
-    VLCMLMetadataTypeProgress = 50,
-    VLCMLMetadataTypeSpeed,
+    // VLCMLMetadataTypeProgress = 50, // replaced by the model 27 progress
+    VLCMLMetadataTypeSpeed = 51,
     VLCMLMetadataTypeTitle,
     VLCMLMetadataTypeChapter,
     VLCMLMetadataTypeProgram,
