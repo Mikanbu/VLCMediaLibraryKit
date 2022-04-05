@@ -8,20 +8,23 @@ stages:
 
 .continous-job-base:
     tags:
-        - catalina
-        - amd64
+        - monterey-m1-lasvegas
     stage: build
     only:
         - merge_requests
     interruptible: true
 
 .continous-build-ios:
-    script:
-        - ./buildVLCMediaLibraryKit.sh -l -v
+    script: |
+        export PATH="/Users/videolanci/sandbox/bin:$PATH"
+
+        ./buildVLCMediaLibraryKit.sh -l -v
 
 .continous-build-tvos:
-    script:
-        - ./buildVLCMediaLibraryKit.sh -l -v -t
+    script: |
+        export PATH="/Users/videolanci/sandbox/bin:$PATH"
+
+        ./buildVLCMediaLibraryKit.sh -l -v -t
 
 continous-VLCMediaLibraryKit-iOS:
     extends:
@@ -39,7 +42,7 @@ continous-VLCMediaLibraryKit-tvOS:
 
 .release-job-base:
     tags:
-        - catalina
+        - monterey-m1-lasvegas
     stage: release
     only:
         - tags
@@ -50,6 +53,8 @@ continous-VLCMediaLibraryKit-tvOS:
 
 VLCMediaLibraryKit:
     extends: .release-job-base
-    script:
-        - ./buildVLCMediaLibraryKit.sh -l -f
-        - ./createDeployable.sh -v ${CI_COMMIT_TAG}
+    script: |
+        export PATH="/Users/videolanci/sandbox/bin:$PATH"
+
+        ./buildVLCMediaLibraryKit.sh -l -f
+        ./createDeployable.sh -v ${CI_COMMIT_TAG}
