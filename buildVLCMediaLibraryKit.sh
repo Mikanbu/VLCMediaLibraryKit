@@ -16,7 +16,7 @@ VLCKIT_RELEASE="3.4.0-8da19f3b-426513d8"
 VLCKIT_SHASUM256_IOS="e80bad21b716bba06b6ff3e40a998214f250352b37e8c4fdc79d71cc2293cdee"
 VLCKIT_SHASUM256_TVOS="4597b0773eaffe077ece0276d1d2fe49a9fa793ce078d244440ead6ac4a1c072"
 BUILD_TYPE="Release"
-TESTED_HASH="725ff59a"
+TESTED_HASH="a2bce106"
 CUSTOM_VLCKIT_PATH=~
 SDK_VERSION=`xcrun --sdk iphoneos --show-sdk-version`
 SKIP_MEDIALIBRARY=no
@@ -386,7 +386,7 @@ fetchMedialibrary()
                 git fetch --all
                 git reset --hard ${TESTED_HASH}
         else
-            git clone https://code.videolan.org/videolan/medialibrary.git --branch master --single-branch medialibrary
+            git clone https://code.videolan.org/videolan/medialibrary.git --branch 0.11.x --single-branch medialibrary
             spushd ${MEDIALIBRARY_DIR}
                 git checkout -B localBranch ${TESTED_HASH}
         fi
